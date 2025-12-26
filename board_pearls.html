@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💎 ABIM Board Pearls — All Specialties</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #fbbf24;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f97316;
+            --accent-pink: #ec4899;
+            --accent-teal: #14b8a6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: 16px;
+            margin-bottom: 30px;
+            border: 1px solid var(--accent-gold);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent-gold), #fde68a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Navigation */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .nav-btn {
+            display: block;
+            padding: 12px 8px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 1px solid var(--bg-tertiary);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-gold);
+        }
+        
+        /* Search */
+        .search-container {
+            margin-bottom: 30px;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 2px solid var(--bg-tertiary);
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            outline: none;
+        }
+        
+        #searchInput:focus {
+            border-color: var(--accent-gold);
+        }
+        
+        /* Specialty Sections */
+        .specialty {
+            margin-bottom: 40px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--bg-tertiary);
+        }
+        
+        .specialty-header {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        
+        .specialty-header:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .specialty-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .specialty-icon {
+            font-size: 1.8rem;
+        }
+        
+        .pearl-count {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .specialty-content {
+            padding: 0 25px 25px;
+        }
+        
+        .specialty.collapsed .specialty-content {
+            display: none;
+        }
+        
+        .toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .specialty.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+        
+        /* Category headers */
+        .category {
+            margin-top: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--bg-tertiary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        .category:first-child {
+            margin-top: 0;
+        }
+        
+        /* Pearl items */
+        .pearl {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .pearl:last-child {
+            border-bottom: none;
+        }
+        
+        .pearl-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .pearl-text {
+            flex: 1;
+        }
+        
+        .pearl-text strong {
+            color: var(--accent-gold);
+        }
+        
+        /* Specialty accent colors */
+        .specialty-id .specialty-header { border-left: 4px solid #22c55e; }
+        .specialty-cardio .specialty-header { border-left: 4px solid #ef4444; }
+        .specialty-gi .specialty-header { border-left: 4px solid #f97316; }
+        .specialty-rheum .specialty-header { border-left: 4px solid #06b6d4; }
+        .specialty-endo .specialty-header { border-left: 4px solid #8b5cf6; }
+        .specialty-nephro .specialty-header { border-left: 4px solid #3b82f6; }
+        .specialty-pulm .specialty-header { border-left: 4px solid #0891b2; }
+        .specialty-heme .specialty-header { border-left: 4px solid #dc2626; }
+        .specialty-neuro .specialty-header { border-left: 4px solid #7c3aed; }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            border-top: 1px solid var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+        
+        footer a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8rem; }
+            .stats-bar { gap: 20px; }
+            .specialty-title { font-size: 1.2rem; }
+            .nav-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        
+        /* Print styles */
+        @media print {
+            body { background: white; color: black; }
+            .specialty { break-inside: avoid; border: 1px solid #ccc; }
+            .specialty-header { background: #f5f5f5; }
+            .nav-grid, #searchInput { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>💎 ABIM Board Pearls</h1>
+    <p class="subtitle">High-Yield Clinical Pearls from All Specialty Study Guides</p>
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-value">9</div>
+            <div class="stat-label">Specialties</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">150+</div>
+            <div class="stat-label">Pearls</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">50+</div>
+            <div class="stat-label">Categories</div>
+        </div>
+    </div>
+</header>
+
+<nav class="nav-grid">
+    <a href="#id" class="nav-btn">🦠 ID</a>
+    <a href="#cardio" class="nav-btn">🫀 Cardio</a>
+    <a href="#gi" class="nav-btn">🟠 GI</a>
+    <a href="#rheum" class="nav-btn">🦴 Rheum</a>
+    <a href="#endo" class="nav-btn">🔬 Endo</a>
+    <a href="#nephro" class="nav-btn">💧 Nephro</a>
+    <a href="#pulm" class="nav-btn">🫁 Pulm</a>
+    <a href="#heme" class="nav-btn">🩸 Heme/Onc</a>
+    <a href="#neuro" class="nav-btn">🧠 Neuro</a>
+</nav>
+
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="🔍 Search pearls... (e.g., 'warfarin', 'diabetes', 'meningitis')">
+</div>
+
+<!-- INFECTIOUS DISEASE -->
+<div class="specialty specialty-id" id="id">
+    <div class="specialty-header" onclick="toggleSpecialty(this)">
+        <div class="specialty-title">
+            <span class="specialty-icon">🦠</span>
+            <span>Infectious Disease</span>
+        </div>
+        <span class="pearl-count">18 pearls</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="specialty-content">
+        <div class="category">Pneumonia</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>CAP empiric therapy:</strong> β-lactam + macrolide OR respiratory fluoroquinolone. Add MRSA/Pseudomonas coverage if risk factors.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>CURB-65</strong> predicts CAP mortality — Confusion, Uremia, RR ≥30, BP low, Age ≥65. Score ≥2 = consider admission.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Aspiration pneumonia:</strong> Treat with ampicillin-sulbactam or clindamycin for anaerobic coverage.</span></div>
+        
+        <div class="category">Meningitis</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Don't delay antibiotics for LP</strong> in suspected bacterial meningitis — give empiric therapy immediately.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Dexamethasone before/with first dose of antibiotics</strong> reduces mortality in pneumococcal meningitis.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>HSV encephalitis:</strong> Temporal lobe involvement, start acyclovir empirically. PCR confirms.</span></div>
+        
+        <div class="category">Endocarditis</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Modified Duke criteria:</strong> 2 major, or 1 major + 3 minor, or 5 minor = definite IE.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Culture-negative endocarditis:</strong> Think HACEK, Coxiella, Bartonella, Brucella, fungi.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Surgery indications:</strong> Heart failure, uncontrolled infection, large vegetations, prosthetic valve.</span></div>
+        
+        <div class="category">HIV/AIDS</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>CD4 <200:</strong> Start PCP prophylaxis (TMP-SMX). Stop when CD4 >200 for 3 months.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>CD4 <50:</strong> Start MAC prophylaxis (azithromycin weekly).</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>IRIS:</strong> Inflammatory response after starting ART. Treat underlying infection, continue ART.</span></div>
+        
+        <div class="category">Tuberculosis</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>RIPE therapy:</strong> Rifampin, Isoniazid, Pyrazinamide, Ethambutol × 2 months, then RI × 4 months.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Add pyridoxine (B6)</strong> with INH to prevent peripheral neuropathy.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Check baseline LFTs</strong> — rifampin and INH are hepatotoxic.</span></div>
+        
+        <div class="category">Antibiotics</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Ceftriaxone contraindicated</strong> with calcium-containing IV solutions in neonates (precipitation).</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Fluoroquinolones:</strong> QT prolongation, tendon rupture, C. diff. Avoid in myasthenia gravis.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Vancomycin trough:</strong> Target 15-20 for serious infections. Monitor renal function.</span></div>
+    </div>
+</div>
+
+<!-- CARDIOLOGY -->
+<div class="specialty specialty-cardio" id="cardio">
+    <div class="specialty-header" onclick="toggleSpecialty(this)">
+        <div class="specialty-title">
+            <span class="specialty-icon">🫀</span>
+            <span>Cardiology</span>
+        </div>
+        <span class="pearl-count">20 pearls</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="specialty-content">
+        <div class="category">Acute Coronary Syndrome</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>STEMI:</strong> Door-to-balloon <90 min. If no PCI available, fibrinolytics within 30 min.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>NSTEMI/UA:</strong> DAPT + anticoagulation. Risk stratify with TIMI or GRACE score.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Post-MI discharge:</strong> DAPT, statin, beta-blocker, ACEi (if EF reduced), lifestyle.</span></div>
+        
+        <div class="category">Heart Failure</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>HFrEF GDMT:</strong> ACEi/ARB/ARNI + beta-blocker + MRA + SGLT2i = "Fantastic Four"</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Don't start beta-blocker</strong> in acute decompensated HF. Okay to continue if already on.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>ICD indicated</strong> if EF ≤35% despite GDMT × 3 months (primary prevention).</span></div>
+        
+        <div class="category">Arrhythmias</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Afib stroke risk:</strong> CHA₂DS₂-VASc ≥2 (men) or ≥3 (women) = anticoagulate.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Afib + WPW:</strong> NO AV nodal blockers! Use procainamide or cardioversion.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Torsades de pointes:</strong> IV magnesium first, even if Mg is normal.</span></div>
+        
+        <div class="category">Valvular Disease</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Severe AS:</strong> Valve area <1.0 cm², mean gradient >40 mmHg, Vmax >4 m/s.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Symptoms in severe AS</strong> (angina, syncope, HF) = intervention needed.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Mitral stenosis:</strong> Think rheumatic heart disease. A-fib common, anticoagulate.</span></div>
+        
+        <div class="category">Hypertension</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>HTN urgency vs emergency:</strong> Emergency = end-organ damage. Reduce BP gradually.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>First-line:</strong> Thiazide, CCB, ACEi/ARB. Combine if needed.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Resistant HTN workup:</strong> Check adherence, consider secondary causes (OSA, aldosteronism).</span></div>
+        
+        <div class="category">Pericardial Disease</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Acute pericarditis:</strong> NSAIDs + colchicine × 3 months. Reduces recurrence.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Cardiac tamponade:</strong> Beck's triad, pulsus paradoxus. Emergent pericardiocentesis.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Constrictive pericarditis:</strong> Kussmaul's sign, calcified pericardium, "square root" sign.</span></div>
+        
+        <div class="category">Lipids</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>High-intensity statin</strong> for all ASCVD patients regardless of baseline LDL.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>PCSK9 inhibitors:</strong> For familial hypercholesterolemia or ASCVD not at goal on max statin.</span></div>
+    </div>
+</div>
+
+<!-- GASTROENTEROLOGY -->
+<div class="specialty specialty-gi" id="gi">
+    <div class="specialty-header" onclick="toggleSpecialty(this)">
+        <div class="specialty-title">
+            <span class="specialty-icon">🟠</span>
+            <span>Gastroenterology & Hepatology</span>
+        </div>
+        <span class="pearl-count">18 pearls</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="specialty-content">
+        <div class="category">Upper GI</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Variceal bleed:</strong> Octreotide + PPI + ceftriaxone + emergent EGD within 12h.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>H. pylori treatment:</strong> PPI + clarithromycin + amoxicillin × 14 days. Confirm eradication.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Barrett's esophagus:</strong> Intestinal metaplasia. Surveillance EGD per dysplasia grade.</span></div>
+        
+        <div class="category">Liver Disease</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Acute liver failure:</strong> INR >1.5 + encephalopathy. N-acetylcysteine for all causes helps.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Hepatorenal syndrome:</strong> Albumin + midodrine + octreotide. Or norepinephrine if ICU.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>SBP prophylaxis:</strong> Fluoroquinolone or TMP-SMX if ascites protein <1.5 + risk factors.</span></div>
+        
+        <div class="category">Inflammatory Bowel Disease</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>UC vs Crohn's:</strong> UC = bloody diarrhea, continuous, rectum always involved. Crohn's = skip lesions, transmural.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Toxic megacolon:</strong> NPO, IV steroids, broad-spectrum antibiotics. Surgery if no improvement.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Screen for TB and Hep B</strong> before starting biologics (anti-TNF, etc.).</span></div>
+        
+        <div class="category">Pancreatic Disease</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Acute pancreatitis:</strong> Aggressive IVF, pain control, NPO initially. Lipase >3× ULN.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Gallstone pancreatitis:</strong> ERCP within 24h if cholangitis or persistent obstruction. Cholecystectomy before discharge.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Chronic pancreatitis:</strong> Pain, malabsorption, diabetes. CT shows calcifications.</span></div>
+        
+        <div class="category">Colon</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>C. diff first episode:</strong> Vancomycin PO (not IV). Fidaxomicin for recurrence.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Diverticulitis:</strong> Uncomplicated = antibiotics + diet. Complicated = abscess, perforation, fistula.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Colon cancer screening:</strong> Start age 45. Colonoscopy q10y or alternatives.</span></div>
+        
+        <div class="category">Biliary</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Acute cholangitis (Charcot triad):</strong> Fever, RUQ pain, jaundice. Reynolds pentad adds shock + AMS.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>PSC:</strong> Associated with UC. "Beading" on MRCP. Increases cholangiocarcinoma risk.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>PBC:</strong> AMA positive, elevated ALP, pruritus. Ursodiol is treatment.</span></div>
+    </div>
+</div>
+
+<!-- RHEUMATOLOGY -->
+<div class="specialty specialty-rheum" id="rheum">
+    <div class="specialty-header" onclick="toggleSpecialty(this)">
+        <div class="specialty-title">
+            <span class="specialty-icon">🦴</span>
+            <span>Rheumatology</span>
+        </div>
+        <span class="pearl-count">21 pearls</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="specialty-content">
+        <div class="category">Diagnostic Pearls</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Negative ANA essentially rules out SLE</strong> — sensitivity >95%.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>CRP usually normal in SLE flares</strong> — if elevated, think infection.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Uric acid can be normal during gout attack</strong> — don't use to rule out.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>DIP involvement:</strong> OA or PsA, NOT RA.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Morning stiffness >1 hour:</strong> inflammatory arthritis. <30 min: mechanical.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Normal CK:</strong> PMR, NOT myositis.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Jaw claudication:</strong> highly specific for GCA.</span></div>
+        
+        <div class="category">Treatment Pearls</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Start steroids immediately for suspected GCA</strong> — don't wait for biopsy.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>ACE inhibitors for scleroderma renal crisis</strong> — even if Cr rises.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Don't start/stop ULT during acute gout attack.</strong></span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>HCQ for everyone with SLE</strong> — reduces flares and mortality.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Warfarin (not DOACs) for APS</strong> — TRAPS trial.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>MTX doesn't work for axial SpA</strong> — use biologics.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Rituximab = preferred for relapsing AAV</strong> — RAVE trial.</span></div>
+        
+        <div class="category">Safety Pearls</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Screen for TB before starting biologics.</strong></span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>HLA-B*5801 testing before allopurinol</strong> in high-risk populations (Asian, African descent).</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Eye exam for HCQ</strong> — baseline, then annually after 5 years.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Check TPMT before azathioprine.</strong></span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Avoid steroids >15mg in diffuse SSc</strong> — precipitates renal crisis.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>C-spine imaging before intubating severe RA patients</strong> (atlantoaxial instability).</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Triple-positive APS</strong> (LA + aCL + anti-β2GP1) = highest thrombosis risk.</span></div>
+    </div>
+</div>
+
+<!-- ENDOCRINOLOGY -->
+<div class="specialty specialty-endo" id="endo">
+    <div class="specialty-header" onclick="toggleSpecialty(this)">
+        <div class="specialty-title">
+            <span class="specialty-icon">🔬</span>
+            <span>Endocrinology</span>
+        </div>
+        <span class="pearl-count">22 pearls</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="specialty-content">
+        <div class="category">Diabetes</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>SGLT2i and GLP-1 RA have cardiorenal benefits</strong> independent of glucose control.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Never use sliding scale alone</strong> — always add basal insulin.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Check K+ before starting insulin in DKA</strong> — insulin drives K+ intracellularly.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Low C-peptide with hypoglycemia</strong> = exogenous insulin.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>DKA in T2DM:</strong> Think SGLT2i-induced euglycemic DKA. Check ketones even if glucose normal.</span></div>
+        
+        <div class="category">Thyroid</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Low RAIU</strong> = thyroiditis or exogenous hormone. <strong>High RAIU</strong> = Graves' or toxic nodule.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Always check prolactin before pituitary surgery</strong> — prolactinomas are treated medically.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>PTU before iodine in thyroid storm.</strong></span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>PTU in 1st trimester, methimazole in 2nd/3rd</strong> (PTU = hepatotoxic, MMI = teratogenic in T1).</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Subclinical hypothyroidism:</strong> Treat if TSH >10, or symptomatic, or pregnant.</span></div>
+        
+        <div class="category">Adrenal</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>IPSS</strong> = gold standard for distinguishing pituitary vs ectopic Cushing's.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Alpha-blocker before beta-blocker in pheochromocytoma</strong> — prevent unopposed α-stimulation.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Give stress-dose steroids in adrenal crisis</strong> — don't wait for labs. Hydrocortisone 100mg IV.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Hyperpigmentation</strong> = primary adrenal insufficiency (high ACTH stimulates melanocytes).</span></div>
+        
+        <div class="category">Pituitary</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Prolactinoma is the ONLY pituitary tumor treated primarily with medication</strong> (dopamine agonists).</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Large mass + mildly elevated prolactin</strong> = stalk effect, not prolactinoma.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Replace cortisol BEFORE thyroid</strong> to avoid precipitating adrenal crisis.</span></div>
+        
+        <div class="category">Calcium/Bone</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>First step in hypercalcemia workup:</strong> check PTH.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Correct magnesium before treating hypocalcemia</strong> — PTH won't work if Mg is low.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Bisphosphonate drug holiday</strong> after 5 years oral or 3 years IV (fracture risk/benefit).</span></div>
+        
+        <div class="category">MEN Syndromes</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>MEN1:</strong> "3 P's" — Parathyroid, Pituitary, Pancreatic neuroendocrine.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>MEN2:</strong> Always rule out pheo before thyroidectomy for MTC.</span></div>
+    </div>
+</div>
+
+<!-- NEPHROLOGY -->
+<div class="specialty specialty-nephro" id="nephro">
+    <div class="specialty-header" onclick="toggleSpecialty(this)">
+        <div class="specialty-title">
+            <span class="specialty-icon">💧</span>
+            <span>Nephrology</span>
+        </div>
+        <span class="pearl-count">18 pearls</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="specialty-content">
+        <div class="category">Acute Kidney Injury</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>FENa <1%</strong> = prerenal (unless on diuretics — use FEUrea <35%).</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Muddy brown casts</strong> = ATN. <strong>RBC casts</strong> = glomerulonephritis. <strong>WBC casts</strong> = pyelonephritis/AIN.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Stop ACEi/ARB in AKI</strong> but restart when stable — they're renoprotective long-term.</span></div>
+        
+        <div class="category">Chronic Kidney Disease</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>SGLT2 inhibitors slow CKD progression</strong> — use unless eGFR <20 (varies by agent).</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Finerenone</strong> reduces CV events and CKD progression in diabetic kidney disease.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Target BP <120/80</strong> in CKD with proteinuria (SPRINT trial).</span></div>
+        
+        <div class="category">Electrolytes</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Correct sodium slowly:</strong> ≤8-10 mEq/L per 24h to avoid osmotic demyelination syndrome.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Hypokalemia + metabolic alkalosis + HTN:</strong> Think hyperaldosteronism.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Hyperkalemia ECG changes:</strong> Peaked T waves → prolonged PR → wide QRS → sine wave → arrest.</span></div>
+        
+        <div class="category">Acid-Base</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>MUDPILES:</strong> Methanol, Uremia, DKA, Propylene glycol, INH/Iron, Lactic acid, Ethylene glycol, Salicylates.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Winter's formula:</strong> Expected PaCO2 = 1.5 × [HCO3] + 8 ± 2 (for metabolic acidosis compensation).</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>RTA Type 1:</strong> Distal, low K+, can't acidify urine. <strong>Type 4:</strong> Low K+, low aldosterone effect.</span></div>
+        
+        <div class="category">Glomerular Disease</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Nephrotic:</strong> Proteinuria >3.5g/day, edema, hypoalbuminemia, hyperlipidemia.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Nephritic:</strong> RBC casts, HTN, oliguria, mild-moderate proteinuria.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Anti-GBM disease:</strong> Linear IgG on IF. May have pulmonary hemorrhage (Goodpasture).</span></div>
+        
+        <div class="category">Dialysis</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Urgent dialysis indications:</strong> A-E-I-O-U — Acidosis, Electrolytes (K+), Ingestion, Overload, Uremia symptoms.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Dialysis disequilibrium:</strong> Cerebral edema from rapid urea removal. Start slow in new HD patients.</span></div>
+    </div>
+</div>
+
+<!-- PULMONOLOGY -->
+<div class="specialty specialty-pulm" id="pulm">
+    <div class="specialty-header" onclick="toggleSpecialty(this)">
+        <div class="specialty-title">
+            <span class="specialty-icon">🫁</span>
+            <span>Pulmonology</span>
+        </div>
+        <span class="pearl-count">18 pearls</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="specialty-content">
+        <div class="category">Obstructive Disease</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>FEV1/FVC <0.70</strong> = obstruction. Reversibility (≥12% + 200mL) suggests asthma.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Normal or rising PaCO2 in acute asthma</strong> = impending respiratory failure.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>GOLD 2024:</strong> ICS in COPD if eosinophils ≥300; avoid if <100.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Only smoking cessation and O2</strong> (if hypoxemic) proven to improve COPD survival.</span></div>
+        
+        <div class="category">Interstitial Lung Disease</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>UIP pattern</strong> = honeycombing, basal/peripheral, traction bronchiectasis.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>NO steroids in IPF</strong> — PANTHER trial showed harm.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Chronic HP can mimic IPF</strong> — look for upper lobe involvement, exposure history.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Pleural plaques = asbestos; eggshell nodes = silicosis.</strong></span></div>
+        
+        <div class="category">Pulmonary Vascular</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>V/Q scan is screening test for CTEPH</strong> (CTPA may miss it).</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Right heart cath required</strong> for PH diagnosis and treatment decisions.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Massive PE</strong> = hemodynamic instability → thrombolysis.</span></div>
+        
+        <div class="category">Critical Care</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>ARDS:</strong> Low Vt (6 mL/kg IBW), plateau <30, prone if P/F <150.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>BiPAP in AECOPD</strong> reduces intubation and mortality.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Target SpO2 88-92% in COPD</strong> (avoid suppressing hypoxic drive).</span></div>
+        
+        <div class="category">Pleural Disease</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Light's criteria:</strong> any 1 of 3 = exudate.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>pH <7.2 in parapneumonic effusion</strong> = drain (complicated).</span></div>
+        
+        <div class="category">Lung Cancer</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Screening:</strong> Age 50-80, ≥20 pack-years, current or quit <15 years → annual LDCT.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>SCLC:</strong> Central, aggressive, paraneoplastic (SIADH, Cushing's, Lambert-Eaton).</span></div>
+    </div>
+</div>
+
+<!-- HEMATOLOGY/ONCOLOGY -->
+<div class="specialty specialty-heme" id="heme">
+    <div class="specialty-header" onclick="toggleSpecialty(this)">
+        <div class="specialty-title">
+            <span class="specialty-icon">🩸</span>
+            <span>Hematology/Oncology</span>
+        </div>
+        <span class="pearl-count">21 pearls</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="specialty-content">
+        <div class="category">Anemia</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Low ferritin = iron deficiency.</strong> Normal ferritin with inflammation doesn't rule it out.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>B12 deficiency can cause neuro symptoms WITHOUT anemia.</strong> Check MMA if borderline.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Spherocytes + positive DAT</strong> = warm AIHA. Spherocytes + negative DAT = hereditary spherocytosis.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>G6PD assay is falsely normal during acute hemolysis</strong> — retest later.</span></div>
+        
+        <div class="category">Bleeding Disorders</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Prolonged PTT + mixing corrects</strong> = factor deficiency. <strong>Doesn't correct</strong> = inhibitor.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>vWD:</strong> Most common inherited bleeding disorder. DDAVP for Type 1.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>DIC:</strong> Treat the underlying cause. Replace products only if bleeding.</span></div>
+        
+        <div class="category">Thrombosis</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>HIT = prothrombotic!</strong> Stop heparin AND start non-heparin anticoagulant.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>TTP:</strong> Don't wait for ADAMTS13 — start plasma exchange immediately.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Warfarin skin necrosis</strong> = protein C/S deficiency. Bridge with heparin.</span></div>
+        
+        <div class="category">Leukemia</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>APL [t(15;17)]</strong> = DIC. Start ATRA immediately on suspicion.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>CML</strong> = Philadelphia chromosome t(9;22), BCR-ABL1. TKIs are curative.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>CLL</strong> = CD5+/CD23+ B-cells. Watch and wait if asymptomatic.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Auer rods</strong> = AML (not ALL).</span></div>
+        
+        <div class="category">Lymphoma</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Reed-Sternberg cells</strong> = Hodgkin. CD15+/CD30+.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>"Starry sky" pattern</strong> = Burkitt lymphoma. t(8;14) c-MYC.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Gastric MALT lymphoma:</strong> Treat H. pylori first — 70% remission with antibiotics alone.</span></div>
+        
+        <div class="category">Myeloma</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>CRAB criteria:</strong> Calcium, Renal, Anemia, Bone lesions.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Lytic lesions on skeletal survey</strong> (not bone scan — no blastic activity).</span></div>
+        
+        <div class="category">Transfusion</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>TRALI</strong> = noncardiogenic pulmonary edema. <strong>TACO</strong> = volume overload (diuretics help).</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Febrile non-hemolytic</strong> = most common reaction. Cytokines in product.</span></div>
+    </div>
+</div>
+
+<!-- NEUROLOGY -->
+<div class="specialty specialty-neuro" id="neuro">
+    <div class="specialty-header" onclick="toggleSpecialty(this)">
+        <div class="specialty-title">
+            <span class="specialty-icon">🧠</span>
+            <span>Neurology</span>
+        </div>
+        <span class="pearl-count">21 pearls</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="specialty-content">
+        <div class="category">Stroke</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>tPA window 4.5 hours;</strong> thrombectomy up to 24h with favorable imaging.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Dual antiplatelet (ASA + clopidogrel) × 21 days</strong> after minor stroke/TIA.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Nimodipine for ALL SAH patients × 21 days</strong> (vasospasm prevention).</span></div>
+        
+        <div class="category">Seizures</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Lorazepam IV first-line</strong> for status epilepticus.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Valproate teratogenic</strong> — avoid in women of childbearing age.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Check HLA-B*1502 before carbamazepine</strong> (SJS risk in Asians).</span></div>
+        
+        <div class="category">Headache</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Thunderclap headache</strong> = SAH until proven otherwise.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Cluster headache:</strong> High-flow O2 + sumatriptan SC; verapamil for prevention.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>New headache >50 years</strong> = consider temporal arteritis.</span></div>
+        
+        <div class="category">Multiple Sclerosis</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>INO</strong> (impaired adduction with nystagmus in abducting eye) = MLF lesion, classic for MS.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Oligoclonal bands in CSF</strong> in >90% of MS.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Natalizumab:</strong> Check JCV antibody (PML risk).</span></div>
+        
+        <div class="category">Movement Disorders</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>PD tremor:</strong> Rest, 4-6 Hz, asymmetric, pill-rolling.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Essential tremor:</strong> Action, higher frequency, bilateral, improves with alcohol.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Early falls + vertical gaze palsy</strong> = PSP.</span></div>
+        
+        <div class="category">Neuromuscular</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>GBS:</strong> Ascending weakness + areflexia + albuminocytologic dissociation. Steroids DON'T work.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Myasthenia:</strong> Fatigable weakness, AChR antibodies, thymoma association.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>Aminoglycosides and fluoroquinolones worsen MG.</strong></span></div>
+        
+        <div class="category">Dementia & CNS Infections</div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>NPH triad:</strong> Wet, wobbly, wacky (incontinence, gait, dementia) — treatable!</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>DLB:</strong> Visual hallucinations, parkinsonism, fluctuations; sensitive to antipsychotics.</span></div>
+        <div class="pearl"><span class="pearl-icon">💎</span><span class="pearl-text"><strong>HSV encephalitis:</strong> Temporal lobe, start acyclovir empirically.</span></div>
+    </div>
+</div>
+
+<footer>
+    <p>💎 ABIM Board Pearls — Compiled from all specialty study guides</p>
+    <div style="margin-top: 15px;">
+        <a href="study_guides_index.html">📚 Study Guides</a>
+        <a href="im_guide.html">🩺 IM Guide</a>
+        <a href="drug_reference_guide.html">💊 Drug Guide</a>
+    </div>
+    <p style="margin-top: 20px; font-size: 0.85rem; opacity: 0.7;">
+        Evidence-based • ABIM-focused • Quick reference
+    </p>
+</footer>
+
+<script>
+    // Toggle specialty sections
+    function toggleSpecialty(header) {
+        const specialty = header.closest('.specialty');
+        specialty.classList.toggle('collapsed');
+    }
+    
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const pearls = document.querySelectorAll('.pearl');
+        const specialties = document.querySelectorAll('.specialty');
+        
+        if (searchTerm === '') {
+            // Show all
+            pearls.forEach(p => p.style.display = 'flex');
+            specialties.forEach(s => {
+                s.style.display = 'block';
+                s.classList.remove('collapsed');
+            });
+            return;
+        }
+        
+        // Filter pearls
+        specialties.forEach(specialty => {
+            const pearlsInSection = specialty.querySelectorAll('.pearl');
+            let hasMatch = false;
+            
+            pearlsInSection.forEach(pearl => {
+                if (pearl.textContent.toLowerCase().includes(searchTerm)) {
+                    pearl.style.display = 'flex';
+                    hasMatch = true;
+                } else {
+                    pearl.style.display = 'none';
+                }
+            });
+            
+            // Show/hide specialty based on matches
+            specialty.style.display = hasMatch ? 'block' : 'none';
+            if (hasMatch) {
+                specialty.classList.remove('collapsed');
+            }
+        });
+    });
+    
+    // Smooth scroll for nav
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Expand the section
+            target.classList.remove('collapsed');
+        });
+    });
+</script>
+
+</body>
+</html>

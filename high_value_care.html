@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💰 High Value Care — ABIM Board Review</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-gold: #fbbf24;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #065f46, #047857);
+            border-radius: 16px;
+            margin-bottom: 30px;
+            border: 1px solid var(--accent-green);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+        }
+        
+        .principles-box {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0 30px;
+            border-left: 4px solid var(--accent-green);
+        }
+        
+        .principles-box h3 {
+            color: var(--accent-green);
+            margin-bottom: 12px;
+        }
+        
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .principle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .principle-icon {
+            font-size: 1.3rem;
+        }
+        
+        /* Navigation */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .nav-btn {
+            display: block;
+            padding: 12px 8px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            border: 1px solid var(--bg-tertiary);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-green);
+        }
+        
+        /* Search */
+        .search-container {
+            margin-bottom: 30px;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 2px solid var(--bg-tertiary);
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            outline: none;
+        }
+        
+        #searchInput:focus {
+            border-color: var(--accent-green);
+        }
+        
+        /* Topic Sections */
+        .topic {
+            margin-bottom: 30px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--bg-tertiary);
+        }
+        
+        .topic-header {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-left: 4px solid var(--accent-green);
+        }
+        
+        .topic-header:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .topic-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+        
+        .toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .topic.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+        
+        .topic-content {
+            padding: 0 25px 25px;
+        }
+        
+        .topic.collapsed .topic-content {
+            display: none;
+        }
+        
+        /* Categories */
+        .category {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        
+        .category:first-child {
+            margin-top: 15px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+        
+        /* Items */
+        .hvc-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .hvc-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .item-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        
+        .avoid-icon { color: var(--accent-red); }
+        .prefer-icon { color: var(--accent-green); }
+        .consider-icon { color: var(--accent-gold); }
+        
+        .item-content {
+            flex: 1;
+        }
+        
+        .item-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .item-detail {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .item-detail strong {
+            color: var(--accent-gold);
+        }
+        
+        /* Evidence tags */
+        .evidence-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .tag-choosing-wisely {
+            background: rgba(139, 92, 246, 0.2);
+            color: #a78bfa;
+        }
+        
+        .tag-uspstf {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+        
+        .tag-acc-aha {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+        
+        .tag-aga {
+            background: rgba(249, 115, 22, 0.2);
+            color: #fb923c;
+        }
+        
+        .tag-ats {
+            background: rgba(6, 182, 212, 0.2);
+            color: #22d3ee;
+        }
+        
+        /* Quick reference boxes */
+        .quick-ref {
+            background: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .quick-ref-title {
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .quick-ref ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .quick-ref li {
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-tertiary);
+        }
+        
+        th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+        
+        tr:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            border-top: 1px solid var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+        
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8rem; }
+            .topic-title { font-size: 1.1rem; }
+            .nav-grid { grid-template-columns: repeat(3, 1fr); }
+            .principles-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Print */
+        @media print {
+            body { background: white; color: black; }
+            .topic { break-inside: avoid; border: 1px solid #ccc; }
+            .nav-grid, #searchInput { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>💰 High Value Care</h1>
+    <p class="subtitle">ACP/ABIM Board Review — Evidence-Based, Cost-Conscious Medicine</p>
+</header>
+
+<div class="principles-box">
+    <h3>🎯 Core Principles of High Value Care</h3>
+    <div class="principles-grid">
+        <div class="principle">
+            <span class="principle-icon">🚫</span>
+            <span>Avoid unnecessary tests & treatments</span>
+        </div>
+        <div class="principle">
+            <span class="principle-icon">💡</span>
+            <span>Choose cost-effective alternatives</span>
+        </div>
+        <div class="principle">
+            <span class="principle-icon">📊</span>
+            <span>Use evidence-based screening</span>
+        </div>
+        <div class="principle">
+            <span class="principle-icon">⚖️</span>
+            <span>Balance benefits vs harms</span>
+        </div>
+        <div class="principle">
+            <span class="principle-icon">🤝</span>
+            <span>Shared decision-making</span>
+        </div>
+        <div class="principle">
+            <span class="principle-icon">💊</span>
+            <span>Deprescribe when appropriate</span>
+        </div>
+    </div>
+</div>
+
+<nav class="nav-grid">
+    <a href="#screening" class="nav-btn">🔍 Screening</a>
+    <a href="#imaging" class="nav-btn">📷 Imaging</a>
+    <a href="#labs" class="nav-btn">🧪 Laboratory</a>
+    <a href="#cardiology" class="nav-btn">🫀 Cardiology</a>
+    <a href="#pulmonology" class="nav-btn">🫁 Pulmonology</a>
+    <a href="#gi" class="nav-btn">🟠 GI</a>
+    <a href="#id" class="nav-btn">🦠 Infectious Disease</a>
+    <a href="#neuro" class="nav-btn">🧠 Neurology</a>
+    <a href="#rheum" class="nav-btn">🦴 Rheumatology</a>
+    <a href="#endo" class="nav-btn">🔬 Endocrine</a>
+    <a href="#nephro" class="nav-btn">💧 Nephrology</a>
+    <a href="#heme" class="nav-btn">🩸 Hematology</a>
+    <a href="#geriatrics" class="nav-btn">👴 Geriatrics</a>
+    <a href="#periop" class="nav-btn">🏥 Perioperative</a>
+    <a href="#hospital" class="nav-btn">🛏️ Hospital Medicine</a>
+</nav>
+
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="🔍 Search high value care topics... (e.g., 'CT scan', 'antibiotics', 'screening')">
+</div>
+
+<!-- SCREENING -->
+<div class="topic" id="screening">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🔍</span>
+            <span>Cancer Screening & Prevention</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">✅ Evidence-Based Screening (USPSTF Grade A/B)</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Lung Cancer <span class="evidence-tag tag-uspstf">USPSTF A</span></div>
+                    <div class="item-detail">Annual low-dose CT: Age 50-80, ≥20 pack-years, current smoker or quit &lt;15 years. <strong>Stop if quit &gt;15 years or limited life expectancy.</strong></div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Colorectal Cancer <span class="evidence-tag tag-uspstf">USPSTF A</span></div>
+                    <div class="item-detail">Start age 45, stop at 75 (individualize 76-85). Options: Colonoscopy q10y, FIT annually, or Cologuard q3y. <strong>Colonoscopy NOT superior to FIT for average-risk screening.</strong></div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Breast Cancer <span class="evidence-tag tag-uspstf">USPSTF B</span></div>
+                    <div class="item-detail">Mammography every 2 years, ages 40-74. <strong>Annual mammography not proven superior to biennial.</strong></div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Cervical Cancer <span class="evidence-tag tag-uspstf">USPSTF A</span></div>
+                    <div class="item-detail">Age 21-29: Pap q3y. Age 30-65: Pap + HPV q5y (preferred) or Pap alone q3y. <strong>Stop at 65 if adequate prior screening.</strong></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">🚫 Low-Value Screening (Avoid)</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">PSA Screening for Prostate Cancer <span class="evidence-tag tag-uspstf">USPSTF C</span></div>
+                    <div class="item-detail"><strong>Do not routinely screen.</strong> Shared decision-making for men 55-69. Do NOT screen men ≥70 or with &lt;10-year life expectancy.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Ovarian Cancer Screening <span class="evidence-tag tag-uspstf">USPSTF D</span></div>
+                    <div class="item-detail"><strong>Do not screen</strong> with CA-125 or transvaginal ultrasound in average-risk women. Causes more harm than benefit.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Thyroid Cancer Screening <span class="evidence-tag tag-uspstf">USPSTF D</span></div>
+                    <div class="item-detail"><strong>Do not screen</strong> asymptomatic adults with neck palpation or ultrasound.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Pancreatic Cancer Screening</div>
+                    <div class="item-detail"><strong>Do not screen</strong> average-risk adults. No proven effective screening method.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Whole-Body CT Screening</div>
+                    <div class="item-detail"><strong>Never recommended.</strong> High false positive rate, radiation exposure, incidentalomas, unnecessary procedures.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quick-ref">
+            <div class="quick-ref-title">📌 When to STOP Screening</div>
+            <ul>
+                <li>Life expectancy &lt;10 years (cancer screening unlikely to provide benefit)</li>
+                <li>Colonoscopy: After age 75 (or 85 max)</li>
+                <li>Pap smear: After age 65 with adequate prior screening</li>
+                <li>Mammography: Individualize after 75; stop if limited life expectancy</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- IMAGING -->
+<div class="topic" id="imaging">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">📷</span>
+            <span>Diagnostic Imaging</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Avoid Unnecessary Imaging</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Acute Low Back Pain (&lt;6 weeks) <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>No imaging</strong> without red flags (trauma, neurologic deficits, cancer history, fever, IV drug use, osteoporosis, age &gt;50 with new symptoms, prolonged steroid use).</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Uncomplicated Headache <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>No imaging</strong> for stable headache patterns without red flags. Red flags: thunderclap, neurologic signs, papilledema, fever, immunocompromise, cancer, age &gt;50 new onset.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Syncope Without High-Risk Features <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>No head CT or carotid imaging</strong> for typical vasovagal syncope. Focus on cardiac workup if concerning features.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Minor Head Injury <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail">Use <strong>Canadian CT Head Rule</strong> to avoid unnecessary CT. Low-risk patients (GCS 15, no LOC, no amnesia, no vomiting) do not need imaging.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Preoperative CXR <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Not routine.</strong> Only if acute cardiopulmonary symptoms or needed for specific surgical planning.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Follow-up Imaging After Incidental Findings</div>
+                    <div class="item-detail">Follow Fleischner (pulmonary nodules), Bosniak (renal cysts), ACR (adrenal incidentaloma) guidelines. Many small findings need <strong>no follow-up</strong>.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ Use Clinical Decision Rules</div>
+            
+            <table>
+                <tr>
+                    <th>Condition</th>
+                    <th>Decision Rule</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Pulmonary Embolism</td>
+                    <td>Wells + D-dimer (PERC if very low risk)</td>
+                    <td>Avoid CT in low-risk patients</td>
+                </tr>
+                <tr>
+                    <td>Ankle/Foot Injury</td>
+                    <td>Ottawa Ankle Rules</td>
+                    <td>Reduce unnecessary X-rays by 30-40%</td>
+                </tr>
+                <tr>
+                    <td>Knee Injury</td>
+                    <td>Ottawa Knee Rules</td>
+                    <td>Rule out fracture clinically</td>
+                </tr>
+                <tr>
+                    <td>C-Spine Injury</td>
+                    <td>NEXUS or Canadian C-Spine Rule</td>
+                    <td>Avoid CT in low-risk trauma</td>
+                </tr>
+                <tr>
+                    <td>Head Injury</td>
+                    <td>Canadian CT Head Rule</td>
+                    <td>Identify who needs CT</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="quick-ref">
+            <div class="quick-ref-title">📌 Imaging Pearls</div>
+            <ul>
+                <li>MRI is NOT always "better" than CT — choose based on clinical question</li>
+                <li>Contrast is often unnecessary and adds risk (nephropathy, allergy)</li>
+                <li>PET scans should not be used for cancer screening</li>
+                <li>Repeat imaging rarely needed if prior study was normal and symptoms unchanged</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- LABORATORY -->
+<div class="topic" id="labs">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🧪</span>
+            <span>Laboratory Testing</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Low-Value Laboratory Tests</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Daily Labs in Stable Hospitalized Patients <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Order labs only when results will change management.</strong> Daily BMP/CBC not needed in stable patients.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Preoperative Testing <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>No routine CBC, BMP, coags, or UA</strong> before low-risk surgery in healthy patients. Test only if indicated by history/exam.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">BNP for Routine Dyspnea Evaluation</div>
+                    <div class="item-detail">BNP is most useful when HF probability is intermediate. <strong>Don't use in clear-cut cases</strong> (obvious HF or clearly non-cardiac).</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">D-dimer in High-Risk PE Patients</div>
+                    <div class="item-detail"><strong>Skip D-dimer if Wells score high</strong> — go directly to imaging. D-dimer only useful in low/moderate pretest probability.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">ESR/CRP for Non-specific Symptoms</div>
+                    <div class="item-detail"><strong>Don't order as "fishing expeditions."</strong> Useful for specific inflammatory conditions (PMR, GCA, RA monitoring), not general workup.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">ANA Without Clinical Suspicion for CTD <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>ANA is positive in many healthy people.</strong> Only order if clinical features suggest SLE, scleroderma, or other CTD.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Lyme Serology Without Appropriate Exposure/Symptoms <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>High false positive rate.</strong> Only test with compatible clinical syndrome AND endemic exposure.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ When Testing Adds Value</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">HbA1c for Diabetes Screening</div>
+                    <div class="item-detail">Screen adults 35-70 who are overweight/obese. More convenient than fasting glucose, one-time test.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Lipid Panel for CV Risk Assessment</div>
+                    <div class="item-detail">Non-fasting lipids acceptable for initial screening. Repeat fasting only if triglycerides very high.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">High-Sensitivity Troponin</div>
+                    <div class="item-detail">Enables faster rule-out of MI with 0/1-hour or 0/3-hour protocols. Reduces length of stay.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CARDIOLOGY -->
+<div class="topic" id="cardiology">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🫀</span>
+            <span>Cardiology</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Low-Value Cardiac Testing</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Stress Testing in Asymptomatic Low-Risk Patients <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Do not perform routine stress testing</strong> in patients without symptoms. Does not improve outcomes.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Preoperative Stress Testing <span class="evidence-tag tag-acc-aha">ACC/AHA</span></div>
+                    <div class="item-detail"><strong>Only if it will change management.</strong> Most patients can proceed to surgery with medical optimization.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Annual ECGs in Asymptomatic Adults <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Not recommended for routine screening.</strong> Leads to false positives and unnecessary testing.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Echocardiogram for Uncomplicated Hypertension <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Not routine.</strong> Reserve for suspected HF, valvular disease, or hypertensive emergency with LV dysfunction concern.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Coronary Calcium Score in Known CAD</div>
+                    <div class="item-detail"><strong>No added value</strong> if CAD already established. Useful only for risk stratification in intermediate-risk asymptomatic patients.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Follow-up Imaging After Stable Stent</div>
+                    <div class="item-detail"><strong>No routine stress testing after PCI</strong> if asymptomatic. Only if new or worsening symptoms.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ High-Value Cardiology Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Exercise ECG Before Imaging</div>
+                    <div class="item-detail">If patient can exercise and has interpretable ECG, <strong>start with exercise ECG</strong> (not imaging stress test). Cheaper, no radiation.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Generic Statins</div>
+                    <div class="item-detail"><strong>Atorvastatin and rosuvastatin</strong> are generic, high-potency, and first-line for ASCVD prevention.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Rate Control First for Afib</div>
+                    <div class="item-detail"><strong>Rate control is non-inferior to rhythm control</strong> for most patients (AFFIRM trial). Less costly, fewer side effects.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">DOACs Over Warfarin for Afib</div>
+                    <div class="item-detail">Non-inferior or superior efficacy, less monitoring, lower ICH risk. <strong>Exception: Mechanical valve or severe MS — use warfarin.</strong></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quick-ref">
+            <div class="quick-ref-title">📌 Stent Duration — Current Guidelines</div>
+            <ul>
+                <li>Stable CAD with DES: DAPT × 6 months (can shorten to 1-3 months if high bleeding risk)</li>
+                <li>ACS with DES: DAPT × 12 months (can extend if high ischemic, low bleeding risk)</li>
+                <li>After DAPT: Single antiplatelet indefinitely (aspirin or clopidogrel alone)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- PULMONOLOGY -->
+<div class="topic" id="pulmonology">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🫁</span>
+            <span>Pulmonology</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Low-Value Pulmonary Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">CT Pulmonary Angiography in Low-Risk PE <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Use PERC rule first.</strong> If PERC negative, no testing needed. If Wells low + D-dimer negative, no CTPA.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Preoperative PFTs <span class="evidence-tag tag-ats">ATS</span></div>
+                    <div class="item-detail"><strong>Not routine before non-thoracic surgery.</strong> Clinical assessment is sufficient for most patients.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Antibiotics for Acute Bronchitis <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>No antibiotics</strong> for acute bronchitis in healthy adults. Viral in >90% of cases. Offer supportive care.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Chest X-ray for Every COPD Exacerbation</div>
+                    <div class="item-detail"><strong>Not routine</strong> for typical exacerbations. Only if pneumonia, pneumothorax, or other complication suspected.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Continuous Pulse Oximetry in Stable Patients <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Discontinue when stable.</strong> Leads to alarm fatigue and unnecessary interventions.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Aggressive Follow-up of Tiny Pulmonary Nodules</div>
+                    <div class="item-detail">Per <strong>Fleischner 2017:</strong> Solid nodules &lt;6mm in low-risk patients need <strong>no follow-up CT</strong>.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ High-Value Pulmonary Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">NIV for AECOPD</div>
+                    <div class="item-detail"><strong>BiPAP reduces intubation and mortality</strong> in AECOPD with respiratory acidosis. Cost-effective.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Smoking Cessation Counseling</div>
+                    <div class="item-detail">Most cost-effective intervention in medicine. Pharmacotherapy (varenicline, NRT) doubles quit rates.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Inhaler Technique Assessment</div>
+                    <div class="item-detail"><strong>Check technique before escalating therapy.</strong> Up to 90% of patients use inhalers incorrectly.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quick-ref">
+            <div class="quick-ref-title">📌 Supplemental O2 — When It's Needed</div>
+            <ul>
+                <li>LTOT criteria: PaO2 ≤55 or SpO2 ≤88% at rest (or 56-59 with cor pulmonale)</li>
+                <li>Ambulatory O2: Only if documented exertional desaturation AND improved with O2</li>
+                <li>Don't prescribe O2 for dyspnea without hypoxemia — no benefit</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- GI -->
+<div class="topic" id="gi">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🟠</span>
+            <span>Gastroenterology</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Low-Value GI Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Repeat Colonoscopy Too Soon <span class="evidence-tag tag-aga">AGA</span></div>
+                    <div class="item-detail"><strong>Follow guidelines:</strong> Normal = 10 years. 1-2 small adenomas = 7-10 years. 3-4 small adenomas = 3-5 years. Advanced adenoma = 3 years.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">EGD for Uncomplicated GERD <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>No EGD</strong> for typical GERD symptoms responding to PPI. Only for alarm features (dysphagia, weight loss, anemia, age &gt;60 new onset).</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Long-term PPI Without Indication <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Re-evaluate PPI need annually.</strong> Step down or discontinue if no clear indication. Use lowest effective dose.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">CT Abdomen for Typical IBS Symptoms</div>
+                    <div class="item-detail"><strong>Clinical diagnosis.</strong> Rome IV criteria. Only image if red flags (weight loss, rectal bleeding, anemia, age &gt;50 new onset).</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Stool Testing for All Diarrhea</div>
+                    <div class="item-detail">Most acute diarrhea is self-limited and viral. <strong>Test only if</strong>: &gt;7 days, bloody, severe, immunocompromised, recent antibiotics, hospitalized.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ High-Value GI Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">FIT for CRC Screening</div>
+                    <div class="item-detail"><strong>Annual FIT is an acceptable alternative</strong> to colonoscopy for average-risk screening. Patient preference matters.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Treat H. pylori to Prevent Ulcer Recurrence</div>
+                    <div class="item-detail">Eradication <strong>eliminates need for long-term PPI</strong> in H. pylori-related PUD. Cost-effective.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Non-invasive Fibrosis Assessment</div>
+                    <div class="item-detail"><strong>FIB-4, NAFLD fibrosis score, or elastography</strong> before liver biopsy for NAFLD/MASLD staging.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- INFECTIOUS DISEASE -->
+<div class="topic" id="id">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🦠</span>
+            <span>Infectious Disease</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Antibiotic Stewardship — Avoid</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Antibiotics for Viral URI <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>No antibiotics</strong> for common cold, viral pharyngitis (if Strep rapid test/culture negative), or acute sinusitis &lt;10 days.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Antibiotics for Asymptomatic Bacteriuria <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Do NOT treat</strong> except in pregnancy or before urologic procedures. Treating ASB increases antibiotic resistance.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Prolonged Antibiotic Courses</div>
+                    <div class="item-detail"><strong>Shorter courses are often equivalent:</strong> CAP 5 days, cellulitis 5-6 days, UTI 3-5 days. Use shortest effective duration.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Fluoroquinolones as First-line for Uncomplicated UTI <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail">Reserve for complicated UTI/pyelonephritis. Use <strong>nitrofurantoin or TMP-SMX</strong> for uncomplicated cystitis.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Urine Culture for Typical Cystitis in Young Women</div>
+                    <div class="item-detail"><strong>Treat empirically.</strong> Culture only if recurrent, complicated, or treatment failure.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">IV Antibiotics When Oral Equivalent Exists</div>
+                    <div class="item-detail"><strong>Oral step-down early.</strong> Many infections (including osteomyelitis, endocarditis in select cases) can complete therapy PO.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ High-Value ID Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Procalcitonin-Guided Antibiotic Duration</div>
+                    <div class="item-detail">Can <strong>safely shorten antibiotic courses</strong> in pneumonia and sepsis. Stop when procalcitonin &lt;0.25 or drops &gt;80%.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Generic Antibiotics</div>
+                    <div class="item-detail"><strong>Most antibiotics are generic.</strong> Brand-name rarely justified. Doxycycline, amoxicillin, TMP-SMX are highly cost-effective.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Hepatitis C Screening and Treatment</div>
+                    <div class="item-detail">Universal screening once for adults. <strong>Cure prevents cirrhosis and HCC</strong> — highly cost-effective despite drug cost.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quick-ref">
+            <div class="quick-ref-title">📌 Antibiotic Duration — Evidence-Based Short Courses</div>
+            <ul>
+                <li>Uncomplicated UTI: 3 days (nitrofurantoin 5 days)</li>
+                <li>Community-acquired pneumonia: 5 days (if afebrile 48-72h and stable)</li>
+                <li>Uncomplicated cellulitis: 5-6 days</li>
+                <li>Intra-abdominal infection (source controlled): 4 days</li>
+                <li>VAP: 7 days</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- NEUROLOGY -->
+<div class="topic" id="neuro">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🧠</span>
+            <span>Neurology</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Low-Value Neurology Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Imaging for Primary Headache <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>No MRI/CT</strong> for stable migraine or tension headache without red flags.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">EEG for Syncope Without Seizure Features <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Low yield.</strong> Only order if clinical features suggest seizure (witnessed tonic-clonic activity, tongue bite, prolonged confusion).</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Carotid Imaging for Non-hemispheric Symptoms</div>
+                    <div class="item-detail"><strong>Carotid disease doesn't cause dizziness, syncope, or confusion.</strong> Only image for hemispheric stroke/TIA symptoms.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Seizure Prophylaxis After Stroke</div>
+                    <div class="item-detail"><strong>Not recommended.</strong> Only treat if seizure occurs. Prophylaxis does not prevent late epilepsy.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Brand-Name ASMs When Generic Available</div>
+                    <div class="item-detail">Levetiracetam, lamotrigine, carbamazepine, valproate, phenytoin — <strong>all generic and effective</strong>.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ High-Value Neurology Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">HINTS Exam for Acute Vestibular Syndrome</div>
+                    <div class="item-detail"><strong>More sensitive than early MRI</strong> for posterior stroke. Skilled exam can avoid unnecessary imaging.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Epley Maneuver for BPPV</div>
+                    <div class="item-detail"><strong>Highly effective, costs nothing.</strong> Avoids unnecessary medications, imaging, and specialist referrals.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Generic Triptans</div>
+                    <div class="item-detail"><strong>Sumatriptan is generic and effective.</strong> Reserve branded or newer agents for treatment failures.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- RHEUMATOLOGY -->
+<div class="topic" id="rheum">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🦴</span>
+            <span>Rheumatology</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Low-Value Rheumatology Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">ANA Testing Without Clinical Suspicion <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>ANA is positive in 15-20% of healthy people.</strong> Only test with clinical features of CTD.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Lyme Testing for Non-specific Symptoms <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>High false positive rate</strong> leads to unnecessary treatment. Test only with compatible syndrome + endemic exposure.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">X-rays for Acute Low Back Pain &lt;6 Weeks</div>
+                    <div class="item-detail"><strong>Clinical assessment only</strong> unless red flags. Most acute LBP resolves without imaging.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">MRI for Non-specific Back Pain Without Red Flags</div>
+                    <div class="item-detail">MRI finds "abnormalities" in most asymptomatic adults. <strong>Leads to unnecessary interventions.</strong></div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">DEXA Before Age 65 in Average-Risk Women</div>
+                    <div class="item-detail"><strong>Screen at 65</strong>, or younger if risk factors (FRAX). Not routine in younger women.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ High-Value Rheumatology Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Methotrexate as First-Line DMARD</div>
+                    <div class="item-detail"><strong>Effective, inexpensive, well-studied.</strong> Use before biologics in RA. Anchor drug in many regimens.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Generic Allopurinol for Gout</div>
+                    <div class="item-detail"><strong>First-line ULT, generic.</strong> Febuxostat and pegloticase reserved for allopurinol failures/intolerance.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Acetaminophen and Topical NSAIDs for OA</div>
+                    <div class="item-detail"><strong>Start with safest options.</strong> Topical diclofenac effective for knee OA with fewer systemic effects.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ENDOCRINE -->
+<div class="topic" id="endo">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🔬</span>
+            <span>Endocrinology</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Low-Value Endocrine Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Thyroid Screening in Asymptomatic Adults <span class="evidence-tag tag-uspstf">USPSTF I</span></div>
+                    <div class="item-detail"><strong>Insufficient evidence</strong> for routine TSH screening. Test if symptomatic or high-risk.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Multiple Daily Glucose Checks in Stable T2DM on Oral Agents</div>
+                    <div class="item-detail"><strong>Minimal benefit</strong> in non-insulin-treated T2DM. HbA1c is sufficient for monitoring.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Sliding Scale Insulin Alone <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Reactive, not proactive.</strong> Always add basal insulin for hospitalized patients with diabetes.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Vitamin D Screening in Low-Risk Adults</div>
+                    <div class="item-detail"><strong>Not recommended routinely.</strong> Supplement empirically if high-risk (malabsorption, limited sun, elderly).</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Testosterone Testing for Fatigue Without Other Signs</div>
+                    <div class="item-detail"><strong>Low testosterone common with aging.</strong> Only test if clinical hypogonadism suspected (specific symptoms + signs).</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ High-Value Endocrine Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Metformin as First-Line for T2DM</div>
+                    <div class="item-detail"><strong>Generic, effective, weight-neutral, CV benefits.</strong> First-line unless contraindicated.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">SGLT2i/GLP-1 RA for Cardiorenal Protection</div>
+                    <div class="item-detail"><strong>Add early if ASCVD, HF, or CKD</strong> — benefit beyond glucose lowering. Now considered high-value despite cost.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Levothyroxine (Generic)</div>
+                    <div class="item-detail"><strong>Brand-name not superior.</strong> Generic levothyroxine is effective and far less expensive.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Observation for Small Thyroid Nodules</div>
+                    <div class="item-detail">Per <strong>ATA guidelines:</strong> Nodules &lt;1 cm (or &lt;1.5 cm without suspicious features) — observation, not biopsy.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NEPHROLOGY -->
+<div class="topic" id="nephro">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">💧</span>
+            <span>Nephrology</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Low-Value Nephrology Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Renal Ultrasound for Isolated AKI Without Obstruction Concern</div>
+                    <div class="item-detail"><strong>Low yield</strong> if no clinical suspicion for obstruction (anuria, known stones, pelvic malignancy). History determines need.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Stopping ACEi/ARB Permanently for Small Cr Rise</div>
+                    <div class="item-detail">Up to <strong>30% Cr increase is acceptable</strong> when starting ACEi/ARB. Long-term renoprotection outweighs short-term rise.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine 24-Hour Urine for Proteinuria Quantification</div>
+                    <div class="item-detail"><strong>Spot urine protein/Cr ratio is sufficient</strong> for most clinical decisions. 24-hour collection cumbersome and often inaccurate.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">NSAIDs in CKD</div>
+                    <div class="item-detail"><strong>Avoid in CKD stage 3+.</strong> Nephrotoxic, worsen hypertension, cause hyperkalemia. Use alternatives.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ High-Value Nephrology Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">SGLT2 Inhibitors for CKD</div>
+                    <div class="item-detail"><strong>Slow CKD progression</strong> regardless of diabetes status (DAPA-CKD, EMPA-KIDNEY). Now standard of care.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">ACEi/ARB for Proteinuric CKD</div>
+                    <div class="item-detail"><strong>Proven to slow progression.</strong> Continue unless hyperkalemia or Cr rise &gt;30%.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Avoid Contrast Nephropathy Overtreatment</div>
+                    <div class="item-detail"><strong>Risk often overstated.</strong> Volume expansion helps, but don't delay necessary imaging. Hold metformin only if eGFR &lt;30.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HEMATOLOGY -->
+<div class="topic" id="heme">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🩸</span>
+            <span>Hematology</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Low-Value Hematology Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Liberal Blood Transfusion <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Restrictive strategy (Hgb &lt;7)</strong> is safe and non-inferior in most patients. Liberal (Hgb &lt;8) for ACS, symptomatic anemia.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Hypercoagulability Workup After Provoked VTE</div>
+                    <div class="item-detail"><strong>Not indicated</strong> for VTE with clear provoking factor (surgery, immobility). Won't change management.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Preoperative Coagulation Testing <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>PT/INR/PTT not needed</strong> unless history of bleeding, liver disease, or anticoagulant use.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Iron Studies for Mild Anemia Without Symptoms</div>
+                    <div class="item-detail"><strong>Check MCV first.</strong> If microcytic, then iron studies. If normocytic, consider other causes before extensive workup.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ High-Value Hematology Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">IV Iron for Iron Deficiency in HF/CKD</div>
+                    <div class="item-detail"><strong>Improves symptoms and reduces hospitalizations</strong> even without anemia. More effective than oral iron.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">DOACs for VTE Treatment</div>
+                    <div class="item-detail"><strong>No monitoring needed, fewer interactions</strong> than warfarin. Exception: mechanical valve, antiphospholipid syndrome.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Observation for Low-Grade Lymphomas</div>
+                    <div class="item-detail"><strong>"Watch and wait"</strong> for asymptomatic follicular lymphoma or CLL. Treatment doesn't prolong survival if asymptomatic.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- GERIATRICS -->
+<div class="topic" id="geriatrics">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">👴</span>
+            <span>Geriatrics & Deprescribing</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Medications to Avoid in Elderly (Beers Criteria)</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Benzodiazepines & Non-Benzo Hypnotics <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Avoid for insomnia.</strong> Falls, fractures, cognitive impairment. Use sleep hygiene, CBT-I instead.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Anticholinergics (Diphenhydramine, Oxybutynin, TCAs)</div>
+                    <div class="item-detail"><strong>High anticholinergic burden</strong> → delirium, falls, cognitive decline. Cumulative effect of multiple agents.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Proton Pump Inhibitors Long-Term</div>
+                    <div class="item-detail"><strong>Re-evaluate annually.</strong> Associated with C. diff, fractures, hypomagnesemia. Use lowest dose, shortest duration.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Tight Glycemic Control in Frail Elderly</div>
+                    <div class="item-detail"><strong>HbA1c target 7.5-8.5%</strong> in limited life expectancy. Hypoglycemia risk outweighs benefit of tight control.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Aggressive BP Lowering in Frail Elderly</div>
+                    <div class="item-detail">SPRINT enrolled robust elders. <strong>Individualize targets</strong> — orthostatic hypotension and falls are real risks.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ Deprescribing Opportunities</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Stop Statins if Life Expectancy &lt;1-2 Years</div>
+                    <div class="item-detail"><strong>No benefit in terminal illness.</strong> Reduces pill burden, interactions, and costs.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Stop Bisphosphonates After 5 Years (Oral) or 3 Years (IV)</div>
+                    <div class="item-detail"><strong>"Drug holiday"</strong> — benefits persist, reduces atypical fracture risk.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Reassess Aspirin for Primary Prevention</div>
+                    <div class="item-detail"><strong>Not recommended</strong> for most adults &gt;60 for primary prevention (ASPREE, ARRIVE). Bleeding risk increases with age.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Review and Stop Unnecessary Vitamins/Supplements</div>
+                    <div class="item-detail"><strong>Most have no proven benefit.</strong> Reduce polypharmacy and costs.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quick-ref">
+            <div class="quick-ref-title">📌 Deprescribing Questions to Ask</div>
+            <ul>
+                <li>Is there still a valid indication for this medication?</li>
+                <li>Is the benefit likely to be realized given life expectancy?</li>
+                <li>Are there potential harms that outweigh benefits?</li>
+                <li>What are the patient's goals and preferences?</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- PERIOPERATIVE -->
+<div class="topic" id="periop">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🏥</span>
+            <span>Perioperative Medicine</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Low-Value Perioperative Testing</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Preoperative Testing in Healthy Patients <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>No routine CBC, BMP, PT/INR, UA, CXR, ECG</strong> for low-risk surgery in healthy patients. Test only if indicated.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Stress Testing Before Low/Intermediate-Risk Surgery <span class="evidence-tag tag-acc-aha">ACC/AHA</span></div>
+                    <div class="item-detail"><strong>Rarely changes management.</strong> For elevated-risk surgery: test only if result will change care (cancel or revascularize).</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">PFTs Before Non-Thoracic Surgery</div>
+                    <div class="item-detail"><strong>Clinical assessment is sufficient.</strong> PFTs rarely change management. Optimize asthma/COPD clinically.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Cardiology "Clearance"</div>
+                    <div class="item-detail"><strong>Not a thing.</strong> Risk assessment and optimization is the goal, not "clearance." Anesthesia clears for surgery.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ High-Value Perioperative Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Use Functional Capacity Assessment</div>
+                    <div class="item-detail"><strong>Can patient climb 2 flights of stairs?</strong> If yes (≥4 METs), low cardiac risk regardless of comorbidities.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Continue Beta-Blockers Perioperatively</div>
+                    <div class="item-detail"><strong>Don't stop</strong> chronic beta-blockers (withdrawal risk). Don't start de novo before surgery (POISE harm).</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Appropriate Antibiotic Prophylaxis Timing</div>
+                    <div class="item-detail"><strong>Within 60 min of incision.</strong> Redose if surgery prolonged. Stop within 24h (48h for cardiac surgery).</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quick-ref">
+            <div class="quick-ref-title">📌 When Preoperative ECG IS Indicated</div>
+            <ul>
+                <li>Known CAD, arrhythmia, or structural heart disease</li>
+                <li>New cardiac symptoms</li>
+                <li>High-risk surgery (vascular, thoracic) in patients with risk factors</li>
+                <li>NOT routine for low-risk surgery regardless of age</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- HOSPITAL MEDICINE -->
+<div class="topic" id="hospital">
+    <div class="topic-header" onclick="toggleTopic(this)">
+        <div class="topic-title">
+            <span class="topic-icon">🛏️</span>
+            <span>Hospital Medicine</span>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-content">
+        <div class="category">
+            <div class="category-header">🚫 Low-Value Inpatient Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Routine Daily Labs <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Order only when results will change management.</strong> Daily phlebotomy causes iatrogenic anemia.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Telemetry for Low-Risk Patients <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Use AHA guidelines.</strong> Most patients don't need continuous monitoring. Causes alarm fatigue.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Foley Catheters Without Indication <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Remove as soon as possible.</strong> CAUTI is preventable. "Patient convenience" is not an indication.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Strict Bed Rest for Most Conditions</div>
+                    <div class="item-detail"><strong>Early mobilization improves outcomes.</strong> Bed rest causes deconditioning, VTE, delirium, pressure ulcers.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon avoid-icon">✗</span>
+                <div class="item-content">
+                    <div class="item-title">Stress Ulcer Prophylaxis in Low-Risk Patients <span class="evidence-tag tag-choosing-wisely">Choosing Wisely</span></div>
+                    <div class="item-detail"><strong>Not routine.</strong> Reserve for ICU with risk factors (coagulopathy, mechanical ventilation, burns, TBI). PPI overuse causes C. diff.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">✅ High-Value Inpatient Practices</div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">VTE Prophylaxis for ALL Hospitalized Patients</div>
+                    <div class="item-detail"><strong>Pharmacologic or mechanical</strong> depending on bleeding risk. One of most effective preventive measures.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Glycemic Control Without Hypoglycemia</div>
+                    <div class="item-detail"><strong>Target 140-180 mg/dL</strong> in most hospitalized patients. Hypoglycemia is harmful. Avoid sliding scale alone.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Discharge Planning Starting Day 1</div>
+                    <div class="item-detail"><strong>Reduces length of stay, readmissions.</strong> Engage case management early for complex patients.</div>
+                </div>
+            </div>
+            
+            <div class="hvc-item">
+                <span class="item-icon prefer-icon">✓</span>
+                <div class="item-content">
+                    <div class="item-title">Medication Reconciliation</div>
+                    <div class="item-detail"><strong>At admission and discharge.</strong> Prevents errors, inappropriate continuation of inpatient-only meds.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>💰 High Value Care — ACP/ABIM Board Review</p>
+    <div style="margin-top: 15px;">
+        <a href="board_pearls.html">💎 Board Pearls</a>
+        <a href="study_guides_index.html">📚 Study Guides</a>
+        <a href="im_guide.html">🩺 IM Guide</a>
+    </div>
+    <p style="margin-top: 20px; font-size: 0.85rem; opacity: 0.7;">
+        Choosing Wisely • USPSTF • Evidence-Based Guidelines
+    </p>
+</footer>
+
+<script>
+    // Toggle topic sections
+    function toggleTopic(header) {
+        const topic = header.closest('.topic');
+        topic.classList.toggle('collapsed');
+    }
+    
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const items = document.querySelectorAll('.hvc-item');
+        const topics = document.querySelectorAll('.topic');
+        
+        if (searchTerm === '') {
+            items.forEach(i => i.style.display = 'flex');
+            topics.forEach(t => {
+                t.style.display = 'block';
+                t.classList.remove('collapsed');
+            });
+            return;
+        }
+        
+        topics.forEach(topic => {
+            const itemsInTopic = topic.querySelectorAll('.hvc-item');
+            let hasMatch = false;
+            
+            itemsInTopic.forEach(item => {
+                if (item.textContent.toLowerCase().includes(searchTerm)) {
+                    item.style.display = 'flex';
+                    hasMatch = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            topic.style.display = hasMatch ? 'block' : 'none';
+            if (hasMatch) {
+                topic.classList.remove('collapsed');
+            }
+        });
+    });
+    
+    // Smooth scroll for nav
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            target.classList.remove('collapsed');
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,3215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Version: 2025-10-25 18:07:24 - SCROLL FIXED -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Critical Care Medicine Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #2c3e50;
+    --border-color: #e0e0e0;
+    --highlight-bg: #fff3cd;
+    --success-color: #27ae60;
+    --header-height: 180px;
+}
+
+html {
+    scroll-padding-top: 200px;
+}
+
+h3[id], h4[id] {
+    scroll-margin-top: 200px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    padding: 0;
+    margin: 0;
+    padding-top: 160px;  /* ← ADD THIS LINE */
+    -webkit-font-smoothing: antialiased;
+}
+
+.header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: fixed;  /* ← CHANGED FROM STICKY TO FIXED */
+    top: 0;
+    left: 0;         /* ← ADD THIS */
+    right: 0;        /* ← ADD THIS */
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+
+        .nav-toggle {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            margin-top: 15px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle:active {
+            transform: scale(0.98);
+        }
+
+        .toc-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+
+        .toc-overlay.active {
+            display: block;
+        }
+
+        .toc {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 400px;
+            height: 100%;
+            background: white;
+            overflow-y: auto;
+            z-index: 999;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .toc.active {
+            left: 0;
+        }
+
+        .toc-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .toc-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .toc-search {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-color);
+        }
+
+        .toc-search::placeholder {
+            color: #999;
+        }
+
+        .toc-search:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .toc-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .toc-content {
+            padding: 20px;
+        }
+
+        .quick-ref {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: -20px -20px 20px -20px;
+            padding: 15px 20px;
+            color: white;
+        }
+
+        .quick-ref h3 {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            color: white;
+            opacity: 0.9;
+            font-weight: 600;
+            border: none;
+            padding: 0;
+        }
+
+        .quick-ref-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .quick-ref-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .quick-ref-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0.98);
+        }
+
+        .toc-item {
+            margin-bottom: 5px;
+        }
+
+        .toc-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+            font-size: 0.95em;
+            font-weight: 600;
+            background: white;
+            cursor: pointer;
+        }
+
+        .toc-main:hover, .toc-main:active {
+            background: var(--bg-color);
+            border-left-color: var(--secondary-color);
+        }
+
+        .toc-main.active {
+            background: var(--bg-color);
+            border-left-color: var(--secondary-color);
+        }
+
+        .toc-arrow {
+            transition: transform 0.3s ease;
+            font-size: 0.8em;
+            color: var(--secondary-color);
+        }
+
+        .toc-main.active .toc-arrow {
+            transform: rotate(180deg);
+        }
+
+        .toc-submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .toc-submenu.active {
+            max-height: 1000px;
+        }
+
+        .toc-submenu a {
+            display: block;
+            padding: 8px 15px 8px 30px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.85em;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-submenu a:hover, .toc-submenu a:active {
+            background: #e9ecef;
+            color: var(--secondary-color);
+            border-left-color: var(--secondary-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background: var(--card-bg);
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+            scroll-margin-top: var(--header-height);
+        }
+
+        .section-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.2s ease;
+        }
+
+        .section-header:active {
+            background: #34495e;
+        }
+
+        .section-header h2 {
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .section-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .section-content.active {
+            max-height: 10000px;
+        }
+
+        .section-inner {
+            padding: 20px;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h4 {
+            color: var(--text-color);
+            font-size: 1.05em;
+            margin-top: 16px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: var(--highlight-bg);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .critical-box {
+            background: #ffe5e5;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: #e8f8f5;
+            border-left: 4px solid var(--success-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .formula {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .trial-name {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: 600;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--secondary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top.visible {
+            display: flex;
+        }
+
+        .back-to-top:active {
+            transform: scale(0.95);
+        }
+
+        /* Glossary Modal */
+        .glossary-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(2px);
+        }
+
+        .glossary-modal.active {
+            display: flex;
+        }
+
+        .glossary-content {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glossary-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--bg-color);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 1.3em;
+            cursor: pointer;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .glossary-close:active {
+            background: #ddd;
+            transform: scale(0.95);
+        }
+
+        .glossary-term-title {
+            font-size: 1.4em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+            padding-right: 40px;
+        }
+
+        .glossary-term-def {
+            color: var(--text-color);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .glossary-term-category {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Clickable glossary terms in text */
+        .gterm {
+            color: var(--secondary-color);
+            cursor: pointer;
+            border-bottom: 1px dotted var(--secondary-color);
+            position: relative;
+            font-weight: 500;
+        }
+
+        .gterm:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Glossary section styles */
+        .glossary-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .glossary-item {
+            background: var(--bg-color);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .glossary-item:active {
+            transform: scale(0.98);
+            background: #e9ecef;
+        }
+
+        .glossary-item-term {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.05em;
+            margin-bottom: 5px;
+        }
+
+        .glossary-item-def {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .glossary-search-box {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+            margin-bottom: 20px;
+            transition: border-color 0.2s ease;
+        }
+
+        .glossary-search-box:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+            
+            .section-inner {
+                padding: 30px;
+            }
+
+            .glossary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media print {
+            .header, .nav-toggle, .toc, .toc-overlay, .back-to-top {
+                display: none;
+            }
+            
+            .section-header {
+                background: white;
+                color: var(--primary-color);
+            }
+            
+            .section-content {
+                max-height: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Critical Care Medicine Study Guide</h1>
+        <p>Internal Medicine Residency Preparation</p>
+        <button class="nav-toggle" onclick="toggleToc()">📋 Table of Contents</button>
+    </div>
+
+    <div class="toc-overlay" onclick="toggleToc()"></div>
+    
+    <nav class="toc">
+        <div class="toc-header">
+            <div class="toc-header-content">
+                <h2>Contents</h2>
+                <button class="toc-close" onclick="toggleToc()">✕</button>
+            </div>
+            <input type="text" class="toc-search" placeholder="🔍 Search topics..." oninput="searchTOC(this.value)">
+        </div>
+        <div class="toc-content">
+            <div class="quick-ref">
+                <h3>⚡ QUICK REFERENCE</h3>
+                <div class="quick-ref-grid">
+                    <div class="quick-ref-btn" onclick="navigateTo('resp', this)">Vent Settings</div>
+                    <div class="quick-ref-btn" onclick="navigateTo('shock', this)">Pressors</div>
+                    <div class="quick-ref-btn" onclick="navigateTo('sepsis', this)">Sepsis Bundle</div>
+                    <div class="quick-ref-btn" onclick="navigateTo('renal', this)">Acid-Base</div>
+                    <div class="quick-ref-btn" onclick="navigateTo('procedures', this)">RSI Drugs</div>
+                    <div class="quick-ref-btn" onclick="navigateTo('glossary', this)">📖 Glossary</div>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>Respiratory Failure & Mechanical Ventilation</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('resp', this); return false;">→ Go to Section</a>
+                    <a href="#resp-types" onclick="navigateToSubsection('resp-types'); return false;">Types of Respiratory Failure</a>
+                    <a href="#resp-vent" onclick="navigateToSubsection('resp-vent'); return false;">Mechanical Ventilation Basics</a>
+                    <a href="#resp-ards" onclick="navigateToSubsection('resp-ards'); return false;">ARDS Management</a>
+                    <a href="#resp-liberation" onclick="navigateToSubsection('resp-liberation'); return false;">Ventilator Liberation</a>
+                    <a href="#resp-niv" onclick="navigateToSubsection('resp-niv'); return false;">Non-Invasive Ventilation</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>Shock & Hemodynamics</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('shock', this); return false;">→ Go to Section</a>
+                    <a href="#shock-types" onclick="navigateToSubsection('shock-types'); return false;">Four Types of Shock</a>
+                    <a href="#shock-monitoring" onclick="navigateToSubsection('shock-monitoring'); return false;">Hemodynamic Monitoring</a>
+                    <a href="#shock-fluids" onclick="navigateToSubsection('shock-fluids'); return false;">Fluid Resuscitation</a>
+                    <a href="#shock-pressors" onclick="navigateToSubsection('shock-pressors'); return false;">Vasopressors & Inotropes</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>Sepsis & Septic Shock</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('sepsis', this); return false;">→ Go to Section</a>
+                    <a href="#sepsis-defs" onclick="navigateToSubsection('sepsis-defs'); return false;">Definitions (Sepsis-3)</a>
+                    <a href="#sepsis-ssc" onclick="navigateToSubsection('sepsis-ssc'); return false;">Surviving Sepsis Guidelines</a>
+                    <a href="#sepsis-resus" onclick="navigateToSubsection('sepsis-resus'); return false;">Initial Resuscitation</a>
+                    <a href="#sepsis-abx" onclick="navigateToSubsection('sepsis-abx'); return false;">Antibiotic Management</a>
+                    <a href="#sepsis-steroids" onclick="navigateToSubsection('sepsis-steroids'); return false;">Corticosteroids</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>Neurological Critical Care</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('neuro', this); return false;">→ Go to Section</a>
+                    <a href="#neuro-ams" onclick="navigateToSubsection('neuro-ams'); return false;">Altered Mental Status</a>
+                    <a href="#neuro-delirium" onclick="navigateToSubsection('neuro-delirium'); return false;">Delirium</a>
+                    <a href="#neuro-arrest" onclick="navigateToSubsection('neuro-arrest'); return false;">Post-Cardiac Arrest Care</a>
+                    <a href="#neuro-icp" onclick="navigateToSubsection('neuro-icp'); return false;">Elevated ICP</a>
+                    <a href="#neuro-seizure" onclick="navigateToSubsection('neuro-seizure'); return false;">Status Epilepticus</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>Renal & Acid-Base</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('renal', this); return false;">→ Go to Section</a>
+                    <a href="#renal-aki" onclick="navigateToSubsection('renal-aki'); return false;">Acute Kidney Injury</a>
+                    <a href="#renal-rrt" onclick="navigateToSubsection('renal-rrt'); return false;">Renal Replacement Therapy</a>
+                    <a href="#renal-acidbase" onclick="navigateToSubsection('renal-acidbase'); return false;">Acid-Base Disorders</a>
+                    <a href="#renal-lytes" onclick="navigateToSubsection('renal-lytes'); return false;">Electrolyte Emergencies</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>Sedation, Analgesia & Delirium</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('sedation', this); return false;">→ Go to Section</a>
+                    <a href="#sedation-bundle" onclick="navigateToSubsection('sedation-bundle'); return false;">ABCDEF Bundle</a>
+                    <a href="#sedation-pain" onclick="navigateToSubsection('sedation-pain'); return false;">Pain Assessment</a>
+                    <a href="#sedation-agents" onclick="navigateToSubsection('sedation-agents'); return false;">Sedation Agents & RASS</a>
+                    <a href="#sedation-delirium" onclick="navigateToSubsection('sedation-delirium'); return false;">Delirium Management</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>Critical Care Procedures</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('procedures', this); return false;">→ Go to Section</a>
+                    <a href="#proc-cvc" onclick="navigateToSubsection('proc-cvc'); return false;">Central Venous Catheter</a>
+                    <a href="#proc-art" onclick="navigateToSubsection('proc-art'); return false;">Arterial Line</a>
+                    <a href="#proc-intubation" onclick="navigateToSubsection('proc-intubation'); return false;">Endotracheal Intubation</a>
+                    <a href="#proc-chest" onclick="navigateToSubsection('proc-chest'); return false;">Chest Tube</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>ICU Emergencies</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('emergencies', this); return false;">→ Go to Section</a>
+                    <a href="#emerg-ptx" onclick="navigateToSubsection('emerg-ptx'); return false;">Tension Pneumothorax</a>
+                    <a href="#emerg-hemopt" onclick="navigateToSubsection('emerg-hemopt'); return false;">Massive Hemoptysis</a>
+                    <a href="#emerg-gib" onclick="navigateToSubsection('emerg-gib'); return false;">Upper GI Bleeding</a>
+                    <a href="#emerg-anaph" onclick="navigateToSubsection('emerg-anaph'); return false;">Anaphylaxis</a>
+                    <a href="#emerg-acls" onclick="navigateToSubsection('emerg-acls'); return false;">Cardiac Arrest (ACLS)</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>Preventive Care & Complications</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('preventive', this); return false;">→ Go to Section</a>
+                    <a href="#prev-vte" onclick="navigateToSubsection('prev-vte'); return false;">VTE Prophylaxis</a>
+                    <a href="#prev-sup" onclick="navigateToSubsection('prev-sup'); return false;">Stress Ulcer Prophylaxis</a>
+                    <a href="#prev-clabsi" onclick="navigateToSubsection('prev-clabsi'); return false;">CLABSI/CAUTI Prevention</a>
+                    <a href="#prev-vap" onclick="navigateToSubsection('prev-vap'); return false;">VAP Prevention</a>
+                    <a href="#prev-weak" onclick="navigateToSubsection('prev-weak'); return false;">ICU-Acquired Weakness</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>Landmark Trials & Key Papers</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('trials', this); return false;">→ Go to Section</a>
+                    <a href="#trials-resp" onclick="navigateToSubsection('trials-resp'); return false;">Respiratory/ARDS Trials</a>
+                    <a href="#trials-sepsis" onclick="navigateToSubsection('trials-sepsis'); return false;">Sepsis Trials</a>
+                    <a href="#trials-sedation" onclick="navigateToSubsection('trials-sedation'); return false;">Sedation Trials</a>
+                    <a href="#trials-other" onclick="navigateToSubsection('trials-other'); return false;">Transfusion, Arrest, Renal</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>Daily ICU Routine & Practical Tips</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('daily', this); return false;">→ Go to Section</a>
+                    <a href="#daily-rounds" onclick="navigateToSubsection('daily-rounds'); return false;">Daily Rounds Structure</a>
+                    <a href="#daily-vent" onclick="navigateToSubsection('daily-vent'); return false;">Ventilator Troubleshooting</a>
+                    <a href="#daily-drips" onclick="navigateToSubsection('daily-drips'); return false;">Common ICU Drips</a>
+                    <a href="#daily-goals" onclick="navigateToSubsection('daily-goals'); return false;">Goals of Care Discussions</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="toggleSubmenu(this); return false;">
+                    <span>Study Plan Recommendations</span>
+                    <span class="toc-arrow">▼</span>
+                </div>
+                <div class="toc-submenu">
+                    <a href="#" onclick="navigateTo('study', this); return false;">→ Go to Section</a>
+                    <a href="#study-plan" onclick="navigateToSubsection('study-plan'); return false;">Week-by-Week Preparation</a>
+                    <a href="#study-resources" onclick="navigateToSubsection('study-resources'); return false;">Key Resources</a>
+                    <a href="#study-tips" onclick="navigateToSubsection('study-tips'); return false;">Final Tips for Success</a>
+                </div>
+            </div>
+
+            <div class="toc-item">
+                <div class="toc-main" onclick="navigateTo('glossary', this); return false;">
+                    <span>📖 Glossary & Abbreviations</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="glossary-modal" onclick="closeGlossaryIfOutside(event)">
+        <div class="glossary-content">
+            <button class="glossary-close" onclick="closeGlossary()">✕</button>
+            <span class="glossary-term-category" id="glossary-category"></span>
+            <h3 class="glossary-term-title" id="glossary-title"></h3>
+            <p class="glossary-term-def" id="glossary-definition"></p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- RESPIRATORY FAILURE -->
+        <section class="section" id="resp">
+            <div class="section-header" onclick="toggleSection('resp')">
+                <h2>Respiratory Failure & Mechanical Ventilation</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Core Concepts to Master</h3>
+                    
+                    <h4 id="resp-types">Types of Respiratory Failure</h4>
+                    <ul>
+                        <li><strong>Type I (Hypoxemic):</strong> PaO2 &lt;60 mmHg on room air
+                            <ul>
+                                <li>A-a gradient elevated</li>
+                                <li>Causes: pneumonia, ARDS, pulmonary edema, PE</li>
+                            </ul>
+                        </li>
+                        <li><strong>Type II (Hypercapnic):</strong> PaCO2 &gt;50 mmHg
+                            <ul>
+                                <li>A-a gradient normal or elevated</li>
+                                <li>Causes: COPD, neuromuscular disease, CNS depression, chest wall disorders</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Indications for Intubation</h4>
+                    <ul>
+                        <li>Airway protection (GCS &lt;8)</li>
+                        <li>Hypoxemia refractory to NIV/high-flow O2</li>
+                        <li>Severe hypercapnia with altered mental status</li>
+                        <li>Impending respiratory arrest</li>
+                        <li>Need for procedural sedation</li>
+                    </ul>
+
+                    <h3 id="resp-vent">Mechanical Ventilation Basics</h3>
+                    
+                    <div class="highlight-box">
+                        <h4>Initial Ventilator Settings</h4>
+                        <ul>
+                            <li><strong>Mode:</strong> Volume control (AC) vs. Pressure control</li>
+                            <li><strong>Tidal volume:</strong> 6-8 mL/kg ideal body weight (ARDS: 6 mL/kg)</li>
+                            <li><strong>Respiratory rate:</strong> 12-16 (adjust for pH)</li>
+                            <li><strong>FiO2:</strong> Start 100%, then titrate to SpO2 88-95%</li>
+                            <li><strong>PEEP:</strong> Start 5 cm H2O, titrate based on oxygenation</li>
+                        </ul>
+                    </div>
+
+                    <div class="formula">
+                        <strong>Ideal Body Weight (IBW) Calculation</strong><br>
+                        Males: 50 kg + 2.3 kg per inch over 5 feet<br>
+                        Females: 45.5 kg + 2.3 kg per inch over 5 feet
+                    </div>
+
+                    <h4>Ventilator Modes</h4>
+                    <ul>
+                        <li><strong>AC (Assist Control):</strong> Set rate + tidal volume, patient can trigger additional breaths</li>
+                        <li><strong>SIMV:</strong> Set breaths + spontaneous breathing</li>
+                        <li><strong>Pressure Support:</strong> Patient-triggered, pressure-targeted</li>
+                        <li><strong>APRV:</strong> Two levels of CPAP, used in severe ARDS</li>
+                    </ul>
+
+                    <div class="critical-box">
+                        <h4>Key Ventilator Parameters</h4>
+                        <ul>
+                            <li><strong>Plateau pressure (Pplat):</strong> Should be &lt;30 cm H2O (lung-protective)</li>
+                            <li><strong>Driving pressure (Pplat - PEEP):</strong> Should be &lt;15 cm H2O</li>
+                            <li><strong>Static compliance:</strong> Tidal volume / (Pplat - PEEP)</li>
+                        </ul>
+                    </div>
+
+                    <h3 id="resp-ards">ARDS Management</h3>
+                    
+                    <h4>Berlin Definition</h4>
+                    <ul>
+                        <li><strong>Timing:</strong> Within 1 week of known insult</li>
+                        <li><strong>Imaging:</strong> Bilateral opacities not explained by effusions/nodules</li>
+                        <li><strong>Origin:</strong> Not fully explained by cardiac failure or fluid overload</li>
+                        <li><strong>Oxygenation</strong> (on <span class="gterm" onclick="showGlossary('PEEP')">PEEP</span> ≥5):
+                            <ul>
+                                <li>Mild: PaO2/<span class="gterm" onclick="showGlossary('FiO2')">FiO2</span> 200-300</li>
+                                <li>Moderate: PaO2/FiO2 100-200</li>
+                                <li>Severe: PaO2/FiO2 &lt;100</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="success-box">
+                        <h4>Evidence-Based ARDS Management</h4>
+                        <ol>
+                            <li><strong>Lung-protective ventilation</strong> <span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/10793162/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">ARMA</a></span>
+                                <ul>
+                                    <li>Tidal volume: 6 mL/kg <span class="gterm" onclick="showGlossary('IBW')">IBW</span></li>
+                                    <li><span class="gterm" onclick="showGlossary('Pplat')">Plateau pressure</span>: &lt;30 cm H2O</li>
+                                </ul>
+                            </li>
+                            <li><strong>Higher PEEP</strong> <span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/15269312/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">ALVEOLI</a></span> <span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/18424510/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">LOVS</a></span>
+                                <ul>
+                                    <li>Use PEEP/FiO2 tables</li>
+                                    <li>Consider recruitment maneuvers</li>
+                                </ul>
+                            </li>
+                            <li><strong>Prone positioning</strong> <span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/23688302/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">PROSEVA</a></span>
+                                <ul>
+                                    <li>For PaO2/FiO2 &lt;150</li>
+                                    <li>16+ hours per day</li>
+                                    <li>50% mortality reduction</li>
+                                </ul>
+                            </li>
+                            <li><strong>Neuromuscular blockade</strong> <span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/20843245/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">ACURASYS</a></span>
+                                <ul>
+                                    <li>For PaO2/FiO2 &lt;150 in first 48 hours</li>
+                                    <li>Cisatracurium infusion for 48 hours</li>
+                                    <li>Re-evaluated by ROSE trial (less clear benefit with lighter sedation)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Conservative fluid strategy</strong> <span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/16714767/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">FACTT</a></span>
+                                <ul>
+                                    <li>After initial resuscitation</li>
+                                    <li>Target CVP &lt;4 or negative fluid balance</li>
+                                </ul>
+                            </li>
+                            <li><strong>Consider ECMO</strong> for refractory hypoxemia
+                                <ul>
+                                    <li>PaO2/FiO2 &lt;80 or pH &lt;7.25 with PaCO2 &gt;60</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <h3 id="resp-liberation">Ventilator Liberation</h3>
+                    
+                    <h4>Daily Assessment for SBT Readiness</h4>
+                    <ul>
+                        <li>Adequate oxygenation (FiO2 ≤50%, PEEP ≤8)</li>
+                        <li>Hemodynamic stability (no/minimal vasopressors)</li>
+                        <li>Able to initiate inspiratory effort</li>
+                        <li>No planned procedures requiring sedation</li>
+                    </ul>
+
+                    <h4>Spontaneous Breathing Trial (SBT)</h4>
+                    <ul>
+                        <li><strong>Method:</strong> T-piece or PS 5-7 cm H2O for 30-120 minutes</li>
+                        <li><strong>Pass criteria:</strong>
+                            <ul>
+                                <li>RR &lt;35 breaths/min</li>
+                                <li>SpO2 &gt;90%</li>
+                                <li>HR &lt;140 or &lt;20% change</li>
+                                <li>SBP 90-180 mmHg</li>
+                                <li>No distress/diaphoresis</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="formula">
+                        <strong>Rapid Shallow Breathing Index (RSBI)</strong><br>
+                        RSBI = RR / Tidal volume (in liters)<br>
+                        &lt;105 predicts successful extubation
+                    </div>
+
+                    <h3 id="resp-niv">Non-Invasive Ventilation (NIV)</h3>
+                    
+                    <div class="success-box">
+                        <h4>Strong Indications</h4>
+                        <ul>
+                            <li><strong>COPD exacerbations</strong> with respiratory acidosis (pH 7.25-7.35)</li>
+                            <li><strong>Cardiogenic pulmonary edema</strong></li>
+                            <li><strong>Immunocompromised patients</strong> with respiratory failure</li>
+                            <li>Post-extubation respiratory failure (in select patients)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Contraindications</h4>
+                    <ul>
+                        <li>Inability to protect airway</li>
+                        <li>Hemodynamic instability</li>
+                        <li>Facial trauma/burns</li>
+                        <li>Recent upper GI surgery</li>
+                        <li>Copious secretions/emesis</li>
+                    </ul>
+
+                    <h4>Settings</h4>
+                    <ul>
+                        <li>IPAP: Start 8-10, titrate to 12-20 cm H2O</li>
+                        <li>EPAP: Start 4-5 cm H2O</li>
+                        <li>Monitor for 1-2 hours: if no improvement → intubate</li>
+                    </ul>
+
+                    <h3>High-Flow Nasal Cannula (HFNC)</h3>
+                    <ul>
+                        <li>Flow rates up to 60 L/min</li>
+                        <li>FiO2 up to 100%</li>
+                        <li>Generates low-level PEEP (3-5 cm H2O)</li>
+                        <li>Washes out dead space</li>
+                    </ul>
+                    <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/25981908/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">FLORALI</a></span> trial: Reduced intubation in hypoxemic respiratory failure vs. standard O2</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOCK & HEMODYNAMICS -->
+        <section class="section" id="shock">
+            <div class="section-header" onclick="toggleSection('shock')">
+                <h2>Shock & Hemodynamics</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Four Types of Shock</h3>
+                    
+                    <h4>1. Distributive Shock</h4>
+                    <ul>
+                        <li><strong>Causes:</strong> Sepsis, anaphylaxis, neurogenic</li>
+                        <li><strong>Findings:</strong> Warm extremities, wide pulse pressure, low SVR</li>
+                        <li><strong>Treatment:</strong> Fluids → vasopressors (norepinephrine)</li>
+                    </ul>
+
+                    <h4>2. Cardiogenic Shock</h4>
+                    <ul>
+                        <li><strong>Causes:</strong> MI, acute valvular disease, myocarditis, post-cardiac arrest</li>
+                        <li><strong>Findings:</strong> Cold/clammy, elevated JVP, pulmonary edema</li>
+                        <li><strong>Markers:</strong> Cardiac index &lt;2.2 L/min/m², PCWP &gt;18 mmHg</li>
+                        <li><strong>Treatment:</strong> Identify cause, inotropes (dobutamine), mechanical support (IABP, Impella)</li>
+                    </ul>
+
+                    <h4>3. Hypovolemic Shock</h4>
+                    <ul>
+                        <li><strong>Causes:</strong> Hemorrhage, GI losses, burns, third-spacing</li>
+                        <li><strong>Findings:</strong> Flat JVP, dry mucous membranes, oliguria</li>
+                        <li><strong>Treatment:</strong> Fluid resuscitation, blood products if hemorrhagic</li>
+                    </ul>
+
+                    <h4>4. Obstructive Shock</h4>
+                    <ul>
+                        <li><strong>Causes:</strong> PE, tension pneumothorax, cardiac tamponade, massive RV infarction</li>
+                        <li><strong>Findings:</strong> Elevated JVP, hypotension, narrow pulse pressure</li>
+                        <li><strong>Treatment:</strong> Relieve obstruction</li>
+                    </ul>
+
+                    <h3>Hemodynamic Monitoring</h3>
+                    
+                    <h4>Laboratory Markers</h4>
+                    <ul>
+                        <li><strong><span class="gterm" onclick="showGlossary('Lactate')">Lactate</span>:</strong> &gt;2 suggests tissue hypoperfusion (but many causes)</li>
+                        <li><strong><span class="gterm" onclick="showGlossary('ScvO2')">ScvO2</span></strong> (central venous O2 saturation):
+                            <ul>
+                                <li>Normal 70-75%</li>
+                                <li>&lt;70% suggests inadequate O2 delivery</li>
+                                <li>&gt;75% may suggest sepsis or inability to extract O2</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="info-box">
+                        <h4>Central Venous Pressure (<span class="gterm" onclick="showGlossary('CVP')">CVP</span>)</h4>
+                        <ul>
+                            <li>Not reliable for predicting fluid responsiveness</li>
+                            <li>CVP &lt;8 suggests hypovolemia (but poor sensitivity)</li>
+                            <li>Trends more useful than absolute values</li>
+                        </ul>
+                    </div>
+
+                    <h4>Passive Leg Raise (PLR) Test</h4>
+                    <ul>
+                        <li>Auto-transfuse ~300 mL from lower extremities</li>
+                        <li>Increase in CO/BP by &gt;10% predicts fluid responsiveness</li>
+                        <li>More reliable than static measurements</li>
+                    </ul>
+
+                    <h3>Fluid Resuscitation</h3>
+                    
+                    <div class="success-box">
+                        <h4>Crystalloids</h4>
+                        <ul>
+                            <li><strong>Normal saline (0.9% NS):</strong> Risk of hyperchloremic acidosis</li>
+                            <li><strong>Lactated Ringer's (LR):</strong> Balanced, contains potassium</li>
+                            <li><strong>Plasmalyte:</strong> Balanced alternative</li>
+                        </ul>
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/29485925/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">SMART</a></span> <span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/29485926/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">SALT-ED</a></span> trials: Balanced crystalloids reduced mortality/AKI vs. saline</p>
+                        <p><strong>Recommendation:</strong> Use balanced crystalloids as first-line</p>
+                    </div>
+
+                    <h4>Colloids</h4>
+                    <ul>
+                        <li><strong>Albumin:</strong> Consider in cirrhosis with SBP, hepatorenal syndrome</li>
+                        <li><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/15163774/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">SAFE</a></span> trial: No difference vs. saline except harm in TBI</li>
+                        <li><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/24635773/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">ALBIOS</a></span> trial: No benefit in septic shock</li>
+                        <li><strong>Starches/gelatins:</strong> Associated with AKI, avoid</li>
+                    </ul>
+
+                    <h3>Vasopressors & Inotropes</h3>
+                    
+                    <div class="highlight-box">
+                        <h4>Norepinephrine (First-Line)</h4>
+                        <ul>
+                            <li>Alpha-1 (vasoconstriction) &gt;&gt; beta-1 (inotropy)</li>
+                            <li>Dose: 0.05-3 mcg/kg/min</li>
+                            <li>Increases MAP with minimal effect on HR</li>
+                        </ul>
+                    </div>
+
+                    <h4>Vasopressin</h4>
+                    <ul>
+                        <li>V1 receptor agonist → vasoconstriction</li>
+                        <li>Dose: 0.03-0.04 units/min (fixed dose)</li>
+                        <li><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/18184957/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">VASST</a></span> trial: Add to norepinephrine in septic shock</li>
+                        <li>May reduce norepi requirements, no mortality benefit</li>
+                    </ul>
+
+                    <h4>Epinephrine</h4>
+                    <ul>
+                        <li>Alpha + beta agonist</li>
+                        <li>Dose: 0.05-2 mcg/kg/min</li>
+                        <li>Use: Anaphylaxis, refractory shock, cardiac arrest</li>
+                        <li>Concerns: Tachycardia, arrhythmias, splanchnic ischemia, lactic acidosis</li>
+                    </ul>
+
+                    <h4>Dobutamine (Inotrope)</h4>
+                    <ul>
+                        <li>Beta-1 &gt;&gt; beta-2 agonist</li>
+                        <li>Increases contractility and CO</li>
+                        <li>Dose: 2.5-20 mcg/kg/min</li>
+                        <li>Use: Cardiogenic shock with reduced CO</li>
+                        <li>Concerns: Tachycardia, arrhythmias, hypotension</li>
+                    </ul>
+
+                    <h4>Milrinone (Inotrope)</h4>
+                    <ul>
+                        <li>Phosphodiesterase-3 inhibitor</li>
+                        <li>Increases contractility, reduces afterload</li>
+                        <li>Dose: 0.25-0.75 mcg/kg/min</li>
+                        <li>Use: Cardiogenic shock, especially with beta-blocker use</li>
+                        <li>Concerns: Long half-life, hypotension</li>
+                    </ul>
+
+                    <div class="info-box">
+                        <h4>MAP Goals</h4>
+                        <p><strong>Standard Target:</strong> MAP ≥65 mmHg</p>
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/24635772/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">SEPSISPAM</a></span> trial: No benefit to MAP 80-85 vs. 65-70 mmHg</p>
+                        <p><strong>Exception:</strong> Chronic hypertension → may need higher MAP (75-85)</p>
+                        <p>Individualize based on end-organ perfusion (UOP, mentation, lactate clearance)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEPSIS -->
+        <section class="section" id="sepsis">
+            <div class="section-header" onclick="toggleSection('sepsis')">
+                <h2>Sepsis & Septic Shock</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3 id="sepsis-defs">Definitions (Sepsis-3)</h3>
+                    
+                    <div class="critical-box">
+                        <p><strong><span class="gterm" onclick="showGlossary('Sepsis')">Sepsis</span>:</strong> Life-threatening organ dysfunction due to dysregulated host response to infection</p>
+                        <ul>
+                            <li><strong>Organ dysfunction:</strong> <span class="gterm" onclick="showGlossary('SOFA')">SOFA</span> score increase ≥2 points</li>
+                        </ul>
+                        
+                        <p><strong>Septic Shock:</strong> Sepsis + persistent hypotension requiring vasopressors (<span class="gterm" onclick="showGlossary('MAP')">MAP</span> ≥65) + lactate &gt;2 mmol/L despite adequate fluid resuscitation</p>
+                    </div>
+
+                    <h4><span class="gterm" onclick="showGlossary('qSOFA')">qSOFA</span> (Quick SOFA - screening tool, NOT diagnostic)</h4>
+                    <ul>
+                        <li>RR ≥22</li>
+                        <li>Altered mentation</li>
+                        <li>SBP ≤100</li>
+                        <li>≥2 points → higher risk of poor outcomes</li>
+                    </ul>
+
+                    <h3 id="sepsis-ssc">Surviving Sepsis Campaign Guidelines (2021)</h3>
+                    
+                    <div class="critical-box">
+                        <h4>Hour-1 Bundle</h4>
+                        <ol>
+                            <li>Measure lactate (remeasure if &gt;2 mmol/L)</li>
+                            <li>Obtain blood cultures before antibiotics</li>
+                            <li>Administer broad-spectrum antibiotics</li>
+                            <li>Begin rapid fluid resuscitation (30 mL/kg crystalloid for hypotension/lactate ≥4)</li>
+                            <li>Administer vasopressors if hypotensive during/after fluid resuscitation (target MAP ≥65)</li>
+                        </ol>
+                    </div>
+
+                    <h3>Initial Resuscitation</h3>
+                    
+                    <h4 id="shock-fluids">Fluid Resuscitation</h4>
+                    <ul>
+                        <li><strong>30 mL/kg crystalloid</strong> within 3 hours for hypotension or lactate ≥4</li>
+                        <li>Use balanced crystalloids (<span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/29485925/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">SMART</a></span>/<span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/29485926/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">SALT-ED</a></span> trials)</li>
+                        <li>Reassess after each bolus</li>
+                    </ul>
+
+                    <h4>Vasopressor Initiation</h4>
+                    <ul>
+                        <li>Don't delay for "adequate" fluid resuscitation</li>
+                        <li>Can start during fluid administration if severely hypotensive</li>
+                        <li><strong>First-line:</strong> Norepinephrine</li>
+                        <li><strong>Add vasopressin</strong> (0.03-0.04 units/min) if needs escalating norepi</li>
+                        <li><strong>Add epinephrine</strong> for refractory shock</li>
+                        <li>Consider <strong>hydrocortisone</strong> (200 mg/day) if refractory to fluids + vasopressors</li>
+                    </ul>
+
+                    <h3>Antibiotic Management</h3>
+                    
+                    <div class="critical-box">
+                        <h4>Timing</h4>
+                        <ul>
+                            <li>Within <strong>1 hour</strong> of sepsis recognition</li>
+                            <li>Each hour delay associated with increased mortality</li>
+                        </ul>
+                    </div>
+
+                    <h4>Common Regimens by Source</h4>
+                    
+                    <p><strong>Community-acquired pneumonia (CAP):</strong></p>
+                    <ul>
+                        <li>Ceftriaxone + azithromycin OR fluoroquinolone</li>
+                        <li>If MRSA risk: Add vancomycin</li>
+                    </ul>
+
+                    <p><strong>Hospital-acquired/ventilator-associated pneumonia (HAP/VAP):</strong></p>
+                    <ul>
+                        <li>Anti-pseudomonal beta-lactam (pip-tazo, cefepime, meropenem) + vancomycin or linezolid</li>
+                        <li>Consider double pseudomonal coverage if high resistance</li>
+                    </ul>
+
+                    <p><strong>Complicated UTI/Urosepsis:</strong></p>
+                    <ul>
+                        <li>Ceftriaxone OR fluoroquinolone</li>
+                        <li>If ESBL risk: Carbapenem (meropenem, ertapenem)</li>
+                    </ul>
+
+                    <p><strong>Intra-abdominal:</strong></p>
+                    <ul>
+                        <li>Pip-tazo OR ceftriaxone + metronidazole</li>
+                        <li>If high resistance: Meropenem + vancomycin</li>
+                    </ul>
+
+                    <p><strong>Neutropenic fever:</strong></p>
+                    <ul>
+                        <li>Anti-pseudomonal beta-lactam + vancomycin (if catheter-associated or skin/soft tissue)</li>
+                    </ul>
+
+                    <h4>De-escalation</h4>
+                    <ul>
+                        <li>Narrow based on cultures by 48-72 hours</li>
+                        <li>Consider shorter courses (7-8 days) if source controlled and improving</li>
+                    </ul>
+
+                    <h3>Source Control</h3>
+                    <ul>
+                        <li><strong>Identify and control</strong> infection source within 6-12 hours</li>
+                        <li>Examples: Drain abscess, debride necrotic tissue, remove infected devices</li>
+                        <li>Surgical consultation if indicated</li>
+                    </ul>
+
+                    <h3>Corticosteroids</h3>
+                    
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/29347871/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">ADRENAL</a></span> & <span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/29490095/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">APROCCHSS</a></span> Trials (2018):</p>
+                        <ul>
+                            <li>Hydrocortisone did NOT reduce 90-day mortality</li>
+                            <li>May reduce time on vasopressors</li>
+                            <li>Small increase in hyperglycemia, hypernatremia</li>
+                        </ul>
+                        
+                        <p><strong>Recommendation:</strong> Consider <strong>hydrocortisone 200 mg/day</strong> (50 mg q6h or 100 mg q12h) if refractory shock despite fluids + vasopressors. Continue for ~5-7 days, then taper.</p>
+                    </div>
+
+                    <h3>Additional Considerations</h3>
+                    
+                    <h4>Lactate Clearance</h4>
+                    <ul>
+                        <li>Target ≥10% decrease in first 2 hours (not absolute normalization)</li>
+                        <li>But don't "chase" lactate at expense of over-resuscitation</li>
+                    </ul>
+
+                    <h4>Blood Products</h4>
+                    <ul>
+                        <li>Transfuse RBCs if Hgb &lt;7 g/dL (unless active hemorrhage or coronary ischemia)</li>
+                        <li>Platelet transfusion for active bleeding or procedures if &lt;50,000</li>
+                        <li>No routine FFP unless coagulopathy with bleeding/procedures</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEUROLOGICAL -->
+        <section class="section" id="neuro">
+            <div class="section-header" onclick="toggleSection('neuro')">
+                <h2>Neurological Critical Care</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3 id="neuro-ams">Altered Mental Status</h3>
+                    
+                    <h4>Differential Diagnosis (Mnemonic: AEIOU TIPS)</h4>
+                    <ul>
+                        <li><strong>A:</strong> Alcohol, Acidosis</li>
+                        <li><strong>E:</strong> Encephalopathy (hepatic, uremic, hypoxic), Electrolytes, Endocrine</li>
+                        <li><strong>I:</strong> Infection (meningitis, encephalitis, sepsis)</li>
+                        <li><strong>O:</strong> Overdose, Opioids</li>
+                        <li><strong>U:</strong> Uremia</li>
+                        <li><strong>T:</strong> Trauma, Temperature</li>
+                        <li><strong>I:</strong> Insulin (hypo/hyperglycemia)</li>
+                        <li><strong>P:</strong> Psychosis, Poisoning</li>
+                        <li><strong>S:</strong> Stroke, Seizure, Syncope, Shock</li>
+                    </ul>
+
+                    <h4>Workup</h4>
+                    <ul>
+                        <li>Glucose (bedside)</li>
+                        <li>BMP, calcium, magnesium, phosphate</li>
+                        <li>CBC, liver function tests</li>
+                        <li>Ammonia (if hepatic encephalopathy suspected)</li>
+                        <li>ABG (hypoxia, hypercarbia, acidosis)</li>
+                        <li>Toxicology screen, acetaminophen, salicylate levels</li>
+                        <li>Blood cultures, urinalysis</li>
+                        <li>CT head (if focal findings, trauma, concern for bleed/mass)</li>
+                        <li>LP (if concern for meningitis/encephalitis)</li>
+                        <li>EEG (if concern for non-convulsive status epilepticus)</li>
+                    </ul>
+
+                    <h3 id="neuro-delirium">Delirium</h3>
+                    
+                    <h4><span class="gterm" onclick="showGlossary('CAM-ICU')">CAM-ICU</span> (Confusion Assessment Method for ICU)</h4>
+                    <ul>
+                        <li>Feature 1: Acute change or fluctuating course</li>
+                        <li>Feature 2: Inattention</li>
+                        <li>Feature 3: Altered level of consciousness</li>
+                        <li>Feature 4: Disorganized thinking</li>
+                        <li>Delirium present if Features 1 + 2 + (3 or 4)</li>
+                    </ul>
+
+                    <h4>Types</h4>
+                    <ul>
+                        <li><strong>Hyperactive:</strong> Agitation, restlessness</li>
+                        <li><strong>Hypoactive:</strong> Lethargy, decreased responsiveness (more common, often missed)</li>
+                        <li><strong>Mixed</strong></li>
+                    </ul>
+
+                    <div class="success-box">
+                        <h4>Prevention & Management (Most Important)</h4>
+                        <ul>
+                            <li><strong>ABCDEF Bundle</strong> (see Sedation section)</li>
+                            <li>Reorient frequently (calendar, clock, family)</li>
+                            <li>Minimize sedation, <strong>avoid benzodiazepines</strong></li>
+                            <li>Early mobilization</li>
+                            <li>Hearing aids/glasses</li>
+                            <li>Sleep hygiene (reduce nighttime disruptions)</li>
+                            <li>Treat underlying causes</li>
+                        </ul>
+                    </div>
+
+                    <h4>Pharmacologic Treatment (only if safety concern)</h4>
+                    <ul>
+                        <li>Haloperidol 0.5-2 mg IV/PO</li>
+                        <li>Quetiapine 25-50 mg PO</li>
+                        <li>Not recommended routinely for prevention</li>
+                    </ul>
+
+                    <h3 id="neuro-arrest">Post-Cardiac Arrest Care</h3>
+                    
+                    <div class="info-box">
+                        <h4>Targeted Temperature Management (<span class="gterm" onclick="showGlossary('TTM')">TTM</span>)</h4>
+                        <ul>
+                            <li><strong>Target:</strong> 32-36°C for at least 24 hours</li>
+                            <li><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/24237006/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">TTM-1</a></span> trial: 33°C vs. 36°C → no difference</li>
+                            <li><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/34133859/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">TTM-2</a></span> trial: 33°C vs. normothermia (avoid fever) → no difference</li>
+                            <li><strong>Recommendation:</strong> Maintain normothermia, avoid hyperthermia (&gt;37.5°C)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Avoid Hypotension</h4>
+                    <ul>
+                        <li>Maintain MAP ≥65 mmHg (consider higher if pre-arrest hypertension)</li>
+                    </ul>
+
+                    <h4>Neuroprognostication</h4>
+                    <ul>
+                        <li>Wait ≥72 hours after ROSC (longer if cooled or sedated)</li>
+                        <li><strong>Multimodal assessment:</strong>
+                            <ul>
+                                <li>Exam: Pupillary/corneal reflexes, motor response</li>
+                                <li>EEG: Continuous background, reactivity</li>
+                                <li>SSEP: Bilateral cortical N20 responses</li>
+                                <li>Imaging: Brain MRI (DWI)</li>
+                                <li>Biomarkers: NSE, S100B (adjunctive)</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Elevated Intracranial Pressure (ICP)</h3>
+                    
+                    <p><strong>Normal ICP:</strong> 5-15 mmHg<br>
+                    <strong>Treatment threshold:</strong> &gt;20-22 mmHg</p>
+
+                    <h4>Clinical Signs</h4>
+                    <ul>
+                        <li>Cushing's triad: Hypertension, bradycardia, irregular respirations</li>
+                        <li>Headache, vomiting, papilledema</li>
+                        <li>Altered mental status → coma</li>
+                        <li>Pupillary changes, posturing</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <h4>Tier 1 Interventions</h4>
+                        <ul>
+                            <li><strong>Head of bed</strong> elevation to 30°</li>
+                            <li><strong>Sedation/analgesia</strong> (reduce metabolic demand)</li>
+                            <li><strong>Maintain normothermia</strong> (treat fever)</li>
+                            <li><strong>Maintain euvolemia</strong>, avoid hypotension (CPP = MAP - ICP; target CPP &gt;60 mmHg)</li>
+                            <li><strong>Maintain normal PaCO2</strong> (35-40 mmHg)</li>
+                            <li><strong>Treat seizures</strong></li>
+                        </ul>
+                    </div>
+
+                    <h4>Tier 2 Interventions (if ICP remains elevated)</h4>
+                    <ul>
+                        <li><strong>Osmotic therapy:</strong>
+                            <ul>
+                                <li><strong>Mannitol</strong> 0.25-1 g/kg IV (check serum osm, avoid if &gt;320 mOsm/kg)</li>
+                                <li><strong>Hypertonic saline</strong> 3% or 23.4% (target Na 145-155)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Brief hyperventilation</strong> (PaCO2 30-35) as temporizing measure</li>
+                        <li><strong>Neuromuscular blockade</strong></li>
+                    </ul>
+
+                    <h4>Tier 3 Interventions (refractory)</h4>
+                    <ul>
+                        <li><strong>Barbiturate coma</strong> (pentobarbital; requires continuous EEG)</li>
+                        <li><strong>Decompressive craniectomy</strong></li>
+                        <li><strong>Hypothermia</strong> (33-35°C)</li>
+                    </ul>
+
+                    <h3 id="neuro-seizure">Status Epilepticus</h3>
+                    
+                    <p><strong>Definition:</strong> Continuous seizure &gt;5 minutes OR recurrent seizures without return to baseline</p>
+
+                    <div class="critical-box">
+                        <h4>Management Algorithm</h4>
+                        
+                        <p><strong>0-5 minutes:</strong></p>
+                        <ul>
+                            <li>Assess ABCs, supplemental O2</li>
+                            <li>Check glucose, correct if hypoglycemic</li>
+                            <li>Obtain IV access</li>
+                        </ul>
+
+                        <p><strong>5-20 minutes:</strong></p>
+                        <ul>
+                            <li><strong>Benzodiazepine:</strong>
+                                <ul>
+                                    <li>Lorazepam 0.1 mg/kg IV (4 mg, may repeat once)</li>
+                                    <li>Diazepam 0.15 mg/kg IV (10 mg)</li>
+                                    <li>Midazolam 10 mg IM (if no IV access)</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <p><strong>20-40 minutes (Established Status):</strong></p>
+                        <ul>
+                            <li><strong>Second-line AED:</strong>
+                                <ul>
+                                    <li>Levetiracetam 60 mg/kg IV (max 4500 mg) OR</li>
+                                    <li>Fosphenytoin 20 mg PE/kg IV (max 1500 mg PE) OR</li>
+                                    <li>Valproic acid 40 mg/kg IV (max 3000 mg)</li>
+                                </ul>
+                            </li>
+                            <li><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/31774955/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">ESETT</a></span> trial: All three equally effective</li>
+                        </ul>
+
+                        <p><strong>&gt;40 minutes (Refractory Status):</strong></p>
+                        <ul>
+                            <li><strong>Continuous infusion</strong> + intubation:
+                                <ul>
+                                    <li>Midazolam 0.2 mg/kg bolus, then 0.1-2 mg/kg/hr OR</li>
+                                    <li>Propofol 1-2 mg/kg bolus, then 2-10 mg/kg/hr OR</li>
+                                    <li>Pentobarbital 5-15 mg/kg bolus, then 0.5-5 mg/kg/hr</li>
+                                </ul>
+                            </li>
+                            <li>Continuous EEG monitoring</li>
+                            <li>Consult neurology</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RENAL & ACID-BASE -->
+        <section class="section" id="renal">
+            <div class="section-header" onclick="toggleSection('renal')">
+                <h2>Renal & Acid-Base</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3 id="renal-aki">Acute Kidney Injury (<span class="gterm" onclick="showGlossary('AKI')">AKI</span>)</h3>
+                    
+                    <h4><span class="gterm" onclick="showGlossary('KDIGO')">KDIGO</span> Criteria (any of the following)</h4>
+                    <ul>
+                        <li>SCr increase ≥0.3 mg/dL within 48 hours OR</li>
+                        <li>SCr increase ≥1.5x baseline within 7 days OR</li>
+                        <li>UOP &lt;0.5 mL/kg/hr for 6 hours</li>
+                    </ul>
+
+                    <h4>Stages</h4>
+                    <ul>
+                        <li><strong>Stage 1:</strong> SCr 1.5-1.9x baseline or ↑≥0.3 mg/dL; UOP &lt;0.5 mL/kg/hr × 6-12 hr</li>
+                        <li><strong>Stage 2:</strong> SCr 2.0-2.9x baseline; UOP &lt;0.5 mL/kg/hr × ≥12 hr</li>
+                        <li><strong>Stage 3:</strong> SCr ≥3x baseline or ≥4 mg/dL or initiation of <span class="gterm" onclick="showGlossary('RRT')">RRT</span>; UOP &lt;0.3 mL/kg/hr × ≥24 hr or anuria × 12 hr</li>
+                    </ul>
+
+                    <h4>Etiology</h4>
+                    <ul>
+                        <li><strong>Prerenal:</strong> Hypovolemia, hypotension, reduced effective arterial volume</li>
+                        <li><strong>Intrinsic:</strong> <span class="gterm" onclick="showGlossary('ATN')">ATN</span> (ischemic/nephrotoxic), AIN, glomerulonephritis, vascular</li>
+                        <li><strong>Postrenal:</strong> Obstruction</li>
+                    </ul>
+
+                    <h4>Workup</h4>
+                    <ul>
+                        <li><strong>Urinalysis:</strong> WBCs, RBCs, casts, protein</li>
+                        <li><strong>Urine electrolytes:</strong> <span class="gterm" onclick="showGlossary('FENa')">FENa</span>, FEUrea
+                            <ul>
+                                <li>FENa &lt;1% suggests prerenal (if not on diuretics)</li>
+                                <li>FENa &gt;2% suggests ATN</li>
+                                <li>FEUrea &lt;35% suggests prerenal (more reliable if on diuretics)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Renal ultrasound:</strong> Assess for obstruction, kidney size</li>
+                    </ul>
+
+                    <h3>Renal Replacement Therapy (RRT)</h3>
+                    
+                    <h4>Indications (AEIOU)</h4>
+                    <ul>
+                        <li><strong>A:</strong> Acidosis (severe metabolic acidosis, pH &lt;7.1)</li>
+                        <li><strong>E:</strong> Electrolytes (hyperkalemia refractory to medical management)</li>
+                        <li><strong>I:</strong> Intoxication (dialyzable toxins: lithium, methanol, ethylene glycol, salicylates)</li>
+                        <li><strong>O:</strong> Overload (volume overload, refractory pulmonary edema)</li>
+                        <li><strong>U:</strong> Uremia (symptomatic: encephalopathy, pericarditis, bleeding)</li>
+                    </ul>
+
+                    <h4>Modalities</h4>
+                    
+                    <p><strong>Intermittent Hemodialysis (IHD):</strong></p>
+                    <ul>
+                        <li>Duration: 3-4 hours</li>
+                        <li>Pros: Rapid correction of electrolytes/volume</li>
+                        <li>Cons: Hemodynamic instability, risk of hypotension</li>
+                        <li>Use: Stable patients, hyperkalemia, toxin removal</li>
+                    </ul>
+
+                    <p><strong>Continuous Renal Replacement Therapy (CRRT):</strong></p>
+                    <ul>
+                        <li>Duration: 24 hours continuous</li>
+                        <li>Pros: Hemodynamic stability, gradual fluid removal</li>
+                        <li>Cons: Requires anticoagulation, immobility</li>
+                        <li>Use: Hemodynamically unstable patients, cerebral edema</li>
+                    </ul>
+
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/32668114/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">STARRT-AKI</a></span> Trial (2020):</p>
+                        <ul>
+                            <li>Accelerated (early) vs. standard (delayed) RRT initiation</li>
+                            <li>No mortality benefit with early initiation</li>
+                            <li>More patients in standard group recovered without RRT</li>
+                        </ul>
+                    </div>
+
+                    <h3 id="renal-acidbase">Acid-Base Disorders</h3>
+                    
+                    <h4>Systematic Approach</h4>
+                    <ol>
+                        <li>Check pH: Acidemia (&lt;7.35) or alkalemia (&gt;7.45)?</li>
+                        <li>Determine primary disorder: Respiratory (PaCO2) or metabolic (HCO3)?</li>
+                        <li>Calculate anion gap (if metabolic acidosis)</li>
+                        <li>Check for compensation</li>
+                        <li>Identify additional disorders (delta-delta)</li>
+                    </ol>
+
+                    <div class="formula">
+                        <strong>Anion Gap</strong><br>
+                        AG = Na - (Cl + HCO3)<br>
+                        Normal: 10-12 mEq/L<br>
+                        Adjust for albumin: AG increases ~2.5 for each 1 g/dL decrease in albumin
+                    </div>
+
+                    <h4>High Anion Gap Metabolic Acidosis (MUDPILES)</h4>
+                    <ul>
+                        <li><strong>M:</strong> Methanol</li>
+                        <li><strong>U:</strong> Uremia</li>
+                        <li><strong>D:</strong> DKA</li>
+                        <li><strong>P:</strong> Propylene glycol, Paracetamol (late)</li>
+                        <li><strong>I:</strong> Iron, Isoniazid</li>
+                        <li><strong>L:</strong> Lactic acidosis</li>
+                        <li><strong>E:</strong> Ethylene glycol</li>
+                        <li><strong>S:</strong> Salicylates</li>
+                    </ul>
+
+                    <h4>Non-Anion Gap (Hyperchloremic) Metabolic Acidosis</h4>
+                    <ul>
+                        <li>GI losses: Diarrhea, fistula</li>
+                        <li>Renal: RTA, early AKI</li>
+                        <li>Iatrogenic: Saline infusion, TPN</li>
+                    </ul>
+
+                    <div class="formula">
+                        <strong>Compensation Formulas</strong><br><br>
+                        
+                        <strong>Metabolic Acidosis:</strong><br>
+                        Expected PaCO2 = 1.5 × (HCO3) + 8 ± 2 (Winter's formula)<br><br>
+                        
+                        <strong>Metabolic Alkalosis:</strong><br>
+                        Expected PaCO2 = 0.7 × (HCO3) + 20 ± 5<br><br>
+                        
+                        <strong>Respiratory Acidosis:</strong><br>
+                        Acute: HCO3 ↑ by 1 for every 10 ↑ in PaCO2<br>
+                        Chronic: HCO3 ↑ by 3.5 for every 10 ↑ in PaCO2<br><br>
+                        
+                        <strong>Respiratory Alkalosis:</strong><br>
+                        Acute: HCO3 ↓ by 2 for every 10 ↓ in PaCO2<br>
+                        Chronic: HCO3 ↓ by 5 for every 10 ↓ in PaCO2
+                    </div>
+
+                    <h3 id="renal-lytes">Electrolyte Emergencies</h3>
+                    
+                    <div class="critical-box">
+                        <h4>Hyperkalemia</h4>
+                        
+                        <p><strong>ECG Changes (progressive):</strong></p>
+                        <ul>
+                            <li>Peaked T waves</li>
+                            <li>Widened QRS</li>
+                            <li>Prolonged PR</li>
+                            <li>Loss of P wave</li>
+                            <li>Sine wave → VF/asystole</li>
+                        </ul>
+
+                        <p><strong>Treatment:</strong></p>
+                        <ol>
+                            <li><strong>Stabilize cardiac membrane</strong> (if ECG changes):
+                                <ul>
+                                    <li>Calcium gluconate 1-2 g IV over 2-5 min</li>
+                                </ul>
+                            </li>
+                            <li><strong>Shift K+ intracellularly:</strong>
+                                <ul>
+                                    <li>Insulin 10 units IV + dextrose 25 g (D50 50 mL)</li>
+                                    <li>Albuterol 10-20 mg nebulized</li>
+                                    <li>Sodium bicarbonate 50 mEq IV (if acidotic)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Remove K+ from body:</strong>
+                                <ul>
+                                    <li>Loop diuretics (furosemide 40-80 mg IV) if UOP adequate</li>
+                                    <li>Patiromer 8.4 g or Sodium zirconium cyclosilicate 10 g PO</li>
+                                    <li>Hemodialysis (most effective, for severe/refractory)</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <h4>Severe Hyponatremia</h4>
+                    <ul>
+                        <li><strong>Symptoms:</strong> Nausea, headache, confusion, seizures, coma</li>
+                        <li><strong>Treatment:</strong>
+                            <ul>
+                                <li>3% NaCl 100 mL bolus, repeat PRN</li>
+                                <li>Target: Increase Na by 4-6 mEq/L in first few hours</li>
+                                <li><strong>Caution:</strong> Avoid correcting &gt;8-10 mEq/L in 24 hours (risk of osmotic demyelination)</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="formula">
+                        <strong>Na Increase Formula:</strong><br>
+                        Na increase = (Infusate Na - Serum Na) / (TBW + 1)<br>
+                        TBW = 0.6 × weight (men), 0.5 × weight (women)
+                    </div>
+
+                    <h4>Severe Hypernatremia</h4>
+                    <ul>
+                        <li><strong>Correct slowly:</strong> ≤10-12 mEq/L per 24 hours</li>
+                        <li>Use D5W or 0.45% NaCl</li>
+                        <li><strong>Caution:</strong> Rapid correction → cerebral edema</li>
+                    </ul>
+
+                    <div class="formula">
+                        <strong>Free Water Deficit:</strong><br>
+                        Free water deficit = TBW × [(Na/140) - 1]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEDATION -->
+        <section class="section" id="sedation">
+            <div class="section-header" onclick="toggleSection('sedation')">
+                <h2>Sedation, Analgesia & Delirium</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>ABCDEF Bundle (PAD Guidelines)</h3>
+                    
+                    <ul>
+                        <li><strong>A:</strong> Assess, prevent, and manage pain</li>
+                        <li><strong>B:</strong> Both spontaneous awakening trials (SAT) and spontaneous breathing trials (SBT)</li>
+                        <li><strong>C:</strong> Choice of analgesia and sedation</li>
+                        <li><strong>D:</strong> Delirium - assess, prevent, and manage</li>
+                        <li><strong>E:</strong> Early mobility and exercise</li>
+                        <li><strong>F:</strong> Family engagement and empowerment</li>
+                    </ul>
+
+                    <h3>Pain Assessment</h3>
+                    
+                    <h4>Scales</h4>
+                    <ul>
+                        <li><strong>CPOT</strong> (Critical-Care Pain Observation Tool): For intubated/non-communicative</li>
+                        <li><strong>BPS</strong> (Behavioral Pain Scale)</li>
+                        <li><strong>Numeric Rating Scale</strong> (0-10) for communicative patients</li>
+                    </ul>
+
+                    <h4>First-Line Analgesics</h4>
+                    <ul>
+                        <li><strong>Fentanyl:</strong> 25-100 mcg IV q30min-1hr PRN; infusion 25-200 mcg/hr</li>
+                        <li><strong>Hydromorphone:</strong> 0.2-0.6 mg IV q1-2hr PRN</li>
+                        <li><strong>Morphine:</strong> Less preferred in ICU (histamine release, active metabolites in renal failure)</li>
+                    </ul>
+
+                    <h4>Non-Opioid Adjuncts</h4>
+                    <ul>
+                        <li>Acetaminophen 650-1000 mg PO/IV q6h</li>
+                        <li>Gabapentin, pregabalin for neuropathic pain</li>
+                        <li>Avoid NSAIDs (risk of AKI, bleeding)</li>
+                    </ul>
+
+                    <h3>Sedation</h3>
+                    
+                    <div class="highlight-box">
+                        <h4><span class="gterm" onclick="showGlossary('RASS')">RASS</span> Scale (Richmond Agitation-Sedation Scale)</h4>
+                        <ul>
+                            <li>+4: Combative</li>
+                            <li>+3: Very agitated</li>
+                            <li>+2: Agitated</li>
+                            <li>+1: Restless</li>
+                            <li>0: Alert and calm</li>
+                            <li>-1: Drowsy</li>
+                            <li>-2: Light sedation</li>
+                            <li>-3: Moderate sedation</li>
+                            <li>-4: Deep sedation</li>
+                            <li>-5: Unarousable</li>
+                        </ul>
+                        <p><strong>Target:</strong> RASS 0 to -2 (light sedation) for most patients</p>
+                    </div>
+
+                    <h4>Sedative Agents</h4>
+                    
+                    <p><strong>Propofol:</strong></p>
+                    <ul>
+                        <li>Dose: 5-50 mcg/kg/min</li>
+                        <li>Pros: Rapid on/off, short context-sensitive half-life</li>
+                        <li>Cons: Hypotension, propofol infusion syndrome, hypertriglyceridemia</li>
+                        <li>Use: Short-term sedation, neuro patients (lowers <span class="gterm" onclick="showGlossary('ICP')">ICP</span>)</li>
+                    </ul>
+
+                    <p><strong>Dexmedetomidine:</strong></p>
+                    <ul>
+                        <li>Dose: 0.2-1.5 mcg/kg/hr (no bolus)</li>
+                        <li>Pros: Less respiratory depression, easier communication, less delirium</li>
+                        <li>Cons: Bradycardia, hypotension, expensive</li>
+                        <li>Use: Weaning sedation, extubated but agitated, ARDS</li>
+                        <li><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/17456818/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">MENDS</a></span>/<span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/19213184/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">SEDCOM</a></span> trials: Reduced delirium vs. benzodiazepines</li>
+                    </ul>
+
+                    <p><strong>Benzodiazepines (Midazolam, Lorazepam):</strong></p>
+                    <ul>
+                        <li>Cons: Delirium, prolonged awakening, propylene glycol toxicity</li>
+                        <li><strong>Avoid</strong> as first-line per PAD guidelines</li>
+                        <li>Use: Alcohol withdrawal, seizures, neuromuscular blockade</li>
+                    </ul>
+
+                    <div class="success-box">
+                        <h4>Daily Sedation Interruption (SAT)</h4>
+                        <ul>
+                            <li>Turn off sedation daily until patient awakens</li>
+                            <li>Assess readiness for extubation</li>
+                            <li>Resume at half dose if needed</li>
+                            <li>Reduces duration of mechanical ventilation, ICU length of stay</li>
+                        </ul>
+                    </div>
+
+                    <h3 id="sedation-delirium">Delirium Management</h3>
+                    
+                    <p><strong>Screening:</strong> CAM-ICU or ICDSC at least daily</p>
+
+                    <div class="success-box">
+                        <h4>Prevention (Most Important)</h4>
+                        <ul>
+                            <li>Minimize sedation (target RASS 0 to -1)</li>
+                            <li><strong>Avoid benzodiazepines</strong></li>
+                            <li>Treat pain adequately</li>
+                            <li>Early mobilization</li>
+                            <li>Sleep hygiene</li>
+                            <li>Reorient frequently</li>
+                            <li>Sensory aids (glasses, hearing aids)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Treatment</h4>
+                    <ul>
+                        <li>Identify and treat underlying cause</li>
+                        <li>Non-pharmacologic measures (above)</li>
+                        <li><strong>Pharmacologic</strong> (only if safety threat):
+                            <ul>
+                                <li>Haloperidol 0.5-2 mg IV/PO q4-6h PRN</li>
+                                <li>Quetiapine 25-50 mg PO BID</li>
+                            </ul>
+                        </li>
+                        <li><strong>Do NOT use for prevention</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROCEDURES -->
+        <section class="section" id="procedures">
+            <div class="section-header" onclick="toggleSection('procedures')">
+                <h2>Critical Care Procedures</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Central Venous Catheter (CVC)</h3>
+                    
+                    <h4>Indications</h4>
+                    <ul>
+                        <li>Vasopressor administration</li>
+                        <li>Inadequate peripheral access</li>
+                        <li>Monitoring (CVP, ScvO2)</li>
+                        <li>Hemodialysis</li>
+                        <li>TPN administration</li>
+                    </ul>
+
+                    <h4>Sites</h4>
+                    <ul>
+                        <li><strong>Internal jugular (IJ):</strong> Preferred (lower pneumothorax risk)</li>
+                        <li><strong>Subclavian:</strong> Higher success, lower infection, but higher pneumothorax risk</li>
+                        <li><strong>Femoral:</strong> Higher infection risk, avoid if ambulating</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <h4>Technique</h4>
+                        <ul>
+                            <li>Ultrasound guidance (reduces complications)</li>
+                            <li>Maximal sterile barrier precautions</li>
+                            <li>Chlorhexidine skin prep</li>
+                            <li>Seldinger technique</li>
+                            <li>Confirm placement with CXR (tip at cavoatrial junction)</li>
+                            <li>Check for pneumothorax</li>
+                        </ul>
+                    </div>
+
+                    <h4>Complications</h4>
+                    <ul>
+                        <li>Arterial puncture</li>
+                        <li>Pneumothorax/hemothorax</li>
+                        <li>Infection (CLABSI)</li>
+                        <li>Thrombosis</li>
+                        <li>Air embolism</li>
+                        <li>Arrhythmia</li>
+                    </ul>
+
+                    <h3 id="proc-art">Arterial Line</h3>
+                    
+                    <h4>Indications</h4>
+                    <ul>
+                        <li>Continuous BP monitoring (vasopressor use)</li>
+                        <li>Frequent ABGs</li>
+                        <li>Hemodynamic instability</li>
+                    </ul>
+
+                    <h4>Sites</h4>
+                    <ul>
+                        <li><strong>Radial</strong> (most common): Perform Allen test first</li>
+                        <li>Femoral</li>
+                        <li>Brachial (higher complication rate)</li>
+                        <li>Dorsalis pedis</li>
+                    </ul>
+
+                    <h3 id="proc-intubation">Endotracheal Intubation</h3>
+                    
+                    <div class="critical-box">
+                        <h4>Rapid Sequence Intubation (<span class="gterm" onclick="showGlossary('RSI')">RSI</span>)</h4>
+                        
+                        <p><strong>Pre-oxygenation:</strong></p>
+                        <ul>
+                            <li>100% O2 for 3-5 minutes</li>
+                        </ul>
+
+                        <p><strong>Induction Agents:</strong></p>
+                        <ul>
+                            <li><strong>Etomidate</strong> 0.3 mg/kg: Hemodynamically stable</li>
+                            <li><strong>Ketamine</strong> 1-2 mg/kg: Good for asthma, maintains BP</li>
+                            <li><strong>Propofol</strong> 1-2 mg/kg: Rapid onset, but hypotension</li>
+                            <li><strong>Midazolam</strong> 0.1-0.3 mg/kg: Slower onset, hemodynamically stable</li>
+                        </ul>
+
+                        <p><strong>Neuromuscular Blockade:</strong></p>
+                        <ul>
+                            <li><strong>Succinylcholine</strong> 1-1.5 mg/kg: Rapid onset (45 sec), short duration
+                                <ul>
+                                    <li>Contraindications: Hyperkalemia, neuromuscular disease, malignant hyperthermia, burns/crush &gt;24 hrs</li>
+                                </ul>
+                            </li>
+                            <li><strong>Rocuronium</strong> 1-1.2 mg/kg: Onset 60 sec, duration 45-60 min</li>
+                        </ul>
+
+                        <p><strong>Confirmation:</strong></p>
+                        <ul>
+                            <li>Chest rise, breath sounds bilateral, EtCO2, CXR</li>
+                        </ul>
+                    </div>
+
+                    <h4>Post-Intubation Hypotension</h4>
+                    <ul>
+                        <li>Common! Loss of sympathetic tone + positive pressure ventilation</li>
+                        <li>Treat: Fluid bolus, vasopressors</li>
+                    </ul>
+
+                    <h3>Chest Tube Placement</h3>
+                    
+                    <h4>Indications</h4>
+                    <ul>
+                        <li>Pneumothorax (especially tension PTX, hemodynamically significant)</li>
+                        <li>Hemothorax</li>
+                        <li>Pleural effusion (large, symptomatic, empyema)</li>
+                    </ul>
+
+                    <h4>Technique</h4>
+                    <ul>
+                        <li><strong>Site:</strong> 4th-5th intercostal space, mid-axillary line ("safe triangle")</li>
+                        <li>Blunt dissection over rib (avoid neurovascular bundle below rib)</li>
+                        <li>Direct tube posteriorly and apically</li>
+                        <li>Connect to water seal/suction (-20 cm H2O)</li>
+                        <li>CXR to confirm</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- EMERGENCIES -->
+        <section class="section" id="emergencies">
+            <div class="section-header" onclick="toggleSection('emergencies')">
+                <h2>ICU Emergencies</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3 id="emerg-ptx">Tension Pneumothorax</h3>
+                    
+                    <h4>Clinical Features</h4>
+                    <ul>
+                        <li>Sudden respiratory distress, hypoxia, hypotension</li>
+                        <li>Tracheal deviation (away from affected side)</li>
+                        <li>Absent breath sounds</li>
+                        <li>Distended neck veins</li>
+                        <li>Hyperresonance to percussion</li>
+                    </ul>
+
+                    <div class="critical-box">
+                        <h4>Management</h4>
+                        <ul>
+                            <li><strong>DO NOT WAIT</strong> for imaging</li>
+                            <li><strong>Needle decompression:</strong> 2nd intercostal space, midclavicular line (or 5th ICS, anterior axillary line)</li>
+                            <li>Immediate chest tube placement</li>
+                        </ul>
+                    </div>
+
+                    <h3 id="emerg-hemopt">Massive Hemoptysis</h3>
+                    
+                    <p><strong>Definition:</strong> &gt;200-600 mL blood in 24 hours or life-threatening</p>
+
+                    <h4>Management</h4>
+                    <ol>
+                        <li><strong>Airway protection:</strong> Consider early intubation</li>
+                        <li><strong>Position:</strong> Bleeding side down (protect non-bleeding lung)</li>
+                        <li><strong>Resuscitate:</strong> Large-bore IV, type and cross</li>
+                        <li><strong>Bronchoscopy:</strong> Identify source, temporize</li>
+                        <li><strong>Interventional radiology:</strong> Bronchial artery embolization</li>
+                        <li><strong>Surgery:</strong> If refractory</li>
+                    </ol>
+
+                    <h3>Acute Upper GI Bleeding</h3>
+                    
+                    <h4 id="sepsis-resus">Initial Resuscitation</h4>
+                    <ul>
+                        <li>Two large-bore IVs</li>
+                        <li>Type and cross</li>
+                        <li>Correct coagulopathy: FFP (INR &gt;2), platelets (&lt;50k)</li>
+                        <li><strong>Transfusion target:</strong> Hgb 7-9 g/dL (<span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/25270275/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">TRIGGER</a></span> trial)</li>
+                    </ul>
+
+                    <h4>Medications</h4>
+                    <ul>
+                        <li><strong>PPI:</strong> 80 mg bolus, then 8 mg/hr infusion (before endoscopy)</li>
+                        <li><strong>Octreotide:</strong> 50 mcg bolus, then 50 mcg/hr (if variceal bleed suspected)</li>
+                        <li><strong>Erythromycin:</strong> 250 mg IV (prokinetic, improves visualization)</li>
+                        <li><strong>Antibiotics:</strong> Ceftriaxone if cirrhosis</li>
+                    </ul>
+
+                    <h4>Endoscopy</h4>
+                    <ul>
+                        <li>Within 24 hours (12 hours if high risk)</li>
+                        <li>Therapies: Clips, cautery, epinephrine injection, banding (varices)</li>
+                    </ul>
+
+                    <h3 id="emerg-anaph">Anaphylaxis</h3>
+                    
+                    <div class="critical-box">
+                        <h4>Management</h4>
+                        <ol>
+                            <li><strong>Epinephrine</strong> 0.3-0.5 mg IM (1:1000) in anterolateral thigh - FIRST-LINE
+                                <ul>
+                                    <li>Repeat q5-15min if needed</li>
+                                    <li>IV infusion if refractory: 2-10 mcg/min</li>
+                                </ul>
+                            </li>
+                            <li><strong>Remove trigger</strong></li>
+                            <li><strong>Airway management:</strong> Prepare for intubation if angioedema/stridor</li>
+                            <li><strong>IV fluids:</strong> 1-2 L bolus</li>
+                            <li><strong>Adjunctive:</strong>
+                                <ul>
+                                    <li>H1 blocker: Diphenhydramine 25-50 mg IV</li>
+                                    <li>H2 blocker: Ranitidine 50 mg IV</li>
+                                    <li>Glucocorticoids: Methylprednisolone 125 mg IV</li>
+                                    <li>Albuterol for bronchospasm</li>
+                                </ul>
+                            </li>
+                            <li><strong>Observe:</strong> 4-8 hours minimum</li>
+                        </ol>
+                    </div>
+
+                    <h3 id="emerg-acls">Cardiac Arrest (ACLS)</h3>
+                    
+                    <h4>Immediate Actions</h4>
+                    <ol>
+                        <li><strong>Recognize arrest:</strong> Unresponsive, no pulse, apnea/gasping</li>
+                        <li><strong>Call for help</strong>, get defibrillator</li>
+                        <li><strong>High-quality CPR:</strong>
+                            <ul>
+                                <li>Rate: 100-120/min</li>
+                                <li>Depth: ≥2 inches (5 cm)</li>
+                                <li>Allow full recoil</li>
+                                <li>Minimize interruptions (&lt;10 sec)</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h4>Shockable Rhythms (VF/pVT)</h4>
+                    <ul>
+                        <li><strong>Defibrillate:</strong> 200 J biphasic</li>
+                        <li>Resume CPR immediately × 2 min</li>
+                        <li><strong>Epinephrine:</strong> 1 mg IV q3-5min (after 2nd shock)</li>
+                        <li><strong>Amiodarone:</strong> 300 mg IV after 3rd shock (then 150 mg)</li>
+                    </ul>
+
+                    <h4>Non-Shockable Rhythms (Asystole/PEA)</h4>
+                    <ul>
+                        <li><strong>CPR</strong> × 2 min</li>
+                        <li><strong>Epinephrine:</strong> 1 mg IV q3-5min (ASAP)</li>
+                        <li>Treat reversible causes (H's & T's)</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <h4>Reversible Causes (H's & T's)</h4>
+                        <ul>
+                            <li><strong>H:</strong> Hypovolemia, Hypoxia, Hydrogen ion (acidosis), Hypo/Hyperkalemia, Hypothermia</li>
+                            <li><strong>T:</strong> Tension pneumothorax, Tamponade, Toxins, Thrombosis (MI, PE)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PREVENTIVE CARE -->
+        <section class="section" id="preventive">
+            <div class="section-header" onclick="toggleSection('preventive')">
+                <h2>Preventive Care & Complications</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Venous Thromboembolism (VTE) Prophylaxis</h3>
+                    
+                    <h4>Pharmacologic Prophylaxis</h4>
+                    <ul>
+                        <li><strong>Enoxaparin:</strong> 40 mg SC daily (30 mg daily if CrCl &lt;30)</li>
+                        <li><strong>Heparin:</strong> 5000 units SC q8-12h</li>
+                        <li><strong>If CrCl &lt;30:</strong> Unfractionated heparin preferred</li>
+                        <li><strong>Contraindications:</strong> Active bleeding, severe thrombocytopenia (&lt;50k), high bleeding risk</li>
+                    </ul>
+
+                    <h4>Mechanical Prophylaxis</h4>
+                    <ul>
+                        <li><strong>Sequential compression devices (SCDs):</strong> Use if pharmacologic contraindicated</li>
+                        <li>Combine with pharmacologic when possible</li>
+                    </ul>
+
+                    <h3 id="prev-sup">Stress Ulcer Prophylaxis</h3>
+                    
+                    <h4>Indications (ASHP Guidelines)</h4>
+                    <ul>
+                        <li>Mechanical ventilation &gt;48 hours</li>
+                        <li>Coagulopathy (platelets &lt;50k, INR &gt;1.5, PTT &gt;2× normal)</li>
+                        <li>Other risk factors: Burns &gt;35% BSA, hepatic failure, multiple trauma, TBI</li>
+                    </ul>
+
+                    <h4>Agents</h4>
+                    <ul>
+                        <li><strong>Proton pump inhibitors (PPIs):</strong> Pantoprazole 40 mg IV/PO daily (preferred)</li>
+                        <li><strong>H2 blockers:</strong> Famotidine 20 mg IV/PO BID</li>
+                    </ul>
+
+                    <h3 id="prev-clabsi">Catheter-Associated Infections</h3>
+                    
+                    <h4><span class="gterm" onclick="showGlossary('CLABSI')">CLABSI</span> Prevention</h4>
+                    <ul>
+                        <li>Maximal sterile barriers during insertion</li>
+                        <li>Chlorhexidine skin prep</li>
+                        <li>Avoid femoral site if possible</li>
+                        <li><strong>Daily review:</strong> Remove if not needed</li>
+                        <li>Dressing changes per protocol</li>
+                    </ul>
+
+                    <h4><span class="gterm" onclick="showGlossary('CAUTI')">CAUTI</span> Prevention</h4>
+                    <ul>
+                        <li><strong>Remove Foley ASAP</strong> (most important)</li>
+                        <li>Use only when necessary</li>
+                        <li>Sterile insertion technique</li>
+                        <li>Maintain closed drainage system</li>
+                    </ul>
+
+                    <h3 id="prev-vap">Ventilator-Associated Pneumonia (VAP) Prevention</h3>
+                    
+                    <div class="success-box">
+                        <h4>VAP Bundle</h4>
+                        <ul>
+                            <li><strong>Head of bed</strong> elevation (30-45°)</li>
+                            <li><strong>Daily sedation interruption</strong> + spontaneous breathing trials</li>
+                            <li><strong>Oral care</strong> with chlorhexidine</li>
+                            <li><strong>Peptic ulcer prophylaxis</strong></li>
+                            <li><strong>DVT prophylaxis</strong></li>
+                            <li><strong>Subglottic suctioning</strong> (if available)</li>
+                        </ul>
+                    </div>
+
+                    <h3 id="prev-weak">ICU-Acquired Weakness</h3>
+                    
+                    <h4>Risk Factors</h4>
+                    <ul>
+                        <li>Prolonged mechanical ventilation</li>
+                        <li>Sepsis, MODS</li>
+                        <li>Hyperglycemia</li>
+                        <li>Corticosteroids</li>
+                        <li>Neuromuscular blocking agents</li>
+                    </ul>
+
+                    <h4>Prevention</h4>
+                    <ul>
+                        <li><strong>Early mobilization:</strong> Out of bed by ICU day 2-3 if able</li>
+                        <li>Minimize sedation</li>
+                        <li>Glycemic control</li>
+                        <li>Physical therapy/occupational therapy consults</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- LANDMARK TRIALS -->
+        <section class="section" id="trials">
+            <div class="section-header" onclick="toggleSection('trials')">
+                <h2>Landmark Trials & Key Papers</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Respiratory/ARDS</h3>
+                    
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/10793162/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">ARMA</a></span> (NEJM 2000) - Low tidal volume ventilation in ARDS</p>
+                        <ul>
+                            <li>6 mL/kg IBW vs. 12 mL/kg IBW</li>
+                            <li>22% relative mortality reduction</li>
+                            <li>Established lung-protective ventilation</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/23688302/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">PROSEVA</a></span> (NEJM 2013) - Prone positioning in severe ARDS</p>
+                        <ul>
+                            <li>16+ hours/day prone vs. supine</li>
+                            <li>50% relative mortality reduction in PaO2/FiO2 &lt;150</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/20843245/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">ACURASYS</a></span> (NEJM 2010) - Neuromuscular blockade in early ARDS</p>
+                        <ul>
+                            <li>48 hours cisatracurium vs. placebo in PaO2/FiO2 &lt;150</li>
+                            <li>Improved 90-day survival (but see ROSE trial)</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/31112383/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">ROSE</a></span> (NEJM 2019) - Reevaluation of neuromuscular blockade</p>
+                        <ul>
+                            <li>No benefit when using lighter sedation strategy</li>
+                            <li>Current practice: Consider for severe ARDS with difficult oxygenation</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/16714767/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">FACTT</a></span> (NEJM 2006) - Conservative vs. liberal fluid strategy in ARDS</p>
+                        <ul>
+                            <li>Conservative strategy improved ventilator-free days</li>
+                            <li>No mortality difference</li>
+                        </ul>
+                    </div>
+
+                    <h3>Sepsis</h3>
+                    
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/29485925/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">SMART</a></span> (NEJM 2018) - Balanced crystalloids vs. saline</p>
+                        <ul>
+                            <li>Reduced mortality, AKI, need for RRT</li>
+                            <li>Use balanced crystalloids in ICU</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/18184957/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">VASST</a></span> (NEJM 2008) - Vasopressin in septic shock</p>
+                        <ul>
+                            <li>No mortality benefit vs. norepinephrine alone</li>
+                            <li>May reduce norepinephrine requirements</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/29347871/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">ADRENAL</a></span> & <span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/29490095/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">APROCCHSS</a></span> (NEJM 2018) - Hydrocortisone in septic shock</p>
+                        <ul>
+                            <li>No clear 90-day mortality benefit</li>
+                            <li>May reduce vasopressor duration</li>
+                        </ul>
+                    </div>
+
+                    <h3>Sedation</h3>
+                    
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/17456818/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">MENDS</a></span> (JAMA 2007), <span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/19213184/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">SEDCOM</a></span> (Lancet 2009) - Dexmedetomidine vs. benzodiazepines</p>
+                        <ul>
+                            <li>Reduced delirium, more days alive without coma/delirium</li>
+                            <li>Established dex as preferred agent</li>
+                        </ul>
+                    </div>
+
+                    <h3>Transfusion</h3>
+                    
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/9971864/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">TRICC</a></span> (NEJM 1999) - Restrictive vs. liberal transfusion</p>
+                        <ul>
+                            <li>Hgb 7-9 g/dL vs. 10-12 g/dL</li>
+                            <li>Restrictive strategy safe, possibly superior</li>
+                        </ul>
+                    </div>
+
+                    <h3>Post-Cardiac Arrest</h3>
+                    
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/24237006/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">TTM-1</a></span> (NEJM 2013) - Targeted temperature 33°C vs. 36°C</p>
+                        <ul>
+                            <li>No difference in mortality or neurologic outcomes</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/34133859/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">TTM-2</a></span> (NEJM 2021) - Hypothermia (33°C) vs. normothermia</p>
+                        <ul>
+                            <li>No mortality benefit to hypothermia</li>
+                            <li>Avoid hyperthermia (&gt;37.5°C)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Renal</h3>
+                    
+                    <div class="info-box">
+                        <p><span class="trial-name"><a href="https://pubmed.ncbi.nlm.nih.gov/32668114/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">STARRT-AKI</a></span> (NEJM 2020) - Early vs. standard RRT initiation</p>
+                        <ul>
+                            <li>No benefit to early initiation</li>
+                            <li>More patients in standard group recovered without RRT</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DAILY ICU ROUTINE -->
+        <section class="section" id="daily">
+            <div class="section-header" onclick="toggleSection('daily')">
+                <h2>Daily ICU Routine & Practical Tips</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Daily Rounds Structure (Systems-Based)</h3>
+                    
+                    <div class="highlight-box">
+                        <h4>Neuro</h4>
+                        <ul>
+                            <li>Mental status (CAM-ICU)</li>
+                            <li>Sedation/analgesia goals (RASS)</li>
+                            <li>Delirium management</li>
+                            <li>Neuro exam if applicable</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Cardiovascular</h4>
+                        <ul>
+                            <li>Hemodynamics: BP, HR, MAP</li>
+                            <li>Vasopressor/inotrope needs</li>
+                            <li>Fluid status (I/O, edema)</li>
+                            <li>DVT prophylaxis</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Respiratory</h4>
+                        <ul>
+                            <li>Vent settings, mode</li>
+                            <li>ABG, SpO2, FiO2, PEEP</li>
+                            <li>Secretions, CXR findings</li>
+                            <li>SBT readiness</li>
+                            <li>VAP prevention bundle</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Renal</h4>
+                        <ul>
+                            <li>UOP, creatinine trend</li>
+                            <li>Fluid balance (24-hr, cumulative)</li>
+                            <li>Electrolytes</li>
+                            <li>RRT if applicable</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>GI/Nutrition</h4>
+                        <ul>
+                            <li>Bowel function</li>
+                            <li>Feeding (enteral vs. parenteral, goal rate)</li>
+                            <li>LFTs</li>
+                            <li>Stress ulcer prophylaxis</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Heme/ID</h4>
+                        <ul>
+                            <li>CBC, coagulation studies</li>
+                            <li>Antibiotic spectrum/duration</li>
+                            <li>Cultures pending</li>
+                            <li>Fever workup if applicable</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Disposition</h4>
+                        <ul>
+                            <li>Goals of care</li>
+                            <li>Family meeting needs</li>
+                            <li>Discharge planning</li>
+                        </ul>
+                    </div>
+
+                    <h3 id="daily-vent">Ventilator Troubleshooting</h3>
+                    
+                    <h4>High Peak Pressure</h4>
+                    <ul>
+                        <li>Check: Biting ETT, secretions, bronchospasm, PTX, mainstem intubation, kinked circuit</li>
+                        <li>Differentiate from high plateau pressure (parenchymal issue)</li>
+                    </ul>
+
+                    <h4>Low Tidal Volumes</h4>
+                    <ul>
+                        <li>Check: Cuff leak, circuit disconnect, worsening lung compliance</li>
+                    </ul>
+
+                    <h4>Hypoxemia</h4>
+                    <ul>
+                        <li>Increase FiO2, PEEP</li>
+                        <li>Recruitment maneuver</li>
+                        <li>Check position (proning)</li>
+                        <li>Rule out: PTX, mucus plug, atelectasis, PE</li>
+                    </ul>
+
+                    <h4>Hypercapnia</h4>
+                    <ul>
+                        <li>Increase respiratory rate</li>
+                        <li>Increase tidal volume (if plateau pressure safe)</li>
+                        <li>Reduce dead space</li>
+                    </ul>
+
+                    <h3 id="daily-drips">Common ICU Drips</h3>
+                    
+                    <div class="formula">
+                        <strong>Norepinephrine</strong><br>
+                        Concentration: 16 mg in 250 mL (64 mcg/mL)<br>
+                        Dose: 0.05-3 mcg/kg/min<br><br>
+                        
+                        <strong>Vasopressin</strong><br>
+                        Concentration: 20 units in 100 mL (0.2 units/mL)<br>
+                        Dose: 0.03-0.04 units/min (fixed dose)<br><br>
+                        
+                        <strong>Epinephrine</strong><br>
+                        Concentration: 4 mg in 250 mL (16 mcg/mL)<br>
+                        Dose: 0.05-2 mcg/kg/min<br><br>
+                        
+                        <strong>Propofol</strong><br>
+                        Concentration: 10 mg/mL (premixed)<br>
+                        Dose: 5-50 mcg/kg/min<br><br>
+                        
+                        <strong>Fentanyl</strong><br>
+                        Concentration: 2 mg in 100 mL (20 mcg/mL)<br>
+                        Dose: 25-200 mcg/hr<br><br>
+                        
+                        <strong>Dexmedetomidine</strong><br>
+                        Concentration: 200 mcg in 50 mL (4 mcg/mL)<br>
+                        Dose: 0.2-1.5 mcg/kg/hr
+                    </div>
+
+                    <h3 id="daily-goals">Goals of Care Discussions</h3>
+                    
+                    <h4>When to Initiate</h4>
+                    <ul>
+                        <li>Patient/family request</li>
+                        <li>Lack of improvement despite maximal therapy</li>
+                        <li>Terminal illness</li>
+                        <li>Poor anticipated quality of life</li>
+                    </ul>
+
+                    <h4>Approach</h4>
+                    <ul>
+                        <li><strong>Assess understanding:</strong> "What have the doctors told you?"</li>
+                        <li><strong>Provide information:</strong> Honest, clear, avoid jargon</li>
+                        <li><strong>Explore values:</strong> "What's most important to your loved one?"</li>
+                        <li><strong>Make recommendations:</strong> Based on evidence + patient values</li>
+                        <li><strong>Summarize and plan:</strong> Ensure agreement on next steps</li>
+                    </ul>
+
+                    <h4>Key Phrases</h4>
+                    <ul>
+                        <li>"I wish things were different..."</li>
+                        <li>"Given what we know, I'm worried that..."</li>
+                        <li>"Would it be okay if I shared what I've seen in similar situations?"</li>
+                        <li>Avoid: "There's nothing more we can do" (reframe as focus on comfort)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUDY PLAN -->
+        <section class="section" id="study">
+            <div class="section-header" onclick="toggleSection('study')">
+                <h2>Study Plan Recommendations</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Week-by-Week Preparation</h3>
+                    
+                    <div class="success-box">
+                        <h4>Week 1-2: Foundation</h4>
+                        <ul>
+                            <li>UpToDate: Read overview articles on respiratory failure, mechanical ventilation, shock</li>
+                            <li>Review ARDS Berlin criteria + management (ARMA, PROSEVA trials)</li>
+                            <li>Practice ventilator calculations (IBW, tidal volumes, plateau pressures)</li>
+                        </ul>
+                    </div>
+
+                    <div class="success-box">
+                        <h4>Week 3: Sepsis & Hemodynamics</h4>
+                        <ul>
+                            <li>Surviving Sepsis Campaign Guidelines (2021)</li>
+                            <li>Understand vasopressor mechanisms</li>
+                            <li>Practice MAP calculations, fluid responsiveness assessment</li>
+                        </ul>
+                    </div>
+
+                    <div class="success-box">
+                        <h4>Week 4: Neuro, Renal, Sedation</h4>
+                        <ul>
+                            <li>Post-cardiac arrest care</li>
+                            <li>KDIGO criteria for AKI</li>
+                            <li>PAD Guidelines for sedation (ABCDEF bundle)</li>
+                            <li>Practice acid-base problems</li>
+                        </ul>
+                    </div>
+
+                    <div class="success-box">
+                        <h4>Week 5: Procedures & Emergencies</h4>
+                        <ul>
+                            <li>Review procedural techniques (CVC, arterial line)</li>
+                            <li>ACLS algorithms</li>
+                            <li>ICU emergency management</li>
+                        </ul>
+                    </div>
+
+                    <div class="success-box">
+                        <h4>Final Week: Integration</h4>
+                        <ul>
+                            <li>Daily ICU rounds structure</li>
+                            <li>Landmark trials review</li>
+                            <li>Mock cases (ARDS, septic shock, post-arrest)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Key Resources</h3>
+                    <ul>
+                        <li><strong>UpToDate:</strong> Primary reference for pathophysiology + management</li>
+                        <li><strong>NEJM/JAMA:</strong> Landmark trials (ARMA, PROSEVA, SMART, TTM)</li>
+                        <li><strong>Guidelines:</strong> Surviving Sepsis, PAD (sedation), KDIGO (AKI)</li>
+                        <li><strong>SCCM Website:</strong> Society of Critical Care Medicine - guidelines + education</li>
+                    </ul>
+
+                    <h3 id="study-tips">Final Tips for Success</h3>
+                    
+                    <div class="highlight-box">
+                        <ol>
+                            <li><strong>Be systematic:</strong> Use a structured approach for rounds and assessments</li>
+                            <li><strong>Think in terms of organ systems:</strong> Neuro, CV, Resp, Renal, etc.</li>
+                            <li><strong>Know your numbers:</strong> IBW, tidal volumes, PEEP, MAP goals</li>
+                            <li><strong>Don't delay treatment:</strong> Sepsis antibiotics, shock resuscitation</li>
+                            <li><strong>Daily checklist:</strong> SBT readiness, line necessity, delirium assessment</li>
+                            <li><strong>Practice procedures:</strong> Get supervised experience early</li>
+                            <li><strong>Communicate with family:</strong> ICU is stressful; frequent updates help</li>
+                            <li><strong>Take care of yourself:</strong> ICU is intense; debrief with team, maintain wellness</li>
+                        </ol>
+                    </div>
+
+                    <p style="text-align: center; margin-top: 30px; font-size: 1.1em; color: var(--secondary-color);"><strong>Good luck on your rotation! Every intensivist was once overwhelmed on their first ICU rotation. Focus on the fundamentals, ask questions, and learn from every patient encounter.</strong></p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- GLOSSARY -->
+    <section class="section" id="glossary">
+        <div class="section-header" onclick="toggleSection('glossary')">
+            <h2>📖 Glossary & Abbreviations</h2>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content">
+            <div class="section-inner">
+                <p style="margin-bottom: 20px;">Quick reference for common critical care terms and abbreviations. Click any term for detailed definition. Throughout the guide, <span class="gterm" onclick="showGlossary('example')">underlined blue terms</span> are clickable for instant definitions.</p>
+                
+                <input type="text" class="glossary-search-box" placeholder="🔍 Search glossary..." oninput="filterGlossary(this.value)">
+                
+                <div class="glossary-grid" id="glossary-list">
+                    <!-- Glossary items will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>Critical Care Medicine Study Guide | Internal Medicine Residency</p>
+        <p style="margin-top: 10px; font-size: 0.85em;">Evidence-based references: UpToDate, NEJM, JAMA, Surviving Sepsis Campaign, PAD Guidelines, KDIGO</p>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Glossary Database
+        const glossary = {
+            // Respiratory Terms
+            'ARDS': {
+                term: 'ARDS',
+                full: 'Acute Respiratory Distress Syndrome',
+                definition: 'Life-threatening lung condition characterized by widespread inflammation causing fluid to leak into the lungs. Defined by bilateral opacities on imaging, PaO2/FiO2 ratio <300, and not fully explained by cardiac failure. Requires lung-protective ventilation (6 mL/kg IBW).',
+                category: 'Respiratory'
+            },
+            'PEEP': {
+                term: 'PEEP',
+                full: 'Positive End-Expiratory Pressure',
+                definition: 'Pressure in the airways above atmospheric pressure at the end of expiration. Prevents alveolar collapse, improves oxygenation, and reduces atelectasis. Typical starting value is 5 cm H2O, titrated higher in ARDS.',
+                category: 'Respiratory'
+            },
+            'FiO2': {
+                term: 'FiO2',
+                full: 'Fraction of Inspired Oxygen',
+                definition: 'Concentration of oxygen in the gas mixture being delivered to the patient, expressed as a decimal (0.21-1.0) or percentage (21%-100%). Room air is 21% (0.21).',
+                category: 'Respiratory'
+            },
+            'Pplat': {
+                term: 'Plateau Pressure',
+                full: 'Plateau Pressure',
+                definition: 'Pressure in the airways during an inspiratory hold maneuver, reflecting alveolar pressure. Should be kept <30 cm H2O in ARDS to prevent barotrauma. Measured by performing an end-inspiratory pause.',
+                category: 'Respiratory'
+            },
+            'IBW': {
+                term: 'IBW',
+                full: 'Ideal Body Weight',
+                definition: 'Calculated weight used for determining appropriate tidal volumes in mechanical ventilation. Males: 50 kg + 2.3 kg per inch over 5 feet. Females: 45.5 kg + 2.3 kg per inch over 5 feet.',
+                category: 'Respiratory'
+            },
+            'SBT': {
+                term: 'SBT',
+                full: 'Spontaneous Breathing Trial',
+                definition: 'Test to assess readiness for extubation by having patient breathe on minimal support (T-piece or pressure support 5-7) for 30-120 minutes. Success indicates patient can likely be extubated.',
+                category: 'Respiratory'
+            },
+            'NIV': {
+                term: 'NIV',
+                full: 'Non-Invasive Ventilation',
+                definition: 'Mechanical ventilation delivered via face mask rather than endotracheal tube. Strong indications include COPD exacerbations with respiratory acidosis, cardiogenic pulmonary edema, and immunocompromised patients with respiratory failure.',
+                category: 'Respiratory'
+            },
+            'VAP': {
+                term: 'VAP',
+                full: 'Ventilator-Associated Pneumonia',
+                definition: 'Pneumonia developing >48 hours after intubation. Prevention includes head of bed elevation, oral care with chlorhexidine, daily sedation interruption, and spontaneous breathing trials.',
+                category: 'Respiratory'
+            },
+            'HFNC': {
+                term: 'HFNC',
+                full: 'High-Flow Nasal Cannula',
+                definition: 'Oxygen delivery system providing heated, humidified oxygen at flow rates up to 60 L/min. Generates low-level PEEP (3-5 cm H2O) and has been shown to reduce intubation rates in hypoxemic respiratory failure.',
+                category: 'Respiratory'
+            },
+            
+            // Hemodynamic Terms
+            'MAP': {
+                term: 'MAP',
+                full: 'Mean Arterial Pressure',
+                definition: 'Average arterial pressure during a single cardiac cycle. Calculated as DBP + 1/3(SBP-DBP). Target is typically ≥65 mmHg in septic shock, though may be individualized based on chronic hypertension.',
+                category: 'Hemodynamics'
+            },
+            'CVP': {
+                term: 'CVP',
+                full: 'Central Venous Pressure',
+                definition: 'Pressure in the vena cava near the right atrium, measured via central line. Not reliable for predicting fluid responsiveness. Normal range 2-8 mmHg. Trends more useful than absolute values.',
+                category: 'Hemodynamics'
+            },
+            'ScvO2': {
+                term: 'ScvO2',
+                full: 'Central Venous Oxygen Saturation',
+                definition: 'Oxygen saturation of blood in the superior vena cava. Normal 70-75%. Values <70% suggest inadequate oxygen delivery or increased consumption. Values >75% in sepsis may indicate impaired oxygen extraction.',
+                category: 'Hemodynamics'
+            },
+            'SVR': {
+                term: 'SVR',
+                full: 'Systemic Vascular Resistance',
+                definition: 'Resistance to blood flow offered by systemic vasculature. Decreased in distributive shock (sepsis, anaphylaxis), increased in cardiogenic and hypovolemic shock. Treated with vasopressors when low.',
+                category: 'Hemodynamics'
+            },
+            'CO': {
+                term: 'CO',
+                full: 'Cardiac Output',
+                definition: 'Volume of blood pumped by the heart per minute. Normal is 4-8 L/min. Cardiac output = heart rate × stroke volume. Decreased in cardiogenic shock, often increased in early septic shock.',
+                category: 'Hemodynamics'
+            },
+            'PPV': {
+                term: 'PPV',
+                full: 'Pulse Pressure Variation',
+                definition: 'Variation in pulse pressure during the respiratory cycle in mechanically ventilated patients. PPV >13% suggests fluid responsiveness. Requires normal sinus rhythm and no spontaneous breathing.',
+                category: 'Hemodynamics'
+            },
+            
+            // Shock & Vasopressors
+            'Sepsis': {
+                term: 'Sepsis',
+                full: 'Sepsis',
+                definition: 'Life-threatening organ dysfunction caused by dysregulated host response to infection. Defined as suspected infection plus increase in SOFA score ≥2 points. Requires early recognition and 1-hour bundle implementation.',
+                category: 'Shock'
+            },
+            'qSOFA': {
+                term: 'qSOFA',
+                full: 'Quick Sequential Organ Failure Assessment',
+                definition: 'Bedside screening tool for sepsis: RR ≥22, altered mentation, SBP ≤100. Score ≥2 indicates higher risk of poor outcomes. NOT diagnostic of sepsis, but useful for early identification.',
+                category: 'Shock'
+            },
+            'SOFA': {
+                term: 'SOFA',
+                full: 'Sequential Organ Failure Assessment',
+                definition: 'Scoring system assessing dysfunction in 6 organ systems: respiratory, coagulation, liver, cardiovascular, CNS, and renal. Sepsis is defined as increase ≥2 points from baseline.',
+                category: 'Shock'
+            },
+            
+            // Renal Terms
+            'AKI': {
+                term: 'AKI',
+                full: 'Acute Kidney Injury',
+                definition: 'Sudden decrease in kidney function defined by KDIGO criteria: SCr increase ≥0.3 mg/dL within 48 hours, or ≥1.5× baseline within 7 days, or UOP <0.5 mL/kg/hr for 6 hours.',
+                category: 'Renal'
+            },
+            'KDIGO': {
+                term: 'KDIGO',
+                full: 'Kidney Disease: Improving Global Outcomes',
+                definition: 'International organization that developed widely-used criteria for diagnosing and staging AKI. Stages 1-3 based on serum creatinine and urine output changes.',
+                category: 'Renal'
+            },
+            'RRT': {
+                term: 'RRT',
+                full: 'Renal Replacement Therapy',
+                definition: 'Dialysis or filtration used when kidneys cannot adequately clear waste. Indications (AEIOU): Acidosis, Electrolytes, Intoxication, Overload, Uremia. Modalities include intermittent HD and continuous CRRT.',
+                category: 'Renal'
+            },
+            'CRRT': {
+                term: 'CRRT',
+                full: 'Continuous Renal Replacement Therapy',
+                definition: 'Form of dialysis running 24 hours continuously. Advantages include hemodynamic stability and gradual fluid removal. Preferred in hemodynamically unstable patients and those with elevated ICP.',
+                category: 'Renal'
+            },
+            'ATN': {
+                term: 'ATN',
+                full: 'Acute Tubular Necrosis',
+                definition: 'Most common cause of intrinsic AKI, resulting from ischemic or nephrotoxic injury to renal tubules. Characterized by muddy brown casts on urinalysis and FENa >2%.',
+                category: 'Renal'
+            },
+            'FENa': {
+                term: 'FENa',
+                full: 'Fractional Excretion of Sodium',
+                definition: 'Percentage of filtered sodium excreted in urine. <1% suggests prerenal AKI, >2% suggests ATN. Formula: (UNa × PCr) / (PNa × UCr) × 100. Less useful if patient on diuretics.',
+                category: 'Renal'
+            },
+            
+            // Neuro Terms
+            'ICP': {
+                term: 'ICP',
+                full: 'Intracranial Pressure',
+                definition: 'Pressure inside the skull. Normal 5-15 mmHg, treat when >20-22 mmHg. Elevated ICP can cause brain herniation. Managed with head of bed elevation, sedation, osmotic therapy, and possibly decompressive craniectomy.',
+                category: 'Neurological'
+            },
+            'CPP': {
+                term: 'CPP',
+                full: 'Cerebral Perfusion Pressure',
+                definition: 'Pressure gradient driving blood flow to the brain. CPP = MAP - ICP. Target CPP >60 mmHg to maintain adequate cerebral perfusion. Requires balancing MAP support with ICP reduction.',
+                category: 'Neurological'
+            },
+            'GCS': {
+                term: 'GCS',
+                full: 'Glasgow Coma Scale',
+                definition: 'Neurological scale assessing level of consciousness. Scored 3-15 based on eye opening (1-4), verbal response (1-5), and motor response (1-6). Score ≤8 typically indicates need for airway protection.',
+                category: 'Neurological'
+            },
+            'CAM-ICU': {
+                term: 'CAM-ICU',
+                full: 'Confusion Assessment Method for ICU',
+                definition: 'Validated tool for diagnosing delirium in ICU patients. Positive if: acute change/fluctuation + inattention + (altered consciousness OR disorganized thinking). Should be assessed at least daily.',
+                category: 'Neurological'
+            },
+            'TTM': {
+                term: 'TTM',
+                full: 'Targeted Temperature Management',
+                definition: 'Temperature control strategy after cardiac arrest. Current evidence supports maintaining normothermia and avoiding hyperthermia (>37.5°C) rather than routine hypothermia to 33°C.',
+                category: 'Neurological'
+            },
+            
+            // Sedation Terms
+            'RASS': {
+                term: 'RASS',
+                full: 'Richmond Agitation-Sedation Scale',
+                definition: 'Scale from +4 (combative) to -5 (unarousable) assessing sedation level. Target typically 0 to -2 (alert/calm to light sedation) for most ICU patients to minimize delirium and facilitate early liberation.',
+                category: 'Sedation'
+            },
+            'PAD': {
+                term: 'PAD Guidelines',
+                full: 'Pain, Agitation, and Delirium Guidelines',
+                definition: 'SCCM clinical practice guidelines for managing pain, agitation, and delirium in ICU. Emphasizes analgesia-first approach, light sedation, delirium prevention, and early mobilization (ABCDEF bundle).',
+                category: 'Sedation'
+            },
+            'SAT': {
+                term: 'SAT',
+                full: 'Spontaneous Awakening Trial',
+                definition: 'Daily interruption of sedation to allow patient to awaken. Helps assess neurological status, readiness for extubation, and reduces total sedation exposure. Resume at half dose if needed.',
+                category: 'Sedation'
+            },
+            
+            // Procedures
+            'RSI': {
+                term: 'RSI',
+                full: 'Rapid Sequence Intubation',
+                definition: 'Technique for emergent intubation involving pre-oxygenation, induction agent (etomidate, ketamine, propofol), neuromuscular blockade (succinylcholine or rocuronium), and immediate intubation without bag-mask ventilation.',
+                category: 'Procedures'
+            },
+            'CVC': {
+                term: 'CVC',
+                full: 'Central Venous Catheter',
+                definition: 'Large-bore catheter inserted into internal jugular, subclavian, or femoral vein. Used for vasopressor administration, monitoring, hemodialysis, or when peripheral access inadequate. Requires sterile technique and ultrasound guidance.',
+                category: 'Procedures'
+            },
+            
+            // Trials & Guidelines
+            'ARMA': {
+                term: 'ARMA Trial',
+                full: 'ARDSNet Low Tidal Volume Trial',
+                definition: 'Landmark 2000 NEJM trial showing 22% mortality reduction with lung-protective ventilation (6 mL/kg IBW vs 12 mL/kg) in ARDS. Established standard of care for ARDS ventilation.',
+                category: 'Trials'
+            },
+            'PROSEVA': {
+                term: 'PROSEVA Trial',
+                full: 'Prone Positioning in Severe ARDS',
+                definition: '2013 NEJM trial demonstrating 50% mortality reduction with prone positioning (16+ hours/day) in severe ARDS (PaO2/FiO2 <150). One of the most impactful interventions in ARDS.',
+                category: 'Trials'
+            },
+            'SMART': {
+                term: 'SMART Trial',
+                full: 'Saline vs. Balanced Crystalloids',
+                definition: '2018 NEJM trial showing balanced crystalloids (lactated Ringer\'s, Plasmalyte) reduced mortality and AKI compared to normal saline in critically ill patients. Changed practice to favor balanced solutions.',
+                category: 'Trials'
+            },
+            
+            // Other Important Terms
+            'Lactate': {
+                term: 'Lactate',
+                full: 'Serum Lactate',
+                definition: 'Marker of tissue hypoperfusion and cellular hypoxia. Elevated (>2 mmol/L) in shock states. Target ≥10% clearance in first 2 hours of sepsis resuscitation. Normal <2 mmol/L.',
+                category: 'Labs'
+            },
+            'CLABSI': {
+                term: 'CLABSI',
+                full: 'Central Line-Associated Bloodstream Infection',
+                definition: 'Bloodstream infection in patient with central line where no other source is identified. Prevention includes maximal sterile barriers, chlorhexidine prep, avoiding femoral site, and daily line necessity assessment.',
+                category: 'Infection'
+            },
+            'CAUTI': {
+                term: 'CAUTI',
+                full: 'Catheter-Associated Urinary Tract Infection',
+                definition: 'UTI in patient with indwelling urinary catheter. Most important prevention strategy is removing Foley catheter as soon as no longer necessary. Use only when truly indicated.',
+                category: 'Infection'
+            },
+            'ABG': {
+                term: 'ABG',
+                full: 'Arterial Blood Gas',
+                definition: 'Blood test measuring pH, PaO2, PaCO2, and HCO3 to assess oxygenation, ventilation, and acid-base status. Essential for managing respiratory failure and metabolic derangements in critically ill patients.',
+                category: 'Labs'
+            },
+            'DKA': {
+                term: 'DKA',
+                full: 'Diabetic Ketoacidosis',
+                definition: 'Hyperglycemic crisis with high anion gap metabolic acidosis and ketones. Triad: hyperglycemia (>250), acidosis (pH <7.3), and ketones. Treated with insulin, fluids, and potassium repletion.',
+                category: 'Endocrine'
+            },
+            'example': {
+                term: 'Example Term',
+                full: 'This is an Example',
+                definition: 'This is what a clickable glossary term looks like! Throughout the guide, you\'ll see medical terms and abbreviations highlighted in blue with a dotted underline. Simply tap them to see their definition without losing your place.',
+                category: 'Demo'
+            }
+        };
+
+        // Show glossary term definition
+        function showGlossary(term) {
+            const entry = glossary[term];
+            if (!entry) return;
+            
+            document.getElementById('glossary-category').textContent = entry.category;
+            document.getElementById('glossary-title').textContent = entry.full || entry.term;
+            document.getElementById('glossary-definition').textContent = entry.definition;
+            
+            const modal = document.querySelector('.glossary-modal');
+            modal.classList.add('active');
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close glossary modal
+        function closeGlossary() {
+            const modal = document.querySelector('.glossary-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close if clicking outside content
+        function closeGlossaryIfOutside(event) {
+            if (event.target.classList.contains('glossary-modal')) {
+                closeGlossary();
+            }
+        }
+
+        // Populate glossary list
+        function populateGlossary() {
+            const glossaryList = document.getElementById('glossary-list');
+            const sortedTerms = Object.keys(glossary).sort();
+            
+            sortedTerms.forEach(key => {
+                const entry = glossary[key];
+                const item = document.createElement('div');
+                item.className = 'glossary-item';
+                item.onclick = () => showGlossary(key);
+                
+                const shortDef = entry.definition.length > 120 
+                    ? entry.definition.substring(0, 120) + '...' 
+                    : entry.definition;
+                
+                item.innerHTML = `
+                    <div class="glossary-item-term">${entry.term}${entry.full && entry.full !== entry.term ? ' - ' + entry.full : ''}</div>
+                    <div class="glossary-item-def">${shortDef}</div>
+                `;
+                
+                glossaryList.appendChild(item);
+            });
+        }
+
+        // Filter glossary
+        function filterGlossary(query) {
+            const items = document.querySelectorAll('.glossary-item');
+            const searchLower = query.toLowerCase();
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchLower) ? 'block' : 'none';
+            });
+        }
+
+        // Toggle table of contents
+        function toggleToc() {
+            const toc = document.querySelector('.toc');
+            const overlay = document.querySelector('.toc-overlay');
+            toc.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Search TOC
+        function searchTOC(query) {
+            const items = document.querySelectorAll('.toc-item');
+            const searchLower = query.toLowerCase();
+            
+            items.forEach(item => {
+                const mainText = item.querySelector('.toc-main span').textContent.toLowerCase();
+                const submenuLinks = item.querySelectorAll('.toc-submenu a');
+                let hasMatch = false;
+                
+                // Check main heading
+                if (mainText.includes(searchLower)) {
+                    hasMatch = true;
+                }
+                
+                // Check submenu items
+                submenuLinks.forEach(link => {
+                    const linkText = link.textContent.toLowerCase();
+                    if (linkText.includes(searchLower)) {
+                        hasMatch = true;
+                        link.style.display = 'block';
+                    } else if (query) {
+                        link.style.display = 'none';
+                    } else {
+                        link.style.display = 'block';
+                    }
+                });
+                
+                // Show/hide main item
+                if (hasMatch || !query) {
+                    item.style.display = 'block';
+                    // Expand if searching and has match
+                    if (query && hasMatch) {
+                        const main = item.querySelector('.toc-main');
+                        const submenu = item.querySelector('.toc-submenu');
+                        main.classList.add('active');
+                        submenu.classList.add('active');
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Toggle submenu in TOC
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            if (!submenu) return;
+            
+            const wasActive = element.classList.contains('active');
+            
+            // Close all other submenus first
+            document.querySelectorAll('.toc-main').forEach(main => {
+                if (main !== element) {
+                    main.classList.remove('active');
+                    if (main.nextElementSibling) {
+                        main.nextElementSibling.classList.remove('active');
+                    }
+                }
+            });
+            
+            // Toggle current submenu
+            if (!wasActive) {
+                element.classList.add('active');
+                submenu.classList.add('active');
+            } else {
+                element.classList.remove('active');
+                submenu.classList.remove('active');
+            }
+            
+            // Prevent default navigation if this was called from a link
+            return false;
+        }
+
+        // Navigate to section and subsection
+        // Navigate to subsection (opens parent section first)
+        function navigateToSubsection(anchorId) {
+            const anchor = document.getElementById(anchorId);
+            if (!anchor) return false;
+            const section = anchor.closest('.section');
+            if (!section) return false;
+            const content = section.querySelector('.section-content');
+            const header = section.querySelector('.section-header');
+            if (content && header && !content.classList.contains('active')) {
+                header.classList.add('active');
+                content.classList.add('active');
+            }
+            const toc = document.querySelector('.toc');
+            const overlay = document.querySelector('.toc-overlay');
+            if (toc && toc.classList.contains('active')) {
+                toc.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+            setTimeout(() => { anchor.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+            return false;
+        }
+
+function navigateTo(sectionId, linkElement) {
+    const section = document.getElementById(sectionId);
+    if (!section) return false;
+    
+    // Open section if collapsed
+    const content = section.querySelector('.section-content');
+    const header = section.querySelector('.section-header');
+    if (content && header && !content.classList.contains('active')) {
+        header.classList.add('active');
+        content.classList.add('active');
+    }
+    
+    // Close TOC
+    const toc = document.querySelector('.toc');
+    const overlay = document.querySelector('.toc-overlay');
+    if (toc && toc.classList.contains('active')) {
+        toc.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+    
+    // Simple scroll - body padding handles the offset
+    setTimeout(() => {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+    
+    return false;
+}
+
+        // Toggle section
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const header = section.querySelector('.section-header');
+            const content = section.querySelector('.section-content');
+            
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide back to top button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Close TOC when clicking outside
+        document.addEventListener('click', function(event) {
+            const toc = document.querySelector('.toc');
+            const navToggle = document.querySelector('.nav-toggle');
+            
+            if (!toc.contains(event.target) && !navToggle.contains(event.target)) {
+                if (toc.classList.contains('active')) {
+                    toggleToc();
+                }
+            }
+        });
+
+        // Keyboard support for glossary modal
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modal = document.querySelector('.glossary-modal');
+                if (modal.classList.contains('active')) {
+                    closeGlossary();
+                }
+            }
+        });
+
+        // Open first section by default
+        window.addEventListener('load', function() {
+            const firstSection = document.querySelector('.section');
+            if (firstSection) {
+                const content = firstSection.querySelector('.section-content');
+                const header = firstSection.querySelector('.section-header');
+                content.classList.add('active');
+                header.classList.add('active');
+            }
+            
+            // Populate glossary
+            populateGlossary();
+            
+            // Add click handlers to TOC submenu links to close TOC
+            document.querySelectorAll('.toc-submenu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    // Close TOC
+                    const toc = document.querySelector('.toc');
+                    const overlay = document.querySelector('.toc-overlay');
+                    if (toc && toc.classList.contains('active')) {
+                        toc.classList.remove('active');
+                        overlay.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

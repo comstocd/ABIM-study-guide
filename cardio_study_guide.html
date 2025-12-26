@@ -1,0 +1,3173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>ABIM Cardiology Study Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        :root {
+            --primary: #991b1b;
+            --primary-light: #b91c1c;
+            --primary-dark: #7f1d1d;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --bg: #fef7f7;
+            --card-bg: #ffffff;
+            --text: #1f2937;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --info: #0284c7;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 28px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(153, 27, 27, 0.3);
+        }
+        
+        .main-header h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+        
+        .main-header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .build-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        /* Navigation */
+        .nav-container {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 14px 16px;
+            position: sticky;
+            top: 82px;
+            z-index: 99;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x proximity;
+        }
+        
+        .nav-pills {
+            display: flex;
+            gap: 8px;
+            min-width: max-content;
+        }
+        
+        .nav-pill {
+            padding: 10px 16px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 22px;
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            scroll-snap-align: start;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-pill:hover, .nav-pill:active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Search */
+        .search-container {
+            padding: 14px 20px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: block;
+            padding: 14px 22px;
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            -webkit-appearance: none;
+        }
+        
+        .search-box:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.1);
+        }
+        
+        /* Main Content */
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Section Styling */
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            overflow: hidden;
+            scroll-margin-top: 170px;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 56px;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        .section-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        
+        .section-header .icon {
+            font-size: 1.4rem;
+        }
+        
+        .section-content {
+            padding: 24px;
+        }
+        
+        /* Topic Cards */
+        .topic {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 18px;
+            overflow: hidden;
+            scroll-margin-top: 170px;
+        }
+        
+        .topic-header {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            padding: 16px 20px;
+            border-bottom: 1px solid #fecaca;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 52px;
+            -webkit-user-select: none;
+            user-select: none;
+            transition: opacity 0.15s;
+        }
+        
+        .topic-header:active {
+            opacity: 0.8;
+        }
+        
+        .topic-header h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .topic-header .badge {
+            background: var(--primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+        
+        .topic-content {
+            padding: 20px;
+        }
+        
+        .topic.collapsed .topic-content {
+            display: none;
+        }
+        
+        /* Subsections */
+        .subsection {
+            margin-bottom: 20px;
+        }
+        
+        .subsection-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+        
+        li {
+            margin-bottom: 7px;
+            line-height: 1.55;
+        }
+        
+        li strong {
+            color: var(--primary-dark);
+        }
+        
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        td {
+            padding: 11px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background: #fef7f7;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Special Boxes */
+        .high-yield {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid var(--warning);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+        
+        .high-yield-title {
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .pearl-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 4px solid var(--info);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+        
+        .pearl-title {
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .danger-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 4px solid var(--danger);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+        
+        .danger-title {
+            font-weight: 700;
+            color: #991b1b;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .clinical-vignette {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 4px solid var(--success);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+        
+        .vignette-title {
+            font-weight: 700;
+            color: #166534;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .guideline-box {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            border-left: 4px solid #7c3aed;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+        
+        .guideline-title {
+            font-weight: 700;
+            color: #5b21b6;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        /* Mnemonic */
+        .mnemonic {
+            background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%);
+            border: 2px dashed #c026d3;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+            text-align: center;
+        }
+        
+        .mnemonic-title {
+            font-weight: 700;
+            color: #86198f;
+            margin-bottom: 8px;
+        }
+        
+        .mnemonic-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #a21caf;
+            letter-spacing: 0.5px;
+        }
+        
+        /* EKG Box */
+        .ekg-box {
+            background: linear-gradient(135deg, #fef9e7 0%, #fef3c7 100%);
+            border: 2px solid #f59e0b;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+        
+        .ekg-title {
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 52px;
+            height: 52px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.6rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(153, 27, 27, 0.35);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .back-to-top.show {
+            display: flex;
+        }
+        
+        .back-to-top:active {
+            transform: scale(0.95);
+        }
+        
+        /* Cross-reference links */
+        .cross-ref {
+            color: var(--info);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--info);
+        }
+        
+        /* Responsive - Mobile */
+        @media (max-width: 767px) {
+            .main-header { padding: 22px 16px; }
+            .main-header h1 { font-size: 1.35rem; }
+            .section-content { padding: 16px; }
+            .topic-content { padding: 16px; }
+            .nav-container { top: 74px; padding: 12px; }
+            .section { scroll-margin-top: 150px; }
+            .topic { scroll-margin-top: 150px; }
+            th, td { padding: 10px 12px; font-size: 0.85rem; }
+        }
+        
+        /* iPad Optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .content { 
+                max-width: 100%; 
+                padding: 24px 28px; 
+            }
+            .nav-pill {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                min-height: 48px;
+            }
+            .topic-header {
+                min-height: 58px;
+                padding: 18px 24px;
+            }
+            .topic-header h3 {
+                font-size: 1.1rem;
+            }
+            .section-header {
+                padding: 24px 28px;
+            }
+            .section-header h2 {
+                font-size: 1.3rem;
+            }
+            .topic-content, .section-content {
+                padding: 26px;
+            }
+            table {
+                font-size: 0.95rem;
+            }
+            th, td {
+                padding: 14px 16px;
+            }
+            .search-box {
+                font-size: 1.1rem;
+                padding: 16px 26px;
+            }
+            .back-to-top {
+                width: 58px;
+                height: 58px;
+                font-size: 1.9rem;
+                bottom: 36px;
+                right: 36px;
+            }
+            .high-yield, .pearl-box, .danger-box, .clinical-vignette, .guideline-box, .mnemonic, .ekg-box {
+                padding: 20px 24px;
+            }
+        }
+        
+        /* iPad Pro / Large Tablets */
+        @media (min-width: 1024px) and (max-width: 1366px) {
+            .content {
+                max-width: 980px;
+                padding: 28px 36px;
+            }
+        }
+        
+        /* Touch-friendly enhancements */
+        @media (pointer: coarse) {
+            .nav-pill, .topic-header, .section-header, button {
+                min-height: 44px;
+            }
+            a, button {
+                -webkit-tap-highlight-color: rgba(153, 27, 27, 0.15);
+            }
+        }
+        
+        /* Safe area for notched iPads */
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: max(0px, env(safe-area-inset-left));
+                padding-right: max(0px, env(safe-area-inset-right));
+                padding-bottom: max(60px, env(safe-area-inset-bottom));
+            }
+        }
+        
+        /* Prevent text selection on interactive elements */
+        .nav-pill, .topic-header, .section-header, button {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 30px 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        footer h3 {
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 22px;
+            margin: 5px;
+            display: inline-block;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        
+        footer a:hover, footer a:active {
+            background: rgba(255,255,255,0.35);
+        }
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <h1>❤️ ABIM Cardiology Study Guide <span class="build-badge">BUILD #1</span></h1>
+    <p class="subtitle">High-Yield Board Review • ACC/AHA/ESC Guidelines • Evidence-Based</p>
+</header>
+
+<nav class="nav-container">
+    <div class="nav-pills">
+        <a href="#acs" class="nav-pill">ACS</a>
+        <a href="#stable-cad" class="nav-pill">Stable CAD</a>
+        <a href="#heart-failure" class="nav-pill">Heart Failure</a>
+        <a href="#afib" class="nav-pill">AFib</a>
+        <a href="#arrhythmias" class="nav-pill">Arrhythmias</a>
+        <a href="#valvular" class="nav-pill">Valvular</a>
+        <a href="#cardiomyopathy" class="nav-pill">Cardiomyopathy</a>
+        <a href="#pericardial" class="nav-pill">Pericardial</a>
+        <a href="#hypertension" class="nav-pill">HTN</a>
+        <a href="#lipids" class="nav-pill">Lipids</a>
+        <a href="#pulm-htn" class="nav-pill">Pulm HTN</a>
+        <a href="#aortic" class="nav-pill">Aortic</a>
+        <a href="#pad" class="nav-pill">PAD</a>
+        <a href="#vte" class="nav-pill">VTE</a>
+        <a href="#devices" class="nav-pill">Devices</a>
+        <a href="#imaging" class="nav-pill">Imaging</a>
+        <a href="#periop" class="nav-pill">Perioperative</a>
+    </div>
+</nav>
+
+<div class="search-container">
+    <input type="text" class="search-box" id="searchBox" placeholder="Search topics, conditions, medications..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+</div>
+
+<main class="content">
+
+<!-- ======================= SECTION 1: ACS ======================= -->
+<section class="section" id="acs">
+    <div class="section-header">
+        <h2>🚨 Acute Coronary Syndromes</h2>
+        <span class="icon">❤️</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="stemi">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>ST-Elevation Myocardial Infarction (STEMI)</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 TIME IS MYOCARDIUM</div>
+                    <ul>
+                        <li><strong>Door-to-balloon time:</strong> ≤90 minutes (primary PCI)</li>
+                        <li><strong>Door-to-needle time:</strong> ≤30 minutes (if fibrinolysis chosen)</li>
+                        <li><strong>First medical contact to device:</strong> ≤120 minutes if transfer for PCI</li>
+                    </ul>
+                </div>
+                
+                <div class="ekg-box">
+                    <div class="ekg-title">📈 STEMI ECG CRITERIA</div>
+                    <ul>
+                        <li><strong>ST elevation:</strong> ≥1mm in ≥2 contiguous leads</li>
+                        <li><strong>Anterior:</strong> V1-V4 (LAD)</li>
+                        <li><strong>Inferior:</strong> II, III, aVF (RCA or LCx)</li>
+                        <li><strong>Lateral:</strong> I, aVL, V5-V6 (LCx or diagonal)</li>
+                        <li><strong>Posterior:</strong> ST depression V1-V3 (get V7-V9; LCx or RCA)</li>
+                        <li><strong>Right ventricular:</strong> V4R ST elevation with inferior STEMI (proximal RCA)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">STEMI Equivalents</div>
+                    <ul>
+                        <li><strong>New LBBB:</strong> With clinical suspicion (use modified Sgarbossa criteria)</li>
+                        <li><strong>De Winter T waves:</strong> Upsloping ST depression V1-V6 + tall symmetric T waves = proximal LAD occlusion</li>
+                        <li><strong>Wellens' syndrome:</strong> Biphasic or deeply inverted T waves V2-V3 in pain-free patient = critical LAD stenosis (avoid stress test → cath)</li>
+                        <li><strong>Posterior STEMI:</strong> Isolated ST depression V1-V3</li>
+                        <li><strong>Hyperacute T waves:</strong> Tall, symmetric, peaked T waves (earliest sign)</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACC/AHA STEMI Guidelines (2013, focused update 2017)</div>
+                    <strong>Primary PCI is preferred reperfusion strategy</strong> when:
+                    <ul>
+                        <li>PCI-capable hospital (door-to-balloon ≤90 min)</li>
+                        <li>Transfer possible with FMC-to-device ≤120 min</li>
+                        <li>Contraindication to fibrinolysis</li>
+                        <li>Cardiogenic shock</li>
+                        <li>Diagnosis uncertain</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Acute STEMI Medications</div>
+                    <ul>
+                        <li><strong>Aspirin:</strong> 162-325mg chewed immediately (continue 81mg daily indefinitely)</li>
+                        <li><strong>P2Y12 inhibitor:</strong> Ticagrelor 180mg or prasugrel 60mg (preferred for PCI); clopidogrel 600mg if lytic therapy or unable to take others</li>
+                        <li><strong>Anticoagulation:</strong> UFH, bivalirudin, or enoxaparin (per protocol)</li>
+                        <li><strong>High-intensity statin:</strong> Start in hospital (atorvastatin 80mg or rosuvastatin 40mg)</li>
+                        <li><strong>Beta-blocker:</strong> Within 24h if no contraindications (HF, low output, heart block, active bronchospasm)</li>
+                        <li><strong>ACEi/ARB:</strong> Within 24h, especially if anterior MI, HF, or EF ≤40%</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: DAPT Duration</div>
+                    <ul>
+                        <li><strong>Post-STEMI/ACS with stent:</strong> DAPT × 12 months (minimum)</li>
+                        <li><strong>High bleeding risk:</strong> May shorten to 6 months</li>
+                        <li><strong>Extended DAPT:</strong> Consider beyond 12 months if low bleeding risk & tolerated well</li>
+                        <li><strong>Prasugrel:</strong> Avoid if prior stroke/TIA, age ≥75, weight &lt;60kg</li>
+                    </ul>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE: Right Ventricular MI</div>
+                    <p><strong>Scenario:</strong> Patient with inferior STEMI develops hypotension after nitroglycerin. Clear lung fields, JVD present.</p>
+                    <p><strong>Answer:</strong> Right ventricular infarction (proximal RCA). Avoid nitrates and diuretics. Treatment: IV fluids to maintain RV preload. Get V4R (ST elevation confirms RV involvement).</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="nstemi">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>NSTEMI / Unstable Angina</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Definitions</div>
+                    <ul>
+                        <li><strong>NSTEMI:</strong> Elevated troponin + ischemic symptoms/ECG changes WITHOUT ST elevation</li>
+                        <li><strong>Unstable angina:</strong> Ischemic symptoms without troponin elevation (now rare with high-sensitivity troponin)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Risk Stratification: TIMI Risk Score</div>
+                    <ul>
+                        <li>Age ≥65 (1 point)</li>
+                        <li>≥3 CAD risk factors (1 point)</li>
+                        <li>Known CAD (≥50% stenosis) (1 point)</li>
+                        <li>Aspirin use within 7 days (1 point)</li>
+                        <li>Severe angina (≥2 episodes in 24h) (1 point)</li>
+                        <li>ST deviation ≥0.5mm (1 point)</li>
+                        <li>Positive cardiac biomarker (1 point)</li>
+                    </ul>
+                    <p><strong>0-2:</strong> Low risk; <strong>3-4:</strong> Intermediate; <strong>5-7:</strong> High risk (favor early invasive)</p>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACC/AHA NSTE-ACS Guidelines (2014)</div>
+                    <strong>Invasive Strategy Timing:</strong>
+                    <ul>
+                        <li><strong>Immediate (&lt;2h):</strong> Refractory angina, hemodynamic/electrical instability, acute HF</li>
+                        <li><strong>Early (within 24h):</strong> GRACE score &gt;140, troponin rise/fall, dynamic ST changes</li>
+                        <li><strong>Delayed invasive (25-72h):</strong> None of above but TIMI ≥2, diabetes, EF &lt;40%, GFR &lt;60, prior CABG</li>
+                        <li><strong>Ischemia-guided:</strong> Low-risk, prefer medical management (stress test, then cath if positive)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Medical Therapy</div>
+                    <ul>
+                        <li><strong>Aspirin + P2Y12 inhibitor:</strong> Same as STEMI</li>
+                        <li><strong>Anticoagulation:</strong> UFH, enoxaparin, fondaparinux, or bivalirudin</li>
+                        <li><strong>Beta-blocker:</strong> Oral within 24h (IV if ongoing ischemia, HTN, tachycardia)</li>
+                        <li><strong>Nitrates:</strong> For ongoing ischemia (avoid if RV infarct, severe AS, recent PDE5 inhibitor)</li>
+                        <li><strong>Statin:</strong> High-intensity, started in hospital</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Troponin Interpretation</div>
+                    <ul>
+                        <li><strong>High-sensitivity troponin:</strong> Detects smaller infarcts, earlier rise (1-3h)</li>
+                        <li><strong>Rise and/or fall pattern:</strong> Suggests acute MI (not chronic elevation)</li>
+                        <li><strong>Non-ACS causes of troponin elevation:</strong> HF, PE, myocarditis, sepsis, renal failure, takotsubo, arrhythmias, cardiac contusion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="acs-complications">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Post-MI Complications</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Complication</th>
+                            <th>Timing</th>
+                            <th>Presentation</th>
+                            <th>Management</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Cardiogenic shock</strong></td>
+                            <td>Any time</td>
+                            <td>Hypotension, cold extremities, pulmonary edema</td>
+                            <td>Revascularization, inotropes, mechanical support</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Free wall rupture</strong></td>
+                            <td>3-5 days</td>
+                            <td>Sudden hemodynamic collapse, PEA</td>
+                            <td>Emergency surgery (usually fatal)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>VSD (septal rupture)</strong></td>
+                            <td>3-5 days</td>
+                            <td>New harsh holosystolic murmur, HF</td>
+                            <td>IABP, vasodilators, surgery</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Papillary muscle rupture</strong></td>
+                            <td>2-7 days</td>
+                            <td>Acute severe MR, pulmonary edema</td>
+                            <td>IABP, surgery</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LV aneurysm</strong></td>
+                            <td>Weeks-months</td>
+                            <td>Persistent ST elevation, HF, arrhythmias</td>
+                            <td>Medical (anticoagulation if thrombus); consider surgery</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LV pseudoaneurysm</strong></td>
+                            <td>Weeks</td>
+                            <td>Contained rupture, narrow neck on echo</td>
+                            <td>Surgery (high rupture risk)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dressler syndrome</strong></td>
+                            <td>2-10 weeks</td>
+                            <td>Fever, pleuritic chest pain, pericardial friction rub</td>
+                            <td>NSAIDs, colchicine; avoid anticoagulation</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE: Post-MI Murmur</div>
+                    <p><strong>Scenario:</strong> 5 days post-MI, patient develops sudden hypotension and new harsh holosystolic murmur with thrill at left lower sternal border.</p>
+                    <p><strong>Answer:</strong> Ventricular septal rupture. Echo will show VSD with left-to-right shunt. Management: IABP to reduce afterload, stabilize, and emergent surgical repair.</p>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: VSD vs Papillary Muscle Rupture</div>
+                    <ul>
+                        <li><strong>Both:</strong> New holosystolic murmur, hemodynamic compromise</li>
+                        <li><strong>VSD:</strong> Murmur at LLSB, palpable thrill, oxygen step-up in RV on PA catheter</li>
+                        <li><strong>Papillary muscle rupture:</strong> Murmur at apex radiating to axilla, large V waves on PCWP tracing</li>
+                        <li><strong>Confirm with echo</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 2: STABLE CAD ======================= -->
+<section class="section" id="stable-cad">
+    <div class="section-header">
+        <h2>🫀 Stable Ischemic Heart Disease</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="chronic-cad">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Chronic Coronary Disease Management</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACC/AHA Chronic Coronary Disease Guidelines (2023)</div>
+                    <strong>Optimal Medical Therapy (OMT) Components:</strong>
+                    <ul>
+                        <li><strong>Antiplatelet:</strong> Aspirin 75-100mg daily (clopidogrel if aspirin intolerant)</li>
+                        <li><strong>Statin:</strong> High-intensity (atorvastatin 40-80mg or rosuvastatin 20-40mg)</li>
+                        <li><strong>ACEi/ARB:</strong> If HF, DM, HTN, CKD, or EF ≤40%</li>
+                        <li><strong>Beta-blocker:</strong> If prior MI, LV dysfunction, or for symptom control</li>
+                        <li><strong>Anti-anginal:</strong> Beta-blocker and/or CCB first-line; add nitrate, ranolazine if needed</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Anti-Anginal Medications</div>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Agent</th>
+                                <th>Mechanism</th>
+                                <th>Notes</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Beta-blockers</strong></td>
+                                <td>↓HR, ↓contractility, ↓O2 demand</td>
+                                <td>First-line; proven mortality benefit post-MI</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CCB (non-DHP)</strong></td>
+                                <td>Diltiazem, verapamil: ↓HR + vasodilation</td>
+                                <td>Good for vasospastic angina; avoid with BB (heart block)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CCB (DHP)</strong></td>
+                                <td>Amlodipine, nifedipine: vasodilation</td>
+                                <td>Can combine with BB; good for HTN</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nitrates</strong></td>
+                                <td>Venodilation → ↓preload</td>
+                                <td>Nitrate-free interval to prevent tolerance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ranolazine</strong></td>
+                                <td>Late sodium channel inhibitor</td>
+                                <td>Add-on; prolongs QT; no mortality benefit</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: ISCHEMIA Trial (2020)</div>
+                    <ul>
+                        <li><strong>Question:</strong> Does routine invasive strategy improve outcomes in stable CAD with moderate-severe ischemia?</li>
+                        <li><strong>Answer:</strong> NO difference in death or MI at 5 years</li>
+                        <li><strong>Key takeaway:</strong> OMT is appropriate initial strategy for stable CAD. Revascularization for refractory symptoms despite OMT.</li>
+                        <li><strong>Exclusion:</strong> Left main &gt;50%, EF &lt;35%, NYHA III-IV, recent ACS</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="stress-testing">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Stress Testing Selection</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Choosing the Right Test</div>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Patient Characteristic</th>
+                                <th>Recommended Test</th>
+                                <th>Rationale</th>
+                            </tr>
+                            <tr>
+                                <td>Can exercise + interpretable ECG</td>
+                                <td>Exercise ECG</td>
+                                <td>Most physiologic, prognostic value from exercise capacity</td>
+                            </tr>
+                            <tr>
+                                <td>Uninterpretable ECG (LBBB, paced, LVH, digoxin, WPW)</td>
+                                <td>Exercise + imaging (echo or nuclear)</td>
+                                <td>ST changes unreliable</td>
+                            </tr>
+                            <tr>
+                                <td>Cannot exercise</td>
+                                <td>Pharmacologic stress + imaging</td>
+                                <td>Dobutamine echo or vasodilator (adenosine/regadenoson) nuclear</td>
+                            </tr>
+                            <tr>
+                                <td>LBBB or paced rhythm</td>
+                                <td>Vasodilator nuclear (avoid dobutamine)</td>
+                                <td>Dobutamine causes false positive septal defects</td>
+                            </tr>
+                            <tr>
+                                <td>Bronchospasm/severe COPD</td>
+                                <td>Dobutamine stress</td>
+                                <td>Avoid adenosine/regadenoson (bronchoconstriction)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 CONTRAINDICATIONS TO STRESS TESTING</div>
+                    <ul>
+                        <li>Acute MI within 2 days</li>
+                        <li>Unstable angina not stabilized on medical therapy</li>
+                        <li>Uncontrolled arrhythmia with hemodynamic compromise</li>
+                        <li>Symptomatic severe aortic stenosis</li>
+                        <li>Decompensated HF</li>
+                        <li>Acute PE, myocarditis, pericarditis, aortic dissection</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Duke Treadmill Score</div>
+                    <p><strong>Formula:</strong> Exercise time (min) – (5 × max ST deviation in mm) – (4 × angina index)</p>
+                    <ul>
+                        <li>Angina index: 0 = none, 1 = non-limiting, 2 = exercise-limiting</li>
+                        <li><strong>≥5:</strong> Low risk (annual mortality &lt;1%)</li>
+                        <li><strong>-10 to +4:</strong> Moderate risk</li>
+                        <li><strong>&lt;-10:</strong> High risk (annual mortality ≥5%)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="revasc">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Revascularization: PCI vs CABG</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACC/AHA/SCAI Revascularization Guidelines</div>
+                    <strong>CABG generally preferred over PCI for:</strong>
+                    <ul>
+                        <li>Left main disease (especially with SYNTAX score &gt;22)</li>
+                        <li>Three-vessel disease, especially with diabetes</li>
+                        <li>Complex CAD with high SYNTAX score (&gt;32)</li>
+                        <li>Reduced EF (&lt;35%)</li>
+                    </ul>
+                    <strong>PCI reasonable for:</strong>
+                    <ul>
+                        <li>1-2 vessel disease without proximal LAD</li>
+                        <li>Left main with low SYNTAX (≤22) if surgery high risk</li>
+                        <li>Patient factors favoring less invasive approach</li>
+                    </ul>
+                </div>
+                
+                <div class="pearl-box">
+                    <div class="pearl-title">💎 SYNTAX SCORE</div>
+                    <ul>
+                        <li>Angiographic scoring system assessing CAD complexity</li>
+                        <li><strong>Low (0-22):</strong> PCI outcomes similar to CABG</li>
+                        <li><strong>Intermediate (23-32):</strong> Heart team discussion</li>
+                        <li><strong>High (&gt;32):</strong> CABG preferred (better outcomes)</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Diabetes and Revascularization (FREEDOM Trial)</div>
+                    <ul>
+                        <li><strong>FREEDOM (2012):</strong> Diabetics with multivessel CAD had better outcomes with CABG vs PCI</li>
+                        <li><strong>Lower death, MI, stroke at 5 years with CABG</strong></li>
+                        <li><strong>Key:</strong> Use LIMA to LAD (survival benefit)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 3: HEART FAILURE ======================= -->
+<section class="section" id="heart-failure">
+    <div class="section-header">
+        <h2>💔 Heart Failure</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="hfref">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Heart Failure with Reduced Ejection Fraction (HFrEF)</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACC/AHA Heart Failure Guidelines (2022 Update)</div>
+                    <strong>HF Classification by EF:</strong>
+                    <ul>
+                        <li><strong>HFrEF:</strong> EF ≤40%</li>
+                        <li><strong>HFmrEF:</strong> EF 41-49% ("mildly reduced")</li>
+                        <li><strong>HFpEF:</strong> EF ≥50%</li>
+                        <li><strong>HFimpEF:</strong> Previously reduced, now ≥40% (keep GDMT!)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Guideline-Directed Medical Therapy (GDMT) for HFrEF</div>
+                    <p><strong>Four Pillars of HFrEF Therapy — Start all simultaneously when possible:</strong></p>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Drug Class</th>
+                                <th>Examples</th>
+                                <th>Mortality Benefit</th>
+                                <th>Key Consideration</th>
+                            </tr>
+                            <tr>
+                                <td><strong>ARNI or ACEi/ARB</strong></td>
+                                <td>Sacubitril-valsartan; lisinopril, losartan</td>
+                                <td>Yes</td>
+                                <td>ARNI superior to ACEi (PARADIGM-HF); 36h washout from ACEi before ARNI</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Beta-blocker</strong></td>
+                                <td>Carvedilol, metoprolol succinate, bisoprolol</td>
+                                <td>Yes</td>
+                                <td>Only these 3 BB proven beneficial in HFrEF</td>
+                            </tr>
+                            <tr>
+                                <td><strong>MRA</strong></td>
+                                <td>Spironolactone, eplerenone</td>
+                                <td>Yes</td>
+                                <td>If EF ≤35% and NYHA II-IV; watch K+ and Cr</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SGLT2 inhibitor</strong></td>
+                                <td>Dapagliflozin, empagliflozin</td>
+                                <td>Yes</td>
+                                <td>Use regardless of diabetes status; reduces HF hospitalization</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="mnemonic">
+                    <div class="mnemonic-title">📝 FOUR PILLARS MEMORY AID</div>
+                    <div class="mnemonic-text">"ABMS" = ARNI, Beta-blocker, MRA, SGLT2i</div>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Key HFrEF Trials</div>
+                    <ul>
+                        <li><strong>PARADIGM-HF:</strong> Sacubitril-valsartan superior to enalapril (20% ↓ CV death/HF hospitalization)</li>
+                        <li><strong>DAPA-HF/EMPEROR-Reduced:</strong> SGLT2i reduces HF hospitalization + CV death (regardless of DM)</li>
+                        <li><strong>RALES/EMPHASIS-HF:</strong> MRAs reduce mortality in HFrEF</li>
+                        <li><strong>COPERNICUS/MERIT-HF:</strong> Beta-blockers reduce mortality</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Additional Therapies</div>
+                    <ul>
+                        <li><strong>Hydralazine + isosorbide dinitrate:</strong> Add if African American with NYHA III-IV on max GDMT (A-HeFT trial)</li>
+                        <li><strong>Ivabradine:</strong> If sinus rhythm, HR ≥70 despite max BB or unable to tolerate BB</li>
+                        <li><strong>Diuretics:</strong> For congestion (symptom relief, no mortality benefit)</li>
+                        <li><strong>Digoxin:</strong> May reduce HF hospitalizations (no mortality benefit; avoid toxicity)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="hfpef">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Heart Failure with Preserved Ejection Fraction (HFpEF)</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li>HF symptoms (dyspnea, edema, fatigue)</li>
+                        <li>EF ≥50%</li>
+                        <li>Evidence of diastolic dysfunction or elevated filling pressures</li>
+                        <li><strong>H2FPEF score:</strong> Predicts probability of HFpEF</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Treatment of HFpEF (2022 Guidelines)</div>
+                    <ul>
+                        <li><strong>SGLT2 inhibitors:</strong> Class IIa recommendation (EMPEROR-Preserved, DELIVER trials)</li>
+                        <li><strong>Diuretics:</strong> For congestion</li>
+                        <li><strong>Treat comorbidities:</strong> HTN, AF, CAD, obesity, sleep apnea</li>
+                        <li><strong>MRA:</strong> May be considered (TOPCAT trial — benefit in Americas subset)</li>
+                        <li><strong>ARNi:</strong> May be considered (PARAGON-HF — benefit near EF 50%)</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: SGLT2i Now Evidence-Based for HFpEF</div>
+                    <strong>EMPEROR-Preserved (2021) and DELIVER (2022):</strong> SGLT2 inhibitors reduce HF hospitalization in HFpEF. First therapies with strong evidence in this population.
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="acute-hf">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Acute Decompensated Heart Failure</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Profiles (Warm/Cold, Wet/Dry)</div>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Profile</th>
+                                <th>Congestion (Wet)</th>
+                                <th>Perfusion (Warm)</th>
+                                <th>Treatment</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Warm & Wet</strong> (most common)</td>
+                                <td>Yes</td>
+                                <td>Adequate</td>
+                                <td>Diuretics (IV loop), vasodilators if HTN</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cold & Wet</strong></td>
+                                <td>Yes</td>
+                                <td>Poor</td>
+                                <td>Inotropes + diuretics; consider MCS</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cold & Dry</strong></td>
+                                <td>No</td>
+                                <td>Poor</td>
+                                <td>Careful fluid challenge; may need inotropes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Warm & Dry</strong></td>
+                                <td>No</td>
+                                <td>Adequate</td>
+                                <td>Optimize oral meds; investigate symptoms</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diuretic Management</div>
+                    <ul>
+                        <li><strong>IV loop diuretic:</strong> Furosemide, bumetanide, or torsemide</li>
+                        <li><strong>Dose:</strong> 1-2× home oral dose as IV (or 40mg if diuretic-naïve)</li>
+                        <li><strong>Goal:</strong> Net negative 1-2 L/day; relieve congestion</li>
+                        <li><strong>Diuretic resistance:</strong> Add thiazide (metolazone), increase dose, continuous infusion</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 CARDIOGENIC SHOCK</div>
+                    <ul>
+                        <li><strong>Definition:</strong> SBP &lt;90 for &gt;30 min (or need for vasopressors) + end-organ hypoperfusion + CI &lt;2.2</li>
+                        <li><strong>Inotropes:</strong> Dobutamine (first-line), milrinone (caution in renal failure)</li>
+                        <li><strong>Vasopressors:</strong> Norepinephrine if hypotensive</li>
+                        <li><strong>Mechanical support:</strong> IABP, Impella, ECMO</li>
+                    </ul>
+                </div>
+                
+                <div class="pearl-box">
+                    <div class="pearl-title">💎 DISCHARGE CHECKLIST</div>
+                    <ul>
+                        <li>Optimized GDMT (initiate before discharge if possible)</li>
+                        <li>Stable on oral diuretics × 24h</li>
+                        <li>Weight and symptom diary education</li>
+                        <li>Follow-up within 7-14 days</li>
+                        <li>Flu + pneumococcal vaccines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="devices-hf">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Device Therapy in Heart Failure</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">ICD Indications (Primary Prevention)</div>
+                    <ul>
+                        <li><strong>EF ≤35%</strong> despite ≥3 months of GDMT</li>
+                        <li><strong>NYHA II-III</strong></li>
+                        <li><strong>Expected survival &gt;1 year</strong></li>
+                        <li><strong>Ischemic:</strong> ≥40 days post-MI</li>
+                        <li><strong>Non-ischemic:</strong> ≥3 months of GDMT</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">CRT Indications</div>
+                    <ul>
+                        <li><strong>EF ≤35%</strong></li>
+                        <li><strong>LBBB with QRS ≥150ms:</strong> Class I (strongest indication)</li>
+                        <li><strong>LBBB with QRS 120-149ms:</strong> Class IIa</li>
+                        <li><strong>Non-LBBB with QRS ≥150ms:</strong> Class IIa</li>
+                        <li><strong>QRS &lt;120ms:</strong> No benefit (harm in LESSER-EARTH)</li>
+                        <li><strong>NYHA II-IV (ambulatory) on optimal medical therapy</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: CRT Response Predictors</div>
+                    <strong>Best responders:</strong>
+                    <ul>
+                        <li>LBBB morphology</li>
+                        <li>QRS ≥150ms</li>
+                        <li>Non-ischemic cardiomyopathy</li>
+                        <li>Female sex</li>
+                    </ul>
+                    <strong>Poor responders:</strong> RV pacing-induced LBBB, ischemic scar in LV lead position
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 4: ATRIAL FIBRILLATION ======================= -->
+<section class="section" id="afib">
+    <div class="section-header">
+        <h2>💓 Atrial Fibrillation</h2>
+        <span class="icon">⚡</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="afib-management">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Rate vs Rhythm Control</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACC/AHA/HRS AF Guidelines (2023 Update)</div>
+                    <strong>Rate Control Target:</strong>
+                    <ul>
+                        <li><strong>Lenient:</strong> Resting HR &lt;110 bpm (RACE II trial — noninferior)</li>
+                        <li><strong>Strict:</strong> Resting HR &lt;80 bpm (consider if symptomatic)</li>
+                    </ul>
+                    <strong>Rate Control Agents:</strong>
+                    <ul>
+                        <li><strong>Beta-blockers:</strong> First-line (metoprolol, atenolol, carvedilol)</li>
+                        <li><strong>Non-DHP CCB:</strong> Diltiazem, verapamil (avoid in HFrEF)</li>
+                        <li><strong>Digoxin:</strong> Add-on or if HF with hypotension</li>
+                        <li><strong>Amiodarone:</strong> If above fail; more for rhythm but slows rate</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Rhythm Control Considerations</div>
+                    <ul>
+                        <li><strong>Preferred if:</strong> Symptomatic despite rate control, younger patients, first episode, tachycardia-mediated cardiomyopathy</li>
+                        <li><strong>EAST-AFNET 4 (2020):</strong> Early rhythm control (within 1 year of diagnosis) reduced CV outcomes vs rate control</li>
+                        <li><strong>Methods:</strong> Antiarrhythmic drugs, electrical cardioversion, catheter ablation</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Antiarrhythmic Drug Selection</div>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Clinical Scenario</th>
+                                <th>Preferred AAD</th>
+                                <th>Avoid</th>
+                            </tr>
+                            <tr>
+                                <td>No structural heart disease</td>
+                                <td>Flecainide, propafenone, sotalol, dronedarone</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td>CAD</td>
+                                <td>Sotalol, dofetilide, amiodarone</td>
+                                <td>Flecainide, propafenone (proarrhythmic)</td>
+                            </tr>
+                            <tr>
+                                <td>HFrEF</td>
+                                <td>Amiodarone, dofetilide</td>
+                                <td>Flecainide, propafenone, sotalol, dronedarone</td>
+                            </tr>
+                            <tr>
+                                <td>LVH (significant)</td>
+                                <td>Amiodarone</td>
+                                <td>Flecainide, propafenone, sotalol</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 DRONEDARONE BLACK BOX</div>
+                    <strong>Contraindicated in:</strong>
+                    <ul>
+                        <li>Permanent AF (PALLAS trial — increased mortality)</li>
+                        <li>NYHA III-IV HF or recent decompensation</li>
+                        <li>Severe liver injury risk</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="afib-anticoag">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Anticoagulation & Stroke Prevention</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">CHA₂DS₂-VASc Score</div>
+                    <ul>
+                        <li><strong>C</strong>HF (1)</li>
+                        <li><strong>H</strong>TN (1)</li>
+                        <li><strong>A</strong>ge ≥75 (2)</li>
+                        <li><strong>D</strong>iabetes (1)</li>
+                        <li><strong>S</strong>troke/TIA/thromboembolism (2)</li>
+                        <li><strong>V</strong>ascular disease (MI, PAD, aortic plaque) (1)</li>
+                        <li><strong>A</strong>ge 65-74 (1)</li>
+                        <li><strong>S</strong>ex category — female (1)</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Anticoagulation Recommendations</div>
+                    <ul>
+                        <li><strong>Score 0 (males) or 1 (females — sex alone):</strong> No anticoagulation</li>
+                        <li><strong>Score 1 (males):</strong> Consider anticoagulation</li>
+                        <li><strong>Score ≥2:</strong> Anticoagulation recommended</li>
+                    </ul>
+                    <strong>DOACs preferred over warfarin</strong> (unless mechanical valve or moderate-severe mitral stenosis)
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>DOAC</th>
+                            <th>Dose (AF)</th>
+                            <th>Renal Adjustment</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Apixaban</strong></td>
+                            <td>5mg BID</td>
+                            <td>2.5mg BID if ≥2 of: age ≥80, weight ≤60kg, Cr ≥1.5</td>
+                            <td>Best studied in CKD; least renal excretion</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rivaroxaban</strong></td>
+                            <td>20mg daily with dinner</td>
+                            <td>15mg daily if CrCl 15-50</td>
+                            <td>Once daily; take with food</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dabigatran</strong></td>
+                            <td>150mg BID</td>
+                            <td>75mg BID if CrCl 15-30</td>
+                            <td>Most GI upset; reversible with idarucizumab</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Edoxaban</strong></td>
+                            <td>60mg daily</td>
+                            <td>30mg daily if CrCl 15-50</td>
+                            <td>Less effective if CrCl &gt;95</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: When to Use Warfarin Instead of DOAC</div>
+                    <ul>
+                        <li><strong>Mechanical heart valve</strong> — DOACs contraindicated (RE-ALIGN trial)</li>
+                        <li><strong>Moderate-severe rheumatic mitral stenosis</strong></li>
+                        <li><strong>Antiphospholipid syndrome</strong> (especially triple positive)</li>
+                        <li><strong>Severe CKD (CrCl &lt;15) or dialysis</strong> — warfarin or apixaban per guidelines</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Left Atrial Appendage Closure</div>
+                    <ul>
+                        <li><strong>WATCHMAN device:</strong> For patients with contraindication to long-term anticoagulation</li>
+                        <li><strong>Requires anticoagulation for 45 days post-procedure</strong></li>
+                        <li><strong>Non-inferior to warfarin for stroke prevention (PROTECT AF, PREVAIL)</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="afib-cardioversion">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Cardioversion Considerations</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Anticoagulation for Cardioversion</div>
+                    <ul>
+                        <li><strong>AF &lt;48 hours:</strong> Cardiovert; start anticoagulation and continue ≥4 weeks</li>
+                        <li><strong>AF ≥48 hours or unknown duration:</strong>
+                            <ul>
+                                <li>Option 1: Anticoagulate ≥3 weeks → cardiovert → continue ≥4 weeks</li>
+                                <li>Option 2: TEE to exclude LAA thrombus → cardiovert → anticoagulate ≥4 weeks</li>
+                            </ul>
+                        </li>
+                        <li><strong>Long-term anticoagulation:</strong> Based on CHA₂DS₂-VASc (not cardioversion status)</li>
+                    </ul>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE</div>
+                    <p><strong>Scenario:</strong> Patient in AF for 2 days, hemodynamically stable. CHA₂DS₂-VASc = 4.</p>
+                    <p><strong>Answer:</strong> Can cardiovert now (AF &lt;48h). Start anticoagulation (DOAC preferred). Continue anticoagulation indefinitely due to high stroke risk.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="catheter-ablation">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Catheter Ablation for AF</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Indications for AF Ablation (2023)</div>
+                    <ul>
+                        <li><strong>Class I:</strong> Symptomatic paroxysmal AF refractory to ≥1 AAD</li>
+                        <li><strong>Class IIa:</strong> First-line therapy (before AAD) in paroxysmal AF</li>
+                        <li><strong>Class IIa:</strong> HFrEF with symptomatic AF (CASTLE-AF — mortality benefit)</li>
+                        <li><strong>Persistent AF:</strong> Less effective than paroxysmal; still reasonable</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: CASTLE-AF Trial (2018)</div>
+                    <strong>Key finding:</strong> In HFrEF + AF, catheter ablation reduced death and HF hospitalization by 38% vs medical therapy. Ablation should be strongly considered in this population.
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 5: OTHER ARRHYTHMIAS ======================= -->
+<section class="section" id="arrhythmias">
+    <div class="section-header">
+        <h2>⚡ Arrhythmias</h2>
+        <span class="icon">📈</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="svt">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Supraventricular Tachycardia</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">SVT Classification</div>
+                    <ul>
+                        <li><strong>AVNRT:</strong> Most common (60%); slow-fast pathway in AV node</li>
+                        <li><strong>AVRT:</strong> Accessory pathway (WPW if preexcitation on baseline ECG)</li>
+                        <li><strong>Atrial tachycardia:</strong> Focal or macroreentrant (atrial flutter)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Acute Management</div>
+                    <ul>
+                        <li><strong>Vagal maneuvers:</strong> Carotid massage, Valsalva (modified — blow then lie flat with legs raised)</li>
+                        <li><strong>Adenosine:</strong> 6mg rapid IV push, then 12mg if needed (use central line if available)</li>
+                        <li><strong>If adenosine fails:</strong> Diltiazem IV, beta-blocker, or cardioversion</li>
+                        <li><strong>Unstable:</strong> Synchronized cardioversion</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 WPW + AFIB</div>
+                    <strong>DO NOT give AV nodal blockers (adenosine, diltiazem, digoxin, verapamil)</strong>
+                    <ul>
+                        <li>Blocks AV node → conduction via accessory pathway → rapid ventricular response → VF</li>
+                        <li><strong>Treatment:</strong> Procainamide or cardioversion</li>
+                        <li><strong>ECG clue:</strong> Irregularly irregular wide complex tachycardia with varying QRS morphology</li>
+                    </ul>
+                </div>
+                
+                <div class="ekg-box">
+                    <div class="ekg-title">📈 WPW ECG FEATURES (Sinus Rhythm)</div>
+                    <ul>
+                        <li><strong>Delta wave:</strong> Slurred upstroke of QRS</li>
+                        <li><strong>Short PR interval:</strong> &lt;120ms</li>
+                        <li><strong>Wide QRS:</strong> Due to delta wave</li>
+                        <li><strong>Secondary ST-T changes</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="vt">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Ventricular Tachycardia</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">VT vs SVT with Aberrancy</div>
+                    <p><strong>Assume VT until proven otherwise</strong> (especially if structural heart disease)</p>
+                    <ul>
+                        <li><strong>Favors VT:</strong> AV dissociation, fusion/capture beats, QRS &gt;140ms, extreme axis deviation, precordial concordance</li>
+                        <li><strong>Favors SVT:</strong> Typical RBBB or LBBB pattern, preceding P waves</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">VT Management</div>
+                    <ul>
+                        <li><strong>Unstable:</strong> Synchronized cardioversion (100-200J biphasic)</li>
+                        <li><strong>Pulseless VT:</strong> Defibrillation + ACLS</li>
+                        <li><strong>Stable monomorphic VT:</strong> Amiodarone 150mg IV over 10 min; procainamide; cardioversion</li>
+                        <li><strong>Polymorphic VT (Torsades):</strong> IV magnesium 2g; correct QT-prolonging factors; isoproterenol/pacing if bradycardia-dependent</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Torsades de Pointes</div>
+                    <ul>
+                        <li><strong>Polymorphic VT + prolonged QT</strong></li>
+                        <li><strong>Causes:</strong> Drugs (sotalol, amiodarone, antipsychotics, antibiotics), hypokalemia, hypomagnesemia, bradycardia, congenital LQTS</li>
+                        <li><strong>Treatment:</strong> IV magnesium, correct electrolytes, stop offending drugs, overdrive pacing if refractory</li>
+                    </ul>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE</div>
+                    <p><strong>Scenario:</strong> Patient on sotalol develops syncope. ECG shows QTc 560ms with runs of polymorphic VT.</p>
+                    <p><strong>Answer:</strong> Drug-induced Torsades de Pointes. Stop sotalol, give IV magnesium 2g, correct K+ and Mg++, temporary pacing if needed.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="bradycardia">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Bradyarrhythmias</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">AV Block Classification</div>
+                    <ul>
+                        <li><strong>1st degree:</strong> PR &gt;200ms, all P waves conducted</li>
+                        <li><strong>2nd degree Mobitz I (Wenckebach):</strong> Progressive PR prolongation → dropped beat; usually AV nodal</li>
+                        <li><strong>2nd degree Mobitz II:</strong> Constant PR → sudden dropped beat; infranodal, high risk of complete block</li>
+                        <li><strong>3rd degree (complete):</strong> No relationship between P waves and QRS; requires pacing</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Pacemaker Indications</div>
+                    <strong>Class I (definite indications):</strong>
+                    <ul>
+                        <li>Symptomatic sinus node dysfunction</li>
+                        <li>Third-degree AV block (regardless of symptoms)</li>
+                        <li>Mobitz II second-degree AV block</li>
+                        <li>Symptomatic chronotropic incompetence</li>
+                        <li>Alternating bundle branch block</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Reversible Causes</div>
+                    <strong>Before permanent pacing, exclude reversible causes:</strong>
+                    <ul>
+                        <li>Drug-induced (beta-blockers, CCB, digoxin, amiodarone)</li>
+                        <li>Lyme disease (especially if young, endemic area)</li>
+                        <li>Electrolyte disturbances</li>
+                        <li>Myocardial ischemia</li>
+                        <li>Post-cardiac surgery (may resolve)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="scd">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Sudden Cardiac Death Prevention</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">ICD Indications — Secondary Prevention</div>
+                    <ul>
+                        <li>Survivors of VF or hemodynamically unstable VT</li>
+                        <li>Sustained VT with structural heart disease</li>
+                        <li>Syncope with inducible VT on EPS</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">ICD Indications — Primary Prevention</div>
+                    <ul>
+                        <li><strong>Ischemic cardiomyopathy:</strong> EF ≤35% on GDMT, ≥40 days post-MI, NYHA II-III</li>
+                        <li><strong>Non-ischemic cardiomyopathy:</strong> EF ≤35% on GDMT ≥3 months, NYHA II-III</li>
+                        <li><strong>HCM:</strong> High-risk features (family hx SCD, syncope, LVH ≥30mm, NSVT, abnormal BP response)</li>
+                        <li><strong>ARVC:</strong> Based on risk stratification</li>
+                        <li><strong>Long QT, Brugada:</strong> Based on clinical risk</li>
+                    </ul>
+                </div>
+                
+                <div class="pearl-box">
+                    <div class="pearl-title">💎 WEARABLE DEFIBRILLATOR (LifeVest)</div>
+                    <ul>
+                        <li>Bridge to ICD decision in high-risk patients</li>
+                        <li>Post-MI with low EF (reassess after 40 days)</li>
+                        <li>Newly diagnosed cardiomyopathy (reassess after 3 months GDMT)</li>
+                        <li>Post-transplant while awaiting evaluation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 6: VALVULAR HEART DISEASE ======================= -->
+<section class="section" id="valvular">
+    <div class="section-header">
+        <h2>🫀 Valvular Heart Disease</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="aortic-stenosis">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Aortic Stenosis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Severity Classification</div>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Mild</th>
+                                <th>Moderate</th>
+                                <th>Severe</th>
+                            </tr>
+                            <tr>
+                                <td>Aortic valve area (cm²)</td>
+                                <td>&gt;1.5</td>
+                                <td>1.0-1.5</td>
+                                <td>&lt;1.0</td>
+                            </tr>
+                            <tr>
+                                <td>Mean gradient (mmHg)</td>
+                                <td>&lt;20</td>
+                                <td>20-40</td>
+                                <td>&gt;40</td>
+                            </tr>
+                            <tr>
+                                <td>Peak velocity (m/s)</td>
+                                <td>&lt;3.0</td>
+                                <td>3.0-4.0</td>
+                                <td>&gt;4.0</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="mnemonic">
+                    <div class="mnemonic-title">📝 AS SYMPTOMS ("SAD")</div>
+                    <div class="mnemonic-text"><strong>S</strong>yncope (3yr survival) → <strong>A</strong>ngina (5yr) → <strong>D</strong>yspnea/HF (2yr)</div>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACC/AHA VHD Guidelines (2020)</div>
+                    <strong>Intervention Indications:</strong>
+                    <ul>
+                        <li><strong>Class I:</strong> Severe AS with symptoms</li>
+                        <li><strong>Class I:</strong> Severe AS + EF &lt;50%</li>
+                        <li><strong>Class I:</strong> Severe AS undergoing other cardiac surgery</li>
+                        <li><strong>Class IIa:</strong> Asymptomatic severe AS with very severe AS (Vmax ≥5m/s)</li>
+                        <li><strong>Class IIa:</strong> Asymptomatic severe AS with abnormal exercise test</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">SAVR vs TAVR</div>
+                    <ul>
+                        <li><strong>Low surgical risk:</strong> SAVR preferred (durability); TAVR acceptable</li>
+                        <li><strong>Intermediate risk:</strong> Either SAVR or TAVR</li>
+                        <li><strong>High/prohibitive risk:</strong> TAVR preferred</li>
+                        <li><strong>Bicuspid valve:</strong> SAVR traditionally preferred; TAVR increasingly used</li>
+                        <li><strong>Age consideration:</strong> TAVR increasingly used in older patients (≥65-70)</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Low-Flow, Low-Gradient AS</div>
+                    <ul>
+                        <li><strong>Definition:</strong> AVA &lt;1.0 cm², mean gradient &lt;40 mmHg, EF &lt;50%</li>
+                        <li><strong>Question:</strong> Is it truly severe AS or pseudosevere (valve just not opening due to low flow)?</li>
+                        <li><strong>Answer:</strong> Dobutamine stress echo — if AVA stays &lt;1.0 with increased flow → truly severe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="mitral-regurg">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Mitral Regurgitation</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Primary vs Secondary MR</div>
+                    <ul>
+                        <li><strong>Primary (degenerative):</strong> Intrinsic valve disease (prolapse, flail leaflet, rheumatic)</li>
+                        <li><strong>Secondary (functional):</strong> Normal valve with annular dilation or tethering from LV dysfunction</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Intervention for Primary MR</div>
+                    <ul>
+                        <li><strong>Class I:</strong> Severe MR with symptoms (NYHA II-IV)</li>
+                        <li><strong>Class I:</strong> Severe MR with EF 30-60% or LVESD ≥40mm</li>
+                        <li><strong>Class IIa:</strong> Severe MR, high likelihood of repair, EF &gt;60%</li>
+                    </ul>
+                    <strong>Repair preferred over replacement when feasible (especially degenerative MR)</strong>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Secondary MR Management</div>
+                    <ul>
+                        <li><strong>First-line:</strong> GDMT for HF (may reduce MR severity)</li>
+                        <li><strong>CRT:</strong> If indicated for HF (may improve MR)</li>
+                        <li><strong>MitraClip:</strong> For select patients with HFrEF + severe MR despite GDMT (COAPT trial)</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: COAPT vs MITRA-FR</div>
+                    <ul>
+                        <li><strong>COAPT (positive):</strong> MitraClip reduced HF hospitalization/death in HFrEF with severe MR</li>
+                        <li><strong>MITRA-FR (negative):</strong> No benefit</li>
+                        <li><strong>Key difference:</strong> COAPT selected "disproportionately severe MR" (MR out of proportion to LV size)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="other-valves">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Aortic Regurgitation & Mitral Stenosis</h3>
+                <span class="badge">CORE</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Aortic Regurgitation</div>
+                    <ul>
+                        <li><strong>Causes:</strong> Bicuspid valve, endocarditis, aortic root dilation, rheumatic</li>
+                        <li><strong>Physical exam:</strong> Wide pulse pressure, bounding pulses, diastolic decrescendo murmur at LUSB</li>
+                        <li><strong>Surgery indications:</strong>
+                            <ul>
+                                <li>Symptomatic severe AR</li>
+                                <li>Asymptomatic with EF ≤55%</li>
+                                <li>Asymptomatic with LVESD &gt;50mm or LVEDD &gt;65mm</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Mitral Stenosis</div>
+                    <ul>
+                        <li><strong>Most common cause:</strong> Rheumatic heart disease</li>
+                        <li><strong>Symptoms:</strong> Dyspnea, orthopnea, hemoptysis, AF, systemic emboli</li>
+                        <li><strong>Physical exam:</strong> Opening snap, low-pitched diastolic rumble at apex</li>
+                        <li><strong>Severe MS:</strong> MVA &lt;1.5 cm², mean gradient &gt;10 mmHg</li>
+                        <li><strong>Intervention:</strong> PBMV (if favorable anatomy) or surgery; anticoagulation if AF</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 MS + PREGNANCY</div>
+                    <ul>
+                        <li>High-risk condition (increased blood volume → pulmonary edema)</li>
+                        <li>Beta-blockers for rate control</li>
+                        <li>PBMV can be done during pregnancy if needed</li>
+                        <li>Screen and treat before conception if possible</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="prosthetic-valves">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Prosthetic Valve Management</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Anticoagulation for Mechanical Valves</div>
+                    <ul>
+                        <li><strong>Aortic mechanical:</strong> INR 2.0-3.0 (+ low-dose aspirin)</li>
+                        <li><strong>Mitral mechanical:</strong> INR 2.5-3.5 (+ low-dose aspirin)</li>
+                        <li><strong>DOACs are CONTRAINDICATED</strong> for mechanical valves</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Bioprosthetic Valves</div>
+                    <ul>
+                        <li><strong>Anticoagulation:</strong> Aspirin alone (some centers use warfarin × 3-6 months post-SAVR)</li>
+                        <li><strong>Post-TAVR:</strong> DAPT or aspirin + anticoagulant × 3-6 months, then aspirin alone</li>
+                        <li><strong>Durability:</strong> ~10-15 years (less in younger patients)</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Bridging Anticoagulation</div>
+                    <ul>
+                        <li><strong>High-risk (any mitral mechanical, older aortic mechanical, recent stroke/TIA):</strong> Bridge with heparin/LMWH</li>
+                        <li><strong>Low-risk (newer bileaflet aortic):</strong> May be able to hold briefly without bridging</li>
+                        <li>Consult cardiology for periprocedural management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 7: CARDIOMYOPATHY ======================= -->
+<section class="section" id="cardiomyopathy">
+    <div class="section-header">
+        <h2>💔 Cardiomyopathies</h2>
+        <span class="icon">🫀</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="hcm">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Hypertrophic Cardiomyopathy</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis & Features</div>
+                    <ul>
+                        <li><strong>Definition:</strong> LV wall thickness ≥15mm without loading condition explanation</li>
+                        <li><strong>Genetics:</strong> Autosomal dominant; sarcomere protein mutations</li>
+                        <li><strong>LVOT obstruction:</strong> Present in ~70% (dynamic; worsens with decreased preload/afterload)</li>
+                        <li><strong>Murmur:</strong> Harsh systolic crescendo-decrescendo at LLSB; increases with Valsalva/standing</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Medical Management</div>
+                    <ul>
+                        <li><strong>Beta-blockers:</strong> First-line for symptoms</li>
+                        <li><strong>Non-DHP CCB (verapamil):</strong> If beta-blocker intolerant</li>
+                        <li><strong>Disopyramide:</strong> Add for refractory symptoms with obstruction</li>
+                        <li><strong>Mavacamten:</strong> Cardiac myosin inhibitor (EXPLORER-HCM) — reduces LVOT gradient</li>
+                        <li><strong>Avoid:</strong> Vasodilators, diuretics, high-dose diuretics, digoxin</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 SCD RISK STRATIFICATION IN HCM</div>
+                    <strong>ICD if any major risk factor:</strong>
+                    <ul>
+                        <li>Prior cardiac arrest or sustained VT</li>
+                        <li>Family history of SCD from HCM</li>
+                        <li>Maximum LV wall thickness ≥30mm</li>
+                        <li>Unexplained syncope</li>
+                        <li>NSVT on monitoring</li>
+                        <li>LV apical aneurysm</li>
+                        <li>EF &lt;50%</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Interventions for Obstruction</div>
+                    <ul>
+                        <li><strong>Septal reduction therapy:</strong> If drug-refractory symptoms + LVOT gradient ≥50 mmHg</li>
+                        <li><strong>Surgical myectomy:</strong> Gold standard; mortality &lt;1% at experienced centers</li>
+                        <li><strong>Alcohol septal ablation:</strong> Alternative if high surgical risk or patient preference</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="other-cm">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Dilated, Restrictive & Other Cardiomyopathies</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Dilated Cardiomyopathy</div>
+                    <ul>
+                        <li><strong>Causes:</strong> Idiopathic, familial (30-50%), ischemic, viral, alcohol, peripartum, toxins (doxorubicin), tachycardia-mediated</li>
+                        <li><strong>Workup:</strong> Echo, coronary evaluation (angiography or CTA), consider MRI, genetic testing if familial</li>
+                        <li><strong>Treatment:</strong> GDMT for HFrEF; treat underlying cause</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Restrictive Cardiomyopathy</div>
+                    <ul>
+                        <li><strong>Features:</strong> Impaired filling, normal/small ventricles, preserved EF initially</li>
+                        <li><strong>Causes:</strong> Amyloidosis (most common), hemochromatosis, sarcoidosis, radiation, endomyocardial fibrosis</li>
+                        <li><strong>Distinguish from constrictive pericarditis:</strong> Similar hemodynamics; MRI, CT, cath helpful</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Cardiac Amyloidosis</div>
+                    <ul>
+                        <li><strong>AL amyloidosis:</strong> Light chain (plasma cell dyscrasia); poor prognosis; treat underlying disease</li>
+                        <li><strong>ATTR (transthyretin):</strong> Wild-type (elderly) or hereditary; better prognosis</li>
+                        <li><strong>Tafamidis:</strong> TTR stabilizer; improves outcomes in ATTR-CM (ATTR-ACT trial)</li>
+                        <li><strong>Diagnosis:</strong> Technetium pyrophosphate scan (positive in ATTR, negative in AL); biopsy if needed</li>
+                        <li><strong>Avoid digoxin:</strong> Binds amyloid fibrils → toxicity</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Takotsubo (Stress) Cardiomyopathy</div>
+                    <ul>
+                        <li><strong>Trigger:</strong> Emotional or physical stress</li>
+                        <li><strong>Features:</strong> Apical ballooning, troponin elevation out of proportion to coronary disease</li>
+                        <li><strong>Angiography:</strong> Normal or non-obstructive coronaries</li>
+                        <li><strong>Prognosis:</strong> Usually resolves in weeks; supportive care</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Arrhythmogenic RV Cardiomyopathy (ARVC)</div>
+                    <ul>
+                        <li><strong>Features:</strong> Fibrofatty replacement of RV; VT (often LBBB morphology)</li>
+                        <li><strong>ECG:</strong> Epsilon wave, T-wave inversions V1-V3</li>
+                        <li><strong>Diagnosis:</strong> Task Force criteria (MRI, echo, ECG, arrhythmias, family history)</li>
+                        <li><strong>Management:</strong> Avoid competitive sports; beta-blockers; ICD if high risk</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 8: PERICARDIAL DISEASE ======================= -->
+<section class="section" id="pericardial">
+    <div class="section-header">
+        <h2>💓 Pericardial Disease</h2>
+        <span class="icon">🫀</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="pericarditis">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Acute Pericarditis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis (2 of 4 criteria)</div>
+                    <ul>
+                        <li>Chest pain (sharp, pleuritic, positional — better leaning forward)</li>
+                        <li>Pericardial friction rub</li>
+                        <li>ECG changes (diffuse ST elevation, PR depression)</li>
+                        <li>New or worsening pericardial effusion</li>
+                    </ul>
+                </div>
+                
+                <div class="ekg-box">
+                    <div class="ekg-title">📈 PERICARDITIS ECG</div>
+                    <ul>
+                        <li><strong>Diffuse ST elevation</strong> (concave up, "smiley face")</li>
+                        <li><strong>PR depression</strong> (most specific finding)</li>
+                        <li><strong>No reciprocal changes</strong> (unlike STEMI)</li>
+                        <li><strong>Spodick sign:</strong> Downsloping TP segment</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Treatment (ESC 2015)</div>
+                    <ul>
+                        <li><strong>First-line:</strong> NSAIDs (ibuprofen 600mg TID or aspirin 750-1000mg TID) × 1-2 weeks + colchicine × 3 months</li>
+                        <li><strong>Colchicine:</strong> Reduces recurrence by 50% (COPE, ICAP trials)</li>
+                        <li><strong>Post-MI pericarditis:</strong> Aspirin preferred; avoid high-dose NSAIDs (impair healing)</li>
+                        <li><strong>Corticosteroids:</strong> AVOID if possible (increase recurrence); use only if refractory or contraindication to NSAIDs/colchicine</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: High-Risk Features</div>
+                    <ul>
+                        <li>Fever &gt;38°C</li>
+                        <li>Subacute onset</li>
+                        <li>Large effusion or tamponade</li>
+                        <li>Failure to respond to NSAIDs within 1 week</li>
+                        <li>Immunocompromised</li>
+                        <li>Trauma</li>
+                        <li>Anticoagulation use</li>
+                    </ul>
+                    <strong>Consider hospitalization and further workup for underlying cause.</strong>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="tamponade">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Cardiac Tamponade</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 CARDIAC TAMPONADE</div>
+                    <strong>Clinical triad (Beck's triad):</strong>
+                    <ul>
+                        <li>Hypotension</li>
+                        <li>Jugular venous distension</li>
+                        <li>Muffled heart sounds</li>
+                    </ul>
+                    <strong>Other findings:</strong> Pulsus paradoxus (&gt;10 mmHg drop in SBP with inspiration), tachycardia
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Echo Findings</div>
+                    <ul>
+                        <li>RA systolic collapse</li>
+                        <li>RV diastolic collapse (more specific)</li>
+                        <li>IVC plethora (no respiratory variation)</li>
+                        <li>Respiratory variation in mitral/tricuspid inflow</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Management</div>
+                    <ul>
+                        <li><strong>Unstable:</strong> Emergent pericardiocentesis</li>
+                        <li><strong>Stable:</strong> Urgent drainage (echo-guided or surgical)</li>
+                        <li><strong>Volume resuscitation:</strong> May temporize while preparing for drainage</li>
+                        <li><strong>Avoid:</strong> Diuretics, positive pressure ventilation (reduce preload)</li>
+                    </ul>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE</div>
+                    <p><strong>Scenario:</strong> Post-cardiac surgery patient with hypotension, JVD, clear lungs, pulsus paradoxus. Echo shows moderate effusion with RV diastolic collapse.</p>
+                    <p><strong>Answer:</strong> Cardiac tamponade. Emergent pericardiocentesis or surgical drainage.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="constrictive">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Constrictive Pericarditis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li>Right-sided HF symptoms (edema, ascites, JVD)</li>
+                        <li><strong>Kussmaul's sign:</strong> JVP increases (or fails to decrease) with inspiration</li>
+                        <li><strong>Pericardial knock:</strong> Early diastolic sound</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Distinguishing from Restrictive Cardiomyopathy</div>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Constrictive</th>
+                                <th>Restrictive</th>
+                            </tr>
+                            <tr>
+                                <td>Pericardial thickening</td>
+                                <td>Present</td>
+                                <td>Absent</td>
+                            </tr>
+                            <tr>
+                                <td>Ventricular interdependence</td>
+                                <td>Present (septal bounce)</td>
+                                <td>Absent</td>
+                            </tr>
+                            <tr>
+                                <td>Respiratory variation in E velocity</td>
+                                <td>≥25%</td>
+                                <td>&lt;15%</td>
+                            </tr>
+                            <tr>
+                                <td>BNP</td>
+                                <td>Normal or mildly elevated</td>
+                                <td>Markedly elevated</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Treatment</div>
+                    <ul>
+                        <li><strong>Definitive:</strong> Pericardiectomy (surgical removal of pericardium)</li>
+                        <li><strong>Medical:</strong> Diuretics for congestion; anti-inflammatory therapy if active inflammation</li>
+                        <li><strong>Trial of anti-inflammatory:</strong> Consider in subacute/transient constriction (may resolve)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 9: HYPERTENSION ======================= -->
+<section class="section" id="hypertension">
+    <div class="section-header">
+        <h2>📊 Hypertension</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="htn-dx">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Diagnosis & Classification</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACC/AHA HTN Guidelines (2017)</div>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Category</th>
+                                <th>Systolic</th>
+                                <th>Diastolic</th>
+                            </tr>
+                            <tr>
+                                <td>Normal</td>
+                                <td>&lt;120</td>
+                                <td>&lt;80</td>
+                            </tr>
+                            <tr>
+                                <td>Elevated</td>
+                                <td>120-129</td>
+                                <td>&lt;80</td>
+                            </tr>
+                            <tr>
+                                <td>Stage 1 HTN</td>
+                                <td>130-139</td>
+                                <td>80-89</td>
+                            </tr>
+                            <tr>
+                                <td>Stage 2 HTN</td>
+                                <td>≥140</td>
+                                <td>≥90</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">BP Targets</div>
+                    <ul>
+                        <li><strong>General:</strong> &lt;130/80 (if 10-year ASCVD risk ≥10% or known CVD, DM, CKD)</li>
+                        <li><strong>Lower risk:</strong> &lt;130/80 reasonable; &lt;140/90 minimum</li>
+                        <li><strong>SPRINT trial:</strong> Intensive (&lt;120) reduced CV events vs standard (&lt;140) in high-risk patients</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="htn-rx">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Antihypertensive Selection</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">First-Line Agents</div>
+                    <ul>
+                        <li><strong>Thiazides:</strong> Chlorthalidone, hydrochlorothiazide, indapamide</li>
+                        <li><strong>ACEi/ARB:</strong> Especially with DM, CKD (proteinuria), HF</li>
+                        <li><strong>CCB:</strong> Amlodipine, nifedipine; especially in African Americans</li>
+                    </ul>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Comorbidity</th>
+                            <th>Preferred Agents</th>
+                        </tr>
+                        <tr>
+                            <td>HFrEF</td>
+                            <td>ACEi/ARB/ARNI, beta-blocker, MRA, diuretic</td>
+                        </tr>
+                        <tr>
+                            <td>CKD with proteinuria</td>
+                            <td>ACEi or ARB (renoprotective)</td>
+                        </tr>
+                        <tr>
+                            <td>Post-MI</td>
+                            <td>ACEi/ARB, beta-blocker</td>
+                        </tr>
+                        <tr>
+                            <td>Diabetes</td>
+                            <td>ACEi or ARB</td>
+                        </tr>
+                        <tr>
+                            <td>African American (no CKD)</td>
+                            <td>Thiazide or CCB (ACEi/ARB less effective)</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Resistant HTN</div>
+                    <ul>
+                        <li><strong>Definition:</strong> BP above goal despite 3 drugs (including diuretic) at optimal doses</li>
+                        <li><strong>Rule out:</strong> Non-adherence, white coat HTN, secondary causes</li>
+                        <li><strong>Add-on:</strong> Spironolactone (PATHWAY-2 trial — most effective 4th agent)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="htn-emergency">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Hypertensive Emergency</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 HYPERTENSIVE EMERGENCY</div>
+                    <strong>Definition:</strong> Severe HTN + acute end-organ damage (encephalopathy, AKI, pulmonary edema, aortic dissection, MI, stroke)
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Treatment Principles</div>
+                    <ul>
+                        <li><strong>Goal:</strong> Reduce MAP by 20-25% in first hour (except aortic dissection — faster)</li>
+                        <li><strong>IV agents:</strong> Nicardipine, labetalol, nitroprusside, clevidipine, esmolol</li>
+                        <li><strong>Aortic dissection:</strong> Beta-blocker FIRST (reduce dP/dt), then vasodilator; target SBP &lt;120 and HR &lt;60</li>
+                        <li><strong>Avoid:</strong> Rapid reduction (risk of ischemia)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 10: LIPIDS ======================= -->
+<section class="section" id="lipids">
+    <div class="section-header">
+        <h2>💊 Lipid Management</h2>
+        <span class="icon">📊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="statin-therapy">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Statin Therapy</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACC/AHA Cholesterol Guidelines (2018)</div>
+                    <strong>High-Intensity Statin (↓LDL ≥50%):</strong>
+                    <ul>
+                        <li>Clinical ASCVD</li>
+                        <li>LDL ≥190 mg/dL</li>
+                        <li>Diabetes age 40-75 with ASCVD risk factors</li>
+                    </ul>
+                    <strong>Moderate-Intensity Statin (↓LDL 30-49%):</strong>
+                    <ul>
+                        <li>Diabetes age 40-75</li>
+                        <li>10-year ASCVD risk ≥7.5% (use risk calculator)</li>
+                    </ul>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Intensity</th>
+                            <th>Options</th>
+                        </tr>
+                        <tr>
+                            <td>High</td>
+                            <td>Atorvastatin 40-80mg, rosuvastatin 20-40mg</td>
+                        </tr>
+                        <tr>
+                            <td>Moderate</td>
+                            <td>Atorvastatin 10-20mg, rosuvastatin 5-10mg, simvastatin 20-40mg, pravastatin 40mg</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: LDL Goals (2018 Multisociety)</div>
+                    <ul>
+                        <li><strong>Very high-risk ASCVD:</strong> LDL goal &lt;70 mg/dL</li>
+                        <li><strong>If on max statin and LDL ≥70:</strong> Add ezetimibe</li>
+                        <li><strong>If still ≥70 (or ≥100 for high-risk):</strong> Add PCSK9 inhibitor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="non-statin">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Non-Statin Therapies</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Ezetimibe</div>
+                    <ul>
+                        <li>Inhibits intestinal cholesterol absorption</li>
+                        <li>↓LDL 15-20% additional when added to statin</li>
+                        <li><strong>IMPROVE-IT:</strong> Reduced CV events post-ACS when added to statin</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">PCSK9 Inhibitors</div>
+                    <ul>
+                        <li><strong>Agents:</strong> Evolocumab, alirocumab (injectable q2 weeks or monthly)</li>
+                        <li>↓LDL 50-60% additional</li>
+                        <li><strong>FOURIER, ODYSSEY:</strong> Reduced CV events in ASCVD patients</li>
+                        <li><strong>Indications:</strong> ASCVD not at goal on max statin + ezetimibe; familial hypercholesterolemia</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Bempedoic Acid</div>
+                    <ul>
+                        <li>ACL inhibitor (upstream of HMG-CoA reductase)</li>
+                        <li>Oral agent; can use with statin intolerance</li>
+                        <li>↓LDL 15-25%</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Hypertriglyceridemia</div>
+                    <ul>
+                        <li><strong>TG 150-499:</strong> Lifestyle; optimize statin</li>
+                        <li><strong>TG 500-999:</strong> Consider fibrate or omega-3</li>
+                        <li><strong>TG ≥1000:</strong> Fibrate to prevent pancreatitis; very low fat diet</li>
+                        <li><strong>Icosapent ethyl (EPA):</strong> REDUCE-IT trial — reduced CV events in ASCVD + TG 150-499 on statin</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 11: PULMONARY HYPERTENSION ======================= -->
+<section class="section" id="pulm-htn">
+    <div class="section-header">
+        <h2>🫁 Pulmonary Hypertension</h2>
+        <span class="icon">💓</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="ph-classification">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Classification & Diagnosis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 WHO Classification</div>
+                    <ul>
+                        <li><strong>Group 1 (PAH):</strong> Idiopathic, heritable, drug/toxin, CTD, HIV, portal HTN</li>
+                        <li><strong>Group 2:</strong> Left heart disease (most common)</li>
+                        <li><strong>Group 3:</strong> Lung disease/hypoxia (COPD, ILD, OSA)</li>
+                        <li><strong>Group 4:</strong> CTEPH (chronic thromboembolic PH)</li>
+                        <li><strong>Group 5:</strong> Multifactorial/unclear (sarcoid, myeloproliferative)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Hemodynamic Definitions (RHC)</div>
+                    <ul>
+                        <li><strong>PH:</strong> Mean PAP &gt;20 mmHg</li>
+                        <li><strong>Precapillary (PAH):</strong> mPAP &gt;20, PCWP ≤15, PVR ≥3 WU</li>
+                        <li><strong>Postcapillary (LHD):</strong> mPAP &gt;20, PCWP &gt;15</li>
+                        <li><strong>Combined:</strong> mPAP &gt;20, PCWP &gt;15, PVR ≥3 WU</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Vasoreactivity Testing</div>
+                    <ul>
+                        <li><strong>Done in Group 1 PAH only</strong></li>
+                        <li><strong>Positive response:</strong> ↓mPAP ≥10 mmHg to ≤40 mmHg with normal/increased CO</li>
+                        <li><strong>~10% are responders:</strong> May use high-dose CCB (only in responders!)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="pah-rx">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>PAH Treatment</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Pathway</th>
+                            <th>Agents</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Endothelin receptor antagonist</strong></td>
+                            <td>Ambrisentan, bosentan, macitentan</td>
+                            <td>Bosentan: hepatotoxicity, drug interactions</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PDE-5 inhibitor</strong></td>
+                            <td>Sildenafil, tadalafil</td>
+                            <td>Also used in Group 2 (off-label)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>sGC stimulator</strong></td>
+                            <td>Riociguat</td>
+                            <td>Contraindicated with PDE-5i; approved for CTEPH</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prostacyclin pathway</strong></td>
+                            <td>Epoprostenol (IV), treprostinil, iloprost, selexipag</td>
+                            <td>Epoprostenol = most potent; continuous IV</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 DO NOT USE PAH DRUGS FOR GROUP 2 PH</div>
+                    PAH-specific therapies are NOT beneficial (and may be harmful) in PH due to left heart disease. Treat underlying cardiac condition.
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">CTEPH (Group 4)</div>
+                    <ul>
+                        <li><strong>Surgical pulmonary thromboendarterectomy (PTE):</strong> Potentially curative; evaluate all patients</li>
+                        <li><strong>Balloon pulmonary angioplasty:</strong> If inoperable</li>
+                        <li><strong>Medical:</strong> Riociguat if inoperable or persistent PH post-surgery</li>
+                        <li><strong>Lifelong anticoagulation</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 12: AORTIC DISEASE ======================= -->
+<section class="section" id="aortic">
+    <div class="section-header">
+        <h2>🩺 Aortic Disease</h2>
+        <span class="icon">❤️</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="dissection">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Aortic Dissection</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 SURGICAL EMERGENCY (TYPE A)</div>
+                    <strong>Type A (Stanford):</strong> Involves ascending aorta → surgery immediately<br>
+                    <strong>Type B:</strong> Descending only → medical management unless complicated
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li><strong>Classic presentation:</strong> Sudden, severe, "tearing" chest/back pain</li>
+                        <li><strong>Pulse deficits:</strong> Unequal arm BPs</li>
+                        <li><strong>Aortic regurgitation:</strong> If dissection extends to aortic root</li>
+                        <li><strong>Complications:</strong> MI (RCA involvement), stroke, limb ischemia, tamponade</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Medical Management</div>
+                    <ul>
+                        <li><strong>Beta-blocker FIRST:</strong> Reduce heart rate (&lt;60) and dP/dt before vasodilators</li>
+                        <li><strong>Target SBP:</strong> &lt;120 mmHg</li>
+                        <li><strong>IV esmolol or labetalol</strong></li>
+                        <li><strong>Add vasodilator if needed:</strong> Nicardipine, nitroprusside (only after beta-blocker)</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Type B Complications Requiring Intervention</div>
+                    <ul>
+                        <li>Malperfusion (renal, mesenteric, limb ischemia)</li>
+                        <li>Rupture or impending rupture</li>
+                        <li>Refractory pain or hypertension</li>
+                        <li>Rapid expansion</li>
+                    </ul>
+                    <strong>Treatment:</strong> TEVAR (thoracic endovascular repair) preferred
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="aneurysm">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Aortic Aneurysm</h3>
+                <span class="badge">CORE</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Thoracic Aortic Aneurysm (TAA)</div>
+                    <ul>
+                        <li><strong>Screening:</strong> First-degree relatives of patients with TAA or bicuspid aortic valve</li>
+                        <li><strong>Surgical threshold:</strong> ≥5.5 cm (≥5.0 in Marfan or bicuspid with risk factors)</li>
+                        <li><strong>Medical:</strong> BP control (beta-blocker preferred), statin, lifestyle</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Abdominal Aortic Aneurysm (AAA)</div>
+                    <ul>
+                        <li><strong>Screening:</strong> One-time ultrasound for men 65-75 who ever smoked</li>
+                        <li><strong>Repair threshold:</strong> ≥5.5 cm (or ≥5.0 in women), or rapid expansion (&gt;0.5 cm/6 months)</li>
+                        <li><strong>Symptomatic:</strong> Urgent repair regardless of size</li>
+                        <li><strong>EVAR vs open:</strong> Similar long-term survival; EVAR lower perioperative mortality but more reinterventions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 13-17: PAD, VTE, DEVICES, IMAGING, PERIOP ======================= -->
+<section class="section" id="pad">
+    <div class="section-header">
+        <h2>🦵 Peripheral Arterial Disease</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="pad-dx">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>PAD Diagnosis & Management</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Ankle-Brachial Index (ABI)</div>
+                    <ul>
+                        <li><strong>Normal:</strong> 1.0-1.4</li>
+                        <li><strong>Borderline:</strong> 0.91-0.99</li>
+                        <li><strong>Abnormal (PAD):</strong> ≤0.90</li>
+                        <li><strong>Severe PAD:</strong> &lt;0.40</li>
+                        <li><strong>Non-compressible:</strong> &gt;1.40 (calcified vessels; need toe pressures)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Management</div>
+                    <ul>
+                        <li><strong>Cardiovascular risk reduction:</strong> Smoking cessation, statin, antiplatelet, BP control</li>
+                        <li><strong>Claudication:</strong> Supervised exercise therapy (first-line), cilostazol</li>
+                        <li><strong>Critical limb ischemia:</strong> Revascularization (endovascular or surgical)</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: COMPASS Trial</div>
+                    <strong>Rivaroxaban 2.5mg BID + aspirin</strong> reduced MACE and major limb events in stable PAD/CAD compared to aspirin alone. Consider in high-risk PAD patients.
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<section class="section" id="vte">
+    <div class="section-header">
+        <h2>🩸 Venous Thromboembolism</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="vte-rx">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>VTE Treatment</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 CHEST Guidelines / ASH 2020</div>
+                    <strong>Initial anticoagulation:</strong>
+                    <ul>
+                        <li><strong>DOACs preferred</strong> over warfarin for most patients</li>
+                        <li><strong>Rivaroxaban or apixaban:</strong> Can start without parenteral lead-in</li>
+                        <li><strong>Dabigatran or edoxaban:</strong> Require 5-10 days parenteral first</li>
+                        <li><strong>Exceptions (use warfarin):</strong> Antiphospholipid syndrome, severe renal impairment</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Duration of Anticoagulation</div>
+                    <ul>
+                        <li><strong>Provoked (surgery, immobilization):</strong> 3 months</li>
+                        <li><strong>Unprovoked:</strong> ≥3 months, then reassess for extended therapy</li>
+                        <li><strong>Active cancer:</strong> LMWH or DOAC (edoxaban, rivaroxaban) indefinitely while cancer active</li>
+                        <li><strong>Recurrent unprovoked VTE:</strong> Indefinite anticoagulation</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: IVC Filter Indications</div>
+                    <ul>
+                        <li><strong>Absolute contraindication to anticoagulation</strong> with acute VTE</li>
+                        <li><strong>Failure of anticoagulation</strong> (recurrent PE despite therapeutic AC)</li>
+                        <li><strong>NOT indicated:</strong> Prophylaxis alone, chronic PE, to allow surgery</li>
+                        <li><strong>Retrievable filters:</strong> Should be removed when no longer needed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<section class="section" id="devices">
+    <div class="section-header">
+        <h2>🔌 Cardiac Devices</h2>
+        <span class="icon">💓</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="pacemaker-modes">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Pacemaker Modes & Indications</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Pacemaker Nomenclature (NBG Code)</div>
+                    <ul>
+                        <li><strong>1st letter:</strong> Chamber paced (A, V, D=dual)</li>
+                        <li><strong>2nd letter:</strong> Chamber sensed (A, V, D, O=none)</li>
+                        <li><strong>3rd letter:</strong> Response to sensing (I=inhibit, T=trigger, D=both)</li>
+                        <li><strong>4th letter:</strong> Rate modulation (R=rate responsive)</li>
+                    </ul>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Mode</th>
+                            <th>Description</th>
+                            <th>Indications</th>
+                        </tr>
+                        <tr>
+                            <td><strong>VVI</strong></td>
+                            <td>Ventricular pacing, sensing, inhibited</td>
+                            <td>Chronic AF with slow ventricular response</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AAI</strong></td>
+                            <td>Atrial pacing/sensing, inhibited</td>
+                            <td>Sinus node dysfunction with intact AV conduction</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DDD</strong></td>
+                            <td>Dual chamber pacing/sensing</td>
+                            <td>AV block, maintains AV synchrony</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DDI</strong></td>
+                            <td>Dual pacing, dual sensing, inhibited only</td>
+                            <td>Paroxysmal AF (prevents tracking fast atrial rates)</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Pacemaker Syndrome</div>
+                    <ul>
+                        <li><strong>Definition:</strong> Symptoms from loss of AV synchrony (VVI mode pacing with intact atrial contraction)</li>
+                        <li><strong>Symptoms:</strong> Fatigue, dyspnea, pulsations in neck ("cannon A waves"), hypotension</li>
+                        <li><strong>Treatment:</strong> Upgrade to dual-chamber (DDD) pacing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="icd-crt">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>ICD & CRT Summary</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">ICD Primary Prevention Indications</div>
+                    <ul>
+                        <li><strong>Ischemic CMP:</strong> EF ≤35%, NYHA II-III, ≥40 days post-MI, on GDMT</li>
+                        <li><strong>Non-ischemic CMP:</strong> EF ≤35%, NYHA II-III, ≥3 months GDMT</li>
+                        <li><strong>HCM:</strong> High-risk features (see HCM section)</li>
+                        <li><strong>Expected survival &gt;1 year</strong> with good functional status</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">CRT Indications</div>
+                    <ul>
+                        <li><strong>EF ≤35%</strong> + NYHA II-IV</li>
+                        <li><strong>LBBB + QRS ≥150ms:</strong> Class I (strongest indication)</li>
+                        <li><strong>LBBB + QRS 120-149ms:</strong> Class IIa</li>
+                        <li><strong>Non-LBBB + QRS ≥150ms:</strong> Class IIa</li>
+                        <li><strong>QRS &lt;120ms:</strong> No benefit</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 DEVICE COMPLICATIONS</div>
+                    <ul>
+                        <li><strong>Lead dislodgement:</strong> Early post-implant; loss of capture/sensing</li>
+                        <li><strong>Pocket infection:</strong> Device removal required</li>
+                        <li><strong>Lead endocarditis:</strong> S. aureus most common; requires extraction</li>
+                        <li><strong>Inappropriate shocks:</strong> Common in ICDs; treat underlying cause (AF, lead fracture)</li>
+                        <li><strong>Twiddler syndrome:</strong> Patient manipulation of device causing lead displacement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<section class="section" id="imaging">
+    <div class="section-header">
+        <h2>📷 Cardiac Imaging</h2>
+        <span class="icon">🔬</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="echo">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Echocardiography</h3>
+                <span class="badge">CORE</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">TTE vs TEE</div>
+                    <ul>
+                        <li><strong>TEE preferred for:</strong> Endocarditis (vegetations, abscesses), LAA thrombus, prosthetic valve evaluation, aortic dissection, intracardiac shunts</li>
+                        <li><strong>TTE sufficient for:</strong> LV function, wall motion, pericardial effusion, most valve assessments</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Key Hemodynamic Calculations</div>
+                    <ul>
+                        <li><strong>LVEF:</strong> (EDV - ESV) / EDV × 100</li>
+                        <li><strong>Continuity equation (AVA):</strong> AVA = (LVOT area × LVOT VTI) / AV VTI</li>
+                        <li><strong>PASP:</strong> 4(TR velocity)² + RAP</li>
+                        <li><strong>E/e' ratio:</strong> Estimates LV filling pressures (&gt;14 = elevated)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="cardiac-mri">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Cardiac MRI</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Indications</div>
+                    <ul>
+                        <li><strong>Cardiomyopathy evaluation:</strong> Distinguish ischemic vs non-ischemic (scar pattern)</li>
+                        <li><strong>Myocarditis:</strong> Edema, late gadolinium enhancement (LGE) in non-coronary distribution</li>
+                        <li><strong>Infiltrative disease:</strong> Amyloid, sarcoid, hemochromatosis</li>
+                        <li><strong>ARVC diagnosis:</strong> RV fat/fibrosis, wall motion abnormalities</li>
+                        <li><strong>Constrictive vs restrictive</strong></li>
+                        <li><strong>Viability assessment:</strong> Transmural vs subendocardial scar</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: LGE Patterns</div>
+                    <ul>
+                        <li><strong>Subendocardial/transmural (coronary distribution):</strong> Ischemic cardiomyopathy</li>
+                        <li><strong>Mid-wall (septal):</strong> Dilated cardiomyopathy, myocarditis</li>
+                        <li><strong>Epicardial/patchy:</strong> Myocarditis, sarcoidosis</li>
+                        <li><strong>Diffuse subendocardial:</strong> Amyloidosis</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 MRI CONTRAINDICATIONS</div>
+                    <ul>
+                        <li><strong>Absolute:</strong> Non-MRI compatible devices (older pacemakers/ICDs), metallic foreign body in eye</li>
+                        <li><strong>Gadolinium:</strong> Avoid if eGFR &lt;30 (nephrogenic systemic fibrosis risk)</li>
+                        <li><strong>MRI-conditional devices:</strong> May be scanned under specific conditions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="cardiac-ct">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Cardiac CT</h3>
+                <span class="badge">CORE</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Coronary CT Angiography (CCTA)</div>
+                    <ul>
+                        <li><strong>Excellent negative predictive value:</strong> Rules out significant CAD</li>
+                        <li><strong>Best for:</strong> Low-intermediate risk chest pain, acute chest pain in ED</li>
+                        <li><strong>Limitations:</strong> Heavy calcification, fast/irregular heart rate, obesity</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Coronary Artery Calcium (CAC) Score</div>
+                    <ul>
+                        <li><strong>0:</strong> Very low risk</li>
+                        <li><strong>1-99:</strong> Mild plaque</li>
+                        <li><strong>100-399:</strong> Moderate plaque</li>
+                        <li><strong>≥400:</strong> Severe plaque; consider high-intensity statin</li>
+                    </ul>
+                    <p><strong>Use:</strong> Risk stratification in intermediate-risk patients (borderline indication for statin)</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<section class="section" id="periop">
+    <div class="section-header">
+        <h2>🏥 Perioperative Cardiac Evaluation</h2>
+        <span class="icon">📋</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="periop-risk">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Risk Stratification & Testing</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACC/AHA Perioperative Guidelines (2014)</div>
+                    <strong>Stepwise Approach:</strong>
+                    <ol>
+                        <li><strong>Emergency surgery:</strong> Proceed to OR; optimize postop</li>
+                        <li><strong>Active cardiac conditions?</strong> (ACS, decompensated HF, significant arrhythmia, severe VHD) → Delay for evaluation/treatment</li>
+                        <li><strong>Low-risk surgery:</strong> Proceed without testing (cataract, superficial)</li>
+                        <li><strong>Functional capacity ≥4 METs?</strong> → Proceed without testing</li>
+                        <li><strong>&lt;4 METs or unknown:</strong> Calculate risk (RCRI); test if elevated risk AND results will change management</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">RCRI (Revised Cardiac Risk Index)</div>
+                    <ul>
+                        <li>High-risk surgery (intraperitoneal, intrathoracic, vascular)</li>
+                        <li>History of ischemic heart disease</li>
+                        <li>History of HF</li>
+                        <li>History of cerebrovascular disease</li>
+                        <li>Diabetes on insulin</li>
+                        <li>Creatinine &gt;2.0</li>
+                    </ul>
+                    <p><strong>0 points:</strong> 0.4% MACE; <strong>1:</strong> 1%; <strong>2:</strong> 2.4%; <strong>≥3:</strong> 5.4%</p>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Perioperative Beta-Blockers</div>
+                    <ul>
+                        <li><strong>Continue if already on beta-blocker</strong> (Class I)</li>
+                        <li><strong>Do NOT start beta-blocker day of surgery</strong> (POISE trial — increased stroke/death)</li>
+                        <li><strong>May start days-weeks before surgery</strong> with titration if intermediate-high risk</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="periop-meds">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Perioperative Medication Management</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Medication</th>
+                            <th>Recommendation</th>
+                        </tr>
+                        <tr>
+                            <td>Beta-blockers</td>
+                            <td>Continue</td>
+                        </tr>
+                        <tr>
+                            <td>Statins</td>
+                            <td>Continue (reduces periop MI)</td>
+                        </tr>
+                        <tr>
+                            <td>ACEi/ARB</td>
+                            <td>Hold morning of surgery (risk of hypotension)</td>
+                        </tr>
+                        <tr>
+                            <td>Aspirin (primary prevention)</td>
+                            <td>Hold 7 days before</td>
+                        </tr>
+                        <tr>
+                            <td>Aspirin (stent &lt;6 weeks)</td>
+                            <td>Continue (very high stent thrombosis risk)</td>
+                        </tr>
+                        <tr>
+                            <td>P2Y12 inhibitor</td>
+                            <td>Hold 5-7 days (clopidogrel/ticagrelor) or 7 days (prasugrel)</td>
+                        </tr>
+                        <tr>
+                            <td>Warfarin</td>
+                            <td>Hold 5 days; bridge per risk</td>
+                        </tr>
+                        <tr>
+                            <td>DOACs</td>
+                            <td>Hold 24-48h (longer if renal impairment or high bleeding risk)</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 STENT THROMBOSIS RISK</div>
+                    <strong>Elective surgery timing after stent:</strong>
+                    <ul>
+                        <li><strong>BMS:</strong> Delay ≥30 days (ideally 3 months)</li>
+                        <li><strong>DES (newer generation):</strong> Delay ≥3-6 months</li>
+                        <li><strong>High-risk (ACS, left main, bifurcation):</strong> Delay 12 months if possible</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+</main>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<footer>
+    <h3>❤️ ABIM Cardiology Study Guide</h3>
+    <p style="opacity: 0.9; font-size: 0.9rem;">Evidence-based content from ACC/AHA/ESC Guidelines</p>
+    <p style="opacity: 0.7; font-size: 0.8rem; margin-top: 10px;">For educational purposes only. Verify all clinical decisions with current guidelines.</p>
+    <div style="margin-top: 20px;">
+        <a href="index.html">📚 Clinical Suite</a>
+        <a href="im_guide.html">🩺 IM Guide</a>
+        <a href="id_study_guide.html">🦠 ID Study Guide</a>
+        <a href="drug_reference_guide.html">💊 Drug Guide</a>
+    </div>
+</footer>
+
+<script>
+    // Toggle topic expansion
+    function toggleTopic(header) {
+        const topic = header.parentElement;
+        topic.classList.toggle('collapsed');
+    }
+    
+    // Search functionality
+    const searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        const topics = document.querySelectorAll('.topic');
+        
+        topics.forEach(topic => {
+            const text = topic.textContent.toLowerCase();
+            if (query === '' || text.includes(query)) {
+                topic.style.display = 'block';
+            } else {
+                topic.style.display = 'none';
+            }
+        });
+    });
+    
+    // Back to top button
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 400) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+    
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
+    // Toggle topic expansion
+    function toggleTopic(header) {
+        const topic = header.parentElement;
+        topic.classList.toggle('collapsed');
+    }
+    
+    // Search functionality
+    const searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        const topics = document.querySelectorAll('.topic');
+        
+        topics.forEach(topic => {
+            const text = topic.textContent.toLowerCase();
+            if (query === '' || text.includes(query)) {
+                topic.style.display = 'block';
+            } else {
+                topic.style.display = 'none';
+            }
+        });
+    });
+    
+    // Back to top button
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 400) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+    
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

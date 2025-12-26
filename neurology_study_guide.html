@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>ABIM Neurology Study Guide</title>
+    <style>
+        * { box-sizing: border-box; -webkit-tap-highlight-color: rgba(124, 58, 237, 0.2); }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #1e293b; max-width: 1200px; margin: 0 auto; padding: 20px; padding-bottom: 80px; background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); min-height: 100vh; }
+        h1 { color: #7c3aed; border-bottom: 3px solid #7c3aed; padding-bottom: 10px; font-size: 1.75rem; }
+        h2 { color: #6d28d9; border-bottom: 2px solid #ddd6fe; padding-bottom: 8px; margin-top: 0; font-size: 1.4rem; }
+        h3 { color: #5b21b6; margin-top: 20px; font-size: 1.15rem; border-left: 4px solid #7c3aed; padding-left: 12px; }
+        h4 { color: #4c1d95; margin-top: 15px; font-size: 1rem; }
+        .header-box { background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%); color: white; padding: 30px 24px; border-radius: 16px; margin-bottom: 24px; text-align: center; box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3); }
+        .header-box h1 { color: white; border: none; margin: 0; font-size: 1.9rem; }
+        .header-box .subtitle { font-size: 1rem; opacity: 0.95; margin-top: 8px; }
+        .header-box .build-tag { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 14px; border-radius: 20px; font-size: 0.85rem; margin-top: 12px; }
+        .search-container { padding: 16px 20px; background: white; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .search-box { width: 100%; padding: 14px 20px; border: 2px solid #ddd6fe; border-radius: 25px; font-size: 1rem; outline: none; }
+        .search-box:focus { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15); }
+        .nav-container { position: sticky; top: 0; z-index: 100; background: rgba(245, 243, 255, 0.95); backdrop-filter: blur(10px); padding: 12px 0; margin: 0 -20px 20px -20px; padding-left: 20px; padding-right: 20px; border-bottom: 1px solid #ddd6fe; }
+        .nav-pills { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 8px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .nav-pills::-webkit-scrollbar { display: none; }
+        .nav-pill { flex-shrink: 0; padding: 10px 18px; background: white; color: #6d28d9; text-decoration: none; border-radius: 22px; font-size: 0.9rem; font-weight: 500; border: 2px solid #ddd6fe; white-space: nowrap; }
+        .nav-pill:hover, .nav-pill:active { background: #7c3aed; color: white; border-color: #7c3aed; }
+        .section { background: white; margin-bottom: 20px; padding: 24px; border-radius: 12px; border-left: 5px solid #7c3aed; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .section-header { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .section-header::after { content: '▼'; font-size: 0.8rem; color: #7c3aed; transition: transform 0.3s ease; }
+        .section.collapsed .section-header::after { transform: rotate(-90deg); }
+        .section.collapsed .section-content { display: none; }
+        .section-content { margin-top: 16px; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+        th, td { border: 1px solid #ddd6fe; padding: 12px; text-align: left; }
+        th { background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%); color: white; font-weight: 600; }
+        tr:nth-child(even) { background: #f5f3ff; }
+        tr:hover { background: #ede9fe; }
+        ul, ol { margin: 12px 0; padding-left: 24px; }
+        li { margin: 8px 0; }
+        .high-yield { background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%); border: 2px solid #f59e0b; border-radius: 10px; padding: 16px; margin: 16px 0; }
+        .high-yield::before { content: "⭐ HIGH-YIELD: "; font-weight: 700; color: #d97706; }
+        .clinical-pearl { background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%); border: 2px solid #3b82f6; border-radius: 10px; padding: 16px; margin: 16px 0; }
+        .clinical-pearl::before { content: "💎 CLINICAL PEARL: "; font-weight: 700; color: #2563eb; }
+        .danger-box { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 2px solid #ef4444; border-radius: 10px; padding: 16px; margin: 16px 0; }
+        .danger-box::before { content: "🚨 DANGER: "; font-weight: 700; color: #dc2626; }
+        .mnemonic-box { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border: 2px solid #10b981; border-radius: 10px; padding: 16px; margin: 16px 0; }
+        .mnemonic-box::before { content: "🧠 MNEMONIC: "; font-weight: 700; color: #059669; }
+        .guideline-box { background: linear-gradient(135deg, #f3e8ff 0%, #ede9fe 100%); border: 2px solid #8b5cf6; border-radius: 10px; padding: 16px; margin: 16px 0; }
+        .guideline-box::before { content: "📋 GUIDELINE: "; font-weight: 700; color: #7c3aed; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-left: 8px; }
+        .badge-common { background: #dbeafe; color: #1d4ed8; }
+        .badge-danger { background: #fee2e2; color: #dc2626; }
+        .badge-boards { background: #fef3c7; color: #d97706; }
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 56px; height: 56px; background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%); color: white; border: none; border-radius: 50%; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .back-to-top.show { display: flex; }
+        footer { background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%); color: white; padding: 30px 24px; border-radius: 16px; margin-top: 40px; text-align: center; }
+        footer a { color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 22px; margin: 6px; display: inline-block; font-size: 0.9rem; }
+        @media (min-width: 768px) and (max-width: 1024px) { body { padding: 24px 28px; } .section { padding: 28px; } }
+        @media (max-width: 767px) { .header-box h1 { font-size: 1.5rem; } .section { padding: 18px; } table { font-size: 0.8rem; } th, td { padding: 8px; } }
+        @media (pointer: coarse) { .nav-pill, .section-header, button { min-height: 44px; } }
+    </style>
+</head>
+<body>
+
+<div class="header-box">
+    <h1>🧠 ABIM Neurology Study Guide</h1>
+    <div class="subtitle">High-Yield Board Review • AAN/AHA Guidelines</div>
+    <div class="build-tag">BUILD #1 • 45 SECTIONS • DECEMBER 2025</div>
+</div>
+
+<div class="search-container">
+    <input type="text" class="search-box" id="searchBox" placeholder="Search topics, conditions, medications..." autocomplete="off">
+</div>
+
+<nav class="nav-container">
+    <div class="nav-pills">
+        <a href="#stroke" class="nav-pill">Stroke</a>
+        <a href="#seizure" class="nav-pill">Seizures</a>
+        <a href="#headache" class="nav-pill">Headache</a>
+        <a href="#ms" class="nav-pill">MS</a>
+        <a href="#movement" class="nav-pill">Movement</a>
+        <a href="#neuropathy" class="nav-pill">Neuropathy</a>
+        <a href="#myopathy" class="nav-pill">Myopathy</a>
+        <a href="#dementia" class="nav-pill">Dementia</a>
+        <a href="#cns-infection" class="nav-pill">CNS Infections</a>
+        <a href="#neuro-exam" class="nav-pill">Neuro Exam</a>
+    </div>
+</nav>
+
+<!-- SECTION 1: ISCHEMIC STROKE -->
+<div class="section" id="stroke">
+    <div class="section-header">
+        <h2>1. Ischemic Stroke <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Definition</h3>
+        <p>Acute neurologic deficit due to cerebral ischemia with infarction on imaging</p>
+        
+        <h3>Etiologies (TOAST Classification)</h3>
+        <table>
+            <tr><th>Category</th><th>Examples</th><th>%</th></tr>
+            <tr><td><strong>Large artery atherosclerosis</strong></td><td>Carotid stenosis, intracranial stenosis</td><td>20%</td></tr>
+            <tr><td><strong>Cardioembolism</strong></td><td>A-fib, LV thrombus, endocarditis, PFO</td><td>25%</td></tr>
+            <tr><td><strong>Small vessel (lacunar)</strong></td><td>Lipohyalinosis, HTN-related</td><td>25%</td></tr>
+            <tr><td><strong>Other determined</strong></td><td>Dissection, vasculitis, hypercoagulable</td><td>5%</td></tr>
+            <tr><td><strong>Cryptogenic</strong></td><td>Unknown after full workup</td><td>25%</td></tr>
+        </table>
+        
+        <h3>Clinical Syndromes by Vascular Territory</h3>
+        <table>
+            <tr><th>Artery</th><th>Clinical Features</th></tr>
+            <tr><td><strong>MCA</strong></td><td>Contralateral face/arm > leg weakness, hemisensory loss, aphasia (dominant) or neglect (non-dominant), gaze preference toward lesion</td></tr>
+            <tr><td><strong>ACA</strong></td><td>Contralateral leg > arm weakness, abulia, urinary incontinence</td></tr>
+            <tr><td><strong>PCA</strong></td><td>Contralateral homonymous hemianopia, visual agnosia, memory deficits</td></tr>
+            <tr><td><strong>Basilar</strong></td><td>Coma, quadriplegia, locked-in syndrome, cranial nerve deficits</td></tr>
+            <tr><td><strong>PICA (lateral medulla)</strong></td><td>Wallenberg syndrome: vertigo, dysphagia, Horner's, crossed sensory loss</td></tr>
+        </table>
+        
+        <h3>Lacunar Syndromes</h3>
+        <table>
+            <tr><th>Syndrome</th><th>Location</th><th>Features</th></tr>
+            <tr><td>Pure motor</td><td>Posterior limb internal capsule, pons</td><td>Face, arm, leg weakness (no sensory/cortical signs)</td></tr>
+            <tr><td>Pure sensory</td><td>Thalamus</td><td>Face, arm, leg numbness</td></tr>
+            <tr><td>Ataxic hemiparesis</td><td>Pons, internal capsule</td><td>Weakness + ipsilateral ataxia</td></tr>
+            <tr><td>Dysarthria-clumsy hand</td><td>Pons, internal capsule</td><td>Dysarthria + hand clumsiness</td></tr>
+        </table>
+        
+        <h3>Acute Management</h3>
+        <h4>IV Alteplase (tPA)</h4>
+        <ul>
+            <li><strong>Window:</strong> Within 4.5 hours of symptom onset</li>
+            <li><strong>Dose:</strong> 0.9 mg/kg (max 90 mg); 10% bolus, 90% over 60 min</li>
+            <li><strong>BP goal:</strong> <185/110 before, <180/105 after</li>
+        </ul>
+        
+        <div class="guideline-box">
+            <strong>tPA Contraindications:</strong> Recent surgery/trauma (14 days), prior ICH, BP >185/110 uncontrolled, platelets <100K, INR >1.7, glucose <50 or >400, large infarct (>1/3 MCA territory)
+        </div>
+        
+        <h4>Mechanical Thrombectomy</h4>
+        <ul>
+            <li><strong>Window:</strong> Up to 24 hours with favorable imaging (DAWN/DEFUSE-3)</li>
+            <li><strong>Indication:</strong> Large vessel occlusion (ICA, M1, basilar)</li>
+            <li><strong>Requirements:</strong> NIHSS ≥6, mismatch on perfusion imaging</li>
+        </ul>
+        
+        <div class="high-yield">
+            Thrombectomy window extended to 24 hours if CT perfusion shows salvageable tissue (core-penumbra mismatch). Don't exclude based on time alone!
+        </div>
+        
+        <h3>Secondary Prevention</h3>
+        <table>
+            <tr><th>Etiology</th><th>Prevention</th></tr>
+            <tr><td>Atherosclerotic</td><td>High-intensity statin, antiplatelet, BP control, lifestyle</td></tr>
+            <tr><td>Cardioembolic (A-fib)</td><td>Anticoagulation (DOAC preferred)</td></tr>
+            <tr><td>Lacunar</td><td>Antiplatelet, BP control</td></tr>
+            <tr><td>Carotid stenosis ≥70%</td><td>CEA or CAS</td></tr>
+        </table>
+        
+        <div class="clinical-pearl">
+            Dual antiplatelet (aspirin + clopidogrel) for 21 days after minor stroke/TIA reduces recurrence (CHANCE, POINT trials). Then single antiplatelet.
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 2: HEMORRHAGIC STROKE -->
+<div class="section" id="ich">
+    <div class="section-header">
+        <h2>2. Intracerebral Hemorrhage <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Etiologies</h3>
+        <table>
+            <tr><th>Cause</th><th>Location</th><th>Notes</th></tr>
+            <tr><td><strong>Hypertension</strong></td><td>Basal ganglia, thalamus, pons, cerebellum</td><td>Most common</td></tr>
+            <tr><td><strong>Cerebral amyloid angiopathy</strong></td><td>Lobar (cortical)</td><td>Elderly, recurrent, associated with dementia</td></tr>
+            <tr><td><strong>Anticoagulation</strong></td><td>Any</td><td>Expanding hematoma</td></tr>
+            <tr><td><strong>Vascular malformation</strong></td><td>Any</td><td>AVM, cavernoma</td></tr>
+            <tr><td><strong>Tumor</strong></td><td>Any</td><td>Metastatic melanoma, RCC, choriocarcinoma</td></tr>
+            <tr><td><strong>Hemorrhagic conversion</strong></td><td>Ischemic territory</td><td>After large stroke or thrombolysis</td></tr>
+        </table>
+        
+        <h3>Management</h3>
+        <ul>
+            <li><strong>BP control:</strong> Target SBP <140 mmHg (if presenting SBP 150-220)</li>
+            <li><strong>Reversal of anticoagulation:</strong>
+                <ul>
+                    <li>Warfarin: Vitamin K + 4-factor PCC (or FFP)</li>
+                    <li>DOACs: Idarucizumab (dabigatran), andexanet alfa (Xa inhibitors), or 4F-PCC</li>
+                </ul>
+            </li>
+            <li><strong>ICP management:</strong> HOB 30°, osmotic therapy if needed</li>
+            <li><strong>Surgery:</strong> Consider for cerebellar hemorrhage >3cm with deterioration</li>
+        </ul>
+        
+        <div class="danger-box">
+            <strong>Cerebellar hemorrhage:</strong> Can rapidly cause brainstem compression. Neurosurgical emergency — evacuate if >3cm or neurologic deterioration.
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 3: SUBARACHNOID HEMORRHAGE -->
+<div class="section" id="sah">
+    <div class="section-header">
+        <h2>3. Subarachnoid Hemorrhage <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Etiology</h3>
+        <ul>
+            <li><strong>Aneurysmal (85%):</strong> Berry aneurysm rupture; locations: ACA/AComm (30%), ICA/PComm (25%), MCA (20%)</li>
+            <li><strong>Non-aneurysmal:</strong> Perimesencephalic, trauma, AVM</li>
+        </ul>
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>"Thunderclap headache":</strong> Worst headache of life, maximal at onset</li>
+            <li>Nausea, vomiting, photophobia</li>
+            <li>Meningismus</li>
+            <li>Altered consciousness, focal deficits (depending on location)</li>
+            <li><strong>"Sentinel headache":</strong> Warning leak days before major rupture</li>
+        </ul>
+        
+        <h3>Diagnosis</h3>
+        <ul>
+            <li><strong>Non-contrast CT:</strong> >95% sensitive within 6 hours (decreases over time)</li>
+            <li><strong>Lumbar puncture:</strong> If CT negative and high suspicion
+                <ul>
+                    <li>Xanthochromia (yellow CSF from bilirubin)</li>
+                    <li>Elevated RBCs that don't clear</li>
+                </ul>
+            </li>
+            <li><strong>CTA or DSA:</strong> To identify aneurysm</li>
+        </ul>
+        
+        <h3>Complications</h3>
+        <table>
+            <tr><th>Complication</th><th>Timing</th><th>Prevention/Treatment</th></tr>
+            <tr><td><strong>Rebleeding</strong></td><td>First 24 hours</td><td>Early aneurysm repair (clip or coil)</td></tr>
+            <tr><td><strong>Vasospasm</strong></td><td>Days 3-14 (peak day 7)</td><td>Nimodipine, "Triple-H" therapy, angioplasty</td></tr>
+            <tr><td><strong>Hydrocephalus</strong></td><td>Acute or delayed</td><td>EVD, VP shunt</td></tr>
+            <tr><td><strong>Hyponatremia</strong></td><td>Days 2-10</td><td>SIADH or cerebral salt wasting</td></tr>
+            <tr><td><strong>Seizures</strong></td><td>Any time</td><td>Prophylaxis controversial (short-term)</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            <strong>Nimodipine 60mg Q4h × 21 days:</strong> Improves outcomes after SAH (reduces vasospasm-related infarcts). Give to ALL aneurysmal SAH patients.
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 4: TIA -->
+<div class="section" id="tia">
+    <div class="section-header">
+        <h2>4. Transient Ischemic Attack <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Definition</h3>
+        <p>Transient neurologic dysfunction due to focal ischemia WITHOUT infarction on imaging</p>
+        
+        <h3>ABCD² Score (7-Day Stroke Risk)</h3>
+        <table>
+            <tr><th>Factor</th><th>Points</th></tr>
+            <tr><td>Age ≥60</td><td>1</td></tr>
+            <tr><td>BP ≥140/90 at presentation</td><td>1</td></tr>
+            <tr><td>Clinical: Unilateral weakness</td><td>2</td></tr>
+            <tr><td>Clinical: Speech impairment without weakness</td><td>1</td></tr>
+            <tr><td>Duration ≥60 min</td><td>2</td></tr>
+            <tr><td>Duration 10-59 min</td><td>1</td></tr>
+            <tr><td>Diabetes</td><td>1</td></tr>
+        </table>
+        <p>Score ≥4: Higher risk, consider admission</p>
+        
+        <h3>Workup</h3>
+        <ul>
+            <li>Brain MRI with DWI (detect silent infarct)</li>
+            <li>Vessel imaging: CTA/MRA head and neck</li>
+            <li>Cardiac: ECG, telemetry, echo (TTE ± TEE)</li>
+            <li>Labs: CBC, BMP, lipids, glucose, A1c</li>
+            <li>Consider prolonged cardiac monitoring for cryptogenic (loop recorder)</li>
+        </ul>
+        
+        <h3>Management</h3>
+        <ul>
+            <li><strong>Antiplatelet:</strong> Aspirin immediately; dual antiplatelet (ASA + clopidogrel) × 21 days for high-risk</li>
+            <li><strong>Statin:</strong> High-intensity</li>
+            <li><strong>BP control:</strong> Target <130/80 after acute phase</li>
+            <li><strong>Carotid revascularization:</strong> If ipsilateral stenosis ≥50-70%</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 5: SEIZURES -->
+<div class="section" id="seizure">
+    <div class="section-header">
+        <h2>5. Seizures & Epilepsy <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Classification</h3>
+        <table>
+            <tr><th>Type</th><th>Features</th></tr>
+            <tr><td><strong>Focal (partial)</strong></td><td>Begins in one hemisphere; aware or impaired awareness</td></tr>
+            <tr><td><strong>Generalized</strong></td><td>Involves both hemispheres from onset; tonic-clonic, absence, myoclonic, atonic</td></tr>
+            <tr><td><strong>Focal to bilateral tonic-clonic</strong></td><td>Starts focal, then generalizes</td></tr>
+        </table>
+        
+        <h3>Epilepsy Definition</h3>
+        <ul>
+            <li>≥2 unprovoked seizures >24 hours apart, OR</li>
+            <li>1 seizure + high recurrence risk (>60%), OR</li>
+            <li>Diagnosis of epilepsy syndrome</li>
+        </ul>
+        
+        <h3>Provoked Seizure Causes</h3>
+        <div class="mnemonic-box">
+            <strong>VITAMINS:</strong> Vascular (stroke), Infection, Trauma, Autoimmune, Metabolic (Na, glucose, uremia), Idiopathic/Ingestion (drugs, alcohol withdrawal), Neoplasm, Sleep deprivation
+        </div>
+        
+        <h3>Workup</h3>
+        <ul>
+            <li>Labs: BMP (Na, glucose, Ca), tox screen</li>
+            <li>EEG: Interictal abnormalities, classify seizure type</li>
+            <li>MRI brain: Structural lesions</li>
+            <li>LP: If infection suspected</li>
+        </ul>
+        
+        <h3>Antiseizure Medications</h3>
+        <table>
+            <tr><th>Drug</th><th>Use</th><th>Key Toxicities</th></tr>
+            <tr><td><strong>Levetiracetam</strong></td><td>Broad spectrum, first-line</td><td>Mood changes, irritability</td></tr>
+            <tr><td><strong>Lamotrigine</strong></td><td>Focal, generalized, pregnancy-safe</td><td>SJS/TEN (slow titration)</td></tr>
+            <tr><td><strong>Valproate</strong></td><td>Generalized (esp. JME)</td><td>Teratogenic, hepatotoxicity, weight gain, tremor</td></tr>
+            <tr><td><strong>Carbamazepine</strong></td><td>Focal seizures</td><td>Hyponatremia, aplastic anemia, SJS (HLA-B*1502)</td></tr>
+            <tr><td><strong>Phenytoin</strong></td><td>Focal, status epilepticus</td><td>Gingival hyperplasia, hirsutism, osteoporosis, zero-order kinetics</td></tr>
+            <tr><td><strong>Oxcarbazepine</strong></td><td>Focal seizures</td><td>Hyponatremia (more than CBZ)</td></tr>
+        </table>
+        
+        <div class="danger-box">
+            <strong>Valproate is teratogenic</strong> (neural tube defects). Avoid in women of childbearing potential. Lamotrigine and levetiracetam are safer in pregnancy.
+        </div>
+        
+        <h3>When NOT to Treat After First Seizure</h3>
+        <ul>
+            <li>Provoked seizure with reversible cause</li>
+            <li>Normal EEG and MRI</li>
+            <li>Low recurrence risk</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 6: STATUS EPILEPTICUS -->
+<div class="section" id="status">
+    <div class="section-header">
+        <h2>6. Status Epilepticus <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Definition</h3>
+        <ul>
+            <li>Seizure lasting >5 minutes, OR</li>
+            <li>≥2 seizures without return to baseline</li>
+        </ul>
+        
+        <h3>Treatment Protocol</h3>
+        <table>
+            <tr><th>Time</th><th>Treatment</th></tr>
+            <tr><td><strong>0-5 min</strong></td><td>ABCs, O2, IV access, glucose, thiamine if indicated</td></tr>
+            <tr><td><strong>5-20 min (emergent)</strong></td><td><strong>Benzodiazepine:</strong> Lorazepam 4mg IV (repeat × 1) OR Midazolam 10mg IM</td></tr>
+            <tr><td><strong>20-40 min (urgent)</strong></td><td><strong>2nd line AED:</strong> Fosphenytoin 20 mg PE/kg, Valproate 40 mg/kg, OR Levetiracetam 60 mg/kg</td></tr>
+            <tr><td><strong>>40 min (refractory)</strong></td><td><strong>Anesthetic:</strong> Propofol, midazolam, or pentobarbital drip + intubation + continuous EEG</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            Lorazepam IV is first-line for status epilepticus. If no IV access, give midazolam IM (RAMPART trial showed non-inferiority).
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 7: HEADACHE -->
+<div class="section" id="headache">
+    <div class="section-header">
+        <h2>7. Primary Headache Disorders <span class="badge badge-common">Very Common</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Migraine</h3>
+        <h4>Diagnostic Criteria</h4>
+        <ul>
+            <li>≥5 attacks lasting 4-72 hours</li>
+            <li>At least 2 of: Unilateral, pulsating, moderate-severe, aggravated by activity</li>
+            <li>At least 1 of: Nausea/vomiting, photophobia + phonophobia</li>
+            <li><strong>Aura:</strong> Visual (scintillating scotoma), sensory, or speech; develops over 5-60 min</li>
+        </ul>
+        
+        <h4>Treatment</h4>
+        <table>
+            <tr><th>Acute</th><th>Preventive (if ≥4 headache days/month)</th></tr>
+            <tr><td>NSAIDs, acetaminophen</td><td>Propranolol, topiramate, valproate</td></tr>
+            <tr><td>Triptans (5-HT1B/1D agonists)</td><td>Amitriptyline</td></tr>
+            <tr><td>Gepants (CGRP antagonists)</td><td>CGRP mAbs (erenumab, fremanezumab)</td></tr>
+            <tr><td>Antiemetics (metoclopramide)</td><td>Botox (chronic migraine)</td></tr>
+        </table>
+        
+        <div class="danger-box">
+            <strong>Triptans contraindicated in:</strong> CAD, uncontrolled HTN, prior stroke, hemiplegic migraine, basilar migraine. Avoid within 24h of ergots.
+        </div>
+        
+        <h3>Tension-Type Headache</h3>
+        <ul>
+            <li>Bilateral, pressing/tightening, mild-moderate</li>
+            <li>No nausea, no more than one of photo/phonophobia</li>
+            <li><strong>Treatment:</strong> NSAIDs, acetaminophen; preventive with amitriptyline</li>
+        </ul>
+        
+        <h3>Cluster Headache</h3>
+        <ul>
+            <li>Unilateral severe orbital/temporal pain, 15-180 minutes</li>
+            <li><strong>Autonomic features:</strong> Lacrimation, rhinorrhea, ptosis, miosis, eyelid edema</li>
+            <li>Occurs in "clusters" (weeks-months) with remission periods</li>
+            <li><strong>Acute treatment:</strong> High-flow O2 (100%), sumatriptan SC</li>
+            <li><strong>Preventive:</strong> Verapamil, lithium, prednisone bridge</li>
+        </ul>
+        
+        <div class="clinical-pearl">
+            Cluster headache: Male predominance, circadian pattern (often same time nightly), patient paces/agitates (vs migraine patients prefer stillness).
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 8: SECONDARY HEADACHE RED FLAGS -->
+<div class="section" id="headache-red-flags">
+    <div class="section-header">
+        <h2>8. Secondary Headache Red Flags <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>SNOOP4 Red Flags</h3>
+        <div class="mnemonic-box">
+            <strong>S</strong>ystemic symptoms (fever, weight loss) or secondary risk factors (HIV, cancer)<br>
+            <strong>N</strong>eurologic symptoms or signs<br>
+            <strong>O</strong>nset sudden (thunderclap)<br>
+            <strong>O</strong>lder age (new onset >50)<br>
+            <strong>P</strong>attern change or progressive<br>
+            <strong>P</strong>ositional<br>
+            <strong>P</strong>recipitated by Valsalva<br>
+            <strong>P</strong>apilledema
+        </div>
+        
+        <h3>Secondary Causes</h3>
+        <table>
+            <tr><th>Cause</th><th>Features</th></tr>
+            <tr><td><strong>SAH</strong></td><td>Thunderclap, "worst headache of life"</td></tr>
+            <tr><td><strong>Meningitis</strong></td><td>Fever, neck stiffness, photophobia</td></tr>
+            <tr><td><strong>Tumor</strong></td><td>Progressive, worse in morning, with focal signs</td></tr>
+            <tr><td><strong>Temporal arteritis</strong></td><td>Age >50, jaw claudication, scalp tenderness, vision changes</td></tr>
+            <tr><td><strong>Idiopathic intracranial HTN</strong></td><td>Obese young woman, papilledema, pulsatile tinnitus</td></tr>
+            <tr><td><strong>Intracranial hypotension</strong></td><td>Positional (better lying down), post-LP</td></tr>
+            <tr><td><strong>Cerebral venous thrombosis</strong></td><td>Progressive, seizures, focal signs, hypercoagulable</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- SECTION 9: MULTIPLE SCLEROSIS -->
+<div class="section" id="ms">
+    <div class="section-header">
+        <h2>9. Multiple Sclerosis <span class="badge badge-boards">Boards Favorite</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Epidemiology</h3>
+        <ul>
+            <li>Young adults (20-40 years), female predominance (3:1)</li>
+            <li>Higher prevalence in northern latitudes</li>
+        </ul>
+        
+        <h3>Clinical Presentations</h3>
+        <table>
+            <tr><th>Syndrome</th><th>Features</th></tr>
+            <tr><td><strong>Optic neuritis</strong></td><td>Unilateral vision loss, pain with eye movement, APD</td></tr>
+            <tr><td><strong>Transverse myelitis</strong></td><td>Weakness, sensory level, bowel/bladder dysfunction</td></tr>
+            <tr><td><strong>Internuclear ophthalmoplegia</strong></td><td>Impaired adduction, nystagmus in abducting eye (MLF lesion)</td></tr>
+            <tr><td><strong>Lhermitte's sign</strong></td><td>Electric shock down spine with neck flexion</td></tr>
+            <tr><td><strong>Uhthoff's phenomenon</strong></td><td>Worsening symptoms with heat/exercise</td></tr>
+        </table>
+        
+        <h3>Disease Types</h3>
+        <table>
+            <tr><th>Type</th><th>Features</th><th>%</th></tr>
+            <tr><td><strong>Relapsing-remitting (RRMS)</strong></td><td>Discrete attacks with full or partial recovery</td><td>85%</td></tr>
+            <tr><td><strong>Secondary progressive (SPMS)</strong></td><td>Gradual worsening after RRMS phase</td><td>—</td></tr>
+            <tr><td><strong>Primary progressive (PPMS)</strong></td><td>Gradual worsening from onset, no relapses</td><td>10-15%</td></tr>
+        </table>
+        
+        <h3>Diagnosis (McDonald Criteria 2017)</h3>
+        <ul>
+            <li><strong>Dissemination in space:</strong> ≥2 CNS lesions in different locations (periventricular, cortical, infratentorial, spinal cord)</li>
+            <li><strong>Dissemination in time:</strong> ≥2 attacks OR new lesion on follow-up MRI OR simultaneous enhancing + non-enhancing lesions</li>
+            <li><strong>CSF:</strong> Oligoclonal bands (present in >90%)</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <h4>Acute Relapse</h4>
+        <ul>
+            <li>IV methylprednisolone 1g/day × 3-5 days</li>
+            <li>Plasma exchange for steroid-refractory</li>
+        </ul>
+        
+        <h4>Disease-Modifying Therapies</h4>
+        <table>
+            <tr><th>Tier</th><th>Examples</th><th>Notes</th></tr>
+            <tr><td><strong>Platform (lower efficacy)</strong></td><td>Interferons, glatiramer</td><td>Injectable, well-tolerated</td></tr>
+            <tr><td><strong>Moderate</strong></td><td>Dimethyl fumarate, teriflunomide</td><td>Oral</td></tr>
+            <tr><td><strong>High efficacy</strong></td><td>Natalizumab, ocrelizumab, ofatumumab</td><td>Monitor for PML (natalizumab)</td></tr>
+            <tr><td><strong>Induction</strong></td><td>Alemtuzumab, HSCT</td><td>Aggressive disease</td></tr>
+        </table>
+        
+        <div class="danger-box">
+            <strong>Natalizumab and PML risk:</strong> Risk increases with JC virus antibody positivity, prior immunosuppression, and duration >2 years. Check JCV antibody.
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 10: PARKINSON'S DISEASE -->
+<div class="section" id="movement">
+    <div class="section-header">
+        <h2>10. Parkinson's Disease <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Cardinal Features</h3>
+        <div class="mnemonic-box">
+            <strong>TRAP:</strong> Tremor (rest), Rigidity (cogwheel), Akinesia/bradykinesia, Postural instability
+        </div>
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Tremor:</strong> "Pill-rolling," 4-6 Hz, worse at rest, improves with action</li>
+            <li><strong>Rigidity:</strong> Cogwheel (ratchety), lead-pipe</li>
+            <li><strong>Bradykinesia:</strong> Slow movements, hypomimia, micrographia, shuffling gait</li>
+            <li><strong>Postural instability:</strong> Late finding, falls</li>
+            <li><strong>Non-motor:</strong> REM sleep behavior disorder, anosmia, constipation, depression</li>
+        </ul>
+        
+        <h3>Pathophysiology</h3>
+        <ul>
+            <li>Loss of dopaminergic neurons in substantia nigra pars compacta</li>
+            <li>Lewy bodies (α-synuclein aggregates)</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <table>
+            <tr><th>Drug Class</th><th>Examples</th><th>Notes</th></tr>
+            <tr><td><strong>Levodopa/carbidopa</strong></td><td>Sinemet</td><td>Most effective; motor fluctuations with long-term use</td></tr>
+            <tr><td><strong>Dopamine agonists</strong></td><td>Pramipexole, ropinirole</td><td>Younger patients; impulse control disorders</td></tr>
+            <tr><td><strong>MAO-B inhibitors</strong></td><td>Selegiline, rasagiline</td><td>Mild effect; early disease or adjunct</td></tr>
+            <tr><td><strong>COMT inhibitors</strong></td><td>Entacapone</td><td>Extend levodopa effect</td></tr>
+            <tr><td><strong>Anticholinergics</strong></td><td>Trihexyphenidyl</td><td>Tremor; avoid in elderly (confusion)</td></tr>
+            <tr><td><strong>Amantadine</strong></td><td>—</td><td>Dyskinesias</td></tr>
+        </table>
+        
+        <h3>Motor Complications</h3>
+        <ul>
+            <li><strong>Wearing off:</strong> End-of-dose deterioration</li>
+            <li><strong>On-off fluctuations:</strong> Unpredictable motor state changes</li>
+            <li><strong>Dyskinesias:</strong> Involuntary movements at peak dose</li>
+        </ul>
+        
+        <div class="clinical-pearl">
+            REM sleep behavior disorder (acting out dreams) often precedes motor symptoms by years. Consider early PD/synucleinopathy.
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 11: PARKINSONISM DIFFERENTIAL -->
+<div class="section" id="parkinsonism">
+    <div class="section-header">
+        <h2>11. Atypical Parkinsonism <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        <table>
+            <tr><th>Condition</th><th>Key Features</th><th>Response to Levodopa</th></tr>
+            <tr><td><strong>Parkinson's disease</strong></td><td>Asymmetric tremor, slow progression</td><td>Good</td></tr>
+            <tr><td><strong>MSA</strong></td><td>Autonomic failure (orthostasis, urinary), cerebellar signs</td><td>Poor</td></tr>
+            <tr><td><strong>PSP</strong></td><td>Vertical gaze palsy, early falls, axial rigidity</td><td>Poor</td></tr>
+            <tr><td><strong>CBD</strong></td><td>Asymmetric apraxia, alien limb, cortical sensory loss</td><td>Poor</td></tr>
+            <tr><td><strong>DLB</strong></td><td>Visual hallucinations, fluctuating cognition, RBD</td><td>Moderate (but sensitive to antipsychotics)</td></tr>
+            <tr><td><strong>Drug-induced</strong></td><td>Symmetric, no tremor, antipsychotic/antiemetic use</td><td>Resolves with drug cessation</td></tr>
+            <tr><td><strong>Vascular parkinsonism</strong></td><td>Lower body predominant, "lower half parkinsonism"</td><td>Poor</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            Red flags for atypical parkinsonism: Early falls, poor levodopa response, symmetric onset, vertical gaze palsy, prominent autonomic failure, hallucinations at presentation.
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 12: ESSENTIAL TREMOR -->
+<div class="section" id="tremor">
+    <div class="section-header">
+        <h2>12. Essential Tremor</h2>
+    </div>
+    <div class="section-content">
+        <h3>Features</h3>
+        <ul>
+            <li>Bilateral action/postural tremor (4-12 Hz)</li>
+            <li>Hands most common; also head, voice</li>
+            <li>Improves with alcohol</li>
+            <li>Family history common (autosomal dominant)</li>
+            <li>No other neurologic signs</li>
+        </ul>
+        
+        <h3>vs Parkinson's Tremor</h3>
+        <table>
+            <tr><th>Feature</th><th>Essential Tremor</th><th>Parkinson's</th></tr>
+            <tr><td>Type</td><td>Action/postural</td><td>Rest</td></tr>
+            <tr><td>Frequency</td><td>Higher (8-12 Hz)</td><td>Lower (4-6 Hz)</td></tr>
+            <tr><td>Symmetry</td><td>Bilateral</td><td>Asymmetric</td></tr>
+            <tr><td>Head tremor</td><td>Common ("no-no")</td><td>Rare</td></tr>
+            <tr><td>Alcohol effect</td><td>Improves</td><td>No effect</td></tr>
+        </table>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>First-line:</strong> Propranolol, primidone</li>
+            <li><strong>Second-line:</strong> Topiramate, gabapentin</li>
+            <li><strong>Refractory:</strong> Deep brain stimulation, focused ultrasound</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Continue with remaining sections -->
+
+<div class="section" id="neuropathy">
+    <div class="section-header">
+        <h2>13. Peripheral Neuropathy <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Pattern Recognition</h3>
+        <table>
+            <tr><th>Pattern</th><th>Causes</th></tr>
+            <tr><td><strong>Length-dependent (stocking-glove)</strong></td><td>Diabetes (most common), B12, alcohol, uremia, drugs</td></tr>
+            <tr><td><strong>Mononeuritis multiplex</strong></td><td>Vasculitis, diabetes, sarcoid, leprosy</td></tr>
+            <tr><td><strong>Polyradiculopathy</strong></td><td>GBS, CIDP, Lyme, CMV (HIV)</td></tr>
+            <tr><td><strong>Autonomic</strong></td><td>Diabetes, amyloid, autoimmune</td></tr>
+        </table>
+        
+        <h3>Workup</h3>
+        <ul>
+            <li>Glucose/A1c, B12, TSH</li>
+            <li>SPEP/UPEP (paraprotein)</li>
+            <li>If indicated: HIV, Lyme, ANA, ANCA, paraneoplastic panel</li>
+            <li>EMG/NCS: Axonal vs demyelinating</li>
+        </ul>
+        
+        <h3>Axonal vs Demyelinating</h3>
+        <table>
+            <tr><th>Feature</th><th>Axonal</th><th>Demyelinating</th></tr>
+            <tr><td>NCS amplitude</td><td>Reduced</td><td>May be preserved</td></tr>
+            <tr><td>Conduction velocity</td><td>Near normal</td><td>Slowed</td></tr>
+            <tr><td>Examples</td><td>Diabetes, toxic, nutritional</td><td>GBS, CIDP, Charcot-Marie-Tooth</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="section" id="gbs">
+    <div class="section-header">
+        <h2>14. Guillain-Barré Syndrome <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Clinical Features</h3>
+        <ul>
+            <li>Acute ascending symmetric weakness</li>
+            <li>Areflexia or hyporeflexia</li>
+            <li>Often preceded by infection (Campylobacter, CMV, EBV, influenza, COVID)</li>
+            <li>Nadir by 4 weeks (usually 2-3 weeks)</li>
+            <li><strong>Respiratory failure:</strong> Monitor FVC (intubate if <20 mL/kg or declining)</li>
+            <li><strong>Autonomic:</strong> BP fluctuations, arrhythmias</li>
+        </ul>
+        
+        <h3>Variants</h3>
+        <table>
+            <tr><th>Variant</th><th>Features</th></tr>
+            <tr><td><strong>AIDP</strong></td><td>Classic demyelinating form (most common)</td></tr>
+            <tr><td><strong>AMAN</strong></td><td>Axonal, motor, associated with Campylobacter</td></tr>
+            <tr><td><strong>Miller Fisher</strong></td><td>Ataxia, ophthalmoplegia, areflexia; anti-GQ1b antibodies</td></tr>
+        </table>
+        
+        <h3>Diagnosis</h3>
+        <ul>
+            <li><strong>CSF:</strong> Albuminocytologic dissociation (high protein, normal WBC)</li>
+            <li><strong>NCS:</strong> Demyelinating features (prolonged distal latency, conduction block)</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>IVIG</strong> OR <strong>Plasmapheresis</strong> (equally effective)</li>
+            <li>Corticosteroids NOT effective in GBS</li>
+            <li>ICU for respiratory and autonomic monitoring</li>
+            <li>VTE prophylaxis, PT/OT</li>
+        </ul>
+        
+        <div class="danger-box">
+            Monitor FVC every 4-6 hours. Intubate if FVC <20 mL/kg, NIF <-30 cmH2O, or >30% decline. Don't wait for hypoxia.
+        </div>
+    </div>
+</div>
+
+<div class="section" id="myasthenia">
+    <div class="section-header">
+        <h2>15. Myasthenia Gravis <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Pathophysiology</h3>
+        <ul>
+            <li>Autoantibodies against acetylcholine receptors (AChR) at neuromuscular junction</li>
+            <li>Associated with thymic abnormalities (thymoma 10-15%, hyperplasia 65%)</li>
+        </ul>
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Fatigable weakness:</strong> Worsens with use, improves with rest</li>
+            <li><strong>Ocular:</strong> Ptosis, diplopia (most common initial symptoms)</li>
+            <li><strong>Bulbar:</strong> Dysarthria, dysphagia, facial weakness</li>
+            <li><strong>Limb:</strong> Proximal > distal</li>
+            <li><strong>Diurnal variation:</strong> Worse later in day</li>
+        </ul>
+        
+        <h3>Diagnosis</h3>
+        <ul>
+            <li><strong>AChR antibodies:</strong> Positive in 85% generalized, 50% ocular</li>
+            <li><strong>Anti-MuSK antibodies:</strong> In seronegative patients (more bulbar/respiratory)</li>
+            <li><strong>Ice pack test:</strong> Improves ptosis (cooling improves NMJ function)</li>
+            <li><strong>Repetitive nerve stimulation:</strong> Decremental response >10%</li>
+            <li><strong>Single-fiber EMG:</strong> Most sensitive</li>
+            <li><strong>CT chest:</strong> Evaluate for thymoma</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <table>
+            <tr><th>Category</th><th>Treatment</th></tr>
+            <tr><td><strong>Symptomatic</strong></td><td>Pyridostigmine (acetylcholinesterase inhibitor)</td></tr>
+            <tr><td><strong>Immunotherapy</strong></td><td>Prednisone, azathioprine, mycophenolate</td></tr>
+            <tr><td><strong>Thymectomy</strong></td><td>Thymoma or AChR-positive generalized MG</td></tr>
+            <tr><td><strong>Rapid action</strong></td><td>IVIG, plasmapheresis</td></tr>
+            <tr><td><strong>Newer</strong></td><td>Eculizumab, efgartigimod (FcRn inhibitor)</td></tr>
+        </table>
+        
+        <h3>Myasthenic Crisis</h3>
+        <ul>
+            <li>Respiratory failure from weakness</li>
+            <li>Triggers: Infection, surgery, medication changes, drugs</li>
+            <li><strong>Treatment:</strong> ICU, intubation if needed, IVIG or PLEX</li>
+        </ul>
+        
+        <div class="danger-box">
+            <strong>Drugs that worsen MG:</strong> Aminoglycosides, fluoroquinolones, beta-blockers, magnesium, neuromuscular blockers, penicillamine.
+        </div>
+    </div>
+</div>
+
+<div class="section" id="dementia">
+    <div class="section-header">
+        <h2>16. Dementia Syndromes <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Overview</h3>
+        <table>
+            <tr><th>Type</th><th>Key Features</th><th>Pathology</th></tr>
+            <tr><td><strong>Alzheimer's</strong></td><td>Insidious memory loss, language, visuospatial</td><td>Amyloid plaques, neurofibrillary tangles</td></tr>
+            <tr><td><strong>Vascular</strong></td><td>Stepwise decline, focal deficits, CVD risk factors</td><td>Multi-infarct, white matter disease</td></tr>
+            <tr><td><strong>Lewy body</strong></td><td>Visual hallucinations, fluctuating cognition, parkinsonism</td><td>α-synuclein Lewy bodies</td></tr>
+            <tr><td><strong>Frontotemporal</strong></td><td>Personality/behavior change (bvFTD) OR language (PPA)</td><td>Tau or TDP-43</td></tr>
+            <tr><td><strong>Normal pressure hydrocephalus</strong></td><td>Triad: Wet, wobbly, wacky (incontinence, gait, dementia)</td><td>Enlarged ventricles, normal pressure LP</td></tr>
+        </table>
+        
+        <h3>Reversible Causes (Must Exclude)</h3>
+        <div class="mnemonic-box">
+            <strong>DEMENTIA:</strong> Drugs, Emotional (depression), Metabolic (B12, thyroid), Eyes/ears, Normal pressure hydrocephalus, Tumor, Infection, Alcohol
+        </div>
+        
+        <h3>Workup</h3>
+        <ul>
+            <li>Cognitive testing (MMSE, MoCA)</li>
+            <li>Labs: B12, TSH, RPR, HIV, metabolic panel</li>
+            <li>Brain MRI</li>
+            <li>Consider: LP (AD biomarkers), PET, genetic testing</li>
+        </ul>
+        
+        <h3>Alzheimer's Treatment</h3>
+        <ul>
+            <li><strong>Cholinesterase inhibitors:</strong> Donepezil, rivastigmine, galantamine (mild-moderate)</li>
+            <li><strong>NMDA antagonist:</strong> Memantine (moderate-severe)</li>
+            <li><strong>Anti-amyloid:</strong> Lecanemab, donanemab (early AD with confirmed amyloid)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Continue with CNS Infections, Meningitis, Encephalitis, etc. -->
+
+<div class="section" id="cns-infection">
+    <div class="section-header">
+        <h2>17. Bacterial Meningitis <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Clinical Features</h3>
+        <ul>
+            <li>Fever, headache, nuchal rigidity, altered mental status</li>
+            <li><strong>Kernig's sign:</strong> Pain with knee extension while hip flexed</li>
+            <li><strong>Brudzinski's sign:</strong> Hip flexion with passive neck flexion</li>
+            <li>Petechial rash (Neisseria meningitidis)</li>
+        </ul>
+        
+        <h3>CSF Findings</h3>
+        <table>
+            <tr><th>Parameter</th><th>Bacterial</th><th>Viral</th><th>TB/Fungal</th></tr>
+            <tr><td>WBC</td><td>>1000 (PMN)</td><td><500 (lymph)</td><td><500 (lymph)</td></tr>
+            <tr><td>Protein</td><td>↑↑</td><td>Normal/↑</td><td>↑↑</td></tr>
+            <tr><td>Glucose</td><td>↓</td><td>Normal</td><td>↓</td></tr>
+            <tr><td>Opening pressure</td><td>↑</td><td>Normal</td><td>↑</td></tr>
+        </table>
+        
+        <h3>Empiric Treatment (Don't Delay!)</h3>
+        <table>
+            <tr><th>Age Group</th><th>Empiric Therapy</th></tr>
+            <tr><td><50 years</td><td>Ceftriaxone + vancomycin</td></tr>
+            <tr><td>≥50 years or immunocompromised</td><td>Ceftriaxone + vancomycin + ampicillin (Listeria coverage)</td></tr>
+        </table>
+        
+        <ul>
+            <li><strong>Dexamethasone:</strong> Give 15-20 min before or with first antibiotic dose (reduces mortality in pneumococcal meningitis)</li>
+        </ul>
+        
+        <div class="danger-box">
+            Do NOT delay antibiotics for LP. If LP delayed, give empiric antibiotics + dexamethasone immediately. Blood cultures can help identify organism.
+        </div>
+    </div>
+</div>
+
+<div class="section" id="encephalitis">
+    <div class="section-header">
+        <h2>18. Viral Encephalitis <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>HSV Encephalitis</h3>
+        <ul>
+            <li>Most common sporadic viral encephalitis</li>
+            <li><strong>Features:</strong> Fever, altered mental status, seizures, focal deficits</li>
+            <li><strong>Temporal lobe predilection:</strong> Personality changes, aphasia, olfactory hallucinations</li>
+            <li><strong>MRI:</strong> T2/FLAIR hyperintensity in temporal lobes (often hemorrhagic)</li>
+            <li><strong>CSF:</strong> Lymphocytic pleocytosis, elevated protein, RBCs, HSV PCR positive</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Acyclovir 10 mg/kg IV q8h × 14-21 days</strong></li>
+            <li>Start empirically if HSV encephalitis suspected — don't wait for PCR</li>
+        </ul>
+        
+        <div class="high-yield">
+            HSV encephalitis is fatal without treatment. Start acyclovir empirically in any patient with encephalitis and temporal lobe findings.
+        </div>
+    </div>
+</div>
+
+<!-- Board Pearls -->
+<div class="section" id="pearls">
+    <div class="section-header">
+        <h2>45. High-Yield Board Pearls</h2>
+    </div>
+    <div class="section-content">
+        <h3>Stroke</h3>
+        <ul>
+            <li>💎 tPA window 4.5 hours; thrombectomy up to 24h with favorable imaging</li>
+            <li>💎 Dual antiplatelet (ASA + clopidogrel) × 21 days after minor stroke/TIA</li>
+            <li>💎 Normal or rising PaCO2 in acute asthma = impending respiratory failure</li>
+            <li>💎 Nimodipine for ALL SAH patients × 21 days (vasospasm prevention)</li>
+        </ul>
+        
+        <h3>Seizures</h3>
+        <ul>
+            <li>💎 Lorazepam IV first-line for status epilepticus</li>
+            <li>💎 Valproate teratogenic — avoid in pregnancy</li>
+            <li>💎 Carbamazepine: Check HLA-B*1502 (SJS risk in Asians)</li>
+        </ul>
+        
+        <h3>Headache</h3>
+        <ul>
+            <li>💎 Thunderclap headache = SAH until proven otherwise</li>
+            <li>💎 Cluster headache: High-flow O2 + sumatriptan SC; verapamil for prevention</li>
+            <li>💎 New headache >50 years = consider temporal arteritis</li>
+        </ul>
+        
+        <h3>Multiple Sclerosis</h3>
+        <ul>
+            <li>💎 INO (impaired adduction with nystagmus in abducting eye) = MLF lesion, classic for MS</li>
+            <li>💎 Oligoclonal bands in CSF in >90% of MS</li>
+            <li>💎 Natalizumab: Check JCV antibody (PML risk)</li>
+        </ul>
+        
+        <h3>Movement Disorders</h3>
+        <ul>
+            <li>💎 PD tremor: Rest, 4-6 Hz, asymmetric, pill-rolling</li>
+            <li>💎 Essential tremor: Action, higher frequency, bilateral, improves with alcohol</li>
+            <li>💎 Early falls + vertical gaze palsy = PSP</li>
+        </ul>
+        
+        <h3>Neuromuscular</h3>
+        <ul>
+            <li>💎 GBS: Ascending weakness + areflexia + albuminocytologic dissociation; steroids DON'T work</li>
+            <li>💎 Myasthenia: Fatigable weakness, AChR antibodies, thymoma association</li>
+            <li>💎 Aminoglycosides and fluoroquinolones worsen MG</li>
+        </ul>
+        
+        <h3>Dementia</h3>
+        <ul>
+            <li>💎 NPH triad: Wet, wobbly, wacky (incontinence, gait, dementia) — treatable!</li>
+            <li>💎 DLB: Visual hallucinations, parkinsonism, fluctuations; sensitive to antipsychotics</li>
+        </ul>
+        
+        <h3>CNS Infections</h3>
+        <ul>
+            <li>💎 Don't delay antibiotics for LP in suspected meningitis</li>
+            <li>💎 Dexamethasone before/with antibiotics in bacterial meningitis</li>
+            <li>💎 HSV encephalitis: Temporal lobe, start acyclovir empirically</li>
+        </ul>
+    </div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<footer>
+    <h3 style="margin: 0 0 10px;">🧠 ABIM Neurology Study Guide</h3>
+    <p style="opacity: 0.9; font-size: 0.9rem;">AAN • AHA/ASA Guidelines</p>
+    <div style="margin-top: 20px;">
+        <a href="index.html">📚 Clinical Suite</a>
+        <a href="im_guide.html">🩺 IM Guide</a>
+        <a href="cardio_study_guide.html">❤️ Cardio</a>
+        <a href="heme_onc_study_guide.html">🩸 Heme/Onc</a>
+    </div>
+</footer>
+
+<script>
+    const searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.display = (query === '' || section.textContent.toLowerCase().includes(query)) ? 'block' : 'none';
+        });
+    });
+    
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => backToTopBtn.classList.toggle('show', window.pageYOffset > 400));
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    
+    document.querySelectorAll('.section-header').forEach(header => {
+        header.addEventListener('click', () => header.parentElement.classList.toggle('collapsed'));
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,3232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>ABIM Gastroenterology Study Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        :root {
+            --primary: #065f46;
+            --primary-light: #047857;
+            --primary-dark: #064e3b;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --bg: #f0fdf4;
+            --card-bg: #ffffff;
+            --text: #1f2937;
+            --text-muted: #6b7280;
+            --border: #d1fae5;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --info: #0284c7;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 28px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(6, 95, 70, 0.3);
+        }
+        
+        .main-header h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+        
+        .main-header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .build-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        /* Navigation */
+        .nav-container {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 14px 16px;
+            position: sticky;
+            top: 82px;
+            z-index: 99;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x proximity;
+        }
+        
+        .nav-pills {
+            display: flex;
+            gap: 8px;
+            min-width: max-content;
+        }
+        
+        .nav-pill {
+            padding: 10px 16px;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-radius: 22px;
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            scroll-snap-align: start;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-pill:hover, .nav-pill:active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Search */
+        .search-container {
+            padding: 14px 20px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: block;
+            padding: 14px 22px;
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            -webkit-appearance: none;
+        }
+        
+        .search-box:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(6, 95, 70, 0.1);
+        }
+        
+        /* Main Content */
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Section Styling */
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            overflow: hidden;
+            scroll-margin-top: 170px;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 56px;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        .section-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        
+        .section-header .icon {
+            font-size: 1.4rem;
+        }
+        
+        .section-content {
+            padding: 24px;
+        }
+        
+        /* Topic Cards */
+        .topic {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 18px;
+            overflow: hidden;
+            scroll-margin-top: 170px;
+        }
+        
+        .topic-header {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            padding: 16px 20px;
+            border-bottom: 1px solid #a7f3d0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 52px;
+            -webkit-user-select: none;
+            user-select: none;
+            transition: opacity 0.15s;
+        }
+        
+        .topic-header:active {
+            opacity: 0.8;
+        }
+        
+        .topic-header h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .topic-header .badge {
+            background: var(--primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+        
+        .topic-content {
+            padding: 20px;
+        }
+        
+        .topic.collapsed .topic-content {
+            display: none;
+        }
+        
+        /* Subsections */
+        .subsection {
+            margin-bottom: 20px;
+        }
+        
+        .subsection-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+        
+        li {
+            margin-bottom: 7px;
+            line-height: 1.55;
+        }
+        
+        li strong {
+            color: var(--primary-dark);
+        }
+        
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        td {
+            padding: 11px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background: #f0fdf4;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Special Boxes */
+        .high-yield {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid var(--warning);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+        
+        .high-yield-title {
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .pearl-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 4px solid var(--info);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+        
+        .pearl-title {
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .danger-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 4px solid var(--danger);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+        
+        .danger-title {
+            font-weight: 700;
+            color: #991b1b;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .clinical-vignette {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left: 4px solid var(--success);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+        
+        .vignette-title {
+            font-weight: 700;
+            color: #166534;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .guideline-box {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            border-left: 4px solid #7c3aed;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+        
+        .guideline-title {
+            font-weight: 700;
+            color: #5b21b6;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        /* Mnemonic */
+        .mnemonic {
+            background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%);
+            border: 2px dashed #c026d3;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+            text-align: center;
+        }
+        
+        .mnemonic-title {
+            font-weight: 700;
+            color: #86198f;
+            margin-bottom: 8px;
+        }
+        
+        .mnemonic-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #a21caf;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Score Box */
+        .score-box {
+            background: linear-gradient(135deg, #fef9e7 0%, #fef3c7 100%);
+            border: 2px solid #f59e0b;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+        
+        .score-title {
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 52px;
+            height: 52px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.6rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(6, 95, 70, 0.35);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .back-to-top.show {
+            display: flex;
+        }
+        
+        .back-to-top:active {
+            transform: scale(0.95);
+        }
+        
+        /* Cross-reference links */
+        .cross-ref {
+            color: var(--info);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--info);
+        }
+        
+        /* Responsive - Mobile */
+        @media (max-width: 767px) {
+            .main-header { padding: 22px 16px; }
+            .main-header h1 { font-size: 1.35rem; }
+            .section-content { padding: 16px; }
+            .topic-content { padding: 16px; }
+            .nav-container { top: 74px; padding: 12px; }
+            .section { scroll-margin-top: 150px; }
+            .topic { scroll-margin-top: 150px; }
+            th, td { padding: 10px 12px; font-size: 0.85rem; }
+        }
+        
+        /* iPad Optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .content { 
+                max-width: 100%; 
+                padding: 24px 28px; 
+            }
+            .nav-pill {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                min-height: 48px;
+            }
+            .topic-header {
+                min-height: 58px;
+                padding: 18px 24px;
+            }
+            .topic-header h3 {
+                font-size: 1.1rem;
+            }
+            .section-header {
+                padding: 24px 28px;
+            }
+            .section-header h2 {
+                font-size: 1.3rem;
+            }
+            .topic-content, .section-content {
+                padding: 26px;
+            }
+            table {
+                font-size: 0.95rem;
+            }
+            th, td {
+                padding: 14px 16px;
+            }
+            .search-box {
+                font-size: 1.1rem;
+                padding: 16px 26px;
+            }
+            .back-to-top {
+                width: 58px;
+                height: 58px;
+                font-size: 1.9rem;
+                bottom: 36px;
+                right: 36px;
+            }
+            .high-yield, .pearl-box, .danger-box, .clinical-vignette, .guideline-box, .mnemonic, .score-box {
+                padding: 20px 24px;
+            }
+        }
+        
+        /* iPad Pro / Large Tablets */
+        @media (min-width: 1024px) and (max-width: 1366px) {
+            .content {
+                max-width: 980px;
+                padding: 28px 36px;
+            }
+        }
+        
+        /* Touch-friendly enhancements */
+        @media (pointer: coarse) {
+            .nav-pill, .topic-header, .section-header, button {
+                min-height: 44px;
+            }
+            a, button {
+                -webkit-tap-highlight-color: rgba(6, 95, 70, 0.15);
+            }
+        }
+        
+        /* Safe area for notched iPads */
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: max(0px, env(safe-area-inset-left));
+                padding-right: max(0px, env(safe-area-inset-right));
+                padding-bottom: max(60px, env(safe-area-inset-bottom));
+            }
+        }
+        
+        /* Prevent text selection on interactive elements */
+        .nav-pill, .topic-header, .section-header, button {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 30px 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        footer h3 {
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 22px;
+            margin: 5px;
+            display: inline-block;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        
+        footer a:hover, footer a:active {
+            background: rgba(255,255,255,0.35);
+        }
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <h1>🫁 ABIM Gastroenterology Study Guide <span class="build-badge">BUILD #1</span></h1>
+    <p class="subtitle">High-Yield Board Review • ACG/AGA/AASLD Guidelines • Evidence-Based</p>
+</header>
+
+<nav class="nav-container">
+    <div class="nav-pills">
+        <a href="#esophagus" class="nav-pill">Esophagus</a>
+        <a href="#stomach" class="nav-pill">Stomach/PUD</a>
+        <a href="#gi-bleed" class="nav-pill">GI Bleeding</a>
+        <a href="#small-bowel" class="nav-pill">Small Bowel</a>
+        <a href="#ibd" class="nav-pill">IBD</a>
+        <a href="#colon" class="nav-pill">Colon</a>
+        <a href="#crc-screening" class="nav-pill">CRC Screening</a>
+        <a href="#liver" class="nav-pill">Liver Disease</a>
+        <a href="#cirrhosis" class="nav-pill">Cirrhosis</a>
+        <a href="#hepatitis" class="nav-pill">Hepatitis</a>
+        <a href="#biliary" class="nav-pill">Biliary</a>
+        <a href="#pancreas" class="nav-pill">Pancreas</a>
+        <a href="#motility" class="nav-pill">Motility</a>
+        <a href="#nutrition" class="nav-pill">Nutrition</a>
+    </div>
+</nav>
+
+<div class="search-container">
+    <input type="text" class="search-box" id="searchBox" placeholder="Search topics, conditions, medications..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+</div>
+
+<main class="content">
+
+<!-- ======================= SECTION 1: ESOPHAGEAL DISORDERS ======================= -->
+<section class="section" id="esophagus">
+    <div class="section-header">
+        <h2>🔴 Esophageal Disorders</h2>
+        <span class="icon">🫁</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="gerd">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Gastroesophageal Reflux Disease (GERD)</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>Clinical diagnosis:</strong> Typical symptoms (heartburn, regurgitation) + response to PPI trial</li>
+                        <li><strong>EGD indications:</strong> Alarm symptoms, PPI non-response, long-standing symptoms (Barrett's screening)</li>
+                        <li><strong>pH monitoring:</strong> If diagnosis uncertain, refractory symptoms, pre-surgical evaluation</li>
+                        <li><strong>Alarm symptoms:</strong> Dysphagia, odynophagia, weight loss, anemia, GI bleeding</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACG GERD Guidelines (2022)</div>
+                    <strong>Treatment Approach:</strong>
+                    <ul>
+                        <li><strong>Lifestyle:</strong> Weight loss (if overweight), avoid late meals, elevate head of bed</li>
+                        <li><strong>PPI therapy:</strong> Standard dose × 8 weeks; if responsive, attempt to step down</li>
+                        <li><strong>H2RA:</strong> For mild/intermittent symptoms or as add-on for nocturnal symptoms</li>
+                        <li><strong>Refractory GERD:</strong> Confirm diagnosis (pH testing), optimize PPI timing (30-60 min before meals)</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: PPI Timing</div>
+                    <strong>PPIs work best when taken 30-60 minutes BEFORE meals</strong> (need active proton pumps to inhibit). Once-daily dosing should be before breakfast. Twice-daily = before breakfast and dinner.
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Extraesophageal Manifestations</div>
+                    <ul>
+                        <li>Chronic cough, asthma, laryngitis</li>
+                        <li>Dental erosions</li>
+                        <li><strong>Note:</strong> Less responsive to PPI therapy; ensure adequate GERD diagnosis before attributing to reflux</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 LONG-TERM PPI RISKS</div>
+                    <ul>
+                        <li><strong>C. difficile infection:</strong> Modest increased risk</li>
+                        <li><strong>Bone fractures:</strong> Minimal risk; calcium/vitamin D not routinely needed</li>
+                        <li><strong>Hypomagnesemia:</strong> Rare; check if on diuretics or symptoms develop</li>
+                        <li><strong>B12 deficiency:</strong> Consider monitoring in long-term users</li>
+                        <li><strong>CKD/AIN:</strong> Association reported; causality uncertain</li>
+                    </ul>
+                    <p><strong>Bottom line:</strong> Use lowest effective dose; benefits outweigh risks when indicated</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="barretts">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Barrett's Esophagus</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Definition & Diagnosis</div>
+                    <ul>
+                        <li><strong>Definition:</strong> Intestinal metaplasia of esophageal squamous epithelium (salmon-colored mucosa + goblet cells on biopsy)</li>
+                        <li><strong>Risk factors:</strong> Chronic GERD, male sex, Caucasian, obesity, smoking, family history</li>
+                        <li><strong>Screening:</strong> Consider in patients with chronic GERD (>5 years) AND multiple risk factors</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACG Barrett's Guidelines (2022)</div>
+                    <strong>Surveillance Intervals:</strong>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Dysplasia Grade</th>
+                                <th>Interval</th>
+                                <th>Management</th>
+                            </tr>
+                            <tr>
+                                <td>No dysplasia</td>
+                                <td>Every 3-5 years</td>
+                                <td>Continue PPI, surveillance</td>
+                            </tr>
+                            <tr>
+                                <td>Low-grade dysplasia</td>
+                                <td>Every 6-12 months OR ablation</td>
+                                <td>Endoscopic eradication therapy preferred</td>
+                            </tr>
+                            <tr>
+                                <td>High-grade dysplasia</td>
+                                <td>Endoscopic eradication</td>
+                                <td>RFA, EMR, or esophagectomy</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Endoscopic Eradication</div>
+                    <ul>
+                        <li><strong>Radiofrequency ablation (RFA):</strong> First-line for flat dysplasia</li>
+                        <li><strong>Endoscopic mucosal resection (EMR):</strong> For nodular/raised lesions</li>
+                        <li><strong>Goal:</strong> Complete eradication of intestinal metaplasia (CE-IM)</li>
+                        <li><strong>Continue surveillance</strong> after successful ablation (recurrence possible)</li>
+                    </ul>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE</div>
+                    <p><strong>Scenario:</strong> 58-year-old man with 15 years of GERD. EGD shows salmon-colored mucosa extending 4 cm above GE junction. Biopsy confirms intestinal metaplasia without dysplasia.</p>
+                    <p><strong>Answer:</strong> Barrett's esophagus without dysplasia. Continue PPI therapy. Repeat surveillance EGD in 3-5 years.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="achalasia">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Achalasia</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Pathophysiology & Presentation</div>
+                    <ul>
+                        <li><strong>Mechanism:</strong> Loss of inhibitory neurons in myenteric plexus → impaired LES relaxation + absent peristalsis</li>
+                        <li><strong>Symptoms:</strong> Progressive dysphagia to BOTH solids AND liquids, regurgitation of undigested food, chest pain, weight loss</li>
+                        <li><strong>Key clue:</strong> Dysphagia to liquids AND solids from onset suggests motility disorder (vs mechanical obstruction: solids → liquids)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>Barium swallow:</strong> "Bird's beak" appearance at GE junction, dilated esophagus</li>
+                        <li><strong>High-resolution manometry:</strong> Gold standard — absent peristalsis + impaired LES relaxation (IRP >15 mmHg)</li>
+                        <li><strong>EGD:</strong> To rule out pseudoachalasia (malignancy at GE junction)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Treatment</div>
+                    <ul>
+                        <li><strong>Pneumatic dilation:</strong> Effective; may require repeat; risk of perforation (2-5%)</li>
+                        <li><strong>Heller myotomy + fundoplication:</strong> Surgical; durable response; laparoscopic preferred</li>
+                        <li><strong>POEM (peroral endoscopic myotomy):</strong> Endoscopic; similar efficacy to surgery; higher GERD rates</li>
+                        <li><strong>Botox injection:</strong> Temporary effect (3-6 months); reserve for poor surgical candidates</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 PSEUDOACHALASIA</div>
+                    <strong>Always consider malignancy</strong> (especially gastric adenocarcinoma at GE junction) in:
+                    <ul>
+                        <li>Age >60 with new-onset symptoms</li>
+                        <li>Rapid symptom progression (&lt;1 year)</li>
+                        <li>Significant weight loss</li>
+                    </ul>
+                    <strong>EGD with careful inspection/biopsy of GE junction mandatory</strong>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="eoe">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Eosinophilic Esophagitis (EoE)</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li><strong>Demographics:</strong> Young adults, males > females, often with atopy (asthma, eczema, allergies)</li>
+                        <li><strong>Symptoms:</strong> Dysphagia (solids > liquids), food impaction, chest pain, heartburn</li>
+                        <li><strong>Key clue:</strong> Young patient with recurrent food impactions</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>EGD findings:</strong> Rings ("trachealization"), furrows, white exudates, strictures</li>
+                        <li><strong>Histology:</strong> ≥15 eosinophils/HPF in esophageal biopsies</li>
+                        <li><strong>Must exclude GERD:</strong> PPI trial or pH monitoring (note: some EoE is PPI-responsive)</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACG EoE Guidelines (2020)</div>
+                    <strong>Treatment Options:</strong>
+                    <ul>
+                        <li><strong>PPI:</strong> First-line therapy (PPI-responsive EoE is still EoE)</li>
+                        <li><strong>Topical steroids:</strong> Swallowed fluticasone or budesonide (oral viscous)</li>
+                        <li><strong>Dietary elimination:</strong> 6-food elimination or targeted elimination</li>
+                        <li><strong>Dupilumab:</strong> FDA-approved for EoE (IL-4/IL-13 inhibitor)</li>
+                        <li><strong>Dilation:</strong> For strictures; symptom relief, not disease-modifying</li>
+                    </ul>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE</div>
+                    <p><strong>Scenario:</strong> 28-year-old man with asthma presents with food impaction requiring emergent EGD. Scope shows esophageal rings and furrows. Biopsies show 45 eosinophils/HPF.</p>
+                    <p><strong>Answer:</strong> Eosinophilic esophagitis. Start PPI (first-line) or topical steroids.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="esoph-cancer">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Esophageal Cancer</h3>
+                <span class="badge">CORE</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Squamous Cell</th>
+                            <th>Adenocarcinoma</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Location</strong></td>
+                            <td>Upper/middle esophagus</td>
+                            <td>Distal esophagus/GE junction</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Risk factors</strong></td>
+                            <td>Alcohol, tobacco, caustic injury, achalasia, Plummer-Vinson, hot beverages</td>
+                            <td>Barrett's esophagus, GERD, obesity, male sex</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trends</strong></td>
+                            <td>Decreasing in US</td>
+                            <td>Increasing (now most common in US)</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Presentation & Staging</div>
+                    <ul>
+                        <li><strong>Symptoms:</strong> Progressive dysphagia (solids → liquids), weight loss, odynophagia</li>
+                        <li><strong>Staging:</strong> EUS (T and N staging), CT chest/abdomen, PET-CT</li>
+                        <li><strong>Treatment:</strong> Depends on stage; surgery, chemoradiation, or palliation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 2: STOMACH & PUD ======================= -->
+<section class="section" id="stomach">
+    <div class="section-header">
+        <h2>🔴 Stomach & Peptic Ulcer Disease</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="pud">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Peptic Ulcer Disease</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Etiology</div>
+                    <ul>
+                        <li><strong>H. pylori:</strong> Most common cause globally; 70-90% of duodenal ulcers, 50-70% of gastric ulcers</li>
+                        <li><strong>NSAIDs:</strong> Second most common cause; direct mucosal injury + COX-1 inhibition</li>
+                        <li><strong>Stress ulcers:</strong> ICU patients (mechanical ventilation, coagulopathy)</li>
+                        <li><strong>Zollinger-Ellison:</strong> Gastrinoma → gastric acid hypersecretion</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">H. pylori Testing</div>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Test</th>
+                                <th>Advantages</th>
+                                <th>Limitations</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Urea breath test</strong></td>
+                                <td>High accuracy, non-invasive, confirms active infection</td>
+                                <td>Hold PPI 2 weeks, antibiotics 4 weeks before</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Stool antigen</strong></td>
+                                <td>High accuracy, non-invasive</td>
+                                <td>Same hold requirements</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Serology</strong></td>
+                                <td>No hold required</td>
+                                <td>Cannot confirm active infection; remains positive after eradication</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Biopsy (histology, rapid urease)</strong></td>
+                                <td>Can assess for pathology</td>
+                                <td>Invasive; patchy infection may cause false negative</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACG H. pylori Guidelines (2017)</div>
+                    <strong>First-Line Regimens (14 days preferred):</strong>
+                    <ul>
+                        <li><strong>Bismuth quadruple:</strong> PPI + bismuth + metronidazole + tetracycline (preferred if prior macrolide exposure)</li>
+                        <li><strong>Concomitant therapy:</strong> PPI + amoxicillin + clarithromycin + metronidazole</li>
+                        <li><strong>Triple therapy (if local clarithromycin resistance &lt;15%):</strong> PPI + amoxicillin + clarithromycin</li>
+                    </ul>
+                    <strong>Confirm eradication:</strong> Urea breath test or stool antigen ≥4 weeks after completing therapy
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Who to Test for H. pylori</div>
+                    <ul>
+                        <li>Active PUD or history of PUD</li>
+                        <li>Low-grade gastric MALT lymphoma</li>
+                        <li>After resection of early gastric cancer</li>
+                        <li>Uninvestigated dyspepsia (test-and-treat strategy)</li>
+                        <li>Long-term NSAID use (test and treat before starting)</li>
+                        <li>Unexplained iron deficiency anemia, ITP</li>
+                    </ul>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE</div>
+                    <p><strong>Scenario:</strong> Patient completes 14-day triple therapy for H. pylori-positive duodenal ulcer. How do you confirm eradication?</p>
+                    <p><strong>Answer:</strong> Urea breath test or stool antigen at least 4 weeks after treatment completion and 2 weeks after stopping PPI. Do NOT use serology (remains positive).</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="gastritis">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Gastritis & Gastropathy</h3>
+                <span class="badge">CORE</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Autoimmune Gastritis</div>
+                    <ul>
+                        <li><strong>Mechanism:</strong> Antibodies against parietal cells and intrinsic factor → achlorhydria, B12 deficiency</li>
+                        <li><strong>Location:</strong> Body/fundus (parietal cell distribution)</li>
+                        <li><strong>Associations:</strong> Pernicious anemia, other autoimmune conditions (thyroiditis)</li>
+                        <li><strong>Cancer risk:</strong> Increased risk of gastric adenocarcinoma and carcinoid tumors</li>
+                        <li><strong>Labs:</strong> Elevated gastrin (due to loss of acid feedback), low B12, anti-parietal cell antibodies</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">H. pylori Gastritis</div>
+                    <ul>
+                        <li><strong>Location:</strong> Antrum predominantly (may progress to pangastritis)</li>
+                        <li><strong>Associations:</strong> PUD, gastric adenocarcinoma, MALT lymphoma</li>
+                        <li><strong>Treatment:</strong> Eradication therapy</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: MALT Lymphoma</div>
+                    <ul>
+                        <li>Low-grade B-cell lymphoma associated with H. pylori</li>
+                        <li><strong>First-line treatment:</strong> H. pylori eradication (70-80% remission in localized disease)</li>
+                        <li>Surveillance EGD after eradication</li>
+                        <li>Chemo/radiation for persistent or advanced disease</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="zes">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Zollinger-Ellison Syndrome</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li><strong>Etiology:</strong> Gastrin-secreting tumor (gastrinoma), usually duodenum or pancreas</li>
+                        <li><strong>Presentation:</strong> Severe/refractory PUD, multiple ulcers, ulcers in unusual locations (distal duodenum, jejunum), diarrhea</li>
+                        <li><strong>Associations:</strong> MEN1 (20-30% of cases) — check for hyperparathyroidism, pituitary tumors</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>Fasting serum gastrin:</strong> Markedly elevated (>1000 pg/mL highly suggestive; >10× ULN virtually diagnostic)</li>
+                        <li><strong>Must be off PPI</strong> (PPIs elevate gastrin; hold 1-2 weeks if possible)</li>
+                        <li><strong>Gastric pH:</strong> Must be <2 (excludes achlorhydria as cause of elevated gastrin)</li>
+                        <li><strong>Secretin stimulation test:</strong> Paradoxical rise in gastrin (>120 pg/mL increase)</li>
+                        <li><strong>Tumor localization:</strong> CT, MRI, EUS, somatostatin receptor scintigraphy (Octreoscan) or Ga-68 DOTATATE PET</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 CAUSES OF ELEVATED GASTRIN</div>
+                    <ul>
+                        <li><strong>PPI use:</strong> Most common cause (stop before testing)</li>
+                        <li><strong>H. pylori infection</strong></li>
+                        <li><strong>Atrophic gastritis / pernicious anemia:</strong> (gastric pH will be high)</li>
+                        <li><strong>Renal failure:</strong> Decreased gastrin clearance</li>
+                        <li><strong>Retained antrum</strong> post-surgery</li>
+                        <li><strong>Gastrinoma (ZES)</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 3: GI BLEEDING ======================= -->
+<section class="section" id="gi-bleed">
+    <div class="section-header">
+        <h2>🩸 Gastrointestinal Bleeding</h2>
+        <span class="icon">🚨</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="ugib">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Upper GI Bleeding</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Common Causes</div>
+                    <ul>
+                        <li><strong>Peptic ulcer disease:</strong> Most common (30-50%)</li>
+                        <li><strong>Erosive gastritis/esophagitis</strong></li>
+                        <li><strong>Esophageal/gastric varices:</strong> In cirrhosis</li>
+                        <li><strong>Mallory-Weiss tear:</strong> Mucosal tear at GE junction after vomiting</li>
+                        <li><strong>Malignancy</strong></li>
+                        <li><strong>Dieulafoy lesion:</strong> Submucosal artery, can cause massive bleeding</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACG UGIB Guidelines (2021)</div>
+                    <strong>Initial Management:</strong>
+                    <ul>
+                        <li><strong>Resuscitation:</strong> IV access, fluids, type and crossmatch</li>
+                        <li><strong>Transfusion threshold:</strong> Hemoglobin &lt;7 g/dL (restrictive strategy preferred); higher threshold if CAD or hemodynamic instability</li>
+                        <li><strong>PPI:</strong> IV PPI infusion (no benefit for pre-endoscopy bolus in all patients)</li>
+                        <li><strong>Prokinetic:</strong> Erythromycin 250mg IV 30-90 min before EGD may improve visualization</li>
+                        <li><strong>Timing of EGD:</strong> Within 24 hours; urgent (&lt;12h) if hemodynamic instability or high-risk features</li>
+                    </ul>
+                </div>
+                
+                <div class="score-box">
+                    <div class="score-title">📊 GLASGOW-BLATCHFORD SCORE (GBS)</div>
+                    <ul>
+                        <li>BUN, hemoglobin, systolic BP, heart rate, melena, syncope, hepatic disease, cardiac failure</li>
+                        <li><strong>Score 0-1:</strong> Low risk; may consider outpatient management</li>
+                        <li><strong>Higher scores:</strong> Need intervention or transfusion more likely</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Forrest Classification (Ulcer Bleeding)</div>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Class</th>
+                                <th>Description</th>
+                                <th>Rebleed Risk</th>
+                                <th>Endoscopic Therapy</th>
+                            </tr>
+                            <tr>
+                                <td>Ia</td>
+                                <td>Spurting hemorrhage</td>
+                                <td>90%</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Ib</td>
+                                <td>Oozing hemorrhage</td>
+                                <td>50%</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>IIa</td>
+                                <td>Visible vessel</td>
+                                <td>40-50%</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>IIb</td>
+                                <td>Adherent clot</td>
+                                <td>20-30%</td>
+                                <td>Consider (remove clot, treat underlying)</td>
+                            </tr>
+                            <tr>
+                                <td>IIc</td>
+                                <td>Flat pigmented spot</td>
+                                <td>10%</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>III</td>
+                                <td>Clean base</td>
+                                <td>5%</td>
+                                <td>No</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Post-Endoscopy Management</div>
+                    <ul>
+                        <li><strong>High-risk stigmata (Ia, Ib, IIa, IIb):</strong> IV PPI infusion (80mg bolus then 8 mg/hr) × 72 hours</li>
+                        <li><strong>Low-risk stigmata (IIc, III):</strong> Oral PPI; can discharge early</li>
+                        <li><strong>Test and treat H. pylori</strong> in all PUD bleeding</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="variceal-bleed">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Variceal Hemorrhage</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 VARICEAL BLEEDING IS A MEDICAL EMERGENCY</div>
+                    <strong>Mortality 10-20% per episode</strong>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 AASLD Variceal Bleeding Guidelines</div>
+                    <strong>Acute Management:</strong>
+                    <ul>
+                        <li><strong>Resuscitation:</strong> Restrictive transfusion (Hgb target 7-8 g/dL); avoid over-transfusion (increases portal pressure)</li>
+                        <li><strong>Vasoactive drugs:</strong> Octreotide 50 mcg bolus → 50 mcg/hr infusion (or terlipressin where available) × 2-5 days</li>
+                        <li><strong>Antibiotics:</strong> Ceftriaxone 1g IV daily × 7 days (reduces mortality!)</li>
+                        <li><strong>EGD within 12 hours:</strong> Endoscopic band ligation (EBL) preferred over sclerotherapy</li>
+                        <li><strong>Balloon tamponade:</strong> Bridge to definitive therapy if uncontrolled bleeding</li>
+                        <li><strong>TIPS:</strong> For refractory bleeding or early TIPS in high-risk patients (Child C or B with active bleeding)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Secondary Prophylaxis</div>
+                    <ul>
+                        <li><strong>Non-selective beta-blocker:</strong> Propranolol or nadolol (target HR 55-60 or 25% reduction)</li>
+                        <li><strong>PLUS serial EBL</strong> until varices eradicated</li>
+                        <li><strong>Carvedilol:</strong> May be more effective than traditional NSBB</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Primary Prophylaxis</div>
+                    <ul>
+                        <li><strong>Screen for varices:</strong> All patients with cirrhosis at diagnosis</li>
+                        <li><strong>No varices:</strong> Repeat EGD in 2-3 years (or 1 year if decompensated)</li>
+                        <li><strong>Small varices:</strong> NSBB or surveillance</li>
+                        <li><strong>Medium/large varices:</strong> NSBB OR endoscopic band ligation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="lgib">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Lower GI Bleeding</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Common Causes</div>
+                    <ul>
+                        <li><strong>Diverticulosis:</strong> Most common cause of massive LGIB; painless, often right-sided</li>
+                        <li><strong>Angiodysplasia (AVMs):</strong> Especially in elderly, CKD, aortic stenosis</li>
+                        <li><strong>Hemorrhoids:</strong> Most common cause of minor LGIB</li>
+                        <li><strong>Colorectal cancer/polyps</strong></li>
+                        <li><strong>Colitis:</strong> IBD, ischemic, infectious, radiation</li>
+                        <li><strong>Post-polypectomy bleeding</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACG LGIB Guidelines (2016)</div>
+                    <strong>Evaluation:</strong>
+                    <ul>
+                        <li><strong>Colonoscopy:</strong> Preferred first-line diagnostic and therapeutic modality</li>
+                        <li><strong>Timing:</strong> Within 24 hours after bowel prep (may be urgent if hemodynamically significant)</li>
+                        <li><strong>CTA:</strong> If ongoing bleeding and colonoscopy not feasible/non-diagnostic</li>
+                        <li><strong>Tagged RBC scan:</strong> Detects slower bleeds; localizes for angiography</li>
+                        <li><strong>Angiography:</strong> For ongoing brisk bleeding; allows embolization</li>
+                    </ul>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE</div>
+                    <p><strong>Scenario:</strong> 72-year-old with painless, large-volume maroon stool. Hemodynamically stable after resuscitation. No prior colonoscopy.</p>
+                    <p><strong>Answer:</strong> Likely diverticular bleed. Colonoscopy after bowel prep within 24 hours for diagnosis and potential therapy.</p>
+                </div>
+                
+                <div class="pearl-box">
+                    <div class="pearl-title">💎 HEYDE SYNDROME</div>
+                    GI bleeding from angiodysplasia + aortic stenosis. Mechanism: Acquired von Willebrand syndrome (high shear stress across stenotic valve destroys vWF multimers). Treatment: AVR can resolve bleeding.
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 4: SMALL BOWEL ======================= -->
+<section class="section" id="small-bowel">
+    <div class="section-header">
+        <h2>🔬 Small Bowel Disorders</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="celiac">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Celiac Disease</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Presentation</div>
+                    <ul>
+                        <li><strong>Classic:</strong> Diarrhea, steatorrhea, weight loss, abdominal bloating</li>
+                        <li><strong>Non-classic:</strong> Iron deficiency anemia, osteoporosis, elevated transaminases, dermatitis herpetiformis</li>
+                        <li><strong>Silent:</strong> Positive serology + villous atrophy but no symptoms</li>
+                        <li><strong>Associations:</strong> Type 1 DM, autoimmune thyroiditis, Down syndrome, IgA deficiency</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>First-line test:</strong> IgA tissue transglutaminase (TTG-IgA) — high sensitivity and specificity</li>
+                        <li><strong>Check total IgA:</strong> IgA deficiency causes false negative TTG-IgA; use IgG-based tests if deficient</li>
+                        <li><strong>Must be on gluten-containing diet</strong> at time of testing</li>
+                        <li><strong>Confirmation:</strong> EGD with duodenal biopsies (≥4 samples from duodenum)</li>
+                        <li><strong>Histology:</strong> Villous atrophy, crypt hyperplasia, intraepithelial lymphocytosis</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACG Celiac Guidelines (2023)</div>
+                    <strong>Treatment:</strong>
+                    <ul>
+                        <li><strong>Strict lifelong gluten-free diet</strong> (avoid wheat, barley, rye)</li>
+                        <li>Dietitian referral essential</li>
+                        <li>Screen for nutritional deficiencies (iron, B12, folate, vitamin D, calcium)</li>
+                        <li>Pneumococcal vaccination (functional hyposplenism)</li>
+                        <li>DEXA scan for bone density</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Non-Responsive Celiac</div>
+                    <strong>If symptoms persist despite GFD:</strong>
+                    <ol>
+                        <li>Ongoing gluten exposure (most common)</li>
+                        <li>Other diagnosis (IBS, lactose intolerance, microscopic colitis, SIBO)</li>
+                        <li>Refractory celiac disease</li>
+                        <li>Enteropathy-associated T-cell lymphoma (EATL) — rare but serious</li>
+                    </ol>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE</div>
+                    <p><strong>Scenario:</strong> 35-year-old woman with iron deficiency anemia unresponsive to oral iron, mild diarrhea, and a pruritic, vesicular rash on elbows and knees.</p>
+                    <p><strong>Answer:</strong> Celiac disease with dermatitis herpetiformis. Test TTG-IgA, confirm with duodenal biopsies. Treat with gluten-free diet (rash also responds).</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="sibo">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Small Intestinal Bacterial Overgrowth (SIBO)</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Risk Factors</div>
+                    <ul>
+                        <li><strong>Anatomic:</strong> Blind loops, strictures, surgical anastomoses, diverticula</li>
+                        <li><strong>Motility disorders:</strong> Scleroderma, diabetic gastroparesis, chronic intestinal pseudo-obstruction</li>
+                        <li><strong>Achlorhydria:</strong> PPI use, atrophic gastritis</li>
+                        <li><strong>Immune deficiency</strong></li>
+                        <li><strong>Cirrhosis</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>Glucose or lactulose breath test:</strong> Measures hydrogen/methane (positive = early rise)</li>
+                        <li><strong>Jejunal aspirate and culture:</strong> Gold standard (>10³ CFU/mL) but invasive, rarely used</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Treatment</div>
+                    <ul>
+                        <li><strong>Rifaximin 550mg TID × 14 days:</strong> Preferred; non-absorbed, well-tolerated</li>
+                        <li><strong>Alternatives:</strong> Ciprofloxacin, metronidazole, amoxicillin-clavulanate</li>
+                        <li><strong>Recurrence common:</strong> May need cyclical or long-term antibiotics</li>
+                        <li><strong>Address underlying cause</strong> when possible</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="malabsorption">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Malabsorption Syndromes</h3>
+                <span class="badge">CORE</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Condition</th>
+                            <th>Key Features</th>
+                            <th>Diagnosis</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Lactose intolerance</strong></td>
+                            <td>Bloating, diarrhea, gas after dairy</td>
+                            <td>Lactose breath test or empiric trial</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pancreatic insufficiency</strong></td>
+                            <td>Steatorrhea, weight loss; chronic pancreatitis, CF</td>
+                            <td>Low fecal elastase (&lt;200); treat with PERT</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bile acid malabsorption</strong></td>
+                            <td>Watery diarrhea; post-cholecystectomy, ileal disease/resection</td>
+                            <td>SeHCAT scan; empiric cholestyramine trial</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tropical sprue</strong></td>
+                            <td>Travel to endemic area; megaloblastic anemia</td>
+                            <td>Duodenal biopsy; responds to antibiotics + folate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Whipple disease</strong></td>
+                            <td>Diarrhea, weight loss, arthralgias, CNS symptoms</td>
+                            <td>PAS-positive macrophages on biopsy; PCR for T. whipplei</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Whipple Disease</div>
+                    <ul>
+                        <li><strong>Classic triad:</strong> Diarrhea, weight loss, arthralgias (arthritis may precede GI symptoms by years)</li>
+                        <li><strong>Other features:</strong> Cardiac involvement, CNS disease, lymphadenopathy</li>
+                        <li><strong>Treatment:</strong> Ceftriaxone × 2 weeks → TMP-SMX × 1 year</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 5: IBD ======================= -->
+<section class="section" id="ibd">
+    <div class="section-header">
+        <h2>🔥 Inflammatory Bowel Disease</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="uc">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Ulcerative Colitis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Key Features</div>
+                    <ul>
+                        <li><strong>Distribution:</strong> Continuous inflammation, starts at rectum, extends proximally</li>
+                        <li><strong>Depth:</strong> Mucosal and submucosal only</li>
+                        <li><strong>Symptoms:</strong> Bloody diarrhea, urgency, tenesmus</li>
+                        <li><strong>Endoscopy:</strong> Erythema, friability, loss of vascular pattern, pseudopolyps</li>
+                        <li><strong>Histology:</strong> Crypt abscesses, crypt architectural distortion</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 AGA/ACG UC Treatment Guidelines</div>
+                    <strong>Mild-Moderate (Distal):</strong>
+                    <ul>
+                        <li>Topical mesalamine (suppository for proctitis, enema for left-sided) — most effective</li>
+                        <li>Oral + topical mesalamine for extensive disease</li>
+                    </ul>
+                    <strong>Moderate-Severe:</strong>
+                    <ul>
+                        <li>Oral corticosteroids for induction (not maintenance)</li>
+                        <li>Thiopurines (azathioprine, 6-MP) for maintenance</li>
+                        <li>Biologics: Anti-TNF (infliximab, adalimumab), vedolizumab (gut-selective), ustekinumab, tofacitinib (JAK inhibitor)</li>
+                    </ul>
+                    <strong>Acute Severe UC (Fulminant):</strong>
+                    <ul>
+                        <li>IV corticosteroids (methylprednisolone 60mg/day)</li>
+                        <li>If no response in 3-5 days: infliximab, cyclosporine, or colectomy</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 TOXIC MEGACOLON</div>
+                    <ul>
+                        <li><strong>Definition:</strong> Colonic dilation >6 cm + systemic toxicity</li>
+                        <li><strong>Management:</strong> NPO, NG decompression, IV steroids, broad-spectrum antibiotics</li>
+                        <li><strong>Avoid:</strong> Opioids, anticholinergics, colonoscopy</li>
+                        <li><strong>Surgery if:</strong> Perforation, no improvement in 24-72 hours</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: UC Cancer Surveillance</div>
+                    <ul>
+                        <li><strong>Start surveillance colonoscopy</strong> 8 years after diagnosis</li>
+                        <li><strong>Interval:</strong> Every 1-3 years depending on risk factors</li>
+                        <li><strong>Higher risk:</strong> Pancolitis, PSC, family history of CRC, prior dysplasia</li>
+                        <li><strong>Chromoendoscopy</strong> with targeted biopsies preferred over random biopsies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="crohns">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Crohn's Disease</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Key Features</div>
+                    <ul>
+                        <li><strong>Distribution:</strong> Any part of GI tract (mouth to anus); skip lesions; terminal ileum most common</li>
+                        <li><strong>Depth:</strong> Transmural inflammation</li>
+                        <li><strong>Symptoms:</strong> Abdominal pain, diarrhea (often non-bloody), weight loss</li>
+                        <li><strong>Endoscopy:</strong> Aphthous ulcers, cobblestoning, strictures</li>
+                        <li><strong>Histology:</strong> Non-caseating granulomas (present in ~30%)</li>
+                    </ul>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Ulcerative Colitis</th>
+                            <th>Crohn's Disease</th>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td>Colon only (continuous from rectum)</td>
+                            <td>Mouth to anus (skip lesions)</td>
+                        </tr>
+                        <tr>
+                            <td>Rectal involvement</td>
+                            <td>Always</td>
+                            <td>Often spared</td>
+                        </tr>
+                        <tr>
+                            <td>Depth</td>
+                            <td>Mucosal</td>
+                            <td>Transmural</td>
+                        </tr>
+                        <tr>
+                            <td>Complications</td>
+                            <td>Toxic megacolon, cancer</td>
+                            <td>Fistulas, strictures, abscesses</td>
+                        </tr>
+                        <tr>
+                            <td>Smoking</td>
+                            <td>Protective</td>
+                            <td>Worsens disease</td>
+                        </tr>
+                        <tr>
+                            <td>Surgery curative?</td>
+                            <td>Yes (colectomy)</td>
+                            <td>No (recurrence common)</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Crohn's Complications</div>
+                    <ul>
+                        <li><strong>Strictures:</strong> Inflammatory (treat medically) vs fibrotic (may need dilation/surgery)</li>
+                        <li><strong>Fistulas:</strong> Perianal, enterocutaneous, enterovesical, enterovaginal</li>
+                        <li><strong>Abscesses:</strong> Percutaneous drainage + antibiotics; rule out before starting biologics</li>
+                        <li><strong>B12 deficiency:</strong> Terminal ileal disease/resection</li>
+                        <li><strong>Bile acid diarrhea:</strong> Ileal resection >100 cm</li>
+                        <li><strong>Oxalate kidney stones:</strong> Fat malabsorption → increased oxalate absorption</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Treatment Approach</div>
+                    <ul>
+                        <li><strong>Mild:</strong> Budesonide (ileal/right colon), mesalamine less effective than in UC</li>
+                        <li><strong>Moderate-Severe:</strong> Biologics (anti-TNF, vedolizumab, ustekinumab) ± immunomodulators</li>
+                        <li><strong>Perianal disease:</strong> MRI for fistula mapping, antibiotics (ciprofloxacin + metronidazole), anti-TNF agents</li>
+                        <li><strong>Post-surgical prophylaxis:</strong> Anti-TNF or thiopurines to prevent recurrence</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Biologics Safety</div>
+                    <ul>
+                        <li><strong>Before starting anti-TNF:</strong> Screen for latent TB (PPD/IGRA), Hepatitis B (HBsAg, anti-HBc, anti-HBs)</li>
+                        <li><strong>Avoid live vaccines</strong> on immunosuppression</li>
+                        <li><strong>Anti-TNF risks:</strong> Infections, reactivation of TB/HBV, demyelination, heart failure exacerbation, drug-induced lupus</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="ibd-eims">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Extraintestinal Manifestations</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>System</th>
+                            <th>Manifestation</th>
+                            <th>Correlates with IBD Activity?</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Musculoskeletal</strong></td>
+                            <td>Peripheral arthritis (type 1)</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Axial arthropathy/AS</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Skin</strong></td>
+                            <td>Erythema nodosum</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Pyoderma gangrenosum</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eye</strong></td>
+                            <td>Episcleritis</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Uveitis</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hepatobiliary</strong></td>
+                            <td>Primary sclerosing cholangitis</td>
+                            <td>No (UC >> Crohn's)</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="pearl-box">
+                    <div class="pearl-title">💎 PSC-IBD ASSOCIATION</div>
+                    <ul>
+                        <li>70-80% of PSC patients have IBD (usually UC)</li>
+                        <li>PSC-IBD patients have HIGHER risk of colorectal cancer</li>
+                        <li>Annual surveillance colonoscopy recommended from PSC diagnosis</li>
+                        <li>Colectomy does NOT prevent PSC progression</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 6: COLON ======================= -->
+<section class="section" id="colon">
+    <div class="section-header">
+        <h2>🔵 Colon Disorders</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="diverticular">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Diverticular Disease</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diverticulosis</div>
+                    <ul>
+                        <li><strong>Definition:</strong> Outpouchings of colonic mucosa through muscular wall</li>
+                        <li><strong>Location:</strong> Left-sided (sigmoid) in Western populations; right-sided in Asian populations</li>
+                        <li><strong>Risk factors:</strong> Age, low fiber diet, obesity, sedentary lifestyle</li>
+                        <li><strong>Usually asymptomatic;</strong> may cause painless bleeding</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Acute Diverticulitis</div>
+                    <ul>
+                        <li><strong>Presentation:</strong> LLQ pain, fever, leukocytosis</li>
+                        <li><strong>Diagnosis:</strong> CT abdomen/pelvis with contrast (preferred)</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 AGA Diverticulitis Guidelines (2015)</div>
+                    <strong>Uncomplicated Diverticulitis:</strong>
+                    <ul>
+                        <li><strong>Mild:</strong> Outpatient management; antibiotics now selective (not always required)</li>
+                        <li><strong>If antibiotics used:</strong> Ciprofloxacin + metronidazole OR amoxicillin-clavulanate × 7-10 days</li>
+                        <li>Clear liquid diet advancing as tolerated</li>
+                    </ul>
+                    <strong>Complicated Diverticulitis:</strong>
+                    <ul>
+                        <li><strong>Abscess &lt;3 cm:</strong> IV antibiotics alone</li>
+                        <li><strong>Abscess ≥3 cm:</strong> Percutaneous drainage + antibiotics</li>
+                        <li><strong>Perforation/peritonitis:</strong> Surgical intervention</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Colonoscopy After Diverticulitis</div>
+                    <ul>
+                        <li><strong>Perform colonoscopy 6-8 weeks after acute episode</strong> to rule out malignancy</li>
+                        <li>Especially important if not recently screened</li>
+                        <li>Elective sigmoid colectomy: consider after complicated diverticulitis or recurrent episodes in select patients</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="microscopic-colitis">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Microscopic Colitis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li><strong>Presentation:</strong> Chronic watery diarrhea (non-bloody), often nocturnal</li>
+                        <li><strong>Demographics:</strong> Middle-aged to elderly women</li>
+                        <li><strong>Colonoscopy:</strong> NORMAL appearing mucosa</li>
+                        <li><strong>Diagnosis:</strong> Random colonic biopsies (must biopsy even if mucosa looks normal)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Subtypes</div>
+                    <ul>
+                        <li><strong>Collagenous colitis:</strong> Thickened subepithelial collagen band (>10 μm)</li>
+                        <li><strong>Lymphocytic colitis:</strong> Increased intraepithelial lymphocytes (>20/100 epithelial cells)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Treatment</div>
+                    <ul>
+                        <li><strong>First:</strong> Stop offending medications (NSAIDs, PPIs, SSRIs)</li>
+                        <li><strong>First-line therapy:</strong> Budesonide 9mg daily × 6-8 weeks (highly effective)</li>
+                        <li><strong>Maintenance:</strong> May need low-dose budesonide for relapsing disease</li>
+                        <li><strong>Alternatives:</strong> Bismuth, cholestyramine, mesalamine</li>
+                    </ul>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE</div>
+                    <p><strong>Scenario:</strong> 62-year-old woman with 6 months of watery diarrhea. Colonoscopy shows normal mucosa. Random biopsies show thickened collagen band.</p>
+                    <p><strong>Answer:</strong> Collagenous colitis. Treat with budesonide.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="ischemic-colitis">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Ischemic Colitis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li><strong>Demographics:</strong> Elderly with cardiovascular risk factors</li>
+                        <li><strong>Presentation:</strong> Sudden onset crampy abdominal pain + bloody diarrhea</li>
+                        <li><strong>Location:</strong> "Watershed" areas — splenic flexure, rectosigmoid junction</li>
+                        <li><strong>Rectum usually spared</strong> (dual blood supply)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis & Management</div>
+                    <ul>
+                        <li><strong>CT:</strong> Colonic wall thickening, thumbprinting</li>
+                        <li><strong>Colonoscopy:</strong> Segmental erythema, edema, ulcerations; "single stripe sign"</li>
+                        <li><strong>Treatment:</strong> Supportive (bowel rest, IV fluids, antibiotics if severe)</li>
+                        <li><strong>Most cases self-limited;</strong> surgery for perforation, gangrene, or stricture</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 ACUTE MESENTERIC ISCHEMIA</div>
+                    <strong>Different from ischemic colitis!</strong>
+                    <ul>
+                        <li><strong>Small bowel involvement;</strong> pain out of proportion to exam</li>
+                        <li><strong>Causes:</strong> Arterial embolism (AF), arterial thrombosis, venous thrombosis, NOMI</li>
+                        <li><strong>CT angiography</strong> for diagnosis</li>
+                        <li><strong>Emergency:</strong> Surgical exploration, revascularization, resection of necrotic bowel</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="ibs">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Irritable Bowel Syndrome</h3>
+                <span class="badge">CORE</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Rome IV Criteria</div>
+                    Recurrent abdominal pain ≥1 day/week (on average) for past 3 months, associated with ≥2 of:
+                    <ul>
+                        <li>Related to defecation</li>
+                        <li>Change in stool frequency</li>
+                        <li>Change in stool form/appearance</li>
+                    </ul>
+                    <strong>Subtypes:</strong> IBS-D (diarrhea), IBS-C (constipation), IBS-M (mixed)
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Treatment by Subtype</div>
+                    <ul>
+                        <li><strong>General:</strong> Fiber supplementation, diet modification (low FODMAP)</li>
+                        <li><strong>IBS-D:</strong> Loperamide, rifaximin, eluxadoline, alosetron (women with severe IBS-D)</li>
+                        <li><strong>IBS-C:</strong> Linaclotide, lubiprostone, plecanatide, tegaserod (women &lt;65)</li>
+                        <li><strong>Pain-predominant:</strong> TCAs (amitriptyline), SSRIs, antispasmodics (dicyclomine, hyoscyamine)</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: When to Test Further</div>
+                    <strong>Alarm features requiring workup:</strong>
+                    <ul>
+                        <li>Age >50 without prior colonoscopy</li>
+                        <li>Rectal bleeding, unintentional weight loss</li>
+                        <li>Nocturnal symptoms (waking from sleep)</li>
+                        <li>Family history of CRC, IBD, celiac</li>
+                        <li>Anemia, elevated inflammatory markers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 7: CRC SCREENING ======================= -->
+<section class="section" id="crc-screening">
+    <div class="section-header">
+        <h2>🔬 Colorectal Cancer Screening</h2>
+        <span class="icon">📊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="crc-average">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Average Risk Screening</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 USPSTF / ACS / ACG Guidelines</div>
+                    <strong>Start screening at age 45</strong> (updated from 50) for average-risk individuals
+                    <br><strong>Continue until age 75;</strong> individualize 76-85; stop after 85
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Test</th>
+                            <th>Interval</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Colonoscopy</strong></td>
+                            <td>Every 10 years</td>
+                            <td>Gold standard; diagnostic and therapeutic</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FIT (fecal immunochemical)</strong></td>
+                            <td>Annual</td>
+                            <td>Preferred stool test; detects human hemoglobin</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FIT-DNA (Cologuard)</strong></td>
+                            <td>Every 3 years</td>
+                            <td>Higher sensitivity than FIT alone; more false positives</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CT colonography</strong></td>
+                            <td>Every 5 years</td>
+                            <td>Requires bowel prep; colonoscopy if abnormal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Flexible sigmoidoscopy</strong></td>
+                            <td>Every 5 years (or 10 with annual FIT)</td>
+                            <td>Limited to distal colon</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Positive Stool Test</div>
+                    <strong>Any positive stool test (FIT, FIT-DNA, gFOBT) requires colonoscopy for follow-up.</strong> Do not repeat the stool test.
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="polyp-surveillance">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Post-Polypectomy Surveillance</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 USMSTF Post-Polypectomy Guidelines (2020)</div>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Baseline Colonoscopy Findings</th>
+                                <th>Surveillance Interval</th>
+                            </tr>
+                            <tr>
+                                <td>Normal colonoscopy</td>
+                                <td>10 years</td>
+                            </tr>
+                            <tr>
+                                <td>1-2 tubular adenomas &lt;10mm</td>
+                                <td>7-10 years</td>
+                            </tr>
+                            <tr>
+                                <td>3-4 tubular adenomas &lt;10mm</td>
+                                <td>3-5 years</td>
+                            </tr>
+                            <tr>
+                                <td>5-10 adenomas</td>
+                                <td>3 years</td>
+                            </tr>
+                            <tr>
+                                <td>>10 adenomas</td>
+                                <td>1 year (consider genetic testing)</td>
+                            </tr>
+                            <tr>
+                                <td>Advanced adenoma (≥10mm, villous, HGD)</td>
+                                <td>3 years</td>
+                            </tr>
+                            <tr>
+                                <td>Sessile serrated lesion &lt;10mm, no dysplasia</td>
+                                <td>5-10 years</td>
+                            </tr>
+                            <tr>
+                                <td>Sessile serrated lesion ≥10mm OR with dysplasia</td>
+                                <td>3 years</td>
+                            </tr>
+                            <tr>
+                                <td>Piecemeal resection of adenoma ≥20mm</td>
+                                <td>6 months (to confirm complete removal)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="pearl-box">
+                    <div class="pearl-title">💎 SERRATED POLYP PATHWAY</div>
+                    <ul>
+                        <li>Alternative pathway to CRC (15-30% of sporadic CRCs)</li>
+                        <li><strong>BRAF mutation, MLH1 methylation, MSI-high</strong></li>
+                        <li>Sessile serrated lesions often in right colon, flat, mucus-covered</li>
+                        <li>Risk of interval cancers due to rapid progression and difficult detection</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="hereditary-crc">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Hereditary CRC Syndromes</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Lynch Syndrome (HNPCC)</div>
+                    <ul>
+                        <li><strong>Genetics:</strong> Autosomal dominant; mismatch repair genes (MLH1, MSH2, MSH6, PMS2)</li>
+                        <li><strong>Cancer risk:</strong> CRC (up to 80%), endometrial, ovarian, gastric, urinary tract, others</li>
+                        <li><strong>Features:</strong> Right-sided CRC, early onset, multiple primary cancers, MSI-high tumors</li>
+                        <li><strong>Screening:</strong> Colonoscopy every 1-2 years starting age 20-25 (or 2-5 years before youngest case in family)</li>
+                    </ul>
+                </div>
+                
+                <div class="mnemonic">
+                    <div class="mnemonic-title">📝 AMSTERDAM II CRITERIA (Lynch)</div>
+                    <div class="mnemonic-text">"3-2-1 Rule": ≥3 relatives with Lynch-associated cancer, across ≥2 generations, ≥1 diagnosed &lt;50 years</div>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Familial Adenomatous Polyposis (FAP)</div>
+                    <ul>
+                        <li><strong>Genetics:</strong> Autosomal dominant; APC gene mutation</li>
+                        <li><strong>Features:</strong> >100 adenomatous polyps; 100% CRC risk by age 40 if untreated</li>
+                        <li><strong>Extracolonic:</strong> Duodenal adenomas (leading cause of death after colectomy), desmoid tumors, osteomas, CHRPE</li>
+                        <li><strong>Management:</strong> Prophylactic colectomy (typically late teens/early 20s); upper GI surveillance</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Attenuated FAP & MUTYH-Associated Polyposis</div>
+                    <ul>
+                        <li><strong>Attenuated FAP:</strong> Fewer polyps (10-100), later onset, still high CRC risk</li>
+                        <li><strong>MAP:</strong> Autosomal RECESSIVE; resembles attenuated FAP; screen siblings</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Universal Tumor Testing</div>
+                    <strong>All newly diagnosed CRCs should be tested for Lynch syndrome</strong> via:
+                    <ul>
+                        <li>Immunohistochemistry (IHC) for MMR proteins, AND/OR</li>
+                        <li>MSI testing</li>
+                    </ul>
+                    If abnormal → germline genetic testing
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 8: LIVER DISEASE ======================= -->
+<section class="section" id="liver">
+    <div class="section-header">
+        <h2>🟤 Liver Disease</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="lfts">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Approach to Abnormal Liver Tests</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Hepatocellular vs Cholestatic Pattern</div>
+                    <ul>
+                        <li><strong>Hepatocellular:</strong> ALT/AST predominant elevation (ratio of ALT:ALP >5)</li>
+                        <li><strong>Cholestatic:</strong> ALP/bilirubin predominant (ratio of ALT:ALP &lt;2)</li>
+                        <li><strong>Mixed:</strong> Ratio 2-5</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: AST:ALT Ratio</div>
+                    <ul>
+                        <li><strong>AST:ALT >2:1:</strong> Think alcoholic liver disease (AST rarely >500)</li>
+                        <li><strong>ALT > AST:</strong> Most other causes (NAFLD, viral hepatitis)</li>
+                        <li><strong>Very high transaminases (>1000):</strong> Acute viral hepatitis, ischemic hepatitis, drug/toxin (acetaminophen), autoimmune flare</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Isolated Elevated ALP</div>
+                    <ul>
+                        <li><strong>First:</strong> Check GGT or 5'-nucleotidase to confirm hepatic source (vs bone)</li>
+                        <li><strong>If hepatic:</strong> RUQ ultrasound (biliary dilation?)</li>
+                        <li><strong>If no dilation:</strong> Consider PBC, PSC, infiltrative disease, medications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="nafld">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>NAFLD / MASLD</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Terminology Update</div>
+                    <ul>
+                        <li><strong>MASLD:</strong> Metabolic dysfunction-associated steatotic liver disease (new term)</li>
+                        <li><strong>MASH:</strong> Metabolic dysfunction-associated steatohepatitis (formerly NASH)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>Imaging:</strong> Hepatic steatosis on ultrasound, CT, or MRI</li>
+                        <li><strong>Exclusion:</strong> Rule out other causes (alcohol, viral, autoimmune, drugs)</li>
+                        <li><strong>Fibrosis staging:</strong> FIB-4 score, NAFLD fibrosis score, transient elastography (FibroScan), MR elastography</li>
+                        <li><strong>Liver biopsy:</strong> Gold standard to distinguish simple steatosis from NASH and stage fibrosis</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 AASLD NAFLD Guidelines</div>
+                    <strong>Management:</strong>
+                    <ul>
+                        <li><strong>Lifestyle:</strong> Weight loss (7-10% body weight improves NASH); exercise</li>
+                        <li><strong>Resmetirom:</strong> First FDA-approved drug for NASH with fibrosis (thyroid hormone receptor agonist)</li>
+                        <li><strong>Vitamin E:</strong> Consider in non-diabetic NASH (800 IU daily)</li>
+                        <li><strong>Pioglitazone:</strong> May use in NASH (with or without diabetes)</li>
+                        <li><strong>GLP-1 agonists:</strong> Benefit for NAFLD with diabetes/obesity (semaglutide promising)</li>
+                        <li><strong>Bariatric surgery:</strong> Can improve/resolve NASH in obesity</li>
+                    </ul>
+                </div>
+                
+                <div class="score-box">
+                    <div class="score-title">📊 FIB-4 SCORE</div>
+                    <ul>
+                        <li><strong>Formula:</strong> (Age × AST) / (Platelet × √ALT)</li>
+                        <li><strong>&lt;1.3:</strong> Low risk for advanced fibrosis</li>
+                        <li><strong>>2.67:</strong> High risk for advanced fibrosis</li>
+                        <li><strong>1.3-2.67:</strong> Indeterminate; further testing (elastography, biopsy)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="aih">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Autoimmune Hepatitis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li><strong>Demographics:</strong> Women > men; bimodal age (10-30 and 40-60)</li>
+                        <li><strong>Presentation:</strong> Variable — asymptomatic, chronic hepatitis, acute severe/fulminant</li>
+                        <li><strong>Associations:</strong> Other autoimmune diseases (thyroiditis, RA, UC, Sjögren's)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>Labs:</strong> Elevated transaminases, hypergammaglobulinemia (IgG)</li>
+                        <li><strong>Autoantibodies:</strong>
+                            <ul>
+                                <li>Type 1: ANA, anti-smooth muscle (ASMA) — most common</li>
+                                <li>Type 2: Anti-LKM1, anti-LC1 — more common in children</li>
+                            </ul>
+                        </li>
+                        <li><strong>Liver biopsy:</strong> Interface hepatitis, plasma cell infiltration</li>
+                        <li><strong>Exclude:</strong> Viral hepatitis, Wilson's, drug-induced</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Treatment</div>
+                    <ul>
+                        <li><strong>Induction:</strong> Prednisone (± azathioprine) — most respond well</li>
+                        <li><strong>Maintenance:</strong> Azathioprine monotherapy (often can wean steroids)</li>
+                        <li><strong>Treatment duration:</strong> Usually lifelong; relapse common if stopped</li>
+                        <li><strong>Check TPMT</strong> before azathioprine (toxicity risk if deficient)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="pbc-psc">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>PBC & PSC</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Primary Biliary Cholangitis (PBC)</th>
+                            <th>Primary Sclerosing Cholangitis (PSC)</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Demographics</strong></td>
+                            <td>Middle-aged women (90%)</td>
+                            <td>Young-middle aged men</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ducts affected</strong></td>
+                            <td>Small intrahepatic bile ducts</td>
+                            <td>Medium/large intra- and extrahepatic ducts</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Association</strong></td>
+                            <td>Other autoimmune diseases, Sjögren's</td>
+                            <td>IBD (especially UC) in 70-80%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Antibody</strong></td>
+                            <td>Anti-mitochondrial (AMA) — 95%</td>
+                            <td>p-ANCA (non-specific)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Imaging</strong></td>
+                            <td>Normal ducts on MRCP</td>
+                            <td>MRCP: "beading" (strictures and dilations)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Treatment</strong></td>
+                            <td>Ursodiol (UDCA) — improves survival</td>
+                            <td>No proven medical therapy; treat complications</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancer risk</strong></td>
+                            <td>HCC (if cirrhosis)</td>
+                            <td>Cholangiocarcinoma (10-15% lifetime), CRC</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: PBC Treatment</div>
+                    <ul>
+                        <li><strong>Ursodiol (UDCA) 13-15 mg/kg/day:</strong> First-line for all PBC patients</li>
+                        <li><strong>Inadequate response:</strong> Add obeticholic acid (FXR agonist)</li>
+                        <li><strong>Pruritus:</strong> Cholestyramine, rifampin, naltrexone, sertraline</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="hemochromatosis">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Hereditary Hemochromatosis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li><strong>Classic triad:</strong> Cirrhosis, diabetes, bronze skin ("bronze diabetes")</li>
+                        <li><strong>Other manifestations:</strong> Cardiomyopathy, arthropathy (2nd/3rd MCP), hypogonadism</li>
+                        <li><strong>Typically presents middle age</strong> (women later due to menstrual iron loss)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>Screen:</strong> Transferrin saturation (>45%) and ferritin</li>
+                        <li><strong>Confirm:</strong> HFE gene testing (C282Y homozygosity most common)</li>
+                        <li><strong>Liver biopsy:</strong> For staging if suspected cirrhosis or ferritin >1000</li>
+                        <li><strong>MRI:</strong> Can quantify hepatic iron</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Treatment</div>
+                    <ul>
+                        <li><strong>Phlebotomy:</strong> Weekly until ferritin &lt;50-100, then maintenance (every 2-4 months)</li>
+                        <li><strong>Screen first-degree relatives</strong></li>
+                        <li><strong>Avoid:</strong> Vitamin C supplements (increases iron absorption), alcohol</li>
+                        <li><strong>HCC surveillance</strong> if cirrhosis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="wilson">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Wilson Disease</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li><strong>Genetics:</strong> Autosomal recessive; ATP7B gene mutation</li>
+                        <li><strong>Age of onset:</strong> Usually 5-35 years</li>
+                        <li><strong>Liver:</strong> Hepatitis, cirrhosis, acute liver failure</li>
+                        <li><strong>Neuropsychiatric:</strong> Tremor, dysarthria, dystonia, parkinsonism, psychiatric symptoms</li>
+                        <li><strong>Eyes:</strong> Kayser-Fleischer rings (copper in Descemet's membrane) — not always present</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>Low serum ceruloplasmin</strong> (&lt;20 mg/dL)</li>
+                        <li><strong>Elevated 24-hour urine copper</strong> (>100 μg)</li>
+                        <li><strong>Kayser-Fleischer rings</strong> on slit-lamp exam</li>
+                        <li><strong>Liver biopsy:</strong> Elevated hepatic copper content</li>
+                        <li><strong>Genetic testing</strong> if uncertain</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 WILSON'S WITH ACUTE LIVER FAILURE</div>
+                    <strong>Look for:</strong> Coombs-negative hemolytic anemia, low ALP, ALP:bilirubin ratio &lt;4, AST:ALT >2.2
+                    <br><strong>High mortality without transplant</strong>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Treatment</div>
+                    <ul>
+                        <li><strong>Chelation:</strong> D-penicillamine or trientine (removes copper)</li>
+                        <li><strong>Zinc:</strong> Blocks intestinal copper absorption (maintenance or mild disease)</li>
+                        <li><strong>Lifelong treatment required</strong></li>
+                        <li><strong>Screen first-degree relatives</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 9: CIRRHOSIS ======================= -->
+<section class="section" id="cirrhosis">
+    <div class="section-header">
+        <h2>🟤 Cirrhosis & Complications</h2>
+        <span class="icon">🚨</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="cirrhosis-dx">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Cirrhosis Diagnosis & Staging</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>Clinical + imaging:</strong> Often sufficient (nodular liver, splenomegaly, varices)</li>
+                        <li><strong>Labs:</strong> Low platelets, albumin; elevated INR, bilirubin</li>
+                        <li><strong>Elastography:</strong> FibroScan or MRE — non-invasive fibrosis assessment</li>
+                        <li><strong>Liver biopsy:</strong> Gold standard but not always needed</li>
+                    </ul>
+                </div>
+                
+                <div class="score-box">
+                    <div class="score-title">📊 CHILD-PUGH SCORE</div>
+                    <p>Assess: Ascites, Encephalopathy, Bilirubin, Albumin, INR (each 1-3 points)</p>
+                    <ul>
+                        <li><strong>Class A (5-6):</strong> Compensated, good prognosis</li>
+                        <li><strong>Class B (7-9):</strong> Significant functional compromise</li>
+                        <li><strong>Class C (10-15):</strong> Decompensated, poor prognosis</li>
+                    </ul>
+                </div>
+                
+                <div class="score-box">
+                    <div class="score-title">📊 MELD SCORE</div>
+                    <p>Uses: Bilirubin, INR, Creatinine, Sodium (MELD-Na)</p>
+                    <ul>
+                        <li>Predicts 90-day mortality</li>
+                        <li>Used for liver transplant allocation</li>
+                        <li><strong>MELD ≥15:</strong> Consider transplant referral</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="ascites">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Ascites</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnostic Paracentesis</div>
+                    <ul>
+                        <li><strong>Perform on ALL new-onset ascites</strong> and hospital admissions with ascites</li>
+                        <li><strong>SAAG (Serum-Ascites Albumin Gradient):</strong>
+                            <ul>
+                                <li>≥1.1 g/dL: Portal hypertension (cirrhosis, heart failure)</li>
+                                <li>&lt;1.1 g/dL: Non-portal hypertension (malignancy, TB, nephrotic)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Total protein:</strong> Low (&lt;2.5) = cirrhosis; High = cardiac ascites, malignancy</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 AASLD Ascites Guidelines</div>
+                    <strong>Treatment:</strong>
+                    <ul>
+                        <li><strong>Sodium restriction:</strong> 2g/day (88 mEq)</li>
+                        <li><strong>Diuretics:</strong> Spironolactone 100mg + furosemide 40mg (100:40 ratio); titrate to max 400:160</li>
+                        <li><strong>Goal:</strong> Weight loss 0.5 kg/day (without edema) or 1 kg/day (with edema)</li>
+                        <li><strong>Large volume paracentesis (>5L):</strong> Give albumin 6-8 g/L removed</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 REFRACTORY ASCITES</div>
+                    <ul>
+                        <li>Diuretic-resistant or diuretic-intractable</li>
+                        <li><strong>Options:</strong> Serial large-volume paracentesis, TIPS, liver transplant</li>
+                        <li><strong>Avoid NSAIDs</strong> (cause sodium retention and AKI)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="sbp">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Spontaneous Bacterial Peritonitis (SBP)</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>Ascitic fluid PMN ≥250 cells/mm³</strong> — diagnostic threshold</li>
+                        <li><strong>Culture often negative</strong> (~40% positive)</li>
+                        <li><strong>Symptoms may be subtle:</strong> Fever, abdominal pain, encephalopathy, renal dysfunction</li>
+                        <li><strong>Low threshold to tap</strong> any cirrhotic patient with clinical deterioration</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 SBP Treatment</div>
+                    <ul>
+                        <li><strong>Empiric antibiotics:</strong> Ceftriaxone 2g IV daily (or cefotaxime) × 5 days</li>
+                        <li><strong>Alternative:</strong> Fluoroquinolone if no prior FQ prophylaxis</li>
+                        <li><strong>IV Albumin:</strong> 1.5 g/kg on day 1 + 1 g/kg on day 3 (reduces mortality and HRS)</li>
+                        <li><strong>Repeat paracentesis at 48h</strong> if not improving clinically</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: SBP Prophylaxis</div>
+                    <strong>Primary prophylaxis:</strong>
+                    <ul>
+                        <li>GI bleed: Ceftriaxone 1g × 7 days (then norfloxacin/cipro)</li>
+                        <li>Low ascitic fluid protein (&lt;1.5) with liver failure or renal dysfunction</li>
+                    </ul>
+                    <strong>Secondary prophylaxis:</strong> Lifelong after SBP episode (norfloxacin 400mg daily or TMP-SMX DS daily)
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="he">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Hepatic Encephalopathy</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li><strong>Spectrum:</strong> Minimal (subtle cognitive deficits) → Overt (confusion, asterixis, coma)</li>
+                        <li><strong>Precipitants:</strong> Infection, GI bleed, constipation, dehydration, sedatives, hypokalemia, high protein intake, TIPS</li>
+                        <li><strong>Asterixis:</strong> "Flapping tremor" — not specific for HE</li>
+                        <li><strong>Ammonia level:</strong> Correlates poorly with severity; don't follow serially</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Treatment</div>
+                    <ul>
+                        <li><strong>Identify and treat precipitants</strong> (most important!)</li>
+                        <li><strong>Lactulose:</strong> Titrate to 2-3 soft bowel movements/day (trap ammonia as NH4+)</li>
+                        <li><strong>Rifaximin:</strong> Add for recurrent HE (reduces recurrence by 50%)</li>
+                        <li><strong>Protein restriction:</strong> NOT recommended (leads to malnutrition)</li>
+                    </ul>
+                </div>
+                
+                <div class="clinical-vignette">
+                    <div class="vignette-title">📝 CLASSIC BOARD VIGNETTE</div>
+                    <p><strong>Scenario:</strong> Cirrhotic patient presents confused with asterixis after large-volume paracentesis without albumin replacement.</p>
+                    <p><strong>Answer:</strong> Hepatic encephalopathy likely precipitated by paracentesis-induced circulatory dysfunction. Treat with lactulose, ensure albumin given for future LVPs.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="hrs">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Hepatorenal Syndrome</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 HEPATORENAL SYNDROME</div>
+                    <strong>Functional renal failure in advanced cirrhosis due to splanchnic vasodilation and renal vasoconstriction</strong>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnostic Criteria</div>
+                    <ul>
+                        <li>Cirrhosis with ascites</li>
+                        <li>AKI per KDIGO criteria (Cr increase ≥0.3 in 48h or ≥50% in 7 days)</li>
+                        <li>No improvement after 2 days of diuretic withdrawal + albumin challenge (1 g/kg/day)</li>
+                        <li>Absence of shock, nephrotoxic drugs, structural kidney disease</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Treatment</div>
+                    <ul>
+                        <li><strong>Albumin + vasoconstrictor:</strong>
+                            <ul>
+                                <li>Terlipressin (if available) — preferred</li>
+                                <li>Norepinephrine (requires ICU)</li>
+                                <li>Midodrine + octreotide (less effective)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Definitive treatment:</strong> Liver transplantation</li>
+                        <li><strong>TIPS:</strong> May be considered in select patients</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="hcc">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Hepatocellular Carcinoma Surveillance</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 AASLD HCC Surveillance</div>
+                    <strong>Who to screen:</strong>
+                    <ul>
+                        <li>All patients with cirrhosis (any etiology)</li>
+                        <li>Chronic HBV carriers (certain populations regardless of cirrhosis)</li>
+                    </ul>
+                    <strong>How:</strong> Ultrasound ± AFP every 6 months
+                    <br><strong>If abnormal:</strong> Diagnostic CT or MRI with contrast
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnostic Imaging</div>
+                    <ul>
+                        <li><strong>LI-RADS criteria:</strong> Standardized reporting for CT/MRI</li>
+                        <li><strong>Hallmark features:</strong> Arterial phase hyperenhancement + washout + capsule</li>
+                        <li><strong>LI-RADS 5:</strong> Definite HCC (biopsy often not needed)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 10: HEPATITIS ======================= -->
+<section class="section" id="hepatitis">
+    <div class="section-header">
+        <h2>🦠 Viral Hepatitis</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="hep-b">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Hepatitis B</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Serology Interpretation</div>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>HBsAg</th>
+                                <th>Anti-HBs</th>
+                                <th>Anti-HBc</th>
+                                <th>Interpretation</th>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>-</td>
+                                <td>IgM+</td>
+                                <td>Acute infection</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>-</td>
+                                <td>IgG+</td>
+                                <td>Chronic infection</td>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>Recovered (immune)</td>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>+</td>
+                                <td>-</td>
+                                <td>Vaccinated (immune)</td>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>+</td>
+                                <td>Isolated anti-HBc (resolved, window, occult, false+)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: HBeAg Status</div>
+                    <ul>
+                        <li><strong>HBeAg-positive:</strong> High replication, high infectivity</li>
+                        <li><strong>HBeAg-negative chronic HBV:</strong> Can still have active disease (precore/core promoter mutants)</li>
+                        <li><strong>Check HBV DNA</strong> to assess viral replication</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 AASLD HBV Treatment Guidelines</div>
+                    <strong>Indications for treatment:</strong>
+                    <ul>
+                        <li>Immune-active phase (elevated ALT + elevated HBV DNA)</li>
+                        <li>Cirrhosis with detectable HBV DNA</li>
+                        <li>Family history of HCC</li>
+                        <li>Immunosuppression (prophylaxis/treatment)</li>
+                    </ul>
+                    <strong>First-line agents:</strong> Entecavir or tenofovir (TAF or TDF) — high barrier to resistance
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 HBV REACTIVATION</div>
+                    <ul>
+                        <li><strong>Risk:</strong> Immunosuppressive therapy (anti-CD20, chemotherapy, anti-TNF, high-dose steroids)</li>
+                        <li><strong>Screen ALL patients</strong> before immunosuppression (HBsAg, anti-HBc, anti-HBs)</li>
+                        <li><strong>Prophylaxis:</strong> Entecavir or tenofovir in HBsAg+ patients</li>
+                        <li><strong>Monitor:</strong> Even isolated anti-HBc+ patients at risk with potent immunosuppression</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="hep-c">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Hepatitis C</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Screening & Diagnosis</div>
+                    <ul>
+                        <li><strong>USPSTF recommends:</strong> One-time screening for all adults 18-79</li>
+                        <li><strong>Screening test:</strong> Anti-HCV antibody</li>
+                        <li><strong>If positive:</strong> Confirm with HCV RNA (viral load)</li>
+                        <li><strong>Anti-HCV+ but RNA negative:</strong> Cleared infection (spontaneous or treated)</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 AASLD/IDSA HCV Guidelines</div>
+                    <strong>Treatment — Direct-Acting Antivirals (DAAs):</strong>
+                    <ul>
+                        <li><strong>ALL patients with chronic HCV should be treated</strong> (regardless of fibrosis stage)</li>
+                        <li><strong>Pangenotypic regimens:</strong> Sofosbuvir/velpatasvir, glecaprevir/pibrentasvir</li>
+                        <li><strong>Duration:</strong> Usually 8-12 weeks</li>
+                        <li><strong>Cure rates (SVR12):</strong> >95%</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Post-SVR Management</div>
+                    <ul>
+                        <li><strong>SVR = Cure:</strong> Undetectable HCV RNA 12 weeks after treatment completion</li>
+                        <li><strong>If NO cirrhosis:</strong> No further HCV-related follow-up needed</li>
+                        <li><strong>If cirrhosis:</strong> Continue HCC surveillance indefinitely (risk persists)</li>
+                        <li><strong>Reinfection possible:</strong> Counsel on risk behaviors</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="hep-a-e">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Hepatitis A, D, E</h3>
+                <span class="badge">CORE</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Virus</th>
+                            <th>Transmission</th>
+                            <th>Chronicity</th>
+                            <th>Key Points</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Hepatitis A</strong></td>
+                            <td>Fecal-oral</td>
+                            <td>No</td>
+                            <td>Vaccine-preventable; supportive care; vaccinate HBV/HCV patients</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hepatitis D</strong></td>
+                            <td>Blood/body fluids</td>
+                            <td>Yes (with HBV)</td>
+                            <td>Requires HBV co-infection; increases severity/progression</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hepatitis E</strong></td>
+                            <td>Fecal-oral (water)</td>
+                            <td>Rare (immunocompromised)</td>
+                            <td>High mortality in pregnancy; endemic in developing countries</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Hepatitis D</div>
+                    <ul>
+                        <li><strong>Defective RNA virus</strong> — needs HBsAg to infect</li>
+                        <li><strong>Test all HBsAg+ patients</strong> for anti-HDV</li>
+                        <li><strong>Co-infection:</strong> Simultaneous HBV + HDV → usually clears</li>
+                        <li><strong>Superinfection:</strong> HDV in chronic HBV → usually becomes chronic, accelerates disease</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 11: BILIARY ======================= -->
+<section class="section" id="biliary">
+    <div class="section-header">
+        <h2>💚 Biliary Disease</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="gallstones">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Cholelithiasis & Cholecystitis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Biliary Colic</div>
+                    <ul>
+                        <li><strong>Presentation:</strong> Episodic RUQ/epigastric pain, often postprandial, lasting 30 min to several hours</li>
+                        <li><strong>Diagnosis:</strong> RUQ ultrasound (gallstones + GB wall normal)</li>
+                        <li><strong>Treatment:</strong> Elective cholecystectomy if symptomatic</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Acute Cholecystitis</div>
+                    <ul>
+                        <li><strong>Presentation:</strong> Persistent RUQ pain (>6 hours), fever, Murphy's sign</li>
+                        <li><strong>Labs:</strong> Leukocytosis; may have mild transaminase/bilirubin elevation</li>
+                        <li><strong>Imaging:</strong> US (stones, GB wall thickening >4mm, pericholecystic fluid, sonographic Murphy's sign)</li>
+                        <li><strong>HIDA scan:</strong> If US inconclusive; non-filling of GB = cystic duct obstruction</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Treatment</div>
+                    <ul>
+                        <li><strong>NPO, IV fluids, pain control, antibiotics</strong></li>
+                        <li><strong>Cholecystectomy:</strong> Preferably within 72 hours (early surgery preferred)</li>
+                        <li><strong>Poor surgical candidate:</strong> Percutaneous cholecystostomy tube</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 COMPLICATIONS OF CHOLECYSTITIS</div>
+                    <ul>
+                        <li><strong>Gangrenous cholecystitis:</strong> Necrosis of GB wall; may be painless in elderly/diabetics</li>
+                        <li><strong>Emphysematous cholecystitis:</strong> Gas-forming organisms; diabetics; emergent surgery</li>
+                        <li><strong>Perforation:</strong> Localized or free perforation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="choledocholithiasis">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Choledocholithiasis & Cholangitis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Choledocholithiasis (CBD Stones)</div>
+                    <ul>
+                        <li><strong>Presentation:</strong> RUQ pain, jaundice, elevated LFTs (cholestatic pattern)</li>
+                        <li><strong>Diagnosis:</strong> MRCP or EUS (non-invasive); ERCP if high probability or therapeutic intent</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Acute Cholangitis</div>
+                    <ul>
+                        <li><strong>Charcot's triad:</strong> Fever, RUQ pain, jaundice (50-70% of cases)</li>
+                        <li><strong>Reynolds' pentad:</strong> + Hypotension + Altered mental status (severe/suppurative)</li>
+                        <li><strong>Pathogens:</strong> E. coli, Klebsiella, Enterococcus, Bacteroides</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Cholangitis Management</div>
+                    <ul>
+                        <li><strong>Antibiotics:</strong> Broad-spectrum (pip-tazo, ampicillin-sulbactam, or FQ + metronidazole)</li>
+                        <li><strong>Biliary drainage:</strong> ERCP within 24-48 hours (emergent if severe/septic)</li>
+                        <li><strong>Alternatives:</strong> Percutaneous transhepatic drainage or surgical drainage if ERCP fails</li>
+                    </ul>
+                </div>
+                
+                <div class="mnemonic">
+                    <div class="mnemonic-title">📝 CHARCOT'S TRIAD</div>
+                    <div class="mnemonic-text">Fever + RUQ Pain + Jaundice = Cholangitis</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="gallstone-panc">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Gallstone Pancreatitis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Key Points</div>
+                    <ul>
+                        <li><strong>Most common cause of acute pancreatitis</strong></li>
+                        <li><strong>Suspect if:</strong> ALT >3× ULN, dilated CBD, visible CBD stone</li>
+                        <li><strong>ERCP:</strong> Indicated if cholangitis or persistent biliary obstruction</li>
+                        <li><strong>Cholecystectomy:</strong> During same admission for mild gallstone pancreatitis (reduces recurrence)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 12: PANCREAS ======================= -->
+<section class="section" id="pancreas">
+    <div class="section-header">
+        <h2>🟡 Pancreatic Disorders</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="acute-panc">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Acute Pancreatitis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis (2 of 3 criteria)</div>
+                    <ul>
+                        <li>Characteristic abdominal pain (epigastric, radiating to back)</li>
+                        <li>Lipase (or amylase) ≥3× upper limit of normal</li>
+                        <li>Imaging findings of pancreatitis</li>
+                    </ul>
+                </div>
+                
+                <div class="mnemonic">
+                    <div class="mnemonic-title">📝 CAUSES OF ACUTE PANCREATITIS ("I GET SMASHED")</div>
+                    <div class="mnemonic-text">Idiopathic, Gallstones, EtOH, Trauma, Steroids, Mumps, Autoimmune, Scorpion stings, Hyperlipidemia/Hypercalcemia, ERCP, Drugs</div>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ACG Acute Pancreatitis Guidelines</div>
+                    <strong>Management:</strong>
+                    <ul>
+                        <li><strong>Aggressive IV fluids:</strong> Lactated Ringer's preferred; goal-directed (watch for fluid overload)</li>
+                        <li><strong>Pain control</strong></li>
+                        <li><strong>Nutrition:</strong> Early oral feeding when tolerated (within 24-48h if mild); enteral preferred over TPN</li>
+                        <li><strong>Antibiotics:</strong> NOT indicated prophylactically (even in severe/necrotic pancreatitis)</li>
+                    </ul>
+                </div>
+                
+                <div class="score-box">
+                    <div class="score-title">📊 SEVERITY ASSESSMENT</div>
+                    <ul>
+                        <li><strong>BISAP score:</strong> BUN >25, Impaired mental status, SIRS, Age >60, Pleural effusion</li>
+                        <li><strong>≥3 points:</strong> Higher mortality risk</li>
+                        <li><strong>Ranson's criteria:</strong> At admission and 48h (≥3 = severe)</li>
+                        <li><strong>Atlanta classification:</strong> Mild (no organ failure), Moderate (transient OF), Severe (persistent OF)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Complications</div>
+                    <ul>
+                        <li><strong>Acute peripancreatic fluid collection:</strong> &lt;4 weeks, no wall</li>
+                        <li><strong>Pseudocyst:</strong> >4 weeks, encapsulated, no necrosis</li>
+                        <li><strong>Acute necrotic collection:</strong> &lt;4 weeks with necrosis</li>
+                        <li><strong>Walled-off necrosis (WON):</strong> >4 weeks, encapsulated necrosis</li>
+                        <li><strong>Infected necrosis:</strong> Gas on CT, clinical deterioration; may need drainage/necrosectomy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="chronic-panc">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Chronic Pancreatitis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li><strong>Etiology:</strong> Alcohol (most common in US), smoking, genetic (PRSS1, SPINK1, CFTR), autoimmune</li>
+                        <li><strong>Symptoms:</strong> Recurrent/chronic abdominal pain, steatorrhea, weight loss, diabetes</li>
+                        <li><strong>Exocrine insufficiency:</strong> Usually after >90% gland destruction</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>CT/MRCP:</strong> Calcifications, ductal dilation, atrophy</li>
+                        <li><strong>EUS:</strong> Most sensitive for early changes</li>
+                        <li><strong>Fecal elastase:</strong> &lt;200 μg/g indicates exocrine insufficiency</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Management</div>
+                    <ul>
+                        <li><strong>Pain:</strong> Abstinence from alcohol/tobacco, analgesics, PERT, celiac plexus block, surgery</li>
+                        <li><strong>Exocrine insufficiency:</strong> Pancreatic enzyme replacement therapy (PERT) with meals</li>
+                        <li><strong>Endocrine insufficiency:</strong> Manage diabetes (brittle, prone to hypoglycemia)</li>
+                        <li><strong>Nutrition:</strong> Small frequent meals, fat-soluble vitamins (A, D, E, K)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="pancreatic-cysts">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Pancreatic Cystic Lesions</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Features</th>
+                            <th>Malignant Potential</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Serous cystadenoma</strong></td>
+                            <td>Microcystic, honeycomb appearance, central scar</td>
+                            <td>Very low (benign)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mucinous cystic neoplasm (MCN)</strong></td>
+                            <td>Women, body/tail, no communication with duct, ovarian-type stroma</td>
+                            <td>Moderate; surgical resection recommended</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IPMN - Main duct</strong></td>
+                            <td>Main pancreatic duct dilation, mucin at ampulla</td>
+                            <td>High (50-70%); surgery usually indicated</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IPMN - Branch duct</strong></td>
+                            <td>Side branch dilation, communicates with main duct</td>
+                            <td>Lower; surveillance vs surgery based on features</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pseudocyst</strong></td>
+                            <td>History of pancreatitis, no solid component, low CEA</td>
+                            <td>None</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Cyst Fluid Analysis</div>
+                    <ul>
+                        <li><strong>Mucinous (MCN, IPMN):</strong> High CEA (>192), viscous, mucin+</li>
+                        <li><strong>Serous:</strong> Low CEA, low amylase</li>
+                        <li><strong>Pseudocyst:</strong> High amylase, low CEA</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 13: MOTILITY ======================= -->
+<section class="section" id="motility">
+    <div class="section-header">
+        <h2>⚡ GI Motility Disorders</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="gastroparesis">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Gastroparesis</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Etiology</div>
+                    <ul>
+                        <li><strong>Diabetes:</strong> Most common identifiable cause</li>
+                        <li><strong>Idiopathic:</strong> Often post-viral</li>
+                        <li><strong>Post-surgical:</strong> Vagal nerve injury</li>
+                        <li><strong>Medications:</strong> Opioids, anticholinergics, GLP-1 agonists</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Diagnosis</div>
+                    <ul>
+                        <li><strong>EGD:</strong> Rule out mechanical obstruction (required before diagnosis)</li>
+                        <li><strong>Gastric emptying scintigraphy (GES):</strong> Gold standard; >10% retention at 4 hours</li>
+                        <li><strong>Hold medications</strong> that affect motility before testing</li>
+                    </ul>
+                </div>
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 Treatment</div>
+                    <ul>
+                        <li><strong>Dietary:</strong> Small, frequent, low-fat, low-fiber meals</li>
+                        <li><strong>Glycemic control</strong> (hyperglycemia worsens emptying)</li>
+                        <li><strong>Prokinetics:</strong> Metoclopramide (FDA black box for tardive dyskinesia — limit to 12 weeks), domperidone (not FDA approved), erythromycin</li>
+                        <li><strong>Anti-emetics:</strong> Ondansetron, prochlorperazine</li>
+                        <li><strong>Refractory:</strong> Gastric electrical stimulation, pyloromyotomy, jejunostomy tube</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="constipation">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Chronic Constipation</h3>
+                <span class="badge">CORE</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Evaluation</div>
+                    <ul>
+                        <li><strong>Rome IV criteria</strong> for functional constipation</li>
+                        <li><strong>Alarm features:</strong> Hematochezia, weight loss, family history CRC, age >50 without screening</li>
+                        <li><strong>Refractory cases:</strong> Anorectal manometry, balloon expulsion test, colonic transit study, defecography</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Treatment Ladder</div>
+                    <ol>
+                        <li><strong>Fiber + fluids</strong></li>
+                        <li><strong>Osmotic laxatives:</strong> PEG (MiraLAX), lactulose</li>
+                        <li><strong>Stimulant laxatives:</strong> Bisacodyl, senna (not for daily long-term use)</li>
+                        <li><strong>Secretagogues:</strong> Linaclotide, lubiprostone, plecanatide (prescription)</li>
+                        <li><strong>Prokinetics:</strong> Prucalopride (5-HT4 agonist)</li>
+                        <li><strong>Dyssynergic defecation:</strong> Biofeedback therapy (first-line)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ======================= SECTION 14: NUTRITION ======================= -->
+<section class="section" id="nutrition">
+    <div class="section-header">
+        <h2>🍎 GI Nutrition</h2>
+        <span class="icon">💊</span>
+    </div>
+    <div class="section-content">
+        
+        <div class="topic" id="enteral-nutrition">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Enteral vs Parenteral Nutrition</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="guideline-box">
+                    <div class="guideline-title">📘 ASPEN Guidelines</div>
+                    <strong>"If the gut works, use it"</strong>
+                    <ul>
+                        <li><strong>Enteral nutrition preferred</strong> — maintains gut integrity, reduces infections, cheaper</li>
+                        <li><strong>TPN indications:</strong> Non-functioning GI tract, severe malabsorption, GI obstruction, high-output fistula, short bowel syndrome (initially)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Enteral Access</div>
+                    <ul>
+                        <li><strong>NG tube:</strong> Short-term (&lt;4 weeks), intact mental status/gag</li>
+                        <li><strong>PEG (gastrostomy):</strong> Long-term, functional stomach, aspiration risk acceptable</li>
+                        <li><strong>PEJ (jejunostomy):</strong> High aspiration risk, gastroparesis, gastric outlet obstruction</li>
+                    </ul>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 REFEEDING SYNDROME</div>
+                    <ul>
+                        <li><strong>Risk:</strong> Severely malnourished patients started on nutrition</li>
+                        <li><strong>Mechanism:</strong> Insulin surge → intracellular shift of phosphorus, potassium, magnesium</li>
+                        <li><strong>Complications:</strong> Hypophosphatemia (most important), arrhythmias, heart failure, respiratory failure</li>
+                        <li><strong>Prevention:</strong> Start low, advance slowly; replete electrolytes; give thiamine before feeding</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="topic" id="sbs">
+            <div class="topic-header" onclick="toggleTopic(this)">
+                <h3>Short Bowel Syndrome</h3>
+                <span class="badge">HIGH YIELD</span>
+            </div>
+            <div class="topic-content">
+                
+                <div class="subsection">
+                    <div class="subsection-title">Clinical Features</div>
+                    <ul>
+                        <li><strong>Definition:</strong> Malabsorption due to loss of small bowel (usually &lt;200 cm remaining)</li>
+                        <li><strong>Causes:</strong> Surgical resection (Crohn's, mesenteric ischemia, trauma), radiation enteritis</li>
+                        <li><strong>Symptoms:</strong> Diarrhea, steatorrhea, dehydration, malnutrition, micronutrient deficiencies</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Management</div>
+                    <ul>
+                        <li><strong>Initial:</strong> TPN for fluid/nutrition while gut adapts</li>
+                        <li><strong>Oral/enteral:</strong> Transition as tolerated; frequent small meals, complex carbs, moderate fat</li>
+                        <li><strong>Anti-diarrheal:</strong> Loperamide, codeine</li>
+                        <li><strong>Acid suppression:</strong> PPI (reduces gastric hypersecretion)</li>
+                        <li><strong>Teduglutide:</strong> GLP-2 analog — promotes intestinal adaptation, reduces TPN dependence</li>
+                        <li><strong>Intestinal transplant:</strong> Refractory cases with TPN complications</li>
+                    </ul>
+                </div>
+                
+                <div class="high-yield">
+                    <div class="high-yield-title">⚡ BOARD PEARL: Ileal Resection Consequences</div>
+                    <ul>
+                        <li><strong>&lt;100 cm resected:</strong> Bile acid diarrhea (watery) — treat with cholestyramine</li>
+                        <li><strong>>100 cm resected:</strong> Fat malabsorption/steatorrhea (bile acid pool depleted) — reduce fat, PERT</li>
+                        <li><strong>Also:</strong> B12 deficiency, gallstones (cholesterol), kidney stones (oxalate)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+</main>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<footer>
+    <h3>🫁 ABIM Gastroenterology Study Guide</h3>
+    <p style="opacity: 0.9; font-size: 0.9rem;">Evidence-based content from ACG/AGA/AASLD Guidelines</p>
+    <p style="opacity: 0.7; font-size: 0.8rem; margin-top: 10px;">For educational purposes only. Verify all clinical decisions with current guidelines.</p>
+    <div style="margin-top: 20px;">
+        <a href="index.html">📚 Clinical Suite</a>
+        <a href="im_guide.html">🩺 IM Guide</a>
+        <a href="id_study_guide.html">🦠 ID Study Guide</a>
+        <a href="cardio_study_guide.html">❤️ Cardio Study Guide</a>
+        <a href="drug_reference_guide.html">💊 Drug Guide</a>
+    </div>
+</footer>
+
+<script>
+    function toggleTopic(header) {
+        const topic = header.parentElement;
+        topic.classList.toggle('collapsed');
+    }
+    
+    const searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        const topics = document.querySelectorAll('.topic');
+        topics.forEach(topic => {
+            const text = topic.textContent.toLowerCase();
+            topic.style.display = (query === '' || text.includes(query)) ? 'block' : 'none';
+        });
+    });
+    
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+        backToTopBtn.classList.toggle('show', window.pageYOffset > 400);
+    });
+    
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
+    function toggleTopic(header) {
+        const topic = header.parentElement;
+        topic.classList.toggle('collapsed');
+    }
+    
+    const searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        const topics = document.querySelectorAll('.topic');
+        topics.forEach(topic => {
+            const text = topic.textContent.toLowerCase();
+            topic.style.display = (query === '' || text.includes(query)) ? 'block' : 'none';
+        });
+    });
+    
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+        backToTopBtn.classList.toggle('show', window.pageYOffset > 400);
+    });
+    
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

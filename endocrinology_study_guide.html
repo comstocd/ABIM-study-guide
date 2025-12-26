@@ -1,0 +1,3120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>ABIM Endocrinology Study Guide</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: rgba(234, 88, 12, 0.2);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 80px;
+            background: linear-gradient(135deg, #fefce8 0%, #fff7ed 100%);
+            min-height: 100vh;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        h1 {
+            color: #ea580c;
+            border-bottom: 3px solid #ea580c;
+            padding-bottom: 10px;
+            font-size: 1.75rem;
+        }
+        
+        h2 {
+            color: #c2410c;
+            border-bottom: 2px solid #fed7aa;
+            padding-bottom: 8px;
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+        
+        h3 {
+            color: #9a3412;
+            margin-top: 20px;
+            font-size: 1.15rem;
+            border-left: 4px solid #ea580c;
+            padding-left: 12px;
+        }
+        
+        h4 {
+            color: #78350f;
+            margin-top: 15px;
+            font-size: 1rem;
+        }
+        
+        /* Header Box */
+        .header-box {
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%);
+            color: white;
+            padding: 30px 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(234, 88, 12, 0.3);
+        }
+        
+        .header-box h1 {
+            color: white;
+            border: none;
+            margin: 0;
+            font-size: 1.9rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header-box .subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-top: 8px;
+        }
+        
+        .header-box .build-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 12px;
+        }
+        
+        /* Search Box */
+        .search-container {
+            padding: 16px 20px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #fed7aa;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        
+        .search-box:focus {
+            border-color: #ea580c;
+            box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+        }
+        
+        /* Navigation Pills */
+        .nav-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 247, 237, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 12px 0;
+            margin: 0 -20px 20px -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-bottom: 1px solid #fed7aa;
+        }
+        
+        .nav-pills {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .nav-pills::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .nav-pill {
+            flex-shrink: 0;
+            padding: 10px 18px;
+            background: white;
+            color: #c2410c;
+            text-decoration: none;
+            border-radius: 22px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 2px solid #fed7aa;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .nav-pill:hover, .nav-pill:active {
+            background: #ea580c;
+            color: white;
+            border-color: #ea580c;
+        }
+        
+        /* Sections */
+        .section {
+            background: white;
+            margin-bottom: 20px;
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 5px solid #ea580c;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .section-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .section-header::after {
+            content: '▼';
+            font-size: 0.8rem;
+            color: #ea580c;
+            transition: transform 0.3s ease;
+        }
+        
+        .section.collapsed .section-header::after {
+            transform: rotate(-90deg);
+        }
+        
+        .section.collapsed .section-content {
+            display: none;
+        }
+        
+        .section-content {
+            margin-top: 16px;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.9rem;
+        }
+        
+        th, td {
+            border: 1px solid #fed7aa;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background: #fffbeb;
+        }
+        
+        tr:hover {
+            background: #fef3c7;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        /* Special Boxes */
+        .high-yield {
+            background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        
+        .high-yield::before {
+            content: "⭐ HIGH-YIELD: ";
+            font-weight: 700;
+            color: #d97706;
+        }
+        
+        .clinical-pearl {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+            border: 2px solid #3b82f6;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        
+        .clinical-pearl::before {
+            content: "💎 CLINICAL PEARL: ";
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .danger-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 2px solid #ef4444;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        
+        .danger-box::before {
+            content: "🚨 DANGER: ";
+            font-weight: 700;
+            color: #dc2626;
+        }
+        
+        .guideline-box {
+            background: linear-gradient(135deg, #f3e8ff 0%, #ede9fe 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        
+        .guideline-box::before {
+            content: "📋 GUIDELINE: ";
+            font-weight: 700;
+            color: #7c3aed;
+        }
+        
+        .mnemonic-box {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            border: 2px solid #ec4899;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        
+        .mnemonic-box::before {
+            content: "🧠 MNEMONIC: ";
+            font-weight: 700;
+            color: #db2777;
+        }
+        
+        .calculation-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #10b981;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 0;
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+        }
+        
+        .calculation-box::before {
+            content: "🔢 CALCULATION: ";
+            font-weight: 700;
+            color: #059669;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        .badge-common {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+        
+        .badge-danger {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .badge-boards {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(234, 88, 12, 0.4);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .back-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(234, 88, 12, 0.5);
+        }
+        
+        .back-to-top.show {
+            display: flex;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%);
+            color: white;
+            padding: 30px 24px;
+            border-radius: 16px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 22px;
+            margin: 6px;
+            display: inline-block;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        
+        footer a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        /* iPad Optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            body {
+                padding: 24px 28px;
+                padding-bottom: 100px;
+            }
+            
+            .header-box {
+                padding: 36px 30px;
+            }
+            
+            .header-box h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section {
+                padding: 28px;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+            }
+            
+            table {
+                font-size: 0.95rem;
+            }
+            
+            th, td {
+                padding: 14px;
+            }
+            
+            .nav-pill {
+                padding: 12px 22px;
+                font-size: 0.95rem;
+            }
+            
+            .back-to-top {
+                width: 62px;
+                height: 62px;
+                font-size: 1.7rem;
+            }
+        }
+        
+        /* iPad Pro */
+        @media (min-width: 1024px) and (max-width: 1366px) {
+            body {
+                max-width: 1000px;
+                padding: 28px 40px;
+            }
+            
+            .section {
+                padding: 32px;
+            }
+        }
+        
+        /* Mobile */
+        @media (max-width: 767px) {
+            .header-box h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section {
+                padding: 18px;
+            }
+            
+            table {
+                font-size: 0.8rem;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        
+        /* Touch device optimizations */
+        @media (pointer: coarse) {
+            .nav-pill, .section-header, button {
+                min-height: 44px;
+            }
+            
+            th, td {
+                padding: 14px 12px;
+            }
+        }
+        
+        /* Safe area for notched devices */
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-bottom: max(80px, env(safe-area-inset-bottom));
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .nav-container, .search-container, .back-to-top {
+                display: none;
+            }
+            
+            .section {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            
+            .section.collapsed .section-content {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-box">
+    <h1>🔬 ABIM Endocrinology, Diabetes & Metabolism Study Guide</h1>
+    <div class="subtitle">High-Yield Board Review • ADA/Endocrine Society/AACE Guidelines</div>
+    <div class="build-tag">BUILD #1 • 50 SECTIONS • DECEMBER 2025</div>
+</div>
+
+<div class="search-container">
+    <input type="text" class="search-box" id="searchBox" placeholder="Search topics, conditions, medications..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+</div>
+
+<nav class="nav-container">
+    <div class="nav-pills">
+        <a href="#diabetes" class="nav-pill">Diabetes</a>
+        <a href="#thyroid" class="nav-pill">Thyroid</a>
+        <a href="#adrenal" class="nav-pill">Adrenal</a>
+        <a href="#pituitary" class="nav-pill">Pituitary</a>
+        <a href="#calcium" class="nav-pill">Calcium</a>
+        <a href="#lipids" class="nav-pill">Lipids</a>
+        <a href="#obesity" class="nav-pill">Obesity</a>
+        <a href="#reproductive" class="nav-pill">Reproductive</a>
+        <a href="#men" class="nav-pill">MEN Syndromes</a>
+        <a href="#emergencies" class="nav-pill">Emergencies</a>
+    </div>
+</nav>
+
+<!-- ==================== SECTION 1: DIABETES OVERVIEW ==================== -->
+<div class="section" id="diabetes">
+    <div class="section-header">
+        <h2>1. Diabetes Mellitus — Overview & Diagnosis <span class="badge badge-common">Very Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Diagnostic Criteria (ADA 2024)</h3>
+        <table>
+            <tr><th>Test</th><th>Diabetes</th><th>Prediabetes</th></tr>
+            <tr><td><strong>Fasting glucose</strong></td><td>≥126 mg/dL</td><td>100-125 mg/dL (IFG)</td></tr>
+            <tr><td><strong>2-hour OGTT</strong></td><td>≥200 mg/dL</td><td>140-199 mg/dL (IGT)</td></tr>
+            <tr><td><strong>HbA1c</strong></td><td>≥6.5%</td><td>5.7-6.4%</td></tr>
+            <tr><td><strong>Random glucose</strong></td><td>≥200 mg/dL + symptoms</td><td>—</td></tr>
+        </table>
+        
+        <div class="clinical-pearl">
+            Two abnormal tests required for diagnosis in asymptomatic patients. A single random glucose ≥200 with classic symptoms (polyuria, polydipsia, weight loss) is diagnostic.
+        </div>
+        
+        <h3>Type 1 vs Type 2 Diabetes</h3>
+        <table>
+            <tr><th>Feature</th><th>Type 1</th><th>Type 2</th></tr>
+            <tr><td>Onset</td><td>Usually <30 years</td><td>Usually >40 years</td></tr>
+            <tr><td>Body habitus</td><td>Often lean</td><td>Often obese (80%)</td></tr>
+            <tr><td>Ketosis prone</td><td>Yes</td><td>Usually no</td></tr>
+            <tr><td>C-peptide</td><td>Low/absent</td><td>Normal/high</td></tr>
+            <tr><td>Autoantibodies</td><td>GAD65, IA-2, ZnT8, IAA</td><td>Negative</td></tr>
+            <tr><td>Pathophysiology</td><td>Autoimmune β-cell destruction</td><td>Insulin resistance + β-cell dysfunction</td></tr>
+            <tr><td>Initial treatment</td><td>Insulin required</td><td>Lifestyle + metformin</td></tr>
+        </table>
+        
+        <h3>Other Diabetes Types</h3>
+        <ul>
+            <li><strong>LADA (Latent Autoimmune Diabetes in Adults):</strong> T1D presenting in adults (>30 years), slower progression, GAD65 positive</li>
+            <li><strong>MODY (Maturity-Onset Diabetes of the Young):</strong> Autosomal dominant, young onset, no autoantibodies
+                <ul>
+                    <li>MODY 2 (GCK): Mild fasting hyperglycemia, rarely needs treatment</li>
+                    <li>MODY 3 (HNF1A): Progressive, responds to sulfonylureas</li>
+                </ul>
+            </li>
+            <li><strong>Gestational diabetes:</strong> Glucose intolerance first recognized in pregnancy</li>
+            <li><strong>Secondary diabetes:</strong> Pancreatitis, cystic fibrosis, Cushing's, acromegaly, drugs (steroids, antipsychotics)</li>
+        </ul>
+        
+        <div class="high-yield">
+            LADA is often misdiagnosed as T2D. Suspect in lean adults with poor response to oral agents. Check GAD65 antibodies.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 2: T2D MANAGEMENT ==================== -->
+<div class="section" id="t2d-management">
+    <div class="section-header">
+        <h2>2. Type 2 Diabetes Management <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Glycemic Targets (ADA 2024)</h3>
+        <table>
+            <tr><th>Parameter</th><th>General Target</th><th>Notes</th></tr>
+            <tr><td><strong>HbA1c</strong></td><td>&lt;7%</td><td>Individualize: &lt;6.5% if low hypoglycemia risk; &lt;8% if limited life expectancy</td></tr>
+            <tr><td><strong>Fasting glucose</strong></td><td>80-130 mg/dL</td><td>Preprandial</td></tr>
+            <tr><td><strong>Postprandial glucose</strong></td><td>&lt;180 mg/dL</td><td>1-2 hours after meal start</td></tr>
+            <tr><td><strong>Time in range (CGM)</strong></td><td>>70%</td><td>70-180 mg/dL</td></tr>
+        </table>
+        
+        <h3>First-Line Therapy</h3>
+        <div class="guideline-box">
+            <strong>Metformin</strong> remains first-line for most patients with T2D, combined with lifestyle modification. However, ADA 2024 emphasizes <strong>organ protection</strong> — consider SGLT2i or GLP-1 RA as first-line if ASCVD, HF, or CKD regardless of A1c.
+        </div>
+        
+        <h3>Drug Selection Based on Comorbidities</h3>
+        <table>
+            <tr><th>Comorbidity</th><th>Preferred Agent</th><th>Key Benefit</th></tr>
+            <tr><td><strong>ASCVD</strong></td><td>GLP-1 RA (liraglutide, semaglutide, dulaglutide)</td><td>Reduces MACE</td></tr>
+            <tr><td><strong>Heart failure (HFrEF or HFpEF)</strong></td><td>SGLT2i (empagliflozin, dapagliflozin)</td><td>Reduces HF hospitalization</td></tr>
+            <tr><td><strong>CKD (eGFR 20-60)</strong></td><td>SGLT2i</td><td>Slows CKD progression</td></tr>
+            <tr><td><strong>Obesity</strong></td><td>GLP-1 RA (especially semaglutide, tirzepatide)</td><td>Significant weight loss</td></tr>
+            <tr><td><strong>Hypoglycemia concern</strong></td><td>GLP-1 RA, SGLT2i, DPP-4i</td><td>Low hypoglycemia risk</td></tr>
+            <tr><td><strong>Cost concern</strong></td><td>Metformin, sulfonylureas</td><td>Generic availability</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            SGLT2 inhibitors and GLP-1 RAs have cardiovascular and renal benefits <strong>independent of glucose lowering</strong>. Use them even if A1c is at goal in patients with ASCVD, HF, or CKD.
+        </div>
+        
+        <h3>Oral Agents Summary</h3>
+        <table>
+            <tr><th>Class</th><th>Mechanism</th><th>A1c Reduction</th><th>Key Concerns</th></tr>
+            <tr><td><strong>Metformin</strong></td><td>↓ Hepatic glucose production</td><td>1-1.5%</td><td>GI side effects, B12 deficiency, lactic acidosis (rare)</td></tr>
+            <tr><td><strong>SGLT2i</strong></td><td>↓ Renal glucose reabsorption</td><td>0.5-1%</td><td>UTI, genital mycotic infections, euglycemic DKA, Fournier's</td></tr>
+            <tr><td><strong>GLP-1 RA</strong></td><td>↑ Insulin, ↓ glucagon, ↓ appetite</td><td>1-1.5%</td><td>Nausea, pancreatitis (rare), thyroid C-cell tumors (rodents)</td></tr>
+            <tr><td><strong>DPP-4i</strong></td><td>↑ Endogenous incretins</td><td>0.5-0.8%</td><td>Weight neutral, possible HF risk (saxagliptin)</td></tr>
+            <tr><td><strong>Sulfonylureas</strong></td><td>↑ Insulin secretion</td><td>1-1.5%</td><td>Hypoglycemia, weight gain</td></tr>
+            <tr><td><strong>Thiazolidinediones</strong></td><td>↑ Insulin sensitivity (PPARγ)</td><td>1-1.5%</td><td>Edema, HF, fractures, weight gain</td></tr>
+        </table>
+        
+        <div class="danger-box">
+            Hold <strong>metformin</strong> before iodinated contrast if eGFR &lt;30. Recheck creatinine 48h after procedure before resuming. Hold <strong>SGLT2i</strong> 3-4 days before major surgery to prevent euglycemic DKA.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 3: INSULIN THERAPY ==================== -->
+<div class="section" id="insulin">
+    <div class="section-header">
+        <h2>3. Insulin Therapy <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Insulin Types</h3>
+        <table>
+            <tr><th>Type</th><th>Examples</th><th>Onset</th><th>Peak</th><th>Duration</th></tr>
+            <tr><td><strong>Rapid-acting</strong></td><td>Lispro, aspart, glulisine</td><td>5-15 min</td><td>1-2 hr</td><td>3-5 hr</td></tr>
+            <tr><td><strong>Short-acting</strong></td><td>Regular</td><td>30-60 min</td><td>2-4 hr</td><td>5-8 hr</td></tr>
+            <tr><td><strong>Intermediate</strong></td><td>NPH</td><td>1-2 hr</td><td>4-12 hr</td><td>12-18 hr</td></tr>
+            <tr><td><strong>Long-acting</strong></td><td>Glargine (U100, U300), detemir</td><td>1-2 hr</td><td>None</td><td>20-24 hr</td></tr>
+            <tr><td><strong>Ultra-long</strong></td><td>Degludec</td><td>1-2 hr</td><td>None</td><td>42+ hr</td></tr>
+        </table>
+        
+        <h3>Initiating Basal Insulin in T2D</h3>
+        <ul>
+            <li><strong>Starting dose:</strong> 10 units or 0.1-0.2 units/kg/day</li>
+            <li><strong>Titration:</strong> Increase by 2-4 units every 3-7 days until fasting glucose at target</li>
+            <li><strong>Target fasting glucose:</strong> 80-130 mg/dL</li>
+        </ul>
+        
+        <h3>Basal-Bolus Regimen (Type 1 or Advanced T2D)</h3>
+        <ul>
+            <li><strong>Total daily dose (TDD):</strong> 0.4-0.5 units/kg/day (T1D), higher in T2D</li>
+            <li><strong>Basal:</strong> 40-50% of TDD</li>
+            <li><strong>Bolus:</strong> Divide remaining 50-60% among meals</li>
+            <li><strong>Correction factor:</strong> 1800 ÷ TDD = mg/dL drop per unit (rapid insulin)</li>
+            <li><strong>Carb ratio:</strong> 500 ÷ TDD = grams of carbs covered per unit</li>
+        </ul>
+        
+        <div class="calculation-box">
+            <strong>Example:</strong> TDD = 50 units<br>
+            Correction factor = 1800 ÷ 50 = 36 (1 unit lowers BG by 36 mg/dL)<br>
+            Carb ratio = 500 ÷ 50 = 10 (1 unit covers 10g carbs)
+        </div>
+        
+        <div class="clinical-pearl">
+            NPH has an unpredictable peak — higher hypoglycemia risk. Long-acting analogs (glargine, degludec) are preferred for basal coverage.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 4: INPATIENT DIABETES ==================== -->
+<div class="section" id="inpatient-dm">
+    <div class="section-header">
+        <h2>4. Inpatient Diabetes Management <span class="badge badge-boards">Boards Favorite</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Glycemic Targets (ADA/Endocrine Society)</h3>
+        <table>
+            <tr><th>Setting</th><th>Target Glucose</th><th>Notes</th></tr>
+            <tr><td><strong>General ward</strong></td><td>140-180 mg/dL</td><td>Avoid &lt;100 mg/dL</td></tr>
+            <tr><td><strong>ICU</strong></td><td>140-180 mg/dL</td><td>140-180 preferred over tighter control (NICE-SUGAR)</td></tr>
+            <tr><td><strong>Perioperative</strong></td><td>&lt;180 mg/dL</td><td>Hold oral agents, use insulin</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            <strong>NICE-SUGAR Trial:</strong> Intensive glucose control (81-108) increased mortality vs conventional (144-180) in ICU patients. Target 140-180 mg/dL.
+        </div>
+        
+        <h3>Inpatient Insulin Regimen (Basal-Bolus)</h3>
+        <ul>
+            <li><strong>Calculate TDD:</strong> 0.3-0.5 units/kg/day (reduce if renal failure, elderly, malnourished)</li>
+            <li><strong>Basal:</strong> 50% of TDD as glargine or NPH</li>
+            <li><strong>Nutritional (bolus):</strong> 50% divided among meals (if eating)</li>
+            <li><strong>Correction:</strong> Sliding scale added to scheduled doses</li>
+        </ul>
+        
+        <div class="danger-box">
+            <strong>Never use sliding scale insulin alone!</strong> Reactive rather than proactive — leads to glycemic variability. Always include scheduled basal ± nutritional insulin.
+        </div>
+        
+        <h3>Special Situations</h3>
+        <table>
+            <tr><th>Situation</th><th>Management</th></tr>
+            <tr><td><strong>NPO</strong></td><td>Continue basal insulin (may reduce by 20-25%), hold bolus</td></tr>
+            <tr><td><strong>Tube feeds (continuous)</strong></td><td>Basal insulin + correction Q6h OR NPH Q8-12h</td></tr>
+            <tr><td><strong>TPN</strong></td><td>Add regular insulin to TPN bag (start 0.1 units/g dextrose)</td></tr>
+            <tr><td><strong>Steroids</strong></td><td>Increase insulin 20-40%, mainly nutritional/afternoon dosing</td></tr>
+            <tr><td><strong>Renal failure (eGFR &lt;30)</strong></td><td>Reduce TDD by 25-50%</td></tr>
+        </table>
+        
+        <div class="clinical-pearl">
+            Steroids cause primarily postprandial and afternoon/evening hyperglycemia. NPH given with morning steroids can help cover this pattern.
+        </div>
+        
+        <h3>Transition to Outpatient</h3>
+        <ul>
+            <li>Give first dose of long-acting insulin 2-4 hours before stopping IV insulin</li>
+            <li>Continue home regimen if A1c was at goal on admission</li>
+            <li>If hyperglycemic on admission, discharge on ~80% of inpatient TDD</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 5: DKA ==================== -->
+<div class="section" id="dka">
+    <div class="section-header">
+        <h2>5. Diabetic Ketoacidosis (DKA) <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Diagnostic Criteria</h3>
+        <table>
+            <tr><th>Parameter</th><th>Mild</th><th>Moderate</th><th>Severe</th></tr>
+            <tr><td><strong>Glucose</strong></td><td colspan="3">>250 mg/dL (can be lower in euglycemic DKA)</td></tr>
+            <tr><td><strong>Arterial pH</strong></td><td>7.25-7.30</td><td>7.00-7.24</td><td>&lt;7.00</td></tr>
+            <tr><td><strong>Bicarbonate</strong></td><td>15-18 mEq/L</td><td>10-14.9 mEq/L</td><td>&lt;10 mEq/L</td></tr>
+            <tr><td><strong>Anion gap</strong></td><td colspan="3">>12 mEq/L</td></tr>
+            <tr><td><strong>Ketones</strong></td><td colspan="3">Positive (serum β-hydroxybutyrate >3 mmol/L)</td></tr>
+            <tr><td><strong>Mental status</strong></td><td>Alert</td><td>Alert/drowsy</td><td>Stupor/coma</td></tr>
+        </table>
+        
+        <h3>Precipitants (The 6 I's)</h3>
+        <div class="mnemonic-box">
+            <strong>Infection</strong> (most common), <strong>Insulin</strong> (missed/insufficient), <strong>Infarction</strong> (MI), <strong>Intoxication</strong>, <strong>Infant</strong> (pregnancy), <strong>Iatrogenic</strong> (steroids, SGLT2i)
+        </div>
+        
+        <h3>Treatment Protocol</h3>
+        <h4>1. Fluids (First Priority)</h4>
+        <ul>
+            <li><strong>Initial:</strong> 1-1.5 L NS in first hour</li>
+            <li><strong>Then:</strong> 250-500 mL/hr NS (or 0.45% if corrected Na normal/high)</li>
+            <li><strong>When glucose &lt;200:</strong> Switch to D5 0.45% NS</li>
+        </ul>
+        
+        <h4>2. Insulin</h4>
+        <ul>
+            <li><strong>Regular insulin:</strong> 0.1 units/kg bolus, then 0.1 units/kg/hr infusion</li>
+            <li><strong>OR:</strong> 0.14 units/kg/hr infusion (no bolus)</li>
+            <li><strong>Target:</strong> Glucose drop 50-70 mg/dL/hr</li>
+            <li><strong>When glucose &lt;200:</strong> Reduce infusion to 0.02-0.05 units/kg/hr, keep glucose 150-200 until anion gap closes</li>
+        </ul>
+        
+        <h4>3. Potassium</h4>
+        <table>
+            <tr><th>Serum K+</th><th>Action</th></tr>
+            <tr><td>&lt;3.3 mEq/L</td><td>Hold insulin, give 20-30 mEq/hr K+ until &gt;3.3</td></tr>
+            <tr><td>3.3-5.3 mEq/L</td><td>Add 20-30 mEq K+ to each liter of fluids</td></tr>
+            <tr><td>&gt;5.3 mEq/L</td><td>No K+ replacement, check Q2h</td></tr>
+        </table>
+        
+        <div class="danger-box">
+            Initial serum K+ is often normal or high despite total body K+ depletion. Insulin drives K+ into cells — can precipitate fatal hypokalemia. <strong>Check K+ before starting insulin.</strong>
+        </div>
+        
+        <h4>4. Bicarbonate</h4>
+        <ul>
+            <li>Only if pH &lt;6.9: Give 100 mEq NaHCO3 in 400 mL water with 20 mEq KCl over 2 hours</li>
+            <li>Repeat until pH &gt;7.0</li>
+        </ul>
+        
+        <h3>Resolution Criteria</h3>
+        <ul>
+            <li>Glucose &lt;200 mg/dL</li>
+            <li>Anion gap ≤12 mEq/L</li>
+            <li>Bicarbonate ≥15 mEq/L</li>
+            <li>pH &gt;7.3</li>
+        </ul>
+        
+        <div class="high-yield">
+            Transition to subcutaneous insulin when DKA resolved AND patient can eat. Give long-acting insulin 2 hours before stopping IV insulin to prevent rebound hyperglycemia/ketosis.
+        </div>
+        
+        <h3>Euglycemic DKA</h3>
+        <ul>
+            <li><strong>Definition:</strong> DKA with glucose &lt;250 mg/dL</li>
+            <li><strong>Causes:</strong> SGLT2 inhibitors (most common), pregnancy, fasting, alcohol</li>
+            <li><strong>Management:</strong> Same as DKA but start dextrose-containing fluids earlier</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 6: HHS ==================== -->
+<div class="section" id="hhs">
+    <div class="section-header">
+        <h2>6. Hyperosmolar Hyperglycemic State (HHS) <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Diagnostic Criteria</h3>
+        <table>
+            <tr><th>Parameter</th><th>HHS</th><th>DKA (for comparison)</th></tr>
+            <tr><td><strong>Glucose</strong></td><td>>600 mg/dL</td><td>>250 mg/dL</td></tr>
+            <tr><td><strong>Serum osmolality</strong></td><td>>320 mOsm/kg</td><td>Variable</td></tr>
+            <tr><td><strong>pH</strong></td><td>>7.30</td><td>&lt;7.30</td></tr>
+            <tr><td><strong>Bicarbonate</strong></td><td>>18 mEq/L</td><td>&lt;18 mEq/L</td></tr>
+            <tr><td><strong>Ketones</strong></td><td>Negative/trace</td><td>Positive</td></tr>
+            <tr><td><strong>Mental status</strong></td><td>Often altered</td><td>Variable</td></tr>
+        </table>
+        
+        <div class="calculation-box">
+            <strong>Effective Serum Osmolality:</strong><br>
+            2 × Na + (Glucose ÷ 18) = mOsm/kg<br>
+            <em>(BUN not included — freely crosses membranes)</em>
+        </div>
+        
+        <h3>Key Differences from DKA</h3>
+        <ul>
+            <li>More common in <strong>T2D</strong> (vs T1D in DKA)</li>
+            <li>Typically <strong>older patients</strong> with limited access to water</li>
+            <li>Profound dehydration (may have 8-10 L fluid deficit)</li>
+            <li>Higher mortality than DKA (10-20% vs 1-5%)</li>
+            <li>Enough insulin to prevent ketosis but not enough to prevent hyperglycemia</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Fluids (priority):</strong> Aggressive NS (may need 6-10 L total)
+                <ul>
+                    <li>1-1.5 L in first hour</li>
+                    <li>Switch to 0.45% NS once hemodynamically stable and Na normal/high</li>
+                </ul>
+            </li>
+            <li><strong>Insulin:</strong> Lower doses than DKA (0.05-0.1 units/kg/hr) — fluids alone lower glucose significantly</li>
+            <li><strong>Potassium:</strong> Same as DKA protocol</li>
+            <li><strong>Thromboprophylaxis:</strong> High VTE risk — anticoagulate</li>
+        </ul>
+        
+        <div class="danger-box">
+            Avoid rapid correction of osmolality — can cause cerebral edema. Target glucose reduction 50-70 mg/dL/hr and sodium correction ≤10-12 mEq/L/day.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 7: HYPOGLYCEMIA ==================== -->
+<div class="section" id="hypoglycemia">
+    <div class="section-header">
+        <h2>7. Hypoglycemia <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Definition</h3>
+        <ul>
+            <li><strong>Level 1:</strong> Glucose &lt;70 mg/dL (alert value)</li>
+            <li><strong>Level 2:</strong> Glucose &lt;54 mg/dL (clinically significant)</li>
+            <li><strong>Level 3:</strong> Severe — altered mental status, needs assistance</li>
+        </ul>
+        
+        <h3>Whipple's Triad</h3>
+        <ol>
+            <li>Symptoms consistent with hypoglycemia</li>
+            <li>Low plasma glucose at time of symptoms</li>
+            <li>Resolution of symptoms with glucose correction</li>
+        </ol>
+        
+        <h3>Causes of Hypoglycemia in Non-Diabetics</h3>
+        <table>
+            <tr><th>Category</th><th>Causes</th><th>Clues</th></tr>
+            <tr><td><strong>Insulinoma</strong></td><td>β-cell tumor</td><td>High insulin, high C-peptide, low β-OHB, negative sulfonylurea screen</td></tr>
+            <tr><td><strong>Sulfonylurea</strong></td><td>Accidental or intentional</td><td>High insulin, high C-peptide, positive drug screen</td></tr>
+            <tr><td><strong>Exogenous insulin</strong></td><td>Factitious or overdose</td><td>High insulin, LOW C-peptide, negative drug screen</td></tr>
+            <tr><td><strong>Adrenal insufficiency</strong></td><td>Cortisol deficiency</td><td>Check cortisol, ACTH</td></tr>
+            <tr><td><strong>Hepatic failure</strong></td><td>↓ Gluconeogenesis</td><td>Liver dysfunction obvious</td></tr>
+            <tr><td><strong>Sepsis</strong></td><td>Multifactorial</td><td>Clinical context</td></tr>
+            <tr><td><strong>Non-islet cell tumor</strong></td><td>IGF-II producing tumors</td><td>Low insulin, low C-peptide, elevated IGF-II</td></tr>
+            <tr><td><strong>Post-bariatric</strong></td><td>Dumping syndrome, nesidioblastosis</td><td>Post-gastric bypass, postprandial</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            <strong>Insulinoma workup:</strong> 72-hour fast with Q6h glucose, insulin, C-peptide, β-hydroxybutyrate. End fast when glucose &lt;55 with symptoms OR glucose &lt;45.
+        </div>
+        
+        <h3>Interpretation of Hypoglycemia Labs</h3>
+        <table>
+            <tr><th>Diagnosis</th><th>Insulin</th><th>C-peptide</th><th>Pro-insulin</th><th>SU Screen</th></tr>
+            <tr><td><strong>Insulinoma</strong></td><td>↑</td><td>↑</td><td>↑</td><td>Negative</td></tr>
+            <tr><td><strong>Sulfonylurea</strong></td><td>↑</td><td>↑</td><td>↑</td><td>Positive</td></tr>
+            <tr><td><strong>Exogenous insulin</strong></td><td>↑</td><td>↓</td><td>↓</td><td>Negative</td></tr>
+            <tr><td><strong>IGF-II tumor</strong></td><td>↓</td><td>↓</td><td>↓</td><td>Negative</td></tr>
+        </table>
+        
+        <div class="clinical-pearl">
+            Exogenous insulin suppresses endogenous secretion — C-peptide will be LOW. Insulinoma and sulfonylureas stimulate endogenous insulin — C-peptide will be HIGH.
+        </div>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Conscious patient:</strong> 15-20g fast-acting carbs (glucose tabs, juice), recheck in 15 min</li>
+            <li><strong>Unconscious/unable to swallow:</strong> Glucagon 1mg IM/SC or IV dextrose (25g D50)</li>
+            <li><strong>Sulfonylurea overdose:</strong> May need octreotide (suppresses insulin) + prolonged dextrose infusion</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 8: DIABETIC COMPLICATIONS ==================== -->
+<div class="section" id="dm-complications">
+    <div class="section-header">
+        <h2>8. Chronic Diabetic Complications <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Microvascular Complications</h3>
+        
+        <h4>Diabetic Retinopathy</h4>
+        <table>
+            <tr><th>Stage</th><th>Findings</th><th>Management</th></tr>
+            <tr><td><strong>Mild NPDR</strong></td><td>Microaneurysms only</td><td>Annual exam</td></tr>
+            <tr><td><strong>Moderate NPDR</strong></td><td>+ Hemorrhages, hard exudates</td><td>Q6-12 month exam</td></tr>
+            <tr><td><strong>Severe NPDR</strong></td><td>4-2-1 rule: hemorrhages in 4 quadrants, venous beading in 2, IRMA in 1</td><td>Q3-6 month exam, consider laser</td></tr>
+            <tr><td><strong>PDR</strong></td><td>Neovascularization</td><td>Panretinal photocoagulation, anti-VEGF</td></tr>
+        </table>
+        
+        <div class="guideline-box">
+            <strong>Screening:</strong> T1D — annual exam starting 5 years after diagnosis. T2D — at diagnosis and annually thereafter.
+        </div>
+        
+        <h4>Diabetic Nephropathy</h4>
+        <ul>
+            <li><strong>Screening:</strong> Annual UACR and eGFR (at diagnosis for T2D, after 5 years for T1D)</li>
+            <li><strong>Stages:</strong>
+                <ul>
+                    <li>Moderately increased albuminuria: UACR 30-300 mg/g</li>
+                    <li>Severely increased albuminuria: UACR >300 mg/g</li>
+                </ul>
+            </li>
+            <li><strong>Treatment:</strong>
+                <ul>
+                    <li>ACEi or ARB (first-line for albuminuria)</li>
+                    <li>SGLT2i (add if eGFR ≥20, slows progression — CREDENCE, DAPA-CKD)</li>
+                    <li>Finerenone (nonsteroidal MRA — FIDELIO, FIGARO)</li>
+                    <li>BP goal &lt;130/80 (or &lt;120/80 if tolerated)</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h4>Diabetic Neuropathy</h4>
+        <table>
+            <tr><th>Type</th><th>Features</th><th>Treatment</th></tr>
+            <tr><td><strong>Distal symmetric polyneuropathy</strong></td><td>Stocking-glove, burning, numbness</td><td>Duloxetine, pregabalin, gabapentin</td></tr>
+            <tr><td><strong>Autonomic</strong></td><td>Gastroparesis, orthostatic hypotension, resting tachycardia, erectile dysfunction</td><td>Symptom-directed</td></tr>
+            <tr><td><strong>Mononeuropathy</strong></td><td>CN III (pupil-sparing), carpal tunnel</td><td>Usually self-limited</td></tr>
+            <tr><td><strong>Diabetic amyotrophy</strong></td><td>Proximal leg weakness, pain, wasting</td><td>Pain control, physical therapy</td></tr>
+        </table>
+        
+        <div class="clinical-pearl">
+            Diabetic CN III palsy typically <strong>spares the pupil</strong> (outer parasympathetics preserved). Pupil-involving CN III suggests aneurysm — get imaging!
+        </div>
+        
+        <h3>Macrovascular Complications</h3>
+        <ul>
+            <li><strong>ASCVD:</strong> Leading cause of death in diabetes
+                <ul>
+                    <li>Statin therapy: moderate-intensity for all 40-75; high-intensity if ASCVD</li>
+                    <li>Aspirin: Secondary prevention; primary prevention individualized (50-70 years with CVD risk)</li>
+                    <li>BP goal: &lt;130/80 mmHg</li>
+                </ul>
+            </li>
+            <li><strong>Peripheral arterial disease:</strong> ABI screening if symptoms or >50 years</li>
+        </ul>
+        
+        <h3>Diabetic Foot</h3>
+        <ul>
+            <li><strong>Screen annually:</strong> Monofilament (10g), vibration (128 Hz tuning fork), ankle reflexes</li>
+            <li><strong>High-risk:</strong> History of ulcer, amputation, Charcot, neuropathy, PAD</li>
+            <li><strong>Management:</strong> Proper footwear, daily self-exams, podiatry referral</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 9: HYPOTHYROIDISM ==================== -->
+<div class="section" id="thyroid">
+    <div class="section-header">
+        <h2>9. Hypothyroidism <span class="badge badge-common">Very Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Causes</h3>
+        <table>
+            <tr><th>Type</th><th>Causes</th></tr>
+            <tr><td><strong>Primary (95%)</strong></td><td>Hashimoto's thyroiditis (most common in iodine-sufficient areas), post-thyroidectomy, post-RAI, iodine deficiency (worldwide), drugs (amiodarone, lithium, checkpoint inhibitors)</td></tr>
+            <tr><td><strong>Central</strong></td><td>Pituitary adenoma, surgery, radiation, Sheehan's syndrome, infiltrative disease</td></tr>
+        </table>
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Symptoms:</strong> Fatigue, cold intolerance, weight gain, constipation, dry skin, hair loss, menorrhagia, depression, cognitive slowing</li>
+            <li><strong>Signs:</strong> Bradycardia, delayed relaxation of reflexes, periorbital edema, non-pitting edema (myxedema), goiter (Hashimoto's)</li>
+        </ul>
+        
+        <h3>Diagnosis</h3>
+        <table>
+            <tr><th>Pattern</th><th>TSH</th><th>Free T4</th><th>Interpretation</th></tr>
+            <tr><td><strong>Primary hypothyroid</strong></td><td>↑</td><td>↓</td><td>Most common</td></tr>
+            <tr><td><strong>Subclinical hypothyroid</strong></td><td>↑</td><td>Normal</td><td>Treat if TSH >10 or symptoms</td></tr>
+            <tr><td><strong>Central hypothyroid</strong></td><td>↓ or Normal</td><td>↓</td><td>Check pituitary MRI</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            In <strong>central hypothyroidism</strong>, TSH is unreliable (may be low, normal, or mildly elevated). Follow free T4, not TSH, to guide treatment.
+        </div>
+        
+        <h3>Hashimoto's Thyroiditis</h3>
+        <ul>
+            <li>Most common cause of hypothyroidism in iodine-sufficient areas</li>
+            <li>Autoimmune: Anti-TPO antibodies (90%+), anti-thyroglobulin</li>
+            <li>Associated with other autoimmune diseases (T1D, celiac, vitiligo)</li>
+            <li>May have initial thyrotoxic phase ("Hashitoxicosis")</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Levothyroxine (T4):</strong> First-line
+                <ul>
+                    <li>Young/healthy: Full replacement dose 1.6 mcg/kg/day</li>
+                    <li>Elderly or CAD: Start low (25-50 mcg), titrate slowly</li>
+                </ul>
+            </li>
+            <li><strong>Monitoring:</strong> TSH in 6-8 weeks, then annually once stable</li>
+            <li><strong>Goal TSH:</strong> 0.5-4.0 mU/L (lower half of range for younger patients)</li>
+        </ul>
+        
+        <div class="clinical-pearl">
+            Take levothyroxine on empty stomach, 30-60 min before breakfast or 3+ hours after last meal. Separate from calcium, iron, PPIs by 4 hours.
+        </div>
+        
+        <h3>Subclinical Hypothyroidism</h3>
+        <ul>
+            <li><strong>Definition:</strong> Elevated TSH, normal free T4</li>
+            <li><strong>Treat if:</strong>
+                <ul>
+                    <li>TSH >10 mU/L</li>
+                    <li>Symptoms attributable to hypothyroidism</li>
+                    <li>Anti-TPO positive (higher progression risk)</li>
+                    <li>Pregnancy or planning pregnancy</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 10: HYPERTHYROIDISM ==================== -->
+<div class="section" id="hyperthyroid">
+    <div class="section-header">
+        <h2>10. Hyperthyroidism <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Causes</h3>
+        <table>
+            <tr><th>Cause</th><th>RAIU</th><th>Key Features</th></tr>
+            <tr><td><strong>Graves' disease</strong></td><td>↑ Diffuse</td><td>TRAb positive, ophthalmopathy, pretibial myxedema</td></tr>
+            <tr><td><strong>Toxic multinodular goiter</strong></td><td>↑ Patchy</td><td>Older patients, nodular goiter</td></tr>
+            <tr><td><strong>Toxic adenoma</strong></td><td>↑ Focal ("hot" nodule)</td><td>Single hyperfunctioning nodule</td></tr>
+            <tr><td><strong>Thyroiditis (subacute, painless)</strong></td><td>↓</td><td>Transient, self-limited</td></tr>
+            <tr><td><strong>Exogenous thyroid hormone</strong></td><td>↓</td><td>Low thyroglobulin</td></tr>
+            <tr><td><strong>Amiodarone-induced (Type I)</strong></td><td>↑ or ↓</td><td>Iodine-induced, underlying thyroid disease</td></tr>
+            <tr><td><strong>Amiodarone-induced (Type II)</strong></td><td>↓</td><td>Destructive thyroiditis</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            <strong>RAIU differentiates high uptake (Graves', toxic nodules) from low uptake (thyroiditis, exogenous).</strong> Essential for treatment planning.
+        </div>
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Symptoms:</strong> Palpitations, anxiety, tremor, heat intolerance, weight loss despite increased appetite, diarrhea, menstrual irregularity</li>
+            <li><strong>Signs:</strong> Tachycardia, AFib (10-15%), hyperreflexia, warm moist skin, lid lag, goiter</li>
+        </ul>
+        
+        <h3>Graves' Disease-Specific</h3>
+        <ul>
+            <li><strong>Ophthalmopathy:</strong> Proptosis, periorbital edema, diplopia (extraocular muscle inflammation)</li>
+            <li><strong>Dermopathy:</strong> Pretibial myxedema (orange-peel texture)</li>
+            <li><strong>Thyroid acropachy:</strong> Clubbing, periosteal new bone (rare)</li>
+            <li><strong>TRAb (TSI):</strong> Pathognomonic, can follow for remission</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <h4>Antithyroid Drugs (ATDs)</h4>
+        <table>
+            <tr><th>Drug</th><th>Mechanism</th><th>Key Concerns</th></tr>
+            <tr><td><strong>Methimazole</strong></td><td>Blocks TPO, inhibits T4 synthesis</td><td>First-line (except 1st trimester); teratogenic (aplasia cutis); agranulocytosis (0.3%)</td></tr>
+            <tr><td><strong>PTU</strong></td><td>Blocks TPO + peripheral T4→T3</td><td>Used in 1st trimester, thyroid storm; hepatotoxicity</td></tr>
+        </table>
+        
+        <div class="danger-box">
+            <strong>Agranulocytosis:</strong> Check WBC if fever, sore throat. If ANC &lt;500, stop ATD immediately and never rechallenge.
+        </div>
+        
+        <h4>Other Treatments</h4>
+        <ul>
+            <li><strong>Beta-blockers:</strong> Symptom control (propranolol preferred — also blocks T4→T3)</li>
+            <li><strong>Radioactive iodine (RAI):</strong> Definitive treatment, causes hypothyroidism</li>
+            <li><strong>Surgery:</strong> Large goiter, severe ophthalmopathy, pregnancy, concern for malignancy</li>
+        </ul>
+        
+        <div class="guideline-box">
+            <strong>Treatment Selection:</strong><br>
+            • Graves' (young, small goiter): ATDs first (30-50% remission after 12-18 months)<br>
+            • Graves' (relapse, large goiter): RAI or surgery<br>
+            • Toxic nodule: RAI or surgery (ATDs don't cause remission)<br>
+            • Pregnancy: PTU 1st trimester, methimazole 2nd/3rd
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 11: THYROID STORM ==================== -->
+<div class="section" id="thyroid-storm">
+    <div class="section-header">
+        <h2>11. Thyroid Storm <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Fever</strong> (often >104°F)</li>
+            <li><strong>Tachycardia</strong> out of proportion to fever</li>
+            <li><strong>Altered mental status</strong> (agitation, delirium, coma)</li>
+            <li><strong>GI symptoms:</strong> Nausea, vomiting, diarrhea, jaundice</li>
+            <li><strong>Cardiovascular:</strong> AFib, high-output heart failure</li>
+        </ul>
+        
+        <h3>Burch-Wartofsky Score</h3>
+        <p>Score ≥45 = thyroid storm; 25-44 = impending storm</p>
+        
+        <h3>Treatment (Order Matters!)</h3>
+        <table>
+            <tr><th>Step</th><th>Treatment</th><th>Rationale</th></tr>
+            <tr><td><strong>1. Beta-blocker</strong></td><td>Propranolol 60-80mg Q4-6h (or esmolol drip)</td><td>Control symptoms, ↓ T4→T3 conversion</td></tr>
+            <tr><td><strong>2. PTU</strong></td><td>500-1000mg load, then 250mg Q4h</td><td>Block synthesis + T4→T3 conversion</td></tr>
+            <tr><td><strong>3. Iodine</strong></td><td>SSKI or Lugol's 1 hour AFTER PTU</td><td>Blocks hormone release (Wolff-Chaikoff)</td></tr>
+            <tr><td><strong>4. Glucocorticoids</strong></td><td>Hydrocortisone 100mg Q8h</td><td>↓ T4→T3, treat relative adrenal insufficiency</td></tr>
+            <tr><td><strong>5. Supportive</strong></td><td>Cooling, fluids, treat precipitant</td><td>Address underlying cause</td></tr>
+        </table>
+        
+        <div class="danger-box">
+            Give PTU <strong>before</strong> iodine! Iodine provides substrate for more hormone synthesis if given first.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 12: THYROIDITIS ==================== -->
+<div class="section" id="thyroiditis">
+    <div class="section-header">
+        <h2>12. Thyroiditis <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Types Comparison</h3>
+        <table>
+            <tr><th>Type</th><th>Cause</th><th>Pain</th><th>RAIU</th><th>Course</th></tr>
+            <tr><td><strong>Subacute (de Quervain)</strong></td><td>Viral (post-URI)</td><td>Yes (neck tenderness)</td><td>↓</td><td>Hyper → hypo → recovery (weeks-months)</td></tr>
+            <tr><td><strong>Painless/Silent</strong></td><td>Autoimmune</td><td>No</td><td>↓</td><td>Hyper → hypo → recovery or permanent hypo</td></tr>
+            <tr><td><strong>Postpartum</strong></td><td>Autoimmune</td><td>No</td><td>↓</td><td>2-6 months postpartum; may recur with future pregnancies</td></tr>
+            <tr><td><strong>Hashimoto's</strong></td><td>Autoimmune (chronic)</td><td>No</td><td>Variable</td><td>Progressive hypothyroidism</td></tr>
+            <tr><td><strong>Drug-induced</strong></td><td>Amiodarone, checkpoint inhibitors, lithium</td><td>Usually no</td><td>↓</td><td>Variable</td></tr>
+        </table>
+        
+        <div class="clinical-pearl">
+            Subacute thyroiditis: Elevated ESR, tender thyroid, recent URI. Often misdiagnosed as pharyngitis. Treat with NSAIDs or steroids for pain. Beta-blockers for hyperthyroid symptoms.
+        </div>
+        
+        <h3>Amiodarone-Induced Thyroid Dysfunction</h3>
+        <table>
+            <tr><th>Type</th><th>Mechanism</th><th>RAIU</th><th>Treatment</th></tr>
+            <tr><td><strong>Type 1 (hyperthyroidism)</strong></td><td>Iodine-induced (Jod-Basedow)</td><td>↑ or normal</td><td>Methimazole ± perchlorate</td></tr>
+            <tr><td><strong>Type 2 (hyperthyroidism)</strong></td><td>Destructive thyroiditis</td><td>↓</td><td>Glucocorticoids</td></tr>
+            <tr><td><strong>Hypothyroidism</strong></td><td>Wolff-Chaikoff effect</td><td>—</td><td>Levothyroxine</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            Type 1 vs Type 2 often hard to distinguish — may need to treat both simultaneously. Color-flow Doppler: Type 1 = increased vascularity; Type 2 = decreased.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 13: THYROID NODULES ==================== -->
+<div class="section" id="thyroid-nodules">
+    <div class="section-header">
+        <h2>13. Thyroid Nodules & Cancer <span class="badge badge-boards">Boards Favorite</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Evaluation</h3>
+        <ul>
+            <li><strong>TSH first:</strong>
+                <ul>
+                    <li>Low TSH → Thyroid scan to identify "hot" (hyperfunctioning) nodules — low malignancy risk, no FNA needed</li>
+                    <li>Normal/high TSH → Proceed to ultrasound</li>
+                </ul>
+            </li>
+            <li><strong>Ultrasound features:</strong> Risk stratify nodules</li>
+        </ul>
+        
+        <h3>ATA Ultrasound Risk Stratification</h3>
+        <table>
+            <tr><th>Pattern</th><th>Features</th><th>Cancer Risk</th><th>FNA Threshold</th></tr>
+            <tr><td><strong>High suspicion</strong></td><td>Solid hypoechoic + microcalcifications, irregular margins, taller than wide, ETE</td><td>>70-90%</td><td>≥1 cm</td></tr>
+            <tr><td><strong>Intermediate</strong></td><td>Solid hypoechoic without high-risk features</td><td>10-20%</td><td>≥1 cm</td></tr>
+            <tr><td><strong>Low suspicion</strong></td><td>Isoechoic/hyperechoic, partially cystic</td><td>5-10%</td><td>≥1.5 cm</td></tr>
+            <tr><td><strong>Very low</strong></td><td>Spongiform, purely cystic</td><td>&lt;3%</td><td>≥2 cm or observe</td></tr>
+            <tr><td><strong>Benign</strong></td><td>Purely cystic</td><td>&lt;1%</td><td>No FNA</td></tr>
+        </table>
+        
+        <h3>Bethesda System (FNA Cytology)</h3>
+        <table>
+            <tr><th>Category</th><th>Malignancy Risk</th><th>Management</th></tr>
+            <tr><td>I. Non-diagnostic</td><td>5-10%</td><td>Repeat FNA</td></tr>
+            <tr><td>II. Benign</td><td>&lt;3%</td><td>Follow clinically</td></tr>
+            <tr><td>III. AUS/FLUS</td><td>10-30%</td><td>Repeat FNA or molecular testing</td></tr>
+            <tr><td>IV. Follicular neoplasm</td><td>25-40%</td><td>Lobectomy or molecular testing</td></tr>
+            <tr><td>V. Suspicious for malignancy</td><td>50-75%</td><td>Lobectomy or total thyroidectomy</td></tr>
+            <tr><td>VI. Malignant</td><td>97-99%</td><td>Total thyroidectomy</td></tr>
+        </table>
+        
+        <h3>Thyroid Cancer Types</h3>
+        <table>
+            <tr><th>Type</th><th>% of Cases</th><th>Features</th><th>Prognosis</th></tr>
+            <tr><td><strong>Papillary</strong></td><td>80-85%</td><td>Psammoma bodies, Orphan Annie nuclei, lymphatic spread</td><td>Excellent (>95% 10-year survival)</td></tr>
+            <tr><td><strong>Follicular</strong></td><td>10-15%</td><td>Hematogenous spread (lung, bone), capsular/vascular invasion on histology</td><td>Good</td></tr>
+            <tr><td><strong>Medullary</strong></td><td>3-5%</td><td>Parafollicular C-cells, calcitonin, MEN2 association (25%)</td><td>Moderate</td></tr>
+            <tr><td><strong>Anaplastic</strong></td><td>1-2%</td><td>Elderly, rapidly growing, locally invasive</td><td>Very poor (median survival 6 months)</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            <strong>Medullary thyroid cancer:</strong> Always check RET proto-oncogene. If positive, screen for MEN2 (pheochromocytoma, hyperparathyroidism) before surgery.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 14: CUSHING'S SYNDROME ==================== -->
+<div class="section" id="adrenal">
+    <div class="section-header">
+        <h2>14. Cushing's Syndrome <span class="badge badge-boards">Boards Favorite</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Etiology</h3>
+        <table>
+            <tr><th>Type</th><th>ACTH</th><th>Cause</th><th>% of Endogenous</th></tr>
+            <tr><td><strong>ACTH-dependent</strong></td><td>↑</td><td>Pituitary adenoma (Cushing's disease) — 70%<br>Ectopic ACTH (small cell lung, carcinoid) — 15%</td><td>85%</td></tr>
+            <tr><td><strong>ACTH-independent</strong></td><td>↓</td><td>Adrenal adenoma, carcinoma, bilateral hyperplasia</td><td>15%</td></tr>
+            <tr><td><strong>Iatrogenic</strong></td><td>↓</td><td>Exogenous glucocorticoids (most common overall)</td><td>—</td></tr>
+        </table>
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Central obesity</strong>, supraclavicular fat pads, buffalo hump</li>
+            <li><strong>Moon facies</strong>, facial plethora</li>
+            <li><strong>Skin:</strong> Thin, easy bruising, purple striae (>1 cm wide), poor wound healing</li>
+            <li><strong>Proximal muscle weakness</strong></li>
+            <li><strong>Metabolic:</strong> Hyperglycemia, hypertension, hypokalemia</li>
+            <li><strong>Osteoporosis</strong>, vertebral fractures</li>
+            <li><strong>Psychiatric:</strong> Depression, psychosis</li>
+            <li><strong>Hirsutism, acne</strong> (androgen excess in adrenal tumors)</li>
+        </ul>
+        
+        <div class="mnemonic-box">
+            <strong>Cushing's features:</strong> "CUSHING" — Central obesity, Unusual infections, Striae (purple), Hyperglycemia/HTN, Immune suppression, Neuro-psych changes, Growth retardation (kids)
+        </div>
+        
+        <h3>Diagnostic Workup</h3>
+        <h4>Step 1: Confirm Hypercortisolism (any 2 of 3)</h4>
+        <ul>
+            <li><strong>24-hour urine free cortisol</strong> (>3× ULN highly specific)</li>
+            <li><strong>Late-night salivary cortisol</strong> (×2 elevated)</li>
+            <li><strong>1 mg overnight dexamethasone suppression test</strong> (cortisol >1.8 μg/dL = abnormal)</li>
+        </ul>
+        
+        <h4>Step 2: ACTH Level</h4>
+        <ul>
+            <li><strong>ACTH suppressed (&lt;5 pg/mL):</strong> Adrenal source → CT adrenals</li>
+            <li><strong>ACTH elevated or normal (>20):</strong> ACTH-dependent → Next step</li>
+        </ul>
+        
+        <h4>Step 3: Localize ACTH Source</h4>
+        <ul>
+            <li><strong>High-dose dexamethasone suppression:</strong> Pituitary usually suppresses; ectopic does not</li>
+            <li><strong>Pituitary MRI:</strong> May show adenoma (but 10% of normals have incidentalomas)</li>
+            <li><strong>Inferior petrosal sinus sampling (IPSS):</strong> Gold standard for distinguishing pituitary vs ectopic</li>
+        </ul>
+        
+        <div class="high-yield">
+            <strong>IPSS:</strong> Central-to-peripheral ACTH ratio >2 at baseline OR >3 after CRH = pituitary source. Essential when MRI is negative or equivocal.
+        </div>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Cushing's disease (pituitary):</strong> Transsphenoidal surgery</li>
+            <li><strong>Adrenal adenoma:</strong> Adrenalectomy</li>
+            <li><strong>Ectopic ACTH:</strong> Resect tumor if possible; medical therapy if not</li>
+            <li><strong>Medical therapy:</strong> Ketoconazole, metyrapone, osilodrostat (steroidogenesis inhibitors); mifepristone (glucocorticoid receptor antagonist); pasireotide (pituitary-directed)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 15: ADRENAL INSUFFICIENCY ==================== -->
+<div class="section" id="adrenal-insuff">
+    <div class="section-header">
+        <h2>15. Adrenal Insufficiency <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Classification</h3>
+        <table>
+            <tr><th>Type</th><th>Cause</th><th>ACTH</th><th>Aldosterone</th></tr>
+            <tr><td><strong>Primary (Addison's)</strong></td><td>Autoimmune (most common in developed), TB, adrenal hemorrhage, metastases</td><td>↑</td><td>↓</td></tr>
+            <tr><td><strong>Secondary</strong></td><td>Pituitary disease, chronic steroid use (most common overall)</td><td>↓</td><td>Normal</td></tr>
+            <tr><td><strong>Tertiary</strong></td><td>Hypothalamic disease, chronic steroid withdrawal</td><td>↓</td><td>Normal</td></tr>
+        </table>
+        
+        <h3>Clinical Features</h3>
+        <table>
+            <tr><th>Feature</th><th>Primary</th><th>Secondary/Tertiary</th></tr>
+            <tr><td>Hyperpigmentation</td><td>Yes (high ACTH)</td><td>No</td></tr>
+            <tr><td>Hyperkalemia</td><td>Yes (low aldosterone)</td><td>No</td></tr>
+            <tr><td>Hyponatremia</td><td>Yes</td><td>Yes (ADH effect)</td></tr>
+            <tr><td>Hypotension</td><td>Yes</td><td>Less severe</td></tr>
+        </table>
+        
+        <ul>
+            <li><strong>Common symptoms:</strong> Fatigue, weakness, anorexia, weight loss, nausea, abdominal pain</li>
+            <li><strong>Salt craving</strong> (primary only — aldosterone deficiency)</li>
+            <li><strong>Hyperpigmentation:</strong> Skin creases, buccal mucosa, scars (ACTH cross-reacts with melanocortin receptors)</li>
+        </ul>
+        
+        <div class="clinical-pearl">
+            Hyperpigmentation in adrenal insufficiency = PRIMARY. High ACTH stimulates melanocytes. Absent in secondary/tertiary.
+        </div>
+        
+        <h3>Diagnosis</h3>
+        <ul>
+            <li><strong>Morning cortisol:</strong> &lt;3 μg/dL = adrenal insufficiency; >15-18 = normal (rules out)</li>
+            <li><strong>ACTH stimulation test (Cosyntropin test):</strong>
+                <ul>
+                    <li>Give 250 mcg IV cosyntropin</li>
+                    <li>Check cortisol at 30 and 60 minutes</li>
+                    <li>Normal: Cortisol ≥18-20 μg/dL</li>
+                </ul>
+            </li>
+            <li><strong>ACTH level:</strong> Distinguishes primary (high) from secondary (low)</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Glucocorticoid replacement:</strong>
+                <ul>
+                    <li>Hydrocortisone 15-25 mg/day divided (⅔ AM, ⅓ PM) OR</li>
+                    <li>Prednisone 3-5 mg/day</li>
+                </ul>
+            </li>
+            <li><strong>Mineralocorticoid (primary only):</strong> Fludrocortisone 0.05-0.2 mg/day</li>
+            <li><strong>Stress dosing:</strong> Double or triple dose for illness; IV hydrocortisone 50-100mg Q8h for major stress/surgery</li>
+        </ul>
+        
+        <h3>Adrenal Crisis</h3>
+        <ul>
+            <li><strong>Triggers:</strong> Infection, surgery, trauma, stopping steroids</li>
+            <li><strong>Presentation:</strong> Hypotension/shock, fever, altered mental status, abdominal pain</li>
+            <li><strong>Treatment:</strong>
+                <ul>
+                    <li><strong>Hydrocortisone 100mg IV bolus</strong>, then 50-100mg Q6-8h</li>
+                    <li>Aggressive IV fluids (NS)</li>
+                    <li>Treat precipitant</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <div class="danger-box">
+            In suspected adrenal crisis, <strong>give hydrocortisone immediately</strong> — do not wait for lab confirmation. Can draw cortisol/ACTH first but don't delay treatment.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 16: PHEOCHROMOCYTOMA ==================== -->
+<div class="section" id="pheo">
+    <div class="section-header">
+        <h2>16. Pheochromocytoma & Paraganglioma <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Overview</h3>
+        <ul>
+            <li><strong>Pheochromocytoma:</strong> Catecholamine-secreting tumor from adrenal medulla</li>
+            <li><strong>Paraganglioma:</strong> Extra-adrenal location (sympathetic chain)</li>
+            <li><strong>~40% are hereditary:</strong> MEN2, VHL, NF1, SDH mutations</li>
+        </ul>
+        
+        <h3>Clinical Features</h3>
+        <div class="mnemonic-box">
+            <strong>5 P's:</strong> Pressure (HTN), Pain (headache), Perspiration, Palpitations, Pallor
+        </div>
+        
+        <ul>
+            <li><strong>Hypertension:</strong> Paroxysmal (50%) or sustained (50%)</li>
+            <li><strong>Classic triad:</strong> Headache, diaphoresis, palpitations</li>
+            <li><strong>Episodic symptoms</strong> triggered by exercise, anesthesia, certain drugs</li>
+            <li><strong>Hyperglycemia</strong> (catecholamines oppose insulin)</li>
+        </ul>
+        
+        <h3>When to Suspect</h3>
+        <ul>
+            <li>Resistant hypertension</li>
+            <li>Adrenal incidentaloma</li>
+            <li>Hypertensive crisis with anesthesia/surgery</li>
+            <li>Syndromic features (MEN2, VHL, NF1)</li>
+            <li>Family history of pheochromocytoma</li>
+        </ul>
+        
+        <h3>Diagnosis</h3>
+        <ul>
+            <li><strong>First-line:</strong> Plasma free metanephrines OR 24-hour urine metanephrines and catecholamines</li>
+            <li><strong>Plasma metanephrines:</strong> Sensitivity >95% — best for screening high-risk patients</li>
+            <li><strong>If positive:</strong> CT or MRI of abdomen/pelvis</li>
+            <li><strong>If imaging negative:</strong> MIBG scan or 68Ga-DOTATATE PET (for metastatic/paraganglioma)</li>
+        </ul>
+        
+        <div class="clinical-pearl">
+            Plasma metanephrines have high sensitivity but lower specificity. False positives with TCAs, decongestants, acute illness. If moderately elevated (2-4× ULN), may need to repeat off interfering meds.
+        </div>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Alpha-blockade first:</strong> Phenoxybenzamine (irreversible) or doxazosin (10-14 days pre-op)
+                <ul>
+                    <li>Goal: Seated BP &lt;130/80, standing SBP >90</li>
+                </ul>
+            </li>
+            <li><strong>Then beta-blockade:</strong> Add after adequate alpha-blockade (prevents unopposed alpha stimulation and hypertensive crisis)</li>
+            <li><strong>Volume expansion:</strong> High-salt diet, IV fluids (catecholamines cause volume contraction)</li>
+            <li><strong>Surgery:</strong> Laparoscopic adrenalectomy (definitive)</li>
+        </ul>
+        
+        <div class="danger-box">
+            <strong>Never give beta-blockers before alpha-blockade!</strong> Unopposed alpha stimulation → hypertensive crisis.
+        </div>
+        
+        <h3>Genetic Testing</h3>
+        <ul>
+            <li>Recommend for all patients with pheochromocytoma/paraganglioma</li>
+            <li><strong>Key syndromes:</strong>
+                <ul>
+                    <li>MEN2A/2B: RET mutation (medullary thyroid cancer, hyperparathyroidism)</li>
+                    <li>VHL: VHL mutation (renal cell carcinoma, hemangioblastomas)</li>
+                    <li>NF1: Café-au-lait spots, neurofibromas</li>
+                    <li>SDH mutations: High paraganglioma and malignancy risk</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 17: PRIMARY ALDOSTERONISM ==================== -->
+<div class="section" id="aldo">
+    <div class="section-header">
+        <h2>17. Primary Aldosteronism <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Overview</h3>
+        <ul>
+            <li>Most common cause of secondary hypertension (5-10% of HTN)</li>
+            <li><strong>Causes:</strong>
+                <ul>
+                    <li>Bilateral adrenal hyperplasia (60-70%)</li>
+                    <li>Aldosterone-producing adenoma (30-40%)</li>
+                    <li>Rare: Familial, carcinoma</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>When to Screen</h3>
+        <ul>
+            <li>Resistant hypertension (≥3 drugs including diuretic)</li>
+            <li>Hypertension with hypokalemia (spontaneous or diuretic-induced)</li>
+            <li>Hypertension with adrenal incidentaloma</li>
+            <li>Hypertension with sleep apnea</li>
+            <li>Family history of early-onset HTN or stroke</li>
+        </ul>
+        
+        <h3>Diagnosis</h3>
+        <h4>Step 1: Screening — Aldosterone/Renin Ratio (ARR)</h4>
+        <ul>
+            <li><strong>Positive:</strong> Aldosterone >10-15 ng/dL AND ARR >30</li>
+            <li><strong>Conditions:</strong> Morning, seated, correct hypokalemia first</li>
+            <li><strong>Hold interfering meds if possible:</strong> MRAs (6 weeks), diuretics (2-4 weeks), ACEi/ARBs (2 weeks)</li>
+        </ul>
+        
+        <h4>Step 2: Confirmatory Testing</h4>
+        <ul>
+            <li><strong>Oral sodium loading test:</strong> High-salt diet × 3 days, then 24h urine aldosterone (>12 μg/day confirms)</li>
+            <li><strong>Saline infusion test:</strong> 2L NS over 4h; aldosterone >10 ng/dL confirms</li>
+        </ul>
+        
+        <h4>Step 3: Subtype Differentiation</h4>
+        <ul>
+            <li><strong>CT adrenals:</strong> May show adenoma (but 30% are &lt;1 cm and may miss)</li>
+            <li><strong>Adrenal vein sampling (AVS):</strong> Gold standard for lateralization if surgical candidate</li>
+        </ul>
+        
+        <div class="high-yield">
+            CT alone is inadequate for subtype differentiation. Even if adenoma visible, AVS confirms lateralization and rules out bilateral disease.
+        </div>
+        
+        <h3>Treatment</h3>
+        <table>
+            <tr><th>Subtype</th><th>Treatment</th></tr>
+            <tr><td><strong>Unilateral adenoma</strong></td><td>Laparoscopic adrenalectomy (cure rate 30-60%)</td></tr>
+            <tr><td><strong>Bilateral hyperplasia</strong></td><td>Mineralocorticoid receptor antagonist (spironolactone or eplerenone)</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- ==================== SECTION 18: ADRENAL INCIDENTALOMA ==================== -->
+<div class="section" id="incidentaloma">
+    <div class="section-header">
+        <h2>18. Adrenal Incidentaloma <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Definition</h3>
+        <p>Adrenal mass ≥1 cm discovered on imaging performed for unrelated indication. Found in 4-5% of CT scans.</p>
+        
+        <h3>Key Questions</h3>
+        <ol>
+            <li><strong>Is it malignant?</strong> (Size, imaging characteristics)</li>
+            <li><strong>Is it functional?</strong> (Hormone excess)</li>
+        </ol>
+        
+        <h3>Malignancy Risk Assessment</h3>
+        <table>
+            <tr><th>Feature</th><th>Benign (Adenoma)</th><th>Malignant</th></tr>
+            <tr><td>Size</td><td>&lt;4 cm</td><td>>4 cm (especially >6 cm)</td></tr>
+            <tr><td>HU on unenhanced CT</td><td>≤10 HU (lipid-rich)</td><td>>10 HU</td></tr>
+            <tr><td>Washout</td><td>>50% absolute washout</td><td>&lt;50% washout</td></tr>
+            <tr><td>Margins</td><td>Smooth, homogeneous</td><td>Irregular, heterogeneous</td></tr>
+            <tr><td>Growth</td><td>Stable</td><td>Rapid growth</td></tr>
+        </table>
+        
+        <div class="clinical-pearl">
+            ≤10 HU on unenhanced CT = adenoma (highly specific). If indeterminate, can do washout study or MRI with chemical shift.
+        </div>
+        
+        <h3>Functional Workup (All Incidentalomas)</h3>
+        <table>
+            <tr><th>Condition</th><th>Test</th></tr>
+            <tr><td><strong>Pheochromocytoma</strong></td><td>Plasma free metanephrines (all patients)</td></tr>
+            <tr><td><strong>Cortisol excess</strong></td><td>1 mg overnight dexamethasone suppression test</td></tr>
+            <tr><td><strong>Primary aldosteronism</strong></td><td>Aldosterone/renin ratio (if hypertension or hypokalemia)</td></tr>
+            <tr><td><strong>Androgen excess</strong></td><td>DHEA-S (if virilization or large mass)</td></tr>
+        </table>
+        
+        <h3>Management</h3>
+        <ul>
+            <li><strong>Surgery if:</strong>
+                <ul>
+                    <li>Size >4 cm (or growing)</li>
+                    <li>Imaging features suggestive of malignancy</li>
+                    <li>Functional (especially pheochromocytoma)</li>
+                </ul>
+            </li>
+            <li><strong>Follow-up if benign-appearing and non-functional:</strong>
+                <ul>
+                    <li>Repeat imaging at 6-12 months, then annually × 1-2 years if stable</li>
+                    <li>Repeat hormonal workup annually × 5 years</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>Autonomous Cortisol Secretion ("Mild" Cushing's)</h3>
+        <ul>
+            <li>Common finding (5-30% of incidentalomas)</li>
+            <li>Cortisol doesn't suppress on DST but no overt Cushing's features</li>
+            <li>May cause HTN, diabetes, osteoporosis</li>
+            <li>Consider surgery if associated comorbidities</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 19: PITUITARY ADENOMAS ==================== -->
+<div class="section" id="pituitary">
+    <div class="section-header">
+        <h2>19. Pituitary Adenomas — Overview <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Classification</h3>
+        <table>
+            <tr><th>Type</th><th>Size</th><th>Hormone Secretion</th></tr>
+            <tr><td><strong>Microadenoma</strong></td><td>&lt;10 mm</td><td>Functioning or non-functioning</td></tr>
+            <tr><td><strong>Macroadenoma</strong></td><td>≥10 mm</td><td>Functioning or non-functioning</td></tr>
+        </table>
+        
+        <h3>Functioning Adenomas (by frequency)</h3>
+        <ol>
+            <li><strong>Prolactinoma</strong> (40-50%)</li>
+            <li><strong>Non-functioning</strong> (30%)</li>
+            <li><strong>GH-secreting (acromegaly)</strong> (15%)</li>
+            <li><strong>ACTH-secreting (Cushing's disease)</strong> (10%)</li>
+            <li><strong>TSH-secreting</strong> (&lt;1%)</li>
+            <li><strong>Gonadotroph</strong> (rare, usually non-functioning)</li>
+        </ol>
+        
+        <h3>Mass Effect Symptoms</h3>
+        <ul>
+            <li><strong>Visual field defects:</strong> Bitemporal hemianopia (optic chiasm compression)</li>
+            <li><strong>Headache</strong></li>
+            <li><strong>Hypopituitarism:</strong> From compression of normal pituitary</li>
+            <li><strong>Cranial nerve palsies:</strong> CN III, IV, VI (cavernous sinus invasion)</li>
+        </ul>
+        
+        <h3>Evaluation of Pituitary Mass</h3>
+        <ul>
+            <li><strong>MRI with gadolinium:</strong> Best imaging modality</li>
+            <li><strong>Visual field testing:</strong> If mass near/compressing chiasm</li>
+            <li><strong>Hormonal evaluation:</strong>
+                <ul>
+                    <li>Prolactin (always check)</li>
+                    <li>IGF-1 (screen for acromegaly)</li>
+                    <li>24h urine cortisol or overnight DST</li>
+                    <li>TSH, free T4</li>
+                    <li>LH, FSH, testosterone/estradiol</li>
+                    <li>8 AM cortisol (assess for deficiency)</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <div class="high-yield">
+            <strong>Always check prolactin before surgery!</strong> Prolactinomas are treated medically (dopamine agonists), not surgically. Prolactin >200 ng/mL with macroadenoma = prolactinoma until proven otherwise.
+        </div>
+        
+        <h3>"Stalk Effect"</h3>
+        <ul>
+            <li>Any mass compressing pituitary stalk can cause hyperprolactinemia (usually mild, &lt;100-150 ng/mL)</li>
+            <li>Due to interruption of dopamine inhibition from hypothalamus</li>
+            <li>Distinguish from prolactinoma by degree of PRL elevation and size correlation</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 20: PROLACTINOMA ==================== -->
+<div class="section" id="prolactinoma">
+    <div class="section-header">
+        <h2>20. Prolactinoma <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Clinical Features</h3>
+        <table>
+            <tr><th>Women</th><th>Men</th></tr>
+            <tr><td>Oligomenorrhea/amenorrhea</td><td>Decreased libido, erectile dysfunction</td></tr>
+            <tr><td>Galactorrhea</td><td>Galactorrhea (less common)</td></tr>
+            <tr><td>Infertility</td><td>Infertility</td></tr>
+            <tr><td>Usually microadenomas (early detection)</td><td>Usually macroadenomas (delayed presentation)</td></tr>
+        </table>
+        
+        <h3>Diagnosis</h3>
+        <ul>
+            <li><strong>Prolactin level correlates with tumor size:</strong>
+                <ul>
+                    <li>Microprolactinoma: PRL 50-200 ng/mL</li>
+                    <li>Macroprolactinoma: PRL >200 ng/mL (often >1000)</li>
+                </ul>
+            </li>
+            <li><strong>"Hook effect":</strong> Very large tumors may have falsely low prolactin due to assay saturation — request serial dilutions if suspected</li>
+        </ul>
+        
+        <div class="clinical-pearl">
+            If large macroadenoma with only mildly elevated prolactin (&lt;100), suspect stalk effect from non-functioning adenoma, NOT prolactinoma.
+        </div>
+        
+        <h3>Causes of Hyperprolactinemia (DDx)</h3>
+        <ul>
+            <li><strong>Physiologic:</strong> Pregnancy, breastfeeding, stress, nipple stimulation</li>
+            <li><strong>Medications:</strong> Antipsychotics, metoclopramide, SSRIs, verapamil</li>
+            <li><strong>Hypothyroidism</strong> (TRH stimulates prolactin)</li>
+            <li><strong>Renal failure, cirrhosis</strong></li>
+            <li><strong>Stalk effect</strong> (any sellar/suprasellar mass)</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <h4>First-Line: Dopamine Agonists</h4>
+        <table>
+            <tr><th>Drug</th><th>Dosing</th><th>Notes</th></tr>
+            <tr><td><strong>Cabergoline</strong></td><td>0.25-1 mg twice weekly</td><td>Preferred: more effective, better tolerated</td></tr>
+            <tr><td><strong>Bromocriptine</strong></td><td>1.25-2.5 mg daily, titrate to 5-7.5 mg</td><td>More nausea; preferred in pregnancy (more safety data)</td></tr>
+        </table>
+        
+        <ul>
+            <li><strong>Goals:</strong> Normalize prolactin, restore gonadal function, shrink tumor</li>
+            <li><strong>Monitoring:</strong> PRL levels q1-2 months initially, MRI at 3-6 months</li>
+            <li><strong>Duration:</strong> May attempt withdrawal after 2+ years if normalized PRL and tumor shrinkage</li>
+        </ul>
+        
+        <h4>Surgery</h4>
+        <ul>
+            <li>Transsphenoidal surgery if:
+                <ul>
+                    <li>Intolerant/resistant to dopamine agonists</li>
+                    <li>Cystic tumor (less responsive)</li>
+                    <li>Patient preference</li>
+                    <li>Apoplexy with visual compromise</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <div class="high-yield">
+            Prolactinoma is the ONE pituitary tumor treated medically, not surgically. Even giant prolactinomas respond to dopamine agonists.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 21: ACROMEGALY ==================== -->
+<div class="section" id="acromegaly">
+    <div class="section-header">
+        <h2>21. Acromegaly <span class="badge badge-boards">Boards Favorite</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Soft tissue growth:</strong> Enlarged hands/feet (ring size increase), coarse facial features, frontal bossing, prognathism</li>
+            <li><strong>Skin:</strong> Oily, skin tags (associated with colon polyps)</li>
+            <li><strong>Cardiovascular:</strong> Hypertension, cardiomyopathy (concentric LVH), arrhythmias</li>
+            <li><strong>Metabolic:</strong> Diabetes/IGT (GH is counter-regulatory)</li>
+            <li><strong>Sleep apnea</strong> (very common)</li>
+            <li><strong>Carpal tunnel syndrome</strong></li>
+            <li><strong>Arthropathy</strong></li>
+            <li><strong>Headache, visual field defects</strong> (tumor mass effect)</li>
+        </ul>
+        
+        <div class="mnemonic-box">
+            <strong>Acromegaly features:</strong> "ABCDEF" — Arthralgia, Blood pressure↑, Carpal tunnel, Diabetes, Enlarged organs, Field defects (visual)
+        </div>
+        
+        <h3>Diagnosis</h3>
+        <ol>
+            <li><strong>Screen:</strong> IGF-1 level (elevated, age/sex adjusted)</li>
+            <li><strong>Confirm:</strong> Oral glucose tolerance test — GH should suppress to &lt;1 ng/mL (or &lt;0.4 with sensitive assay) after 75g glucose. Failure to suppress = acromegaly.</li>
+            <li><strong>Localize:</strong> Pituitary MRI</li>
+        </ol>
+        
+        <div class="clinical-pearl">
+            IGF-1 has a long half-life and reflects integrated GH secretion. Random GH is pulsatile and unreliable for screening.
+        </div>
+        
+        <h3>Treatment</h3>
+        <h4>First-Line: Surgery</h4>
+        <ul>
+            <li>Transsphenoidal adenomectomy</li>
+            <li>Cure rate 80-90% for microadenomas, 40-50% for macroadenomas</li>
+        </ul>
+        
+        <h4>Medical Therapy (Adjuvant or If Surgery Fails)</h4>
+        <table>
+            <tr><th>Class</th><th>Drug</th><th>Mechanism</th><th>Notes</th></tr>
+            <tr><td><strong>Somatostatin analogs</strong></td><td>Octreotide LAR, lanreotide</td><td>Inhibit GH secretion</td><td>First-line medical; normalize IGF-1 in 50-70%</td></tr>
+            <tr><td><strong>GH receptor antagonist</strong></td><td>Pegvisomant</td><td>Blocks GH action</td><td>Most effective for IGF-1 normalization; doesn't shrink tumor</td></tr>
+            <tr><td><strong>Dopamine agonist</strong></td><td>Cabergoline</td><td>Inhibits GH secretion</td><td>May work if mild elevation or co-secreting PRL</td></tr>
+        </table>
+        
+        <h4>Radiation</h4>
+        <ul>
+            <li>Reserved for refractory cases</li>
+            <li>Slow onset of effect (years)</li>
+            <li>Risk of hypopituitarism</li>
+        </ul>
+        
+        <h3>Surveillance</h3>
+        <ul>
+            <li><strong>Colonoscopy:</strong> Increased colon cancer risk; screen at diagnosis</li>
+            <li><strong>Echocardiogram:</strong> Evaluate for cardiomyopathy</li>
+            <li><strong>Sleep study:</strong> High prevalence of sleep apnea</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 22: HYPOPITUITARISM ==================== -->
+<div class="section" id="hypopituitarism">
+    <div class="section-header">
+        <h2>22. Hypopituitarism <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Causes</h3>
+        <table>
+            <tr><th>Category</th><th>Examples</th></tr>
+            <tr><td><strong>Tumors</strong></td><td>Pituitary adenoma, craniopharyngioma, metastases</td></tr>
+            <tr><td><strong>Infiltrative</strong></td><td>Sarcoidosis, hemochromatosis, histiocytosis</td></tr>
+            <tr><td><strong>Inflammatory</strong></td><td>Lymphocytic hypophysitis, IgG4 disease</td></tr>
+            <tr><td><strong>Vascular</strong></td><td>Sheehan's syndrome (postpartum), pituitary apoplexy</td></tr>
+            <tr><td><strong>Iatrogenic</strong></td><td>Surgery, radiation</td></tr>
+            <tr><td><strong>Trauma</strong></td><td>TBI (often underrecognized)</td></tr>
+            <tr><td><strong>Congenital</strong></td><td>Genetic mutations, empty sella</td></tr>
+        </table>
+        
+        <h3>Order of Hormone Loss</h3>
+        <div class="mnemonic-box">
+            <strong>"Go Look For The Adenoma"</strong> — GH, LH/FSH, TSH, ACTH (order of sensitivity to compression/damage)
+        </div>
+        
+        <h3>Clinical Features by Deficiency</h3>
+        <table>
+            <tr><th>Hormone</th><th>Deficiency Symptoms</th></tr>
+            <tr><td><strong>GH</strong></td><td>↓ Muscle mass, ↑ fat, fatigue, ↓ QoL</td></tr>
+            <tr><td><strong>LH/FSH</strong></td><td>Amenorrhea, ↓ libido, infertility, osteoporosis</td></tr>
+            <tr><td><strong>TSH</strong></td><td>Fatigue, cold intolerance, constipation</td></tr>
+            <tr><td><strong>ACTH</strong></td><td>Fatigue, hypotension, hypoglycemia (no hyperpigmentation)</td></tr>
+            <tr><td><strong>ADH</strong></td><td>Diabetes insipidus (polyuria, polydipsia)</td></tr>
+            <tr><td><strong>Prolactin</strong></td><td>Unable to lactate (rarely clinically significant)</td></tr>
+        </table>
+        
+        <h3>Sheehan's Syndrome</h3>
+        <ul>
+            <li>Postpartum pituitary necrosis from hemorrhage/hypotension</li>
+            <li><strong>Presentation:</strong> Failure to lactate, amenorrhea post-delivery, fatigue</li>
+            <li>May present years later with chronic hypopituitarism</li>
+        </ul>
+        
+        <h3>Pituitary Apoplexy</h3>
+        <ul>
+            <li>Hemorrhage or infarction of pituitary adenoma</li>
+            <li><strong>Presentation:</strong> Sudden severe headache, visual loss, ophthalmoplegia, altered consciousness, hypotension</li>
+            <li><strong>Treatment:</strong> IV corticosteroids immediately; surgery if visual compromise</li>
+        </ul>
+        
+        <div class="danger-box">
+            Pituitary apoplexy is an emergency. Give hydrocortisone 100mg IV immediately, then surgical evaluation.
+        </div>
+        
+        <h3>Hormone Replacement</h3>
+        <ul>
+            <li><strong>Cortisol first</strong> (before thyroid to avoid adrenal crisis)</li>
+            <li><strong>Then levothyroxine</strong> (follow free T4, not TSH)</li>
+            <li><strong>Sex steroids</strong> for quality of life, bone health</li>
+            <li><strong>GH</strong> if symptomatic and confirmed deficiency</li>
+            <li><strong>Desmopressin</strong> for diabetes insipidus</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 23: DIABETES INSIPIDUS ==================== -->
+<div class="section" id="di">
+    <div class="section-header">
+        <h2>23. Diabetes Insipidus <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Types</h3>
+        <table>
+            <tr><th>Type</th><th>Mechanism</th><th>ADH Level</th><th>Response to Desmopressin</th></tr>
+            <tr><td><strong>Central DI</strong></td><td>↓ ADH production (pituitary/hypothalamus)</td><td>Low</td><td>Urine concentrates</td></tr>
+            <tr><td><strong>Nephrogenic DI</strong></td><td>Kidney resistance to ADH</td><td>High</td><td>No response</td></tr>
+            <tr><td><strong>Primary polydipsia</strong></td><td>Excessive water intake</td><td>Appropriately low</td><td>Partial response</td></tr>
+            <tr><td><strong>Gestational DI</strong></td><td>Placental vasopressinase</td><td>Low (degraded)</td><td>Responds to desmopressin</td></tr>
+        </table>
+        
+        <h3>Causes</h3>
+        <h4>Central DI</h4>
+        <ul>
+            <li>Pituitary surgery (most common)</li>
+            <li>Trauma, tumors, infiltrative disease</li>
+            <li>Idiopathic (30%)</li>
+        </ul>
+        
+        <h4>Nephrogenic DI</h4>
+        <ul>
+            <li><strong>Drugs:</strong> Lithium (most common), amphotericin, foscarnet</li>
+            <li>Hypercalcemia, hypokalemia</li>
+            <li>CKD, sickle cell disease</li>
+            <li>Genetic (rare)</li>
+        </ul>
+        
+        <h3>Diagnosis</h3>
+        <ul>
+            <li><strong>Clinical:</strong> Polyuria (>3 L/day), polydipsia, nocturia</li>
+            <li><strong>Labs:</strong>
+                <ul>
+                    <li>Serum Na: Normal or elevated</li>
+                    <li>Serum osmolality: >295 mOsm/kg</li>
+                    <li>Urine osmolality: &lt;300 mOsm/kg (dilute urine despite high serum osm)</li>
+                </ul>
+            </li>
+            <li><strong>Water deprivation test:</strong> If diagnosis uncertain
+                <ul>
+                    <li>Withhold fluids until serum osm >295 or 3% weight loss</li>
+                    <li>Give desmopressin and remeasure urine osm</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>Interpretation of Water Deprivation Test</h3>
+        <table>
+            <tr><th>Condition</th><th>After Dehydration</th><th>After Desmopressin</th></tr>
+            <tr><td><strong>Central DI</strong></td><td>Urine stays dilute (&lt;300)</td><td>Urine concentrates (>600)</td></tr>
+            <tr><td><strong>Nephrogenic DI</strong></td><td>Urine stays dilute</td><td>Urine stays dilute</td></tr>
+            <tr><td><strong>Primary polydipsia</strong></td><td>Urine concentrates (>500)</td><td>—</td></tr>
+        </table>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Central DI:</strong> Desmopressin (DDAVP) — intranasal, oral, or SQ</li>
+            <li><strong>Nephrogenic DI:</strong>
+                <ul>
+                    <li>Treat underlying cause (stop lithium if possible)</li>
+                    <li>Thiazide diuretics (paradoxically reduce urine output)</li>
+                    <li>Low-sodium, low-protein diet</li>
+                    <li>Amiloride (for lithium-induced)</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <div class="danger-box">
+            Monitor sodium closely when treating DI. Overcorrection with desmopressin can cause hyponatremia.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 24: SIADH ==================== -->
+<div class="section" id="siadh">
+    <div class="section-header">
+        <h2>24. SIADH <span class="badge badge-common">Very Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Diagnostic Criteria</h3>
+        <ul>
+            <li><strong>Hyponatremia</strong> (serum Na &lt;135 mEq/L)</li>
+            <li><strong>Decreased serum osmolality</strong> (&lt;275 mOsm/kg)</li>
+            <li><strong>Urine osmolality >100 mOsm/kg</strong> (inappropriately concentrated)</li>
+            <li><strong>Urine Na >40 mEq/L</strong> (renal salt wasting)</li>
+            <li><strong>Euvolemic</strong></li>
+            <li><strong>Normal thyroid, adrenal, renal function</strong></li>
+        </ul>
+        
+        <h3>Causes</h3>
+        <div class="mnemonic-box">
+            <strong>"SIADH Causes"</strong> — CNS disorders (stroke, trauma, infection), Lung disease (pneumonia, SCLC), Drugs, pain, nausea, surgery
+        </div>
+        
+        <table>
+            <tr><th>Category</th><th>Examples</th></tr>
+            <tr><td><strong>CNS</strong></td><td>Stroke, hemorrhage, infection, trauma</td></tr>
+            <tr><td><strong>Pulmonary</strong></td><td>Pneumonia, TB, SCLC (ectopic ADH)</td></tr>
+            <tr><td><strong>Malignancy</strong></td><td>Small cell lung cancer (most common), head/neck</td></tr>
+            <tr><td><strong>Drugs</strong></td><td>SSRIs, carbamazepine, cyclophosphamide, vincristine, MDMA</td></tr>
+            <tr><td><strong>Other</strong></td><td>Pain, nausea, post-operative</td></tr>
+        </table>
+        
+        <h3>Treatment</h3>
+        <table>
+            <tr><th>Severity</th><th>Management</th></tr>
+            <tr><td><strong>Mild/chronic (Na 125-134)</strong></td><td>Fluid restriction 1-1.5 L/day</td></tr>
+            <tr><td><strong>Moderate</strong></td><td>Fluid restriction + salt tablets ± loop diuretic</td></tr>
+            <tr><td><strong>Refractory</strong></td><td>Urea (oral osmotic), tolvaptan (vasopressin antagonist)</td></tr>
+            <tr><td><strong>Severe/symptomatic</strong></td><td>3% hypertonic saline (see correction rates below)</td></tr>
+        </table>
+        
+        <h3>Hypertonic Saline for Severe Symptomatic Hyponatremia</h3>
+        <ul>
+            <li><strong>Indications:</strong> Seizures, altered mental status, acute severe hyponatremia</li>
+            <li><strong>Goal:</strong> Raise Na by 4-6 mEq/L in first 24 hours (1-2 mEq/L/hr for first 2-3 hours if symptomatic)</li>
+            <li><strong>Maximum correction:</strong> ≤8-10 mEq/L in first 24 hours, ≤18 mEq/L in 48 hours</li>
+        </ul>
+        
+        <div class="danger-box">
+            <strong>Osmotic demyelination syndrome (ODS):</strong> From overly rapid correction. Risk factors: chronic hyponatremia, hypokalemia, alcoholism, malnutrition. Presents days later with dysarthria, dysphagia, quadriparesis.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 25: HYPERCALCEMIA ==================== -->
+<div class="section" id="calcium">
+    <div class="section-header">
+        <h2>25. Hypercalcemia <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Causes</h3>
+        <table>
+            <tr><th>PTH-Dependent</th><th>PTH-Independent</th></tr>
+            <tr><td>Primary hyperparathyroidism (most common outpatient)</td><td>Malignancy (most common inpatient): PTHrP, bone mets, myeloma</td></tr>
+            <tr><td>Familial hypocalciuric hypercalcemia (FHH)</td><td>Granulomatous disease (sarcoid, TB) — 1,25-vit D</td></tr>
+            <tr><td>Lithium</td><td>Vitamin D intoxication</td></tr>
+            <tr><td>Tertiary hyperparathyroidism</td><td>Milk-alkali syndrome</td></tr>
+            <tr><td></td><td>Immobilization, thyrotoxicosis, adrenal insufficiency</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            <strong>First step in hypercalcemia workup:</strong> Check PTH.<br>
+            • PTH elevated/inappropriately normal → Primary HPT (or FHH)<br>
+            • PTH suppressed → Non-PTH mediated (malignancy, vitamin D, etc.)
+        </div>
+        
+        <h3>Clinical Features</h3>
+        <div class="mnemonic-box">
+            <strong>"Stones, Bones, Groans, Moans, and Psychiatric Overtones"</strong><br>
+            Kidney stones, bone pain/osteoporosis, abdominal pain/constipation, fatigue/weakness, depression/confusion
+        </div>
+        
+        <h3>Treatment of Acute Hypercalcemia</h3>
+        <table>
+            <tr><th>Intervention</th><th>Mechanism</th><th>Notes</th></tr>
+            <tr><td><strong>IV NS (first-line)</strong></td><td>Volume expansion, ↑ Ca excretion</td><td>2-4 L/day; most patients are volume depleted</td></tr>
+            <tr><td><strong>Furosemide</strong></td><td>↑ Calciuresis</td><td>Only after volume repletion</td></tr>
+            <tr><td><strong>Bisphosphonates</strong></td><td>Inhibit osteoclasts</td><td>Zoledronic acid 4mg IV; takes 2-4 days to work</td></tr>
+            <tr><td><strong>Calcitonin</strong></td><td>↓ Bone resorption, ↑ renal excretion</td><td>Rapid onset but tachyphylaxis in 48h</td></tr>
+            <tr><td><strong>Denosumab</strong></td><td>RANKL inhibitor</td><td>For bisphosphonate-refractory</td></tr>
+            <tr><td><strong>Dialysis</strong></td><td>Direct Ca removal</td><td>Severe, refractory, or renal failure</td></tr>
+            <tr><td><strong>Glucocorticoids</strong></td><td>↓ 1,25-vit D</td><td>For granulomatous disease, lymphoma, vit D toxicity</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- ==================== SECTION 26: PRIMARY HYPERPARATHYROIDISM ==================== -->
+<div class="section" id="phpt">
+    <div class="section-header">
+        <h2>26. Primary Hyperparathyroidism <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Etiology</h3>
+        <ul>
+            <li><strong>Single adenoma:</strong> 85%</li>
+            <li><strong>Hyperplasia (4-gland):</strong> 10-15%</li>
+            <li><strong>Parathyroid carcinoma:</strong> &lt;1%</li>
+        </ul>
+        
+        <h3>Laboratory Findings</h3>
+        <table>
+            <tr><th>Lab</th><th>Finding</th></tr>
+            <tr><td>Calcium</td><td>Elevated</td></tr>
+            <tr><td>PTH</td><td>Elevated or inappropriately normal</td></tr>
+            <tr><td>Phosphorus</td><td>Low-normal (PTH causes phosphaturia)</td></tr>
+            <tr><td>Urine calcium</td><td>Normal-high</td></tr>
+            <tr><td>1,25-vitamin D</td><td>Often elevated</td></tr>
+        </table>
+        
+        <h3>Distinguish from FHH</h3>
+        <ul>
+            <li><strong>Familial hypocalciuric hypercalcemia (FHH):</strong> Benign, no treatment needed</li>
+            <li><strong>Calcium/creatinine clearance ratio:</strong>
+                <ul>
+                    <li>&lt;0.01 = FHH</li>
+                    <li>>0.02 = Primary HPT</li>
+                    <li>0.01-0.02 = Indeterminate (consider genetic testing)</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>Indications for Surgery (Asymptomatic Primary HPT)</h3>
+        <div class="guideline-box">
+            <strong>2022 International Guidelines — Surgery if ANY:</strong>
+            <ul>
+                <li>Serum calcium >1 mg/dL above normal</li>
+                <li>Creatinine clearance &lt;60 mL/min</li>
+                <li>T-score ≤-2.5 at any site OR vertebral fracture</li>
+                <li>Age &lt;50</li>
+                <li>Kidney stones or nephrocalcinosis</li>
+            </ul>
+        </div>
+        
+        <h3>Preoperative Localization</h3>
+        <ul>
+            <li><strong>Sestamibi scan:</strong> Parathyroid adenoma shows persistent uptake</li>
+            <li><strong>Ultrasound:</strong> Operator-dependent but useful</li>
+            <li><strong>4D CT:</strong> High sensitivity for localization</li>
+            <li><strong>Note:</strong> Localization studies are for surgical planning, NOT diagnosis</li>
+        </ul>
+        
+        <h3>Medical Management (If Surgery Not Pursued)</h3>
+        <ul>
+            <li>Adequate hydration</li>
+            <li>Avoid thiazides (increase calcium)</li>
+            <li>Bisphosphonates for osteoporosis</li>
+            <li>Cinacalcet (calcimimetic) — lowers calcium but doesn't address bone disease</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 27: HYPOCALCEMIA ==================== -->
+<div class="section" id="hypocalcemia">
+    <div class="section-header">
+        <h2>27. Hypocalcemia <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Causes</h3>
+        <table>
+            <tr><th>Mechanism</th><th>Causes</th></tr>
+            <tr><td><strong>↓ PTH</strong></td><td>Post-surgical (most common), autoimmune, infiltrative, radiation</td></tr>
+            <tr><td><strong>PTH resistance</strong></td><td>Pseudohypoparathyroidism (Albright hereditary osteodystrophy)</td></tr>
+            <tr><td><strong>Vitamin D deficiency</strong></td><td>Nutritional, malabsorption, CKD (↓ 1,25-vit D)</td></tr>
+            <tr><td><strong>Other</strong></td><td>Acute pancreatitis, rhabdomyolysis, tumor lysis, citrated blood transfusion, severe hypomagnesemia</td></tr>
+        </table>
+        
+        <div class="clinical-pearl">
+            Severe <strong>hypomagnesemia</strong> causes hypocalcemia by impairing PTH secretion AND causing PTH resistance. Correct magnesium first!
+        </div>
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Neuromuscular:</strong> Paresthesias (perioral, fingers), muscle cramps, tetany, seizures</li>
+            <li><strong>Chvostek's sign:</strong> Facial twitch with tapping facial nerve</li>
+            <li><strong>Trousseau's sign:</strong> Carpal spasm with BP cuff inflation (more specific)</li>
+            <li><strong>Cardiac:</strong> Prolonged QT, arrhythmias</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <h4>Acute Symptomatic Hypocalcemia</h4>
+        <ul>
+            <li><strong>IV calcium gluconate:</strong> 1-2 g (10-20 mL of 10% solution) over 10-20 min</li>
+            <li><strong>Then continuous infusion:</strong> 0.5-1.5 mg/kg/hr elemental calcium</li>
+            <li><strong>Monitor:</strong> Calcium Q4-6h, telemetry</li>
+            <li><strong>Correct hypomagnesemia</strong></li>
+        </ul>
+        
+        <h4>Chronic Hypocalcemia</h4>
+        <ul>
+            <li><strong>Calcium supplementation:</strong> 1-3 g elemental calcium daily (divided doses)</li>
+            <li><strong>Calcitriol:</strong> 0.25-1 mcg daily (especially if hypoparathyroidism)</li>
+            <li><strong>Goal:</strong> Low-normal calcium (avoid hypercalciuria → nephrolithiasis)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 28: OSTEOPOROSIS ==================== -->
+<div class="section" id="osteoporosis">
+    <div class="section-header">
+        <h2>28. Osteoporosis <span class="badge badge-common">Very Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Definitions (WHO)</h3>
+        <table>
+            <tr><th>Diagnosis</th><th>T-score</th></tr>
+            <tr><td>Normal</td><td>≥-1.0</td></tr>
+            <tr><td>Osteopenia (low bone mass)</td><td>-1.0 to -2.5</td></tr>
+            <tr><td>Osteoporosis</td><td>≤-2.5</td></tr>
+            <tr><td>Severe osteoporosis</td><td>≤-2.5 + fragility fracture</td></tr>
+        </table>
+        
+        <h3>Who to Screen</h3>
+        <ul>
+            <li>All women ≥65 years</li>
+            <li>All men ≥70 years</li>
+            <li>Postmenopausal women &lt;65 and men 50-69 with risk factors</li>
+            <li>Adults with fragility fracture</li>
+            <li>Conditions/medications associated with bone loss</li>
+        </ul>
+        
+        <h3>Secondary Causes to Evaluate</h3>
+        <ul>
+            <li>Vitamin D deficiency (25-OH vitamin D)</li>
+            <li>Calcium intake (dietary assessment)</li>
+            <li>Hyperparathyroidism (calcium, PTH)</li>
+            <li>Hyperthyroidism (TSH)</li>
+            <li>Hypogonadism</li>
+            <li>Multiple myeloma (SPEP, CBC)</li>
+            <li>Celiac disease (if GI symptoms)</li>
+            <li>Cushing's syndrome (if suspected)</li>
+        </ul>
+        
+        <h3>FRAX Tool</h3>
+        <ul>
+            <li>Estimates 10-year probability of hip fracture and major osteoporotic fracture</li>
+            <li>Uses clinical risk factors ± femoral neck BMD</li>
+            <li><strong>Treat if:</strong> Hip fracture risk ≥3% OR major osteoporotic fracture risk ≥20%</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <table>
+            <tr><th>Class</th><th>Agents</th><th>Notes</th></tr>
+            <tr><td><strong>Bisphosphonates (first-line)</strong></td><td>Alendronate, risedronate, zoledronic acid, ibandronate</td><td>Antiresorptive; drug holiday after 5y oral or 3y IV</td></tr>
+            <tr><td><strong>Denosumab</strong></td><td>Prolia (60mg SQ Q6 months)</td><td>RANKL inhibitor; rebound bone loss if stopped</td></tr>
+            <tr><td><strong>Anabolic agents</strong></td><td>Teriparatide, abaloparatide, romosozumab</td><td>For severe osteoporosis; follow with antiresorptive</td></tr>
+            <tr><td><strong>SERM</strong></td><td>Raloxifene</td><td>Reduces vertebral (not hip) fractures; VTE risk</td></tr>
+            <tr><td><strong>HRT</strong></td><td>Estrogen</td><td>Considered in early menopause; not first-line for osteoporosis</td></tr>
+        </table>
+        
+        <div class="danger-box">
+            <strong>Bisphosphonate adverse effects:</strong> Esophagitis (take upright with water), ONJ (dental exam first), atypical femoral fractures (prodromal thigh pain).
+        </div>
+        
+        <h3>Vitamin D and Calcium</h3>
+        <ul>
+            <li><strong>Vitamin D:</strong> Goal 25-OH vitamin D >30 ng/mL; supplement 800-2000 IU daily</li>
+            <li><strong>Calcium:</strong> 1000-1200 mg daily (diet + supplements)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 29-50 CONTINUE IN SIMILAR FASHION ==================== -->
+<!-- Including: Lipids, Obesity, PCOS, Hypogonadism, MEN syndromes, etc. -->
+
+<!-- ==================== SECTION 29: LIPID DISORDERS ==================== -->
+<div class="section" id="lipids">
+    <div class="section-header">
+        <h2>29. Lipid Disorders <span class="badge badge-common">Very Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>ATP Guidelines/ACC-AHA Statin Benefit Groups</h3>
+        <ol>
+            <li><strong>Clinical ASCVD</strong> (secondary prevention)</li>
+            <li><strong>LDL ≥190 mg/dL</strong> (severe hypercholesterolemia)</li>
+            <li><strong>Diabetes, age 40-75</strong></li>
+            <li><strong>Primary prevention with 10-year ASCVD risk ≥7.5%</strong></li>
+        </ol>
+        
+        <h3>Statin Intensity</h3>
+        <table>
+            <tr><th>Intensity</th><th>LDL Reduction</th><th>Examples</th></tr>
+            <tr><td><strong>High</strong></td><td>≥50%</td><td>Atorvastatin 40-80mg, Rosuvastatin 20-40mg</td></tr>
+            <tr><td><strong>Moderate</strong></td><td>30-49%</td><td>Atorvastatin 10-20mg, Rosuvastatin 5-10mg, Simvastatin 20-40mg</td></tr>
+            <tr><td><strong>Low</strong></td><td>&lt;30%</td><td>Simvastatin 10mg, Pravastatin 10-20mg</td></tr>
+        </table>
+        
+        <h3>LDL Goals</h3>
+        <table>
+            <tr><th>Population</th><th>LDL Goal</th></tr>
+            <tr><td><strong>Very high-risk ASCVD</strong></td><td>&lt;70 mg/dL (or 50% reduction)</td></tr>
+            <tr><td><strong>High-risk ASCVD</strong></td><td>&lt;70 mg/dL</td></tr>
+            <tr><td><strong>Diabetes + ASCVD</strong></td><td>&lt;55 mg/dL (ESC) or &lt;70 (ADA)</td></tr>
+        </table>
+        
+        <h3>Non-Statin Therapies</h3>
+        <table>
+            <tr><th>Drug</th><th>Mechanism</th><th>LDL Reduction</th><th>Indication</th></tr>
+            <tr><td><strong>Ezetimibe</strong></td><td>↓ Intestinal absorption</td><td>~18%</td><td>Add if statin insufficient</td></tr>
+            <tr><td><strong>PCSK9 inhibitors</strong></td><td>↓ LDL receptor degradation</td><td>50-60%</td><td>ASCVD not at goal, familial hypercholesterolemia</td></tr>
+            <tr><td><strong>Bempedoic acid</strong></td><td>↓ Cholesterol synthesis (upstream of statins)</td><td>~18%</td><td>Statin intolerant</td></tr>
+            <tr><td><strong>Inclisiran</strong></td><td>siRNA targeting PCSK9</td><td>~50%</td><td>ASCVD, FH (twice yearly injection)</td></tr>
+        </table>
+        
+        <h3>Hypertriglyceridemia</h3>
+        <ul>
+            <li><strong>Mild-moderate (150-499):</strong> Lifestyle, optimize glucose, consider statin</li>
+            <li><strong>Severe (≥500):</strong> Risk of pancreatitis — fibrates, omega-3, very low fat diet</li>
+            <li><strong>Very severe (≥1000):</strong> Hospitalization if acute pancreatitis risk</li>
+        </ul>
+        
+        <div class="high-yield">
+            <strong>Icosapent ethyl (Vascepa):</strong> REDUCE-IT trial showed CV benefit in patients with TG 135-499 on statin. Pure EPA, not fish oil.
+        </div>
+        
+        <h3>Familial Hypercholesterolemia</h3>
+        <ul>
+            <li><strong>Heterozygous FH:</strong> LDL 190-400 mg/dL, early ASCVD</li>
+            <li><strong>Homozygous FH:</strong> LDL >500 mg/dL, ASCVD in childhood</li>
+            <li><strong>Treatment:</strong> High-intensity statin + ezetimibe + PCSK9 inhibitor; may need LDL apheresis</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 30: OBESITY ==================== -->
+<div class="section" id="obesity">
+    <div class="section-header">
+        <h2>30. Obesity <span class="badge badge-common">Very Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Classification</h3>
+        <table>
+            <tr><th>BMI (kg/m²)</th><th>Classification</th></tr>
+            <tr><td>18.5-24.9</td><td>Normal</td></tr>
+            <tr><td>25-29.9</td><td>Overweight</td></tr>
+            <tr><td>30-34.9</td><td>Class I Obesity</td></tr>
+            <tr><td>35-39.9</td><td>Class II Obesity</td></tr>
+            <tr><td>≥40</td><td>Class III (Severe) Obesity</td></tr>
+        </table>
+        
+        <h3>Pharmacotherapy Options</h3>
+        <table>
+            <tr><th>Drug</th><th>Mechanism</th><th>Weight Loss</th><th>Key Points</th></tr>
+            <tr><td><strong>Semaglutide (Wegovy)</strong></td><td>GLP-1 RA</td><td>~15-17%</td><td>Weekly injection; GI side effects; CI in MTC/MEN2</td></tr>
+            <tr><td><strong>Tirzepatide (Zepbound)</strong></td><td>GLP-1/GIP dual agonist</td><td>~20-22%</td><td>Weekly injection; most effective to date</td></tr>
+            <tr><td><strong>Phentermine-topiramate</strong></td><td>Sympathomimetic + anticonvulsant</td><td>~10%</td><td>CI in pregnancy, glaucoma, hyperthyroidism, CVD</td></tr>
+            <tr><td><strong>Naltrexone-bupropion</strong></td><td>Opioid antagonist + antidepressant</td><td>~5-6%</td><td>CI in seizures, opioid use, uncontrolled HTN</td></tr>
+            <tr><td><strong>Orlistat</strong></td><td>Lipase inhibitor</td><td>~3%</td><td>GI side effects; fat-soluble vitamin malabsorption</td></tr>
+        </table>
+        
+        <h3>Bariatric Surgery Indications</h3>
+        <div class="guideline-box">
+            <strong>Consider bariatric surgery if:</strong>
+            <ul>
+                <li>BMI ≥40</li>
+                <li>BMI ≥35 with obesity-related comorbidity (T2D, OSA, HTN, etc.)</li>
+                <li>BMI ≥30 with T2D not achieving glycemic goals</li>
+            </ul>
+        </div>
+        
+        <h3>Bariatric Surgery Types</h3>
+        <table>
+            <tr><th>Procedure</th><th>Mechanism</th><th>Weight Loss</th></tr>
+            <tr><td><strong>Roux-en-Y gastric bypass</strong></td><td>Restrictive + malabsorptive</td><td>~30% total body weight</td></tr>
+            <tr><td><strong>Sleeve gastrectomy</strong></td><td>Restrictive (removes 80% stomach)</td><td>~25-30%</td></tr>
+            <tr><td><strong>Adjustable gastric band</strong></td><td>Restrictive only</td><td>~15-20% (less common now)</td></tr>
+        </table>
+        
+        <h3>Post-Bariatric Complications</h3>
+        <ul>
+            <li><strong>Dumping syndrome:</strong> Rapid gastric emptying → vasomotor symptoms, diarrhea</li>
+            <li><strong>Nutritional deficiencies:</strong> B12, iron, calcium, vitamin D, thiamine</li>
+            <li><strong>Hypoglycemia:</strong> Late postprandial (nesidioblastosis)</li>
+            <li><strong>Gallstones:</strong> Rapid weight loss</li>
+            <li><strong>Marginal ulcer, stricture, internal hernia</strong></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Additional sections would continue here for: PCOS, Male Hypogonadism, MEN syndromes, Congenital adrenal hyperplasia, Carcinoid, etc. -->
+
+<!-- ==================== SECTION 31: PCOS ==================== -->
+<div class="section" id="pcos">
+    <div class="section-header">
+        <h2>31. Polycystic Ovary Syndrome (PCOS) <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Rotterdam Criteria (2 of 3)</h3>
+        <ol>
+            <li><strong>Oligo/anovulation</strong> (irregular cycles)</li>
+            <li><strong>Clinical or biochemical hyperandrogenism</strong></li>
+            <li><strong>Polycystic ovaries on ultrasound</strong> (≥12 follicles per ovary or volume >10 mL)</li>
+        </ol>
+        <p>*Must exclude other causes: thyroid dysfunction, hyperprolactinemia, CAH, Cushing's</p>
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Menstrual:</strong> Oligomenorrhea, amenorrhea, anovulatory infertility</li>
+            <li><strong>Hyperandrogenism:</strong> Hirsutism, acne, androgenic alopecia</li>
+            <li><strong>Metabolic:</strong> Insulin resistance, obesity (50-70%), T2D, dyslipidemia</li>
+            <li><strong>Associated:</strong> OSA, NAFLD, depression, endometrial hyperplasia/cancer</li>
+        </ul>
+        
+        <h3>Laboratory Evaluation</h3>
+        <ul>
+            <li><strong>Total/free testosterone</strong> (mildly elevated)</li>
+            <li><strong>LH:FSH ratio</strong> (often >2:1, not diagnostic)</li>
+            <li><strong>Rule out:</strong> TSH, prolactin, 17-OHP (if CAH suspected)</li>
+            <li><strong>Metabolic:</strong> Fasting glucose, OGTT, lipid panel</li>
+        </ul>
+        
+        <div class="clinical-pearl">
+            PCOS is the most common cause of anovulatory infertility. Screen all PCOS patients for glucose intolerance with OGTT.
+        </div>
+        
+        <h3>Treatment</h3>
+        <table>
+            <tr><th>Goal</th><th>Treatment</th></tr>
+            <tr><td><strong>Menstrual regulation</strong></td><td>Combined OCP, cyclic progestin</td></tr>
+            <tr><td><strong>Hirsutism</strong></td><td>OCP, spironolactone, electrolysis/laser</td></tr>
+            <tr><td><strong>Ovulation induction</strong></td><td>Letrozole (first-line), clomiphene, gonadotropins</td></tr>
+            <tr><td><strong>Metabolic</strong></td><td>Weight loss, metformin (especially if IGT)</td></tr>
+            <tr><td><strong>Endometrial protection</strong></td><td>Progestin withdrawal Q1-3 months if not on OCP</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            <strong>Letrozole</strong> is now first-line for ovulation induction (better live birth rates than clomiphene per NEJM trial).
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 32: MENOPAUSE ==================== -->
+<div class="section" id="menopause">
+    <div class="section-header">
+        <h2>32. Menopause & Hormone Therapy</h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Definitions</h3>
+        <ul>
+            <li><strong>Menopause:</strong> 12 consecutive months without menses (average age 51)</li>
+            <li><strong>Perimenopause:</strong> Transition period with irregular cycles</li>
+            <li><strong>Premature ovarian insufficiency:</strong> Menopause before age 40</li>
+        </ul>
+        
+        <h3>Symptoms</h3>
+        <ul>
+            <li><strong>Vasomotor:</strong> Hot flashes, night sweats</li>
+            <li><strong>Genitourinary:</strong> Vaginal dryness, dyspareunia, urgency</li>
+            <li><strong>Other:</strong> Sleep disturbance, mood changes</li>
+        </ul>
+        
+        <h3>Hormone Therapy Indications</h3>
+        <ul>
+            <li>Bothersome vasomotor symptoms</li>
+            <li>Prevention of bone loss (when other options unsuitable)</li>
+            <li>Premature menopause (until average age of menopause)</li>
+        </ul>
+        
+        <h3>Contraindications to Systemic HRT</h3>
+        <ul>
+            <li>Breast cancer (current or history)</li>
+            <li>Endometrial cancer</li>
+            <li>VTE or thrombophilia</li>
+            <li>Active liver disease</li>
+            <li>CAD, stroke</li>
+            <li>Unexplained vaginal bleeding</li>
+        </ul>
+        
+        <div class="guideline-box">
+            <strong>Key Points:</strong><br>
+            • Use lowest effective dose for shortest duration<br>
+            • Initiate within 10 years of menopause or age &lt;60 (lower CVD risk)<br>
+            • With intact uterus: estrogen + progestogen (prevents endometrial hyperplasia)<br>
+            • After hysterectomy: estrogen alone
+        </div>
+        
+        <h3>Non-Hormonal Options for Vasomotor Symptoms</h3>
+        <ul>
+            <li><strong>Paroxetine (Brisdelle)</strong> — FDA approved for hot flashes</li>
+            <li><strong>Venlafaxine, SSRIs</strong></li>
+            <li><strong>Gabapentin</strong></li>
+            <li><strong>Fezolinetant</strong> (NK3 receptor antagonist — 2023 FDA approved)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 33: MALE HYPOGONADISM ==================== -->
+<div class="section" id="hypogonadism">
+    <div class="section-header">
+        <h2>33. Male Hypogonadism <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Classification</h3>
+        <table>
+            <tr><th>Type</th><th>LH/FSH</th><th>Testosterone</th><th>Causes</th></tr>
+            <tr><td><strong>Primary (testicular)</strong></td><td>↑</td><td>↓</td><td>Klinefelter (47,XXY), trauma, infection, radiation, chemotherapy</td></tr>
+            <tr><td><strong>Secondary (central)</strong></td><td>↓ or Normal</td><td>↓</td><td>Pituitary adenoma, hyperprolactinemia, Kallmann syndrome, obesity, opioids</td></tr>
+        </table>
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Sexual:</strong> Decreased libido, erectile dysfunction</li>
+            <li><strong>Physical:</strong> Decreased muscle mass, increased body fat, gynecomastia</li>
+            <li><strong>Other:</strong> Fatigue, depression, decreased bone density, anemia</li>
+        </ul>
+        
+        <h3>Diagnosis</h3>
+        <ul>
+            <li><strong>Morning total testosterone</strong> (8-10 AM) on 2 separate occasions</li>
+            <li><strong>Low testosterone:</strong> &lt;300 ng/dL (confirm with repeat + free testosterone)</li>
+            <li><strong>Then check:</strong> LH, FSH (distinguish primary vs secondary)</li>
+            <li><strong>If secondary:</strong> Prolactin, MRI pituitary</li>
+        </ul>
+        
+        <div class="clinical-pearl">
+            Many "low T" symptoms are nonspecific. Confirm with AM testosterone on 2 occasions before initiating therapy.
+        </div>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Testosterone replacement:</strong> Gels, injections, patches, pellets</li>
+            <li><strong>Monitoring:</strong> Testosterone levels, hematocrit (polycythemia risk), PSA, lipids</li>
+            <li><strong>Contraindications:</strong> Prostate or breast cancer, severe sleep apnea, hematocrit >50%, desire for fertility</li>
+        </ul>
+        
+        <div class="danger-box">
+            Testosterone suppresses spermatogenesis. Do NOT give to men desiring fertility. Use clomiphene or gonadotropins instead.
+        </div>
+        
+        <h3>Klinefelter Syndrome (47,XXY)</h3>
+        <ul>
+            <li>Most common sex chromosome aneuploidy in males (1:500-1000)</li>
+            <li><strong>Features:</strong> Tall stature, small firm testes, gynecomastia, infertility, learning disabilities</li>
+            <li><strong>Labs:</strong> ↓ Testosterone, ↑ LH/FSH, ↑ estradiol</li>
+            <li><strong>Treatment:</strong> Testosterone replacement starting at puberty</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 34: MEN1 ==================== -->
+<div class="section" id="men">
+    <div class="section-header">
+        <h2>34. Multiple Endocrine Neoplasia Type 1 <span class="badge badge-boards">Boards Favorite</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>MEN1 — "3 P's"</h3>
+        <div class="mnemonic-box">
+            <strong>Parathyroid</strong> (95%) + <strong>Pituitary</strong> (40%) + <strong>Pancreatic islet</strong> tumors (40-70%)
+        </div>
+        
+        <table>
+            <tr><th>Tumor</th><th>Frequency</th><th>Features</th></tr>
+            <tr><td><strong>Primary hyperparathyroidism</strong></td><td>95%</td><td>Usually multigland hyperplasia; first manifestation</td></tr>
+            <tr><td><strong>Pituitary adenoma</strong></td><td>40%</td><td>Prolactinoma most common, also GH, ACTH</td></tr>
+            <tr><td><strong>Enteropancreatic NETs</strong></td><td>40-70%</td><td>Gastrinoma (ZES), insulinoma, non-functioning</td></tr>
+            <tr><td><strong>Adrenal tumors</strong></td><td>20-40%</td><td>Usually non-functioning adenomas</td></tr>
+        </table>
+        
+        <h3>Genetics</h3>
+        <ul>
+            <li><strong>MEN1 gene</strong> (menin) — tumor suppressor, chromosome 11q13</li>
+            <li>Autosomal dominant</li>
+            <li>Screen first-degree relatives with genetic testing</li>
+        </ul>
+        
+        <h3>Screening Protocol for MEN1 Carriers</h3>
+        <ul>
+            <li><strong>Annual:</strong> Calcium, PTH, prolactin, IGF-1, fasting glucose, chromogranin A</li>
+            <li><strong>Periodic imaging:</strong> MRI pituitary (Q3-5 years), CT/MRI pancreas (Q1-3 years)</li>
+        </ul>
+        
+        <h3>Zollinger-Ellison Syndrome</h3>
+        <ul>
+            <li><strong>Gastrinoma:</strong> Most common functioning NET in MEN1</li>
+            <li><strong>Features:</strong> Severe peptic ulcers, diarrhea, GERD</li>
+            <li><strong>Diagnosis:</strong> Fasting gastrin >1000 pg/mL, gastric pH &lt;2, secretin stimulation test</li>
+            <li><strong>Treatment:</strong> High-dose PPI; surgery if localized and non-MEN1</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 35: MEN2 ==================== -->
+<div class="section" id="men2">
+    <div class="section-header">
+        <h2>35. Multiple Endocrine Neoplasia Type 2 <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>MEN2 Subtypes</h3>
+        <table>
+            <tr><th>Feature</th><th>MEN2A</th><th>MEN2B</th></tr>
+            <tr><td><strong>Medullary thyroid cancer</strong></td><td>95%</td><td>100%</td></tr>
+            <tr><td><strong>Pheochromocytoma</strong></td><td>50%</td><td>50%</td></tr>
+            <tr><td><strong>Primary hyperparathyroidism</strong></td><td>20-30%</td><td>Rare</td></tr>
+            <tr><td><strong>Mucosal neuromas</strong></td><td>No</td><td>Yes</td></tr>
+            <tr><td><strong>Marfanoid habitus</strong></td><td>No</td><td>Yes</td></tr>
+            <tr><td><strong>Prognosis</strong></td><td>Better</td><td>More aggressive MTC</td></tr>
+        </table>
+        
+        <h3>Genetics</h3>
+        <ul>
+            <li><strong>RET proto-oncogene</strong> — chromosome 10</li>
+            <li>Autosomal dominant, high penetrance</li>
+            <li>Specific mutations correlate with aggressiveness and timing of prophylactic thyroidectomy</li>
+        </ul>
+        
+        <h3>Medullary Thyroid Cancer</h3>
+        <ul>
+            <li>Arises from parafollicular C-cells</li>
+            <li><strong>Tumor marker:</strong> Calcitonin (also CEA)</li>
+            <li><strong>Treatment:</strong> Total thyroidectomy with lymph node dissection</li>
+        </ul>
+        
+        <div class="high-yield">
+            Before thyroidectomy in MEN2, <strong>always rule out pheochromocytoma</strong> — undiagnosed pheo can cause perioperative crisis.
+        </div>
+        
+        <h3>Prophylactic Thyroidectomy Timing</h3>
+        <ul>
+            <li><strong>Highest risk mutations (MEN2B):</strong> First year of life</li>
+            <li><strong>High risk:</strong> Before age 5</li>
+            <li><strong>Moderate risk:</strong> Based on calcitonin levels or by age 5-10</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 36: CAH ==================== -->
+<div class="section" id="cah">
+    <div class="section-header">
+        <h2>36. Congenital Adrenal Hyperplasia <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>21-Hydroxylase Deficiency (95% of CAH)</h3>
+        <table>
+            <tr><th>Type</th><th>Features</th><th>Labs</th></tr>
+            <tr><td><strong>Classic salt-wasting</strong></td><td>Neonatal adrenal crisis, ambiguous genitalia (females)</td><td>↓↓ Cortisol, ↓↓ aldosterone, ↑↑ 17-OHP</td></tr>
+            <tr><td><strong>Classic simple virilizing</strong></td><td>Virilization, early puberty</td><td>↓ Cortisol, normal aldosterone, ↑↑ 17-OHP</td></tr>
+            <tr><td><strong>Non-classic (late-onset)</strong></td><td>Hirsutism, acne, oligomenorrhea (like PCOS)</td><td>Normal cortisol, mild ↑ 17-OHP</td></tr>
+        </table>
+        
+        <div class="clinical-pearl">
+            Non-classic CAH mimics PCOS. Check <strong>morning 17-OHP</strong> — if >200 ng/dL, perform ACTH stimulation test to confirm.
+        </div>
+        
+        <h3>Diagnosis</h3>
+        <ul>
+            <li><strong>17-hydroxyprogesterone:</strong> Elevated (morning sample, follicular phase in women)</li>
+            <li><strong>ACTH stimulation test:</strong> 17-OHP >1000 ng/dL post-stimulation diagnostic</li>
+            <li><strong>Newborn screening:</strong> 17-OHP on heel stick (may miss non-classic)</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Classic CAH:</strong> Glucocorticoid + mineralocorticoid replacement</li>
+            <li><strong>Non-classic CAH:</strong> Glucocorticoid if symptomatic or fertility desired; OCPs for hirsutism</li>
+            <li><strong>Monitoring:</strong> 17-OHP, androgens (goal: suppress but avoid over-treatment)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 37: CARCINOID ==================== -->
+<div class="section" id="carcinoid">
+    <div class="section-header">
+        <h2>37. Carcinoid Tumors & Syndrome <span class="badge badge-boards">Boards Favorite</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Overview</h3>
+        <ul>
+            <li>Well-differentiated neuroendocrine tumors</li>
+            <li><strong>Common sites:</strong> GI tract (small bowel, appendix, rectum), lungs</li>
+            <li><strong>Carcinoid syndrome:</strong> Occurs with hepatic metastases (or primary bronchial/ovarian)</li>
+        </ul>
+        
+        <h3>Carcinoid Syndrome Features</h3>
+        <div class="mnemonic-box">
+            <strong>"F-D-B-W":</strong> Flushing, Diarrhea, Bronchoconstriction, Wheezing (right-sided heart disease)
+        </div>
+        
+        <ul>
+            <li><strong>Flushing:</strong> Episodic, triggered by alcohol, stress, catecholamines</li>
+            <li><strong>Diarrhea:</strong> Secretory (from serotonin)</li>
+            <li><strong>Carcinoid heart disease:</strong> Right-sided valve fibrosis (tricuspid regurgitation, pulmonic stenosis)</li>
+            <li><strong>Bronchoconstriction</strong></li>
+        </ul>
+        
+        <h3>Diagnosis</h3>
+        <ul>
+            <li><strong>24-hour urine 5-HIAA</strong> (serotonin metabolite) — elevated</li>
+            <li><strong>Chromogranin A</strong> — elevated (nonspecific)</li>
+            <li><strong>Imaging:</strong> CT/MRI, somatostatin receptor scintigraphy (Octreoscan), 68Ga-DOTATATE PET</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Surgery:</strong> Curative if localized</li>
+            <li><strong>Somatostatin analogs:</strong> Octreotide LAR, lanreotide — control symptoms, slow tumor growth</li>
+            <li><strong>PRRT:</strong> Lutetium-177 DOTATATE for progressive disease</li>
+            <li><strong>Carcinoid crisis prevention:</strong> Octreotide before surgery/procedures</li>
+        </ul>
+        
+        <div class="danger-box">
+            <strong>Carcinoid crisis:</strong> Life-threatening hypotension, bronchospasm during surgery. Give octreotide 250-500 mcg IV before and during procedure.
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 38: ENDOCRINE HYPERTENSION ==================== -->
+<div class="section" id="endo-htn">
+    <div class="section-header">
+        <h2>38. Secondary Endocrine Hypertension</h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>When to Suspect Secondary HTN</h3>
+        <ul>
+            <li>Onset before age 30 or after age 55</li>
+            <li>Resistant hypertension (≥3 drugs including diuretic)</li>
+            <li>Sudden worsening of previously controlled BP</li>
+            <li>Hypokalemia (unprovoked or diuretic-induced)</li>
+            <li>Paroxysmal symptoms (pheo)</li>
+            <li>Clinical features of Cushing's, acromegaly</li>
+        </ul>
+        
+        <h3>Endocrine Causes of HTN</h3>
+        <table>
+            <tr><th>Cause</th><th>Clues</th><th>Screening Test</th></tr>
+            <tr><td><strong>Primary aldosteronism</strong></td><td>Hypokalemia, resistant HTN</td><td>Aldosterone/renin ratio</td></tr>
+            <tr><td><strong>Pheochromocytoma</strong></td><td>Paroxysmal symptoms, headache, diaphoresis</td><td>Plasma free metanephrines</td></tr>
+            <tr><td><strong>Cushing's syndrome</strong></td><td>Central obesity, striae, easy bruising</td><td>1mg DST, 24h urine cortisol</td></tr>
+            <tr><td><strong>Hyperthyroidism</strong></td><td>Tachycardia, weight loss, tremor</td><td>TSH</td></tr>
+            <tr><td><strong>Hypothyroidism</strong></td><td>Fatigue, weight gain, diastolic HTN</td><td>TSH</td></tr>
+            <tr><td><strong>Hyperparathyroidism</strong></td><td>Hypercalcemia, kidney stones</td><td>Calcium, PTH</td></tr>
+            <tr><td><strong>Acromegaly</strong></td><td>Coarse features, enlarged hands</td><td>IGF-1</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- ==================== SECTION 39: THYROID IN PREGNANCY ==================== -->
+<div class="section" id="thyroid-pregnancy">
+    <div class="section-header">
+        <h2>39. Thyroid Disease in Pregnancy <span class="badge badge-boards">High-Yield</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Normal Physiologic Changes</h3>
+        <ul>
+            <li>↑ TBG (estrogen effect) → ↑ Total T4/T3</li>
+            <li>hCG has TSH-like activity → mild ↓ TSH in 1st trimester</li>
+            <li>Use trimester-specific reference ranges</li>
+        </ul>
+        
+        <h3>Hypothyroidism in Pregnancy</h3>
+        <ul>
+            <li><strong>Risks:</strong> Miscarriage, preterm delivery, impaired fetal neurodevelopment</li>
+            <li><strong>Treatment:</strong> Levothyroxine — increase dose ~25-30% as soon as pregnancy confirmed</li>
+            <li><strong>Goal TSH:</strong> &lt;2.5 mU/L (especially 1st trimester)</li>
+            <li><strong>Monitoring:</strong> TSH every 4 weeks in 1st half, then once per trimester</li>
+        </ul>
+        
+        <h3>Hyperthyroidism in Pregnancy</h3>
+        <table>
+            <tr><th>Condition</th><th>Features</th><th>Management</th></tr>
+            <tr><td><strong>Gestational thyrotoxicosis</strong></td><td>1st trimester, hCG-mediated, often with hyperemesis</td><td>Self-limited; supportive care</td></tr>
+            <tr><td><strong>Graves' disease</strong></td><td>TRAb positive, goiter, ophthalmopathy</td><td>Antithyroid drugs</td></tr>
+        </table>
+        
+        <div class="high-yield">
+            <strong>PTU in 1st trimester</strong> (methimazole causes aplasia cutis, choanal atresia)<br>
+            <strong>Methimazole in 2nd/3rd trimester</strong> (PTU hepatotoxicity risk)
+        </div>
+        
+        <h3>Postpartum Thyroiditis</h3>
+        <ul>
+            <li>Occurs 2-6 months postpartum</li>
+            <li><strong>Phase 1:</strong> Thyrotoxicosis (destructive) — beta-blocker for symptoms</li>
+            <li><strong>Phase 2:</strong> Hypothyroidism — levothyroxine if symptomatic</li>
+            <li><strong>Phase 3:</strong> Recovery (80%) or permanent hypothyroidism (20%)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== SECTION 40: DIABETES IN PREGNANCY ==================== -->
+<div class="section" id="dm-pregnancy">
+    <div class="section-header">
+        <h2>40. Diabetes in Pregnancy <span class="badge badge-common">Common</span></h2>
+    </div>
+    <div class="section-content">
+        
+        <h3>Types</h3>
+        <ul>
+            <li><strong>Pregestational:</strong> T1D or T2D before pregnancy</li>
+            <li><strong>Gestational (GDM):</strong> Glucose intolerance first diagnosed in pregnancy</li>
+        </ul>
+        
+        <h3>GDM Screening</h3>
+        <ul>
+            <li><strong>When:</strong> 24-28 weeks (earlier if high risk)</li>
+            <li><strong>One-step (75g OGTT):</strong> Any 1 value abnormal = GDM
+                <ul>
+                    <li>Fasting ≥92 mg/dL</li>
+                    <li>1-hour ≥180 mg/dL</li>
+                    <li>2-hour ≥153 mg/dL</li>
+                </ul>
+            </li>
+            <li><strong>Two-step:</strong> 50g GCT → if ≥140, then 100g OGTT</li>
+        </ul>
+        
+        <h3>Glycemic Targets in Pregnancy</h3>
+        <table>
+            <tr><th>Time</th><th>Target</th></tr>
+            <tr><td>Fasting</td><td>&lt;95 mg/dL</td></tr>
+            <tr><td>1-hour postprandial</td><td>&lt;140 mg/dL</td></tr>
+            <tr><td>2-hour postprandial</td><td>&lt;120 mg/dL</td></tr>
+            <tr><td>A1c</td><td>&lt;6% (without hypoglycemia)</td></tr>
+        </table>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>First-line:</strong> Medical nutrition therapy, exercise</li>
+            <li><strong>Medications:</strong> Insulin preferred; metformin and glyburide sometimes used</li>
+            <li><strong>Avoid:</strong> All other oral agents</li>
+        </ul>
+        
+        <h3>Maternal/Fetal Risks</h3>
+        <ul>
+            <li><strong>Maternal:</strong> Preeclampsia, C-section, progression to T2D</li>
+            <li><strong>Fetal:</strong> Macrosomia, shoulder dystocia, neonatal hypoglycemia, congenital anomalies (pregestational), respiratory distress</li>
+        </ul>
+        
+        <div class="guideline-box">
+            <strong>Postpartum:</strong> Screen for persistent diabetes at 4-12 weeks (75g OGTT). Then screen every 1-3 years (high T2D risk).
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 41-50: Brief key topics ==================== -->
+
+<div class="section" id="emergencies">
+    <div class="section-header">
+        <h2>41. Endocrine Emergencies — Summary <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        <table>
+            <tr><th>Emergency</th><th>Key Features</th><th>Treatment</th></tr>
+            <tr><td><strong>DKA</strong></td><td>High glucose, AG metabolic acidosis, ketones</td><td>Fluids, insulin, K+ replacement</td></tr>
+            <tr><td><strong>HHS</strong></td><td>Very high glucose (>600), hyperosmolar, minimal ketones</td><td>Aggressive fluids, lower-dose insulin</td></tr>
+            <tr><td><strong>Thyroid storm</strong></td><td>Fever, tachycardia, AMS, hyperthyroid</td><td>PTU → iodine → steroids → beta-blocker</td></tr>
+            <tr><td><strong>Myxedema coma</strong></td><td>Hypothermia, AMS, hyponatremia, severe hypothyroid</td><td>IV levothyroxine + hydrocortisone, supportive</td></tr>
+            <tr><td><strong>Adrenal crisis</strong></td><td>Hypotension, shock, hypoglycemia, hyponatremia</td><td>IV hydrocortisone 100mg + fluids</td></tr>
+            <tr><td><strong>Hypercalcemic crisis</strong></td><td>Calcium >14, AMS, dehydration</td><td>IV fluids, bisphosphonate, calcitonin</td></tr>
+            <tr><td><strong>Pituitary apoplexy</strong></td><td>Sudden headache, visual loss, hypopituitarism</td><td>IV hydrocortisone, surgery if visual loss</td></tr>
+            <tr><td><strong>Pheo crisis</strong></td><td>Severe HTN, arrhythmias</td><td>Phentolamine, nitroprusside (NOT beta-blocker first)</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="section" id="myxedema">
+    <div class="section-header">
+        <h2>42. Myxedema Coma <span class="badge badge-danger">Emergency</span></h2>
+    </div>
+    <div class="section-content">
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Hypothermia</strong> (may be profound)</li>
+            <li><strong>Altered mental status</strong> (confusion to coma)</li>
+            <li><strong>Hyponatremia</strong></li>
+            <li><strong>Hypoglycemia, hypotension, bradycardia</strong></li>
+            <li><strong>Hypoventilation</strong> (CO2 retention)</li>
+        </ul>
+        
+        <h3>Precipitants</h3>
+        <ul>
+            <li>Infection, cold exposure, medications (sedatives, narcotics)</li>
+            <li>Noncompliance with levothyroxine</li>
+            <li>Surgery, trauma, MI</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>IV levothyroxine:</strong> Loading dose 200-400 mcg, then 50-100 mcg/day</li>
+            <li><strong>IV hydrocortisone:</strong> 50-100mg Q8h (until adrenal insufficiency ruled out)</li>
+            <li><strong>Supportive:</strong> Passive rewarming, ventilatory support, treat precipitant</li>
+        </ul>
+        
+        <div class="danger-box">
+            Always give hydrocortisone with thyroid hormone — treating hypothyroidism can precipitate adrenal crisis if underlying adrenal insufficiency exists.
+        </div>
+    </div>
+</div>
+
+<div class="section" id="gi-hormones">
+    <div class="section-header">
+        <h2>43. GI Neuroendocrine Tumors</h2>
+    </div>
+    <div class="section-content">
+        <table>
+            <tr><th>Tumor</th><th>Hormone</th><th>Features</th><th>Diagnosis</th></tr>
+            <tr><td><strong>Insulinoma</strong></td><td>Insulin</td><td>Hypoglycemia (Whipple's triad)</td><td>72h fast: low glucose, high insulin, high C-peptide</td></tr>
+            <tr><td><strong>Gastrinoma</strong></td><td>Gastrin</td><td>Severe PUD, diarrhea (ZES)</td><td>Fasting gastrin >1000, secretin stimulation</td></tr>
+            <tr><td><strong>VIPoma</strong></td><td>VIP</td><td>Watery diarrhea, hypokalemia, achlorhydria (WDHA)</td><td>Elevated VIP level</td></tr>
+            <tr><td><strong>Glucagonoma</strong></td><td>Glucagon</td><td>Necrolytic migratory erythema, diabetes, weight loss</td><td>Elevated glucagon >500 pg/mL</td></tr>
+            <tr><td><strong>Somatostatinoma</strong></td><td>Somatostatin</td><td>Diabetes, gallstones, steatorrhea</td><td>Elevated somatostatin</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="section" id="drugs-endo">
+    <div class="section-header">
+        <h2>44. Drug-Induced Endocrine Disorders</h2>
+    </div>
+    <div class="section-content">
+        <table>
+            <tr><th>Drug</th><th>Endocrine Effect</th></tr>
+            <tr><td><strong>Amiodarone</strong></td><td>Hypo- or hyperthyroidism (Type I or II)</td></tr>
+            <tr><td><strong>Lithium</strong></td><td>Hypothyroidism, nephrogenic DI, hyperparathyroidism</td></tr>
+            <tr><td><strong>Checkpoint inhibitors</strong></td><td>Hypophysitis, thyroiditis, adrenalitis, T1D</td></tr>
+            <tr><td><strong>Glucocorticoids</strong></td><td>Adrenal suppression, hyperglycemia, osteoporosis</td></tr>
+            <tr><td><strong>Opioids</strong></td><td>Hypogonadism (via hypothalamic suppression)</td></tr>
+            <tr><td><strong>Ketoconazole</strong></td><td>Adrenal insufficiency (inhibits steroidogenesis)</td></tr>
+            <tr><td><strong>SSRIs</strong></td><td>SIADH, hyperprolactinemia</td></tr>
+            <tr><td><strong>Antipsychotics</strong></td><td>Hyperprolactinemia, metabolic syndrome</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="section" id="autoimmune-poly">
+    <div class="section-header">
+        <h2>45. Autoimmune Polyglandular Syndromes</h2>
+    </div>
+    <div class="section-content">
+        <table>
+            <tr><th>Type</th><th>Features</th><th>Notes</th></tr>
+            <tr><td><strong>APS-1 (APECED)</strong></td><td>Chronic mucocutaneous candidiasis, hypoparathyroidism, adrenal insufficiency</td><td>AIRE gene mutation; childhood onset</td></tr>
+            <tr><td><strong>APS-2 (Schmidt)</strong></td><td>Adrenal insufficiency + autoimmune thyroid disease ± T1D</td><td>Most common APS; adult onset</td></tr>
+        </table>
+        
+        <div class="clinical-pearl">
+            If one autoimmune endocrine disorder is diagnosed, screen for others (thyroid, adrenal, T1D, celiac, pernicious anemia).
+        </div>
+    </div>
+</div>
+
+<div class="section" id="bone-markers">
+    <div class="section-header">
+        <h2>46. Bone Turnover Markers</h2>
+    </div>
+    <div class="section-content">
+        <table>
+            <tr><th>Marker</th><th>Type</th><th>Use</th></tr>
+            <tr><td><strong>P1NP</strong></td><td>Formation</td><td>Monitor anabolic therapy response</td></tr>
+            <tr><td><strong>Bone-specific ALP</strong></td><td>Formation</td><td>Paget's disease monitoring</td></tr>
+            <tr><td><strong>CTX</strong></td><td>Resorption</td><td>Monitor antiresorptive therapy</td></tr>
+            <tr><td><strong>NTX (urine)</strong></td><td>Resorption</td><td>Monitor treatment response</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="section" id="vitamin-d">
+    <div class="section-header">
+        <h2>47. Vitamin D Physiology & Disorders</h2>
+    </div>
+    <div class="section-content">
+        <h3>Vitamin D Metabolism</h3>
+        <ul>
+            <li><strong>Vitamin D3 (cholecalciferol):</strong> Skin synthesis (UV) or dietary</li>
+            <li><strong>25-OH vitamin D:</strong> Liver hydroxylation — storage form, measured clinically</li>
+            <li><strong>1,25-(OH)2 vitamin D (calcitriol):</strong> Kidney hydroxylation — active form</li>
+        </ul>
+        
+        <h3>Interpretation</h3>
+        <table>
+            <tr><th>25-OH Vitamin D</th><th>Status</th></tr>
+            <tr><td>&lt;12 ng/mL</td><td>Deficient</td></tr>
+            <tr><td>12-20 ng/mL</td><td>Insufficient</td></tr>
+            <tr><td>20-50 ng/mL</td><td>Sufficient</td></tr>
+            <tr><td>>50 ng/mL</td><td>Potentially harmful</td></tr>
+        </table>
+        
+        <div class="clinical-pearl">
+            Check <strong>25-OH vitamin D</strong> for deficiency. Check <strong>1,25-(OH)2 vitamin D</strong> only if granulomatous disease, CKD, or hypercalcemia workup.
+        </div>
+    </div>
+</div>
+
+<div class="section" id="thyroid-sick">
+    <div class="section-header">
+        <h2>48. Euthyroid Sick Syndrome (Non-Thyroidal Illness)</h2>
+    </div>
+    <div class="section-content">
+        <h3>Pattern</h3>
+        <ul>
+            <li><strong>Low T3</strong> (decreased peripheral conversion)</li>
+            <li><strong>Normal or low T4</strong></li>
+            <li><strong>Normal, low, or mildly elevated TSH</strong></li>
+            <li><strong>Elevated reverse T3</strong></li>
+        </ul>
+        
+        <h3>Key Points</h3>
+        <ul>
+            <li>Occurs in severe illness (sepsis, MI, surgery, starvation)</li>
+            <li>Adaptive response — do NOT treat with thyroid hormone</li>
+            <li>May look like central hypothyroidism</li>
+            <li>Recheck thyroid function after illness recovery</li>
+        </ul>
+    </div>
+</div>
+
+<div class="section" id="screening-endo">
+    <div class="section-header">
+        <h2>49. Endocrine Screening Guidelines Summary</h2>
+    </div>
+    <div class="section-content">
+        <table>
+            <tr><th>Condition</th><th>Who to Screen</th><th>Test</th></tr>
+            <tr><td><strong>Diabetes</strong></td><td>All adults ≥35 (or any age if overweight + risk factors)</td><td>Fasting glucose, A1c, or OGTT</td></tr>
+            <tr><td><strong>Thyroid</strong></td><td>No universal screening; consider in pregnancy, elderly</td><td>TSH</td></tr>
+            <tr><td><strong>Osteoporosis</strong></td><td>Women ≥65, men ≥70, or younger with risk factors</td><td>DXA</td></tr>
+            <tr><td><strong>Primary aldosteronism</strong></td><td>Resistant HTN, hypokalemia</td><td>Aldosterone/renin ratio</td></tr>
+            <tr><td><strong>Pheochromocytoma</strong></td><td>Paroxysmal HTN, adrenal incidentaloma, hereditary syndromes</td><td>Plasma free metanephrines</td></tr>
+            <tr><td><strong>Cushing's</strong></td><td>Clinical features, adrenal incidentaloma, uncontrolled diabetes</td><td>1mg DST, 24h urine cortisol</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="section" id="boards-questions">
+    <div class="section-header">
+        <h2>50. High-Yield Board Pearls</h2>
+    </div>
+    <div class="section-content">
+        <h3>Diabetes</h3>
+        <ul>
+            <li>💎 SGLT2i and GLP-1 RA have cardiorenal benefits independent of glucose control</li>
+            <li>💎 Never use sliding scale alone — always add basal insulin</li>
+            <li>💎 Check K+ before starting insulin in DKA</li>
+            <li>💎 Low C-peptide with hypoglycemia = exogenous insulin</li>
+        </ul>
+        
+        <h3>Thyroid</h3>
+        <ul>
+            <li>💎 Low RAIU = thyroiditis or exogenous; high RAIU = Graves' or toxic nodule</li>
+            <li>💎 Always check prolactin before pituitary surgery (prolactinomas are treated medically)</li>
+            <li>💎 PTU before iodine in thyroid storm</li>
+            <li>💎 PTU in 1st trimester, methimazole in 2nd/3rd</li>
+        </ul>
+        
+        <h3>Adrenal</h3>
+        <ul>
+            <li>💎 IPSS = gold standard for distinguishing pituitary vs ectopic Cushing's</li>
+            <li>💎 Alpha-blocker before beta-blocker in pheochromocytoma</li>
+            <li>💎 Give stress-dose steroids in adrenal crisis — don't wait for labs</li>
+            <li>💎 Hyperpigmentation = primary adrenal insufficiency (high ACTH)</li>
+        </ul>
+        
+        <h3>Pituitary</h3>
+        <ul>
+            <li>💎 Prolactinoma is the ONLY pituitary tumor treated primarily with medication</li>
+            <li>💎 Large mass + mildly elevated prolactin = stalk effect, not prolactinoma</li>
+            <li>💎 Replace cortisol BEFORE thyroid to avoid adrenal crisis</li>
+        </ul>
+        
+        <h3>Calcium/Bone</h3>
+        <ul>
+            <li>💎 First step in hypercalcemia workup: check PTH</li>
+            <li>💎 Correct magnesium before treating hypocalcemia</li>
+            <li>💎 Bisphosphonate drug holiday after 5 years oral or 3 years IV</li>
+        </ul>
+        
+        <h3>MEN Syndromes</h3>
+        <ul>
+            <li>💎 MEN1: "3 P's" — Parathyroid, Pituitary, Pancreatic</li>
+            <li>💎 MEN2: Always rule out pheo before thyroidectomy</li>
+            <li>💎 All medullary thyroid cancer patients need RET genetic testing</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Additional sections would continue here -->
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<footer>
+    <h3 style="margin: 0 0 10px; font-size: 1.2rem;">🔬 ABIM Endocrinology Study Guide</h3>
+    <p style="opacity: 0.9; font-size: 0.9rem; margin: 0;">ADA • Endocrine Society • AACE Guidelines</p>
+    <p style="opacity: 0.7; font-size: 0.8rem; margin-top: 10px;">BUILD #1 • 50 SECTIONS • December 2025</p>
+    <div style="margin-top: 20px;">
+        <a href="index.html">📚 Clinical Suite</a>
+        <a href="im_guide.html">🩺 IM Guide</a>
+        <a href="id_study_guide.html">🦠 ID Guide</a>
+        <a href="cardio_study_guide.html">❤️ Cardio Guide</a>
+        <a href="gi_study_guide.html">🫁 GI Guide</a>
+        <a href="rheumatology_study_guide.html">🦴 Rheum Guide</a>
+    </div>
+    <p style="opacity: 0.6; font-size: 0.75rem; margin-top: 15px;">For educational purposes only. Always use clinical judgment.</p>
+</footer>
+
+<script>
+    // Search functionality
+    const searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            const text = section.textContent.toLowerCase();
+            section.style.display = (query === '' || text.includes(query)) ? 'block' : 'none';
+        });
+    });
+    
+    // Back to top button
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+        backToTopBtn.classList.toggle('show', window.pageYOffset > 400);
+    });
+    
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Collapsible sections
+    document.querySelectorAll('.section-header').forEach(header => {
+        header.addEventListener('click', function() {
+            this.parentElement.classList.toggle('collapsed');
+        });
+    });
+</script>
+
+</body>
+</html>

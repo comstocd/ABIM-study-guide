@@ -1,0 +1,2667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rheumatology Study Guide</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        
+        h1 {
+            color: #6f42c1;
+            border-bottom: 3px solid #6f42c1;
+            padding-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #6f42c1;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 8px;
+            margin-top: 40px;
+            font-size: 22px;
+        }
+        
+        h3 {
+            color: #24292e;
+            margin-top: 25px;
+            font-size: 18px;
+            border-left: 4px solid #6f42c1;
+            padding-left: 12px;
+        }
+        
+        h4 {
+            color: #586069;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        
+        .header-box {
+            background: linear-gradient(135deg, #6f42c1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .header-box h1 {
+            color: white;
+            border: none;
+            margin: 0;
+            font-size: 32px;
+        }
+        
+        .header-box .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+        
+        .toc {
+            background: #f6f8fa;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+            font-size: 18px;
+            border: none;
+        }
+        
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 8px;
+        }
+        
+        .toc a {
+            color: #6f42c1;
+            text-decoration: none;
+            display: block;
+            padding: 4px 0;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #fafbfc;
+            border-radius: 8px;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .section h2 {
+            margin-top: 0;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .pearl-box {
+            background: #e8f4fd;
+            border: 1px solid #0366d6;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .pearl-box::before {
+            content: "💎 Clinical Pearl: ";
+            font-weight: bold;
+            color: #0366d6;
+        }
+        
+        .emergency-box {
+            background: #fee2e2;
+            border: 1px solid #dc2626;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .emergency-box::before {
+            content: "🚨 Emergency: ";
+            font-weight: bold;
+            color: #dc2626;
+        }
+        
+        .mnemonic-box {
+            background: #f0fdf4;
+            border: 1px solid #22c55e;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .mnemonic-box::before {
+            content: "📝 Mnemonic: ";
+            font-weight: bold;
+            color: #22c55e;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        th, td {
+            border: 1px solid #e1e4e8;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #6f42c1;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background: #f6f8fa;
+        }
+        
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin: 6px 0;
+        }
+        
+        .drug-box {
+            background: #fdf4ff;
+            border: 1px solid #a855f7;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .criteria-box {
+            background: #f8fafc;
+            border: 2px solid #6f42c1;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .criteria-box h4 {
+            margin-top: 0;
+            color: #6f42c1;
+        }
+        
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "SF Mono", Monaco, monospace;
+            font-size: 13px;
+        }
+        
+        .trial-link {
+            color: #6f42c1;
+            text-decoration: none;
+        }
+        
+        .trial-link:hover {
+            text-decoration: underline;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .badge-common {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+        
+        .badge-emergency {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .badge-boards {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        
+        .back-to-top {
+            display: inline-block;
+            margin-top: 20px;
+            color: #6f42c1;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .comparison-table th {
+            background: #6f42c1;
+        }
+        
+        .positive {
+            color: #16a34a;
+            font-weight: 600;
+        }
+        
+        .negative {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        
+        .flowchart {
+            background: #f8fafc;
+            border: 2px dashed #6f42c1;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .flowchart-step {
+            background: #6f42c1;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 5px;
+        }
+        
+        .flowchart-arrow {
+            font-size: 24px;
+            color: #6f42c1;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-box">
+    <h1>🦴 Rheumatology Study Guide</h1>
+    <div class="subtitle">Internal Medicine Residency Preparation</div>
+    <div class="subtitle" style="margin-top: 15px; font-size: 14px;">Comprehensive review of autoimmune & inflammatory conditions</div>
+</div>
+
+<div class="toc">
+    <h2>📚 Table of Contents</h2>
+    <div class="toc-grid">
+        <div>
+            <strong>Inflammatory Arthritis</strong>
+            <a href="#ra">1. Rheumatoid Arthritis</a>
+            <a href="#spondy">2. Spondyloarthropathies</a>
+            <a href="#gout">3. Gout & Pseudogout</a>
+            <a href="#septic-arthritis">4. Septic Arthritis</a>
+            <a href="#oa">5. Osteoarthritis</a>
+        </div>
+        <div>
+            <strong>Connective Tissue Diseases</strong>
+            <a href="#sle">6. Systemic Lupus Erythematosus</a>
+            <a href="#drug-lupus">7. Drug-Induced Lupus</a>
+            <a href="#scleroderma">8. Systemic Sclerosis</a>
+            <a href="#myositis">9. Inflammatory Myopathies</a>
+            <a href="#sjogren">10. Sjögren's Syndrome</a>
+            <a href="#mctd">11. Mixed CTD</a>
+            <a href="#aps">12. Antiphospholipid Syndrome</a>
+        </div>
+        <div>
+            <strong>Vasculitis</strong>
+            <a href="#pmr-gca">13. PMR & Giant Cell Arteritis</a>
+            <a href="#vasculitis">14. ANCA & Other Vasculitis</a>
+            <a href="#behcet">15. Behçet's Disease</a>
+        </div>
+        <div>
+            <strong>Systemic & Autoinflammatory</strong>
+            <a href="#still">16. Adult-Onset Still's Disease</a>
+            <a href="#sarcoidosis">17. Sarcoidosis</a>
+            <a href="#igg4">18. IgG4-Related Disease</a>
+            <a href="#amyloidosis">19. Amyloidosis</a>
+        </div>
+        <div>
+            <strong>Metabolic Bone Disease</strong>
+            <a href="#osteoporosis">20. Osteoporosis</a>
+            <a href="#paget">21. Paget's Disease</a>
+            <a href="#avn">22. Osteonecrosis (AVN)</a>
+        </div>
+        <div>
+            <strong>Soft Tissue & Pain</strong>
+            <a href="#fibromyalgia">23. Fibromyalgia</a>
+            <a href="#soft-tissue">24. Bursitis, Tendinopathy, CTS</a>
+            <a href="#back-pain">25. Back Pain & Red Flags</a>
+            <a href="#raynaud">26. Raynaud's Phenomenon</a>
+        </div>
+        <div>
+            <strong>Diagnostics</strong>
+            <a href="#serologies">27. Autoantibodies & Serologies</a>
+            <a href="#imaging">28. Rheumatologic Imaging</a>
+            <a href="#arthrocentesis">29. Arthrocentesis & Synovial Fluid</a>
+        </div>
+        <div>
+            <strong>Treatment Principles</strong>
+            <a href="#nsaids">30. NSAIDs</a>
+            <a href="#steroids">31. Glucocorticoid Management</a>
+            <a href="#dmards">32. DMARDs & Biologics</a>
+            <a href="#vaccines">33. Vaccination in Immunosuppression</a>
+            <a href="#pregnancy">34. Pregnancy & Rheumatic Disease</a>
+        </div>
+        <div>
+            <strong>Reference & Review</strong>
+            <a href="#emergencies">35. Rheumatologic Emergencies</a>
+            <a href="#trials">36. Landmark Trials</a>
+            <a href="#criteria">37. Classification Criteria</a>
+            <a href="#pearls">38. High-Yield Clinical Pearls</a>
+            <a href="#boards">39. Board-Style Questions</a>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 1: RHEUMATOID ARTHRITIS -->
+<div class="section" id="ra">
+    <h2>1. Rheumatoid Arthritis <span class="badge badge-common">Common</span></h2>
+    
+    <h3>Epidemiology & Pathophysiology</h3>
+    <ul>
+        <li><strong>Prevalence:</strong> 0.5-1% of population, F:M = 3:1</li>
+        <li><strong>Peak onset:</strong> 30-50 years (but can occur at any age)</li>
+        <li><strong>Pathophysiology:</strong> Autoimmune synovitis → pannus formation → cartilage/bone destruction</li>
+        <li><strong>Genetic association:</strong> HLA-DR4 (shared epitope), PTPN22</li>
+        <li><strong>Environmental triggers:</strong> Smoking (strongest modifiable risk factor), periodontal disease, silica exposure</li>
+    </ul>
+    
+    <h3>Clinical Presentation</h3>
+    <div class="mnemonic-box">
+        <strong>MCP/PIP/Wrist</strong> — RA loves the small joints of hands (spares DIPs!)
+    </div>
+    
+    <h4>Joint Involvement</h4>
+    <ul>
+        <li><strong>Classic pattern:</strong> Symmetric polyarthritis of small joints</li>
+        <li><strong>Hands:</strong> MCP, PIP (spares DIP)</li>
+        <li><strong>Wrists:</strong> Very common, early involvement</li>
+        <li><strong>Feet:</strong> MTP joints</li>
+        <li><strong>Other:</strong> Knees, ankles, elbows, shoulders</li>
+        <li><strong>Cervical spine:</strong> C1-C2 subluxation (check before intubation!)</li>
+        <li><strong>Morning stiffness:</strong> >1 hour (inflammatory pattern)</li>
+    </ul>
+    
+    <h4>Extra-Articular Manifestations</h4>
+    <table>
+        <tr><th>System</th><th>Manifestation</th><th>Notes</th></tr>
+        <tr><td>Skin</td><td>Rheumatoid nodules</td><td>Extensor surfaces, 20-30% of seropositive RA</td></tr>
+        <tr><td>Pulmonary</td><td>ILD, pleural effusions, nodules</td><td>ILD is leading cause of RA mortality; UIP or NSIP pattern</td></tr>
+        <tr><td>Cardiac</td><td>Pericarditis, accelerated atherosclerosis</td><td>CV disease is #1 cause of death in RA</td></tr>
+        <tr><td>Ocular</td><td>Scleritis, episcleritis, keratoconjunctivitis sicca</td><td>Scleritis can be vision-threatening</td></tr>
+        <tr><td>Hematologic</td><td>Anemia of chronic disease, Felty syndrome</td><td>Felty = RA + splenomegaly + neutropenia</td></tr>
+        <tr><td>Neurologic</td><td>Carpal tunnel, cervical myelopathy</td><td>C1-C2 instability can cause cord compression</td></tr>
+        <tr><td>Vascular</td><td>Rheumatoid vasculitis</td><td>Rare but serious; digital infarcts, mononeuritis multiplex</td></tr>
+    </table>
+    
+    <div class="pearl-box">
+        Felty syndrome (RA + splenomegaly + neutropenia) increases infection risk. These patients need aggressive RA treatment.
+    </div>
+    
+    <h3>Diagnostic Workup</h3>
+    <h4>Serologies</h4>
+    <table>
+        <tr><th>Test</th><th>Sensitivity</th><th>Specificity</th><th>Clinical Utility</th></tr>
+        <tr><td>RF (Rheumatoid Factor)</td><td>70-80%</td><td>80%</td><td>Can be positive in other conditions (HCV, Sjögren's, age)</td></tr>
+        <tr><td>Anti-CCP (ACPA)</td><td>60-70%</td><td>95%</td><td>More specific; predicts erosive disease</td></tr>
+        <tr><td>ESR/CRP</td><td>Variable</td><td>Low</td><td>Disease activity monitoring</td></tr>
+    </table>
+    
+    <div class="pearl-box">
+        Anti-CCP can be positive years before clinical RA develops. Double-positive (RF+ and anti-CCP+) predicts more aggressive, erosive disease.
+    </div>
+    
+    <h4>Imaging</h4>
+    <ul>
+        <li><strong>X-ray (early):</strong> Soft tissue swelling, periarticular osteopenia, joint space narrowing</li>
+        <li><strong>X-ray (late):</strong> Erosions (marginal), subluxations, deformities</li>
+        <li><strong>Ultrasound:</strong> Synovitis, erosions (more sensitive than X-ray early)</li>
+        <li><strong>MRI:</strong> Bone marrow edema, early erosions, synovitis</li>
+    </ul>
+    
+    <div class="criteria-box">
+        <h4>2010 ACR/EULAR Classification Criteria for RA</h4>
+        <p>Score ≥6/10 = definite RA (requires at least 1 swollen joint)</p>
+        <table>
+            <tr><th>Category</th><th>Points</th></tr>
+            <tr><td colspan="2"><strong>Joint Involvement</strong></td></tr>
+            <tr><td>1 large joint</td><td>0</td></tr>
+            <tr><td>2-10 large joints</td><td>1</td></tr>
+            <tr><td>1-3 small joints</td><td>2</td></tr>
+            <tr><td>4-10 small joints</td><td>3</td></tr>
+            <tr><td>>10 joints (at least 1 small)</td><td>5</td></tr>
+            <tr><td colspan="2"><strong>Serology</strong></td></tr>
+            <tr><td>Negative RF and negative ACPA</td><td>0</td></tr>
+            <tr><td>Low-positive RF or low-positive ACPA</td><td>2</td></tr>
+            <tr><td>High-positive RF or high-positive ACPA</td><td>3</td></tr>
+            <tr><td colspan="2"><strong>Acute Phase Reactants</strong></td></tr>
+            <tr><td>Normal CRP and normal ESR</td><td>0</td></tr>
+            <tr><td>Abnormal CRP or abnormal ESR</td><td>1</td></tr>
+            <tr><td colspan="2"><strong>Duration of Symptoms</strong></td></tr>
+            <tr><td><6 weeks</td><td>0</td></tr>
+            <tr><td>≥6 weeks</td><td>1</td></tr>
+        </table>
+    </div>
+    
+    <h3>Treatment</h3>
+    
+    <h4>Treatment Goals</h4>
+    <ul>
+        <li><strong>Treat-to-target:</strong> Aim for remission or low disease activity</li>
+        <li><strong>Window of opportunity:</strong> Early aggressive treatment prevents joint damage</li>
+        <li><strong>Monitoring:</strong> DAS28, CDAI, or SDAI scores every 3-6 months</li>
+    </ul>
+    
+    <h4>First-Line: csDMARDs</h4>
+    <div class="drug-box">
+        <strong>Methotrexate (MTX)</strong> — Anchor drug for RA
+        <ul>
+            <li><strong>Dose:</strong> Start 7.5-15mg weekly, titrate to 20-25mg weekly</li>
+            <li><strong>Folate:</strong> Folic acid 1mg daily (reduces side effects)</li>
+            <li><strong>Monitoring:</strong> CBC, CMP, LFTs at baseline, then every 2-4 weeks initially, then every 8-12 weeks</li>
+            <li><strong>Contraindications:</strong> Pregnancy (teratogenic), liver disease, heavy alcohol use, severe renal impairment</li>
+            <li><strong>Side effects:</strong> GI upset, stomatitis, hepatotoxicity, cytopenias, pneumonitis</li>
+        </ul>
+    </div>
+    
+    <table>
+        <tr><th>Drug</th><th>Mechanism</th><th>Key Monitoring</th><th>Notable Side Effects</th></tr>
+        <tr><td>Methotrexate</td><td>Folate antagonist</td><td>CBC, LFTs, creatinine</td><td>Hepatotoxicity, pneumonitis</td></tr>
+        <tr><td>Leflunomide</td><td>Pyrimidine synthesis inhibitor</td><td>CBC, LFTs</td><td>Hepatotoxicity, teratogenic</td></tr>
+        <tr><td>Sulfasalazine</td><td>Anti-inflammatory</td><td>CBC</td><td>GI upset, rash, cytopenias</td></tr>
+        <tr><td>Hydroxychloroquine</td><td>Multiple</td><td>Annual eye exam (after 5 yrs)</td><td>Retinal toxicity (rare)</td></tr>
+    </table>
+    
+    <h4>Second-Line: Biologics & Targeted Synthetic DMARDs</h4>
+    <table>
+        <tr><th>Class</th><th>Drugs</th><th>Key Considerations</th></tr>
+        <tr><td>TNF inhibitors</td><td>Adalimumab, Etanercept, Infliximab, Certolizumab, Golimumab</td><td>Screen for TB, Hep B; avoid in CHF, demyelinating disease</td></tr>
+        <tr><td>IL-6 inhibitors</td><td>Tocilizumab, Sarilumab</td><td>Can mask infection (suppresses CRP); monitor lipids</td></tr>
+        <tr><td>T-cell costimulation</td><td>Abatacept</td><td>Avoid live vaccines</td></tr>
+        <tr><td>B-cell depletion</td><td>Rituximab</td><td>Screen for Hep B; infusion reactions</td></tr>
+        <tr><td>JAK inhibitors</td><td>Tofacitinib, Baricitinib, Upadacitinib</td><td>VTE risk, herpes zoster risk; avoid in age >65 with CV risk</td></tr>
+    </table>
+    
+    <div class="emergency-box">
+        Before starting biologics: Screen for latent TB (PPD or IGRA), Hepatitis B (HBsAg, anti-HBc, anti-HBs), and Hepatitis C. Update vaccinations (no live vaccines on biologics).
+    </div>
+    
+    <h3>Prognosis & Monitoring</h3>
+    <ul>
+        <li><strong>Poor prognostic factors:</strong> High-titer RF, anti-CCP positive, early erosions, extra-articular disease, high disease activity</li>
+        <li><strong>CV risk:</strong> RA increases CV mortality 1.5-2x; treat traditional risk factors aggressively</li>
+        <li><strong>Remission rates:</strong> 20-40% achieve sustained remission with modern therapy</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 2: SLE -->
+<div class="section" id="spondy">
+    <h2>2. Spondyloarthropathies <span class="badge badge-boards">Boards Favorite</span></h2>
+    
+    <h3>Overview</h3>
+    <p>Group of inflammatory arthritides sharing clinical features:</p>
+    <ul>
+        <li><strong>Axial involvement:</strong> Sacroiliitis, spondylitis</li>
+        <li><strong>Peripheral arthritis:</strong> Asymmetric, oligoarticular</li>
+        <li><strong>Enthesitis:</strong> Inflammation at tendon/ligament insertions</li>
+        <li><strong>Dactylitis:</strong> "Sausage digits"</li>
+        <li><strong>Extra-articular:</strong> Uveitis, psoriasis, inflammatory bowel disease</li>
+        <li><strong>RF negative</strong> (seronegative arthropathies)</li>
+        <li><strong>HLA-B27 association</strong></li>
+    </ul>
+    
+    <h3>Ankylosing Spondylitis (AS)</h3>
+    <h4>Clinical Features</h4>
+    <ul>
+        <li><strong>Demographics:</strong> Young men (20-40), M:F = 3:1</li>
+        <li><strong>Cardinal symptom:</strong> Inflammatory back pain
+            <ul>
+                <li>Onset <40 years</li>
+                <li>Insidious onset</li>
+                <li>Morning stiffness >30 minutes</li>
+                <li>Improves with exercise, worsens with rest</li>
+                <li>Nocturnal pain (wakes from sleep)</li>
+            </ul>
+        </li>
+        <li><strong>Sacroiliitis:</strong> Alternating buttock pain</li>
+        <li><strong>Decreased spinal mobility:</strong> Positive Schober test (normal ≥5 cm)</li>
+        <li><strong>Chest expansion:</strong> Reduced (<5 cm at nipple level)</li>
+    </ul>
+    
+    <h4>Extra-Articular Manifestations</h4>
+    <table>
+        <tr><th>System</th><th>Manifestation</th><th>Frequency</th></tr>
+        <tr><td>Eye</td><td>Acute anterior uveitis (AAU)</td><td>25-40%</td></tr>
+        <tr><td>Cardiac</td><td>Aortic regurgitation, conduction defects</td><td>2-10%</td></tr>
+        <tr><td>Pulmonary</td><td>Apical fibrosis (late)</td><td>Rare</td></tr>
+        <tr><td>GI</td><td>IBD (microscopic or overt)</td><td>5-10%</td></tr>
+        <tr><td>Renal</td><td>IgA nephropathy, AA amyloidosis</td><td>Rare</td></tr>
+    </table>
+    
+    <div class="pearl-box">
+        Acute anterior uveitis (AAU) is the most common extra-articular manifestation of AS. Presents with acute, unilateral red eye with pain and photophobia. HLA-B27 positive in >50% of AAU.
+    </div>
+    
+    <h4>Imaging</h4>
+    <ul>
+        <li><strong>X-ray sacroiliac joints:</strong> Erosions → sclerosis → fusion (bilateral symmetric)</li>
+        <li><strong>X-ray spine:</strong> Squaring of vertebrae, syndesmophytes, "bamboo spine" (late)</li>
+        <li><strong>MRI:</strong> Bone marrow edema at sacroiliac joints (early disease before X-ray changes)</li>
+    </ul>
+    
+    <h4>Treatment</h4>
+    <ul>
+        <li><strong>Exercise:</strong> Essential — maintain spinal mobility, swimming excellent</li>
+        <li><strong>NSAIDs:</strong> First-line, continuous use may slow radiographic progression</li>
+        <li><strong>TNF inhibitors:</strong> Highly effective for refractory disease</li>
+        <li><strong>IL-17 inhibitors:</strong> Secukinumab, ixekizumab</li>
+        <li><strong>JAK inhibitors:</strong> Tofacitinib, upadacitinib (newer option)</li>
+        <li><strong>csDMARDs (MTX, SSZ):</strong> NOT effective for axial disease; may help peripheral arthritis</li>
+    </ul>
+    
+    <h3>Psoriatic Arthritis (PsA)</h3>
+    <h4>Clinical Patterns</h4>
+    <ol>
+        <li><strong>Asymmetric oligoarthritis</strong> (most common, 30-50%)</li>
+        <li><strong>Symmetric polyarthritis</strong> (RA-like, 15-25%)</li>
+        <li><strong>DIP arthritis</strong> (5-10%) — associated with nail changes</li>
+        <li><strong>Spondylitis/sacroiliitis</strong> (5-20%)</li>
+        <li><strong>Arthritis mutilans</strong> (<5%) — destructive, "pencil-in-cup"</li>
+    </ol>
+    
+    <h4>Key Features</h4>
+    <ul>
+        <li><strong>Dactylitis:</strong> "Sausage digit" — entire finger/toe swollen</li>
+        <li><strong>Enthesitis:</strong> Achilles tendinitis, plantar fasciitis</li>
+        <li><strong>Nail changes:</strong> Pitting, onycholysis, oil spots — correlate with DIP involvement</li>
+        <li><strong>Skin:</strong> Psoriasis (skin changes may precede, follow, or be absent)</li>
+    </ul>
+    
+    <div class="pearl-box">
+        15-20% of PsA patients have no visible psoriasis. Check scalp, umbilicus, gluteal cleft, and nails carefully!
+    </div>
+    
+    <h4>Treatment</h4>
+    <table>
+        <tr><th>Domain</th><th>Treatment Options</th></tr>
+        <tr><td>Peripheral arthritis</td><td>MTX, leflunomide, SSZ, apremilast, TNFi, IL-17i, IL-23i, JAKi</td></tr>
+        <tr><td>Axial disease</td><td>NSAIDs, TNFi, IL-17i, JAKi (NOT MTX)</td></tr>
+        <tr><td>Enthesitis/dactylitis</td><td>NSAIDs, TNFi, IL-17i, IL-23i</td></tr>
+        <tr><td>Skin</td><td>IL-17i, IL-23i often preferred</td></tr>
+    </table>
+    
+    <h3>Reactive Arthritis (Formerly Reiter's Syndrome)</h3>
+    <ul>
+        <li><strong>Trigger:</strong> Post-infectious (GI: Salmonella, Shigella, Campylobacter, Yersinia; GU: Chlamydia)</li>
+        <li><strong>Timing:</strong> 1-4 weeks after infection</li>
+        <li><strong>Classic triad:</strong> Arthritis + urethritis + conjunctivitis ("can't see, can't pee, can't climb a tree")</li>
+        <li><strong>Other:</strong> Keratoderma blennorrhagicum, circinate balanitis, oral ulcers</li>
+        <li><strong>Treatment:</strong> NSAIDs, treat underlying infection if persistent; DMARDs for chronic</li>
+    </ul>
+    
+    <h3>Enteropathic Arthritis</h3>
+    <ul>
+        <li><strong>Associated with:</strong> Crohn's disease, ulcerative colitis</li>
+        <li><strong>Types:</strong>
+            <ul>
+                <li>Peripheral (parallels bowel activity) — treat the gut</li>
+                <li>Axial (independent of bowel activity) — treat like AS</li>
+            </ul>
+        </li>
+        <li><strong>Caution:</strong> NSAIDs may flare IBD; TNFi (infliximab, adalimumab) preferred</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 6: SYSTEMIC SCLEROSIS -->
+<div class="section" id="gout">
+    <h2>3. Gout & Pseudogout <span class="badge badge-common">Common</span></h2>
+    
+    <h3>Gout (Monosodium Urate Crystal Disease)</h3>
+    
+    <h4>Risk Factors</h4>
+    <ul>
+        <li><strong>Hyperuricemia causes:</strong> Underexcretion (90%) vs overproduction (10%)</li>
+        <li><strong>Diet:</strong> Red meat, organ meats, shellfish, alcohol (especially beer), fructose</li>
+        <li><strong>Medications:</strong> Thiazides, loop diuretics, low-dose aspirin, cyclosporine</li>
+        <li><strong>Comorbidities:</strong> CKD, metabolic syndrome, obesity, HTN</li>
+    </ul>
+    
+    <h4>Clinical Stages</h4>
+    <ol>
+        <li><strong>Asymptomatic hyperuricemia:</strong> No treatment indicated (most never develop gout)</li>
+        <li><strong>Acute gouty arthritis:</strong> Sudden, severe monoarticular inflammation</li>
+        <li><strong>Intercritical gout:</strong> Asymptomatic periods between attacks</li>
+        <li><strong>Chronic tophaceous gout:</strong> Tophi, chronic arthritis, joint destruction</li>
+    </ol>
+    
+    <h4>Acute Gout Presentation</h4>
+    <ul>
+        <li><strong>Classic:</strong> Podagra (1st MTP) — 50% of first attacks</li>
+        <li><strong>Character:</strong> Rapid onset (peaks 12-24h), exquisitely tender, erythema, warmth</li>
+        <li><strong>Other sites:</strong> Ankle, knee, wrist, elbow</li>
+        <li><strong>Triggers:</strong> Dietary indiscretion, alcohol, dehydration, surgery, illness, medication changes</li>
+    </ul>
+    
+    <div class="pearl-box">
+        Serum uric acid may be NORMAL during acute attack (consumed into crystals). Don't use acute level to rule out gout!
+    </div>
+    
+    <h4>Diagnosis</h4>
+    <div class="highlight-box">
+        <strong>Gold Standard:</strong> Arthrocentesis showing negatively birefringent, needle-shaped MSU crystals under polarized light microscopy
+    </div>
+    
+    <table>
+        <tr><th>Finding</th><th>Gout (MSU)</th><th>Pseudogout (CPPD)</th></tr>
+        <tr><td>Crystal shape</td><td>Needle-shaped</td><td>Rhomboid/rectangular</td></tr>
+        <tr><td>Birefringence</td><td>Negative (yellow parallel)</td><td>Positive (blue parallel)</td></tr>
+        <tr><td>Imaging</td><td>Erosions with overhanging edges ("rat bite")</td><td>Chondrocalcinosis</td></tr>
+        <tr><td>Joint distribution</td><td>1st MTP, ankle, knee</td><td>Knee, wrist, shoulder</td></tr>
+    </table>
+    
+    <h4>Treatment: Acute Gout</h4>
+    <table>
+        <tr><th>Agent</th><th>Dosing</th><th>Considerations</th></tr>
+        <tr><td>NSAIDs</td><td>Indomethacin 50mg TID or Naproxen 500mg BID × 5-7 days</td><td>Avoid if CKD, GI bleeding, CVD</td></tr>
+        <tr><td>Colchicine</td><td>1.2mg, then 0.6mg 1h later; then 0.6mg daily/BID</td><td>Best within 36h of onset; reduce dose in CKD</td></tr>
+        <tr><td>Corticosteroids</td><td>Prednisone 30-40mg × 5 days OR intra-articular</td><td>Good for CKD, multiple comorbidities</td></tr>
+        <tr><td>IL-1 inhibitors</td><td>Anakinra 100mg daily × 3 days</td><td>Refractory cases</td></tr>
+    </table>
+    
+    <div class="emergency-box">
+        Do NOT start or stop urate-lowering therapy (ULT) during acute attack — can prolong/worsen flare. Treat the acute attack first.
+    </div>
+    
+    <h4>Treatment: Chronic Gout / Urate-Lowering Therapy</h4>
+    <p><strong>Indications for ULT:</strong></p>
+    <ul>
+        <li>≥2 attacks per year</li>
+        <li>Tophi</li>
+        <li>Chronic gouty arthritis</li>
+        <li>Urate nephropathy or nephrolithiasis</li>
+        <li>CKD stage ≥3</li>
+    </ul>
+    
+    <table>
+        <tr><th>Drug</th><th>Mechanism</th><th>Dosing</th><th>Notes</th></tr>
+        <tr><td>Allopurinol</td><td>Xanthine oxidase inhibitor</td><td>Start 100mg daily, titrate to goal</td><td>Dose reduce in CKD; HLA-B*5801 screening in high-risk populations</td></tr>
+        <tr><td>Febuxostat</td><td>Xanthine oxidase inhibitor</td><td>40-80mg daily</td><td>Alternative if allopurinol intolerant; avoid in CVD (CARES trial)</td></tr>
+        <tr><td>Probenecid</td><td>Uricosuric</td><td>500mg BID</td><td>Requires good renal function; contraindicated in nephrolithiasis</td></tr>
+        <tr><td>Pegloticase</td><td>Uricase (converts urate to allantoin)</td><td>IV q2 weeks</td><td>Refractory tophaceous gout; immunogenic</td></tr>
+    </table>
+    
+    <p><strong>Goal:</strong> Serum urate <6 mg/dL (or <5 if tophi)</p>
+    
+    <div class="pearl-box">
+        <strong>Allopurinol hypersensitivity syndrome (AHS):</strong> Severe DRESS-like reaction. Risk factors: CKD, HLA-B*5801 (common in Han Chinese, Korean, Thai). Start low (100mg) and go slow.
+    </div>
+    
+    <h3>Pseudogout (CPPD Crystal Arthritis)</h3>
+    <ul>
+        <li><strong>Crystals:</strong> Calcium pyrophosphate dihydrate</li>
+        <li><strong>Classic joints:</strong> Knee (most common), wrist, shoulder</li>
+        <li><strong>Imaging:</strong> Chondrocalcinosis (cartilage calcification) on X-ray</li>
+        <li><strong>Associations:</strong> Hemochromatosis, hyperparathyroidism, hypothyroidism, hypomagnesemia</li>
+    </ul>
+    
+    <p><strong>Treatment:</strong> Same as gout (NSAIDs, colchicine, steroids). No urate-lowering equivalent exists for CPPD.</p>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 4: PMR & GCA -->
+<div class="section" id="septic-arthritis">
+    <h2>4. Septic Arthritis <span class="badge badge-emergency">Emergency</span></h2>
+    
+    <h3>Overview</h3>
+    <ul>
+        <li><strong>Definition:</strong> Bacterial infection of joint space — orthopedic emergency</li>
+        <li><strong>Risk factors:</strong> RA, prosthetic joint, diabetes, immunosuppression, IVDU, skin infection</li>
+    </ul>
+    
+    <h3>Microbiology</h3>
+    <table>
+        <tr><th>Population</th><th>Common Organisms</th></tr>
+        <tr><td>Adults (non-gonococcal)</td><td>S. aureus (#1), Streptococcus</td></tr>
+        <tr><td>Sexually active young adults</td><td>N. gonorrhoeae</td></tr>
+        <tr><td>IVDU</td><td>S. aureus, Pseudomonas</td></tr>
+        <tr><td>Prosthetic joint</td><td>CoNS, S. aureus</td></tr>
+    </table>
+    
+    <h3>Clinical Presentation</h3>
+    <ul>
+        <li><strong>Classic:</strong> Acute monoarthritis — hot, swollen, extremely painful</li>
+        <li><strong>Location:</strong> Knee (most common), hip, ankle, wrist</li>
+        <li><strong>Fever:</strong> Present in ~60%</li>
+    </ul>
+    
+    <h4>Disseminated Gonococcal Infection</h4>
+    <ul>
+        <li><strong>Demographics:</strong> Young, sexually active</li>
+        <li><strong>Bacteremic phase:</strong> Migratory polyarthralgias, tenosynovitis, pustular skin lesions</li>
+        <li><strong>Septic phase:</strong> Monoarthritis</li>
+    </ul>
+    
+    <h3>Diagnosis</h3>
+    <div class="emergency-box">
+        <strong>Joint aspiration is MANDATORY</strong> before antibiotics. Delay = irreversible joint destruction.
+    </div>
+    
+    <table>
+        <tr><th>Parameter</th><th>Septic Arthritis</th></tr>
+        <tr><td>WBC</td><td>>50,000/μL (often >100,000)</td></tr>
+        <tr><td>PMN%</td><td>>90%</td></tr>
+        <tr><td>Gram stain</td><td>Positive 50-75%</td></tr>
+        <tr><td>Culture</td><td>Positive 70-90%</td></tr>
+    </table>
+    
+    <div class="pearl-box">
+        WBC >50,000 suggests septic but isn't definitive — gout can too. Send Gram stain, culture, AND crystals on every tap!
+    </div>
+    
+    <h3>Treatment</h3>
+    <table>
+        <tr><th>Scenario</th><th>Empiric Antibiotics</th></tr>
+        <tr><td>Standard</td><td>Vancomycin + Ceftriaxone</td></tr>
+        <tr><td>Gonococcal</td><td>Ceftriaxone 1g IV + Azithromycin 1g</td></tr>
+    </table>
+    <ul>
+        <li><strong>Duration:</strong> 2-4 weeks depending on organism</li>
+        <li><strong>Drainage:</strong> Essential — serial aspiration, arthroscopy, or open</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: DRUG-INDUCED LUPUS -->
+<div class="section" id="oa">
+    <h2>5. Osteoarthritis <span class="badge badge-common">Very Common</span></h2>
+    
+    <h3>Overview</h3>
+    <ul>
+        <li><strong>Definition:</strong> Degenerative joint disease — cartilage loss, subchondral bone changes, osteophyte formation</li>
+        <li><strong>Epidemiology:</strong> Most common arthritis; affects >30 million Americans; increases with age</li>
+        <li><strong>Risk factors:</strong> Age, obesity, joint injury, repetitive stress, genetics, female sex</li>
+    </ul>
+    
+    <h3>Clinical Features</h3>
+    <ul>
+        <li><strong>Pain:</strong> Worse with activity, better with rest (opposite of inflammatory)</li>
+        <li><strong>Morning stiffness:</strong> <30 minutes (vs >1 hour in RA)</li>
+        <li><strong>Gelling:</strong> Stiffness after prolonged sitting</li>
+        <li><strong>No systemic symptoms</strong></li>
+    </ul>
+    
+    <h4>Joint Distribution</h4>
+    <table>
+        <tr><th>Commonly Affected</th><th>Typically Spared</th></tr>
+        <tr><td>DIP joints (Heberden's nodes)</td><td>MCP joints</td></tr>
+        <tr><td>PIP joints (Bouchard's nodes)</td><td>Wrists</td></tr>
+        <tr><td>First CMC (base of thumb)</td><td>Elbows</td></tr>
+        <tr><td>Hips, Knees</td><td>Shoulders, Ankles</td></tr>
+        <tr><td>Cervical/lumbar spine</td><td></td></tr>
+    </table>
+    
+    <div class="pearl-box">
+        OA affects DIPs; RA spares DIPs. If you see DIP involvement, think OA or PsA, NOT RA.
+    </div>
+    
+    <h3>X-ray Findings</h3>
+    <div class="mnemonic-box">
+        <strong>JOSS</strong>: <strong>J</strong>oint space narrowing, <strong>O</strong>steophytes, <strong>S</strong>ubchondral sclerosis, <strong>S</strong>ubchondral cysts
+    </div>
+    
+    <h3>Treatment</h3>
+    <table>
+        <tr><th>Modality</th><th>Details</th></tr>
+        <tr><td>Non-pharmacologic</td><td>Weight loss (best for knee), exercise, PT, assistive devices</td></tr>
+        <tr><td>Topical</td><td>NSAIDs (diclofenac gel), capsaicin</td></tr>
+        <tr><td>Oral</td><td>Acetaminophen (limited efficacy), NSAIDs (short courses)</td></tr>
+        <tr><td>Intra-articular</td><td>Corticosteroids (short-term), hyaluronic acid (controversial)</td></tr>
+        <tr><td>Surgery</td><td>Joint replacement for refractory cases</td></tr>
+    </table>
+    
+    <h3>OA vs RA Comparison</h3>
+    <table>
+        <tr><th>Feature</th><th>OA</th><th>RA</th></tr>
+        <tr><td>Morning stiffness</td><td><30 min</td><td>>1 hour</td></tr>
+        <tr><td>Pain pattern</td><td>Worse with use</td><td>Worse at rest/morning</td></tr>
+        <tr><td>DIP involvement</td><td>Yes</td><td>No</td></tr>
+        <tr><td>MCP/wrist</td><td>Rare</td><td>Classic</td></tr>
+        <tr><td>ESR/CRP</td><td>Normal</td><td>Elevated</td></tr>
+        <tr><td>X-ray</td><td>Osteophytes, sclerosis</td><td>Erosions, osteopenia</td></tr>
+    </table>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: SEPTIC ARTHRITIS -->
+<div class="section" id="sle">
+    <h2>6. Systemic Lupus Erythematosus <span class="badge badge-common">Common</span> <span class="badge badge-boards">Boards Favorite</span></h2>
+    
+    <h3>Epidemiology</h3>
+    <ul>
+        <li><strong>Prevalence:</strong> 20-150 per 100,000</li>
+        <li><strong>F:M ratio:</strong> 9:1 (during childbearing years)</li>
+        <li><strong>Peak onset:</strong> 15-44 years</li>
+        <li><strong>Higher prevalence/severity:</strong> African American, Hispanic, Asian populations</li>
+    </ul>
+    
+    <h3>Clinical Manifestations</h3>
+    <div class="mnemonic-box">
+        <strong>SOAP BRAIN MD</strong> — SLE criteria
+        <ul style="columns: 2; margin-top: 10px;">
+            <li><strong>S</strong>erositis</li>
+            <li><strong>O</strong>ral ulcers</li>
+            <li><strong>A</strong>rthritis</li>
+            <li><strong>P</strong>hotosensitivity</li>
+            <li><strong>B</strong>lood disorders</li>
+            <li><strong>R</strong>enal disease</li>
+            <li><strong>A</strong>NA</li>
+            <li><strong>I</strong>mmunologic (anti-dsDNA, anti-Sm, antiphospholipid)</li>
+            <li><strong>N</strong>eurologic</li>
+            <li><strong>M</strong>alar rash</li>
+            <li><strong>D</strong>iscoid rash</li>
+        </ul>
+    </div>
+    
+    <table>
+        <tr><th>System</th><th>Manifestations</th><th>Key Points</th></tr>
+        <tr><td><strong>Skin</strong></td><td>Malar rash, discoid rash, photosensitivity, oral ulcers, alopecia</td><td>Malar rash spares nasolabial folds; discoid causes scarring</td></tr>
+        <tr><td><strong>Joints</strong></td><td>Non-erosive arthritis, Jaccoud's arthropathy</td><td>Unlike RA: no erosions, reducible deformities</td></tr>
+        <tr><td><strong>Renal</strong></td><td>Lupus nephritis (Class I-VI)</td><td>Most important prognostic factor; proteinuria, active sediment</td></tr>
+        <tr><td><strong>Hematologic</strong></td><td>Cytopenias, hemolytic anemia, lymphopenia, thrombocytopenia</td><td>Lymphopenia (<1000) correlates with disease activity</td></tr>
+        <tr><td><strong>Serositis</strong></td><td>Pleuritis, pericarditis</td><td>May present as chest pain</td></tr>
+        <tr><td><strong>Neurologic</strong></td><td>Seizures, psychosis, cognitive dysfunction, stroke</td><td>19 different neuropsychiatric manifestations</td></tr>
+        <tr><td><strong>Cardiac</strong></td><td>Pericarditis, Libman-Sacks endocarditis, accelerated atherosclerosis</td><td>Leading cause of late death = CV disease</td></tr>
+        <tr><td><strong>Pulmonary</strong></td><td>Pleuritis, ILD, shrinking lung syndrome, pulmonary HTN</td><td>Shrinking lung = diaphragmatic weakness</td></tr>
+    </table>
+    
+    <h3>Lupus Nephritis — Critical Topic</h3>
+    <table>
+        <tr><th>Class</th><th>Description</th><th>Treatment</th></tr>
+        <tr><td>I</td><td>Minimal mesangial</td><td>None specific</td></tr>
+        <tr><td>II</td><td>Mesangial proliferative</td><td>Conservative/low-dose immunosuppression</td></tr>
+        <tr><td>III</td><td>Focal proliferative (<50% glomeruli)</td><td>Induction: MMF or Cyclophosphamide + steroids</td></tr>
+        <tr><td>IV</td><td>Diffuse proliferative (≥50% glomeruli)</td><td>Most aggressive treatment; induction + maintenance</td></tr>
+        <tr><td>V</td><td>Membranous</td><td>If nephrotic: immunosuppression</td></tr>
+        <tr><td>VI</td><td>Advanced sclerosis</td><td>Supportive; prepare for RRT</td></tr>
+    </table>
+    
+    <div class="pearl-box">
+        Class IV lupus nephritis is the most common and severe form. Treatment: Induction with MMF or IV cyclophosphamide + steroids, followed by maintenance with MMF or azathioprine.
+    </div>
+    
+    <h3>Autoantibodies in SLE</h3>
+    <table>
+        <tr><th>Antibody</th><th>Sensitivity</th><th>Specificity</th><th>Clinical Association</th></tr>
+        <tr><td>ANA</td><td>95%+</td><td>Low</td><td>Screening test; if negative, SLE very unlikely</td></tr>
+        <tr><td>Anti-dsDNA</td><td>60-70%</td><td>95%</td><td>Correlates with disease activity, lupus nephritis</td></tr>
+        <tr><td>Anti-Smith (Sm)</td><td>25-30%</td><td>99%</td><td>Most specific for SLE</td></tr>
+        <tr><td>Anti-Ro (SSA)</td><td>30%</td><td>Low</td><td>Neonatal lupus, congenital heart block, photosensitivity</td></tr>
+        <tr><td>Anti-La (SSB)</td><td>15%</td><td>Moderate</td><td>Usually with anti-Ro; less nephritis</td></tr>
+        <tr><td>Anti-RNP</td><td>30%</td><td>Low</td><td>MCTD overlap</td></tr>
+        <tr><td>Antiphospholipid</td><td>30-40%</td><td>Moderate</td><td>Thrombosis, pregnancy loss</td></tr>
+    </table>
+    
+    <div class="highlight-box">
+        <strong>Anti-Ro positive pregnancy:</strong> Monitor fetal heart (weekly from 16-26 weeks) for congenital heart block. IVIG and dexamethasone may be used if block detected.
+    </div>
+    
+    <h3>Disease Activity Monitoring</h3>
+    <ul>
+        <li><strong>C3/C4:</strong> Low in active disease (consumption)</li>
+        <li><strong>Anti-dsDNA:</strong> Rising titers often precede flare</li>
+        <li><strong>ESR:</strong> Elevated in active disease</li>
+        <li><strong>CRP:</strong> Usually normal in lupus flare (elevated suggests infection)</li>
+        <li><strong>Urinalysis:</strong> Active sediment (RBC casts, proteinuria) = nephritis</li>
+    </ul>
+    
+    <div class="pearl-box">
+        CRP is usually NOT elevated in SLE flares (unlike most inflammatory conditions). If CRP is high in a lupus patient, think infection first!
+    </div>
+    
+    <h3>Treatment</h3>
+    <h4>All Patients</h4>
+    <ul>
+        <li><strong>Hydroxychloroquine:</strong> EVERYONE with SLE (reduces flares, mortality, thrombosis, damage accrual)</li>
+        <li><strong>Sun protection:</strong> Sunscreen, protective clothing</li>
+        <li><strong>Cardiovascular risk reduction:</strong> Aggressive management</li>
+        <li><strong>Vaccinations:</strong> Annual flu, pneumococcal (no live vaccines if immunosuppressed)</li>
+    </ul>
+    
+    <h4>By Severity</h4>
+    <table>
+        <tr><th>Manifestation</th><th>Treatment</th></tr>
+        <tr><td>Skin, joints (mild)</td><td>HCQ ± NSAIDs ± low-dose prednisone</td></tr>
+        <tr><td>Moderate disease</td><td>Add azathioprine or methotrexate</td></tr>
+        <tr><td>Nephritis (Class III/IV/V)</td><td>Induction: MMF or CYC + steroids; Maintenance: MMF or AZA</td></tr>
+        <tr><td>Severe/refractory</td><td>Rituximab, belimumab, voclosporin (nephritis)</td></tr>
+        <tr><td>Neuropsychiatric</td><td>High-dose steroids ± cyclophosphamide</td></tr>
+    </table>
+    
+    <div class="drug-box">
+        <strong>Hydroxychloroquine (HCQ)</strong> — Foundation of SLE treatment
+        <ul>
+            <li><strong>Dose:</strong> 200-400mg daily (≤5 mg/kg/day to reduce retinal toxicity)</li>
+            <li><strong>Benefits:</strong> Reduces flares by 50%, reduces damage accrual, improves survival, reduces thrombosis</li>
+            <li><strong>Monitoring:</strong> Baseline eye exam, then annual after 5 years (or earlier if risk factors)</li>
+            <li><strong>Safe in pregnancy</strong></li>
+        </ul>
+    </div>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 3: GOUT -->
+<div class="section" id="drug-lupus">
+    <h2>7. Drug-Induced Lupus <span class="badge badge-boards">Boards Favorite</span></h2>
+    
+    <h3>High-Risk Drugs</h3>
+    <div class="mnemonic-box">
+        <strong>Classic drugs — "HIP":</strong> <strong>H</strong>ydralazine, <strong>I</strong>soniazid, <strong>P</strong>rocainamide
+    </div>
+    
+    <table>
+        <tr><th>Risk Level</th><th>Drugs</th></tr>
+        <tr><td>High (1-20%)</td><td>Procainamide, Hydralazine</td></tr>
+        <tr><td>Moderate</td><td>Isoniazid, Minocycline, Anti-TNF agents</td></tr>
+        <tr><td>Lower</td><td>Sulfasalazine, Methyldopa, Phenytoin, PPIs</td></tr>
+    </table>
+    
+    <h3>Clinical Features</h3>
+    <ul>
+        <li><strong>Common:</strong> Arthralgias, myalgias, serositis, fever, rash</li>
+        <li><strong>Uncommon:</strong> Renal disease, CNS involvement (unlike SLE)</li>
+    </ul>
+    
+    <div class="pearl-box">
+        Drug-induced lupus typically spares kidneys and CNS. If nephritis or CNS disease present, think idiopathic SLE.
+    </div>
+    
+    <h3>Serologies</h3>
+    <table>
+        <tr><th>Antibody</th><th>Drug-Induced</th><th>Idiopathic SLE</th></tr>
+        <tr><td>ANA</td><td>Positive (>95%)</td><td>Positive</td></tr>
+        <tr><td><strong>Anti-histone</strong></td><td><strong>Positive (>95%)</strong></td><td>Positive (50-70%)</td></tr>
+        <tr><td>Anti-dsDNA</td><td>Usually negative</td><td>Often positive</td></tr>
+        <tr><td>Complement</td><td>Normal</td><td>Often low</td></tr>
+    </table>
+    
+    <h3>Treatment</h3>
+    <ul>
+        <li><strong>Stop the offending drug</strong> — usually sufficient</li>
+        <li><strong>NSAIDs/short-course steroids</strong> for symptoms</li>
+        <li><strong>Resolution:</strong> 1-2 weeks for symptoms; months for serologies</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: MCTD -->
+<div class="section" id="scleroderma">
+    <h2>8. Systemic Sclerosis (Scleroderma) <span class="badge badge-boards">Boards Favorite</span></h2>
+    
+    <h3>Classification</h3>
+    <table>
+        <tr><th>Feature</th><th>Limited Cutaneous (lcSSc)</th><th>Diffuse Cutaneous (dcSSc)</th></tr>
+        <tr><td>Skin involvement</td><td>Distal to elbows/knees, face</td><td>Proximal + trunk</td></tr>
+        <tr><td>Antibody</td><td>Anti-centromere (ACA)</td><td>Anti-Scl-70 (topoisomerase I)</td></tr>
+        <tr><td>Course</td><td>Slowly progressive</td><td>Rapidly progressive early</td></tr>
+        <tr><td>Internal organs</td><td>Late PAH, less ILD</td><td>Early ILD, renal crisis</td></tr>
+        <tr><td>Prognosis</td><td>Better</td><td>Worse</td></tr>
+    </table>
+    
+    <div class="mnemonic-box">
+        <strong>CREST syndrome</strong> (limited cutaneous SSc):<br>
+        <strong>C</strong>alcinosis, <strong>R</strong>aynaud's, <strong>E</strong>sophageal dysmotility, <strong>S</strong>clerodactyly, <strong>T</strong>elangiectasias
+    </div>
+    
+    <h3>Clinical Manifestations</h3>
+    <h4>Skin</h4>
+    <ul>
+        <li><strong>Raynaud's phenomenon:</strong> Almost universal (>95%), often first symptom</li>
+        <li><strong>Skin thickening:</strong> Starts in fingers, may progress proximally</li>
+        <li><strong>Digital ulcers:</strong> Painful, can become infected</li>
+        <li><strong>Sclerodactyly:</strong> Tight, shiny skin on fingers</li>
+        <li><strong>Calcinosis:</strong> Subcutaneous calcium deposits</li>
+        <li><strong>Telangiectasias:</strong> Face, hands</li>
+    </ul>
+    
+    <h4>GI (>90% of patients)</h4>
+    <ul>
+        <li><strong>Esophageal dysmotility:</strong> GERD, dysphagia, Barrett's</li>
+        <li><strong>Small bowel:</strong> Malabsorption, bacterial overgrowth, pseudo-obstruction</li>
+        <li><strong>Colon:</strong> Constipation, wide-mouth diverticula</li>
+    </ul>
+    
+    <h4>Pulmonary (leading cause of death)</h4>
+    <ul>
+        <li><strong>ILD:</strong> More common in dcSSc, anti-Scl-70 positive</li>
+        <li><strong>PAH:</strong> More common in lcSSc, anti-centromere positive</li>
+        <li><strong>Screening:</strong> Annual PFTs, echocardiogram</li>
+    </ul>
+    
+    <h4>Renal — Scleroderma Renal Crisis (SRC)</h4>
+    <div class="emergency-box">
+        <strong>Scleroderma renal crisis:</strong> Acute hypertensive emergency with AKI. Occurs in 10-15% of dcSSc, often within first 4 years. Risk factors: diffuse skin disease, anti-RNA polymerase III, corticosteroid use (>15mg/day).
+        <br><br>
+        <strong>Treatment:</strong> ACE inhibitors (captopril) — even if creatinine rises initially. Continue even if dialysis needed. Do NOT use calcium channel blockers initially.
+    </div>
+    
+    <h3>Autoantibodies</h3>
+    <table>
+        <tr><th>Antibody</th><th>Subset</th><th>Clinical Association</th></tr>
+        <tr><td>Anti-centromere (ACA)</td><td>lcSSc</td><td>PAH, less ILD, better prognosis</td></tr>
+        <tr><td>Anti-Scl-70 (topoisomerase I)</td><td>dcSSc</td><td>ILD, worse prognosis</td></tr>
+        <tr><td>Anti-RNA polymerase III</td><td>dcSSc</td><td>Scleroderma renal crisis, cancer association</td></tr>
+        <tr><td>Anti-U3 RNP (fibrillarin)</td><td>dcSSc</td><td>PAH, skeletal muscle involvement</td></tr>
+        <tr><td>Anti-PM-Scl</td><td>Overlap</td><td>Myositis overlap</td></tr>
+    </table>
+    
+    <h3>Treatment</h3>
+    <table>
+        <tr><th>Manifestation</th><th>Treatment</th></tr>
+        <tr><td>Raynaud's</td><td>Avoid cold, CCB (nifedipine, amlodipine), PDE5 inhibitors</td></tr>
+        <tr><td>Digital ulcers</td><td>CCB, PDE5 inhibitors, prostacyclin analogs (iloprost), bosentan for prevention</td></tr>
+        <tr><td>GERD</td><td>PPI (high dose), lifestyle modifications</td></tr>
+        <tr><td>ILD</td><td>MMF, nintedanib, tocilizumab; rituximab for refractory</td></tr>
+        <tr><td>PAH</td><td>ERA (bosentan, ambrisentan), PDE5i (sildenafil), prostacyclins</td></tr>
+        <tr><td>Renal crisis</td><td>ACE inhibitor — lifesaving!</td></tr>
+        <tr><td>Skin</td><td>MTX may help early; no great options</td></tr>
+    </table>
+    
+    <div class="pearl-box">
+        Avoid corticosteroids >15mg/day in diffuse SSc — increases risk of scleroderma renal crisis!
+    </div>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 7: VASCULITIS -->
+<div class="section" id="myositis">
+    <h2>9. Inflammatory Myopathies</h2>
+    
+    <h3>Classification</h3>
+    <ul>
+        <li><strong>Dermatomyositis (DM)</strong></li>
+        <li><strong>Polymyositis (PM)</strong></li>
+        <li><strong>Immune-mediated necrotizing myopathy (IMNM)</strong></li>
+        <li><strong>Inclusion body myositis (IBM)</strong></li>
+        <li><strong>Antisynthetase syndrome</strong></li>
+    </ul>
+    
+    <h3>Dermatomyositis</h3>
+    <h4>Skin Findings</h4>
+    <ul>
+        <li><strong>Heliotrope rash:</strong> Violaceous discoloration of eyelids</li>
+        <li><strong>Gottron's papules:</strong> Erythematous papules over MCP/PIP/DIP (pathognomonic)</li>
+        <li><strong>Gottron's sign:</strong> Same distribution but macular</li>
+        <li><strong>Shawl sign:</strong> V-neck and upper back erythema</li>
+        <li><strong>Mechanic's hands:</strong> Cracked, rough skin on fingers (also antisynthetase)</li>
+        <li><strong>Calcinosis:</strong> Especially in juvenile DM</li>
+    </ul>
+    
+    <h4>Muscle Involvement</h4>
+    <ul>
+        <li><strong>Proximal weakness:</strong> Difficulty rising from chair, climbing stairs, lifting arms</li>
+        <li><strong>Symmetric</strong></li>
+        <li><strong>CK:</strong> Elevated (often 10-50× normal)</li>
+        <li><strong>Aldolase:</strong> Also elevated</li>
+    </ul>
+    
+    <div class="emergency-box">
+        <strong>Malignancy association:</strong> DM has 3-8× increased cancer risk. Screen with age-appropriate cancer screening + CT chest/abdomen/pelvis. Highest risk in first 1-3 years after diagnosis.
+    </div>
+    
+    <h3>Polymyositis</h3>
+    <ul>
+        <li>Similar muscle involvement as DM</li>
+        <li>NO skin manifestations</li>
+        <li>Rare diagnosis — many former PM cases now reclassified as IMNM or antisynthetase</li>
+    </ul>
+    
+    <h3>Inclusion Body Myositis</h3>
+    <ul>
+        <li><strong>Age:</strong> >50 years, M > F</li>
+        <li><strong>Distribution:</strong> Asymmetric, involves finger flexors and quadriceps (falls, difficulty gripping)</li>
+        <li><strong>CK:</strong> Normal to mildly elevated</li>
+        <li><strong>Treatment:</strong> Does NOT respond to immunosuppression</li>
+        <li><strong>Biopsy:</strong> Rimmed vacuoles, inclusion bodies</li>
+    </ul>
+    
+    <div class="pearl-box">
+        IBM is the most common myopathy in patients >Key clue: weakness of finger flexors (difficulty gripping) + quadriceps weakness + poor response to steroids.
+    </div>
+    
+    <h3>Antisynthetase Syndrome</h3>
+    <ul>
+        <li><strong>Antibody:</strong> Anti-Jo-1 (most common), anti-PL-7, anti-PL-12, others</li>
+        <li><strong>Classic features:</strong> Myositis + ILD + arthritis + mechanic's hands + Raynaud's + fever</li>
+        <li><strong>ILD:</strong> Can be severe and progressive</li>
+    </ul>
+    
+    <h3>Myositis-Specific Antibodies</h3>
+    <table>
+        <tr><th>Antibody</th><th>Association</th></tr>
+        <tr><td>Anti-Jo-1</td><td>Antisynthetase syndrome, ILD</td></tr>
+        <tr><td>Anti-Mi-2</td><td>Classic DM, good prognosis</td></tr>
+        <tr><td>Anti-MDA5</td><td>Amyopathic DM, rapidly progressive ILD (high mortality)</td></tr>
+        <tr><td>Anti-TIF1-γ</td><td>DM with high cancer risk</td></tr>
+        <tr><td>Anti-NXP2</td><td>DM with calcinosis, cancer risk</td></tr>
+        <tr><td>Anti-SRP</td><td>IMNM, severe myopathy, cardiac involvement</td></tr>
+        <tr><td>Anti-HMGCR</td><td>IMNM, statin-associated (can occur without statin)</td></tr>
+    </table>
+    
+    <h3>Treatment</h3>
+    <ul>
+        <li><strong>First-line:</strong> High-dose prednisone (1mg/kg/day)</li>
+        <li><strong>Steroid-sparing:</strong> Methotrexate, azathioprine</li>
+        <li><strong>Refractory:</strong> IVIG, rituximab, mycophenolate</li>
+        <li><strong>ILD:</strong> MMF, azathioprine, rituximab, nintedanib</li>
+        <li><strong>Physical therapy:</strong> Essential for maintaining function</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 9: ANTIPHOSPHOLIPID SYNDROME -->
+<div class="section" id="sjogren">
+    <h2>10. Sjögren's Syndrome</h2>
+    
+    <h3>Overview</h3>
+    <ul>
+        <li><strong>Definition:</strong> Chronic autoimmune disease targeting exocrine glands (salivary, lacrimal)</li>
+        <li><strong>Demographics:</strong> F:M = 9:1, peak 40-60 years</li>
+        <li><strong>Types:</strong> Primary (alone) vs Secondary (with RA, SLE, scleroderma)</li>
+    </ul>
+    
+    <h3>Clinical Features</h3>
+    <h4>Sicca Symptoms (Hallmark)</h4>
+    <ul>
+        <li><strong>Keratoconjunctivitis sicca:</strong> Dry eyes, gritty sensation, photosensitivity</li>
+        <li><strong>Xerostomia:</strong> Dry mouth, difficulty swallowing dry foods, dental caries</li>
+        <li><strong>Parotid enlargement:</strong> Bilateral, episodic</li>
+    </ul>
+    
+    <h4>Extraglandular Manifestations</h4>
+    <table>
+        <tr><th>System</th><th>Manifestation</th></tr>
+        <tr><td>Joints</td><td>Arthralgias, non-erosive arthritis</td></tr>
+        <tr><td>Skin</td><td>Purpura, xerosis, annular erythema</td></tr>
+        <tr><td>Pulmonary</td><td>ILD, bronchiectasis, lymphocytic interstitial pneumonia</td></tr>
+        <tr><td>Renal</td><td>Interstitial nephritis, RTA type 1 (distal)</td></tr>
+        <tr><td>Neurologic</td><td>Peripheral neuropathy, CNS involvement (rare)</td></tr>
+        <tr><td>Hematologic</td><td>Leukopenia, hypergammaglobulinemia, cryoglobulinemia</td></tr>
+    </table>
+    
+    <div class="emergency-box">
+        <strong>Lymphoma risk:</strong> 5-10% lifetime risk of B-cell lymphoma (especially MALT). Monitor for persistent parotid swelling, lymphadenopathy, cryoglobulinemia.
+    </div>
+    
+    <h3>Diagnosis</h3>
+    <h4>Serologies</h4>
+    <ul>
+        <li><strong>Anti-Ro (SSA):</strong> 60-70% sensitive</li>
+        <li><strong>Anti-La (SSB):</strong> 30-40% sensitive, usually with anti-Ro</li>
+        <li><strong>RF:</strong> Positive in 50-70%</li>
+        <li><strong>ANA:</strong> Positive in 80%</li>
+    </ul>
+    
+    <h4>Objective Tests</h4>
+    <ul>
+        <li><strong>Schirmer test:</strong> Filter paper in eye, <5mm wetting in 5 min = abnormal</li>
+        <li><strong>Ocular staining:</strong> Rose bengal, lissamine green</li>
+        <li><strong>Salivary flow:</strong> Unstimulated flow <0.1mL/min abnormal</li>
+        <li><strong>Minor salivary gland biopsy:</strong> Focal lymphocytic sialadenitis (focus score ≥1)</li>
+    </ul>
+    
+    <h3>Treatment</h3>
+    <ul>
+        <li><strong>Dry eyes:</strong> Artificial tears, cyclosporine drops (Restasis), punctal plugs</li>
+        <li><strong>Dry mouth:</strong> Frequent sips of water, sugar-free gum, pilocarpine, cevimeline</li>
+        <li><strong>Dental care:</strong> Fluoride, regular dental visits</li>
+        <li><strong>Systemic disease:</strong> HCQ for arthralgias, fatigue; immunosuppressants for severe organ involvement</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 11: RHEUMATOLOGIC EMERGENCIES -->
+<div class="section" id="mctd">
+    <h2>11. Mixed Connective Tissue Disease</h2>
+    
+    <h3>Overview</h3>
+    <ul>
+        <li><strong>Definition:</strong> Overlap syndrome with features of SLE, scleroderma, and polymyositis</li>
+        <li><strong>Hallmark:</strong> High-titer anti-U1 RNP antibodies</li>
+        <li><strong>Demographics:</strong> F:M = 9:1; peak 15-35 years</li>
+    </ul>
+    
+    <h3>Clinical Features</h3>
+    <ul>
+        <li><strong>Raynaud's:</strong> Nearly universal (>90%)</li>
+        <li><strong>Swollen "sausage" fingers</strong></li>
+        <li><strong>Arthritis</strong></li>
+        <li><strong>Myositis:</strong> Proximal weakness, elevated CK</li>
+        <li><strong>Sclerodactyly</strong></li>
+        <li><strong>Esophageal dysmotility</strong></li>
+        <li><strong>Pulmonary:</strong> ILD, PAH (leading cause of death)</li>
+    </ul>
+    
+    <div class="pearl-box">
+        MCTD has <strong>less severe renal and CNS disease</strong> than SLE. If nephritis/CNS prominent, reconsider diagnosis.
+    </div>
+    
+    <h3>Diagnosis</h3>
+    <ul>
+        <li><strong>Anti-U1 RNP:</strong> High titer (required)</li>
+        <li><strong>ANA:</strong> Positive, speckled pattern</li>
+        <li><strong>Anti-dsDNA, anti-Sm:</strong> Usually negative</li>
+    </ul>
+    
+    <h3>Treatment</h3>
+    <p>Treat based on predominant manifestation (Raynaud's → CCB; arthritis → HCQ/MTX; myositis → steroids)</p>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: BEHÇET'S -->
+<div class="section" id="aps">
+    <h2>12. Antiphospholipid Syndrome <span class="badge badge-boards">Boards Favorite</span></h2>
+    
+    <h3>Definition</h3>
+    <p>Autoimmune thrombophilia characterized by arterial/venous thrombosis and/or pregnancy morbidity with persistent antiphospholipid antibodies.</p>
+    
+    <h3>Clinical Manifestations</h3>
+    <h4>Thrombosis</h4>
+    <ul>
+        <li><strong>Venous (most common):</strong> DVT, PE, cerebral venous sinus thrombosis</li>
+        <li><strong>Arterial:</strong> Stroke, TIA, MI (often in young patients)</li>
+        <li><strong>Unusual sites:</strong> Hepatic veins (Budd-Chiari), renal, adrenal</li>
+    </ul>
+    
+    <h4>Pregnancy Complications</h4>
+    <ul>
+        <li>Recurrent early miscarriages (<10 weeks)</li>
+        <li>Late fetal loss (>10 weeks)</li>
+        <li>Preterm delivery due to preeclampsia/placental insufficiency</li>
+    </ul>
+    
+    <h4>Other Manifestations</h4>
+    <ul>
+        <li><strong>Livedo reticularis</strong></li>
+        <li><strong>Thrombocytopenia</strong> (moderate, usually >50k)</li>
+        <li><strong>Cardiac valve disease</strong> (Libman-Sacks endocarditis)</li>
+        <li><strong>Nephropathy</strong> (thrombotic microangiopathy)</li>
+    </ul>
+    
+    <h3>Antiphospholipid Antibodies</h3>
+    <table>
+        <tr><th>Test</th><th>Notes</th></tr>
+        <tr><td>Lupus anticoagulant (LA)</td><td>Prolongs PTT but causes thrombosis; strongest predictor</td></tr>
+        <tr><td>Anticardiolipin (aCL)</td><td>IgG and IgM; medium-high titer more significant</td></tr>
+        <tr><td>Anti-β2-glycoprotein I</td><td>IgG and IgM; most specific</td></tr>
+    </table>
+    
+    <div class="criteria-box">
+        <h4>Revised Sapporo Criteria for APS</h4>
+        <p>≥1 Clinical + ≥1 Laboratory criterion</p>
+        <p><strong>Clinical:</strong></p>
+        <ul>
+            <li>Vascular thrombosis (arterial, venous, or small vessel)</li>
+            <li>Pregnancy morbidity (≥3 early losses, ≥1 late loss, or preterm for preeclampsia)</li>
+        </ul>
+        <p><strong>Laboratory (must be positive on 2 occasions ≥12 weeks apart):</strong></p>
+        <ul>
+            <li>Lupus anticoagulant</li>
+            <li>Anticardiolipin IgG or IgM (medium-high titer)</li>
+            <li>Anti-β2GP1 IgG or IgM</li>
+        </ul>
+    </div>
+    
+    <div class="pearl-box">
+        "Triple positive" APS (all 3 antibodies positive) has highest thrombosis and pregnancy complication risk. These patients need more aggressive management.
+    </div>
+    
+    <h3>Treatment</h3>
+    <table>
+        <tr><th>Scenario</th><th>Treatment</th></tr>
+        <tr><td>First venous thrombosis</td><td>Warfarin INR 2-3 (indefinite)</td></tr>
+        <tr><td>Arterial thrombosis</td><td>Warfarin INR 2-3 + aspirin OR higher INR 3-4</td></tr>
+        <tr><td>Recurrent thrombosis on warfarin</td><td>Higher INR target, add aspirin, or LMWH</td></tr>
+        <tr><td>Pregnancy (without prior thrombosis)</td><td>Low-dose aspirin ± prophylactic LMWH</td></tr>
+        <tr><td>Pregnancy (with prior thrombosis)</td><td>Therapeutic LMWH + low-dose aspirin</td></tr>
+    </table>
+    
+    <div class="emergency-box">
+        <strong>Do NOT use DOACs in APS</strong> — TRAPS trial showed increased thrombosis with rivaroxaban vs warfarin in triple-positive APS. Warfarin remains standard.
+    </div>
+    
+    <h3>Catastrophic APS (CAPS)</h3>
+    <ul>
+        <li><strong>Definition:</strong> ≥3 organs involved, develops over <1 week, small vessel thrombosis on histology</li>
+        <li><strong>Mortality:</strong> 30-50% even with treatment</li>
+        <li><strong>Treatment:</strong> Anticoagulation + high-dose steroids + plasma exchange + IVIG ± rituximab</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 10: SJOGREN'S -->
+<div class="section" id="pmr-gca">
+    <h2>13. Polymyalgia Rheumatica & Giant Cell Arteritis <span class="badge badge-emergency">Time-Sensitive</span></h2>
+    
+    <h3>Polymyalgia Rheumatica (PMR)</h3>
+    
+    <h4>Key Features</h4>
+    <ul>
+        <li><strong>Age:</strong> Almost always >50 years (peak 70-80)</li>
+        <li><strong>Symptoms:</strong> Bilateral shoulder and hip girdle pain/stiffness</li>
+        <li><strong>Morning stiffness:</strong> >45 minutes</li>
+        <li><strong>Onset:</strong> Often sudden (patients can identify exact day)</li>
+        <li><strong>Constitutional:</strong> Fatigue, malaise, low-grade fever, weight loss</li>
+        <li><strong>NO true weakness:</strong> Pain limits function, but strength is normal</li>
+    </ul>
+    
+    <div class="pearl-box">
+        PMR causes pain, not weakness. If true proximal muscle weakness exists, think inflammatory myopathy and check CK.
+    </div>
+    
+    <h4>Diagnosis</h4>
+    <ul>
+        <li><strong>ESR:</strong> Usually >40 mm/h (often >100)</li>
+        <li><strong>CRP:</strong> Elevated</li>
+        <li><strong>CK:</strong> Normal (distinguishes from myositis)</li>
+        <li><strong>RF, Anti-CCP:</strong> Negative</li>
+        <li><strong>Ultrasound:</strong> Bilateral subacromial/subdeltoid bursitis, biceps tenosynovitis, hip synovitis</li>
+    </ul>
+    
+    <div class="highlight-box">
+        <strong>Dramatic steroid response:</strong> Improvement within 24-72 hours of starting prednisone is virtually diagnostic. If no response, reconsider diagnosis.
+    </div>
+    
+    <h4>Treatment</h4>
+    <ul>
+        <li><strong>Prednisone:</strong> 12.5-25 mg daily (NOT high-dose like GCA)</li>
+        <li><strong>Taper:</strong> Slowly over 1-2 years
+            <ul>
+                <li>Reduce by 2.5mg every 2-4 weeks until 10mg</li>
+                <li>Below 10mg: reduce by 1mg every 4-8 weeks</li>
+            </ul>
+        </li>
+        <li><strong>Relapse:</strong> Common (30-50%), especially below 10mg</li>
+        <li><strong>Steroid-sparing:</strong> Methotrexate, tocilizumab if relapsing</li>
+    </ul>
+    
+    <h3>Giant Cell Arteritis (Temporal Arteritis)</h3>
+    
+    <div class="emergency-box">
+        GCA is an OPHTHALMOLOGIC EMERGENCY. Untreated, can cause permanent blindness within hours to days. Start steroids IMMEDIATELY if suspected — do not wait for biopsy.
+    </div>
+    
+    <h4>Clinical Features</h4>
+    <ul>
+        <li><strong>Age:</strong> >50 years (same as PMR)</li>
+        <li><strong>Headache:</strong> New-onset, often temporal</li>
+        <li><strong>Scalp tenderness:</strong> Pain when combing hair</li>
+        <li><strong>Jaw claudication:</strong> Pain with chewing (highly specific)</li>
+        <li><strong>Visual symptoms:</strong> Amaurosis fugax, diplopia, vision loss</li>
+        <li><strong>Temporal artery:</strong> Tender, thickened, nodular, decreased pulse</li>
+        <li><strong>PMR symptoms:</strong> Present in 40-60% of GCA patients</li>
+    </ul>
+    
+    <div class="mnemonic-box">
+        <strong>GCA Red Flags</strong> — JAW claudication, Amaurosis/visual changes, Headache (new)
+    </div>
+    
+    <h4>Diagnosis</h4>
+    <ul>
+        <li><strong>ESR:</strong> Usually very high (>50, often >100 mm/h)</li>
+        <li><strong>CRP:</strong> Elevated</li>
+        <li><strong>Temporal artery biopsy:</strong> Gold standard — granulomatous inflammation with giant cells. Get 2-3cm segment; consider bilateral. Remains positive for 2-6 weeks after starting steroids</li>
+        <li><strong>Temporal artery ultrasound:</strong> "Halo sign" (hypoechoic ring) is suggestive</li>
+    </ul>
+    
+    <h4>Treatment</h4>
+    <table>
+        <tr><th>Scenario</th><th>Treatment</th></tr>
+        <tr><td>GCA without visual symptoms</td><td>Prednisone 40-60 mg daily (1 mg/kg)</td></tr>
+        <tr><td>GCA with visual symptoms</td><td>IV methylprednisolone 1g daily × 3 days, then high-dose oral</td></tr>
+        <tr><td>Maintenance</td><td>Slow taper over 1-2 years; add aspirin 81mg daily</td></tr>
+        <tr><td>Relapsing/steroid-sparing</td><td>Tocilizumab (GiACTA trial), methotrexate</td></tr>
+    </table>
+    
+    <div class="pearl-box">
+        10-30% of PMR patients have GCA. Always ask about headache, jaw claudication, and visual symptoms at every PMR visit!
+    </div>
+    
+    <h4>Large Vessel GCA</h4>
+    <ul>
+        <li>Can involve aorta and major branches</li>
+        <li>Presents with arm claudication, subclavian/axillary bruits, BP discrepancy between arms</li>
+        <li>Risk of aortic aneurysm/dissection — screen with CTA or PET-CT</li>
+        <li>May present without cranial symptoms (biopsy-negative)</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 5: SPONDYLOARTHROPATHIES -->
+<div class="section" id="vasculitis">
+    <h2>14. Vasculitis <span class="badge badge-emergency">Must-Know</span></h2>
+    
+    <h3>Classification by Vessel Size</h3>
+    <table>
+        <tr><th>Vessel Size</th><th>Diseases</th><th>Key Features</th></tr>
+        <tr><td><strong>Large</strong></td><td>GCA, Takayasu</td><td>Aorta and major branches</td></tr>
+        <tr><td><strong>Medium</strong></td><td>PAN, Kawasaki</td><td>Visceral arteries, aneurysms</td></tr>
+        <tr><td><strong>Small (immune complex)</strong></td><td>IgA vasculitis, cryoglobulinemic</td><td>Skin, kidneys, GI</td></tr>
+        <tr><td><strong>Small (ANCA-associated)</strong></td><td>GPA, MPA, EGPA</td><td>Lungs, kidneys, sinuses</td></tr>
+    </table>
+    
+    <h3>ANCA-Associated Vasculitis (AAV)</h3>
+    
+    <h4>ANCA Patterns</h4>
+    <table>
+        <tr><th>ANCA</th><th>Target</th><th>Primary Association</th></tr>
+        <tr><td>c-ANCA (cytoplasmic)</td><td>PR3 (proteinase 3)</td><td>GPA (>80%)</td></tr>
+        <tr><td>p-ANCA (perinuclear)</td><td>MPO (myeloperoxidase)</td><td>MPA, EGPA</td></tr>
+    </table>
+    
+    <h4>Granulomatosis with Polyangiitis (GPA, formerly Wegener's)</h4>
+    <ul>
+        <li><strong>Classic triad:</strong> Upper airway + Lower airway + Kidney</li>
+        <li><strong>Upper airway:</strong> Chronic sinusitis, saddle nose deformity, subglottic stenosis</li>
+        <li><strong>Lungs:</strong> Nodules (can cavitate), hemorrhage, infiltrates</li>
+        <li><strong>Kidney:</strong> Pauci-immune crescentic GN (RPGN)</li>
+        <li><strong>Other:</strong> Scleritis, mononeuritis multiplex</li>
+        <li><strong>ANCA:</strong> PR3/c-ANCA (80-90%)</li>
+    </ul>
+    
+    <h4>Microscopic Polyangiitis (MPA)</h4>
+    <ul>
+        <li><strong>Similar to GPA but:</strong> No granulomas, no upper airway disease</li>
+        <li><strong>Pulmonary-renal syndrome:</strong> Diffuse alveolar hemorrhage + RPGN</li>
+        <li><strong>ANCA:</strong> MPO/p-ANCA (60-70%)</li>
+    </ul>
+    
+    <h4>Eosinophilic Granulomatosis with Polyangiitis (EGPA, formerly Churg-Strauss)</h4>
+    <ul>
+        <li><strong>Key feature:</strong> Asthma + eosinophilia + vasculitis</li>
+        <li><strong>Phases:</strong> Allergic (asthma, rhinitis) → Eosinophilic (infiltrates) → Vasculitic</li>
+        <li><strong>Cardiac:</strong> Eosinophilic myocarditis (leading cause of death)</li>
+        <li><strong>ANCA:</strong> MPO/p-ANCA (40-60%)</li>
+    </ul>
+    
+    <h4>AAV Treatment</h4>
+    <table>
+        <tr><th>Phase</th><th>Regimen</th></tr>
+        <tr><td>Induction (severe)</td><td>Rituximab OR Cyclophosphamide + High-dose steroids</td></tr>
+        <tr><td>Induction (non-severe)</td><td>Rituximab + reduced steroids (PEXIVAS, LoVAS)</td></tr>
+        <tr><td>Maintenance</td><td>Rituximab OR Azathioprine (2+ years minimum)</td></tr>
+        <tr><td>Refractory</td><td>Plasma exchange (consider in DAH, severe renal)</td></tr>
+    </table>
+    
+    <div class="pearl-box">
+        RAVE trial established rituximab as equivalent (or superior for relapsing disease) to cyclophosphamide for AAV induction. Rituximab is now preferred for many patients.
+    </div>
+    
+    <h3>Polyarteritis Nodosa (PAN)</h3>
+    <ul>
+        <li><strong>Medium vessel:</strong> Aneurysms at branch points, NO glomerulonephritis (spares small vessels)</li>
+        <li><strong>Features:</strong> Livedo reticularis, skin nodules, mononeuritis multiplex, testicular pain, mesenteric ischemia</li>
+        <li><strong>Association:</strong> Hepatitis B (treat the HBV!)</li>
+        <li><strong>ANCA:</strong> Negative</li>
+        <li><strong>Imaging:</strong> Mesenteric angiography shows microaneurysms</li>
+    </ul>
+    
+    <h3>IgA Vasculitis (Henoch-Schönlein Purpura)</h3>
+    <ul>
+        <li><strong>Classic:</strong> Children after URI</li>
+        <li><strong>Tetrad:</strong> Palpable purpura (buttocks, legs) + arthritis + abdominal pain + nephritis</li>
+        <li><strong>Usually self-limited:</strong> Supportive care, steroids for severe GI/renal</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 8: INFLAMMATORY MYOPATHIES -->
+<div class="section" id="behcet">
+    <h2>15. Behçet's Disease <span class="badge badge-boards">Boards Favorite</span></h2>
+    
+    <h3>Overview</h3>
+    <ul>
+        <li><strong>"Silk Road disease":</strong> Highest in Turkey, Middle East, East Asia</li>
+        <li><strong>Demographics:</strong> Peak 20-40 years</li>
+        <li><strong>Genetics:</strong> HLA-B51 association</li>
+    </ul>
+    
+    <h3>Clinical Features</h3>
+    <div class="mnemonic-box">
+        <strong>Classic Triad:</strong> Oral ulcers + Genital ulcers + Uveitis
+    </div>
+    
+    <table>
+        <tr><th>System</th><th>Features</th></tr>
+        <tr><td>Mucocutaneous</td><td>Oral ulcers (required), genital ulcers, erythema nodosum, pathergy</td></tr>
+        <tr><td>Ocular</td><td>Anterior uveitis with hypopyon, posterior uveitis (can cause blindness)</td></tr>
+        <tr><td>Vascular</td><td>DVT, arterial aneurysms, Budd-Chiari</td></tr>
+        <tr><td>Neurologic</td><td>Meningoencephalitis, dural sinus thrombosis</td></tr>
+        <tr><td>GI</td><td>Ulcers mimicking Crohn's</td></tr>
+    </table>
+    
+    <h4>Pathergy Test</h4>
+    <ul>
+        <li>Prick skin with sterile needle → pustule at 24-48h = positive</li>
+    </ul>
+    
+    <h3>Diagnosis (ISG Criteria)</h3>
+    <p><strong>Required:</strong> Recurrent oral ulcers (≥3 times/12 months)</p>
+    <p><strong>Plus 2 of:</strong> Genital ulcers, eye lesions, skin lesions, positive pathergy</p>
+    
+    <div class="pearl-box">
+        Behçet's thrombosis is inflammatory — treat with immunosuppression, NOT primarily anticoagulation.
+    </div>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: ADULT-ONSET STILL'S -->
+<div class="section" id="still">
+    <h2>16. Adult-Onset Still's Disease <span class="badge badge-boards">Boards Favorite</span></h2>
+    
+    <h3>Clinical Features</h3>
+    <ul>
+        <li><strong>Quotidian fever:</strong> Daily spikes to ≥39°C, typically evening, returns to normal</li>
+        <li><strong>Evanescent salmon-colored rash:</strong> Appears with fever</li>
+        <li><strong>Arthritis:</strong> Can become destructive</li>
+        <li><strong>Pharyngitis:</strong> Severe, non-exudative</li>
+        <li><strong>Lymphadenopathy, hepatosplenomegaly</strong></li>
+    </ul>
+    
+    <h3>Laboratory Findings</h3>
+    <table>
+        <tr><th>Test</th><th>Finding</th></tr>
+        <tr><td><strong>Ferritin</strong></td><td><strong>Markedly elevated (often >10,000)</strong></td></tr>
+        <tr><td>Glycosylated ferritin</td><td><20% (normally 50-80%)</td></tr>
+        <tr><td>WBC</td><td>Leukocytosis with neutrophilia</td></tr>
+        <tr><td>ANA/RF</td><td>Negative</td></tr>
+    </table>
+    
+    <div class="pearl-box">
+        <strong>Ferritin >10,000 + glycosylated ferritin <20%</strong> = Still's disease (or MAS). Boards favorite!
+    </div>
+    
+    <h3>Complications</h3>
+    <div class="emergency-box">
+        <strong>Macrophage Activation Syndrome (MAS):</strong> Pancytopenia, very high ferritin, high TG, low fibrinogen. Life-threatening!
+    </div>
+    
+    <h3>Treatment</h3>
+    <ul>
+        <li><strong>Mild:</strong> NSAIDs, low-dose steroids</li>
+        <li><strong>Moderate-severe:</strong> High-dose corticosteroids</li>
+        <li><strong>Refractory:</strong> Anakinra (IL-1), tocilizumab (IL-6)</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: SARCOIDOSIS -->
+<div class="section" id="sarcoidosis">
+    <h2>17. Sarcoidosis <span class="badge badge-boards">High-Yield</span></h2>
+    
+    <h3>Overview</h3>
+    <ul>
+        <li><strong>Definition:</strong> Multisystem granulomatous disease</li>
+        <li><strong>Epidemiology:</strong> Higher in African Americans; peak 25-35 years</li>
+        <li><strong>Pathology:</strong> Non-caseating granulomas</li>
+    </ul>
+    
+    <h3>Clinical Manifestations</h3>
+    <h4>Pulmonary (>90%)</h4>
+    <table>
+        <tr><th>Stage</th><th>CXR Findings</th><th>Remission Rate</th></tr>
+        <tr><td>I</td><td>Bilateral hilar LAD alone</td><td>55-90%</td></tr>
+        <tr><td>II</td><td>BHL + pulmonary infiltrates</td><td>40-70%</td></tr>
+        <tr><td>III</td><td>Infiltrates without BHL</td><td>10-20%</td></tr>
+        <tr><td>IV</td><td>Pulmonary fibrosis</td><td>0%</td></tr>
+    </table>
+    
+    <h4>Extrapulmonary</h4>
+    <table>
+        <tr><th>System</th><th>Features</th></tr>
+        <tr><td>Skin</td><td>Erythema nodosum, lupus pernio</td></tr>
+        <tr><td>Eyes</td><td>Uveitis</td></tr>
+        <tr><td>Cardiac</td><td>AV block, cardiomyopathy, sudden death</td></tr>
+        <tr><td>Neuro</td><td>CN VII palsy, meningitis</td></tr>
+        <tr><td>Metabolic</td><td>Hypercalcemia (granuloma 1,25-vitamin D)</td></tr>
+    </table>
+    
+    <h4>Löfgren's Syndrome</h4>
+    <div class="mnemonic-box">
+        <strong>Acute triad:</strong> BHL + Erythema nodosum + Migratory polyarthritis (ankles)
+        <br>Excellent prognosis — usually self-limited
+    </div>
+    
+    <h3>Treatment</h3>
+    <ul>
+        <li><strong>Observation:</strong> Many remit (especially Stage I)</li>
+        <li><strong>Indications:</strong> Progressive pulmonary, hypercalcemia, cardiac, neuro, ocular</li>
+        <li><strong>First-line:</strong> Corticosteroids</li>
+        <li><strong>Steroid-sparing:</strong> MTX, AZA; TNFi for refractory</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: IgG4-RD -->
+<div class="section" id="igg4">
+    <h2>18. IgG4-Related Disease</h2>
+    
+    <h3>Overview</h3>
+    <ul>
+        <li><strong>Definition:</strong> Fibro-inflammatory condition with IgG4+ plasma cell infiltration</li>
+        <li><strong>Demographics:</strong> Middle-aged to elderly men</li>
+        <li><strong>Pattern:</strong> Mass-forming lesions in multiple organs</li>
+    </ul>
+    
+    <h3>Organ Involvement</h3>
+    <table>
+        <tr><th>Organ</th><th>Manifestation</th></tr>
+        <tr><td>Pancreas</td><td>Autoimmune pancreatitis (type 1)</td></tr>
+        <tr><td>Biliary</td><td>Sclerosing cholangitis</td></tr>
+        <tr><td>Salivary/Lacrimal</td><td>Sialadenitis, dacryoadenitis</td></tr>
+        <tr><td>Retroperitoneum</td><td>Retroperitoneal fibrosis</td></tr>
+        <tr><td>Kidney</td><td>Tubulointerstitial nephritis</td></tr>
+        <tr><td>Aorta</td><td>Aortitis/periaortitis</td></tr>
+        <tr><td>Thyroid</td><td>Riedel's thyroiditis</td></tr>
+    </table>
+    
+    <h3>Diagnosis</h3>
+    <ul>
+        <li><strong>Serum IgG4:</strong> Elevated (but normal in 30-50%)</li>
+        <li><strong>Histology:</strong> IgG4+ plasma cells, storiform fibrosis, obliterative phlebitis</li>
+    </ul>
+    
+    <h3>Treatment</h3>
+    <ul>
+        <li><strong>First-line:</strong> Corticosteroids (dramatic response)</li>
+        <li><strong>Steroid-sparing:</strong> Rituximab (very effective)</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: AMYLOIDOSIS -->
+<div class="section" id="amyloidosis">
+    <h2>19. Amyloidosis <span class="badge badge-boards">Boards Favorite</span></h2>
+    
+    <h3>Types</h3>
+    <table>
+        <tr><th>Type</th><th>Precursor</th><th>Association</th></tr>
+        <tr><td><strong>AL (Primary)</strong></td><td>Light chains</td><td>Myeloma, MGUS</td></tr>
+        <tr><td><strong>AA (Secondary)</strong></td><td>Serum amyloid A</td><td>Chronic inflammation (RA, IBD, FMF)</td></tr>
+        <tr><td>ATTR (hereditary)</td><td>Mutant TTR</td><td>Familial polyneuropathy</td></tr>
+        <tr><td>ATTR (wild-type)</td><td>Normal TTR</td><td>Senile cardiac (elderly)</td></tr>
+    </table>
+    
+    <h3>AL Amyloidosis Features</h3>
+    <ul>
+        <li><strong>Heart:</strong> Restrictive cardiomyopathy, low voltage ECG</li>
+        <li><strong>Kidney:</strong> Nephrotic syndrome</li>
+        <li><strong>Nerve:</strong> Peripheral neuropathy, carpal tunnel</li>
+        <li><strong>GI:</strong> Macroglossia (pathognomonic), hepatomegaly</li>
+        <li><strong>Skin:</strong> Periorbital purpura ("raccoon eyes")</li>
+    </ul>
+    
+    <div class="pearl-box">
+        Macroglossia + periorbital purpura = think AL amyloidosis/plasma cell dyscrasia
+    </div>
+    
+    <h3>Diagnosis</h3>
+    <ul>
+        <li><strong>Tissue biopsy:</strong> Congo red → apple-green birefringence</li>
+        <li><strong>Sites:</strong> Abdominal fat pad (80% sensitive), rectal, bone marrow</li>
+    </ul>
+    
+    <h3>Treatment</h3>
+    <table>
+        <tr><th>Type</th><th>Treatment</th></tr>
+        <tr><td>AL</td><td>Treat plasma cell dyscrasia (bortezomib, SCT)</td></tr>
+        <tr><td>AA</td><td>Treat underlying inflammation</td></tr>
+        <tr><td>ATTR</td><td>Tafamidis (FDA approved)</td></tr>
+    </table>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: OSTEOPOROSIS -->
+<div class="section" id="osteoporosis">
+    <h2>20. Osteoporosis <span class="badge badge-common">Very Common</span> <span class="badge badge-boards">High-Yield</span></h2>
+    
+    <h3>Definitions</h3>
+    <table>
+        <tr><th>Category</th><th>T-score</th></tr>
+        <tr><td>Normal</td><td>≥ -1.0</td></tr>
+        <tr><td>Osteopenia</td><td>-1.0 to -2.5</td></tr>
+        <tr><td>Osteoporosis</td><td>≤ -2.5</td></tr>
+        <tr><td>Severe osteoporosis</td><td>≤ -2.5 + fragility fracture</td></tr>
+    </table>
+    
+    <h3>Screening (USPSTF)</h3>
+    <ul>
+        <li><strong>All women ≥65 years</strong></li>
+        <li><strong>Postmenopausal women <65</strong> with risk factors</li>
+        <li><strong>Modality:</strong> DXA of hip and lumbar spine</li>
+    </ul>
+    
+    <h3>FRAX Score</h3>
+    <ul>
+        <li>Estimates 10-year fracture probability</li>
+        <li><strong>Treat if:</strong> ≥3% hip fracture OR ≥20% major osteoporotic fracture risk</li>
+    </ul>
+    
+    <h3>Treatment Options</h3>
+    <table>
+        <tr><th>Class</th><th>Drugs</th><th>Key Points</th></tr>
+        <tr><td>Bisphosphonates</td><td>Alendronate, Zoledronic acid</td><td>First-line; avoid CrCl <30-35</td></tr>
+        <tr><td>RANK-L inhibitor</td><td>Denosumab</td><td>Rebound bone loss if stopped</td></tr>
+        <tr><td>Anabolic</td><td>Teriparatide, Romosozumab</td><td>Severe/refractory; 2-year limit</td></tr>
+        <tr><td>SERMs</td><td>Raloxifene</td><td>Vertebral only; VTE risk</td></tr>
+    </table>
+    
+    <div class="highlight-box">
+        <strong>Bisphosphonate Holiday:</strong> After 5 years oral or 3 years IV, consider drug holiday in low-risk patients.
+    </div>
+    
+    <h3>Adverse Effects</h3>
+    <ul>
+        <li><strong>Bisphosphonates:</strong> ONJ, atypical femoral fractures</li>
+        <li><strong>Denosumab:</strong> Hypocalcemia, rebound when stopped</li>
+        <li><strong>Teriparatide:</strong> Osteosarcoma risk (avoid if Paget's)</li>
+        <li><strong>Romosozumab:</strong> CV risk</li>
+    </ul>
+    
+    <h3>GIOP Prevention</h3>
+    <ul>
+        <li><strong>Risk:</strong> ≥2.5mg prednisone daily × ≥3 months</li>
+        <li><strong>Prophylaxis:</strong> Calcium + Vitamin D + bisphosphonate</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: PAGET'S -->
+<div class="section" id="paget">
+    <h2>21. Paget's Disease of Bone <span class="badge badge-boards">Boards Favorite</span></h2>
+    
+    <h3>Overview</h3>
+    <ul>
+        <li><strong>Definition:</strong> Focal disorder of accelerated bone remodeling</li>
+        <li><strong>Sites:</strong> Pelvis, spine, skull, femur, tibia</li>
+    </ul>
+    
+    <h3>Clinical Features</h3>
+    <ul>
+        <li><strong>Asymptomatic:</strong> Most patients (incidental)</li>
+        <li><strong>Bone pain, deformities</strong> (bowing, skull enlargement)</li>
+        <li><strong>Hearing loss:</strong> CN VIII compression</li>
+        <li><strong>Complications:</strong> High-output HF (rare), osteosarcoma (<1%)</li>
+    </ul>
+    
+    <h3>Laboratory</h3>
+    <div class="highlight-box">
+        <strong>Classic:</strong> Markedly elevated alkaline phosphatase with NORMAL calcium, phosphorus, PTH
+    </div>
+    
+    <h3>Treatment</h3>
+    <ul>
+        <li><strong>Indications:</strong> Pain, hypercalcemia, neurologic, pre-surgery, high-risk sites</li>
+        <li><strong>First-line:</strong> Zoledronic acid 5mg IV × 1 (often only dose needed)</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: AVN -->
+<div class="section" id="avn">
+    <h2>22. Osteonecrosis (Avascular Necrosis)</h2>
+    
+    <h3>Risk Factors</h3>
+    <div class="mnemonic-box">
+        <strong>"ASEPTIC":</strong> <strong>A</strong>lcohol, <strong>S</strong>teroids, <strong>E</strong>mboli (sickle cell), <strong>P</strong>ancreatitis, <strong>T</strong>rauma, <strong>I</strong>diopathic, <strong>C</strong>aisson disease
+    </div>
+    
+    <ul>
+        <li><strong>Glucocorticoids:</strong> Most common non-traumatic cause</li>
+        <li><strong>Alcohol, SLE, HIV, Radiation</strong></li>
+    </ul>
+    
+    <h3>Clinical Presentation</h3>
+    <ul>
+        <li><strong>Pain:</strong> Hip/groin, worse with weight bearing</li>
+        <li><strong>Most common site:</strong> Femoral head</li>
+        <li><strong>May be bilateral</strong></li>
+    </ul>
+    
+    <h3>Diagnosis</h3>
+    <ul>
+        <li><strong>X-ray:</strong> May be normal early; later crescent sign, collapse</li>
+        <li><strong>MRI:</strong> Gold standard — "double line sign"</li>
+    </ul>
+    
+    <h3>Treatment</h3>
+    <ul>
+        <li><strong>Early:</strong> Core decompression</li>
+        <li><strong>Late (collapse):</strong> Total hip arthroplasty</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: FIBROMYALGIA -->
+<div class="section" id="fibromyalgia">
+    <h2>23. Fibromyalgia <span class="badge badge-common">Common</span> <span class="badge badge-boards">Boards Favorite</span></h2>
+    
+    <h3>Overview</h3>
+    <ul>
+        <li><strong>Definition:</strong> Chronic widespread pain with central sensitization</li>
+        <li><strong>Epidemiology:</strong> 2-4% population; F:M = 7:1</li>
+    </ul>
+    
+    <h3>Clinical Features</h3>
+    <ul>
+        <li><strong>Chronic widespread pain:</strong> >3 months, multiple regions</li>
+        <li><strong>Fatigue:</strong> Unrefreshing sleep</li>
+        <li><strong>"Fibro fog":</strong> Cognitive difficulties</li>
+        <li><strong>Associated:</strong> IBS, headaches, depression</li>
+    </ul>
+    
+    <div class="pearl-box">
+        Fibromyalgia is a diagnosis of EXCLUSION. All labs should be normal. If inflammatory markers elevated, look elsewhere.
+    </div>
+    
+    <h3>Workup (to Exclude Other Conditions)</h3>
+    <ul>
+        <li>CBC, ESR/CRP, TSH, Vitamin D, CK — all should be normal</li>
+        <li><strong>Avoid shotgun ANA testing!</strong></li>
+    </ul>
+    
+    <h3>Treatment</h3>
+    <h4>Non-Pharmacologic (First-Line)</h4>
+    <ul>
+        <li><strong>Aerobic exercise:</strong> Most effective intervention</li>
+        <li><strong>CBT, sleep hygiene, stress reduction</strong></li>
+    </ul>
+    
+    <h4>Pharmacologic</h4>
+    <table>
+        <tr><th>Class</th><th>Drugs</th></tr>
+        <tr><td>SNRIs (FDA approved)</td><td>Duloxetine, Milnacipran</td></tr>
+        <tr><td>Anticonvulsants</td><td>Pregabalin (FDA), Gabapentin</td></tr>
+        <tr><td>TCAs</td><td>Amitriptyline (low dose at bedtime)</td></tr>
+    </table>
+    
+    <div class="emergency-box">
+        <strong>Avoid:</strong> Opioids (not effective, dependence risk), high-dose NSAIDs (not effective), corticosteroids (not inflammatory)
+    </div>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: SOFT TISSUE -->
+<div class="section" id="soft-tissue">
+    <h2>24. Bursitis, Tendinopathy & Carpal Tunnel</h2>
+    
+    <h3>Bursitis</h3>
+    <table>
+        <tr><th>Type</th><th>Location</th><th>Key Features</th></tr>
+        <tr><td>Trochanteric</td><td>Lateral hip</td><td>Pain lying on side</td></tr>
+        <tr><td>Olecranon</td><td>Elbow</td><td>Consider septic if red/hot</td></tr>
+        <tr><td>Prepatellar</td><td>Anterior knee</td><td>"Housemaid's knee"</td></tr>
+        <tr><td>Pes anserine</td><td>Medial knee</td><td>Common in OA, obesity</td></tr>
+        <tr><td>Subacromial</td><td>Shoulder</td><td>Painful arc 60-120°</td></tr>
+    </table>
+    
+    <h3>Tendinopathies</h3>
+    <ul>
+        <li><strong>Lateral epicondylitis:</strong> "Tennis elbow" — pain with wrist extension</li>
+        <li><strong>Medial epicondylitis:</strong> "Golfer's elbow" — pain with wrist flexion</li>
+        <li><strong>De Quervain's:</strong> Thumb/radial wrist; positive Finkelstein</li>
+        <li><strong>Achilles:</strong> Posterior heel; fluoroquinolone risk</li>
+    </ul>
+    
+    <h3>Carpal Tunnel Syndrome</h3>
+    <ul>
+        <li><strong>Symptoms:</strong> Numbness in median distribution (thumb, index, middle, radial ring)</li>
+        <li><strong>Worse at night</strong></li>
+        <li><strong>Tests:</strong> Phalen, Tinel</li>
+        <li><strong>Advanced:</strong> Thenar atrophy</li>
+        <li><strong>Associations:</strong> Pregnancy, hypothyroidism, DM, RA, amyloid</li>
+        <li><strong>Treatment:</strong> Splinting, steroids, surgery</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: BACK PAIN -->
+<div class="section" id="back-pain">
+    <h2>25. Back Pain: Inflammatory vs Mechanical & Red Flags</h2>
+    
+    <h3>Inflammatory vs Mechanical</h3>
+    <table>
+        <tr><th>Feature</th><th>Inflammatory</th><th>Mechanical</th></tr>
+        <tr><td>Age of onset</td><td><40 years</td><td>Any age</td></tr>
+        <tr><td>Onset</td><td>Insidious</td><td>Often acute</td></tr>
+        <tr><td>Morning stiffness</td><td>>30-60 min</td><td><30 min</td></tr>
+        <tr><td>Effect of exercise</td><td>Improves</td><td>Worsens</td></tr>
+        <tr><td>Effect of rest</td><td>Worsens</td><td>Improves</td></tr>
+        <tr><td>Night pain</td><td>Yes (2nd half)</td><td>Uncommon</td></tr>
+    </table>
+    
+    <h3>Red Flags</h3>
+    <div class="emergency-box">
+        <strong>Urgent evaluation needed:</strong>
+        <ul>
+            <li><strong>Cauda equina:</strong> Urinary retention, saddle anesthesia, bilateral weakness</li>
+            <li><strong>Cancer:</strong> History of cancer, weight loss, age >50, rest/night pain</li>
+            <li><strong>Infection:</strong> Fever, IVDU, immunosuppression</li>
+            <li><strong>Fracture:</strong> Trauma, osteoporosis, steroids</li>
+        </ul>
+    </div>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: RAYNAUD'S -->
+<div class="section" id="raynaud">
+    <h2>26. Raynaud's Phenomenon</h2>
+    
+    <h3>Definition</h3>
+    <p>Episodic vasospasm causing digital color changes with cold/stress</p>
+    <div class="mnemonic-box">
+        <strong>White → Blue → Red</strong> (pallor → cyanosis → rubor)
+    </div>
+    
+    <h3>Primary vs Secondary</h3>
+    <table>
+        <tr><th>Feature</th><th>Primary</th><th>Secondary</th></tr>
+        <tr><td>Age</td><td>15-30</td><td>>30</td></tr>
+        <tr><td>Tissue damage</td><td>None</td><td>Ulcers, gangrene</td></tr>
+        <tr><td>ANA</td><td>Negative</td><td>Often positive</td></tr>
+        <tr><td>Nailfold capillaries</td><td>Normal</td><td>Abnormal</td></tr>
+    </table>
+    
+    <h3>Secondary Causes</h3>
+    <ul>
+        <li><strong>CTD:</strong> Scleroderma (>95%), SLE, MCTD, Sjögren's</li>
+        <li><strong>Drugs:</strong> Beta-blockers, ergotamines</li>
+        <li><strong>Occupational:</strong> Vibration injury</li>
+    </ul>
+    
+    <div class="pearl-box">
+        Raynaud's is often the first symptom of scleroderma, appearing years before other features. Always examine nailfold capillaries!
+    </div>
+    
+    <h3>Treatment</h3>
+    <ul>
+        <li><strong>Lifestyle:</strong> Avoid cold, keep whole body warm, stop smoking</li>
+        <li><strong>First-line:</strong> CCB (nifedipine, amlodipine)</li>
+        <li><strong>Second-line:</strong> PDE5 inhibitors, topical nitrates</li>
+        <li><strong>Severe:</strong> IV prostacyclins, bosentan</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: NSAIDs -->
+<div class="section" id="serologies">
+    <h2>27. Autoantibodies & Serologies</h2>
+    
+    <h3>Quick Reference Table</h3>
+    <table>
+        <tr><th>Antibody</th><th>Primary Association</th><th>Clinical Significance</th></tr>
+        <tr><td>ANA</td><td>SLE (95%+), many others</td><td>Screening; if negative, SLE unlikely</td></tr>
+        <tr><td>Anti-dsDNA</td><td>SLE</td><td>Specific; correlates with nephritis and activity</td></tr>
+        <tr><td>Anti-Smith</td><td>SLE</td><td>Most specific for SLE</td></tr>
+        <tr><td>Anti-Ro (SSA)</td><td>Sjögren's, SLE</td><td>Neonatal lupus, photosensitivity</td></tr>
+        <tr><td>Anti-La (SSB)</td><td>Sjögren's</td><td>Usually with anti-Ro</td></tr>
+        <tr><td>Anti-RNP</td><td>MCTD, SLE</td><td>Required for MCTD diagnosis</td></tr>
+        <tr><td>RF</td><td>RA (70-80%)</td><td>Also positive in Sjögren's, HCV, age</td></tr>
+        <tr><td>Anti-CCP</td><td>RA</td><td>Most specific; predicts erosive disease</td></tr>
+        <tr><td>c-ANCA/PR3</td><td>GPA</td><td>Active disease marker</td></tr>
+        <tr><td>p-ANCA/MPO</td><td>MPA, EGPA</td><td>Also drug-induced vasculitis</td></tr>
+        <tr><td>Anti-centromere</td><td>Limited SSc</td><td>PAH risk</td></tr>
+        <tr><td>Anti-Scl-70</td><td>Diffuse SSc</td><td>ILD risk</td></tr>
+        <tr><td>Anti-Jo-1</td><td>Antisynthetase syndrome</td><td>ILD, myositis</td></tr>
+        <tr><td>Anti-Mi-2</td><td>DM</td><td>Classic DM, good prognosis</td></tr>
+        <tr><td>Anti-MDA5</td><td>DM</td><td>Rapidly progressive ILD</td></tr>
+        <tr><td>Anti-GBM</td><td>Goodpasture's</td><td>Pulmonary-renal syndrome</td></tr>
+    </table>
+    
+    <h3>Complement Levels</h3>
+    <table>
+        <tr><th>Pattern</th><th>Disease</th></tr>
+        <tr><td>Low C3, Low C4</td><td>SLE (active), cryoglobulinemia</td></tr>
+        <tr><td>Low C3, Normal C4</td><td>Post-strep GN, MPGN, C3 glomerulopathy</td></tr>
+        <tr><td>Normal C3, Low C4</td><td>Hereditary angioedema, cryoglobulinemia</td></tr>
+        <tr><td>Normal C3, Normal C4</td><td>Most other autoimmune diseases</td></tr>
+    </table>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 13: IMAGING -->
+<div class="section" id="imaging">
+    <h2>28. Rheumatologic Imaging</h2>
+    
+    <h3>X-ray Findings by Disease</h3>
+    <table>
+        <tr><th>Disease</th><th>Classic Findings</th></tr>
+        <tr><td>RA</td><td>Periarticular osteopenia, symmetric joint space narrowing, marginal erosions, subluxations</td></tr>
+        <tr><td>OA</td><td>Joint space narrowing, osteophytes, subchondral sclerosis, subchondral cysts</td></tr>
+        <tr><td>Gout</td><td>Erosions with overhanging edges ("rat bite"), soft tissue tophi</td></tr>
+        <tr><td>Pseudogout</td><td>Chondrocalcinosis (cartilage calcification)</td></tr>
+        <tr><td>PsA</td><td>Pencil-in-cup deformity, DIP involvement, asymmetric</td></tr>
+        <tr><td>AS</td><td>Sacroiliitis (bilateral symmetric), bamboo spine, syndesmophytes</td></tr>
+    </table>
+    
+    <h3>Ultrasound in Rheumatology</h3>
+    <ul>
+        <li><strong>Synovitis:</strong> Effusion, synovial hypertrophy, increased Doppler signal</li>
+        <li><strong>Erosions:</strong> Cortical breaks (more sensitive than X-ray early)</li>
+        <li><strong>Crystal disease:</strong> "Double contour sign" (gout), hyperechoic deposits</li>
+        <li><strong>Enthesitis:</strong> Thickening, hypoechogenicity, Doppler signal</li>
+        <li><strong>GCA:</strong> "Halo sign" around temporal artery</li>
+    </ul>
+    
+    <h3>MRI Applications</h3>
+    <ul>
+        <li><strong>Sacroiliitis:</strong> Bone marrow edema before X-ray changes (early SpA)</li>
+        <li><strong>RA:</strong> Synovitis, bone marrow edema, early erosions</li>
+        <li><strong>Myositis:</strong> Muscle edema (STIR sequence), fatty replacement</li>
+        <li><strong>Avascular necrosis:</strong> Early detection before X-ray changes</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 14: ARTHROCENTESIS -->
+<div class="section" id="arthrocentesis">
+    <h2>29. Arthrocentesis & Synovial Fluid Analysis</h2>
+    
+    <h3>Synovial Fluid Classification</h3>
+    <table>
+        <tr><th>Type</th><th>WBC (cells/μL)</th><th>Appearance</th><th>Differential</th></tr>
+        <tr><td>Normal</td><td><200</td><td>Clear, viscous</td><td>—</td></tr>
+        <tr><td>Non-inflammatory</td><td>200-2,000</td><td>Clear, yellow</td><td>OA, trauma, AVN</td></tr>
+        <tr><td>Inflammatory</td><td>2,000-50,000</td><td>Cloudy, yellow</td><td>RA, gout, PsA, reactive</td></tr>
+        <tr><td>Septic</td><td>>50,000</td><td>Purulent</td><td>Bacterial infection</td></tr>
+    </table>
+    
+    <div class="pearl-box">
+        WBC >50,000 is concerning for septic arthritis but not definitive. Gout can also cause very high WBC counts. Always send for Gram stain and culture!
+    </div>
+    
+    <h3>Crystal Analysis</h3>
+    <table>
+        <tr><th>Crystal</th><th>Shape</th><th>Birefringence</th><th>Color When Parallel to Polarizer</th></tr>
+        <tr><td>MSU (gout)</td><td>Needle</td><td>Negative</td><td class="positive">Yellow</td></tr>
+        <tr><td>CPPD (pseudogout)</td><td>Rhomboid</td><td>Positive</td><td class="negative">Blue</td></tr>
+    </table>
+    
+    <div class="mnemonic-box">
+        <strong>Gout = Yellow when Parallel</strong> — "Yellow taxi PARALLEL parked" (negative birefringence)
+    </div>
+    
+    <h3>What to Order</h3>
+    <ul>
+        <li><strong>Routine:</strong> Cell count with differential, Gram stain, culture</li>
+        <li><strong>Crystal analysis:</strong> Polarized microscopy</li>
+        <li><strong>If TB suspected:</strong> AFB smear/culture</li>
+        <li><strong>If gonococcal:</strong> NAAT (more sensitive than culture)</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 15: DMARDs -->
+<div class="section" id="nsaids">
+    <h2>30. NSAIDs</h2>
+    
+    <h3>Mechanism</h3>
+    <ul>
+        <li>Inhibit cyclooxygenase (COX) → ↓ prostaglandin synthesis</li>
+        <li><strong>COX-1:</strong> Constitutive — GI protection, platelet function, renal blood flow</li>
+        <li><strong>COX-2:</strong> Inducible — inflammation, pain, fever</li>
+    </ul>
+    
+    <h3>Drug Classes</h3>
+    <table>
+        <tr><th>Type</th><th>Examples</th><th>Notes</th></tr>
+        <tr><td>Non-selective</td><td>Ibuprofen, Naproxen, Indomethacin</td><td>Higher GI risk</td></tr>
+        <tr><td>COX-2 selective</td><td>Celecoxib</td><td>Lower GI risk, same CV risk</td></tr>
+    </table>
+    
+    <h3>Adverse Effects</h3>
+    <table>
+        <tr><th>System</th><th>Effect</th><th>Notes</th></tr>
+        <tr><td>GI</td><td>PUD, bleeding</td><td>Use PPI if high risk</td></tr>
+        <tr><td>CV</td><td>↑ MI, stroke</td><td>All NSAIDs (except naproxen may be neutral)</td></tr>
+        <tr><td>Renal</td><td>AKI, hyperkalemia, Na retention</td><td>Avoid if CKD, HF</td></tr>
+        <tr><td>Hematologic</td><td>Platelet dysfunction</td><td>Hold before surgery</td></tr>
+    </table>
+    
+    <h3>Contraindications</h3>
+    <ul>
+        <li>Active PUD or GI bleeding</li>
+        <li>CKD (especially GFR <30)</li>
+        <li>CHF (fluid retention)</li>
+        <li>Third trimester pregnancy (premature ductus closure)</li>
+        <li>Aspirin-exacerbated respiratory disease</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: VACCINATION -->
+<div class="section" id="steroids">
+    <h2>31. Glucocorticoid Management</h2>
+    
+    <h3>Equivalent Doses</h3>
+    <table>
+        <tr><th>Drug</th><th>Equivalent Dose</th><th>Duration</th><th>Mineralocorticoid Effect</th></tr>
+        <tr><td>Hydrocortisone</td><td>20 mg</td><td>Short</td><td>++</td></tr>
+        <tr><td>Prednisone</td><td>5 mg</td><td>Intermediate</td><td>+</td></tr>
+        <tr><td>Methylprednisolone</td><td>4 mg</td><td>Intermediate</td><td>+</td></tr>
+        <tr><td>Dexamethasone</td><td>0.75 mg</td><td>Long</td><td>0</td></tr>
+    </table>
+    
+    <h3>Side Effects by Duration</h3>
+    <h4>Short-term (days-weeks)</h4>
+    <ul>
+        <li>Hyperglycemia</li>
+        <li>Insomnia, mood changes</li>
+        <li>Fluid retention</li>
+        <li>Increased appetite</li>
+    </ul>
+    
+    <h4>Long-term (months-years)</h4>
+    <ul>
+        <li><strong>Metabolic:</strong> Cushingoid features, weight gain, diabetes</li>
+        <li><strong>Bone:</strong> Osteoporosis, avascular necrosis</li>
+        <li><strong>Infection:</strong> Increased risk of opportunistic infections</li>
+        <li><strong>Cardiovascular:</strong> HTN, dyslipidemia</li>
+        <li><strong>Ocular:</strong> Cataracts, glaucoma</li>
+        <li><strong>GI:</strong> PUD (especially with NSAIDs)</li>
+        <li><strong>Skin:</strong> Thin skin, easy bruising</li>
+        <li><strong>Adrenal:</strong> HPA axis suppression</li>
+    </ul>
+    
+    <h3>Prophylaxis for Chronic Steroids</h3>
+    <table>
+        <tr><th>Indication</th><th>Intervention</th></tr>
+        <tr><td>Bone protection (if prednisone ≥2.5mg × ≥3 months)</td><td>Calcium 1000-1200mg + Vitamin D 800-1000 IU daily; DEXA; consider bisphosphonate</td></tr>
+        <tr><td>GI protection</td><td>PPI if on NSAIDs or high-risk</td></tr>
+        <tr><td>PJP prophylaxis</td><td>TMP-SMX if high-dose/prolonged (>20mg × >1 month, especially with other immunosuppression)</td></tr>
+        <tr><td>Vaccinations</td><td>Pneumococcal, influenza annually</td></tr>
+    </table>
+    
+    <h3>Tapering Principles</h3>
+    <ul>
+        <li><strong>Risk of HPA suppression:</strong> >20mg/day for >3 weeks</li>
+        <li><strong>Slow taper:</strong> Reduce by 10-20% every 1-2 weeks</li>
+        <li><strong>Monitor for flare:</strong> Symptoms and inflammatory markers</li>
+        <li><strong>Stress dosing:</strong> May need increased dose during surgery/illness if HPA suppressed</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 17: LANDMARK TRIALS -->
+<div class="section" id="dmards">
+    <h2>32. DMARDs & Biologics</h2>
+    
+    <h3>Conventional Synthetic DMARDs (csDMARDs)</h3>
+    <table>
+        <tr><th>Drug</th><th>Mechanism</th><th>Monitoring</th><th>Key Toxicities</th></tr>
+        <tr><td>Methotrexate</td><td>Folate antagonist</td><td>CBC, LFTs, Cr q8-12wk</td><td>Hepatotoxicity, pneumonitis, cytopenias</td></tr>
+        <tr><td>Leflunomide</td><td>Pyrimidine synthesis inhibitor</td><td>CBC, LFTs</td><td>Hepatotoxicity, teratogenic</td></tr>
+        <tr><td>Sulfasalazine</td><td>Anti-inflammatory</td><td>CBC</td><td>GI upset, rash, cytopenias</td></tr>
+        <tr><td>Hydroxychloroquine</td><td>Multiple</td><td>Eye exam annually (after 5yr)</td><td>Retinal toxicity</td></tr>
+        <tr><td>Azathioprine</td><td>Purine antagonist</td><td>CBC, LFTs; TPMT level</td><td>Cytopenias, hepatotoxicity</td></tr>
+        <tr><td>Mycophenolate</td><td>Purine synthesis inhibitor</td><td>CBC</td><td>GI upset, cytopenias, teratogenic</td></tr>
+    </table>
+    
+    <h3>Biologic DMARDs</h3>
+    <table>
+        <tr><th>Class</th><th>Drugs</th><th>Uses</th><th>Key Considerations</th></tr>
+        <tr><td>TNF inhibitors</td><td>Adalimumab, Etanercept, Infliximab, Certolizumab, Golimumab</td><td>RA, SpA, PsA, IBD</td><td>TB screening, avoid in CHF, demyelinating disease</td></tr>
+        <tr><td>IL-6 inhibitors</td><td>Tocilizumab, Sarilumab</td><td>RA, GCA</td><td>Masks infection (suppresses CRP), monitor lipids</td></tr>
+        <tr><td>IL-17 inhibitors</td><td>Secukinumab, Ixekizumab</td><td>PsA, AS, psoriasis</td><td>May worsen IBD</td></tr>
+        <tr><td>IL-23 inhibitors</td><td>Ustekinumab, Guselkumab, Risankizumab</td><td>PsA, psoriasis, IBD</td><td>Generally well-tolerated</td></tr>
+        <tr><td>B-cell depletion</td><td>Rituximab</td><td>RA, AAV, SLE</td><td>Hep B screening, infusion reactions</td></tr>
+        <tr><td>T-cell costimulation</td><td>Abatacept</td><td>RA</td><td>Avoid live vaccines</td></tr>
+        <tr><td>IL-1 inhibitors</td><td>Anakinra, Canakinumab</td><td>Gout, autoinflammatory</td><td>Injection site reactions</td></tr>
+        <tr><td>BLyS inhibitor</td><td>Belimumab</td><td>SLE</td><td>Approved for lupus nephritis</td></tr>
+    </table>
+    
+    <h3>Targeted Synthetic DMARDs (JAK Inhibitors)</h3>
+    <table>
+        <tr><th>Drug</th><th>JAK Selectivity</th><th>Black Box Warnings</th></tr>
+        <tr><td>Tofacitinib</td><td>JAK1, JAK3</td><td>VTE, serious infections, malignancy, CV events</td></tr>
+        <tr><td>Baricitinib</td><td>JAK1, JAK2</td><td>Same as above</td></tr>
+        <tr><td>Upadacitinib</td><td>JAK1 selective</td><td>Same as above</td></tr>
+    </table>
+    
+    <div class="highlight-box">
+        <strong>Pre-biologic Checklist:</strong>
+        <ul>
+            <li>TB screening (IGRA or PPD)</li>
+            <li>Hepatitis B serology (HBsAg, anti-HBc, anti-HBs)</li>
+            <li>Hepatitis C antibody</li>
+            <li>Update vaccinations (pneumococcal, influenza, Shingrix)</li>
+            <li>No live vaccines while on biologics</li>
+        </ul>
+    </div>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 16: STEROIDS -->
+<div class="section" id="vaccines">
+    <h2>33. Vaccination in Immunosuppression <span class="badge badge-boards">High-Yield</span></h2>
+    
+    <h3>General Principles</h3>
+    <ul>
+        <li><strong>Update vaccines BEFORE starting immunosuppression when possible</strong></li>
+        <li><strong>Live vaccines contraindicated</strong> on most immunosuppressive therapy</li>
+        <li><strong>Inactivated vaccines are safe</strong> but may be less effective</li>
+    </ul>
+    
+    <h3>Live Vaccines to AVOID</h3>
+    <div class="emergency-box">
+        <ul>
+            <li>MMR</li>
+            <li>Varicella (chickenpox)</li>
+            <li>Zoster (live — Zostavax)</li>
+            <li>Yellow fever</li>
+            <li>Oral typhoid</li>
+            <li>Intranasal influenza</li>
+            <li>BCG</li>
+        </ul>
+    </div>
+    
+    <h3>Recommended Vaccines</h3>
+    <table>
+        <tr><th>Vaccine</th><th>Recommendation</th></tr>
+        <tr><td>Influenza (injectable)</td><td>Annual</td></tr>
+        <tr><td>Pneumococcal (PCV20 or PCV15+PPSV23)</td><td>All immunosuppressed</td></tr>
+        <tr><td>Hepatitis B</td><td>If seronegative</td></tr>
+        <tr><td>Shingrix (recombinant zoster)</td><td>Age ≥50; SAFE on immunosuppression</td></tr>
+        <tr><td>COVID-19</td><td>Per current guidelines</td></tr>
+    </table>
+    
+    <h3>Timing with Rituximab</h3>
+    <ul>
+        <li><strong>Vaccinate ≥4 weeks BEFORE rituximab</strong> if possible</li>
+        <li><strong>Vaccinate ≥6 months AFTER rituximab</strong> for optimal response</li>
+        <li>B-cell recovery needed for vaccine response</li>
+    </ul>
+    
+    <div class="pearl-box">
+        Shingrix (recombinant) is SAFE and RECOMMENDED for immunosuppressed patients age ≥50. Zostavax (live) is contraindicated.
+    </div>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: PREGNANCY -->
+<div class="section" id="pregnancy">
+    <h2>34. Pregnancy & Rheumatic Disease <span class="badge badge-boards">High-Yield</span></h2>
+    
+    <h3>Medication Safety</h3>
+    <table>
+        <tr><th>Safe</th><th>Contraindicated</th></tr>
+        <tr><td>Hydroxychloroquine</td><td>Methotrexate</td></tr>
+        <tr><td>Sulfasalazine (+ folate)</td><td>Leflunomide</td></tr>
+        <tr><td>Azathioprine</td><td>Mycophenolate</td></tr>
+        <tr><td>Low-dose prednisone</td><td>Cyclophosphamide</td></tr>
+        <tr><td>Certolizumab</td><td>Warfarin (1st trimester)</td></tr>
+        <tr><td>LMWH/Heparin</td><td>NSAIDs (3rd trimester)</td></tr>
+    </table>
+    
+    <h3>Disease-Specific Considerations</h3>
+    <h4>SLE</h4>
+    <ul>
+        <li><strong>Plan pregnancy during remission</strong> (≥6 months)</li>
+        <li><strong>Continue HCQ:</strong> Reduces flares, safe</li>
+        <li><strong>Flare risk:</strong> Increased during pregnancy/postpartum</li>
+    </ul>
+    
+    <h4>Anti-Ro (SSA) Positive</h4>
+    <div class="emergency-box">
+        <strong>Neonatal lupus / CHB:</strong> 2% risk of complete heart block. Monitor fetal HR weekly 16-26 weeks.
+    </div>
+    
+    <h4>Antiphospholipid Syndrome</h4>
+    <ul>
+        <li><strong>Without prior thrombosis:</strong> Low-dose aspirin ± prophylactic LMWH</li>
+        <li><strong>With prior thrombosis:</strong> Therapeutic LMWH + aspirin</li>
+    </ul>
+    
+    <h4>RA</h4>
+    <ul>
+        <li><strong>Improvement:</strong> 50-75% improve during pregnancy</li>
+        <li><strong>Postpartum flare:</strong> Common</li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: BOARD QUESTIONS -->
+<div class="section" id="emergencies">
+    <h2>35. Rheumatologic Emergencies <span class="badge badge-emergency">Critical</span></h2>
+    
+    <h3>Must-Know Emergencies</h3>
+    
+    <div class="emergency-box">
+        <strong>Giant Cell Arteritis with Visual Symptoms</strong><br>
+        • <strong>Risk:</strong> Permanent blindness within hours<br>
+        • <strong>Action:</strong> IV methylprednisolone 1g × 3 days IMMEDIATELY<br>
+        • <strong>Don't wait:</strong> Start steroids before biopsy
+    </div>
+    
+    <div class="emergency-box">
+        <strong>Scleroderma Renal Crisis</strong><br>
+        • <strong>Presentation:</strong> Acute HTN + AKI in diffuse SSc<br>
+        • <strong>Treatment:</strong> ACE inhibitor (captopril) — even if creatinine rises<br>
+        • <strong>Avoid:</strong> High-dose steroids precipitate SRC
+    </div>
+    
+    <div class="emergency-box">
+        <strong>Pulmonary-Renal Syndrome (AAV)</strong><br>
+        • <strong>Presentation:</strong> Diffuse alveolar hemorrhage + RPGN<br>
+        • <strong>Causes:</strong> GPA, MPA, anti-GBM disease<br>
+        • <strong>Treatment:</strong> High-dose steroids + rituximab/cyclophosphamide + consider plasma exchange
+    </div>
+    
+    <div class="emergency-box">
+        <strong>Catastrophic Antiphospholipid Syndrome</strong><br>
+        • <strong>Definition:</strong> ≥3 organs, <1 week, microangiopathy<br>
+        • <strong>Mortality:</strong> 30-50%<br>
+        • <strong>Treatment:</strong> Anticoagulation + steroids + PLEX + IVIG
+    </div>
+    
+    <div class="emergency-box">
+        <strong>Septic Arthritis</strong><br>
+        • <strong>Action:</strong> Joint aspiration BEFORE antibiotics (unless septic shock)<br>
+        • <strong>Treatment:</strong> IV antibiotics + surgical washout/drainage<br>
+        • <strong>Remember:</strong> RA patients on immunosuppression at high risk
+    </div>
+    
+    <div class="emergency-box">
+        <strong>Cervical Spine Instability (RA)</strong><br>
+        • <strong>Risk:</strong> C1-C2 subluxation → cord compression<br>
+        • <strong>Presentation:</strong> Neck pain, myelopathy, sudden death<br>
+        • <strong>Action:</strong> Cervical spine imaging before intubation in severe RA
+    </div>
+    
+    <div class="emergency-box">
+        <strong>Anti-MDA5 Dermatomyositis with ILD</strong><br>
+        • <strong>Course:</strong> Rapidly progressive ILD, often amyopathic<br>
+        • <strong>Mortality:</strong> Very high if untreated<br>
+        • <strong>Treatment:</strong> Aggressive triple therapy (steroids + calcineurin inhibitor + cyclophosphamide)
+    </div>
+    
+    <h3>Drug Toxicities</h3>
+    <table>
+        <tr><th>Drug</th><th>Toxicity</th><th>Management</th></tr>
+        <tr><td>MTX</td><td>Pneumonitis</td><td>Stop MTX, steroids if severe</td></tr>
+        <tr><td>MTX</td><td>Pancytopenia</td><td>Stop MTX, leucovorin rescue</td></tr>
+        <tr><td>Biologics</td><td>Serious infection/sepsis</td><td>Hold biologic, broad-spectrum antibiotics</td></tr>
+        <tr><td>Cyclophosphamide</td><td>Hemorrhagic cystitis</td><td>Mesna prophylaxis, hydration</td></tr>
+        <tr><td>Allopurinol</td><td>DRESS/AHS</td><td>Stop immediately, supportive care, steroids</td></tr>
+        <tr><td>HCQ</td><td>Retinal toxicity</td><td>Stop HCQ, ophthalmology follow-up</td></tr>
+    </table>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 12: SEROLOGIES -->
+<div class="section" id="trials">
+    <h2>36. Landmark Trials</h2>
+    
+    <h3>Rheumatoid Arthritis</h3>
+    <table>
+        <tr><th>Trial</th><th>Finding</th></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/20131255/" target="_blank" class="trial-link">TICORA</a></td><td>Treat-to-target improves outcomes in RA</td></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/27794714/" target="_blank" class="trial-link">RA-BEAM</a></td><td>Baricitinib superior to adalimumab in MTX-IR patients</td></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/35081281/" target="_blank" class="trial-link">ORAL Surveillance</a></td><td>Tofacitinib CV and cancer risks vs TNFi (led to black box)</td></tr>
+    </table>
+    
+    <h3>Lupus</h3>
+    <table>
+        <tr><th>Trial</th><th>Finding</th></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/16192477/" target="_blank" class="trial-link">ALMS</a></td><td>MMF non-inferior to cyclophosphamide for lupus nephritis induction</td></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/33045428/" target="_blank" class="trial-link">BLISS-LN</a></td><td>Belimumab + standard of care improves lupus nephritis outcomes</td></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/33471988/" target="_blank" class="trial-link">AURORA</a></td><td>Voclosporin added to MMF improves lupus nephritis response</td></tr>
+    </table>
+    
+    <h3>Vasculitis</h3>
+    <table>
+        <tr><th>Trial</th><th>Finding</th></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/20647199/" target="_blank" class="trial-link">RAVE</a></td><td>Rituximab non-inferior to cyclophosphamide for AAV; superior for relapsing disease</td></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/30612116/" target="_blank" class="trial-link">PEXIVAS</a></td><td>Reduced-dose steroids non-inferior in AAV; plasma exchange no benefit for most</td></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/28494235/" target="_blank" class="trial-link">GiACTA</a></td><td>Tocilizumab effective for GCA, allows lower steroid doses</td></tr>
+    </table>
+    
+    <h3>Gout</h3>
+    <table>
+        <tr><th>Trial</th><th>Finding</th></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/29530634/" target="_blank" class="trial-link">CARES</a></td><td>Febuxostat associated with higher CV mortality than allopurinol</td></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/28614753/" target="_blank" class="trial-link">FAST</a></td><td>Febuxostat non-inferior to allopurinol for CV outcomes (conflicting with CARES)</td></tr>
+    </table>
+    
+    <h3>Antiphospholipid Syndrome</h3>
+    <table>
+        <tr><th>Trial</th><th>Finding</th></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/30580552/" target="_blank" class="trial-link">TRAPS</a></td><td>Rivaroxaban inferior to warfarin in triple-positive APS — stopped early</td></tr>
+    </table>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 18: CLASSIFICATION CRITERIA -->
+<div class="section" id="criteria">
+    <h2>37. Classification Criteria Quick Reference</h2>
+    
+    <h3>Key Points About Classification vs Diagnosis</h3>
+    <ul>
+        <li>Classification criteria are designed for research, not diagnosis</li>
+        <li>Clinicians can diagnose disease even if criteria not fully met</li>
+        <li>But criteria are useful frameworks for clinical reasoning</li>
+    </ul>
+    
+    <h3>Summary of Major Criteria</h3>
+    <table>
+        <tr><th>Disease</th><th>Key Criteria Elements</th></tr>
+        <tr><td>RA (2010 ACR/EULAR)</td><td>≥6/10 points: joints involved, serology, APR, duration</td></tr>
+        <tr><td>SLE (2019 ACR/EULAR)</td><td>ANA ≥1:80 as entry + ≥10 points from clinical/immunologic domains</td></tr>
+        <tr><td>SSc (2013 ACR/EULAR)</td><td>≥9 points: skin thickening, fingertip lesions, telangiectasia, Raynaud's, antibodies, PAH/ILD</td></tr>
+        <tr><td>PMR (2012 ACR/EULAR)</td><td>Age ≥50 + bilateral shoulder pain + elevated ESR/CRP + scoring system</td></tr>
+        <tr><td>Gout (2015 ACR/EULAR)</td><td>≥8 points: clinical, lab, imaging findings; or proven crystals</td></tr>
+        <tr><td>Axial SpA (ASAS)</td><td>Sacroiliitis on imaging + ≥1 SpA feature OR HLA-B27 + ≥2 SpA features</td></tr>
+        <tr><td>GPA/EGPA/MPA</td><td>2022 ACR/EULAR criteria (score-based with clinical and lab findings)</td></tr>
+    </table>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION 19: CLINICAL PEARLS -->
+<div class="section" id="pearls">
+    <h2>38. High-Yield Clinical Pearls</h2>
+    
+    <h3>Diagnostic Pearls</h3>
+    <ul>
+        <li>💎 <strong>Negative ANA essentially rules out SLE</strong> — sensitivity >95%</li>
+        <li>💎 <strong>CRP usually normal in SLE flares</strong> — if elevated, think infection</li>
+        <li>💎 <strong>Uric acid can be normal during gout attack</strong> — don't use to rule out</li>
+        <li>💎 <strong>DIP involvement:</strong> OA or PsA, NOT RA</li>
+        <li>💎 <strong>Morning stiffness >1 hour:</strong> inflammatory arthritis; <30 min: mechanical</li>
+        <li>💎 <strong>Normal CK:</strong> PMR, NOT myositis</li>
+        <li>💎 <strong>Jaw claudication:</strong> highly specific for GCA</li>
+    </ul>
+    
+    <h3>Treatment Pearls</h3>
+    <ul>
+        <li>💎 <strong>Start steroids immediately for suspected GCA</strong> — don't wait for biopsy</li>
+        <li>💎 <strong>ACE inhibitors for scleroderma renal crisis</strong> — even if Cr rises</li>
+        <li>💎 <strong>Don't start/stop ULT during acute gout attack</strong></li>
+        <li>💎 <strong>HCQ for everyone with SLE</strong> — reduces flares and mortality</li>
+        <li>💎 <strong>Warfarin (not DOACs) for APS</strong> — TRAPS trial</li>
+        <li>💎 <strong>MTX doesn't work for axial SpA</strong> — use biologics</li>
+        <li>💎 <strong>Rituximab = preferred for relapsing AAV</strong> — RAVE trial</li>
+    </ul>
+    
+    <h3>Safety Pearls</h3>
+    <ul>
+        <li>💎 <strong>Screen for TB before starting biologics</strong></li>
+        <li>💎 <strong>HLA-B*5801 testing before allopurinol</strong> in high-risk populations</li>
+        <li>💎 <strong>Eye exam for HCQ</strong> — baseline, then annually after 5 years</li>
+        <li>💎 <strong>Check TPMT before azathioprine</strong></li>
+        <li>💎 <strong>Avoid steroids >15mg in diffuse SSc</strong> — precipitates renal crisis</li>
+        <li>💎 <strong>C-spine imaging before intubating severe RA patients</strong></li>
+    </ul>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- SECTION: OSTEOARTHRITIS -->
+<div class="section" id="boards">
+    <h2>39. Board-Style Practice Questions</h2>
+    
+    <h4>Question 1</h4>
+    <p>A 55-year-old woman presents with 3 months of bilateral shoulder and hip pain with morning stiffness lasting 2 hours. ESR is 85 mm/h. She reports new headaches for 1 week. What is the next best step?</p>
+    <p><strong>Answer:</strong> Start high-dose prednisone (40-60mg) immediately and arrange temporal artery biopsy. New headache in PMR suggests GCA — a medical emergency.</p>
+    
+    <h4>Question 2</h4>
+    <p>A 35-year-old man with inflammatory back pain presents with acute, painful red eye. What is the diagnosis?</p>
+    <p><strong>Answer:</strong> Acute anterior uveitis in ankylosing spondylitis. HLA-B27 positive in >90% of AS.</p>
+    
+    <h4>Question 3</h4>
+    <p>A 28-year-old woman with SLE and positive antiphospholipid antibodies has her first DVT. What anticoagulation?</p>
+    <p><strong>Answer:</strong> Warfarin INR 2-3, indefinitely. DOACs contraindicated in APS (TRAPS trial).</p>
+    
+    <h4>Question 4</h4>
+    <p>A patient with diffuse systemic sclerosis develops acute HTN (210/120) and AKI. Diagnosis and treatment?</p>
+    <p><strong>Answer:</strong> Scleroderma renal crisis. ACE inhibitor (captopril), even if creatinine rises.</p>
+    
+    <h4>Question 5</h4>
+    <p>A 65-year-old man has acute monoarthritis of the first MTP. Uric acid is 6.2 mg/dL. Does this rule out gout?</p>
+    <p><strong>Answer:</strong> No. Uric acid can be normal during acute attacks. Gold standard: arthrocentesis.</p>
+    
+    <h4>Question 6</h4>
+    <p>A patient on hydralazine for 2 years develops arthralgias, fever, pleuritis. ANA+, anti-histone+, anti-dsDNA−, normal complement. Diagnosis?</p>
+    <p><strong>Answer:</strong> Drug-induced lupus. Stop hydralazine.</p>
+    
+    <h4>Question 7</h4>
+    <p>A 30-year-old Turkish man has recurrent oral ulcers, genital ulcers, and painful red eye. What additional finding supports the diagnosis?</p>
+    <p><strong>Answer:</strong> Positive pathergy test. This is Behçet's disease.</p>
+    
+    <h4>Question 8</h4>
+    <p>A 25-year-old woman has daily fevers to 39.5°C, salmon-colored rash, arthritis, ferritin 15,000. ANA/RF negative. Diagnosis?</p>
+    <p><strong>Answer:</strong> Adult-onset Still's disease.</p>
+    
+    <h4>Question 9</h4>
+    <p>A 45-year-old woman has bilateral hilar LAD, erythema nodosum, and ankle arthritis. Prognosis?</p>
+    <p><strong>Answer:</strong> Excellent. Löfgren's syndrome usually self-resolves.</p>
+    
+    <h4>Question 10</h4>
+    <p>A 70-year-old has elevated alk phos, normal Ca/PO4/PTH, thickened skull on X-ray. Diagnosis?</p>
+    <p><strong>Answer:</strong> Paget's disease of bone.</p>
+    
+    <h4>Question 11</h4>
+    <p>A patient with widespread pain, fatigue, poor sleep has normal labs. Most effective treatment?</p>
+    <p><strong>Answer:</strong> Aerobic exercise. For fibromyalgia, exercise is most effective.</p>
+    
+    <h4>Question 12</h4>
+    <p>A 60-year-old on prednisone 20mg × 6 months has T-score -1.8 at hip. Management?</p>
+    <p><strong>Answer:</strong> Start bisphosphonate. GIOP has lower treatment threshold.</p>
+    
+    <h4>Question 13</h4>
+    <p>A patient starting adalimumab — which vaccines before therapy?</p>
+    <p><strong>Answer:</strong> Shingrix, pneumococcal, influenza, hepatitis B. Screen for latent TB.</p>
+    
+    <h4>Question 14</h4>
+    <p>A pregnant woman with SLE is anti-Ro positive. Required monitoring?</p>
+    <p><strong>Answer:</strong> Weekly fetal HR monitoring 16-26 weeks for CHB (2% risk).</p>
+    
+    <h4>Question 15</h4>
+    <p>Nephrotic syndrome, restrictive CMP, macroglossia, periorbital purpura. Diagnosis and next step?</p>
+    <p><strong>Answer:</strong> AL amyloidosis. Fat pad biopsy and serum free light chains.</p>
+    
+    <a href="#" class="back-to-top">↑ Back to Table of Contents</a>
+</div>
+
+<!-- FOOTER -->
+<div style="background: #f6f8fa; padding: 20px; border-radius: 8px; margin-top: 40px; text-align: center;">
+    <p style="margin: 0; color: #586069; font-size: 14px;"><strong>Rheumatology Study Guide</strong></p>
+    <p style="margin: 5px 0 0; color: #586069; font-size: 12px;">Internal Medicine Residency Preparation</p>
+    <p style="margin: 10px 0 0; color: #6f42c1; font-size: 12px; font-weight: 600;">Version 2.0 | December 2025 | 39 Topics</p>
+    <p style="margin: 10px 0 0; color: #999; font-size: 11px;">For educational purposes only. Always use clinical judgment and consult current guidelines.</p>
+</div>
+
+</body>
+</html>
