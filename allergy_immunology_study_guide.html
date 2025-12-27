@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Allergy & Immunology — ABIM Study Guide</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-primary: #f472b6;
+            --accent-secondary: #f9a8d4;
+            --green: #10b981;
+            --red: #ef4444;
+            --yellow: #f59e0b;
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            padding-bottom: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: 16px;
+            border: 1px solid var(--accent-primary);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+        
+        .search-container { position: sticky; top: 10px; z-index: 100; margin-bottom: 20px; }
+        
+        #searchInput {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 2px solid var(--bg-tertiary);
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            outline: none;
+        }
+        
+        #searchInput:focus { border-color: var(--accent-primary); }
+        
+        .nav-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; justify-content: center; }
+        
+        .nav-tab {
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .nav-tab:hover { background: var(--bg-tertiary); color: var(--text-primary); border-color: var(--accent-primary); }
+        
+        .section { background: var(--bg-secondary); border-radius: 12px; margin-bottom: 16px; border: 1px solid var(--bg-tertiary); overflow: hidden; }
+        .section-header { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary)); }
+        .section-header:hover { background: var(--bg-tertiary); }
+        .section-header h2 { font-size: 1.2rem; color: var(--text-primary); }
+        .toggle-icon { font-size: 1.2rem; transition: transform 0.3s; }
+        .section.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .section.collapsed .section-content { display: none; }
+        .section-content { padding: 20px; border-top: 1px solid var(--bg-tertiary); }
+        
+        h3 { color: var(--accent-secondary); margin: 20px 0 12px; font-size: 1.1rem; }
+        h3:first-child { margin-top: 0; }
+        h4 { color: var(--text-primary); margin: 16px 0 8px; font-size: 1rem; }
+        p { margin-bottom: 12px; }
+        ul, ol { margin: 12px 0; padding-left: 24px; }
+        li { margin-bottom: 6px; }
+        
+        .box { padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .box-green { background: rgba(16, 185, 129, 0.1); border-left: 4px solid var(--green); }
+        .box-red { background: rgba(239, 68, 68, 0.1); border-left: 4px solid var(--red); }
+        .box-yellow { background: rgba(245, 158, 11, 0.1); border-left: 4px solid var(--yellow); }
+        .box-blue { background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--blue); }
+        .box-purple { background: rgba(139, 92, 246, 0.1); border-left: 4px solid var(--purple); }
+        .box-title { font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--bg-tertiary); }
+        th { background: var(--bg-tertiary); font-weight: 600; color: var(--accent-secondary); }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        
+        footer { text-align: center; padding: 40px 20px; margin-top: 40px; border-top: 1px solid var(--bg-tertiary); color: var(--text-secondary); }
+        footer a { color: var(--accent-primary); text-decoration: none; margin: 0 10px; }
+        
+        .back-to-top { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: var(--accent-primary); color: white; border: none; border-radius: 50%; font-size: 1.5rem; cursor: pointer; display: none; align-items: center; justify-content: center; z-index: 1000; }
+        
+        strong { color: var(--accent-secondary); }
+        
+        @media (max-width: 768px) { h1 { font-size: 1.7rem; } .section-header h2 { font-size: 1.1rem; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🌸 Allergy & Immunology</h1>
+    <p class="subtitle">Anaphylaxis • Drug Allergy • Immunodeficiency • Angioedema • Urticaria</p>
+</header>
+
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="🔍 Search topics...">
+</div>
+
+<nav class="nav-tabs">
+    <a href="#anaphylaxis" class="nav-tab">Anaphylaxis</a>
+    <a href="#drug" class="nav-tab">Drug Allergy</a>
+    <a href="#urticaria" class="nav-tab">Urticaria</a>
+    <a href="#angioedema" class="nav-tab">Angioedema</a>
+    <a href="#immunodef" class="nav-tab">Immunodeficiency</a>
+    <a href="#rhinitis" class="nav-tab">Rhinitis</a>
+    <a href="#pearls" class="nav-tab">Board Pearls</a>
+</nav>
+
+<!-- SECTION 1: ANAPHYLAXIS -->
+<div class="section" id="anaphylaxis">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>1. Anaphylaxis — Recognition</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Definition</h3>
+        <p>Severe, potentially life-threatening systemic allergic reaction with rapid onset (usually minutes to hours after exposure).</p>
+        
+        <h3>Diagnostic Criteria (Any ONE of the following)</h3>
+        <div class="box box-red">
+            <div class="box-title">🚨 Anaphylaxis Criteria</div>
+            <ol>
+                <li><strong>Acute onset</strong> with skin/mucosal involvement (hives, pruritus, flushing, lip/tongue swelling) <strong>PLUS</strong> respiratory compromise OR hypotension/end-organ dysfunction</li>
+                <li><strong>Two or more</strong> rapidly after exposure to likely allergen:
+                    <ul>
+                        <li>Skin-mucosal involvement</li>
+                        <li>Respiratory compromise</li>
+                        <li>Hypotension or symptoms of end-organ dysfunction</li>
+                        <li>GI symptoms (cramping, vomiting)</li>
+                    </ul>
+                </li>
+                <li><strong>Hypotension</strong> after exposure to known allergen (SBP &lt;90 or &gt;30% decrease)</li>
+            </ol>
+        </div>
+        
+        <h3>Common Triggers</h3>
+        <table>
+            <tr><th>Category</th><th>Examples</th></tr>
+            <tr><td><strong>Foods</strong></td><td>Peanuts, tree nuts, shellfish, fish, milk, eggs, wheat, soy</td></tr>
+            <tr><td><strong>Medications</strong></td><td>Penicillins, NSAIDs, contrast media, anesthetics</td></tr>
+            <tr><td><strong>Insect stings</strong></td><td>Hymenoptera (bees, wasps, hornets, fire ants)</td></tr>
+            <tr><td><strong>Latex</strong></td><td>Healthcare workers, spina bifida patients</td></tr>
+            <tr><td><strong>Exercise</strong></td><td>May be food-dependent</td></tr>
+            <tr><td><strong>Idiopathic</strong></td><td>No identifiable cause (~20%)</td></tr>
+        </table>
+        
+        <h3>Clinical Features by System</h3>
+        <table>
+            <tr><th>System</th><th>Manifestations</th><th>Frequency</th></tr>
+            <tr><td>Skin</td><td>Urticaria, angioedema, flushing, pruritus</td><td>80-90%</td></tr>
+            <tr><td>Respiratory</td><td>Dyspnea, wheezing, stridor, throat tightness</td><td>70%</td></tr>
+            <tr><td>Cardiovascular</td><td>Hypotension, tachycardia, syncope</td><td>45%</td></tr>
+            <tr><td>GI</td><td>Nausea, vomiting, diarrhea, cramping</td><td>45%</td></tr>
+            <tr><td>CNS</td><td>Anxiety, confusion, dizziness</td><td>Variable</td></tr>
+        </table>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Key Point</div>
+            <p><strong>Skin findings may be ABSENT</strong> in 10-20% of anaphylaxis cases. Don't exclude anaphylaxis based solely on absence of hives.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 2: ANAPHYLAXIS TREATMENT -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>2. Anaphylaxis — Treatment</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Immediate Management</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ First-Line Treatment: EPINEPHRINE</div>
+            <ul>
+                <li><strong>Route:</strong> IM (anterolateral thigh) — NOT subcutaneous</li>
+                <li><strong>Dose:</strong> 0.3-0.5 mg (1:1000 concentration = 1 mg/mL) = 0.3-0.5 mL</li>
+                <li><strong>Pediatric:</strong> 0.01 mg/kg (max 0.5 mg)</li>
+                <li><strong>May repeat every 5-15 minutes</strong> if inadequate response</li>
+                <li><strong>No absolute contraindications</strong> in anaphylaxis</li>
+            </ul>
+        </div>
+        
+        <h3>Additional Measures</h3>
+        <ol>
+            <li><strong>Position:</strong> Supine with legs elevated (if hypotensive); sitting if respiratory distress</li>
+            <li><strong>Remove trigger</strong> if possible (stop infusion, remove stinger)</li>
+            <li><strong>Call for help</strong> — activate emergency response</li>
+            <li><strong>Oxygen:</strong> High-flow</li>
+            <li><strong>IV fluids:</strong> 1-2 L NS bolus for hypotension</li>
+            <li><strong>Airway management:</strong> Early intubation if airway compromise</li>
+        </ol>
+        
+        <h3>Adjunctive Medications (NOT First-Line)</h3>
+        <table>
+            <tr><th>Medication</th><th>Role</th><th>Notes</th></tr>
+            <tr>
+                <td>H1 antihistamines</td>
+                <td>Skin symptoms (hives, pruritus)</td>
+                <td>Diphenhydramine 25-50mg; does NOT treat hypotension or airway</td>
+            </tr>
+            <tr>
+                <td>H2 antihistamines</td>
+                <td>May add to H1 blockers</td>
+                <td>Famotidine 20mg IV</td>
+            </tr>
+            <tr>
+                <td>Glucocorticoids</td>
+                <td>May prevent biphasic reaction</td>
+                <td>Methylprednisolone 125mg IV; NOT immediate benefit</td>
+            </tr>
+            <tr>
+                <td>Bronchodilators</td>
+                <td>Bronchospasm</td>
+                <td>Albuterol nebulizer</td>
+            </tr>
+            <tr>
+                <td>Glucagon</td>
+                <td>Beta-blocker refractory</td>
+                <td>1-5mg IV; for patients on beta-blockers not responding to epinephrine</td>
+            </tr>
+        </table>
+        
+        <div class="box box-red">
+            <div class="box-title">🚫 Common Errors</div>
+            <ul>
+                <li>Giving antihistamines INSTEAD of epinephrine</li>
+                <li>Delaying epinephrine</li>
+                <li>Using subcutaneous instead of IM route</li>
+                <li>Using IV epinephrine inappropriately (can cause arrhythmias)</li>
+            </ul>
+        </div>
+        
+        <h3>Observation & Biphasic Reactions</h3>
+        <ul>
+            <li><strong>Observe 4-6 hours minimum</strong> (longer if severe or history of biphasic)</li>
+            <li><strong>Biphasic reaction:</strong> Recurrence of symptoms after initial resolution (1-20% of cases)</li>
+            <li>Usually within 8-12 hours; can occur up to 72 hours</li>
+            <li>Risk factors: Severe initial reaction, delayed epinephrine, need for multiple doses</li>
+        </ul>
+        
+        <h3>Discharge Planning</h3>
+        <ul>
+            <li><strong>Prescribe epinephrine auto-injector</strong> (EpiPen, Auvi-Q)</li>
+            <li>Educate on use and when to use</li>
+            <li><strong>Referral to allergist</strong> for trigger identification</li>
+            <li>Medic-Alert bracelet</li>
+            <li>Anaphylaxis action plan</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 3: DRUG ALLERGY OVERVIEW -->
+<div class="section" id="drug">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>3. Drug Allergy — Overview</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Types of Drug Reactions</h3>
+        <table>
+            <tr><th>Type</th><th>Mechanism</th><th>Timing</th><th>Examples</th></tr>
+            <tr>
+                <td><strong>Type I (IgE)</strong></td>
+                <td>IgE-mediated mast cell activation</td>
+                <td>Minutes to hours</td>
+                <td>Anaphylaxis, urticaria, angioedema</td>
+            </tr>
+            <tr>
+                <td><strong>Type II (Cytotoxic)</strong></td>
+                <td>IgG/IgM antibodies against cell surface</td>
+                <td>Days</td>
+                <td>Hemolytic anemia, thrombocytopenia</td>
+            </tr>
+            <tr>
+                <td><strong>Type III (Immune complex)</strong></td>
+                <td>Antigen-antibody complexes</td>
+                <td>1-3 weeks</td>
+                <td>Serum sickness, vasculitis</td>
+            </tr>
+            <tr>
+                <td><strong>Type IV (Delayed/T-cell)</strong></td>
+                <td>T-cell mediated</td>
+                <td>Days to weeks</td>
+                <td>Contact dermatitis, DRESS, SJS/TEN</td>
+            </tr>
+        </table>
+        
+        <h3>Important Distinctions</h3>
+        <ul>
+            <li><strong>Drug allergy:</strong> Immune-mediated (requires prior sensitization)</li>
+            <li><strong>Drug intolerance:</strong> Non-immune (e.g., GI upset from erythromycin)</li>
+            <li><strong>Drug toxicity:</strong> Predictable based on pharmacology</li>
+            <li><strong>Drug idiosyncrasy:</strong> Unpredictable, non-immune (e.g., G6PD hemolysis)</li>
+        </ul>
+        
+        <h3>Drugs Most Commonly Causing Allergic Reactions</h3>
+        <ul>
+            <li>Beta-lactam antibiotics (penicillins, cephalosporins)</li>
+            <li>Sulfonamides</li>
+            <li>NSAIDs</li>
+            <li>Radiocontrast media</li>
+            <li>Anticonvulsants (phenytoin, carbamazepine, lamotrigine)</li>
+            <li>Allopurinol</li>
+            <li>Chemotherapy agents</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 4: PENICILLIN ALLERGY -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>4. Penicillin Allergy</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Epidemiology</h3>
+        <ul>
+            <li>~10% of patients report penicillin allergy</li>
+            <li><strong>&lt;1% have true IgE-mediated allergy</strong> when tested</li>
+            <li>IgE sensitization wanes over time (~50% lose sensitivity after 5 years, ~80% after 10 years)</li>
+        </ul>
+        
+        <h3>History Assessment</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Key Questions</div>
+            <ul>
+                <li>What was the reaction? (rash, hives, anaphylaxis, GI symptoms)</li>
+                <li>How long ago?</li>
+                <li>How long after taking the drug?</li>
+                <li>Were other drugs given simultaneously?</li>
+                <li>Has patient tolerated penicillins since?</li>
+            </ul>
+        </div>
+        
+        <h3>Risk Stratification</h3>
+        <table>
+            <tr><th>Risk Level</th><th>History</th><th>Action</th></tr>
+            <tr>
+                <td><strong>Low</strong></td>
+                <td>Non-specific rash, GI symptoms, unknown/family history, remote (&gt;10 years)</td>
+                <td>Consider direct challenge or penicillin skin testing</td>
+            </tr>
+            <tr>
+                <td><strong>Moderate</strong></td>
+                <td>Urticaria, pruritic rash within hours-days</td>
+                <td>Penicillin skin testing before use</td>
+            </tr>
+            <tr>
+                <td><strong>High</strong></td>
+                <td>Anaphylaxis, angioedema, bronchospasm, SJS/TEN, DRESS</td>
+                <td>Avoid penicillins; use alternative; allergist referral</td>
+            </tr>
+        </table>
+        
+        <h3>Cross-Reactivity</h3>
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Penicillin-Cephalosporin Cross-Reactivity</div>
+            <ul>
+                <li>Overall cross-reactivity is <strong>~2%</strong> (lower than historically thought)</li>
+                <li>Higher with similar R-group side chains (1st gen cephalosporins)</li>
+                <li>Very low cross-reactivity with 3rd/4th generation cephalosporins, carbapenems, aztreonam</li>
+                <li><strong>Aztreonam:</strong> Safe in penicillin allergy EXCEPT cross-reacts with ceftazidime (identical side chain)</li>
+            </ul>
+        </div>
+        
+        <h3>Penicillin Skin Testing</h3>
+        <ul>
+            <li>Negative predictive value ~99% for IgE-mediated reactions</li>
+            <li>If negative → safe to give penicillin (with initial observation)</li>
+            <li>If positive → avoid or consider desensitization</li>
+            <li>Does NOT predict non-IgE reactions (SJS, DRESS)</li>
+        </ul>
+        
+        <h3>Penicillin Allergy Delabeling</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Benefits of Delabeling</div>
+            <ul>
+                <li>Access to first-line antibiotics</li>
+                <li>Reduced use of broad-spectrum alternatives</li>
+                <li>Lower cost</li>
+                <li>Reduced antimicrobial resistance</li>
+                <li>Better outcomes (e.g., surgical prophylaxis)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 5: SEVERE DRUG REACTIONS -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>5. Severe Cutaneous Drug Reactions</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Stevens-Johnson Syndrome (SJS) / Toxic Epidermal Necrolysis (TEN)</h3>
+        <div class="box box-red">
+            <div class="box-title">🚨 Medical Emergency</div>
+            <p>Severe mucocutaneous reaction with epidermal necrosis and detachment</p>
+        </div>
+        
+        <h4>Definition by BSA Involvement</h4>
+        <ul>
+            <li><strong>SJS:</strong> &lt;10% body surface area detachment</li>
+            <li><strong>SJS/TEN overlap:</strong> 10-30% BSA</li>
+            <li><strong>TEN:</strong> &gt;30% BSA</li>
+        </ul>
+        
+        <h4>Clinical Features</h4>
+        <ul>
+            <li>Prodrome: Fever, malaise, upper respiratory symptoms</li>
+            <li>Painful skin with erythematous/purpuric macules</li>
+            <li><strong>Mucosal involvement</strong> (≥2 sites): oral, ocular, genital</li>
+            <li><strong>Nikolsky sign positive</strong> (epidermis separates with lateral pressure)</li>
+            <li>Atypical targets with necrotic centers</li>
+        </ul>
+        
+        <h4>Common Culprits</h4>
+        <ul>
+            <li>Allopurinol (highest risk)</li>
+            <li>Sulfonamides (TMP-SMX)</li>
+            <li>Anticonvulsants (carbamazepine, phenytoin, lamotrigine, phenobarbital)</li>
+            <li>NSAIDs (piroxicam)</li>
+            <li>Nevirapine</li>
+        </ul>
+        
+        <h4>Management</h4>
+        <ul>
+            <li><strong>Immediately discontinue causative drug</strong></li>
+            <li>Supportive care in burn unit or ICU</li>
+            <li>Fluid/electrolyte management</li>
+            <li>Wound care</li>
+            <li>Ophthalmology consult (ocular complications)</li>
+            <li>Role of systemic steroids, IVIG, cyclosporine controversial</li>
+        </ul>
+        
+        <h3>DRESS Syndrome</h3>
+        <p><strong>Drug Reaction with Eosinophilia and Systemic Symptoms</strong></p>
+        
+        <h4>Clinical Features</h4>
+        <ul>
+            <li>Onset: 2-8 weeks after drug initiation</li>
+            <li>Fever, diffuse morbilliform rash, facial edema</li>
+            <li>Lymphadenopathy</li>
+            <li><strong>Eosinophilia</strong> and/or atypical lymphocytes</li>
+            <li><strong>Internal organ involvement:</strong> Liver (most common), kidney, lung, heart</li>
+        </ul>
+        
+        <h4>Common Causes</h4>
+        <ul>
+            <li>Anticonvulsants (carbamazepine, phenytoin, lamotrigine)</li>
+            <li>Allopurinol</li>
+            <li>Sulfonamides</li>
+            <li>Vancomycin</li>
+            <li>Minocycline</li>
+        </ul>
+        
+        <h4>Management</h4>
+        <ul>
+            <li>Stop offending drug</li>
+            <li>Systemic corticosteroids for severe cases</li>
+            <li>Monitor for organ involvement (LFTs, renal function, cardiac)</li>
+            <li>Prolonged course; may flare during steroid taper</li>
+        </ul>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ HLA Associations</div>
+            <ul>
+                <li><strong>HLA-B*5701:</strong> Abacavir hypersensitivity — screen before use</li>
+                <li><strong>HLA-B*1502:</strong> Carbamazepine-induced SJS/TEN in Asian populations — screen before use</li>
+                <li><strong>HLA-B*5801:</strong> Allopurinol-induced SJS/TEN/DRESS (Asians, African Americans)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 6: NSAID/ASPIRIN REACTIONS -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>6. NSAID & Aspirin Reactions</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Types of NSAID Reactions</h3>
+        <table>
+            <tr><th>Type</th><th>Mechanism</th><th>Features</th><th>Cross-Reactivity</th></tr>
+            <tr>
+                <td><strong>NSAID-exacerbated respiratory disease (AERD)</strong></td>
+                <td>COX-1 inhibition → leukotriene overproduction</td>
+                <td>Asthma + nasal polyps + ASA/NSAID sensitivity</td>
+                <td>All COX-1 inhibitors</td>
+            </tr>
+            <tr>
+                <td><strong>NSAID-induced urticaria/angioedema</strong></td>
+                <td>COX-1 inhibition</td>
+                <td>Urticaria/angioedema in patients with chronic urticaria</td>
+                <td>All COX-1 inhibitors</td>
+            </tr>
+            <tr>
+                <td><strong>Single NSAID-induced</strong></td>
+                <td>IgE-mediated (true allergy)</td>
+                <td>Anaphylaxis, urticaria to specific NSAID</td>
+                <td>Same drug or structurally similar only</td>
+            </tr>
+        </table>
+        
+        <h3>AERD (Samter's Triad)</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Classic Triad</div>
+            <ol>
+                <li>Asthma (often severe)</li>
+                <li>Chronic rhinosinusitis with nasal polyps</li>
+                <li>Respiratory reaction to aspirin/NSAIDs</li>
+            </ol>
+        </div>
+        
+        <h4>Management</h4>
+        <ul>
+            <li>Avoid all COX-1 inhibitors</li>
+            <li><strong>COX-2 selective inhibitors (celecoxib) are usually safe</strong></li>
+            <li>Acetaminophen safe at low doses (&lt;1000mg)</li>
+            <li><strong>Aspirin desensitization</strong> if aspirin needed (e.g., CAD)</li>
+            <li>Leukotriene modifiers (montelukast)</li>
+            <li>Intranasal steroids</li>
+            <li>Consider biologic therapy for severe asthma</li>
+        </ul>
+        
+        <h3>Contrast Media Reactions</h3>
+        <h4>Types</h4>
+        <ul>
+            <li><strong>Immediate:</strong> Within 1 hour; urticaria, bronchospasm, hypotension</li>
+            <li><strong>Delayed:</strong> 1 hour to 1 week; usually maculopapular rash</li>
+        </ul>
+        
+        <h4>Premedication for Previous Immediate Reaction</h4>
+        <div class="box box-green">
+            <div class="box-title">✓ Premedication Regimen</div>
+            <ul>
+                <li><strong>Prednisone 50mg PO</strong> at 13h, 7h, and 1h before procedure</li>
+                <li><strong>Diphenhydramine 50mg</strong> 1h before</li>
+                <li>Use low-osmolar or iso-osmolar contrast</li>
+            </ul>
+            <p><strong>Note:</strong> Premedication reduces but doesn't eliminate risk (~10% breakthrough)</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 7: URTICARIA -->
+<div class="section" id="urticaria">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>7. Urticaria</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Definition</h3>
+        <p>Wheals (hives): Raised, erythematous, pruritic plaques that blanch with pressure and resolve within 24 hours</p>
+        
+        <h3>Classification</h3>
+        <table>
+            <tr><th>Type</th><th>Duration</th><th>Cause</th></tr>
+            <tr>
+                <td><strong>Acute</strong></td>
+                <td>&lt;6 weeks</td>
+                <td>Often identifiable: infection, food, drug, insect sting</td>
+            </tr>
+            <tr>
+                <td><strong>Chronic spontaneous</strong></td>
+                <td>≥6 weeks</td>
+                <td>Usually idiopathic; rarely autoimmune</td>
+            </tr>
+            <tr>
+                <td><strong>Chronic inducible</strong></td>
+                <td>≥6 weeks</td>
+                <td>Physical trigger: cold, pressure, vibration, cholinergic, solar</td>
+            </tr>
+        </table>
+        
+        <h3>Chronic Spontaneous Urticaria</h3>
+        <ul>
+            <li>Most common form of chronic urticaria</li>
+            <li><strong>Cause identified in &lt;10%</strong></li>
+            <li>Not typically allergic; extensive allergy testing not indicated</li>
+            <li>May be associated with autoimmune thyroid disease</li>
+            <li>Consider checking: CBC, TSH, CRP/ESR</li>
+        </ul>
+        
+        <h3>Treatment Algorithm</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Stepwise Approach</div>
+            <ol>
+                <li><strong>Step 1:</strong> Second-generation H1 antihistamine (cetirizine, loratadine, fexofenadine) — standard dose daily</li>
+                <li><strong>Step 2:</strong> Increase to 2-4× standard dose (off-label but guideline-recommended)</li>
+                <li><strong>Step 3:</strong> Add H2 blocker OR leukotriene antagonist OR switch antihistamine</li>
+                <li><strong>Step 4:</strong> Add <strong>omalizumab</strong> (anti-IgE; FDA-approved for chronic urticaria)</li>
+                <li><strong>Step 5:</strong> Add cyclosporine (refractory cases)</li>
+            </ol>
+        </div>
+        
+        <h4>Key Points</h4>
+        <ul>
+            <li><strong>Avoid first-generation antihistamines</strong> (sedation, anticholinergic effects) — especially in elderly</li>
+            <li>Corticosteroids for short-term flares only; NOT for chronic management</li>
+            <li>Avoid NSAIDs if they exacerbate urticaria</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 8: ANGIOEDEMA -->
+<div class="section" id="angioedema">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>8. Angioedema</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Definition</h3>
+        <p>Deep swelling of dermis, subcutaneous, or submucosal tissue. Often affects face, lips, tongue, throat, extremities, genitalia, bowel.</p>
+        
+        <h3>Types</h3>
+        <table>
+            <tr><th>Type</th><th>Mechanism</th><th>Key Features</th></tr>
+            <tr>
+                <td><strong>Allergic/Mast cell-mediated</strong></td>
+                <td>Histamine release</td>
+                <td>Usually with urticaria; responds to antihistamines/epinephrine</td>
+            </tr>
+            <tr>
+                <td><strong>ACE inhibitor-induced</strong></td>
+                <td>Bradykinin accumulation</td>
+                <td>NO urticaria; doesn't respond to antihistamines/steroids</td>
+            </tr>
+            <tr>
+                <td><strong>Hereditary (HAE)</strong></td>
+                <td>C1-INH deficiency/dysfunction</td>
+                <td>NO urticaria; recurrent; family history; can be life-threatening</td>
+            </tr>
+            <tr>
+                <td><strong>Acquired C1-INH deficiency</strong></td>
+                <td>Autoantibodies or consumption</td>
+                <td>Associated with lymphoproliferative disorders; older onset</td>
+            </tr>
+        </table>
+        
+        <h3>ACE Inhibitor Angioedema</h3>
+        <div class="box box-red">
+            <div class="box-title">🚨 Important Facts</div>
+            <ul>
+                <li>Occurs in <strong>0.1-0.7%</strong> of patients on ACEi</li>
+                <li><strong>5× more common in Black patients</strong></li>
+                <li>Can occur at any time (even after years of use)</li>
+                <li>Usually affects head/neck; can be life-threatening</li>
+                <li><strong>NO urticaria</strong></li>
+                <li><strong>Does NOT respond to epinephrine, antihistamines, or steroids</strong></li>
+            </ul>
+        </div>
+        
+        <h4>Management</h4>
+        <ul>
+            <li><strong>Stop ACE inhibitor permanently</strong></li>
+            <li>Supportive care, airway management</li>
+            <li>Consider icatibant or C1-INH concentrate for severe cases</li>
+            <li><strong>Do NOT substitute ARB</strong> (small cross-reactivity risk; avoid if severe reaction)</li>
+        </ul>
+        
+        <h3>Hereditary Angioedema (HAE)</h3>
+        <h4>Types</h4>
+        <ul>
+            <li><strong>Type 1 (85%):</strong> Low C1-INH level and function</li>
+            <li><strong>Type 2 (15%):</strong> Normal level, low function</li>
+            <li><strong>Type 3 (rare):</strong> Normal C1-INH; often Factor XII mutation</li>
+        </ul>
+        
+        <h4>Diagnosis</h4>
+        <div class="box box-blue">
+            <div class="box-title">📋 Laboratory Findings</div>
+            <ul>
+                <li><strong>Low C4</strong> (screening test — low during and between attacks)</li>
+                <li>Low C1-INH level (Type 1) or function (Type 2)</li>
+                <li>C3 is normal (unlike acquired deficiency)</li>
+            </ul>
+        </div>
+        
+        <h4>Triggers</h4>
+        <ul>
+            <li>Trauma, surgery, dental procedures</li>
+            <li>Stress, infections</li>
+            <li>Estrogen (OCPs, pregnancy)</li>
+            <li>ACE inhibitors (contraindicated)</li>
+        </ul>
+        
+        <h4>Treatment</h4>
+        <table>
+            <tr><th>Setting</th><th>Treatment</th></tr>
+            <tr>
+                <td><strong>Acute attack</strong></td>
+                <td>C1-INH concentrate (Berinert, Cinryze), icatibant (bradykinin B2 antagonist), ecallantide (kallikrein inhibitor), fresh frozen plasma</td>
+            </tr>
+            <tr>
+                <td><strong>Prophylaxis (long-term)</strong></td>
+                <td>C1-INH concentrate, lanadelumab (anti-kallikrein), berotralstat (oral kallikrein inhibitor)</td>
+            </tr>
+            <tr>
+                <td><strong>Short-term prophylaxis</strong></td>
+                <td>C1-INH concentrate before procedures</td>
+            </tr>
+        </table>
+        
+        <div class="box box-red">
+            <div class="box-title">🚫 Ineffective in HAE/Bradykinin-Mediated</div>
+            <p>Epinephrine, antihistamines, and corticosteroids do NOT work for HAE or ACEi-induced angioedema</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 9: PRIMARY IMMUNODEFICIENCY -->
+<div class="section" id="immunodef">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>9. Primary Immunodeficiency — Overview</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Warning Signs (Adults)</h3>
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ When to Suspect Immunodeficiency</div>
+            <ul>
+                <li>≥2 serious bacterial infections (sepsis, meningitis, osteomyelitis)</li>
+                <li>≥3 sinus/ear/pneumonia infections per year requiring antibiotics</li>
+                <li>Infections with unusual organisms</li>
+                <li>Recurrent deep abscesses</li>
+                <li>Infections requiring prolonged or IV antibiotics</li>
+                <li>Family history of immunodeficiency</li>
+                <li>Autoimmune disease with infections</li>
+            </ul>
+        </div>
+        
+        <h3>Categories of Primary Immunodeficiency</h3>
+        <table>
+            <tr><th>Defect</th><th>Typical Infections</th><th>Examples</th></tr>
+            <tr>
+                <td><strong>B-cell (antibody)</strong></td>
+                <td>Encapsulated bacteria (S. pneumoniae, H. influenzae), Giardia</td>
+                <td>CVID, X-linked agammaglobulinemia, IgA deficiency</td>
+            </tr>
+            <tr>
+                <td><strong>T-cell</strong></td>
+                <td>Viruses, fungi, Pneumocystis, mycobacteria</td>
+                <td>DiGeorge, SCID</td>
+            </tr>
+            <tr>
+                <td><strong>Phagocyte</strong></td>
+                <td>Bacteria (Staph, Serratia, Aspergillus)</td>
+                <td>Chronic granulomatous disease (CGD)</td>
+            </tr>
+            <tr>
+                <td><strong>Complement</strong></td>
+                <td>Neisseria (meningococcus), encapsulated bacteria, autoimmune disease</td>
+                <td>Terminal complement deficiency</td>
+            </tr>
+        </table>
+        
+        <h3>Initial Workup</h3>
+        <ul>
+            <li><strong>CBC with differential</strong> (lymphopenia, neutropenia)</li>
+            <li><strong>Quantitative immunoglobulins</strong> (IgG, IgA, IgM)</li>
+            <li><strong>Specific antibody responses</strong> (tetanus, pneumococcal titers)</li>
+            <li><strong>Complement:</strong> CH50 (total), C3, C4</li>
+            <li>HIV testing</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 10: COMMON VARIABLE IMMUNODEFICIENCY -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>10. Common Variable Immunodeficiency (CVID)</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Overview</h3>
+        <ul>
+            <li><strong>Most common symptomatic primary immunodeficiency in adults</strong></li>
+            <li>Typically diagnosed in 2nd-4th decade</li>
+            <li>Heterogeneous group of disorders</li>
+        </ul>
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li><strong>Recurrent sinopulmonary infections</strong> (pneumonia, sinusitis, bronchiectasis)</li>
+            <li>GI infections (Giardia, C. difficile)</li>
+            <li><strong>Autoimmune manifestations</strong> (ITP, AIHA, thyroiditis)</li>
+            <li>Granulomatous disease (lungs, liver, spleen)</li>
+            <li>Increased risk of lymphoma and gastric cancer</li>
+            <li>Splenomegaly, lymphadenopathy</li>
+        </ul>
+        
+        <h3>Diagnosis</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Diagnostic Criteria</div>
+            <ul>
+                <li><strong>Low IgG</strong> (at least 2 SD below mean)</li>
+                <li><strong>Low IgA and/or IgM</strong></li>
+                <li><strong>Poor vaccine responses</strong> (to protein and/or polysaccharide antigens)</li>
+                <li>Exclusion of other causes of hypogammaglobulinemia</li>
+            </ul>
+        </div>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>Immunoglobulin replacement</strong> (IV or subcutaneous) — lifelong</li>
+            <li>Goal: trough IgG >500-800 mg/dL</li>
+            <li>Reduces frequency and severity of infections</li>
+            <li>Prompt antibiotic treatment for infections</li>
+            <li>Avoid live vaccines</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 11: SELECTIVE IGA DEFICIENCY -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>11. Selective IgA Deficiency</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Overview</h3>
+        <ul>
+            <li><strong>Most common primary immunodeficiency</strong> (~1:500 in Caucasians)</li>
+            <li><strong>Most patients are asymptomatic</strong></li>
+        </ul>
+        
+        <h3>Definition</h3>
+        <p>IgA &lt;7 mg/dL with normal IgG and IgM in patient ≥4 years old, after exclusion of other causes</p>
+        
+        <h3>Clinical Features</h3>
+        <ul>
+            <li>Many asymptomatic</li>
+            <li>Increased sinopulmonary and GI infections</li>
+            <li>Associated with autoimmune diseases (celiac, thyroiditis, SLE, RA)</li>
+            <li>Increased risk of allergies</li>
+        </ul>
+        
+        <h3>Important Considerations</h3>
+        <div class="box box-red">
+            <div class="box-title">🚨 Transfusion Reactions</div>
+            <p>Some IgA-deficient patients develop <strong>anti-IgA antibodies</strong> and can have <strong>anaphylactic reactions to blood products</strong> containing IgA.</p>
+            <ul>
+                <li>Use IgA-depleted blood products or washed RBCs</li>
+                <li>Not all patients develop anti-IgA antibodies</li>
+            </ul>
+        </div>
+        
+        <h3>Management</h3>
+        <ul>
+            <li>Most don't require specific treatment</li>
+            <li>Antibiotics for infections</li>
+            <li>IgG replacement NOT indicated (unless concurrent IgG subclass deficiency with infections)</li>
+            <li>Can progress to CVID in some patients</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 12: COMPLEMENT DEFICIENCY -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>12. Complement Deficiency</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Complement Pathways</h3>
+        <table>
+            <tr><th>Pathway</th><th>Activation</th><th>Components</th></tr>
+            <tr><td><strong>Classical</strong></td><td>Antigen-antibody complexes</td><td>C1, C2, C4</td></tr>
+            <tr><td><strong>Alternative</strong></td><td>Microbial surfaces (direct)</td><td>Factor B, D, properdin</td></tr>
+            <tr><td><strong>Lectin</strong></td><td>Mannose on microbial surfaces</td><td>MBL, MASP</td></tr>
+            <tr><td><strong>Terminal (MAC)</strong></td><td>Common final pathway</td><td>C5, C6, C7, C8, C9</td></tr>
+        </table>
+        
+        <h3>Clinical Associations</h3>
+        <table>
+            <tr><th>Deficiency</th><th>Clinical Features</th></tr>
+            <tr>
+                <td><strong>Early classical (C1, C2, C4)</strong></td>
+                <td>SLE-like syndrome, autoimmune disease; increased encapsulated bacteria</td>
+            </tr>
+            <tr>
+                <td><strong>C3</strong></td>
+                <td>Severe recurrent infections (encapsulated bacteria)</td>
+            </tr>
+            <tr>
+                <td><strong>Terminal (C5-C9)</strong></td>
+                <td><strong>Recurrent Neisseria infections</strong> (meningococcus, gonococcus)</td>
+            </tr>
+            <tr>
+                <td><strong>C1-INH</strong></td>
+                <td>Hereditary angioedema (see Section 8)</td>
+            </tr>
+        </table>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Board Pearl</div>
+            <p><strong>Recurrent Neisseria meningitidis infections</strong> → Check terminal complement (CH50). Vaccinate against meningococcus (MenACWY + MenB).</p>
+        </div>
+        
+        <h3>Laboratory Testing</h3>
+        <ul>
+            <li><strong>CH50:</strong> Screens entire classical + terminal pathway; absent if any component missing</li>
+            <li><strong>AH50:</strong> Alternative pathway screen</li>
+            <li><strong>C3, C4:</strong> Individual components</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 13: ALLERGIC RHINITIS -->
+<div class="section" id="rhinitis">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>13. Allergic Rhinitis</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Classification</h3>
+        <ul>
+            <li><strong>Seasonal:</strong> Pollens (trees, grasses, weeds)</li>
+            <li><strong>Perennial:</strong> Dust mites, mold, animal dander, cockroach</li>
+            <li><strong>Intermittent:</strong> &lt;4 days/week or &lt;4 weeks</li>
+            <li><strong>Persistent:</strong> ≥4 days/week and ≥4 weeks</li>
+        </ul>
+        
+        <h3>Symptoms</h3>
+        <ul>
+            <li>Nasal congestion, rhinorrhea (clear)</li>
+            <li>Sneezing, nasal pruritus</li>
+            <li>Postnasal drip</li>
+            <li>Ocular symptoms (itching, tearing, redness)</li>
+            <li>Allergic shiners (dark circles under eyes)</li>
+            <li>Allergic salute (transverse nasal crease)</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Stepwise Approach</div>
+            <ol>
+                <li><strong>Allergen avoidance</strong> (if feasible)</li>
+                <li><strong>Intranasal corticosteroids</strong> — MOST EFFECTIVE for moderate-severe
+                    <ul>
+                        <li>Fluticasone, mometasone, budesonide</li>
+                    </ul>
+                </li>
+                <li><strong>Second-generation antihistamines</strong> — for mild or PRN
+                    <ul>
+                        <li>Cetirizine, loratadine, fexofenadine</li>
+                    </ul>
+                </li>
+                <li><strong>Combination:</strong> Intranasal steroid + antihistamine</li>
+                <li><strong>Add-ons:</strong> Leukotriene antagonist, intranasal antihistamine (azelastine)</li>
+                <li><strong>Allergen immunotherapy</strong> — for refractory cases</li>
+            </ol>
+        </div>
+        
+        <h3>Allergen Immunotherapy</h3>
+        <ul>
+            <li><strong>Subcutaneous (SCIT):</strong> Weekly buildup → monthly maintenance × 3-5 years</li>
+            <li><strong>Sublingual (SLIT):</strong> Daily tablets; FDA-approved for grass, ragweed, dust mite</li>
+            <li>Only treatment that modifies disease course</li>
+            <li>Contraindicated in severe/uncontrolled asthma</li>
+        </ul>
+        
+        <h3>Non-Allergic Rhinitis</h3>
+        <table>
+            <tr><th>Type</th><th>Features</th></tr>
+            <tr><td>Vasomotor</td><td>Triggered by irritants, temperature changes; no allergic component</td></tr>
+            <tr><td>Drug-induced (rhinitis medicamentosa)</td><td>Rebound congestion from decongestant overuse (&gt;3-5 days)</td></tr>
+            <tr><td>Gustatory</td><td>Clear rhinorrhea with eating</td></tr>
+            <tr><td>Hormonal</td><td>Pregnancy, hypothyroidism</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- SECTION 14: ASTHMA OVERVIEW -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>14. Asthma — Allergy Connection</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Allergic Asthma</h3>
+        <ul>
+            <li>Most common asthma phenotype</li>
+            <li>IgE-mediated response to aeroallergens</li>
+            <li>Often associated with allergic rhinitis, atopic dermatitis</li>
+            <li>Elevated total IgE, specific IgE to allergens</li>
+        </ul>
+        
+        <h3>Allergy Testing in Asthma</h3>
+        <ul>
+            <li><strong>Skin prick testing:</strong> Preferred; rapid, sensitive</li>
+            <li><strong>Specific IgE (ImmunoCAP):</strong> When skin testing not possible</li>
+            <li>Identify triggers for avoidance</li>
+            <li>Assess candidacy for immunotherapy</li>
+        </ul>
+        
+        <h3>Biologic Therapies for Severe Asthma</h3>
+        <table>
+            <tr><th>Drug</th><th>Target</th><th>Indication</th></tr>
+            <tr>
+                <td><strong>Omalizumab</strong></td>
+                <td>Anti-IgE</td>
+                <td>Allergic asthma; elevated IgE; positive aeroallergen testing</td>
+            </tr>
+            <tr>
+                <td><strong>Mepolizumab, Reslizumab, Benralizumab</strong></td>
+                <td>Anti-IL-5 / IL-5R</td>
+                <td>Eosinophilic asthma</td>
+            </tr>
+            <tr>
+                <td><strong>Dupilumab</strong></td>
+                <td>Anti-IL-4/IL-13</td>
+                <td>Eosinophilic or oral steroid-dependent asthma</td>
+            </tr>
+            <tr>
+                <td><strong>Tezepelumab</strong></td>
+                <td>Anti-TSLP</td>
+                <td>Severe asthma regardless of phenotype</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- SECTION 15: FOOD ALLERGY -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>15. Food Allergy</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Types of Food Reactions</h3>
+        <table>
+            <tr><th>Type</th><th>Mechanism</th><th>Timing</th><th>Symptoms</th></tr>
+            <tr>
+                <td><strong>IgE-mediated</strong></td>
+                <td>Type I hypersensitivity</td>
+                <td>Minutes to 2 hours</td>
+                <td>Urticaria, angioedema, anaphylaxis, vomiting</td>
+            </tr>
+            <tr>
+                <td><strong>Mixed IgE/non-IgE</strong></td>
+                <td>IgE + cell-mediated</td>
+                <td>Hours</td>
+                <td>Eosinophilic esophagitis, atopic dermatitis</td>
+            </tr>
+            <tr>
+                <td><strong>Non-IgE-mediated</strong></td>
+                <td>Cell-mediated</td>
+                <td>Hours to days</td>
+                <td>FPIES, enterocolitis</td>
+            </tr>
+            <tr>
+                <td><strong>Food intolerance</strong></td>
+                <td>Non-immune</td>
+                <td>Variable</td>
+                <td>Lactose intolerance (GI symptoms only)</td>
+            </tr>
+        </table>
+        
+        <h3>Common Food Allergens ("Big 9")</h3>
+        <ul>
+            <li>Peanut</li>
+            <li>Tree nuts</li>
+            <li>Milk</li>
+            <li>Egg</li>
+            <li>Wheat</li>
+            <li>Soy</li>
+            <li>Fish</li>
+            <li>Shellfish</li>
+            <li>Sesame</li>
+        </ul>
+        
+        <h3>Diagnosis</h3>
+        <ul>
+            <li><strong>History</strong> is most important</li>
+            <li><strong>Skin prick testing:</strong> High NPV; positive test doesn't confirm clinical allergy</li>
+            <li><strong>Specific IgE:</strong> Same limitations as skin testing</li>
+            <li><strong>Oral food challenge:</strong> Gold standard; performed under supervision</li>
+        </ul>
+        
+        <h3>Management</h3>
+        <ul>
+            <li><strong>Strict avoidance</strong> of allergen</li>
+            <li><strong>Epinephrine auto-injector</strong> — all patients with IgE-mediated food allergy</li>
+            <li>Education on label reading</li>
+            <li><strong>Oral immunotherapy (OIT):</strong> FDA-approved for peanut (Palforzia) in children/adolescents</li>
+        </ul>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Food-Dependent Exercise-Induced Anaphylaxis</div>
+            <p>Anaphylaxis occurs when exercise follows ingestion of specific food (often wheat, shellfish). Either alone doesn't cause symptoms.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 16: INSECT STING ALLERGY -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>16. Insect Sting Allergy</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Hymenoptera</h3>
+        <ul>
+            <li>Honeybees</li>
+            <li>Wasps, hornets, yellow jackets</li>
+            <li>Fire ants</li>
+        </ul>
+        
+        <h3>Types of Reactions</h3>
+        <table>
+            <tr><th>Reaction</th><th>Features</th><th>Risk of Future Systemic</th></tr>
+            <tr>
+                <td><strong>Local</strong></td>
+                <td>Redness, swelling at sting site (&lt;10cm)</td>
+                <td>Low (~5%)</td>
+            </tr>
+            <tr>
+                <td><strong>Large local</strong></td>
+                <td>Swelling &gt;10cm, peaks 24-48h, lasts days</td>
+                <td>~10%</td>
+            </tr>
+            <tr>
+                <td><strong>Systemic/Anaphylaxis</strong></td>
+                <td>Urticaria, angioedema, bronchospasm, hypotension</td>
+                <td>30-60% (if untreated)</td>
+            </tr>
+        </table>
+        
+        <h3>Management</h3>
+        <h4>Systemic Reaction</h4>
+        <ul>
+            <li>Epinephrine for acute anaphylaxis</li>
+            <li>Prescribe epinephrine auto-injector</li>
+            <li><strong>Referral to allergist</strong> for testing and consideration of venom immunotherapy</li>
+        </ul>
+        
+        <h4>Venom Immunotherapy (VIT)</h4>
+        <div class="box box-green">
+            <div class="box-title">✓ Highly Effective</div>
+            <ul>
+                <li>Reduces risk of future anaphylaxis from 30-60% to &lt;5%</li>
+                <li>Indicated for systemic reactions + positive testing</li>
+                <li>5 years of maintenance; lifelong for severe reactions or mast cell disease</li>
+            </ul>
+        </div>
+        
+        <h4>Large Local Reactions</h4>
+        <ul>
+            <li>Ice, elevation, antihistamines</li>
+            <li>Short course oral steroids if severe</li>
+            <li>Venom immunotherapy NOT routinely recommended (but can be considered)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 17: EOSINOPHILIC DISORDERS -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>17. Eosinophilic Disorders</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Causes of Eosinophilia</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 "NAACP" Mnemonic</div>
+            <ul>
+                <li><strong>N</strong>eoplasm (Hodgkin lymphoma, other malignancies)</li>
+                <li><strong>A</strong>llergy/Atopy</li>
+                <li><strong>A</strong>dison's disease (adrenal insufficiency)</li>
+                <li><strong>C</strong>onnective tissue disease (eosinophilic granulomatosis with polyangiitis)</li>
+                <li><strong>P</strong>arasites (helminths)</li>
+            </ul>
+        </div>
+        
+        <p><strong>Also:</strong> Drug reactions (DRESS), hypereosinophilic syndrome, eosinophilic GI disorders</p>
+        
+        <h3>Eosinophilic Esophagitis (EoE)</h3>
+        <ul>
+            <li>Chronic immune-mediated esophageal disease</li>
+            <li><strong>Symptoms:</strong> Dysphagia, food impaction (adults); feeding difficulties, vomiting (children)</li>
+            <li><strong>Diagnosis:</strong> ≥15 eosinophils/hpf on esophageal biopsy (after PPI trial)</li>
+            <li><strong>Treatment:</strong> PPI, topical steroids (swallowed fluticasone or budesonide), elimination diets, dilation</li>
+        </ul>
+        
+        <h3>Hypereosinophilic Syndrome (HES)</h3>
+        <ul>
+            <li>Persistent eosinophilia &gt;1500/μL + organ damage</li>
+            <li>Affects heart, lungs, skin, nervous system, GI tract</li>
+            <li>Rule out secondary causes</li>
+            <li><strong>Treatment:</strong> Corticosteroids, hydroxyurea, imatinib (if FIP1L1-PDGFRA+)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 18: BOARD PEARLS -->
+<div class="section" id="pearls">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>18. High-Yield Board Pearls</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Anaphylaxis Pearls</h3>
+        <ul>
+            <li>💎 <strong>Epinephrine IM is FIRST-LINE</strong> — no absolute contraindications in anaphylaxis</li>
+            <li>💎 <strong>Skin findings may be absent</strong> in 10-20% of anaphylaxis</li>
+            <li>💎 <strong>Antihistamines treat hives, NOT hypotension or airway compromise</strong></li>
+            <li>💎 <strong>Biphasic reactions</strong> can occur up to 72 hours later; observe 4-6+ hours</li>
+        </ul>
+        
+        <h3>Drug Allergy Pearls</h3>
+        <ul>
+            <li>💎 <strong>&lt;1% of reported penicillin allergies are true IgE-mediated</strong></li>
+            <li>💎 <strong>Penicillin-cephalosporin cross-reactivity is ~2%</strong> (not 10%)</li>
+            <li>💎 <strong>Aztreonam</strong> is safe in penicillin allergy (except cross-reacts with ceftazidime)</li>
+            <li>💎 <strong>SJS/TEN:</strong> Allopurinol, sulfonamides, anticonvulsants; Nikolsky sign positive</li>
+            <li>💎 <strong>DRESS:</strong> 2-8 weeks after drug start; eosinophilia + liver involvement</li>
+            <li>💎 <strong>Screen HLA-B*5701 before abacavir</strong></li>
+        </ul>
+        
+        <h3>Angioedema Pearls</h3>
+        <ul>
+            <li>💎 <strong>ACEi angioedema:</strong> No urticaria; doesn't respond to epinephrine/antihistamines/steroids</li>
+            <li>💎 <strong>ACEi angioedema</strong> 5× more common in Black patients</li>
+            <li>💎 <strong>HAE:</strong> Low C4 (even between attacks); treat with C1-INH concentrate or icatibant</li>
+            <li>💎 <strong>Recurrent angioedema WITHOUT urticaria</strong> → think bradykinin-mediated (HAE or ACEi)</li>
+        </ul>
+        
+        <h3>Immunodeficiency Pearls</h3>
+        <ul>
+            <li>💎 <strong>CVID:</strong> Most common symptomatic primary immunodeficiency in adults; low IgG + poor vaccine responses</li>
+            <li>💎 <strong>Selective IgA deficiency:</strong> Most common overall; usually asymptomatic; risk of transfusion reactions</li>
+            <li>💎 <strong>Recurrent Neisseria infections</strong> → check terminal complement (CH50)</li>
+            <li>💎 <strong>Encapsulated bacteria</strong> (S. pneumoniae, H. flu) → antibody or complement deficiency</li>
+        </ul>
+        
+        <h3>Other Pearls</h3>
+        <ul>
+            <li>💎 <strong>Intranasal corticosteroids</strong> are most effective treatment for allergic rhinitis</li>
+            <li>💎 <strong>Chronic urticaria:</strong> Up-dose antihistamines 2-4× before adding other agents; omalizumab for refractory</li>
+            <li>💎 <strong>AERD (Samter's triad):</strong> Asthma + nasal polyps + ASA/NSAID sensitivity; COX-2 inhibitors usually safe</li>
+            <li>💎 <strong>Venom immunotherapy</strong> reduces anaphylaxis risk from 30-60% to &lt;5%</li>
+            <li>💎 <strong>All patients with IgE-mediated food allergy</strong> should have epinephrine auto-injector</li>
+        </ul>
+    </div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<footer>
+    <h3>🌸 Allergy & Immunology Study Guide</h3>
+    <p>AAAAI • ACAAI • WAO Guidelines</p>
+    <div style="margin-top: 20px;">
+        <a href="study_guides_index.html">📚 All Study Guides</a>
+        <a href="board_pearls.html">💎 Board Pearls</a>
+        <a href="high_value_care.html">💰 High Value Care</a>
+    </div>
+</footer>
+
+<script>
+function toggleSection(header) { header.closest('.section').classList.toggle('collapsed'); }
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+window.onscroll = function() { document.getElementById('backToTop').style.display = (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? 'flex' : 'none'; };
+document.getElementById('searchInput').addEventListener('input', function(e) {
+    const query = e.target.value.toLowerCase();
+    document.querySelectorAll('.section').forEach(section => {
+        const text = section.textContent.toLowerCase();
+        section.style.display = (query === '' || text.includes(query)) ? 'block' : 'none';
+        if (query !== '' && text.includes(query)) section.classList.remove('collapsed');
+    });
+});
+document.querySelectorAll('.section').forEach((section, index) => { if (index > 0) section.classList.add('collapsed'); });
+</script>
+
+</body>
+</html>
