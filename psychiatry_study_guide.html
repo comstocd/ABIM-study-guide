@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Psychiatry — ABIM Study Guide</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-primary: #a855f7;
+            --accent-secondary: #c084fc;
+            --green: #10b981;
+            --red: #ef4444;
+            --yellow: #f59e0b;
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            padding-bottom: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: 16px;
+            border: 1px solid var(--accent-primary);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+        
+        .search-container {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            margin-bottom: 20px;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 2px solid var(--bg-tertiary);
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            outline: none;
+        }
+        
+        #searchInput:focus { border-color: var(--accent-primary); }
+        
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+        
+        .nav-tab {
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .nav-tab:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--accent-primary);
+        }
+        
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid var(--bg-tertiary);
+            overflow: hidden;
+        }
+        
+        .section-header {
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+        }
+        
+        .section-header:hover { background: var(--bg-tertiary); }
+        .section-header h2 { font-size: 1.2rem; color: var(--text-primary); }
+        .toggle-icon { font-size: 1.2rem; transition: transform 0.3s; }
+        .section.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .section.collapsed .section-content { display: none; }
+        .section-content { padding: 20px; border-top: 1px solid var(--bg-tertiary); }
+        
+        h3 { color: var(--accent-secondary); margin: 20px 0 12px; font-size: 1.1rem; }
+        h3:first-child { margin-top: 0; }
+        h4 { color: var(--text-primary); margin: 16px 0 8px; font-size: 1rem; }
+        p { margin-bottom: 12px; }
+        ul, ol { margin: 12px 0; padding-left: 24px; }
+        li { margin-bottom: 6px; }
+        
+        .box { padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .box-green { background: rgba(16, 185, 129, 0.1); border-left: 4px solid var(--green); }
+        .box-red { background: rgba(239, 68, 68, 0.1); border-left: 4px solid var(--red); }
+        .box-yellow { background: rgba(245, 158, 11, 0.1); border-left: 4px solid var(--yellow); }
+        .box-blue { background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--blue); }
+        .box-purple { background: rgba(139, 92, 246, 0.1); border-left: 4px solid var(--purple); }
+        .box-title { font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--bg-tertiary); }
+        th { background: var(--bg-tertiary); font-weight: 600; color: var(--accent-secondary); }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+        footer a { color: var(--accent-primary); text-decoration: none; margin: 0 10px; }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        strong { color: var(--accent-secondary); }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.7rem; }
+            .section-header h2 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🧠 Psychiatry</h1>
+    <p class="subtitle">Depression • Anxiety • Substance Use • Somatoform • Capacity Evaluation</p>
+</header>
+
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="🔍 Search topics...">
+</div>
+
+<nav class="nav-tabs">
+    <a href="#depression" class="nav-tab">Depression</a>
+    <a href="#anxiety" class="nav-tab">Anxiety</a>
+    <a href="#bipolar" class="nav-tab">Bipolar</a>
+    <a href="#psychosis" class="nav-tab">Psychosis</a>
+    <a href="#substance" class="nav-tab">Substance Use</a>
+    <a href="#somatic" class="nav-tab">Somatic</a>
+    <a href="#pearls" class="nav-tab">Board Pearls</a>
+</nav>
+
+<!-- SECTION 1: DEPRESSION OVERVIEW -->
+<div class="section" id="depression">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>1. Major Depressive Disorder — Overview</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>DSM-5 Criteria</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Diagnosis: ≥5 symptoms for ≥2 weeks (must include #1 or #2)</div>
+            <p><strong>SIG E CAPS mnemonic:</strong></p>
+            <ol>
+                <li><strong>S</strong>leep disturbance (insomnia or hypersomnia)</li>
+                <li><strong>I</strong>nterest loss (anhedonia)</li>
+                <li><strong>G</strong>uilt or worthlessness</li>
+                <li><strong>E</strong>nergy loss / fatigue</li>
+                <li><strong>C</strong>oncentration problems</li>
+                <li><strong>A</strong>ppetite changes (increased or decreased)</li>
+                <li><strong>P</strong>sychomotor agitation or retardation</li>
+                <li><strong>S</strong>uicidal ideation</li>
+            </ol>
+            <p><strong>Required:</strong> Must include depressed mood OR anhedonia</p>
+        </div>
+        
+        <h3>Severity</h3>
+        <ul>
+            <li><strong>Mild:</strong> 5-6 symptoms, minor impairment</li>
+            <li><strong>Moderate:</strong> Between mild and severe</li>
+            <li><strong>Severe:</strong> Most symptoms, marked impairment, may have psychotic features</li>
+        </ul>
+        
+        <h3>Screening</h3>
+        <table>
+            <tr><th>Tool</th><th>Description</th></tr>
+            <tr>
+                <td><strong>PHQ-2</strong></td>
+                <td>2 questions: depressed mood + anhedonia. Score ≥3 = positive screen → do PHQ-9</td>
+            </tr>
+            <tr>
+                <td><strong>PHQ-9</strong></td>
+                <td>9 questions = 9 DSM criteria. Score 5-9 mild, 10-14 moderate, 15-19 mod-severe, ≥20 severe</td>
+            </tr>
+        </table>
+        
+        <h3>Differential Diagnosis</h3>
+        <ul>
+            <li><strong>Medical causes:</strong> Hypothyroidism, anemia, B12/folate deficiency, Cushing's, Parkinson's, stroke, malignancy</li>
+            <li><strong>Medications:</strong> Beta-blockers, corticosteroids, interferon, isotretinoin, opioids</li>
+            <li><strong>Substance-induced:</strong> Alcohol, cannabis, sedatives</li>
+            <li><strong>Bipolar disorder:</strong> Screen for prior manic/hypomanic episodes before starting antidepressant</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 2: DEPRESSION TREATMENT -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>2. Depression — Treatment</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Treatment Approach by Severity</h3>
+        <table>
+            <tr><th>Severity</th><th>First-line Treatment</th></tr>
+            <tr>
+                <td><strong>Mild</strong></td>
+                <td>Psychotherapy (CBT, IPT) OR medication; patient preference</td>
+            </tr>
+            <tr>
+                <td><strong>Moderate</strong></td>
+                <td>Medication AND/OR psychotherapy</td>
+            </tr>
+            <tr>
+                <td><strong>Severe</strong></td>
+                <td>Medication + psychotherapy; consider ECT if refractory/psychotic</td>
+            </tr>
+        </table>
+        
+        <h3>Antidepressant Classes</h3>
+        <table>
+            <tr><th>Class</th><th>Examples</th><th>Key Features</th></tr>
+            <tr>
+                <td><strong>SSRIs</strong></td>
+                <td>Sertraline, escitalopram, fluoxetine, paroxetine, citalopram</td>
+                <td>First-line; generally well tolerated</td>
+            </tr>
+            <tr>
+                <td><strong>SNRIs</strong></td>
+                <td>Venlafaxine, duloxetine, desvenlafaxine</td>
+                <td>Also for neuropathic pain, fibromyalgia</td>
+            </tr>
+            <tr>
+                <td><strong>Bupropion</strong></td>
+                <td>—</td>
+                <td>No sexual side effects; smoking cessation; lower seizure threshold</td>
+            </tr>
+            <tr>
+                <td><strong>Mirtazapine</strong></td>
+                <td>—</td>
+                <td>Sedating, weight gain; good for insomnia, poor appetite</td>
+            </tr>
+            <tr>
+                <td><strong>TCAs</strong></td>
+                <td>Amitriptyline, nortriptyline</td>
+                <td>Anticholinergic; cardiac toxicity in overdose; neuropathic pain</td>
+            </tr>
+            <tr>
+                <td><strong>MAOIs</strong></td>
+                <td>Phenelzine, tranylcypromine</td>
+                <td>Last resort; dietary restrictions; hypertensive crisis with tyramine</td>
+            </tr>
+        </table>
+        
+        <div class="box box-green">
+            <div class="box-title">✓ First-Line Choices</div>
+            <ul>
+                <li><strong>Sertraline</strong> — Good safety profile, fewer drug interactions</li>
+                <li><strong>Escitalopram</strong> — Well tolerated, once daily</li>
+                <li><strong>Fluoxetine</strong> — Long half-life, good for non-adherence; can be activating</li>
+            </ul>
+        </div>
+        
+        <h3>Key Side Effects</h3>
+        <table>
+            <tr><th>Side Effect</th><th>Agents</th><th>Management</th></tr>
+            <tr>
+                <td>Sexual dysfunction</td>
+                <td>SSRIs, SNRIs</td>
+                <td>Switch to bupropion or mirtazapine; add bupropion</td>
+            </tr>
+            <tr>
+                <td>Weight gain</td>
+                <td>Mirtazapine, paroxetine, TCAs</td>
+                <td>Switch to bupropion, sertraline</td>
+            </tr>
+            <tr>
+                <td>QTc prolongation</td>
+                <td>Citalopram (dose-dependent)</td>
+                <td>Max 40mg (20mg if &gt;60 or hepatic impairment)</td>
+            </tr>
+            <tr>
+                <td>Hypertension</td>
+                <td>Venlafaxine, duloxetine</td>
+                <td>Monitor BP; dose-dependent</td>
+            </tr>
+            <tr>
+                <td>Seizures</td>
+                <td>Bupropion</td>
+                <td>Contraindicated in seizure disorder, eating disorders</td>
+            </tr>
+        </table>
+        
+        <h3>Treatment Timeline</h3>
+        <ul>
+            <li><strong>Response onset:</strong> 2-4 weeks for initial improvement</li>
+            <li><strong>Full response:</strong> 6-8 weeks at therapeutic dose</li>
+            <li><strong>If no response at 4-6 weeks:</strong> Optimize dose → switch → augment</li>
+            <li><strong>Duration:</strong> Continue at least 6-9 months after remission; lifelong if recurrent</li>
+        </ul>
+        
+        <div class="box box-red">
+            <div class="box-title">🚫 Black Box Warning</div>
+            <p>Antidepressants may increase suicidal thinking in patients &lt;25 years, especially in first weeks. Monitor closely. Risk decreases with age; benefit exceeds risk in adults.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 3: SUICIDE RISK -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>3. Suicide Risk Assessment</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Risk Factors</h3>
+        <div class="box box-red">
+            <div class="box-title">🚨 SAD PERSONS Mnemonic</div>
+            <ul>
+                <li><strong>S</strong>ex (male)</li>
+                <li><strong>A</strong>ge (elderly, young adults)</li>
+                <li><strong>D</strong>epression</li>
+                <li><strong>P</strong>revious attempt (strongest predictor)</li>
+                <li><strong>E</strong>thanol/substance abuse</li>
+                <li><strong>R</strong>ational thinking loss (psychosis)</li>
+                <li><strong>S</strong>ocial support lacking</li>
+                <li><strong>O</strong>rganized plan</li>
+                <li><strong>N</strong>o spouse/partner</li>
+                <li><strong>S</strong>ickness (chronic illness)</li>
+            </ul>
+        </div>
+        
+        <h3>Assessment Components</h3>
+        <ul>
+            <li><strong>Suicidal ideation:</strong> Passive vs active; frequency, intensity</li>
+            <li><strong>Plan:</strong> Specific method, access to means</li>
+            <li><strong>Intent:</strong> Does patient intend to act?</li>
+            <li><strong>Prior attempts:</strong> Number, lethality, what prevented completion</li>
+            <li><strong>Protective factors:</strong> Social support, reasons for living, religious beliefs</li>
+        </ul>
+        
+        <h3>Management</h3>
+        <table>
+            <tr><th>Risk Level</th><th>Action</th></tr>
+            <tr>
+                <td>Low (passive ideation, no plan, protective factors)</td>
+                <td>Outpatient management with close follow-up</td>
+            </tr>
+            <tr>
+                <td>Moderate (ideation with plan, no intent)</td>
+                <td>Safety planning, remove access to means, frequent contact</td>
+            </tr>
+            <tr>
+                <td>High (plan + intent, prior attempts, impaired judgment)</td>
+                <td>Psychiatric hospitalization (voluntary or involuntary)</td>
+            </tr>
+        </table>
+        
+        <h3>Safety Planning</h3>
+        <ol>
+            <li>Recognize warning signs</li>
+            <li>Internal coping strategies</li>
+            <li>Social contacts for distraction</li>
+            <li>Family/friends who can help</li>
+            <li>Professional resources (crisis line, ED)</li>
+            <li>Reduce access to lethal means</li>
+        </ol>
+    </div>
+</div>
+
+<!-- SECTION 4: ANXIETY DISORDERS -->
+<div class="section" id="anxiety">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>4. Generalized Anxiety Disorder (GAD)</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>DSM-5 Criteria</h3>
+        <ul>
+            <li>Excessive anxiety/worry about multiple events occurring <strong>more days than not for ≥6 months</strong></li>
+            <li>Difficulty controlling worry</li>
+            <li>≥3 of: Restlessness, fatigue, concentration difficulty, irritability, muscle tension, sleep disturbance</li>
+            <li>Causes significant distress or impairment</li>
+            <li>Not due to substance or medical condition</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ First-Line Treatment</div>
+            <ul>
+                <li><strong>SSRIs:</strong> Escitalopram, sertraline, paroxetine</li>
+                <li><strong>SNRIs:</strong> Venlafaxine XR, duloxetine</li>
+                <li><strong>CBT:</strong> Equally effective as medication; combination often best</li>
+            </ul>
+        </div>
+        
+        <h4>Other Options</h4>
+        <ul>
+            <li><strong>Buspirone:</strong> Non-sedating, no dependence; takes 2-4 weeks; good adjunct</li>
+            <li><strong>Benzodiazepines:</strong> Rapid relief but avoid long-term; risk of dependence</li>
+            <li><strong>Pregabalin:</strong> Alternative for some patients</li>
+            <li><strong>Hydroxyzine:</strong> PRN for acute anxiety</li>
+        </ul>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Avoid</div>
+            <ul>
+                <li>Long-term benzodiazepines (dependence, falls in elderly, cognitive impairment)</li>
+                <li>Beta-blockers (not effective for GAD; useful for performance anxiety only)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 5: PANIC DISORDER -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>5. Panic Disorder</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>DSM-5 Criteria</h3>
+        <ul>
+            <li>Recurrent unexpected panic attacks</li>
+            <li>≥1 attack followed by ≥1 month of:
+                <ul>
+                    <li>Persistent concern about additional attacks, OR</li>
+                    <li>Maladaptive behavior change (avoidance)</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>Panic Attack Symptoms (≥4)</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Panic Attack = Abrupt surge of intense fear with ≥4 of:</div>
+            <ul>
+                <li>Palpitations / racing heart</li>
+                <li>Sweating</li>
+                <li>Trembling / shaking</li>
+                <li>Shortness of breath</li>
+                <li>Choking sensation</li>
+                <li>Chest pain</li>
+                <li>Nausea / abdominal distress</li>
+                <li>Dizziness / lightheadedness</li>
+                <li>Chills or hot flashes</li>
+                <li>Paresthesias</li>
+                <li>Derealization / depersonalization</li>
+                <li>Fear of losing control / "going crazy"</li>
+                <li>Fear of dying</li>
+            </ul>
+            <p><strong>Peak within minutes;</strong> typically resolves in 20-30 minutes</p>
+        </div>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li><strong>First-line:</strong> SSRIs (sertraline, paroxetine, fluoxetine) or SNRIs</li>
+            <li><strong>CBT:</strong> Highly effective; includes exposure therapy</li>
+            <li><strong>Acute attacks:</strong> Benzodiazepine PRN (lorazepam, alprazolam) — limit use</li>
+            <li><strong>Avoid caffeine, stimulants</strong></li>
+        </ul>
+        
+        <h3>Differential</h3>
+        <ul>
+            <li>Hyperthyroidism</li>
+            <li>Pheochromocytoma</li>
+            <li>Cardiac arrhythmia</li>
+            <li>Pulmonary embolism</li>
+            <li>Stimulant/caffeine use</li>
+            <li>Medication side effects</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 6: PTSD -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>6. Post-Traumatic Stress Disorder (PTSD)</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>DSM-5 Criteria</h3>
+        <p>Exposure to traumatic event (experienced, witnessed, learned about, or repeated exposure to details) PLUS symptoms from each category lasting <strong>>1 month:</strong></p>
+        
+        <table>
+            <tr><th>Category</th><th>Symptoms</th></tr>
+            <tr>
+                <td><strong>Intrusion</strong></td>
+                <td>Flashbacks, nightmares, distressing memories, psychological/physiological reactivity to cues</td>
+            </tr>
+            <tr>
+                <td><strong>Avoidance</strong></td>
+                <td>Avoiding memories, thoughts, feelings; avoiding external reminders</td>
+            </tr>
+            <tr>
+                <td><strong>Negative cognition/mood</strong></td>
+                <td>Amnesia, negative beliefs, distorted blame, negative emotional state, detachment, anhedonia</td>
+            </tr>
+            <tr>
+                <td><strong>Arousal/reactivity</strong></td>
+                <td>Irritability, reckless behavior, hypervigilance, exaggerated startle, concentration problems, sleep disturbance</td>
+            </tr>
+        </table>
+        
+        <h3>Related Diagnoses</h3>
+        <ul>
+            <li><strong>Acute Stress Disorder:</strong> Same symptoms, 3 days to 1 month post-trauma</li>
+            <li><strong>Adjustment Disorder:</strong> Symptoms within 3 months of stressor, don't meet PTSD criteria</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Evidence-Based Treatments</div>
+            <ul>
+                <li><strong>Trauma-focused psychotherapy:</strong> Prolonged Exposure (PE), Cognitive Processing Therapy (CPT), EMDR</li>
+                <li><strong>SSRIs:</strong> Sertraline, paroxetine (FDA-approved for PTSD)</li>
+                <li><strong>SNRIs:</strong> Venlafaxine</li>
+                <li><strong>Prazosin:</strong> For PTSD-related nightmares (alpha-1 blocker)</li>
+            </ul>
+        </div>
+        
+        <div class="box box-red">
+            <div class="box-title">🚫 NOT Recommended for PTSD</div>
+            <ul>
+                <li>Benzodiazepines (may worsen outcomes)</li>
+                <li>Antipsychotics as monotherapy</li>
+                <li>Debriefing immediately after trauma</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 7: BIPOLAR DISORDER -->
+<div class="section" id="bipolar">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>7. Bipolar Disorder</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Types</h3>
+        <table>
+            <tr><th>Type</th><th>Definition</th></tr>
+            <tr>
+                <td><strong>Bipolar I</strong></td>
+                <td>≥1 manic episode (may have depressive episodes)</td>
+            </tr>
+            <tr>
+                <td><strong>Bipolar II</strong></td>
+                <td>≥1 hypomanic episode + ≥1 major depressive episode (no full mania)</td>
+            </tr>
+            <tr>
+                <td><strong>Cyclothymia</strong></td>
+                <td>≥2 years of hypomanic + depressive symptoms not meeting full criteria</td>
+            </tr>
+        </table>
+        
+        <h3>Manic Episode Criteria</h3>
+        <div class="box box-purple">
+            <div class="box-title">🔥 DIG FAST Mnemonic (≥3 symptoms, ≥1 week)</div>
+            <ul>
+                <li><strong>D</strong>istractibility</li>
+                <li><strong>I</strong>ndiscretion / impulsivity (risky behavior)</li>
+                <li><strong>G</strong>randiosity</li>
+                <li><strong>F</strong>light of ideas / racing thoughts</li>
+                <li><strong>A</strong>ctivity/Agitation increased</li>
+                <li><strong>S</strong>leep decreased (feels rested with little sleep)</li>
+                <li><strong>T</strong>alkativeness (pressured speech)</li>
+            </ul>
+            <p><strong>Duration:</strong> ≥1 week (or any duration if hospitalized)</p>
+            <p><strong>Severity:</strong> Marked impairment or psychotic features</p>
+        </div>
+        
+        <h3>Hypomania vs Mania</h3>
+        <ul>
+            <li><strong>Hypomania:</strong> ≥4 days, change from baseline, observable by others, no marked impairment, no psychosis, no hospitalization</li>
+            <li><strong>Mania:</strong> ≥7 days, marked impairment, may have psychosis, often hospitalized</li>
+        </ul>
+        
+        <h3>Treatment — Acute Mania</h3>
+        <ul>
+            <li><strong>Mood stabilizers:</strong> Lithium, valproate</li>
+            <li><strong>Atypical antipsychotics:</strong> Quetiapine, aripiprazole, olanzapine, risperidone</li>
+            <li><strong>Benzodiazepines:</strong> Adjunct for agitation/insomnia</li>
+        </ul>
+        
+        <h3>Treatment — Bipolar Depression</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ First-Line Options</div>
+            <ul>
+                <li><strong>Quetiapine</strong> (monotherapy)</li>
+                <li><strong>Lurasidone</strong> (monotherapy or with lithium/valproate)</li>
+                <li><strong>Olanzapine-fluoxetine combination (OFC)</strong></li>
+                <li><strong>Lamotrigine</strong> (good for maintenance, depression prevention)</li>
+            </ul>
+        </div>
+        
+        <div class="box box-red">
+            <div class="box-title">🚫 Avoid in Bipolar</div>
+            <p><strong>Antidepressant monotherapy</strong> — can trigger mania/rapid cycling. If antidepressant needed, use with mood stabilizer.</p>
+        </div>
+        
+        <h3>Lithium Monitoring</h3>
+        <ul>
+            <li><strong>Therapeutic range:</strong> 0.6-1.2 mEq/L (higher end for acute mania)</li>
+            <li><strong>Baseline:</strong> TSH, creatinine, calcium, ECG, pregnancy test</li>
+            <li><strong>Monitoring:</strong> Lithium level, TSH, creatinine every 6 months</li>
+            <li><strong>Toxicity signs:</strong> Tremor → ataxia → confusion → seizures</li>
+        </ul>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Lithium Toxicity Risk</div>
+            <ul>
+                <li>Dehydration, diarrhea, vomiting</li>
+                <li>NSAIDs (increase lithium levels)</li>
+                <li>ACE inhibitors, ARBs, thiazide diuretics</li>
+                <li>Renal impairment</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 8: SCHIZOPHRENIA -->
+<div class="section" id="psychosis">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>8. Schizophrenia & Psychotic Disorders</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>DSM-5 Criteria for Schizophrenia</h3>
+        <ul>
+            <li>≥2 of the following for significant portion of 1 month (≥1 must be #1, 2, or 3):
+                <ol>
+                    <li>Delusions</li>
+                    <li>Hallucinations</li>
+                    <li>Disorganized speech</li>
+                    <li>Disorganized or catatonic behavior</li>
+                    <li>Negative symptoms (flat affect, avolition, alogia)</li>
+                </ol>
+            </li>
+            <li>Continuous signs for ≥6 months</li>
+            <li>Functional decline</li>
+            <li>Rule out schizoaffective, mood disorders, substances, medical conditions</li>
+        </ul>
+        
+        <h3>Positive vs Negative Symptoms</h3>
+        <table>
+            <tr><th>Positive (Excess)</th><th>Negative (Deficit)</th></tr>
+            <tr><td>Hallucinations (auditory most common)</td><td>Flat/blunted affect</td></tr>
+            <tr><td>Delusions (paranoid, grandiose, referential)</td><td>Alogia (poverty of speech)</td></tr>
+            <tr><td>Disorganized speech (tangential, loose associations)</td><td>Avolition (lack of motivation)</td></tr>
+            <tr><td>Disorganized behavior</td><td>Anhedonia</td></tr>
+            <tr><td></td><td>Social withdrawal</td></tr>
+        </table>
+        
+        <h3>Treatment</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Antipsychotics</div>
+            <ul>
+                <li><strong>Second-generation (atypical):</strong> Risperidone, olanzapine, quetiapine, aripiprazole, ziprasidone, lurasidone, paliperidone</li>
+                <li><strong>First-generation (typical):</strong> Haloperidol, chlorpromazine, fluphenazine</li>
+                <li><strong>Clozapine:</strong> Reserved for treatment-resistant schizophrenia (failed ≥2 adequate trials)</li>
+            </ul>
+        </div>
+        
+        <h3>Antipsychotic Side Effects</h3>
+        <table>
+            <tr><th>Side Effect</th><th>Common Agents</th></tr>
+            <tr><td>Metabolic syndrome (weight gain, diabetes, dyslipidemia)</td><td>Clozapine, olanzapine > quetiapine > risperidone</td></tr>
+            <tr><td>QTc prolongation</td><td>Ziprasidone, haloperidol, thioridazine</td></tr>
+            <tr><td>Extrapyramidal symptoms (EPS)</td><td>First-generation > risperidone > other SGAs</td></tr>
+            <tr><td>Prolactin elevation</td><td>Risperidone, paliperidone, haloperidol</td></tr>
+            <tr><td>Agranulocytosis</td><td>Clozapine (requires REMS monitoring)</td></tr>
+            <tr><td>Seizures</td><td>Clozapine</td></tr>
+        </table>
+        
+        <h3>Clozapine Monitoring (REMS)</h3>
+        <ul>
+            <li>Absolute neutrophil count (ANC) weekly × 6 months → every 2 weeks × 6 months → monthly</li>
+            <li>Hold if ANC &lt;1500; discontinue if &lt;1000</li>
+            <li>Also monitor: metabolic panel, lipids, ECG</li>
+        </ul>
+        
+        <h3>Extrapyramidal Symptoms</h3>
+        <table>
+            <tr><th>Type</th><th>Timing</th><th>Treatment</th></tr>
+            <tr>
+                <td>Acute dystonia</td>
+                <td>Hours to days</td>
+                <td>Benztropine or diphenhydramine IM/IV</td>
+            </tr>
+            <tr>
+                <td>Akathisia</td>
+                <td>Days to weeks</td>
+                <td>Reduce dose, switch agent; propranolol, benzodiazepine</td>
+            </tr>
+            <tr>
+                <td>Parkinsonism</td>
+                <td>Weeks to months</td>
+                <td>Reduce dose, benztropine, amantadine</td>
+            </tr>
+            <tr>
+                <td>Tardive dyskinesia</td>
+                <td>Months to years</td>
+                <td>Prevention is key; VMAT2 inhibitors (valbenazine, deutetrabenazine)</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- SECTION 9: NEUROLEPTIC MALIGNANT SYNDROME -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>9. Neuroleptic Malignant Syndrome</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <div class="box box-red">
+            <div class="box-title">🚨 NMS — Life-Threatening Emergency</div>
+            <p><strong>Cause:</strong> Dopamine receptor blockade (antipsychotics, antiemetics, withdrawal of dopamine agonists)</p>
+        </div>
+        
+        <h3>Clinical Features ("FEVER")</h3>
+        <ul>
+            <li><strong>F</strong>ever (hyperthermia, often >40°C)</li>
+            <li><strong>E</strong>ncephalopathy (altered mental status, confusion)</li>
+            <li><strong>V</strong>itals unstable (autonomic instability — tachycardia, labile BP, diaphoresis)</li>
+            <li><strong>E</strong>levated CK (often >1000 U/L)</li>
+            <li><strong>R</strong>igidity ("lead-pipe")</li>
+        </ul>
+        
+        <h3>Labs</h3>
+        <ul>
+            <li>Elevated CK (may be >10,000)</li>
+            <li>Leukocytosis</li>
+            <li>Metabolic acidosis</li>
+            <li>Myoglobinuria (risk of AKI)</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <ol>
+            <li><strong>Stop offending agent immediately</strong></li>
+            <li>Supportive care: IV fluids, cooling, ICU monitoring</li>
+            <li><strong>Dantrolene</strong> (muscle relaxant)</li>
+            <li><strong>Bromocriptine</strong> (dopamine agonist)</li>
+            <li>Amantadine (alternative)</li>
+            <li>Benzodiazepines for agitation</li>
+            <li>Monitor for rhabdomyolysis → AKI</li>
+        </ol>
+        
+        <h3>Differential: Serotonin Syndrome</h3>
+        <table>
+            <tr><th>Feature</th><th>NMS</th><th>Serotonin Syndrome</th></tr>
+            <tr><td>Cause</td><td>Dopamine blockade</td><td>Serotonin excess</td></tr>
+            <tr><td>Onset</td><td>Days to weeks</td><td>Hours (rapid)</td></tr>
+            <tr><td>Muscle</td><td>Rigidity ("lead-pipe")</td><td>Hyperreflexia, clonus, myoclonus</td></tr>
+            <tr><td>Treatment</td><td>Dantrolene, bromocriptine</td><td>Cyproheptadine, benzodiazepines</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- SECTION 10: SUBSTANCE USE DISORDERS -->
+<div class="section" id="substance">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>10. Substance Use Disorders — Overview</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>DSM-5 Criteria (≥2 in 12 months)</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 11 Criteria (any substance)</div>
+            <ol>
+                <li>Using more than intended</li>
+                <li>Unsuccessful efforts to cut down</li>
+                <li>Significant time spent obtaining/using/recovering</li>
+                <li>Craving</li>
+                <li>Failure to fulfill major obligations</li>
+                <li>Continued use despite social/interpersonal problems</li>
+                <li>Giving up important activities</li>
+                <li>Use in hazardous situations</li>
+                <li>Continued use despite physical/psychological problems</li>
+                <li>Tolerance</li>
+                <li>Withdrawal</li>
+            </ol>
+            <p><strong>Severity:</strong> 2-3 = mild; 4-5 = moderate; ≥6 = severe</p>
+        </div>
+        
+        <h3>Screening Tools</h3>
+        <table>
+            <tr><th>Tool</th><th>Use</th></tr>
+            <tr><td>CAGE</td><td>Alcohol (Cut down, Annoyed, Guilty, Eye-opener) — ≥2 = positive</td></tr>
+            <tr><td>AUDIT-C</td><td>Alcohol — 3 questions; ≥4 men, ≥3 women = positive</td></tr>
+            <tr><td>Single-item screening</td><td>"How many times in the past year have you used [substance]?"</td></tr>
+            <tr><td>DAST</td><td>Drug Abuse Screening Test</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- SECTION 11: ALCOHOL USE DISORDER -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>11. Alcohol Use Disorder</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Alcohol Withdrawal</h3>
+        <table>
+            <tr><th>Time After Last Drink</th><th>Symptoms</th></tr>
+            <tr><td>6-24 hours</td><td>Tremor, anxiety, diaphoresis, nausea, insomnia</td></tr>
+            <tr><td>12-48 hours</td><td>Withdrawal seizures (generalized tonic-clonic)</td></tr>
+            <tr><td>12-48 hours</td><td>Alcoholic hallucinosis (visual, auditory — with clear sensorium)</td></tr>
+            <tr><td>48-96 hours</td><td><strong>Delirium tremens (DTs):</strong> Confusion, agitation, hallucinations, autonomic instability, fever</td></tr>
+        </table>
+        
+        <div class="box box-red">
+            <div class="box-title">🚨 Delirium Tremens Risk Factors</div>
+            <ul>
+                <li>Prior DTs or withdrawal seizures</li>
+                <li>Heavy, prolonged drinking</li>
+                <li>Concurrent illness</li>
+                <li>Older age</li>
+            </ul>
+            <p><strong>Mortality:</strong> Up to 5% if untreated; requires ICU</p>
+        </div>
+        
+        <h3>Treatment of Withdrawal</h3>
+        <ul>
+            <li><strong>Benzodiazepines:</strong> First-line (chlordiazepoxide, lorazepam, diazepam)</li>
+            <li>Use symptom-triggered dosing (CIWA-Ar protocol)</li>
+            <li><strong>Thiamine:</strong> Before glucose to prevent Wernicke encephalopathy</li>
+            <li>Electrolyte repletion (magnesium, potassium)</li>
+            <li>IV fluids</li>
+        </ul>
+        
+        <h3>Medications for Alcohol Use Disorder</h3>
+        <table>
+            <tr><th>Medication</th><th>Mechanism</th><th>Notes</th></tr>
+            <tr>
+                <td><strong>Naltrexone</strong></td>
+                <td>Opioid antagonist</td>
+                <td>Reduces craving/heavy drinking; oral or monthly injection; contraindicated if on opioids</td>
+            </tr>
+            <tr>
+                <td><strong>Acamprosate</strong></td>
+                <td>NMDA/GABA modulation</td>
+                <td>Maintains abstinence; renally cleared; safe in liver disease</td>
+            </tr>
+            <tr>
+                <td><strong>Disulfiram</strong></td>
+                <td>Aldehyde dehydrogenase inhibitor</td>
+                <td>Causes unpleasant reaction with alcohol; requires motivation/adherence</td>
+            </tr>
+        </table>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Wernicke Encephalopathy (Medical Emergency)</div>
+            <p><strong>Triad:</strong> Confusion, ataxia, ophthalmoplegia</p>
+            <p><strong>Treatment:</strong> High-dose IV thiamine (500mg TID × 3 days) BEFORE glucose</p>
+            <p>If untreated → Korsakoff syndrome (irreversible memory impairment, confabulation)</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 12: OPIOID USE DISORDER -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>12. Opioid Use Disorder</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Opioid Intoxication</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Classic Triad</div>
+            <ul>
+                <li>Miosis (pinpoint pupils)</li>
+                <li>Respiratory depression</li>
+                <li>Decreased consciousness</li>
+            </ul>
+            <p><strong>Treatment:</strong> Naloxone (Narcan) — 0.4-2mg IV/IM/SC; may need repeated doses</p>
+        </div>
+        
+        <h3>Opioid Withdrawal</h3>
+        <p><strong>NOT life-threatening</strong> (unlike alcohol, benzodiazepine withdrawal)</p>
+        <ul>
+            <li><strong>Symptoms:</strong> Lacrimation, rhinorrhea, yawning, piloerection ("goose bumps"), diarrhea, muscle aches, dilated pupils, anxiety, insomnia</li>
+            <li><strong>Onset:</strong> 8-24 hours after last use (short-acting); 36-72 hours (methadone)</li>
+        </ul>
+        
+        <h3>Medications for Opioid Use Disorder (MOUD)</h3>
+        <table>
+            <tr><th>Medication</th><th>Mechanism</th><th>Notes</th></tr>
+            <tr>
+                <td><strong>Buprenorphine (+ naloxone)</strong></td>
+                <td>Partial μ-agonist</td>
+                <td>X-waiver no longer required; can prescribe in office; ceiling effect (safer)</td>
+            </tr>
+            <tr>
+                <td><strong>Methadone</strong></td>
+                <td>Full μ-agonist</td>
+                <td>Must dispense from licensed program (OTP); QTc prolongation</td>
+            </tr>
+            <tr>
+                <td><strong>Naltrexone</strong></td>
+                <td>Opioid antagonist</td>
+                <td>Monthly injection (Vivitrol); patient must be opioid-free 7-10 days</td>
+            </tr>
+        </table>
+        
+        <div class="box box-green">
+            <div class="box-title">✓ Key Points</div>
+            <ul>
+                <li>MOUD significantly reduces mortality and overdose</li>
+                <li>Any physician can prescribe buprenorphine (DEA X-waiver eliminated 2023)</li>
+                <li>Long-term/indefinite treatment is appropriate — not "just substitution"</li>
+            </ul>
+        </div>
+        
+        <h3>Symptomatic Treatment of Withdrawal</h3>
+        <ul>
+            <li><strong>Clonidine:</strong> Autonomic symptoms (monitor for hypotension)</li>
+            <li><strong>Loperamide:</strong> Diarrhea</li>
+            <li><strong>NSAIDs:</strong> Muscle aches</li>
+            <li><strong>Ondansetron:</strong> Nausea/vomiting</li>
+            <li><strong>Trazodone:</strong> Insomnia</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 13: OTHER SUBSTANCES -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>13. Other Substance Use</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Benzodiazepine Withdrawal</h3>
+        <div class="box box-red">
+            <div class="box-title">🚨 Potentially Life-Threatening</div>
+            <ul>
+                <li>Similar to alcohol withdrawal: anxiety, tremor, seizures</li>
+                <li>Can be delayed (days to weeks) with long-acting agents</li>
+                <li><strong>Treatment:</strong> Gradual taper; may substitute long-acting for short-acting</li>
+            </ul>
+        </div>
+        
+        <h3>Stimulants (Cocaine, Amphetamines)</h3>
+        <ul>
+            <li><strong>Intoxication:</strong> Euphoria, tachycardia, HTN, hyperthermia, dilated pupils, paranoia, psychosis</li>
+            <li><strong>Complications:</strong> MI (even in young), stroke, arrhythmia</li>
+            <li><strong>Treatment:</strong> Supportive; benzodiazepines for agitation; avoid beta-blockers alone (unopposed alpha)</li>
+            <li><strong>Withdrawal:</strong> "Crash" — fatigue, depression, hypersomnia, hyperphagia (not dangerous)</li>
+        </ul>
+        
+        <h3>Cannabis</h3>
+        <ul>
+            <li><strong>Intoxication:</strong> Euphoria, impaired coordination, red eyes, increased appetite, tachycardia</li>
+            <li><strong>Cannabinoid hyperemesis syndrome:</strong> Cyclic vomiting with hot showers for relief; treat with capsaicin cream, haloperidol</li>
+            <li><strong>Withdrawal:</strong> Irritability, insomnia, decreased appetite (mild, not dangerous)</li>
+        </ul>
+        
+        <h3>Tobacco Cessation</h3>
+        <table>
+            <tr><th>Treatment</th><th>Details</th></tr>
+            <tr><td><strong>Varenicline</strong></td><td>Most effective single agent; partial nicotine agonist</td></tr>
+            <tr><td><strong>Bupropion SR</strong></td><td>Start 1-2 weeks before quit date; seizure risk</td></tr>
+            <tr><td><strong>NRT</strong></td><td>Patch, gum, lozenge, inhaler, spray; can combine</td></tr>
+            <tr><td><strong>Combination</strong></td><td>NRT + varenicline or bupropion may be most effective</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- SECTION 14: SOMATIC SYMPTOM DISORDERS -->
+<div class="section" id="somatic">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>14. Somatic Symptom & Related Disorders</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Overview</h3>
+        <table>
+            <tr><th>Disorder</th><th>Key Features</th></tr>
+            <tr>
+                <td><strong>Somatic Symptom Disorder</strong></td>
+                <td>≥1 distressing somatic symptom + excessive thoughts/feelings/behaviors related to symptoms; ≥6 months</td>
+            </tr>
+            <tr>
+                <td><strong>Illness Anxiety Disorder</strong></td>
+                <td>Preoccupation with having/acquiring serious illness; minimal or no somatic symptoms; high health anxiety</td>
+            </tr>
+            <tr>
+                <td><strong>Conversion Disorder (Functional Neurological)</strong></td>
+                <td>Neurological symptoms (weakness, movement, sensory) incompatible with recognized conditions; not feigned</td>
+            </tr>
+            <tr>
+                <td><strong>Factitious Disorder</strong></td>
+                <td>Intentional production/feigning of symptoms for sick role (no external incentive)</td>
+            </tr>
+            <tr>
+                <td><strong>Malingering</strong></td>
+                <td>Intentional production/feigning of symptoms for external gain (not a disorder)</td>
+            </tr>
+        </table>
+        
+        <h3>Somatic Symptom Disorder</h3>
+        <ul>
+            <li>Focus is on <strong>excessive response to symptoms</strong>, not whether symptoms are medically explained</li>
+            <li>Patients are not intentionally producing symptoms</li>
+            <li><strong>Treatment:</strong> Scheduled visits, validation, CBT, treat comorbid depression/anxiety, avoid unnecessary tests/procedures</li>
+        </ul>
+        
+        <h3>Conversion Disorder</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Clinical Clues</div>
+            <ul>
+                <li>Symptoms inconsistent with known neurological conditions</li>
+                <li>Positive findings on exam:
+                    <ul>
+                        <li>Hoover sign (hip extension weakness reverses with contralateral hip flexion)</li>
+                        <li>Give-way weakness</li>
+                        <li>Psychogenic tremor (entrainment with contralateral tapping)</li>
+                        <li>Tubular/tunnel vision</li>
+                    </ul>
+                </li>
+                <li>Often follows stressor</li>
+            </ul>
+        </div>
+        
+        <h3>Factitious Disorder vs Malingering</h3>
+        <table>
+            <tr><th>Feature</th><th>Factitious Disorder</th><th>Malingering</th></tr>
+            <tr><td>Intentional symptoms</td><td>Yes</td><td>Yes</td></tr>
+            <tr><td>Motivation</td><td>Assume sick role (internal)</td><td>External gain (money, avoid work)</td></tr>
+            <tr><td>Conscious awareness</td><td>May be aware</td><td>Fully aware</td></tr>
+            <tr><td>Classification</td><td>Mental disorder</td><td>Not a disorder</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- SECTION 15: EATING DISORDERS -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>15. Eating Disorders</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Anorexia Nervosa</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 DSM-5 Criteria</div>
+            <ol>
+                <li>Restriction of energy intake → significantly low body weight</li>
+                <li>Intense fear of gaining weight despite being underweight</li>
+                <li>Disturbance in body image perception</li>
+            </ol>
+            <p><strong>Subtypes:</strong> Restricting type vs Binge-eating/purging type</p>
+        </div>
+        
+        <h3>Medical Complications</h3>
+        <ul>
+            <li><strong>Cardiac:</strong> Bradycardia, hypotension, arrhythmias, QTc prolongation</li>
+            <li><strong>Electrolytes:</strong> Hypokalemia, hypophosphatemia, hypomagnesemia</li>
+            <li><strong>Endocrine:</strong> Amenorrhea, hypothyroidism, low estrogen/testosterone</li>
+            <li><strong>GI:</strong> Constipation, delayed gastric emptying</li>
+            <li><strong>Bone:</strong> Osteoporosis</li>
+            <li><strong>Hematologic:</strong> Anemia, leukopenia, thrombocytopenia</li>
+        </ul>
+        
+        <div class="box box-red">
+            <div class="box-title">🚨 Refeeding Syndrome</div>
+            <ul>
+                <li>Occurs with nutritional rehabilitation in severely malnourished patients</li>
+                <li><strong>Hypophosphatemia</strong> is the hallmark (also low K, Mg)</li>
+                <li>Can cause cardiac failure, arrhythmias, seizures, death</li>
+                <li><strong>Prevention:</strong> Start feeding slowly ("start low, go slow"), monitor electrolytes, supplement phosphate</li>
+            </ul>
+        </div>
+        
+        <h3>Bulimia Nervosa</h3>
+        <ul>
+            <li>Recurrent binge eating with compensatory behaviors (purging, laxatives, exercise, fasting)</li>
+            <li>At least weekly for 3 months</li>
+            <li>Self-evaluation unduly influenced by weight/shape</li>
+            <li><strong>Complications:</strong> Dental erosion, parotid enlargement, Russell's sign (knuckle calluses), hypokalemic metabolic alkalosis, esophageal tears</li>
+        </ul>
+        
+        <h3>Binge Eating Disorder</h3>
+        <ul>
+            <li>Recurrent binge eating WITHOUT compensatory behaviors</li>
+            <li>Often associated with obesity</li>
+            <li><strong>Treatment:</strong> CBT, lisdexamfetamine (only FDA-approved medication)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 16: PERSONALITY DISORDERS -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>16. Personality Disorders</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Clusters</h3>
+        <table>
+            <tr><th>Cluster</th><th>Description</th><th>Types</th></tr>
+            <tr>
+                <td><strong>A ("Odd/Eccentric")</strong></td>
+                <td>Odd, eccentric behavior</td>
+                <td>Paranoid, Schizoid, Schizotypal</td>
+            </tr>
+            <tr>
+                <td><strong>B ("Dramatic")</strong></td>
+                <td>Dramatic, emotional, erratic</td>
+                <td>Antisocial, Borderline, Histrionic, Narcissistic</td>
+            </tr>
+            <tr>
+                <td><strong>C ("Anxious")</strong></td>
+                <td>Anxious, fearful</td>
+                <td>Avoidant, Dependent, Obsessive-Compulsive</td>
+            </tr>
+        </table>
+        
+        <h3>High-Yield Disorders</h3>
+        <h4>Borderline Personality Disorder</h4>
+        <ul>
+            <li>Unstable relationships, self-image, affect</li>
+            <li>Impulsivity, recurrent self-harm/suicidal behavior</li>
+            <li>Fear of abandonment</li>
+            <li>"Splitting" (idealizing → devaluing)</li>
+            <li><strong>Treatment:</strong> Dialectical Behavior Therapy (DBT)</li>
+        </ul>
+        
+        <h4>Antisocial Personality Disorder</h4>
+        <ul>
+            <li>Disregard for and violation of rights of others</li>
+            <li>Deceitfulness, impulsivity, aggression, lack of remorse</li>
+            <li>Must be ≥18 with history of conduct disorder before 15</li>
+        </ul>
+        
+        <h4>Obsessive-Compulsive Personality Disorder (OCPD)</h4>
+        <ul>
+            <li>Preoccupation with orderliness, perfectionism, control</li>
+            <li><strong>Ego-syntonic</strong> (patient sees as normal)</li>
+            <li><strong>Different from OCD</strong> (which is ego-dystonic with intrusive thoughts)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 17: SLEEP DISORDERS -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>17. Sleep Disorders</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Insomnia</h3>
+        <ul>
+            <li>Difficulty initiating, maintaining, or early morning awakening</li>
+            <li><strong>First-line:</strong> Cognitive Behavioral Therapy for Insomnia (CBT-I)</li>
+            <li><strong>Pharmacotherapy (short-term):</strong> Low-dose trazodone, melatonin, Z-drugs (zolpidem, eszopiclone)</li>
+            <li><strong>Avoid in elderly:</strong> Benzodiazepines, antihistamines, anticholinergics</li>
+        </ul>
+        
+        <h3>OSA</h3>
+        <ul>
+            <li>Diagnosis: Polysomnography (AHI ≥5 with symptoms or AHI ≥15)</li>
+            <li><strong>Treatment:</strong> CPAP is first-line; weight loss; positional therapy; oral appliances; surgery for anatomical issues</li>
+        </ul>
+        
+        <h3>Restless Legs Syndrome</h3>
+        <ul>
+            <li>Urge to move legs, worse at rest, worse at night, relieved by movement</li>
+            <li><strong>Check:</strong> Iron studies (treat if ferritin &lt;75)</li>
+            <li><strong>Treatment:</strong> Gabapentin/pregabalin preferred; dopamine agonists (risk of augmentation)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 18: BOARD PEARLS -->
+<div class="section" id="pearls">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>18. High-Yield Board Pearls</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Depression Pearls</h3>
+        <ul>
+            <li>💎 <strong>PHQ-9 ≥10</strong> = screen positive, needs further evaluation</li>
+            <li>💎 <strong>Screen for bipolar</strong> before starting antidepressant (risk of triggering mania)</li>
+            <li>💎 <strong>Bupropion:</strong> No sexual side effects; contraindicated in seizures, eating disorders</li>
+            <li>💎 <strong>Antidepressants take 2-4 weeks</strong> for initial effect; 6-8 weeks for full response</li>
+        </ul>
+        
+        <h3>Anxiety Pearls</h3>
+        <ul>
+            <li>💎 <strong>SSRIs/SNRIs are first-line</strong> for GAD, panic, PTSD</li>
+            <li>💎 <strong>Avoid long-term benzodiazepines</strong> — use for acute/short-term only</li>
+            <li>💎 <strong>Prazosin</strong> for PTSD nightmares</li>
+            <li>💎 <strong>Beta-blockers only for performance anxiety</strong> — not effective for generalized anxiety</li>
+        </ul>
+        
+        <h3>Bipolar Pearls</h3>
+        <ul>
+            <li>💎 <strong>Antidepressant monotherapy is contraindicated</strong> in bipolar</li>
+            <li>💎 <strong>Lithium:</strong> Narrow therapeutic window; interacts with NSAIDs, ACE inhibitors, thiazides</li>
+            <li>💎 <strong>Valproate:</strong> Teratogenic (neural tube defects) — avoid in pregnancy</li>
+            <li>💎 <strong>Quetiapine</strong> is effective for both acute mania and bipolar depression</li>
+        </ul>
+        
+        <h3>Substance Use Pearls</h3>
+        <ul>
+            <li>💎 <strong>Alcohol and benzodiazepine withdrawal</strong> can be life-threatening (seizures, DTs)</li>
+            <li>💎 <strong>Opioid withdrawal is NOT life-threatening</strong> — treat symptoms, start MOUD</li>
+            <li>💎 <strong>Give thiamine BEFORE glucose</strong> in suspected Wernicke encephalopathy</li>
+            <li>💎 <strong>Naltrexone:</strong> Good for alcohol AND opioid use disorder; contraindicated if on opioids</li>
+            <li>💎 <strong>Any physician can prescribe buprenorphine</strong> (X-waiver eliminated)</li>
+        </ul>
+        
+        <h3>Psychosis/NMS Pearls</h3>
+        <ul>
+            <li>💎 <strong>Clozapine</strong> is reserved for treatment-resistant schizophrenia; requires ANC monitoring</li>
+            <li>💎 <strong>NMS:</strong> Fever + rigidity + altered mental status + elevated CK; treat with dantrolene, bromocriptine</li>
+            <li>💎 <strong>Serotonin syndrome:</strong> Rapid onset, hyperreflexia, clonus; treat with cyproheptadine</li>
+            <li>💎 <strong>Tardive dyskinesia:</strong> Late-onset, treat with VMAT2 inhibitors (valbenazine)</li>
+        </ul>
+        
+        <h3>Somatic/Capacity Pearls</h3>
+        <ul>
+            <li>💎 <strong>Conversion disorder:</strong> Neurologic symptoms incompatible with anatomy; positive signs on exam</li>
+            <li>💎 <strong>Factitious disorder:</strong> Intentional symptoms for sick role (internal motivation)</li>
+            <li>💎 <strong>Malingering:</strong> Intentional symptoms for external gain (not a disorder)</li>
+            <li>💎 <strong>Capacity:</strong> Understanding, Appreciation, Reasoning, Choice — decision-specific</li>
+        </ul>
+    </div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<footer>
+    <h3>🧠 Psychiatry Study Guide</h3>
+    <p>APA • ASAM Guidelines</p>
+    <div style="margin-top: 20px;">
+        <a href="study_guides_index.html">📚 All Study Guides</a>
+        <a href="board_pearls.html">💎 Board Pearls</a>
+        <a href="high_value_care.html">💰 High Value Care</a>
+    </div>
+</footer>
+
+<script>
+function toggleSection(header) {
+    const section = header.closest('.section');
+    section.classList.toggle('collapsed');
+}
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.onscroll = function() {
+    const btn = document.getElementById('backToTop');
+    btn.style.display = (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? 'flex' : 'none';
+};
+
+document.getElementById('searchInput').addEventListener('input', function(e) {
+    const query = e.target.value.toLowerCase();
+    document.querySelectorAll('.section').forEach(section => {
+        const text = section.textContent.toLowerCase();
+        section.style.display = (query === '' || text.includes(query)) ? 'block' : 'none';
+        if (query !== '' && text.includes(query)) section.classList.remove('collapsed');
+    });
+});
+
+document.querySelectorAll('.section').forEach((section, index) => {
+    if (index > 0) section.classList.add('collapsed');
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Geriatrics — ABIM Study Guide</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-primary: #14b8a6;
+            --accent-secondary: #5eead4;
+            --green: #10b981;
+            --red: #ef4444;
+            --yellow: #f59e0b;
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            padding-bottom: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: 16px;
+            border: 1px solid var(--accent-primary);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+        
+        .search-container { position: sticky; top: 10px; z-index: 100; margin-bottom: 20px; }
+        
+        #searchInput {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 2px solid var(--bg-tertiary);
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            outline: none;
+        }
+        
+        #searchInput:focus { border-color: var(--accent-primary); }
+        
+        .nav-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; justify-content: center; }
+        
+        .nav-tab {
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .nav-tab:hover { background: var(--bg-tertiary); color: var(--text-primary); border-color: var(--accent-primary); }
+        
+        .section { background: var(--bg-secondary); border-radius: 12px; margin-bottom: 16px; border: 1px solid var(--bg-tertiary); overflow: hidden; }
+        .section-header { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary)); }
+        .section-header:hover { background: var(--bg-tertiary); }
+        .section-header h2 { font-size: 1.2rem; color: var(--text-primary); }
+        .toggle-icon { font-size: 1.2rem; transition: transform 0.3s; }
+        .section.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .section.collapsed .section-content { display: none; }
+        .section-content { padding: 20px; border-top: 1px solid var(--bg-tertiary); }
+        
+        h3 { color: var(--accent-secondary); margin: 20px 0 12px; font-size: 1.1rem; }
+        h3:first-child { margin-top: 0; }
+        h4 { color: var(--text-primary); margin: 16px 0 8px; font-size: 1rem; }
+        p { margin-bottom: 12px; }
+        ul, ol { margin: 12px 0; padding-left: 24px; }
+        li { margin-bottom: 6px; }
+        
+        .box { padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .box-green { background: rgba(16, 185, 129, 0.1); border-left: 4px solid var(--green); }
+        .box-red { background: rgba(239, 68, 68, 0.1); border-left: 4px solid var(--red); }
+        .box-yellow { background: rgba(245, 158, 11, 0.1); border-left: 4px solid var(--yellow); }
+        .box-blue { background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--blue); }
+        .box-purple { background: rgba(139, 92, 246, 0.1); border-left: 4px solid var(--purple); }
+        .box-title { font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--bg-tertiary); }
+        th { background: var(--bg-tertiary); font-weight: 600; color: var(--accent-secondary); }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        
+        footer { text-align: center; padding: 40px 20px; margin-top: 40px; border-top: 1px solid var(--bg-tertiary); color: var(--text-secondary); }
+        footer a { color: var(--accent-primary); text-decoration: none; margin: 0 10px; }
+        
+        .back-to-top { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: var(--accent-primary); color: white; border: none; border-radius: 50%; font-size: 1.5rem; cursor: pointer; display: none; align-items: center; justify-content: center; z-index: 1000; }
+        
+        strong { color: var(--accent-secondary); }
+        
+        @media (max-width: 768px) { h1 { font-size: 1.7rem; } .section-header h2 { font-size: 1.1rem; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>👴 Geriatric Medicine</h1>
+    <p class="subtitle">Frailty • Falls • Delirium • Polypharmacy • Goals of Care</p>
+</header>
+
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="🔍 Search topics...">
+</div>
+
+<nav class="nav-tabs">
+    <a href="#assessment" class="nav-tab">Assessment</a>
+    <a href="#falls" class="nav-tab">Falls</a>
+    <a href="#delirium" class="nav-tab">Delirium</a>
+    <a href="#dementia" class="nav-tab">Dementia</a>
+    <a href="#polypharmacy" class="nav-tab">Polypharmacy</a>
+    <a href="#goals" class="nav-tab">Goals of Care</a>
+    <a href="#pearls" class="nav-tab">Board Pearls</a>
+</nav>
+
+<!-- SECTION 1: GERIATRIC ASSESSMENT -->
+<div class="section" id="assessment">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>1. Comprehensive Geriatric Assessment</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Components of CGA</h3>
+        <table>
+            <tr><th>Domain</th><th>Assessment Tools</th></tr>
+            <tr><td><strong>Functional Status</strong></td><td>ADLs, IADLs, gait speed</td></tr>
+            <tr><td><strong>Cognition</strong></td><td>MMSE, MoCA, Mini-Cog</td></tr>
+            <tr><td><strong>Mood</strong></td><td>PHQ-2, PHQ-9, GDS</td></tr>
+            <tr><td><strong>Nutrition</strong></td><td>MNA, weight loss, BMI</td></tr>
+            <tr><td><strong>Polypharmacy</strong></td><td>Medication review, Beers Criteria</td></tr>
+            <tr><td><strong>Social Support</strong></td><td>Living situation, caregivers, safety</td></tr>
+            <tr><td><strong>Goals of Care</strong></td><td>Advance directives, prognosis discussion</td></tr>
+        </table>
+        
+        <h3>Activities of Daily Living (ADLs)</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Basic ADLs — "DEATH"</div>
+            <ul>
+                <li><strong>D</strong>ressing</li>
+                <li><strong>E</strong>ating</li>
+                <li><strong>A</strong>mbulating/Transferring</li>
+                <li><strong>T</strong>oileting</li>
+                <li><strong>H</strong>ygiene (bathing, grooming)</li>
+            </ul>
+            <p>Also: Continence</p>
+        </div>
+        
+        <h3>Instrumental ADLs (IADLs)</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 IADLs — "SHAFT"</div>
+            <ul>
+                <li><strong>S</strong>hopping</li>
+                <li><strong>H</strong>ousekeeping</li>
+                <li><strong>A</strong>ccounting (finances)</li>
+                <li><strong>F</strong>ood preparation</li>
+                <li><strong>T</strong>ransportation</li>
+            </ul>
+            <p>Also: Medications, telephone use, laundry</p>
+        </div>
+        
+        <h3>Frailty</h3>
+        <p><strong>Fried Frailty Phenotype</strong> (≥3 = frail, 1-2 = pre-frail):</p>
+        <ol>
+            <li>Unintentional weight loss (>10 lbs or 5% in past year)</li>
+            <li>Exhaustion (self-reported)</li>
+            <li>Weakness (low grip strength)</li>
+            <li>Slow walking speed</li>
+            <li>Low physical activity</li>
+        </ol>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Clinical Implications of Frailty</div>
+            <ul>
+                <li>Increased mortality</li>
+                <li>Increased hospitalization</li>
+                <li>Increased falls</li>
+                <li>Higher surgical risk</li>
+                <li>Consider when making treatment decisions</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 2: FALLS -->
+<div class="section" id="falls">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>2. Falls — Risk Assessment</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Epidemiology</h3>
+        <ul>
+            <li>1 in 4 adults ≥65 falls each year</li>
+            <li>Leading cause of injury-related death in older adults</li>
+            <li>Falls cause 95% of hip fractures</li>
+        </ul>
+        
+        <h3>Risk Factors</h3>
+        <table>
+            <tr><th>Intrinsic</th><th>Extrinsic</th></tr>
+            <tr><td>Age ≥65</td><td>Environmental hazards (rugs, poor lighting)</td></tr>
+            <tr><td>Prior falls</td><td>Inappropriate footwear</td></tr>
+            <tr><td>Gait/balance impairment</td><td>Lack of assistive devices</td></tr>
+            <tr><td>Visual impairment</td><td>Medications (sedatives, antihypertensives)</td></tr>
+            <tr><td>Cognitive impairment</td><td>Alcohol use</td></tr>
+            <tr><td>Lower extremity weakness</td><td></td></tr>
+            <tr><td>Vitamin D deficiency</td><td></td></tr>
+            <tr><td>Orthostatic hypotension</td><td></td></tr>
+            <tr><td>Peripheral neuropathy</td><td></td></tr>
+        </table>
+        
+        <h3>Screening</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Annual Falls Screening (CDC STEADI)</div>
+            <ol>
+                <li>Have you fallen in the past year?</li>
+                <li>Do you feel unsteady when standing or walking?</li>
+                <li>Do you worry about falling?</li>
+            </ol>
+            <p><strong>"Yes" to any</strong> → Full fall risk assessment</p>
+        </div>
+        
+        <h3>Fall Risk Assessment</h3>
+        <ul>
+            <li><strong>Timed Up and Go (TUG):</strong> Rise from chair, walk 3m, return, sit. ≥12 seconds = increased risk</li>
+            <li><strong>30-Second Chair Stand:</strong> Number of stands in 30 sec. &lt;8 = increased risk</li>
+            <li><strong>4-Stage Balance Test:</strong> Tandem, semi-tandem, side-by-side, one-leg stand</li>
+            <li><strong>Orthostatic vitals</strong></li>
+            <li><strong>Vision screening</strong></li>
+            <li><strong>Medication review</strong></li>
+            <li><strong>Footwear assessment</strong></li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 3: FALLS PREVENTION -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>3. Falls — Prevention & Management</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Evidence-Based Interventions</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Proven Fall Prevention Strategies</div>
+            <ul>
+                <li><strong>Exercise:</strong> Balance and strength training (Tai Chi, physical therapy)</li>
+                <li><strong>Vitamin D:</strong> 800-1000 IU daily if deficient or at risk</li>
+                <li><strong>Medication review:</strong> Reduce/stop fall-risk medications (see Beers)</li>
+                <li><strong>Vision correction</strong></li>
+                <li><strong>Home safety assessment:</strong> Remove hazards, improve lighting, grab bars</li>
+                <li><strong>Footwear:</strong> Non-slip, low-heeled, well-fitting</li>
+                <li><strong>Assistive devices:</strong> Cane, walker as appropriate</li>
+            </ul>
+        </div>
+        
+        <h3>High-Risk Medications for Falls</h3>
+        <table>
+            <tr><th>Class</th><th>Examples</th><th>Mechanism</th></tr>
+            <tr><td>Benzodiazepines</td><td>Lorazepam, diazepam</td><td>Sedation, impaired balance</td></tr>
+            <tr><td>Non-benzo hypnotics</td><td>Zolpidem, eszopiclone</td><td>Sedation</td></tr>
+            <tr><td>Anticholinergics</td><td>Diphenhydramine, oxybutynin</td><td>Sedation, confusion</td></tr>
+            <tr><td>Opioids</td><td>All</td><td>Sedation, dizziness</td></tr>
+            <tr><td>Antipsychotics</td><td>Quetiapine, haloperidol</td><td>Sedation, orthostasis, EPS</td></tr>
+            <tr><td>Antihypertensives</td><td>Alpha-blockers, diuretics</td><td>Orthostatic hypotension</td></tr>
+            <tr><td>Antidepressants</td><td>TCAs, SSRIs</td><td>Sedation, hyponatremia</td></tr>
+        </table>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Board Pearl</div>
+            <p><strong>Multifactorial interventions</strong> are most effective for fall prevention. Single interventions (except exercise) are less effective than combined approaches.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 4: DELIRIUM -->
+<div class="section" id="delirium">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>4. Delirium — Diagnosis</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Definition</h3>
+        <p>Acute, fluctuating disturbance in attention and awareness, with cognitive change, not explained by preexisting dementia.</p>
+        
+        <h3>Types</h3>
+        <table>
+            <tr><th>Type</th><th>Features</th><th>Notes</th></tr>
+            <tr><td><strong>Hyperactive</strong></td><td>Agitation, restlessness, hallucinations</td><td>Easily recognized</td></tr>
+            <tr><td><strong>Hypoactive</strong></td><td>Lethargy, decreased activity, withdrawal</td><td>Often missed; worse prognosis</td></tr>
+            <tr><td><strong>Mixed</strong></td><td>Alternating features</td><td>Most common</td></tr>
+        </table>
+        
+        <h3>Screening Tools</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Confusion Assessment Method (CAM)</div>
+            <p><strong>Delirium = 1 + 2 + (3 or 4)</strong></p>
+            <ol>
+                <li><strong>Acute onset and fluctuating course</strong></li>
+                <li><strong>Inattention</strong> (difficulty focusing, easily distracted)</li>
+                <li>Disorganized thinking OR</li>
+                <li>Altered level of consciousness</li>
+            </ol>
+        </div>
+        
+        <h4>CAM-ICU</h4>
+        <p>Modified version for intubated/non-verbal patients</p>
+        
+        <h3>Delirium vs Dementia</h3>
+        <table>
+            <tr><th>Feature</th><th>Delirium</th><th>Dementia</th></tr>
+            <tr><td>Onset</td><td>Acute (hours to days)</td><td>Insidious (months to years)</td></tr>
+            <tr><td>Course</td><td>Fluctuating</td><td>Progressive, stable day-to-day</td></tr>
+            <tr><td>Attention</td><td>Impaired (hallmark)</td><td>Usually intact until late</td></tr>
+            <tr><td>Consciousness</td><td>Altered</td><td>Usually normal</td></tr>
+            <tr><td>Reversibility</td><td>Usually reversible</td><td>Usually irreversible</td></tr>
+        </table>
+        
+        <div class="box box-red">
+            <div class="box-title">🚨 Key Point</div>
+            <p><strong>Dementia is a major risk factor for delirium.</strong> Delirium superimposed on dementia is common and associated with worse outcomes.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 5: DELIRIUM CAUSES & MANAGEMENT -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>5. Delirium — Causes & Management</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Common Causes — "I WATCH DEATH"</h3>
+        <div class="box box-purple">
+            <div class="box-title">🔍 Mnemonic</div>
+            <ul>
+                <li><strong>I</strong>nfection (UTI, pneumonia, sepsis)</li>
+                <li><strong>W</strong>ithdrawal (alcohol, benzodiazepines, opioids)</li>
+                <li><strong>A</strong>cute metabolic (electrolytes, glucose, renal/hepatic failure)</li>
+                <li><strong>T</strong>rauma (head injury, pain, surgery)</li>
+                <li><strong>C</strong>NS pathology (stroke, seizure, meningitis)</li>
+                <li><strong>H</strong>ypoxia</li>
+                <li><strong>D</strong>eficiencies (thiamine, B12)</li>
+                <li><strong>E</strong>ndocrine (thyroid, adrenal)</li>
+                <li><strong>A</strong>cute vascular (MI, PE, CHF)</li>
+                <li><strong>T</strong>oxins/drugs (anticholinergics, opioids, benzos, steroids)</li>
+                <li><strong>H</strong>eavy metals (rarely)</li>
+            </ul>
+        </div>
+        
+        <h3>High-Risk Medications for Delirium</h3>
+        <ul>
+            <li><strong>Anticholinergics:</strong> Diphenhydramine, oxybutynin, TCAs, antipsychotics</li>
+            <li><strong>Benzodiazepines</strong></li>
+            <li><strong>Opioids</strong> (especially meperidine)</li>
+            <li><strong>Corticosteroids</strong></li>
+            <li><strong>H2 blockers</strong> (cimetidine, ranitidine)</li>
+            <li><strong>Fluoroquinolones</strong></li>
+        </ul>
+        
+        <h3>Workup</h3>
+        <ul>
+            <li>Complete metabolic panel, glucose</li>
+            <li>CBC</li>
+            <li>Urinalysis, urine culture</li>
+            <li>Chest X-ray</li>
+            <li>Blood cultures if febrile</li>
+            <li>Medication review</li>
+            <li>Consider: TSH, B12, ammonia, drug levels, CT head, LP if indicated</li>
+        </ul>
+        
+        <h3>Non-Pharmacologic Management (FIRST LINE)</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ HELP Protocol / Multicomponent Interventions</div>
+            <ul>
+                <li><strong>Reorientation:</strong> Clocks, calendars, familiar objects, family presence</li>
+                <li><strong>Sleep promotion:</strong> Reduce nighttime interruptions, daytime activity</li>
+                <li><strong>Sensory optimization:</strong> Glasses, hearing aids</li>
+                <li><strong>Early mobilization</strong></li>
+                <li><strong>Hydration and nutrition</strong></li>
+                <li><strong>Avoid physical restraints</strong> (worsen agitation)</li>
+                <li><strong>Minimize lines, catheters</strong></li>
+                <li><strong>Treat pain</strong></li>
+            </ul>
+        </div>
+        
+        <h3>Pharmacologic Management</h3>
+        <div class="box box-red">
+            <div class="box-title">🚫 Medications Are Second-Line</div>
+            <p>Use only when patient is a danger to self or others and non-pharmacologic measures have failed.</p>
+        </div>
+        
+        <ul>
+            <li><strong>Haloperidol:</strong> 0.5-1mg PO/IM; avoid if QTc prolonged, Parkinson's, DLB</li>
+            <li><strong>Atypical antipsychotics:</strong> Quetiapine 12.5-25mg, risperidone 0.25-0.5mg</li>
+            <li><strong>Avoid benzodiazepines</strong> except for alcohol/benzo withdrawal or seizures</li>
+        </ul>
+        
+        <h3>Prevention</h3>
+        <p>Up to 40% of delirium is preventable with multicomponent interventions (HELP program)</p>
+    </div>
+</div>
+
+<!-- SECTION 6: DEMENTIA OVERVIEW -->
+<div class="section" id="dementia">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>6. Dementia — Overview</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Definition (Major Neurocognitive Disorder)</h3>
+        <p>Significant cognitive decline in ≥1 domain (memory, executive function, language, visuospatial, social cognition) that interferes with independence in daily activities.</p>
+        
+        <h3>Cognitive Screening Tools</h3>
+        <table>
+            <tr><th>Tool</th><th>Time</th><th>Scoring</th></tr>
+            <tr><td><strong>Mini-Cog</strong></td><td>3 min</td><td>3-word recall + clock draw</td></tr>
+            <tr><td><strong>MMSE</strong></td><td>10 min</td><td>0-30; &lt;24 abnormal</td></tr>
+            <tr><td><strong>MoCA</strong></td><td>10 min</td><td>0-30; &lt;26 abnormal; better for MCI</td></tr>
+        </table>
+        
+        <h3>Dementia Types</h3>
+        <table>
+            <tr><th>Type</th><th>% of Cases</th><th>Key Features</th></tr>
+            <tr>
+                <td><strong>Alzheimer's</strong></td>
+                <td>60-80%</td>
+                <td>Gradual onset, memory loss early, hippocampal atrophy</td>
+            </tr>
+            <tr>
+                <td><strong>Vascular</strong></td>
+                <td>10-20%</td>
+                <td>Stepwise decline, focal deficits, CVD risk factors</td>
+            </tr>
+            <tr>
+                <td><strong>Lewy Body (DLB)</strong></td>
+                <td>5-10%</td>
+                <td>Visual hallucinations, parkinsonism, fluctuations, REM sleep disorder</td>
+            </tr>
+            <tr>
+                <td><strong>Frontotemporal</strong></td>
+                <td>5-10%</td>
+                <td>Personality/behavior changes, language problems, younger onset</td>
+            </tr>
+            <tr>
+                <td><strong>Parkinson's dementia</strong></td>
+                <td>—</td>
+                <td>Motor symptoms precede dementia by ≥1 year</td>
+            </tr>
+        </table>
+        
+        <h3>Reversible Causes — Rule Out</h3>
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ "DEMENTIA" Mnemonic</div>
+            <ul>
+                <li><strong>D</strong>rugs (anticholinergics, sedatives)</li>
+                <li><strong>E</strong>motional (depression = pseudodementia)</li>
+                <li><strong>M</strong>etabolic (thyroid, B12, folate, electrolytes)</li>
+                <li><strong>E</strong>yes/Ears (sensory impairment)</li>
+                <li><strong>N</strong>ormal pressure hydrocephalus</li>
+                <li><strong>T</strong>umor/Trauma/Toxins</li>
+                <li><strong>I</strong>nfection (syphilis, HIV, prion)</li>
+                <li><strong>A</strong>lcohol</li>
+            </ul>
+        </div>
+        
+        <h3>Workup</h3>
+        <ul>
+            <li>CBC, CMP, TSH, B12, folate</li>
+            <li>Consider: HIV, syphilis, heavy metals if indicated</li>
+            <li>Brain imaging (CT or MRI) — at least once to rule out structural causes</li>
+            <li>Depression screening</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 7: DEMENTIA MANAGEMENT -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>7. Dementia — Management</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Pharmacologic Treatment — Cognitive Symptoms</h3>
+        <table>
+            <tr><th>Class</th><th>Agents</th><th>Indication</th><th>Side Effects</th></tr>
+            <tr>
+                <td><strong>Cholinesterase Inhibitors</strong></td>
+                <td>Donepezil, rivastigmine, galantamine</td>
+                <td>Mild-moderate Alzheimer's, DLB</td>
+                <td>Nausea, diarrhea, bradycardia</td>
+            </tr>
+            <tr>
+                <td><strong>NMDA Antagonist</strong></td>
+                <td>Memantine</td>
+                <td>Moderate-severe Alzheimer's</td>
+                <td>Dizziness, confusion, headache</td>
+            </tr>
+        </table>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Realistic Expectations</div>
+            <p>Medications provide <strong>modest symptomatic benefit</strong> at best. They do not cure or significantly slow disease progression. Benefits typically last 6-12 months.</p>
+        </div>
+        
+        <h3>Behavioral & Psychological Symptoms (BPSD)</h3>
+        <ul>
+            <li>Agitation, aggression</li>
+            <li>Psychosis (hallucinations, delusions)</li>
+            <li>Depression, anxiety</li>
+            <li>Wandering, sleep disturbance</li>
+        </ul>
+        
+        <h4>Non-Pharmacologic Approaches (FIRST LINE)</h4>
+        <div class="box box-green">
+            <div class="box-title">✓ Behavioral Interventions</div>
+            <ul>
+                <li>Identify and address triggers (pain, infection, constipation)</li>
+                <li>Structured routine</li>
+                <li>Music therapy, aromatherapy</li>
+                <li>Redirection, validation</li>
+                <li>Caregiver education</li>
+                <li>Safe environment</li>
+            </ul>
+        </div>
+        
+        <h4>Pharmacologic — Use Sparingly</h4>
+        <div class="box box-red">
+            <div class="box-title">🚫 Black Box Warning</div>
+            <p><strong>Antipsychotics increase mortality</strong> in elderly with dementia (1.6-1.7× risk). Use only for severe symptoms when non-pharmacologic approaches fail.</p>
+        </div>
+        
+        <ul>
+            <li><strong>Depression:</strong> SSRIs (sertraline, citalopram) — avoid TCAs</li>
+            <li><strong>Agitation:</strong> Attempt non-pharmacologic first; low-dose antipsychotic if danger to self/others</li>
+            <li><strong>Sleep:</strong> Sleep hygiene; melatonin; avoid benzodiazepines</li>
+        </ul>
+        
+        <h3>Driving</h3>
+        <ul>
+            <li>Mild dementia does not automatically preclude driving</li>
+            <li>Assess individually; consider driving evaluation</li>
+            <li>Document discussions and recommendations</li>
+            <li>Know state reporting requirements</li>
+        </ul>
+        
+        <h3>Caregiver Support</h3>
+        <ul>
+            <li>Assess caregiver burnout</li>
+            <li>Respite care</li>
+            <li>Support groups (Alzheimer's Association)</li>
+            <li>Community resources</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 8: POLYPHARMACY -->
+<div class="section" id="polypharmacy">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>8. Polypharmacy & Beers Criteria</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Definition</h3>
+        <ul>
+            <li><strong>Polypharmacy:</strong> Usually ≥5 medications</li>
+            <li><strong>Hyperpolypharmacy:</strong> ≥10 medications</li>
+        </ul>
+        
+        <h3>Consequences of Polypharmacy</h3>
+        <ul>
+            <li>Adverse drug reactions</li>
+            <li>Drug-drug interactions</li>
+            <li>Falls</li>
+            <li>Cognitive impairment</li>
+            <li>Non-adherence</li>
+            <li>Increased healthcare costs</li>
+        </ul>
+        
+        <h3>AGS Beers Criteria 2023 — Key Categories</h3>
+        <div class="box box-red">
+            <div class="box-title">🚫 Potentially Inappropriate Medications in Elderly</div>
+        </div>
+        
+        <h4>Avoid in Most Older Adults</h4>
+        <table>
+            <tr><th>Drug Class</th><th>Examples</th><th>Concern</th></tr>
+            <tr>
+                <td>First-gen antihistamines</td>
+                <td>Diphenhydramine, hydroxyzine</td>
+                <td>Anticholinergic; confusion, falls</td>
+            </tr>
+            <tr>
+                <td>Benzodiazepines</td>
+                <td>All</td>
+                <td>Falls, fractures, cognitive impairment</td>
+            </tr>
+            <tr>
+                <td>Non-benzo hypnotics</td>
+                <td>Zolpidem, eszopiclone</td>
+                <td>Falls, fractures, minimal benefit</td>
+            </tr>
+            <tr>
+                <td>Muscle relaxants</td>
+                <td>Cyclobenzaprine, methocarbamol</td>
+                <td>Anticholinergic; poorly tolerated</td>
+            </tr>
+            <tr>
+                <td>Antipsychotics</td>
+                <td>All (for dementia)</td>
+                <td>Increased mortality, stroke</td>
+            </tr>
+            <tr>
+                <td>Proton pump inhibitors</td>
+                <td>All (>8 weeks without indication)</td>
+                <td>C. diff, fractures, hypomagnesemia</td>
+            </tr>
+            <tr>
+                <td>Sulfonylureas (long-acting)</td>
+                <td>Glyburide, glimepiride</td>
+                <td>Prolonged hypoglycemia</td>
+            </tr>
+            <tr>
+                <td>NSAIDs</td>
+                <td>All (chronic use)</td>
+                <td>GI bleed, AKI, CV events</td>
+            </tr>
+            <tr>
+                <td>Alpha-blockers</td>
+                <td>Prazosin, doxazosin</td>
+                <td>Orthostatic hypotension</td>
+            </tr>
+        </table>
+        
+        <h4>Anticholinergic Burden</h4>
+        <p><strong>High anticholinergic burden = cognitive impairment, falls, delirium</strong></p>
+        <p>Common anticholinergic medications:</p>
+        <ul>
+            <li>Diphenhydramine</li>
+            <li>Oxybutynin, tolterodine</li>
+            <li>TCAs (amitriptyline, nortriptyline)</li>
+            <li>First-generation antipsychotics</li>
+            <li>Paroxetine (more than other SSRIs)</li>
+        </ul>
+        
+        <h3>Deprescribing</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Deprescribing Approach</div>
+            <ol>
+                <li>Review all medications (including OTC, supplements)</li>
+                <li>Identify potentially inappropriate medications</li>
+                <li>Assess each medication: Is there still an indication?</li>
+                <li>Prioritize which to stop based on harm/benefit</li>
+                <li>Taper when appropriate (don't abruptly stop)</li>
+                <li>Monitor for withdrawal or recurrence</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 9: PRESSURE INJURIES -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>9. Pressure Injuries</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Staging</h3>
+        <table>
+            <tr><th>Stage</th><th>Description</th></tr>
+            <tr><td><strong>Stage 1</strong></td><td>Non-blanchable erythema of intact skin</td></tr>
+            <tr><td><strong>Stage 2</strong></td><td>Partial-thickness loss (dermis); blister or shallow ulcer</td></tr>
+            <tr><td><strong>Stage 3</strong></td><td>Full-thickness loss; subcutaneous fat visible; no bone/tendon</td></tr>
+            <tr><td><strong>Stage 4</strong></td><td>Full-thickness with exposed bone, tendon, or muscle</td></tr>
+            <tr><td><strong>Unstageable</strong></td><td>Obscured by slough or eschar</td></tr>
+            <tr><td><strong>Deep Tissue Injury</strong></td><td>Purple/maroon discoloration; suspected deep tissue damage</td></tr>
+        </table>
+        
+        <h3>Risk Factors</h3>
+        <ul>
+            <li>Immobility</li>
+            <li>Malnutrition</li>
+            <li>Incontinence</li>
+            <li>Decreased sensation</li>
+            <li>Vascular disease</li>
+        </ul>
+        
+        <h3>Prevention</h3>
+        <ul>
+            <li><strong>Reposition every 2 hours</strong></li>
+            <li>Pressure-redistributing surfaces</li>
+            <li>Keep skin clean and dry</li>
+            <li>Optimize nutrition</li>
+            <li>Use Braden Scale for risk assessment</li>
+        </ul>
+        
+        <h3>Treatment</h3>
+        <ul>
+            <li>Offload pressure</li>
+            <li>Debride necrotic tissue (except stable heel eschar)</li>
+            <li>Keep wound moist (hydrocolloid, foam, alginate dressings)</li>
+            <li>Treat infection if present</li>
+            <li>Optimize nutrition (protein, vitamin C, zinc)</li>
+            <li>Consider negative pressure wound therapy for deep wounds</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 10: INCONTINENCE -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>10. Urinary Incontinence</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Types</h3>
+        <table>
+            <tr><th>Type</th><th>Mechanism</th><th>Features</th></tr>
+            <tr>
+                <td><strong>Stress</strong></td>
+                <td>Weak pelvic floor/sphincter</td>
+                <td>Leakage with cough, sneeze, exertion; more common in women</td>
+            </tr>
+            <tr>
+                <td><strong>Urge</strong></td>
+                <td>Detrusor overactivity</td>
+                <td>Sudden urge, unable to delay; frequency, nocturia</td>
+            </tr>
+            <tr>
+                <td><strong>Overflow</strong></td>
+                <td>Bladder outlet obstruction or detrusor weakness</td>
+                <td>Dribbling, incomplete emptying; elevated PVR; more common in men (BPH)</td>
+            </tr>
+            <tr>
+                <td><strong>Functional</strong></td>
+                <td>Physical or cognitive barriers</td>
+                <td>Can't get to toilet in time; dementia, immobility</td>
+            </tr>
+            <tr>
+                <td><strong>Mixed</strong></td>
+                <td>Combination</td>
+                <td>Usually stress + urge</td>
+            </tr>
+        </table>
+        
+        <h3>Transient Causes — "DIAPPERS"</h3>
+        <ul>
+            <li><strong>D</strong>elirium</li>
+            <li><strong>I</strong>nfection (UTI)</li>
+            <li><strong>A</strong>trophic vaginitis</li>
+            <li><strong>P</strong>harmaceuticals (diuretics, anticholinergics, sedatives)</li>
+            <li><strong>P</strong>sychological (depression)</li>
+            <li><strong>E</strong>xcessive urine output (hyperglycemia, CHF, hypercalcemia)</li>
+            <li><strong>R</strong>estricted mobility</li>
+            <li><strong>S</strong>tool impaction</li>
+        </ul>
+        
+        <h3>Treatment by Type</h3>
+        <table>
+            <tr><th>Type</th><th>First-Line</th><th>Other Options</th></tr>
+            <tr>
+                <td>Stress</td>
+                <td>Pelvic floor exercises (Kegels)</td>
+                <td>Pessary, surgery (sling)</td>
+            </tr>
+            <tr>
+                <td>Urge</td>
+                <td>Bladder training, pelvic floor exercises</td>
+                <td>Antimuscarinics (use cautiously in elderly)</td>
+            </tr>
+            <tr>
+                <td>Overflow</td>
+                <td>Treat obstruction (BPH meds, TURP)</td>
+                <td>Intermittent catheterization if detrusor failure</td>
+            </tr>
+            <tr>
+                <td>Functional</td>
+                <td>Scheduled toileting, improve access</td>
+                <td>Treat underlying condition</td>
+            </tr>
+        </table>
+        
+        <div class="box box-red">
+            <div class="box-title">🚫 Avoid in Elderly</div>
+            <p><strong>Anticholinergic medications</strong> (oxybutynin, tolterodine) — high risk of confusion, falls. If needed, use lower doses or consider mirabegron (beta-3 agonist).</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 11: GOALS OF CARE -->
+<div class="section" id="goals">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>11. Goals of Care & Advance Care Planning</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Advance Care Planning Components</h3>
+        <ul>
+            <li><strong>Advance directive:</strong> Written document of healthcare preferences</li>
+            <li><strong>Healthcare proxy/POA:</strong> Designated decision-maker</li>
+            <li><strong>POLST/MOLST:</strong> Actionable physician orders for seriously ill</li>
+            <li><strong>Goals of care discussion:</strong> Ongoing conversation about values and preferences</li>
+        </ul>
+        
+        <h3>Prognostic Indicators for Life-Limiting Illness</h3>
+        <ul>
+            <li>Multiple hospitalizations in past year</li>
+            <li>Functional decline</li>
+            <li>Unintentional weight loss &gt;10%</li>
+            <li>"Would you be surprised if this patient died in the next year?"</li>
+            <li>Increasing symptom burden</li>
+        </ul>
+        
+        <h3>Goals of Care Conversation Framework</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 SPIKES Protocol (for serious news)</div>
+            <ol>
+                <li><strong>S</strong>etting — private, uninterrupted</li>
+                <li><strong>P</strong>erception — assess what patient/family understands</li>
+                <li><strong>I</strong>nvitation — ask how much they want to know</li>
+                <li><strong>K</strong>nowledge — share information clearly</li>
+                <li><strong>E</strong>mpathy — acknowledge emotions</li>
+                <li><strong>S</strong>trategy — discuss plan, offer support</li>
+            </ol>
+        </div>
+        
+        <h3>Key Questions to Ask</h3>
+        <ul>
+            <li>"What is your understanding of your illness?"</li>
+            <li>"What matters most to you?"</li>
+            <li>"What are you hoping for?"</li>
+            <li>"What are you worried about?"</li>
+            <li>"If you became sicker, what would be most important to you?"</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 12: PALLIATIVE & HOSPICE -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>12. Palliative Care & Hospice</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Palliative Care vs Hospice</h3>
+        <table>
+            <tr><th>Feature</th><th>Palliative Care</th><th>Hospice</th></tr>
+            <tr><td>Prognosis</td><td>Any serious illness</td><td>&lt;6 months life expectancy</td></tr>
+            <tr><td>Curative treatment</td><td>May continue</td><td>Foregone (comfort focus)</td></tr>
+            <tr><td>Setting</td><td>Any (hospital, clinic, home)</td><td>Usually home or facility</td></tr>
+            <tr><td>Insurance</td><td>Standard billing</td><td>Medicare Hospice Benefit</td></tr>
+            <tr><td>Eligibility</td><td>Anyone with serious illness</td><td>Certified terminal illness</td></tr>
+        </table>
+        
+        <h3>Common Symptoms in End-of-Life</h3>
+        <table>
+            <tr><th>Symptom</th><th>Management</th></tr>
+            <tr>
+                <td>Pain</td>
+                <td>Opioids (morphine, hydromorphone); follow WHO ladder; no ceiling dose for cancer pain</td>
+            </tr>
+            <tr>
+                <td>Dyspnea</td>
+                <td>Low-dose opioids (morphine); fan, positioning; supplemental O2 if hypoxic</td>
+            </tr>
+            <tr>
+                <td>Nausea</td>
+                <td>Ondansetron, metoclopramide, haloperidol (based on cause)</td>
+            </tr>
+            <tr>
+                <td>Secretions ("death rattle")</td>
+                <td>Glycopyrrolate, atropine (reduces new secretions; suctioning often ineffective)</td>
+            </tr>
+            <tr>
+                <td>Agitation/delirium</td>
+                <td>Treat reversible causes; haloperidol, lorazepam</td>
+            </tr>
+            <tr>
+                <td>Constipation</td>
+                <td>Prophylactic laxatives with opioids (senna, polyethylene glycol)</td>
+            </tr>
+        </table>
+        
+        <div class="box box-green">
+            <div class="box-title">✓ Key Principle</div>
+            <p><strong>Morphine for dyspnea</strong> is appropriate and does NOT hasten death when used properly. Opioids reduce sensation of breathlessness.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 13: ELDER ABUSE -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>13. Elder Abuse</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Types</h3>
+        <ul>
+            <li><strong>Physical:</strong> Bruises, fractures, burns, restraint marks</li>
+            <li><strong>Emotional/Psychological:</strong> Humiliation, threats, isolation</li>
+            <li><strong>Sexual:</strong> Non-consensual contact</li>
+            <li><strong>Financial:</strong> Exploitation, theft, coercion</li>
+            <li><strong>Neglect:</strong> Failure to provide care, nutrition, hygiene</li>
+            <li><strong>Self-neglect:</strong> Patient fails to care for self</li>
+        </ul>
+        
+        <h3>Risk Factors</h3>
+        <ul>
+            <li>Cognitive impairment</li>
+            <li>Functional dependence</li>
+            <li>Social isolation</li>
+            <li>Caregiver stress/burnout</li>
+            <li>Caregiver substance abuse or mental illness</li>
+            <li>Shared living situation</li>
+        </ul>
+        
+        <h3>Red Flags on Exam</h3>
+        <ul>
+            <li>Unexplained injuries</li>
+            <li>Injuries in various stages of healing</li>
+            <li>Delay in seeking care</li>
+            <li>Inconsistent history</li>
+            <li>Poor hygiene, malnutrition</li>
+            <li>Fearful behavior around caregiver</li>
+            <li>Caregiver speaks for patient</li>
+        </ul>
+        
+        <h3>Management</h3>
+        <div class="box box-red">
+            <div class="box-title">🚨 Mandatory Reporting</div>
+            <p>Most states require <strong>mandatory reporting</strong> of suspected elder abuse to Adult Protective Services (APS). Document carefully and report even if not certain.</p>
+        </div>
+        
+        <ul>
+            <li>Interview patient alone</li>
+            <li>Document injuries with photographs</li>
+            <li>Assess safety — is patient safe to go home?</li>
+            <li>Report to APS</li>
+            <li>Involve social work</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 14: NUTRITION -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>14. Nutrition & Malnutrition</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Screening</h3>
+        <ul>
+            <li><strong>MNA (Mini Nutritional Assessment):</strong> Validated for older adults</li>
+            <li><strong>MUST (Malnutrition Universal Screening Tool)</strong></li>
+            <li>Weight loss &gt;5% in 1 month or &gt;10% in 6 months = significant</li>
+        </ul>
+        
+        <h3>Causes of Malnutrition — "MEALS ON WHEELS"</h3>
+        <ul>
+            <li><strong>M</strong>edications</li>
+            <li><strong>E</strong>motional (depression)</li>
+            <li><strong>A</strong>norexia (late-life)</li>
+            <li><strong>L</strong>ate-life paranoia</li>
+            <li><strong>S</strong>wallowing problems</li>
+            <li><strong>O</strong>ral/dental problems</li>
+            <li><strong>N</strong>o money (poverty)</li>
+            <li><strong>W</strong>andering (dementia)</li>
+            <li><strong>H</strong>yperthyroidism/disease</li>
+            <li><strong>E</strong>ntry problems (malabsorption)</li>
+            <li><strong>E</strong>ating problems (inability to self-feed)</li>
+            <li><strong>L</strong>ow-salt, low-cholesterol diets</li>
+            <li><strong>S</strong>hopping/food preparation difficulties</li>
+        </ul>
+        
+        <h3>Management</h3>
+        <ul>
+            <li>Treat underlying cause</li>
+            <li>Liberalize diet (avoid overly restrictive diets in elderly)</li>
+            <li>Fortify foods</li>
+            <li>Oral nutritional supplements</li>
+            <li>Address dental issues</li>
+            <li>Social eating, pleasant environment</li>
+        </ul>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Tube Feeding in Advanced Dementia</div>
+            <p>Tube feeding does <strong>NOT improve survival or quality of life</strong> in advanced dementia. Associated with aspiration, infections, restraints. Careful hand-feeding is preferred.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 15: SENSORY IMPAIRMENT -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>15. Sensory Impairment</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Vision</h3>
+        <table>
+            <tr><th>Condition</th><th>Features</th><th>Management</th></tr>
+            <tr>
+                <td>Cataracts</td>
+                <td>Gradual, painless vision loss; glare</td>
+                <td>Surgery when impairs function</td>
+            </tr>
+            <tr>
+                <td>Macular degeneration</td>
+                <td>Central vision loss; drusen</td>
+                <td>AREDS vitamins (intermediate AMD); anti-VEGF (wet AMD)</td>
+            </tr>
+            <tr>
+                <td>Glaucoma</td>
+                <td>Peripheral vision loss; elevated IOP</td>
+                <td>Eye drops, laser, surgery</td>
+            </tr>
+            <tr>
+                <td>Diabetic retinopathy</td>
+                <td>Microaneurysms, hemorrhages</td>
+                <td>Glycemic control; laser; anti-VEGF</td>
+            </tr>
+        </table>
+        
+        <h3>Hearing</h3>
+        <ul>
+            <li><strong>Presbycusis:</strong> Age-related hearing loss; high-frequency loss first</li>
+            <li><strong>Screening:</strong> Whispered voice test, finger rub, audiometry</li>
+            <li><strong>Treatment:</strong> Hearing aids (underutilized), cochlear implants for profound loss</li>
+        </ul>
+        
+        <h3>Consequences of Sensory Impairment</h3>
+        <ul>
+            <li>Falls</li>
+            <li>Depression</li>
+            <li>Social isolation</li>
+            <li>Cognitive decline (especially hearing loss)</li>
+            <li>Functional impairment</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 16: BOARD PEARLS -->
+<div class="section" id="pearls">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>16. High-Yield Board Pearls</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Geriatric Assessment Pearls</h3>
+        <ul>
+            <li>💎 <strong>Functional status (ADLs/IADLs)</strong> is the best predictor of outcomes in elderly</li>
+            <li>💎 <strong>Frailty</strong> = weight loss, exhaustion, weakness, slow gait, low activity (≥3 of 5)</li>
+            <li>💎 <strong>Stop cancer screening</strong> when life expectancy &lt;10 years</li>
+        </ul>
+        
+        <h3>Falls Pearls</h3>
+        <ul>
+            <li>💎 <strong>Exercise (balance + strength)</strong> is the most effective fall prevention intervention</li>
+            <li>💎 <strong>Vitamin D 800-1000 IU</strong> reduces falls in deficient/at-risk patients</li>
+            <li>💎 <strong>Timed Up and Go ≥12 seconds</strong> = increased fall risk</li>
+            <li>💎 <strong>Multifactorial interventions</strong> are most effective</li>
+        </ul>
+        
+        <h3>Delirium Pearls</h3>
+        <ul>
+            <li>💎 <strong>CAM criteria:</strong> Acute + fluctuating + inattention + (disorganized thinking OR altered consciousness)</li>
+            <li>💎 <strong>Hypoactive delirium</strong> is often missed and has worse prognosis</li>
+            <li>💎 <strong>Non-pharmacologic interventions are FIRST-LINE</strong></li>
+            <li>💎 <strong>Avoid benzodiazepines</strong> except for alcohol/benzo withdrawal</li>
+            <li>💎 <strong>Dementia is the #1 risk factor</strong> for delirium</li>
+        </ul>
+        
+        <h3>Dementia Pearls</h3>
+        <ul>
+            <li>💎 <strong>Rule out reversible causes:</strong> B12, TSH, depression, medications</li>
+            <li>💎 <strong>DLB:</strong> Visual hallucinations, parkinsonism, fluctuations, RBD, sensitive to antipsychotics</li>
+            <li>💎 <strong>NPH:</strong> "Wet, wacky, wobbly" — gait first, then dementia, then incontinence</li>
+            <li>💎 <strong>Antipsychotics increase mortality</strong> in dementia patients (black box warning)</li>
+        </ul>
+        
+        <h3>Polypharmacy Pearls</h3>
+        <ul>
+            <li>💎 <strong>Beers Criteria:</strong> Avoid benzos, anticholinergics, long-acting sulfonylureas, chronic NSAIDs, PPIs without indication</li>
+            <li>💎 <strong>Diphenhydramine</strong> is strongly anticholinergic — avoid in elderly</li>
+            <li>💎 <strong>Deprescribe</strong> when indication no longer exists or harm outweighs benefit</li>
+        </ul>
+        
+        <h3>End-of-Life Pearls</h3>
+        <ul>
+            <li>💎 <strong>Morphine for dyspnea</strong> is appropriate and effective in terminal illness</li>
+            <li>💎 <strong>Tube feeding in advanced dementia</strong> does NOT improve outcomes</li>
+            <li>💎 <strong>Hospice eligibility:</strong> Prognosis &lt;6 months if disease runs its usual course</li>
+            <li>💎 <strong>Palliative care ≠ hospice</strong> — palliative care can be concurrent with curative treatment</li>
+        </ul>
+        
+        <h3>Other Pearls</h3>
+        <ul>
+            <li>💎 <strong>Elder abuse:</strong> Mandatory reporting to Adult Protective Services in most states</li>
+            <li>💎 <strong>Stress incontinence:</strong> Pelvic floor exercises first</li>
+            <li>💎 <strong>Pressure injury prevention:</strong> Reposition every 2 hours</li>
+            <li>💎 <strong>Hearing loss</strong> is associated with cognitive decline</li>
+        </ul>
+    </div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<footer>
+    <h3>👴 Geriatric Medicine Study Guide</h3>
+    <p>AGS • Beers Criteria • USPSTF Guidelines</p>
+    <div style="margin-top: 20px;">
+        <a href="study_guides_index.html">📚 All Study Guides</a>
+        <a href="board_pearls.html">💎 Board Pearls</a>
+        <a href="high_value_care.html">💰 High Value Care</a>
+    </div>
+</footer>
+
+<script>
+function toggleSection(header) { header.closest('.section').classList.toggle('collapsed'); }
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+window.onscroll = function() { document.getElementById('backToTop').style.display = (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? 'flex' : 'none'; };
+document.getElementById('searchInput').addEventListener('input', function(e) {
+    const query = e.target.value.toLowerCase();
+    document.querySelectorAll('.section').forEach(section => {
+        const text = section.textContent.toLowerCase();
+        section.style.display = (query === '' || text.includes(query)) ? 'block' : 'none';
+        if (query !== '' && text.includes(query)) section.classList.remove('collapsed');
+    });
+});
+document.querySelectorAll('.section').forEach((section, index) => { if (index > 0) section.classList.add('collapsed'); });
+</script>
+
+</body>
+</html>

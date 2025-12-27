@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>General Internal Medicine — ABIM Study Guide</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-primary: #6366f1;
+            --accent-secondary: #818cf8;
+            --green: #10b981;
+            --red: #ef4444;
+            --yellow: #f59e0b;
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            padding-bottom: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: 16px;
+            border: 1px solid var(--accent-primary);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+        
+        /* Search */
+        .search-container {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            margin-bottom: 20px;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 2px solid var(--bg-tertiary);
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            outline: none;
+        }
+        
+        #searchInput:focus { border-color: var(--accent-primary); }
+        
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+        
+        .nav-tab {
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .nav-tab:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--accent-primary);
+        }
+        
+        /* Sections */
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid var(--bg-tertiary);
+            overflow: hidden;
+        }
+        
+        .section-header {
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+        }
+        
+        .section-header:hover { background: var(--bg-tertiary); }
+        
+        .section-header h2 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+        
+        .toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .section.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .section.collapsed .section-content { display: none; }
+        
+        .section-content {
+            padding: 20px;
+            border-top: 1px solid var(--bg-tertiary);
+        }
+        
+        /* Content Styling */
+        h3 {
+            color: var(--accent-secondary);
+            margin: 20px 0 12px;
+            font-size: 1.1rem;
+        }
+        
+        h3:first-child { margin-top: 0; }
+        
+        h4 {
+            color: var(--text-primary);
+            margin: 16px 0 8px;
+            font-size: 1rem;
+        }
+        
+        p { margin-bottom: 12px; }
+        
+        ul, ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+        
+        li { margin-bottom: 6px; }
+        
+        /* Info Boxes */
+        .box {
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .box-green {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--green);
+        }
+        
+        .box-red {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--red);
+        }
+        
+        .box-yellow {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--yellow);
+        }
+        
+        .box-blue {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--blue);
+        }
+        
+        .box-purple {
+            background: rgba(139, 92, 246, 0.1);
+            border-left: 4px solid var(--purple);
+        }
+        
+        .box-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.9rem;
+        }
+        
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-tertiary);
+        }
+        
+        th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--accent-secondary);
+        }
+        
+        tr:hover { background: rgba(255,255,255,0.02); }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+        
+        footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        strong { color: var(--accent-secondary); }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.7rem; }
+            .section-header h2 { font-size: 1.1rem; }
+            .nav-tabs { gap: 6px; }
+            .nav-tab { padding: 6px 12px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🏥 General Internal Medicine</h1>
+    <p class="subtitle">Preventive Care • Perioperative Medicine • Ethics • Quality & Safety</p>
+</header>
+
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="🔍 Search topics...">
+</div>
+
+<nav class="nav-tabs">
+    <a href="#preventive" class="nav-tab">Preventive Care</a>
+    <a href="#periop" class="nav-tab">Perioperative</a>
+    <a href="#ethics" class="nav-tab">Ethics</a>
+    <a href="#safety" class="nav-tab">Patient Safety</a>
+    <a href="#eol" class="nav-tab">End of Life</a>
+    <a href="#pearls" class="nav-tab">Board Pearls</a>
+</nav>
+
+<!-- SECTION 1: PREVENTIVE CARE OVERVIEW -->
+<div class="section" id="preventive">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>1. Preventive Care Overview</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Levels of Prevention</h3>
+        <table>
+            <tr><th>Level</th><th>Definition</th><th>Examples</th></tr>
+            <tr><td><strong>Primary</strong></td><td>Prevent disease before it occurs</td><td>Vaccinations, smoking cessation, exercise</td></tr>
+            <tr><td><strong>Secondary</strong></td><td>Early detection of disease</td><td>Cancer screening, HTN screening, diabetes screening</td></tr>
+            <tr><td><strong>Tertiary</strong></td><td>Reduce complications of existing disease</td><td>Cardiac rehab, diabetes education, stroke prevention</td></tr>
+            <tr><td><strong>Quaternary</strong></td><td>Prevent overdiagnosis/overtreatment</td><td>Avoiding unnecessary tests, deprescribing</td></tr>
+        </table>
+        
+        <h3>USPSTF Grading System</h3>
+        <div class="box box-blue">
+            <div class="box-title">📊 Recommendation Grades</div>
+            <ul>
+                <li><strong>Grade A:</strong> High certainty of substantial benefit → RECOMMEND</li>
+                <li><strong>Grade B:</strong> High certainty of moderate benefit OR moderate certainty of substantial benefit → RECOMMEND</li>
+                <li><strong>Grade C:</strong> Moderate certainty of small benefit → OFFER SELECTIVELY based on patient circumstances</li>
+                <li><strong>Grade D:</strong> Evidence shows no benefit or harms outweigh benefits → DO NOT OFFER</li>
+                <li><strong>Grade I:</strong> Insufficient evidence → Cannot make recommendation</li>
+            </ul>
+        </div>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Board Pearl</div>
+            <p>Know the difference between Grade A/B (recommend) vs Grade C (shared decision-making) vs Grade D (do not recommend). ABIM loves testing Grade D recommendations!</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 2: CANCER SCREENING -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>2. Cancer Screening Recommendations</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>USPSTF Grade A/B Cancer Screening</h3>
+        <table>
+            <tr><th>Cancer</th><th>Population</th><th>Method</th><th>Interval</th></tr>
+            <tr>
+                <td><strong>Colorectal</strong></td>
+                <td>Age 45-75</td>
+                <td>Colonoscopy, FIT, FIT-DNA, CT colonography, sigmoidoscopy</td>
+                <td>Varies by method</td>
+            </tr>
+            <tr>
+                <td><strong>Breast</strong></td>
+                <td>Women 40-74</td>
+                <td>Mammography</td>
+                <td>Every 2 years</td>
+            </tr>
+            <tr>
+                <td><strong>Cervical</strong></td>
+                <td>Women 21-65</td>
+                <td>Pap ± HPV cotesting</td>
+                <td>Every 3-5 years</td>
+            </tr>
+            <tr>
+                <td><strong>Lung</strong></td>
+                <td>Age 50-80, ≥20 pack-years, current/quit &lt;15y</td>
+                <td>Low-dose CT</td>
+                <td>Annual</td>
+            </tr>
+        </table>
+        
+        <h3>Colorectal Cancer Screening Details</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Screening Options (All Acceptable)</div>
+            <ul>
+                <li><strong>Colonoscopy:</strong> Every 10 years</li>
+                <li><strong>FIT (fecal immunochemical test):</strong> Annual</li>
+                <li><strong>FIT-DNA (Cologuard):</strong> Every 1-3 years</li>
+                <li><strong>Flexible sigmoidoscopy:</strong> Every 5 years</li>
+                <li><strong>CT colonography:</strong> Every 5 years</li>
+            </ul>
+        </div>
+        
+        <h4>When to Stop Screening</h4>
+        <ul>
+            <li>Age 75-85: Individualize based on health, prior screening, preferences</li>
+            <li>Age >85: Do not screen</li>
+            <li>Life expectancy <10 years: Generally stop screening</li>
+        </ul>
+        
+        <h3>Breast Cancer Screening</h3>
+        <ul>
+            <li><strong>Age 40-49:</strong> Decision to start should be individual (Grade B)</li>
+            <li><strong>Age 50-74:</strong> Biennial mammography (Grade B)</li>
+            <li><strong>Age ≥75:</strong> Insufficient evidence (Grade I)</li>
+            <li><strong>BRCA carriers:</strong> Start screening at age 25-30 with MRI</li>
+        </ul>
+        
+        <h3>Cervical Cancer Screening</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Current Recommendations</div>
+            <ul>
+                <li><strong>Age 21-29:</strong> Pap smear every 3 years (no HPV testing)</li>
+                <li><strong>Age 30-65:</strong> Pap + HPV every 5 years (preferred) OR Pap every 3 years OR HPV alone every 5 years</li>
+                <li><strong>Age >65:</strong> Stop if adequate prior screening (3 consecutive negative Paps or 2 negative cotests in 10 years, most recent within 5 years)</li>
+                <li><strong>Post-hysterectomy:</strong> No screening if cervix removed for benign disease</li>
+            </ul>
+        </div>
+        
+        <h3>Lung Cancer Screening</h3>
+        <p><strong>LDCT Criteria:</strong></p>
+        <ul>
+            <li>Age 50-80 years</li>
+            <li>≥20 pack-year smoking history</li>
+            <li>Current smoker OR quit within past 15 years</li>
+            <li>No symptoms of lung cancer</li>
+        </ul>
+        
+        <div class="box box-red">
+            <div class="box-title">🚫 Do NOT Screen (Grade D)</div>
+            <ul>
+                <li>Ovarian cancer (CA-125, ultrasound)</li>
+                <li>Prostate cancer (PSA) — routine screening; shared decision for ages 55-69</li>
+                <li>Pancreatic cancer</li>
+                <li>Thyroid cancer (neck palpation, ultrasound)</li>
+                <li>Testicular cancer</li>
+                <li>Bladder cancer</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 3: CARDIOVASCULAR SCREENING -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>3. Cardiovascular Screening & Prevention</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Hypertension Screening</h3>
+        <ul>
+            <li><strong>Adults ≥18:</strong> Screen annually (Grade A)</li>
+            <li>Confirm elevated readings with out-of-office measurements (ABPM or home BP)</li>
+            <li>Diagnosis: ≥130/80 on repeated measurements</li>
+        </ul>
+        
+        <h3>Lipid Screening</h3>
+        <ul>
+            <li><strong>Age 40-75:</strong> Screen for dyslipidemia (Grade B)</li>
+            <li><strong>Age 20-39:</strong> Screen if other risk factors present</li>
+            <li>Non-fasting lipid panel acceptable for initial screening</li>
+        </ul>
+        
+        <h3>Statin Therapy for Primary Prevention</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Initiate Statin (USPSTF Grade B)</div>
+            <ul>
+                <li>Age 40-75 with ≥1 CVD risk factor (dyslipidemia, diabetes, HTN, smoking)</li>
+                <li>AND 10-year ASCVD risk ≥10%</li>
+            </ul>
+        </div>
+        
+        <h4>10-Year ASCVD Risk Calculator Inputs</h4>
+        <ul>
+            <li>Age, sex, race</li>
+            <li>Total cholesterol, HDL, LDL</li>
+            <li>Systolic BP, treatment status</li>
+            <li>Diabetes status</li>
+            <li>Smoking status</li>
+        </ul>
+        
+        <h3>Aspirin for Primary Prevention</h3>
+        <div class="box box-red">
+            <div class="box-title">🚫 Updated 2022 Recommendations</div>
+            <ul>
+                <li><strong>Age 40-59, ≥10% ASCVD risk:</strong> Small benefit; shared decision-making (Grade C)</li>
+                <li><strong>Age ≥60:</strong> Do NOT initiate aspirin for primary prevention (Grade D)</li>
+            </ul>
+            <p><strong>Key trials:</strong> ASPREE, ARRIVE, ASCEND showed bleeding risk often exceeds benefit</p>
+        </div>
+        
+        <h3>Abdominal Aortic Aneurysm Screening</h3>
+        <ul>
+            <li><strong>Men 65-75 who have ever smoked:</strong> One-time ultrasound (Grade B)</li>
+            <li><strong>Men 65-75 never smoked:</strong> Selective screening (Grade C)</li>
+            <li><strong>Women who never smoked:</strong> Do not screen (Grade D)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 4: INFECTIOUS DISEASE PREVENTION -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>4. Infectious Disease Prevention</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Adult Immunization Schedule Highlights</h3>
+        <table>
+            <tr><th>Vaccine</th><th>Recommendation</th><th>Notes</th></tr>
+            <tr>
+                <td><strong>Influenza</strong></td>
+                <td>Annual, all adults</td>
+                <td>High-dose or adjuvanted for age ≥65</td>
+            </tr>
+            <tr>
+                <td><strong>COVID-19</strong></td>
+                <td>Updated vaccine annually</td>
+                <td>Additional doses for immunocompromised</td>
+            </tr>
+            <tr>
+                <td><strong>Tdap/Td</strong></td>
+                <td>Tdap once, then Td every 10 years</td>
+                <td>Tdap each pregnancy (27-36 weeks)</td>
+            </tr>
+            <tr>
+                <td><strong>Pneumococcal</strong></td>
+                <td>PCV20 or PCV15 + PPSV23</td>
+                <td>All adults ≥65; younger if risk factors</td>
+            </tr>
+            <tr>
+                <td><strong>Shingles (RZV)</strong></td>
+                <td>2 doses, age ≥50</td>
+                <td>Preferred over live ZVL; OK if immunocompromised</td>
+            </tr>
+            <tr>
+                <td><strong>Hepatitis B</strong></td>
+                <td>All adults 19-59; ≥60 with risk factors</td>
+                <td>3-dose or 2-dose (Heplisav-B) series</td>
+            </tr>
+            <tr>
+                <td><strong>HPV</strong></td>
+                <td>Through age 26; shared decision 27-45</td>
+                <td>2 doses if started &lt;15; otherwise 3 doses</td>
+            </tr>
+            <tr>
+                <td><strong>RSV</strong></td>
+                <td>Single dose, age ≥60</td>
+                <td>Shared decision-making; pregnancy dose available</td>
+            </tr>
+        </table>
+        
+        <h3>Pneumococcal Vaccination</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 2024 Recommendations</div>
+            <ul>
+                <li><strong>PCV20 (Prevnar 20):</strong> Single dose — simplest approach</li>
+                <li><strong>OR PCV15 + PPSV23:</strong> PCV15 first, then PPSV23 ≥1 year later</li>
+                <li><strong>Indications for age &lt;65:</strong> Immunocompromising conditions, CSF leaks, cochlear implants, chronic heart/lung/liver disease, diabetes, smoking, alcoholism</li>
+            </ul>
+        </div>
+        
+        <h3>Hepatitis Screening</h3>
+        <ul>
+            <li><strong>Hepatitis B:</strong> Screen all adults at least once (Grade B)</li>
+            <li><strong>Hepatitis C:</strong> Screen all adults 18-79 at least once (Grade B)</li>
+        </ul>
+        
+        <h3>HIV Screening</h3>
+        <ul>
+            <li>Screen all adults 15-65 at least once (Grade A)</li>
+            <li>Screen younger/older if at increased risk</li>
+            <li>All pregnant women (Grade A)</li>
+        </ul>
+        
+        <h3>STI Screening</h3>
+        <table>
+            <tr><th>Infection</th><th>Who to Screen</th></tr>
+            <tr><td>Chlamydia/Gonorrhea</td><td>Sexually active women &lt;25; older if risk factors</td></tr>
+            <tr><td>Syphilis</td><td>All pregnant women; MSM; persons at increased risk</td></tr>
+            <tr><td>HIV</td><td>All adults 15-65; all pregnant women</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- SECTION 5: OTHER SCREENING -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>5. Other Important Screenings</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Diabetes Screening</h3>
+        <ul>
+            <li><strong>Adults 35-70 who are overweight/obese:</strong> Screen (Grade B)</li>
+            <li>Methods: Fasting glucose, HbA1c, or 2-hour OGTT</li>
+            <li>Screen earlier if additional risk factors (family history, GDM, PCOS, high-risk ethnicity)</li>
+        </ul>
+        
+        <h3>Osteoporosis Screening</h3>
+        <ul>
+            <li><strong>Women ≥65:</strong> DEXA scan (Grade B)</li>
+            <li><strong>Postmenopausal women &lt;65:</strong> Screen if 10-year fracture risk ≥ that of 65-year-old white woman (use FRAX)</li>
+            <li><strong>Men:</strong> No routine screening recommendation</li>
+        </ul>
+        
+        <h3>Depression Screening</h3>
+        <ul>
+            <li>Screen all adults (Grade B)</li>
+            <li>Use validated tool: PHQ-2, PHQ-9, or equivalent</li>
+            <li>Must have systems in place for diagnosis, treatment, and follow-up</li>
+        </ul>
+        
+        <h3>Unhealthy Alcohol Use</h3>
+        <ul>
+            <li>Screen all adults ≥18 (Grade B)</li>
+            <li>Use validated screening tool: AUDIT-C, single question</li>
+            <li>Provide brief behavioral counseling for those with risky drinking</li>
+        </ul>
+        
+        <h3>Tobacco Use</h3>
+        <ul>
+            <li>Ask all adults about tobacco use (Grade A)</li>
+            <li>Provide cessation interventions for those who use tobacco</li>
+            <li>Interventions: behavioral counseling + pharmacotherapy (varenicline, NRT, bupropion)</li>
+        </ul>
+        
+        <h3>Obesity</h3>
+        <ul>
+            <li>Screen all adults for obesity (Grade B)</li>
+            <li>Offer intensive behavioral interventions for BMI ≥30</li>
+        </ul>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Common Board Question</div>
+            <p><strong>What screenings are NOT recommended (Grade D)?</strong></p>
+            <ul>
+                <li>Thyroid cancer screening</li>
+                <li>Ovarian cancer screening</li>
+                <li>Routine PSA screening</li>
+                <li>Routine ECG in asymptomatic adults</li>
+                <li>Carotid artery stenosis screening in asymptomatic adults</li>
+                <li>Aspirin for primary prevention in age ≥60</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 6: PERIOPERATIVE MEDICINE OVERVIEW -->
+<div class="section" id="periop">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>6. Perioperative Medicine Overview</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Surgical Risk Categories</h3>
+        <table>
+            <tr><th>Risk</th><th>Cardiac Risk</th><th>Examples</th></tr>
+            <tr>
+                <td><strong>Low (&lt;1%)</strong></td>
+                <td>&lt;1% MACE</td>
+                <td>Cataract, endoscopy, superficial procedures, breast biopsy</td>
+            </tr>
+            <tr>
+                <td><strong>Intermediate (1-5%)</strong></td>
+                <td>1-5% MACE</td>
+                <td>Orthopedic, urologic, thoracic, abdominal, head/neck</td>
+            </tr>
+            <tr>
+                <td><strong>High (&gt;5%)</strong></td>
+                <td>&gt;5% MACE</td>
+                <td>Aortic/major vascular, peripheral vascular</td>
+            </tr>
+        </table>
+        
+        <h3>Functional Capacity (METs)</h3>
+        <div class="box box-blue">
+            <div class="box-title">📊 Metabolic Equivalents</div>
+            <ul>
+                <li><strong>1 MET:</strong> Eating, dressing, walking around house</li>
+                <li><strong>4 METs:</strong> Climbing a flight of stairs, walking up a hill, heavy housework</li>
+                <li><strong>≥10 METs:</strong> Strenuous sports (swimming, tennis, skiing)</li>
+            </ul>
+            <p><strong>Key threshold:</strong> ≥4 METs = adequate functional capacity = low risk regardless of risk factors</p>
+        </div>
+        
+        <h3>Revised Cardiac Risk Index (RCRI)</h3>
+        <table>
+            <tr><th>Risk Factor</th><th>Points</th></tr>
+            <tr><td>High-risk surgery (vascular, thoracic, abdominal)</td><td>1</td></tr>
+            <tr><td>History of ischemic heart disease</td><td>1</td></tr>
+            <tr><td>History of heart failure</td><td>1</td></tr>
+            <tr><td>History of cerebrovascular disease</td><td>1</td></tr>
+            <tr><td>Preoperative insulin therapy</td><td>1</td></tr>
+            <tr><td>Preoperative creatinine &gt;2 mg/dL</td><td>1</td></tr>
+        </table>
+        
+        <div class="box box-green">
+            <div class="box-title">✓ RCRI Interpretation</div>
+            <ul>
+                <li><strong>0 points:</strong> 0.4% risk of major cardiac event</li>
+                <li><strong>1 point:</strong> 0.9% risk</li>
+                <li><strong>2 points:</strong> 6.6% risk</li>
+                <li><strong>≥3 points:</strong> 11% risk</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 7: CARDIAC RISK ASSESSMENT -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>7. Preoperative Cardiac Risk Assessment</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>ACC/AHA Stepwise Approach</h3>
+        <ol>
+            <li><strong>Emergency surgery?</strong> → Proceed with risk stratification and modification perioperatively</li>
+            <li><strong>Active cardiac condition?</strong> (unstable angina, decompensated HF, significant arrhythmia, severe valvular disease) → Evaluate and treat before elective surgery</li>
+            <li><strong>Low-risk surgery?</strong> → Proceed without cardiac testing</li>
+            <li><strong>Functional capacity ≥4 METs?</strong> → Proceed without further testing</li>
+            <li><strong>&lt;4 METs or unknown + elevated risk?</strong> → Consider stress testing if it will change management</li>
+        </ol>
+        
+        <div class="box box-red">
+            <div class="box-title">🚫 When NOT to Order Preoperative Stress Testing</div>
+            <ul>
+                <li>Low-risk surgery</li>
+                <li>Patient has good functional capacity (≥4 METs)</li>
+                <li>Result will not change management</li>
+                <li>Revascularization not indicated regardless of result</li>
+            </ul>
+        </div>
+        
+        <h3>Preoperative ECG</h3>
+        <ul>
+            <li><strong>Not routine</strong> — obtain only if clinically indicated</li>
+            <li>Consider if: known CVD, arrhythmia, structural heart disease, or high-risk surgery in patients with risk factors</li>
+            <li>NOT recommended for low-risk surgery in asymptomatic patients</li>
+        </ul>
+        
+        <h3>Preoperative Echocardiography</h3>
+        <ul>
+            <li>NOT routine</li>
+            <li>Indicated if: suspected severe valvular disease, new dyspnea of unknown cause, known HF with worsening symptoms</li>
+            <li>Recent echo (&lt;1 year) with no clinical change = no repeat needed</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 8: PERIOPERATIVE MEDICATIONS -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>8. Perioperative Medication Management</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Beta-Blockers</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Continue</div>
+            <p>Patients already taking beta-blockers should <strong>continue perioperatively</strong></p>
+        </div>
+        <div class="box box-red">
+            <div class="box-title">🚫 Do NOT Start De Novo</div>
+            <p>Routine initiation of beta-blockers before surgery is <strong>NOT recommended</strong> (POISE trial showed increased stroke and death)</p>
+        </div>
+        
+        <h3>Statins</h3>
+        <ul>
+            <li><strong>Continue</strong> in patients already taking</li>
+            <li>Reasonable to start preoperatively in vascular surgery patients</li>
+        </ul>
+        
+        <h3>ACE Inhibitors / ARBs</h3>
+        <ul>
+            <li><strong>May hold on morning of surgery</strong> — risk of intraoperative hypotension</li>
+            <li>Resume when hemodynamically stable postoperatively</li>
+            <li>If held, ensure restart before discharge</li>
+        </ul>
+        
+        <h3>Antiplatelet Agents</h3>
+        <table>
+            <tr><th>Scenario</th><th>Management</th></tr>
+            <tr>
+                <td>Primary prevention aspirin</td>
+                <td>Hold 7-10 days before surgery</td>
+            </tr>
+            <tr>
+                <td>Secondary prevention aspirin</td>
+                <td>Continue perioperatively (except high-bleed-risk surgery)</td>
+            </tr>
+            <tr>
+                <td>Recent BMS (&lt;30 days)</td>
+                <td>Delay elective surgery; DAPT required</td>
+            </tr>
+            <tr>
+                <td>Recent DES (&lt;6 months)</td>
+                <td>Delay elective surgery if possible</td>
+            </tr>
+            <tr>
+                <td>DES &gt;6 months, stable</td>
+                <td>May hold P2Y12 inhibitor 5-7 days; continue aspirin</td>
+            </tr>
+        </table>
+        
+        <h3>Anticoagulants</h3>
+        <table>
+            <tr><th>Drug</th><th>Hold Before Surgery</th><th>When to Resume</th></tr>
+            <tr><td>Warfarin</td><td>5 days</td><td>12-24 hours post-op (low bleed risk)</td></tr>
+            <tr><td>Dabigatran</td><td>2-4 days (based on CrCl)</td><td>24-48 hours post-op</td></tr>
+            <tr><td>Rivaroxaban/Apixaban</td><td>2-3 days</td><td>24-48 hours post-op</td></tr>
+        </table>
+        
+        <h4>Bridging Anticoagulation</h4>
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ When to Bridge (BRIDGE Trial)</div>
+            <ul>
+                <li><strong>High-risk for thrombosis:</strong> Mechanical mitral valve, recent VTE (&lt;3 months), high-risk thrombophilia → Bridge with LMWH</li>
+                <li><strong>Moderate/Low risk Afib:</strong> Do NOT bridge — similar thrombotic outcomes, more bleeding</li>
+            </ul>
+        </div>
+        
+        <h3>Diabetes Medications</h3>
+        <ul>
+            <li><strong>Metformin:</strong> Hold on day of surgery (lactic acidosis risk with contrast/hypoperfusion)</li>
+            <li><strong>SGLT2 inhibitors:</strong> Hold 3-4 days before surgery (euglycemic DKA risk)</li>
+            <li><strong>Sulfonylureas:</strong> Hold on day of surgery</li>
+            <li><strong>Insulin:</strong> Reduce long-acting by 25-50%; hold short-acting</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 9: PERIOPERATIVE PULMONARY -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>9. Perioperative Pulmonary Evaluation</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Risk Factors for Pulmonary Complications</h3>
+        <table>
+            <tr><th>Patient Factors</th><th>Surgical Factors</th></tr>
+            <tr><td>Age &gt;60</td><td>Thoracic surgery</td></tr>
+            <tr><td>COPD</td><td>Upper abdominal surgery</td></tr>
+            <tr><td>Current smoking</td><td>Surgery &gt;3 hours</td></tr>
+            <tr><td>CHF</td><td>General anesthesia</td></tr>
+            <tr><td>Functional dependence</td><td>Emergency surgery</td></tr>
+            <tr><td>OSA</td><td>Neurosurgery (head-up position)</td></tr>
+            <tr><td>Low albumin (&lt;3.5)</td><td></td></tr>
+        </table>
+        
+        <h3>Preoperative Pulmonary Function Tests</h3>
+        <div class="box box-red">
+            <div class="box-title">🚫 PFTs NOT Routinely Recommended</div>
+            <ul>
+                <li>PFTs do not predict postoperative pulmonary complications better than clinical assessment</li>
+                <li><strong>Indications:</strong> Lung resection surgery (to assess resectability), unexplained dyspnea</li>
+                <li>Patients with known COPD/asthma should be optimized clinically (not with PFTs)</li>
+            </ul>
+        </div>
+        
+        <h3>Preoperative Chest X-ray</h3>
+        <ul>
+            <li>NOT routine</li>
+            <li>Obtain if: acute cardiopulmonary symptoms or signs, new/unexplained findings on exam</li>
+        </ul>
+        
+        <h3>Risk Reduction Strategies</h3>
+        <ul>
+            <li><strong>Smoking cessation:</strong> Ideally ≥8 weeks before surgery; any duration helps</li>
+            <li><strong>Optimize COPD/asthma:</strong> Ensure on appropriate maintenance therapy</li>
+            <li><strong>Incentive spirometry:</strong> Pre- and postoperatively</li>
+            <li><strong>Lung expansion maneuvers</strong></li>
+            <li><strong>Early mobilization</strong></li>
+            <li><strong>Avoid long-acting neuromuscular blockers</strong></li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 10: VTE PROPHYLAXIS -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>10. Perioperative VTE Prophylaxis</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>VTE Risk Stratification</h3>
+        <table>
+            <tr><th>Risk Level</th><th>Examples</th><th>Prophylaxis</th></tr>
+            <tr>
+                <td><strong>Very Low</strong></td>
+                <td>Minor surgery, mobile patient</td>
+                <td>Early ambulation only</td>
+            </tr>
+            <tr>
+                <td><strong>Low</strong></td>
+                <td>Minor surgery, moderate risk factors</td>
+                <td>Mechanical (SCDs) OR pharmacologic</td>
+            </tr>
+            <tr>
+                <td><strong>Moderate</strong></td>
+                <td>Major surgery, medical illness</td>
+                <td>LMWH or UFH or fondaparinux</td>
+            </tr>
+            <tr>
+                <td><strong>High</strong></td>
+                <td>Hip/knee replacement, hip fracture, major trauma, cancer surgery</td>
+                <td>Pharmacologic + mechanical; extended prophylaxis (4 weeks)</td>
+            </tr>
+        </table>
+        
+        <h3>Pharmacologic Options</h3>
+        <ul>
+            <li><strong>LMWH:</strong> Enoxaparin 40mg SC daily or 30mg BID</li>
+            <li><strong>UFH:</strong> 5000 units SC q8-12h</li>
+            <li><strong>Fondaparinux:</strong> 2.5mg SC daily</li>
+        </ul>
+        
+        <h3>High-Bleed-Risk Patients</h3>
+        <ul>
+            <li>Use mechanical prophylaxis (SCDs) alone</li>
+            <li>Add pharmacologic when bleeding risk decreases</li>
+        </ul>
+        
+        <h3>Extended VTE Prophylaxis</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ Extended Prophylaxis (4-5 weeks) Recommended</div>
+            <ul>
+                <li>Total hip arthroplasty</li>
+                <li>Total knee arthroplasty</li>
+                <li>Hip fracture surgery</li>
+                <li>Major abdominal/pelvic cancer surgery</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 11: ETHICS OVERVIEW -->
+<div class="section" id="ethics">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>11. Medical Ethics Principles</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Four Core Principles (Beauchamp & Childress)</h3>
+        <table>
+            <tr><th>Principle</th><th>Definition</th><th>Example</th></tr>
+            <tr>
+                <td><strong>Autonomy</strong></td>
+                <td>Respect patient's right to make decisions</td>
+                <td>Informed consent, respecting refusal</td>
+            </tr>
+            <tr>
+                <td><strong>Beneficence</strong></td>
+                <td>Act in patient's best interest</td>
+                <td>Recommending appropriate treatment</td>
+            </tr>
+            <tr>
+                <td><strong>Non-maleficence</strong></td>
+                <td>Do no harm</td>
+                <td>Avoiding unnecessary procedures</td>
+            </tr>
+            <tr>
+                <td><strong>Justice</strong></td>
+                <td>Fair distribution of resources</td>
+                <td>Triage, allocation decisions</td>
+            </tr>
+        </table>
+        
+        <h3>Informed Consent</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Elements of Valid Informed Consent</div>
+            <ol>
+                <li><strong>Disclosure:</strong> Nature of procedure, risks, benefits, alternatives</li>
+                <li><strong>Understanding:</strong> Patient comprehends information</li>
+                <li><strong>Voluntariness:</strong> Decision made without coercion</li>
+                <li><strong>Competence:</strong> Patient has capacity to decide</li>
+                <li><strong>Consent:</strong> Patient agrees to proceed</li>
+            </ol>
+        </div>
+        
+        <h3>Exceptions to Informed Consent</h3>
+        <ul>
+            <li><strong>Emergency:</strong> Immediate threat to life, patient unable to consent, no surrogate available</li>
+            <li><strong>Waiver:</strong> Patient voluntarily waives right to information</li>
+            <li><strong>Therapeutic privilege:</strong> Disclosure would harm patient (rarely justified)</li>
+            <li><strong>Incapacity:</strong> Surrogate decision-maker provides consent</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 12: DECISION-MAKING CAPACITY -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>12. Decision-Making Capacity</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Capacity vs. Competence</h3>
+        <ul>
+            <li><strong>Capacity:</strong> Clinical determination by physician; decision-specific</li>
+            <li><strong>Competence:</strong> Legal determination by court; global</li>
+        </ul>
+        
+        <h3>Four Elements of Capacity</h3>
+        <div class="box box-purple">
+            <div class="box-title">🧠 Assess Capacity</div>
+            <ol>
+                <li><strong>Understanding:</strong> Can patient state the medical problem and proposed treatment?</li>
+                <li><strong>Appreciation:</strong> Does patient acknowledge how this applies to their situation?</li>
+                <li><strong>Reasoning:</strong> Can patient weigh risks/benefits and consider alternatives?</li>
+                <li><strong>Choice:</strong> Can patient clearly communicate a decision?</li>
+            </ol>
+        </div>
+        
+        <h3>Key Principles</h3>
+        <ul>
+            <li>Capacity is <strong>decision-specific</strong> — patient may have capacity for some decisions but not others</li>
+            <li>Capacity is <strong>time-specific</strong> — may fluctuate (delirium, medications)</li>
+            <li><strong>Disagreement with physician does NOT equal lack of capacity</strong></li>
+            <li>Capacity may need reassessment if circumstances change</li>
+        </ul>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Board Pearl</div>
+            <p>A patient who refuses recommended treatment is NOT automatically lacking capacity. You must assess the four elements. A patient with capacity has the right to refuse any treatment, even life-saving therapy.</p>
+        </div>
+        
+        <h3>When Patient Lacks Capacity</h3>
+        <ol>
+            <li>Identify surrogate decision-maker (healthcare proxy > spouse > adult children > parents > other family)</li>
+            <li>Surrogate should use <strong>substituted judgment</strong> (what patient would want)</li>
+            <li>If patient's wishes unknown, use <strong>best interest standard</strong></li>
+        </ol>
+    </div>
+</div>
+
+<!-- SECTION 13: ADVANCE DIRECTIVES -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>13. Advance Directives</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Types of Advance Directives</h3>
+        <table>
+            <tr><th>Type</th><th>Description</th></tr>
+            <tr>
+                <td><strong>Living Will</strong></td>
+                <td>Written document specifying treatment preferences in specific situations (e.g., terminal illness, PVS)</td>
+            </tr>
+            <tr>
+                <td><strong>Healthcare Proxy/Durable Power of Attorney for Healthcare</strong></td>
+                <td>Designates a person to make healthcare decisions if patient loses capacity</td>
+            </tr>
+            <tr>
+                <td><strong>POLST/MOLST</strong></td>
+                <td>Physician Orders for Life-Sustaining Treatment — actionable medical orders signed by physician</td>
+            </tr>
+        </table>
+        
+        <h3>Key Points</h3>
+        <ul>
+            <li>Advance directives only take effect when patient <strong>lacks capacity</strong></li>
+            <li>Patient can revoke or change at any time while having capacity</li>
+            <li>Oral statements to family/physicians are valid (though written is preferred)</li>
+            <li>Healthcare proxy can override written directive if in patient's best interest</li>
+        </ul>
+        
+        <h3>DNR/DNI Orders</h3>
+        <ul>
+            <li><strong>DNR:</strong> No CPR (chest compressions, defibrillation)</li>
+            <li><strong>DNI:</strong> No endotracheal intubation</li>
+            <li>DNR/DNI does NOT mean "do not treat" — other interventions can continue</li>
+            <li>DNR must be addressed preoperatively — may be suspended during surgery with patient consent</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 14: CONFIDENTIALITY -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>14. Confidentiality & Privacy</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>HIPAA Basics</h3>
+        <ul>
+            <li>Protected Health Information (PHI) cannot be disclosed without patient authorization</li>
+            <li>Applies to all healthcare providers and their business associates</li>
+            <li>Patients have right to access and amend their records</li>
+        </ul>
+        
+        <h3>Exceptions to Confidentiality</h3>
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ When Disclosure is Permitted/Required</div>
+            <ul>
+                <li><strong>Mandatory reporting:</strong> Suspected abuse (child, elder, domestic), gunshot wounds, certain infectious diseases</li>
+                <li><strong>Imminent harm to identifiable third party:</strong> Duty to warn/protect (Tarasoff)</li>
+                <li><strong>Public health:</strong> Reportable diseases to health departments</li>
+                <li><strong>Court order/subpoena</strong></li>
+                <li><strong>Workers' compensation claims</strong></li>
+                <li><strong>When patient consents</strong></li>
+            </ul>
+        </div>
+        
+        <h3>Adolescent Confidentiality</h3>
+        <ul>
+            <li>Minors may consent to care for: STIs, substance abuse, contraception, mental health (varies by state)</li>
+            <li>Emancipated minors can consent to all care</li>
+            <li>Mature minor doctrine may apply</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 15: END-OF-LIFE CARE -->
+<div class="section" id="eol">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>15. End-of-Life Care</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Withholding vs. Withdrawing Treatment</h3>
+        <div class="box box-blue">
+            <div class="box-title">📋 Key Concept</div>
+            <p>Ethically and legally, <strong>withholding and withdrawing treatment are equivalent</strong>. There is no ethical obligation to continue a treatment that is no longer beneficial or desired.</p>
+        </div>
+        
+        <h3>Palliative Care vs. Hospice</h3>
+        <table>
+            <tr><th>Feature</th><th>Palliative Care</th><th>Hospice</th></tr>
+            <tr><td>Prognosis</td><td>Any serious illness</td><td>&lt;6 months life expectancy</td></tr>
+            <tr><td>Curative treatment</td><td>May continue</td><td>Foregone (comfort focus)</td></tr>
+            <tr><td>Setting</td><td>Any (hospital, clinic, home)</td><td>Usually home or facility</td></tr>
+            <tr><td>Insurance</td><td>Standard billing</td><td>Medicare Hospice Benefit</td></tr>
+        </table>
+        
+        <h3>Medical Aid in Dying (MAID)</h3>
+        <ul>
+            <li>Legal in some US states (Oregon, Washington, California, etc.)</li>
+            <li>Requirements: terminal illness (&lt;6 months), decision-making capacity, multiple requests, waiting periods</li>
+            <li>Physician prescribes lethal medication; patient self-administers</li>
+            <li>Distinguished from euthanasia (physician administers — illegal in US)</li>
+        </ul>
+        
+        <h3>Palliative Sedation</h3>
+        <ul>
+            <li>Use of sedatives to reduce consciousness in dying patients with refractory symptoms</li>
+            <li>Ethically acceptable when: symptoms refractory, death imminent, patient/surrogate consent</li>
+            <li>Intent is comfort, not hastening death (principle of double effect)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 16: PATIENT SAFETY -->
+<div class="section" id="safety">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>16. Patient Safety</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Types of Medical Errors</h3>
+        <table>
+            <tr><th>Type</th><th>Definition</th><th>Example</th></tr>
+            <tr>
+                <td><strong>Adverse Event</strong></td>
+                <td>Harm from medical care (not disease)</td>
+                <td>Drug reaction, surgical complication</td>
+            </tr>
+            <tr>
+                <td><strong>Preventable Adverse Event</strong></td>
+                <td>Adverse event due to error</td>
+                <td>Wrong-site surgery, medication error</td>
+            </tr>
+            <tr>
+                <td><strong>Near Miss</strong></td>
+                <td>Error caught before reaching patient</td>
+                <td>Wrong medication caught at pharmacy</td>
+            </tr>
+            <tr>
+                <td><strong>Never Event</strong></td>
+                <td>Serious, preventable event that should never occur</td>
+                <td>Wrong-site surgery, retained foreign body</td>
+            </tr>
+        </table>
+        
+        <h3>Swiss Cheese Model</h3>
+        <p>Errors occur when multiple system failures align (like holes in swiss cheese slices lining up). Improving safety requires multiple layers of defense.</p>
+        
+        <h3>Error Disclosure</h3>
+        <div class="box box-green">
+            <div class="box-title">✓ When to Disclose</div>
+            <ul>
+                <li>All harmful errors should be disclosed to patient/family</li>
+                <li>Disclosure should be: prompt, honest, empathetic, include plan to prevent recurrence</li>
+                <li>Near misses: disclose to patient if appropriate; report internally</li>
+            </ul>
+        </div>
+        
+        <h3>Malpractice</h3>
+        <p>Four elements required ("Four D's"):</p>
+        <ol>
+            <li><strong>Duty:</strong> Physician-patient relationship exists</li>
+            <li><strong>Dereliction:</strong> Breach of standard of care</li>
+            <li><strong>Direct causation:</strong> Breach directly caused harm</li>
+            <li><strong>Damages:</strong> Patient suffered harm</li>
+        </ol>
+    </div>
+</div>
+
+<!-- SECTION 17: QUALITY IMPROVEMENT -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>17. Quality Improvement</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Quality Measures</h3>
+        <table>
+            <tr><th>Type</th><th>Definition</th><th>Example</th></tr>
+            <tr>
+                <td><strong>Structure</strong></td>
+                <td>Resources and setting</td>
+                <td>ICU nurse-to-patient ratio</td>
+            </tr>
+            <tr>
+                <td><strong>Process</strong></td>
+                <td>What is done to patient</td>
+                <td>% patients with MI receiving aspirin</td>
+            </tr>
+            <tr>
+                <td><strong>Outcome</strong></td>
+                <td>Result of care</td>
+                <td>Mortality rate, readmission rate</td>
+            </tr>
+        </table>
+        
+        <h3>PDSA Cycle</h3>
+        <div class="box box-blue">
+            <div class="box-title">📊 Plan-Do-Study-Act</div>
+            <ol>
+                <li><strong>Plan:</strong> Identify problem, develop hypothesis, plan intervention</li>
+                <li><strong>Do:</strong> Implement intervention on small scale</li>
+                <li><strong>Study:</strong> Analyze results, compare to predictions</li>
+                <li><strong>Act:</strong> If successful, implement broadly; if not, revise and repeat</li>
+            </ol>
+        </div>
+        
+        <h3>Root Cause Analysis</h3>
+        <ul>
+            <li>Systematic analysis of adverse event to identify contributing factors</li>
+            <li>Focus on system failures, not individual blame</li>
+            <li>Uses tools like: fishbone diagram, 5 Whys, failure mode analysis</li>
+        </ul>
+        
+        <h3>High-Reliability Organizations</h3>
+        <ul>
+            <li>Preoccupation with failure</li>
+            <li>Reluctance to simplify</li>
+            <li>Sensitivity to operations</li>
+            <li>Commitment to resilience</li>
+            <li>Deference to expertise</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 18: INTERPRETING DIAGNOSTIC TESTS -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>18. Interpreting Diagnostic Tests</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Key Definitions</h3>
+        <table>
+            <tr><th>Term</th><th>Definition</th><th>Mnemonic</th></tr>
+            <tr>
+                <td><strong>Sensitivity</strong></td>
+                <td>TP / (TP + FN) — ability to detect disease</td>
+                <td>SnNOut: Sensitive test, Negative result rules OUT</td>
+            </tr>
+            <tr>
+                <td><strong>Specificity</strong></td>
+                <td>TN / (TN + FP) — ability to confirm absence</td>
+                <td>SpPIn: Specific test, Positive result rules IN</td>
+            </tr>
+            <tr>
+                <td><strong>PPV</strong></td>
+                <td>TP / (TP + FP) — probability disease present if positive</td>
+                <td>Affected by prevalence</td>
+            </tr>
+            <tr>
+                <td><strong>NPV</strong></td>
+                <td>TN / (TN + FN) — probability no disease if negative</td>
+                <td>Affected by prevalence</td>
+            </tr>
+        </table>
+        
+        <h3>Likelihood Ratios</h3>
+        <ul>
+            <li><strong>LR+ = Sensitivity / (1 - Specificity)</strong> — how much more likely positive result in diseased</li>
+            <li><strong>LR- = (1 - Sensitivity) / Specificity</strong> — how much more likely negative result in diseased</li>
+            <li>LR+ >10 or LR- <0.1 are most useful</li>
+        </ul>
+        
+        <h3>Effect of Prevalence</h3>
+        <ul>
+            <li>Sensitivity and specificity are <strong>constant</strong> regardless of prevalence</li>
+            <li>PPV <strong>increases</strong> with higher prevalence</li>
+            <li>NPV <strong>decreases</strong> with higher prevalence</li>
+        </ul>
+        
+        <div class="box box-yellow">
+            <div class="box-title">⚠️ Board Pearl</div>
+            <p>For a screening test in low-prevalence population, even with high sensitivity/specificity, PPV will be low (many false positives). This is why screening is targeted to higher-risk populations.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 19: EVIDENCE-BASED MEDICINE -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>19. Evidence-Based Medicine</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Hierarchy of Evidence</h3>
+        <ol>
+            <li>Systematic reviews / meta-analyses of RCTs</li>
+            <li>Individual RCTs</li>
+            <li>Cohort studies</li>
+            <li>Case-control studies</li>
+            <li>Case series / case reports</li>
+            <li>Expert opinion</li>
+        </ol>
+        
+        <h3>Study Types</h3>
+        <table>
+            <tr><th>Type</th><th>Description</th><th>Measures</th></tr>
+            <tr>
+                <td><strong>RCT</strong></td>
+                <td>Random assignment to intervention/control</td>
+                <td>RR, ARR, NNT</td>
+            </tr>
+            <tr>
+                <td><strong>Cohort</strong></td>
+                <td>Exposed vs unexposed followed over time</td>
+                <td>Relative Risk (RR)</td>
+            </tr>
+            <tr>
+                <td><strong>Case-Control</strong></td>
+                <td>Cases vs controls, look back at exposure</td>
+                <td>Odds Ratio (OR)</td>
+            </tr>
+            <tr>
+                <td><strong>Cross-Sectional</strong></td>
+                <td>Snapshot in time</td>
+                <td>Prevalence</td>
+            </tr>
+        </table>
+        
+        <h3>Key Statistics</h3>
+        <ul>
+            <li><strong>Relative Risk (RR):</strong> Risk in exposed / Risk in unexposed</li>
+            <li><strong>Absolute Risk Reduction (ARR):</strong> Risk in control - Risk in treatment</li>
+            <li><strong>Number Needed to Treat (NNT):</strong> 1 / ARR — patients to treat to prevent one event</li>
+            <li><strong>Number Needed to Harm (NNH):</strong> 1 / ARI — patients treated for one adverse event</li>
+        </ul>
+        
+        <h3>Bias</h3>
+        <table>
+            <tr><th>Type</th><th>Description</th></tr>
+            <tr><td>Selection bias</td><td>Non-random selection of subjects</td></tr>
+            <tr><td>Recall bias</td><td>Differential recall of exposures (case-control)</td></tr>
+            <tr><td>Observer bias</td><td>Observer interpretation affected by knowledge</td></tr>
+            <tr><td>Lead-time bias</td><td>Earlier detection appears to prolong survival</td></tr>
+            <tr><td>Length-time bias</td><td>Screening preferentially detects slower-growing disease</td></tr>
+            <tr><td>Confounding</td><td>Third variable associated with both exposure and outcome</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- SECTION 20: PROFESSIONALISM -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>20. Professionalism</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Core Elements</h3>
+        <ul>
+            <li>Primacy of patient welfare</li>
+            <li>Patient autonomy</li>
+            <li>Social justice</li>
+            <li>Honesty and integrity</li>
+            <li>Confidentiality</li>
+            <li>Commitment to competence</li>
+        </ul>
+        
+        <h3>Conflicts of Interest</h3>
+        <ul>
+            <li>Financial relationships with industry</li>
+            <li>Self-referral</li>
+            <li>Gifts from pharmaceutical companies</li>
+            <li>Disclosure is key — transparency to patients and institutions</li>
+        </ul>
+        
+        <h3>Impaired Physicians</h3>
+        <ul>
+            <li>Obligation to report colleagues who may be impaired</li>
+            <li>Most states have physician health programs</li>
+            <li>Balance patient safety with support for colleague</li>
+        </ul>
+        
+        <h3>Sexual Boundaries</h3>
+        <ul>
+            <li>Sexual contact with current patients is always unethical</li>
+            <li>Sexual contact with former patients may be unethical (depends on nature of prior relationship, power differential, time elapsed)</li>
+            <li>Sexual harassment: zero tolerance</li>
+        </ul>
+        
+        <h3>Social Media</h3>
+        <ul>
+            <li>Never post PHI or patient-identifiable information</li>
+            <li>Maintain professional boundaries</li>
+            <li>Be aware of institutional policies</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 21: HIGH-YIELD BOARD PEARLS -->
+<div class="section" id="pearls">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h2>21. High-Yield Board Pearls</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content">
+        <h3>Preventive Care Pearls</h3>
+        <ul>
+            <li>💎 <strong>Grade D = Do not offer:</strong> PSA routine screening, ovarian cancer screening, thyroid cancer screening, carotid ultrasound in asymptomatic</li>
+            <li>💎 <strong>Aspirin primary prevention:</strong> Do NOT start in patients ≥60 (Grade D)</li>
+            <li>💎 <strong>AAA screening:</strong> Men 65-75 who ever smoked — ONE TIME ultrasound</li>
+            <li>💎 <strong>Stop screening:</strong> When life expectancy &lt;10 years (cancer screening unlikely to benefit)</li>
+        </ul>
+        
+        <h3>Perioperative Pearls</h3>
+        <ul>
+            <li>💎 <strong>Functional capacity ≥4 METs</strong> (climb a flight of stairs) = low cardiac risk, no testing needed</li>
+            <li>💎 <strong>Continue beta-blockers</strong> perioperatively; do NOT start de novo (POISE)</li>
+            <li>💎 <strong>Bridging anticoagulation:</strong> Generally do NOT bridge Afib unless mechanical valve or very high risk</li>
+            <li>💎 <strong>Hold SGLT2i</strong> 3-4 days before surgery (euglycemic DKA risk)</li>
+            <li>💎 <strong>PFTs NOT routine</strong> before non-thoracic surgery</li>
+        </ul>
+        
+        <h3>Ethics Pearls</h3>
+        <ul>
+            <li>💎 <strong>Capacity is decision-specific</strong> — assess 4 elements: Understanding, Appreciation, Reasoning, Choice</li>
+            <li>💎 <strong>Disagreeing with physician ≠ lack of capacity</strong></li>
+            <li>💎 <strong>Withholding = Withdrawing treatment</strong> ethically and legally</li>
+            <li>💎 <strong>Break confidentiality:</strong> Imminent harm to identifiable third party, mandatory reporting (abuse, certain diseases)</li>
+        </ul>
+        
+        <h3>Quality & Safety Pearls</h3>
+        <ul>
+            <li>💎 <strong>Always disclose harmful errors</strong> to patients</li>
+            <li>💎 <strong>PDSA cycle:</strong> Plan-Do-Study-Act for QI</li>
+            <li>💎 <strong>Root cause analysis:</strong> Focus on systems, not individuals</li>
+            <li>💎 <strong>SnNOut / SpPIn:</strong> Sensitive test + negative = rule out; Specific test + positive = rule in</li>
+        </ul>
+        
+        <h3>Statistics Pearls</h3>
+        <ul>
+            <li>💎 <strong>NNT = 1/ARR</strong></li>
+            <li>💎 <strong>Sensitivity/Specificity don't change with prevalence</strong>; PPV/NPV do</li>
+            <li>💎 <strong>Lead-time bias:</strong> Earlier detection appears to increase survival without actually prolonging life</li>
+            <li>💎 <strong>Intention-to-treat analysis</strong> preserves randomization, prevents attrition bias</li>
+        </ul>
+    </div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<footer>
+    <h3>🏥 General Internal Medicine Study Guide</h3>
+    <p>USPSTF • ACC/AHA • ACP Guidelines</p>
+    <div style="margin-top: 20px;">
+        <a href="study_guides_index.html">📚 All Study Guides</a>
+        <a href="board_pearls.html">💎 Board Pearls</a>
+        <a href="high_value_care.html">💰 High Value Care</a>
+    </div>
+</footer>
+
+<script>
+function toggleSection(header) {
+    const section = header.closest('.section');
+    section.classList.toggle('collapsed');
+}
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Back to top button
+window.onscroll = function() {
+    const btn = document.getElementById('backToTop');
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = 'flex';
+    } else {
+        btn.style.display = 'none';
+    }
+};
+
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', function(e) {
+    const query = e.target.value.toLowerCase();
+    const sections = document.querySelectorAll('.section');
+    
+    sections.forEach(section => {
+        const text = section.textContent.toLowerCase();
+        if (query === '' || text.includes(query)) {
+            section.style.display = 'block';
+            if (query !== '') section.classList.remove('collapsed');
+        } else {
+            section.style.display = 'none';
+        }
+    });
+});
+
+// Collapse all sections initially except first
+document.querySelectorAll('.section').forEach((section, index) => {
+    if (index > 0) section.classList.add('collapsed');
+});
+</script>
+
+</body>
+</html>
