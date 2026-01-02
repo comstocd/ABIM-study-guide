@@ -10,13 +10,13 @@ A collection of high-yield, evidence-based study guides optimized for ABIM board
 
 | Metric | Count |
 |--------|-------|
-| Specialty Guides | 9 |
-| Total Sections | 333 |
+| Specialty Guides | 17 |
+| Total Sections | 446+ |
 | Board Pearls | 177 |
 | High Value Care Items | 125 |
-| Total Size | ~1.2 MB |
+| Total Size | ~1.6 MB |
 
-**Last Updated:** December 2025
+**Last Updated:** January 2026
 
 ---
 
@@ -42,6 +42,14 @@ A collection of high-yield, evidence-based study guides optimized for ABIM board
 | [🫁 Pulmonology](pulmonology_study_guide.html) | 45 | Asthma, COPD, ILD, PE, pulmonary HTN, ARDS, sleep apnea, lung cancer | 91 KB |
 | [🩸 Hematology/Oncology](heme_onc_study_guide.html) | 45 | Anemia, bleeding disorders, thrombosis, leukemia, lymphoma, myeloma | 86 KB |
 | [🧠 Neurology](neurology_study_guide.html) | 45 | Stroke, seizures, headache, MS, movement disorders, neuropathy, dementia | 85 KB |
+| [🏥 General IM](general_im_study_guide.html) | 21 | Preventive care, screening, ethics, capacity, quality & safety | 72 KB |
+| [🧠 Psychiatry](psychiatry_study_guide.html) | 18 | Depression, anxiety, bipolar, psychosis, substance use, capacity | 68 KB |
+| [👴 Geriatrics](geriatrics_study_guide.html) | 16 | Falls, delirium, dementia, polypharmacy, Beers criteria, frailty | 58 KB |
+| [🌸 Allergy/Immunology](allergy_immunology_study_guide.html) | 18 | Anaphylaxis, drug allergy, urticaria, angioedema, immunodeficiency | 62 KB |
+| [👩‍⚕️ Women's Health](womens_health_study_guide.html) | 7 | Contraception, pregnancy complications, menopause/HRT, PCOS, screening | 63 KB |
+| [🏥 Perioperative Medicine](perioperative_study_guide.html) | 7 | Cardiac risk (RCRI), pulmonary risk, medications, anticoagulation, VTE | 55 KB |
+| [🩹 Dermatology](dermatology_study_guide.html) | 6 | Drug eruptions (SJS/TEN/DRESS), skin cancer, infections, skin signs | 54 KB |
+| [🕊️ Palliative Care](palliative_care_study_guide.html) | 6 | Goals of care, pain management, opioids, symptom control, hospice, ethics | 53 KB |
 
 ---
 
@@ -240,7 +248,15 @@ nephrology_study_guide1.html  — Nephrology
 pulmonology_study_guide.html  — Pulmonology
 heme_onc_study_guide.html    — Hematology / Oncology
 neurology_study_guide.html   — Neurology
-README.md                    — This file
+general_im_study_guide.html  — General Internal Medicine
+psychiatry_study_guide.html  — Psychiatry
+geriatrics_study_guide.html  — Geriatrics
+allergy_immunology_study_guide.html — Allergy & Immunology
+womens_health_study_guide.html — Women's Health
+perioperative_study_guide.html — Perioperative Medicine
+dermatology_study_guide.html — Dermatology
+palliative_care_study_guide.html — Palliative Care
+ABIM_README.md               — This file
 ```
 
 ---
