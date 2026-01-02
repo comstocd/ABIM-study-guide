@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Women's Health Study Guide | ABIM Board Review</title>
+    <style>
+        :root {
+            --primary: #e91e8c;
+            --primary-light: #fce4ec;
+            --primary-dark: #ad1457;
+            --accent: #7b1fa2;
+            --background: #fafafa;
+            --surface: #ffffff;
+            --text: #212121;
+            --text-secondary: #757575;
+            --divider: #e0e0e0;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --info: #2196f3;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+            margin: 0;
+            padding: 0;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 20px;
+            padding-top: calc(20px + env(safe-area-inset-top));
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .search-container {
+            padding: 15px 20px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--divider);
+            position: sticky;
+            top: 80px;
+            z-index: 99;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid var(--divider);
+            border-radius: 10px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #searchInput:focus {
+            border-color: var(--primary);
+        }
+
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            background: var(--surface);
+            border-bottom: 1px solid var(--divider);
+            padding: 0 10px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-tab {
+            flex-shrink: 0;
+            padding: 12px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .section-header .toggle {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .section-header.collapsed .toggle {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            padding: 20px;
+        }
+
+        .section-content.collapsed {
+            display: none;
+        }
+
+        .subsection {
+            margin-bottom: 24px;
+        }
+
+        .subsection:last-child {
+            margin-bottom: 0;
+        }
+
+        .subsection h3 {
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            margin: 0 0 12px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .subsection h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin: 16px 0 8px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border: 1px solid var(--divider);
+        }
+
+        th {
+            background: var(--primary-light);
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .box {
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+        }
+
+        .key-point {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success);
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+        }
+
+        .danger-box {
+            background: #ffebee;
+            border-left: 4px solid var(--danger);
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--info);
+        }
+
+        .pearl-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+        }
+
+        .criteria-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--accent);
+        }
+
+        ul, ol {
+            margin: 8px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 6px 0;
+        }
+
+        .mnemonic {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .drug {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: #fff59d;
+            padding: 1px 4px;
+            border-radius: 3px;
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.4rem; }
+            .section-header h2 { font-size: 1.1rem; }
+            th, td { padding: 8px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>👩‍⚕️ Women's Health Study Guide</h1>
+        <p>ABIM Board Review • 4% of Exam</p>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="🔍 Search topics..." oninput="searchContent()">
+    </div>
+
+    <div class="nav-tabs">
+        <a href="#contraception" class="nav-tab">Contraception</a>
+        <a href="#pregnancy" class="nav-tab">Pregnancy</a>
+        <a href="#menopause" class="nav-tab">Menopause</a>
+        <a href="#screening" class="nav-tab">Screening</a>
+        <a href="#pcos" class="nav-tab">PCOS</a>
+        <a href="#osteoporosis" class="nav-tab">Osteoporosis</a>
+        <a href="#pearls" class="nav-tab">Pearls</a>
+    </div>
+
+    <div class="container">
+
+        <!-- CONTRACEPTION -->
+        <div class="section" id="contraception">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>💊 Contraception</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Methods by Effectiveness</h3>
+                    <table>
+                        <tr>
+                            <th>Tier</th>
+                            <th>Method</th>
+                            <th>Failure Rate</th>
+                        </tr>
+                        <tr>
+                            <td rowspan="3"><strong>Tier 1</strong><br>Most Effective<br>(&lt;1%)</td>
+                            <td>Copper IUD (Paragard)</td>
+                            <td>0.8%</td>
+                        </tr>
+                        <tr>
+                            <td>Hormonal IUD (Mirena, Kyleena)</td>
+                            <td>0.2%</td>
+                        </tr>
+                        <tr>
+                            <td>Implant (Nexplanon)</td>
+                            <td>0.05%</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2"><strong>Tier 2</strong><br>(4-9%)</td>
+                            <td>Injectable (Depo-Provera)</td>
+                            <td>6%</td>
+                        </tr>
+                        <tr>
+                            <td>Pills, Patch, Ring</td>
+                            <td>9%</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2"><strong>Tier 3</strong><br>(12-28%)</td>
+                            <td>Male condom</td>
+                            <td>18%</td>
+                        </tr>
+                        <tr>
+                            <td>Withdrawal, fertility awareness</td>
+                            <td>20-28%</td>
+                        </tr>
+                    </table>
+                    <div class="pearl-box">💎 <strong>LARC (Long-Acting Reversible Contraception)</strong> = IUDs + Implant. First-line for most women due to highest efficacy and no adherence issues.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Combined Hormonal Contraceptives (Estrogen + Progestin)</h3>
+                    <p><strong>Forms:</strong> Pills (COCs), Patch (Xulane), Vaginal Ring (NuvaRing)</p>
+                    
+                    <h4>Absolute Contraindications (Category 4)</h4>
+                    <div class="danger-box">
+                        <ul>
+                            <li><strong>Age ≥35 + smoking ≥15 cigs/day</strong></li>
+                            <li>History of <strong>VTE, PE, DVT</strong></li>
+                            <li><strong>Known thrombogenic mutations</strong> (Factor V Leiden, etc.)</li>
+                            <li>History of <strong>stroke or CAD</strong></li>
+                            <li><strong>Migraine with aura</strong> (at any age)</li>
+                            <li><strong>Breast cancer</strong> (current)</li>
+                            <li><strong>Severe cirrhosis</strong>, hepatocellular adenoma, or hepatoma</li>
+                            <li><strong>Hypertension</strong> (≥160/100 or with vascular disease)</li>
+                            <li><strong>&lt;21 days postpartum</strong> (VTE risk)</li>
+                            <li><strong>Major surgery with prolonged immobilization</strong></li>
+                        </ul>
+                    </div>
+
+                    <h4>Relative Contraindications (Category 3)</h4>
+                    <div class="warning-box">
+                        <ul>
+                            <li>Age ≥35 + smoking &lt;15 cigs/day</li>
+                            <li>HTN (140-159/90-99) controlled on meds</li>
+                            <li>Migraine without aura (age ≥35)</li>
+                            <li>History of breast cancer (>5 years, no recurrence)</li>
+                            <li>Symptomatic gallbladder disease</li>
+                            <li>21-42 days postpartum + additional VTE risk</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">✅ <strong>Can use estrogen-containing contraceptives:</strong> Obesity (alone), diabetes (no vascular complications), well-controlled HTN (<140/90), family history VTE, varicose veins, depression, fibroids, dysmenorrhea.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Progestin-Only Methods</h3>
+                    <p><strong>Forms:</strong> Mini-pill, Depo-Provera (DMPA), Hormonal IUD, Implant</p>
+                    
+                    <div class="info-box">
+                        <strong>Advantages over combined methods:</strong>
+                        <ul>
+                            <li>Safe with migraine with aura</li>
+                            <li>Safe with history of VTE</li>
+                            <li>Safe immediately postpartum (including breastfeeding)</li>
+                            <li>Safe with hypertension</li>
+                        </ul>
+                    </div>
+
+                    <h4>Depo-Provera (DMPA) Considerations</h4>
+                    <div class="warning-box">
+                        ⚠️ <strong>Bone Density Loss:</strong> 
+                        <ul>
+                            <li>FDA black box: ↓BMD with prolonged use</li>
+                            <li>Limit to 2 years unless no alternatives</li>
+                            <li>Reversible after discontinuation</li>
+                        </ul>
+                        <strong>Other effects:</strong> Weight gain (~5 lbs), irregular bleeding, delay return to fertility (up to 18 months)
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>IUD Specifics</h3>
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Duration</th>
+                            <th>Mechanism</th>
+                            <th>Effects on Menses</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Copper (Paragard)</strong></td>
+                            <td>10-12 years</td>
+                            <td>Spermicidal, prevents fertilization</td>
+                            <td>↑Heavier, longer periods</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mirena</strong> (52mg LNG)</td>
+                            <td>8 years</td>
+                            <td>Thickens mucus, thins endometrium</td>
+                            <td>↓Lighter → amenorrhea (20%)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kyleena</strong> (19.5mg)</td>
+                            <td>5 years</td>
+                            <td>Same as Mirena</td>
+                            <td>↓Lighter periods</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Skyla</strong> (13.5mg)</td>
+                            <td>3 years</td>
+                            <td>Same as Mirena</td>
+                            <td>↓Lighter periods</td>
+                        </tr>
+                    </table>
+
+                    <div class="key-point">✅ <strong>IUDs are safe in:</strong> Nulliparous women, adolescents, history of ectopic pregnancy, immediately post-abortion, and postpartum (can place within 10 min of placental delivery).</div>
+
+                    <div class="danger-box">
+                        ❌ <strong>IUD Contraindications:</strong>
+                        <ul>
+                            <li>Current PID or purulent cervicitis</li>
+                            <li>Current pregnancy</li>
+                            <li>Unexplained vaginal bleeding (until evaluated)</li>
+                            <li>Cervical or endometrial cancer</li>
+                            <li>Uterine anomalies distorting cavity</li>
+                            <li><strong>Wilson's disease</strong> (copper IUD only)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Emergency Contraception</h3>
+                    <table>
+                        <tr>
+                            <th>Method</th>
+                            <th>Timing</th>
+                            <th>Efficacy</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Copper IUD</strong></td>
+                            <td>≤5 days</td>
+                            <td>>99%</td>
+                            <td>MOST effective; provides ongoing contraception</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ulipristal (Ella)</strong></td>
+                            <td>≤5 days</td>
+                            <td>~85%</td>
+                            <td>Rx only; ↓efficacy with BMI >26</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Levonorgestrel (Plan B)</strong></td>
+                            <td>≤3 days (best)</td>
+                            <td>~75-89%</td>
+                            <td>OTC; ↓↓efficacy with BMI >25</td>
+                        </tr>
+                    </table>
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Copper IUD is the MOST EFFECTIVE emergency contraception and works up to 5 days after unprotected intercourse. Also provides ongoing contraception for 10+ years.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Drug Interactions</h3>
+                    <div class="warning-box">
+                        ⚠️ <strong>Drugs that ↓ efficacy of hormonal contraceptives:</strong>
+                        <ul>
+                            <li><strong>Rifampin</strong> (most significant - use backup method)</li>
+                            <li>Anticonvulsants: phenytoin, carbamazepine, phenobarbital, topiramate (>200mg)</li>
+                            <li>Some antiretrovirals</li>
+                            <li>St. John's Wort</li>
+                        </ul>
+                        <em>Note: Antibiotics (other than rifampin) do NOT significantly affect efficacy</em>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PREGNANCY COMPLICATIONS -->
+        <div class="section" id="pregnancy">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🤰 Pregnancy Complications</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Hypertensive Disorders of Pregnancy</h3>
+                    
+                    <table>
+                        <tr>
+                            <th>Disorder</th>
+                            <th>Definition</th>
+                            <th>Onset</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Gestational HTN</strong></td>
+                            <td>BP ≥140/90 after 20 wks, NO proteinuria, resolves by 12 wks postpartum</td>
+                            <td>>20 weeks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Preeclampsia</strong></td>
+                            <td>BP ≥140/90 + proteinuria (≥300mg/24h) OR severe features</td>
+                            <td>>20 weeks (typically)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eclampsia</strong></td>
+                            <td>Preeclampsia + new-onset seizures</td>
+                            <td>>20 weeks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chronic HTN</strong></td>
+                            <td>HTN before pregnancy or <20 weeks</td>
+                            <td><20 weeks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Superimposed Preeclampsia</strong></td>
+                            <td>Chronic HTN + new proteinuria or severe features</td>
+                            <td>>20 weeks</td>
+                        </tr>
+                    </table>
+
+                    <h4>Preeclampsia with Severe Features</h4>
+                    <div class="criteria-box">
+                        <strong>Diagnosis (any one of):</strong>
+                        <ul>
+                            <li>BP ≥160/110 on two occasions ≥4 hours apart</li>
+                            <li>Thrombocytopenia (<100,000)</li>
+                            <li>Creatinine >1.1 mg/dL or doubling of baseline</li>
+                            <li>LFTs >2× upper limit normal</li>
+                            <li>Pulmonary edema</li>
+                            <li>New-onset headache (unresponsive to meds)</li>
+                            <li>Visual disturbances</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">✅ <strong>Management:</strong>
+                        <ul>
+                            <li><strong>Definitive treatment = Delivery</strong></li>
+                            <li>Magnesium sulfate for seizure prophylaxis</li>
+                            <li>Antihypertensives: labetalol, hydralazine, nifedipine</li>
+                            <li>Betamethasone (fetal lung maturity if <34 weeks)</li>
+                        </ul>
+                    </div>
+
+                    <div class="danger-box">
+                        ❌ <strong>Avoid in pregnancy:</strong>
+                        <ul>
+                            <li><strong>ACE inhibitors / ARBs</strong> — teratogenic (renal dysgenesis)</li>
+                            <li><strong>Nitroprusside</strong> — fetal cyanide toxicity</li>
+                            <li><strong>Atenolol</strong> — IUGR</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>HELLP Syndrome</h3>
+                    <div class="criteria-box">
+                        <strong>H</strong>emolysis (↑LDH, ↓haptoglobin, schistocytes)<br>
+                        <strong>E</strong>levated <strong>L</strong>iver enzymes (AST/ALT >2× normal)<br>
+                        <strong>L</strong>ow <strong>P</strong>latelets (<100,000)
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Key Points:</strong>
+                        <ul>
+                            <li>Variant of severe preeclampsia</li>
+                            <li>Can occur without significant HTN or proteinuria</li>
+                            <li>Treatment = delivery (regardless of gestational age if severe)</li>
+                            <li>Can present with RUQ/epigastric pain (hepatic capsule distension)</li>
+                            <li>Complication: hepatic rupture (rare but catastrophic)</li>
+                        </ul>
+                    </div>
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> HELLP can mimic TTP/HUS — both have MAHA and thrombocytopenia. Check ADAMTS13 if unclear. In HELLP, delivery resolves the syndrome.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Gestational Diabetes (GDM)</h3>
+                    
+                    <h4>Screening</h4>
+                    <table>
+                        <tr>
+                            <th>When</th>
+                            <th>Test</th>
+                            <th>Positive Result</th>
+                        </tr>
+                        <tr>
+                            <td>24-28 weeks (all women)</td>
+                            <td>1-hour 50g glucose challenge</td>
+                            <td>≥130-140 mg/dL → proceed to 3-hour</td>
+                        </tr>
+                        <tr>
+                            <td>If 1-hour positive</td>
+                            <td>3-hour 100g OGTT</td>
+                            <td>≥2 abnormal values = GDM</td>
+                        </tr>
+                    </table>
+
+                    <div class="info-box">
+                        <strong>3-hour OGTT Thresholds (Carpenter-Coustan):</strong>
+                        <ul>
+                            <li>Fasting: ≥95</li>
+                            <li>1 hour: ≥180</li>
+                            <li>2 hour: ≥155</li>
+                            <li>3 hour: ≥140</li>
+                        </ul>
+                    </div>
+
+                    <h4>Management</h4>
+                    <div class="key-point">
+                        <ul>
+                            <li><strong>First-line:</strong> Diet and exercise (70-80% achieve control)</li>
+                            <li><strong>If inadequate:</strong> Insulin (preferred) or metformin/glyburide</li>
+                            <li><strong>Targets:</strong> Fasting <95, 1-hr postprandial <140, 2-hr <120</li>
+                        </ul>
+                    </div>
+
+                    <h4>Postpartum</h4>
+                    <div class="warning-box">
+                        ⚠️ <strong>GDM → Future Type 2 DM Risk:</strong>
+                        <ul>
+                            <li>50% lifetime risk of developing T2DM</li>
+                            <li>Screen with 75g OGTT at 4-12 weeks postpartum</li>
+                            <li>Screen every 1-3 years thereafter</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Venous Thromboembolism in Pregnancy</h3>
+                    <div class="info-box">
+                        <strong>Risk factors:</strong> Pregnancy is hypercoagulable state (↑factors, ↓protein S, stasis)
+                        <ul>
+                            <li>VTE risk 5-10× higher than non-pregnant</li>
+                            <li>Highest risk: postpartum (especially first 6 weeks)</li>
+                            <li>Left leg > right (uterine compression of left iliac vein)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Treatment</h4>
+                    <table>
+                        <tr>
+                            <th>Anticoagulant</th>
+                            <th>Use in Pregnancy</th>
+                        </tr>
+                        <tr>
+                            <td><span class="drug">LMWH (enoxaparin)</span></td>
+                            <td>✅ Preferred — does not cross placenta</td>
+                        </tr>
+                        <tr>
+                            <td><span class="drug">UFH</span></td>
+                            <td>✅ Safe — does not cross placenta</td>
+                        </tr>
+                        <tr>
+                            <td><span class="drug">Fondaparinux</span></td>
+                            <td>⚠️ Limited data, may consider if heparin allergy</td>
+                        </tr>
+                        <tr>
+                            <td><span class="drug">Warfarin</span></td>
+                            <td>❌ Teratogenic (1st trimester) — warfarin embryopathy</td>
+                        </tr>
+                        <tr>
+                            <td><span class="drug">DOACs</span></td>
+                            <td>❌ Contraindicated — cross placenta, no safety data</td>
+                        </tr>
+                    </table>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Warfarin is safe during breastfeeding. Can transition postpartum.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Medications in Pregnancy</h3>
+                    <table>
+                        <tr>
+                            <th>Category</th>
+                            <th>Safe</th>
+                            <th>Avoid</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Antibiotics</strong></td>
+                            <td>Penicillins, cephalosporins, azithromycin, nitrofurantoin (not at term)</td>
+                            <td>Tetracyclines, fluoroquinolones, TMP-SMX (1st tri)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Antiemetics</strong></td>
+                            <td>Ondansetron, doxylamine-B6, metoclopramide</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pain</strong></td>
+                            <td>Acetaminophen</td>
+                            <td>NSAIDs (3rd tri — premature DA closure, oligohydramnios)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Psych</strong></td>
+                            <td>SSRIs (some risk), SNRIs</td>
+                            <td>Valproate, lithium (1st tri), paroxetine (1st tri)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Seizures</strong></td>
+                            <td>Levetiracetam, lamotrigine</td>
+                            <td>Valproate (neural tube defects), phenytoin</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anticoagulation</strong></td>
+                            <td>LMWH, UFH</td>
+                            <td>Warfarin (1st tri), DOACs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Antihypertensives</strong></td>
+                            <td>Labetalol, nifedipine, methyldopa</td>
+                            <td>ACE-I, ARBs, atenolol</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>Acute Fatty Liver of Pregnancy (AFLP)</h3>
+                    <div class="criteria-box">
+                        <strong>Swansea Criteria (≥6 features):</strong>
+                        <ul>
+                            <li>Vomiting, abdominal pain, polydipsia/polyuria</li>
+                            <li>Encephalopathy, hypoglycemia</li>
+                            <li>↑Bilirubin, ↑uric acid, ↑creatinine</li>
+                            <li>↑WBC, ↑ammonia, ↑AST/ALT</li>
+                            <li>Coagulopathy, ascites</li>
+                            <li>Bright liver on US, microvesicular steatosis on biopsy</li>
+                        </ul>
+                    </div>
+                    <div class="danger-box">
+                        <strong>AFLP vs HELLP:</strong>
+                        <ul>
+                            <li>AFLP: Liver failure predominates (↑↑bilirubin, ↓glucose, coagulopathy, encephalopathy)</li>
+                            <li>HELLP: Hemolysis/platelets predominate</li>
+                            <li>Both require delivery, but AFLP has higher mortality</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MENOPAUSE -->
+        <div class="section" id="menopause">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🌡️ Menopause & HRT</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Definitions</h3>
+                    <table>
+                        <tr>
+                            <th>Term</th>
+                            <th>Definition</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Menopause</strong></td>
+                            <td>12 consecutive months of amenorrhea (average age 51)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Perimenopause</strong></td>
+                            <td>Transition period with irregular cycles, vasomotor symptoms</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Premature ovarian insufficiency</strong></td>
+                            <td>Menopause before age 40</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Early menopause</strong></td>
+                            <td>Menopause between ages 40-45</td>
+                        </tr>
+                    </table>
+                    <div class="info-box">
+                        <strong>Diagnosis:</strong> Clinical (12 months amenorrhea in woman >45). Labs NOT routinely needed. If uncertain: ↑FSH (>30), ↓estradiol.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Vasomotor Symptoms (Hot Flashes)</h3>
+                    <div class="info-box">
+                        <strong>Characteristics:</strong>
+                        <ul>
+                            <li>Sudden heat sensation, flushing, sweating</li>
+                            <li>Lasts 1-5 minutes, occurs multiple times daily</li>
+                            <li>More common at night → sleep disruption</li>
+                            <li>Average duration: 7 years (can persist >10 years)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Treatment Options</h4>
+                    <table>
+                        <tr>
+                            <th>Treatment</th>
+                            <th>Efficacy</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Hormone Therapy (HT)</strong></td>
+                            <td>+++ (best)</td>
+                            <td>First-line if no contraindications</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fezolinetant</strong> (NK3 antagonist)</td>
+                            <td>++</td>
+                            <td>Non-hormonal, FDA-approved for VMS</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SSRIs/SNRIs</strong> (paroxetine, venlafaxine)</td>
+                            <td>++</td>
+                            <td>Paroxetine 7.5mg only FDA-approved</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gabapentin</strong></td>
+                            <td>+</td>
+                            <td>Useful for nighttime symptoms</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clonidine</strong></td>
+                            <td>+</td>
+                            <td>Modest effect, useful if HTN</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>Hormone Therapy (HT)</h3>
+                    
+                    <h4>Indications</h4>
+                    <div class="key-point">
+                        ✅ <strong>Appropriate candidates:</strong>
+                        <ul>
+                            <li>Bothersome vasomotor symptoms</li>
+                            <li>Age <60 or within 10 years of menopause onset</li>
+                            <li>No contraindications</li>
+                            <li>Genitourinary syndrome of menopause (low-dose vaginal preferred)</li>
+                            <li>Premature ovarian insufficiency (HT recommended until age 51)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Regimens</h4>
+                    <table>
+                        <tr>
+                            <th>Uterus Status</th>
+                            <th>Regimen</th>
+                            <th>Rationale</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Intact uterus</strong></td>
+                            <td>Estrogen + Progestogen</td>
+                            <td>Progestogen prevents endometrial hyperplasia/cancer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hysterectomy</strong></td>
+                            <td>Estrogen alone</td>
+                            <td>No need for endometrial protection</td>
+                        </tr>
+                    </table>
+
+                    <h4>Absolute Contraindications to Systemic HT</h4>
+                    <div class="danger-box">
+                        <ul>
+                            <li>Unexplained vaginal bleeding</li>
+                            <li>Known or suspected breast cancer</li>
+                            <li>Known or suspected estrogen-dependent cancer</li>
+                            <li>History of VTE or thrombophilia</li>
+                            <li>History of stroke or MI</li>
+                            <li>Active liver disease</li>
+                            <li>Known or suspected pregnancy</li>
+                        </ul>
+                    </div>
+
+                    <h4>WHI Trial Key Points</h4>
+                    <div class="info-box">
+                        <strong>E+P (Women's Health Initiative):</strong>
+                        <ul>
+                            <li>↑ Breast cancer (↑26% after 5+ years)</li>
+                            <li>↑ VTE, stroke, CHD (in older women)</li>
+                            <li>↓ Hip fractures, ↓ colon cancer</li>
+                        </ul>
+                        <strong>Estrogen alone (in women post-hysterectomy):</strong>
+                        <ul>
+                            <li>↓ Breast cancer (in E-alone arm)</li>
+                            <li>↑ VTE, stroke</li>
+                            <li>No ↑ CHD</li>
+                        </ul>
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>"Timing Hypothesis":</strong> HT is safer and may provide cardiovascular benefit when initiated in early menopause (<60 yo or <10 years post-menopause). Risk outweighs benefit if started later.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Genitourinary Syndrome of Menopause (GSM)</h3>
+                    <div class="info-box">
+                        <strong>Symptoms:</strong> Vaginal dryness, dyspareunia, urinary urgency/frequency, recurrent UTIs
+                    </div>
+
+                    <h4>Treatment</h4>
+                    <div class="key-point">
+                        <ul>
+                            <li><strong>First-line:</strong> Vaginal moisturizers, lubricants</li>
+                            <li><strong>If inadequate:</strong> Low-dose vaginal estrogen (cream, tablet, ring)</li>
+                            <li>Vaginal estrogen is safe even with history of breast cancer (minimal systemic absorption)</li>
+                            <li><strong>Ospemifene</strong> (oral SERM) — alternative if vaginal application not tolerated</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CANCER SCREENING -->
+        <div class="section" id="screening">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🔬 Cancer Screening</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Breast Cancer Screening</h3>
+                    <table>
+                        <tr>
+                            <th>Organization</th>
+                            <th>Recommendation</th>
+                        </tr>
+                        <tr>
+                            <td><strong>USPSTF (2024)</strong></td>
+                            <td>Mammography every 2 years, ages <strong>40-74</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ACS</strong></td>
+                            <td>Annual mammography starting at 45; can start at 40. Every 2 years at age 55+.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ACR</strong></td>
+                            <td>Annual mammography starting at 40</td>
+                        </tr>
+                    </table>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>High-Risk Patients (add MRI):</strong>
+                        <ul>
+                            <li>BRCA1/2 mutation carriers</li>
+                            <li>First-degree relative with BRCA mutation</li>
+                            <li>Lifetime risk ≥20-25% (based on models)</li>
+                            <li>History of chest radiation before age 30 (Hodgkin's)</li>
+                            <li>Li-Fraumeni, Cowden syndrome</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">
+                        ✅ <strong>Dense Breasts:</strong> ~50% of women. Reduces mammogram sensitivity. Some states mandate notification. Supplemental screening (US, MRI) may be considered.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Cervical Cancer Screening</h3>
+                    <table>
+                        <tr>
+                            <th>Age</th>
+                            <th>Recommendation (USPSTF/ACS 2020)</th>
+                        </tr>
+                        <tr>
+                            <td><strong><21</strong></td>
+                            <td>No screening (regardless of sexual activity)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>21-29</strong></td>
+                            <td>Cytology (Pap) alone every 3 years</td>
+                        </tr>
+                        <tr>
+                            <td><strong>30-65</strong></td>
+                            <td>Options: (1) HPV testing alone every 5 years (preferred), (2) Cotesting (Pap + HPV) every 5 years, (3) Cytology alone every 3 years</td>
+                        </tr>
+                        <tr>
+                            <td><strong>>65</strong></td>
+                            <td>Stop if adequate prior screening and no history of CIN2+</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Post-hysterectomy</strong></td>
+                            <td>Stop if no history of CIN2+ and cervix removed</td>
+                        </tr>
+                    </table>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>Continue screening beyond guidelines if:</strong>
+                        <ul>
+                            <li>History of CIN2, CIN3, or AIS → screen for 25 years after treatment</li>
+                            <li>HIV-positive or immunocompromised</li>
+                            <li>DES exposure in utero</li>
+                        </ul>
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> HPV primary testing (without cytology) is now preferred for ages 30-65 per ACS guidelines. Most cervical cancers are caused by HPV 16 and 18.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Ovarian Cancer Screening</h3>
+                    <div class="danger-box">
+                        ❌ <strong>NOT recommended for average-risk women:</strong>
+                        <ul>
+                            <li>Neither CA-125 nor transvaginal US improves mortality</li>
+                            <li>High false-positive rate leads to unnecessary surgery</li>
+                            <li>PLCO trial: No benefit, harm from unnecessary procedures</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>High-risk women (BRCA1/2):</strong> Consider risk-reducing salpingo-oophorectomy by age 35-40 (BRCA1) or 40-45 (BRCA2). No proven screening strategy.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Endometrial Cancer</h3>
+                    <div class="info-box">
+                        <ul>
+                            <li><strong>No routine screening</strong> for average-risk women</li>
+                            <li><strong>Evaluate abnormal uterine bleeding</strong> promptly (especially postmenopausal)</li>
+                            <li><strong>Lynch syndrome:</strong> Offer annual endometrial biopsy starting age 30-35</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PCOS -->
+        <div class="section" id="pcos">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🔄 PCOS</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Diagnosis (Rotterdam Criteria)</h3>
+                    <div class="criteria-box">
+                        <strong>Need 2 of 3:</strong>
+                        <ol>
+                            <li><strong>Oligo/anovulation</strong> (irregular or absent menses)</li>
+                            <li><strong>Hyperandrogenism</strong> (clinical: hirsutism, acne, alopecia; OR biochemical: ↑testosterone)</li>
+                            <li><strong>Polycystic ovaries on US</strong> (≥12 follicles 2-9mm or ovarian volume >10mL)</li>
+                        </ol>
+                        <em>After excluding other causes (thyroid dysfunction, hyperprolactinemia, CAH, androgen-secreting tumor)</em>
+                    </div>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>Rule out other causes:</strong>
+                        <ul>
+                            <li>TSH (thyroid disease)</li>
+                            <li>Prolactin (hyperprolactinemia)</li>
+                            <li>17-OH progesterone (late-onset CAH)</li>
+                            <li>Consider DHEA-S if virilization (tumor)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Associated Conditions</h3>
+                    <div class="info-box">
+                        <ul>
+                            <li><strong>Metabolic syndrome</strong> — screen with lipids, fasting glucose/HbA1c</li>
+                            <li><strong>Type 2 DM</strong> — 40% will develop impaired glucose tolerance by age 40</li>
+                            <li><strong>Obstructive sleep apnea</strong> — screen if symptomatic</li>
+                            <li><strong>Endometrial hyperplasia/cancer</strong> — due to unopposed estrogen</li>
+                            <li><strong>Infertility</strong> — anovulation</li>
+                            <li><strong>Nonalcoholic fatty liver disease</strong></li>
+                            <li><strong>Depression and anxiety</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Management</h3>
+                    
+                    <h4>Lifestyle (First-Line for All)</h4>
+                    <div class="key-point">
+                        <ul>
+                            <li>Weight loss (5-10% improves metabolic and reproductive parameters)</li>
+                            <li>Exercise</li>
+                            <li>Dietary modification</li>
+                        </ul>
+                    </div>
+
+                    <h4>Pharmacologic Treatment</h4>
+                    <table>
+                        <tr>
+                            <th>Goal</th>
+                            <th>Treatment</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Menstrual regulation / Endometrial protection</strong></td>
+                            <td>Combined oral contraceptives (first-line) OR cyclic progestins</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hirsutism</strong></td>
+                            <td>COCs (first-line) + spironolactone (antiandrogen). Also: hair removal, eflornithine cream</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Acne</strong></td>
+                            <td>COCs ± topical/oral acne medications</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Metabolic (glucose intolerance, DM prevention)</strong></td>
+                            <td>Metformin (especially if not on COCs or if prediabetes)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Infertility</strong></td>
+                            <td>Letrozole (first-line for ovulation induction) > clomiphene</td>
+                        </tr>
+                    </table>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Metformin is NOT first-line for menstrual irregularity (use COCs). Metformin's role is for metabolic features and may help with ovulation induction.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- OSTEOPOROSIS -->
+        <div class="section" id="osteoporosis">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🦴 Osteoporosis in Women</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Screening</h3>
+                    <table>
+                        <tr>
+                            <th>Population</th>
+                            <th>Recommendation</th>
+                        </tr>
+                        <tr>
+                            <td><strong>All women ≥65</strong></td>
+                            <td>DXA screening</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Postmenopausal women <65</strong></td>
+                            <td>Screen if 10-year fracture risk ≥ that of 65 yo white woman (use FRAX)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Men ≥70</strong></td>
+                            <td>DXA screening</td>
+                        </tr>
+                    </table>
+
+                    <div class="info-box">
+                        <strong>T-score interpretation:</strong>
+                        <ul>
+                            <li>Normal: T-score ≥ -1.0</li>
+                            <li>Osteopenia: T-score -1.0 to -2.5</li>
+                            <li>Osteoporosis: T-score ≤ -2.5</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>When to Treat</h3>
+                    <div class="criteria-box">
+                        <strong>Treat if ANY of:</strong>
+                        <ul>
+                            <li>Hip or vertebral fracture (clinical or morphometric)</li>
+                            <li>T-score ≤ -2.5 at spine, femoral neck, or total hip</li>
+                            <li>T-score -1.0 to -2.5 (osteopenia) AND:
+                                <ul>
+                                    <li>10-year hip fracture probability ≥3% (FRAX), OR</li>
+                                    <li>10-year major osteoporotic fracture probability ≥20%</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Treatment Options</h3>
+                    <table>
+                        <tr>
+                            <th>Class</th>
+                            <th>Examples</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Bisphosphonates</strong></td>
+                            <td>Alendronate, risedronate, zoledronic acid</td>
+                            <td>First-line. Duration 3-5 years, then reassess ("drug holiday")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Denosumab</strong></td>
+                            <td>Prolia (60mg SC q6mo)</td>
+                            <td>Alternative to bisphosphonates. Rebound vertebral fractures if stopped</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SERMs</strong></td>
+                            <td>Raloxifene</td>
+                            <td>↓Vertebral fractures only. ↑VTE risk. Also ↓breast cancer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anabolic</strong></td>
+                            <td>Teriparatide, abaloparatide, romosozumab</td>
+                            <td>For very high-risk (severe OP, prior fractures). Limited duration (2 years)</td>
+                        </tr>
+                    </table>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>Bisphosphonate Adverse Effects:</strong>
+                        <ul>
+                            <li>GI upset, esophagitis (take upright with water)</li>
+                            <li>Atypical femur fractures (rare, with prolonged use)</li>
+                            <li>Osteonecrosis of jaw (rare, higher risk with IV, dental procedures)</li>
+                            <li>Avoid if CrCl <30-35</li>
+                        </ul>
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> After 5 years of bisphosphonates (3 years if IV zoledronic acid), consider "drug holiday" in lower-risk patients. Reassess in 2-3 years. Transition to antiresorptive after anabolic agents.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BOARD PEARLS -->
+        <div class="section" id="pearls">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>💎 High-Yield Board Pearls</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="pearl-box">
+                    <strong>Contraception:</strong>
+                    <ol>
+                        <li>Copper IUD is the most effective emergency contraception</li>
+                        <li>Migraine WITH AURA = absolute contraindication to estrogen-containing contraceptives</li>
+                        <li>IUDs are safe in nulliparous women and immediately postpartum</li>
+                        <li>Only rifampin significantly reduces OCP efficacy (not other antibiotics)</li>
+                        <li>Depo-Provera causes reversible bone loss — limit to 2 years if possible</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Pregnancy:</strong>
+                    <ol>
+                        <li>ACE-I and ARBs are teratogenic — contraindicated in all trimesters</li>
+                        <li>HELLP = Hemolysis, Elevated Liver enzymes, Low Platelets — variant of severe preeclampsia</li>
+                        <li>Magnesium sulfate is used for seizure prophylaxis in preeclampsia (NOT for BP control)</li>
+                        <li>LMWH is the anticoagulant of choice in pregnancy (warfarin is teratogenic)</li>
+                        <li>Gestational diabetes → 50% lifetime risk of type 2 DM</li>
+                        <li>Left leg DVT is more common in pregnancy (uterine compression of left iliac vein)</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Menopause:</strong>
+                    <ol>
+                        <li>HRT is most beneficial when started <60 yo or <10 years post-menopause ("timing hypothesis")</li>
+                        <li>Women with intact uterus need estrogen + progestogen (endometrial protection)</li>
+                        <li>Low-dose vaginal estrogen is safe even with history of breast cancer</li>
+                        <li>Paroxetine 7.5mg is the only non-hormonal FDA-approved treatment for hot flashes</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Screening:</strong>
+                    <ol>
+                        <li>Cervical cancer screening starts at 21 (regardless of sexual activity)</li>
+                        <li>HPV primary testing is now preferred for ages 30-65</li>
+                        <li>Ovarian cancer screening is NOT recommended (even CA-125 + TVUS)</li>
+                        <li>BRCA carriers: Consider risk-reducing salpingo-oophorectomy by 35-45</li>
+                        <li>USPSTF 2024: Mammography for all women 40-74 every 2 years</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>PCOS:</strong>
+                    <ol>
+                        <li>Rotterdam criteria: 2 of 3 (oligo/anovulation, hyperandrogenism, polycystic ovaries)</li>
+                        <li>COCs are first-line for menstrual regulation AND hirsutism</li>
+                        <li>Metformin is for metabolic features, NOT first-line for menstrual irregularity</li>
+                        <li>Letrozole > clomiphene for ovulation induction (infertility)</li>
+                        <li>Screen for metabolic syndrome, OSA, and depression</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Osteoporosis:</strong>
+                    <ol>
+                        <li>Screen all women ≥65 with DXA; younger if high-risk</li>
+                        <li>Bisphosphonate drug holiday after 5 years (3 years for IV)</li>
+                        <li>Denosumab: Rebound vertebral fractures if stopped — must transition to another agent</li>
+                        <li>Raloxifene reduces vertebral (not hip) fractures AND reduces breast cancer risk</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            const content = header.nextElementSibling;
+            content.classList.toggle('collapsed');
+        }
+
+        function searchContent() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                const header = section.querySelector('.section-header');
+                const content = section.querySelector('.section-content');
+                
+                if (query === '' || text.includes(query)) {
+                    section.style.display = 'block';
+                    if (query !== '' && text.includes(query)) {
+                        header.classList.remove('collapsed');
+                        content.classList.remove('collapsed');
+                    }
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onscroll = function() {
+            const btn = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = 'block';
+            } else {
+                btn.style.display = 'none';
+            }
+        };
+
+        // Smooth scroll for nav tabs
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Expand section
+                    const header = target.querySelector('.section-header');
+                    const content = target.querySelector('.section-content');
+                    if (header && content) {
+                        header.classList.remove('collapsed');
+                        content.classList.remove('collapsed');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

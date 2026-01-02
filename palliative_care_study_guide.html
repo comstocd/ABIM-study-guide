@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Palliative Care Study Guide | ABIM Board Review</title>
+    <style>
+        :root {
+            --primary: #5c6bc0;
+            --primary-light: #e8eaf6;
+            --primary-dark: #3949ab;
+            --accent: #26a69a;
+            --background: #fafafa;
+            --surface: #ffffff;
+            --text: #212121;
+            --text-secondary: #757575;
+            --divider: #e0e0e0;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --info: #2196f3;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+            margin: 0;
+            padding: 0;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 20px;
+            padding-top: calc(20px + env(safe-area-inset-top));
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; }
+        .header p { margin: 5px 0 0 0; opacity: 0.9; font-size: 0.95rem; }
+
+        .search-container {
+            padding: 15px 20px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--divider);
+            position: sticky;
+            top: 80px;
+            z-index: 99;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid var(--divider);
+            border-radius: 10px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #searchInput:focus { border-color: var(--primary); }
+
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            background: var(--surface);
+            border-bottom: 1px solid var(--divider);
+            padding: 0 10px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-tab {
+            flex-shrink: 0;
+            padding: 12px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-tab:hover, .nav-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        .section {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .section-header h2 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+        .section-header .toggle { font-size: 1.2rem; transition: transform 0.3s; }
+        .section-header.collapsed .toggle { transform: rotate(-90deg); }
+        .section-content { padding: 20px; }
+        .section-content.collapsed { display: none; }
+
+        .subsection { margin-bottom: 24px; }
+        .subsection:last-child { margin-bottom: 0; }
+
+        .subsection h3 {
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            margin: 0 0 12px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .subsection h4 { color: var(--accent); font-size: 1rem; margin: 16px 0 8px 0; }
+
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.95rem; }
+        th, td { padding: 10px 12px; text-align: left; border: 1px solid var(--divider); }
+        th { background: var(--primary-light); font-weight: 600; color: var(--primary-dark); }
+        tr:nth-child(even) { background: #fafafa; }
+
+        .box { padding: 14px 16px; border-radius: 8px; margin: 12px 0; }
+        .key-point { background: #e8f5e9; border-left: 4px solid var(--success); }
+        .warning-box { background: #fff3e0; border-left: 4px solid var(--warning); }
+        .danger-box { background: #ffebee; border-left: 4px solid var(--danger); }
+        .info-box { background: #e3f2fd; border-left: 4px solid var(--info); }
+        .pearl-box { background: #fff8e1; border-left: 4px solid #ffc107; }
+        .criteria-box { background: #f3e5f5; border-left: 4px solid #9c27b0; }
+
+        ul, ol { margin: 8px 0; padding-left: 24px; }
+        li { margin: 6px 0; }
+
+        .mnemonic { font-weight: 700; color: var(--accent); }
+        .drug { color: var(--primary-dark); font-weight: 600; }
+        .highlight { background: #fff59d; padding: 1px 4px; border-radius: 3px; }
+
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.4rem; }
+            .section-header h2 { font-size: 1.1rem; }
+            th, td { padding: 8px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🕊️ Palliative Care Study Guide</h1>
+        <p>ABIM Board Review • 2% of Exam</p>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="🔍 Search topics..." oninput="searchContent()">
+    </div>
+
+    <div class="nav-tabs">
+        <a href="#goals" class="nav-tab">Goals of Care</a>
+        <a href="#pain" class="nav-tab">Pain Management</a>
+        <a href="#symptoms" class="nav-tab">Symptom Control</a>
+        <a href="#hospice" class="nav-tab">Hospice</a>
+        <a href="#ethics" class="nav-tab">Ethics & Legal</a>
+        <a href="#pearls" class="nav-tab">Pearls</a>
+    </div>
+
+    <div class="container">
+
+        <!-- GOALS OF CARE -->
+        <div class="section" id="goals">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🎯 Goals of Care Discussions</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>When to Have Goals of Care Conversations</h3>
+                    <div class="info-box">
+                        <ul>
+                            <li>New diagnosis of serious illness</li>
+                            <li>Disease progression or treatment failure</li>
+                            <li>Hospital admission for serious illness</li>
+                            <li>Functional decline</li>
+                            <li>When patient asks "What should I expect?"</li>
+                            <li>Before high-risk procedures</li>
+                            <li>When current treatment is no longer aligned with goals</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Framework for Goals of Care Discussion</h3>
+                    <div class="criteria-box">
+                        <strong>SPIKES Protocol for Breaking Bad News:</strong>
+                        <ul>
+                            <li><strong>S</strong>etting — Private space, sit down, minimize interruptions</li>
+                            <li><strong>P</strong>erception — "What do you understand about your illness?"</li>
+                            <li><strong>I</strong>nvitation — "How much information would you like?"</li>
+                            <li><strong>K</strong>nowledge — Share information in small chunks</li>
+                            <li><strong>E</strong>mpathy — Acknowledge and validate emotions</li>
+                            <li><strong>S</strong>ummary/Strategy — Plan next steps together</li>
+                        </ul>
+                    </div>
+
+                    <h4>Key Questions to Explore</h4>
+                    <div class="key-point">
+                        ✅ <strong>Understanding values and preferences:</strong>
+                        <ul>
+                            <li>"What matters most to you right now?"</li>
+                            <li>"What are you hoping for?"</li>
+                            <li>"What are you worried about?"</li>
+                            <li>"What gives your life meaning?"</li>
+                            <li>"What would be unacceptable to you?"</li>
+                            <li>"If time is limited, how would you want to spend it?"</li>
+                        </ul>
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Ask about understanding BEFORE giving information. This allows you to meet the patient where they are and correct misconceptions.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Responding to Emotion</h3>
+                    <div class="criteria-box">
+                        <strong>NURSE Statements:</strong>
+                        <ul>
+                            <li><strong>N</strong>ame the emotion: "It sounds like you're feeling scared."</li>
+                            <li><strong>U</strong>nderstand: "I can understand why you would feel that way."</li>
+                            <li><strong>R</strong>espect: "I can see how hard you've been fighting this."</li>
+                            <li><strong>S</strong>upport: "I will be with you through this."</li>
+                            <li><strong>E</strong>xplore: "Tell me more about what you're worried about."</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>When emotions arise:</strong> Pause and respond to the emotion BEFORE continuing with medical information. Patients cannot process information when emotionally overwhelmed.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Code Status Discussions</h3>
+                    <div class="info-box">
+                        <strong>Framing code status in context of goals:</strong>
+                        <ul>
+                            <li>Discuss code status as part of larger goals conversation, not in isolation</li>
+                            <li>Provide realistic information about outcomes of CPR</li>
+                            <li>Frame recommendations in terms of what you WOULD do, not just what you wouldn't</li>
+                        </ul>
+                    </div>
+
+                    <h4>CPR Outcomes by Setting</h4>
+                    <table>
+                        <tr>
+                            <th>Population</th>
+                            <th>Survival to Discharge</th>
+                        </tr>
+                        <tr>
+                            <td>In-hospital cardiac arrest (all)</td>
+                            <td>~25%</td>
+                        </tr>
+                        <tr>
+                            <td>Metastatic cancer</td>
+                            <td>~6%</td>
+                        </tr>
+                        <tr>
+                            <td>Sepsis</td>
+                            <td>~10%</td>
+                        </tr>
+                        <tr>
+                            <td>Renal failure on dialysis</td>
+                            <td>~10-15%</td>
+                        </tr>
+                        <tr>
+                            <td>Nursing home residents</td>
+                            <td>~5%</td>
+                        </tr>
+                    </table>
+
+                    <div class="key-point">
+                        ✅ <strong>Better framing:</strong> "Given what we know about your illness, if your heart were to stop, I would not recommend CPR because it would not help you achieve your goal of [stated goal]. Instead, I recommend we focus on [comfort, time with family, etc.]."
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PAIN MANAGEMENT -->
+        <div class="section" id="pain">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>💊 Pain Management</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>WHO Pain Ladder</h3>
+                    <table>
+                        <tr>
+                            <th>Step</th>
+                            <th>Pain Level</th>
+                            <th>Treatment</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Step 1</strong></td>
+                            <td>Mild (1-3)</td>
+                            <td>Non-opioid ± adjuvant (acetaminophen, NSAIDs)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Step 2</strong></td>
+                            <td>Moderate (4-6)</td>
+                            <td>Weak opioid ± non-opioid ± adjuvant (tramadol, codeine)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Step 3</strong></td>
+                            <td>Severe (7-10)</td>
+                            <td>Strong opioid ± non-opioid ± adjuvant (morphine, oxycodone, hydromorphone, fentanyl)</td>
+                        </tr>
+                    </table>
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> In cancer pain or severe pain, it's appropriate to start at Step 3 if clinically indicated. The ladder is a guide, not a requirement to climb sequentially.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Opioid Equianalgesic Dosing</h3>
+                    <table>
+                        <tr>
+                            <th>Opioid</th>
+                            <th>PO Dose (mg)</th>
+                            <th>IV Dose (mg)</th>
+                            <th>PO:IV Ratio</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Morphine</strong></td>
+                            <td>30</td>
+                            <td>10</td>
+                            <td>3:1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hydromorphone</strong></td>
+                            <td>6</td>
+                            <td>1.5</td>
+                            <td>4:1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Oxycodone</strong></td>
+                            <td>20</td>
+                            <td>N/A</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hydrocodone</strong></td>
+                            <td>30</td>
+                            <td>N/A</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fentanyl</strong></td>
+                            <td>N/A</td>
+                            <td>0.1 (100 mcg)</td>
+                            <td>—</td>
+                        </tr>
+                    </table>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>Conversion safety:</strong> When rotating opioids, reduce calculated dose by 25-50% due to incomplete cross-tolerance. Exception: methadone (requires greater reduction).
+                    </div>
+
+                    <h4>Fentanyl Patch Conversion</h4>
+                    <div class="info-box">
+                        <ul>
+                            <li>Fentanyl patch 25 mcg/hr ≈ Morphine 60-90 mg PO/day</li>
+                            <li>Takes 12-24 hours to reach steady state</li>
+                            <li>Continue short-acting opioid for first 12-24 hours when starting patch</li>
+                            <li>Avoid in opioid-naive patients</li>
+                            <li>Heat increases absorption (fever, heating pads)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Breakthrough Pain Dosing</h3>
+                    <div class="key-point">
+                        ✅ <strong>PRN breakthrough dose:</strong>
+                        <ul>
+                            <li>10-20% of total daily opioid dose</li>
+                            <li>Give same opioid as scheduled if possible</li>
+                            <li>Can give q1-2h PRN for IV, q3-4h for PO</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Example:</strong> Patient on morphine ER 60mg BID (120mg/day)
+                        <ul>
+                            <li>Breakthrough = 10-20% of 120mg = 12-24mg</li>
+                            <li>Order: Morphine IR 15mg PO q4h PRN</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Opioid Selection in Special Populations</h3>
+                    <table>
+                        <tr>
+                            <th>Condition</th>
+                            <th>Preferred</th>
+                            <th>Avoid</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Renal failure</strong></td>
+                            <td>Fentanyl, hydromorphone, methadone</td>
+                            <td>Morphine (active metabolites accumulate → toxicity)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Liver failure</strong></td>
+                            <td>Hydromorphone, fentanyl (reduce dose)</td>
+                            <td>Codeine, tramadol (prodrugs); reduce all doses</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Elderly</strong></td>
+                            <td>Start low, go slow; hydromorphone</td>
+                            <td>Meperidine (neurotoxicity); high starting doses</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Opioid-naive</strong></td>
+                            <td>Immediate-release, low dose</td>
+                            <td>Fentanyl patch, methadone, high starting doses</td>
+                        </tr>
+                    </table>
+
+                    <div class="danger-box">
+                        ❌ <strong>Always avoid meperidine</strong> for chronic pain — metabolite normeperidine causes seizures, especially in renal impairment.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Adjuvant Analgesics</h3>
+                    <table>
+                        <tr>
+                            <th>Pain Type</th>
+                            <th>Adjuvant Options</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Neuropathic pain</strong></td>
+                            <td>Gabapentin, pregabalin, duloxetine, TCAs (amitriptyline, nortriptyline)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bone pain</strong></td>
+                            <td>NSAIDs, bisphosphonates, denosumab, radiation, corticosteroids</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Visceral pain / obstruction</strong></td>
+                            <td>Corticosteroids, octreotide</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Muscle spasm</strong></td>
+                            <td>Baclofen, tizanidine, cyclobenzaprine</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inflammatory pain</strong></td>
+                            <td>NSAIDs, corticosteroids</td>
+                        </tr>
+                    </table>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Gabapentinoids and SNRIs are first-line for neuropathic pain. Opioids alone are often insufficient for neuropathic pain.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Opioid Side Effects & Management</h3>
+                    <table>
+                        <tr>
+                            <th>Side Effect</th>
+                            <th>Tolerance?</th>
+                            <th>Management</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Constipation</strong></td>
+                            <td>NO</td>
+                            <td>Prophylactic bowel regimen: senna + docusate; methylnaltrexone if refractory</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nausea</strong></td>
+                            <td>Yes (3-5 days)</td>
+                            <td>Ondansetron, prochlorperazine, metoclopramide; often resolves</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sedation</strong></td>
+                            <td>Yes (3-5 days)</td>
+                            <td>Wait for tolerance; consider methylphenidate if persistent</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pruritus</strong></td>
+                            <td>Yes</td>
+                            <td>Antihistamines, opioid rotation; nalbuphine in severe cases</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Respiratory depression</strong></td>
+                            <td>Yes</td>
+                            <td>Hold opioid; naloxone 0.04-0.4mg IV if severe</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Myoclonus</strong></td>
+                            <td>No</td>
+                            <td>Dose reduction, opioid rotation, clonazepam</td>
+                        </tr>
+                    </table>
+
+                    <div class="danger-box">
+                        ❌ <strong>Constipation does NOT develop tolerance.</strong> ALWAYS prescribe a bowel regimen with opioids. Stimulant laxative (senna) is preferred.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SYMPTOM MANAGEMENT -->
+        <div class="section" id="symptoms">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🩺 Non-Pain Symptom Management</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Dyspnea</h3>
+                    <div class="info-box">
+                        <strong>Causes to evaluate:</strong> Pleural effusion, pulmonary embolism, anemia, pneumonia, CHF exacerbation, airway obstruction
+                    </div>
+
+                    <h4>Management</h4>
+                    <div class="key-point">
+                        ✅ <strong>Pharmacologic:</strong>
+                        <ul>
+                            <li><strong>Opioids</strong> — First-line for refractory dyspnea
+                                <ul>
+                                    <li>Opioid-naive: Morphine 2.5-5mg PO q4h or 1-2mg IV q4h</li>
+                                    <li>On opioids: Increase dose by 25%</li>
+                                </ul>
+                            </li>
+                            <li><strong>Benzodiazepines</strong> — For anxiety component (lorazepam 0.5-1mg)</li>
+                            <li><strong>Corticosteroids</strong> — If lymphangitic spread, airway obstruction, COPD</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">
+                        ✅ <strong>Non-pharmacologic:</strong>
+                        <ul>
+                            <li>Fan blowing on face (stimulates trigeminal nerve)</li>
+                            <li>Positioning (upright, leaning forward)</li>
+                            <li>Oxygen if hypoxic (less benefit if not hypoxic)</li>
+                            <li>Cool environment</li>
+                        </ul>
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Opioids reduce the sensation of dyspnea without significantly suppressing respiratory drive at appropriate doses. They are first-line for refractory dyspnea in palliative care.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Nausea and Vomiting</h3>
+                    <h4>Treatment by Mechanism</h4>
+                    <table>
+                        <tr>
+                            <th>Cause</th>
+                            <th>Mechanism</th>
+                            <th>Treatment</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Chemotherapy, opioids</strong></td>
+                            <td>CTZ (5-HT3, D2)</td>
+                            <td>Ondansetron, prochlorperazine, haloperidol</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gastric stasis</strong></td>
+                            <td>Vagal afferents</td>
+                            <td>Metoclopramide (prokinetic)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bowel obstruction</strong></td>
+                            <td>Mechanical</td>
+                            <td>Octreotide, dexamethasone, avoid prokinetics</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Increased ICP</strong></td>
+                            <td>Vestibular/central</td>
+                            <td>Dexamethasone</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vestibular</strong></td>
+                            <td>Motion/position</td>
+                            <td>Meclizine, scopolamine</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anticipatory</strong></td>
+                            <td>Cortical</td>
+                            <td>Lorazepam</td>
+                        </tr>
+                    </table>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>Bowel obstruction:</strong> Avoid metoclopramide (prokinetic can worsen colic). Use octreotide to decrease secretions, dexamethasone to reduce edema, and antiemetics.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Delirium at End of Life</h3>
+                    <div class="info-box">
+                        <strong>Common causes:</strong>
+                        <ul>
+                            <li>Medications (opioids, benzodiazepines, anticholinergics)</li>
+                            <li>Metabolic (hypercalcemia, uremia, hepatic encephalopathy)</li>
+                            <li>Infection</li>
+                            <li>Hypoxia</li>
+                            <li>Brain metastases</li>
+                            <li>Terminal delirium (part of dying process)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Management</h4>
+                    <div class="key-point">
+                        ✅ <strong>Non-pharmacologic (first):</strong>
+                        <ul>
+                            <li>Reorientation, familiar objects, family presence</li>
+                            <li>Minimize unnecessary interventions</li>
+                            <li>Optimize sleep-wake cycle</li>
+                            <li>Correct reversible causes if consistent with goals</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">
+                        ✅ <strong>Pharmacologic (for agitation):</strong>
+                        <ul>
+                            <li><strong>Haloperidol</strong> 0.5-2mg PO/IV/SC q4-6h PRN — first-line</li>
+                            <li><strong>Olanzapine</strong> 2.5-5mg PO/SL daily</li>
+                            <li><strong>Quetiapine</strong> 12.5-25mg PO BID</li>
+                            <li>Avoid benzodiazepines (worsen delirium) unless alcohol withdrawal or terminal sedation</li>
+                        </ul>
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>Terminal delirium:</strong> Common in last days of life. Goals shift to patient comfort. May require palliative sedation if refractory and distressing.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Death Rattle (Terminal Secretions)</h3>
+                    <div class="info-box">
+                        <strong>Noisy respirations from secretions in airways in dying patient</strong>
+                        <ul>
+                            <li>Does NOT cause dyspnea or discomfort to patient</li>
+                            <li>Distressing to family — education is key</li>
+                        </ul>
+                    </div>
+
+                    <h4>Management</h4>
+                    <div class="key-point">
+                        <ul>
+                            <li>Position patient on side</li>
+                            <li>Gentle suctioning (avoid deep suctioning — causes discomfort)</li>
+                            <li><strong>Anticholinergics:</strong>
+                                <ul>
+                                    <li>Glycopyrrolate 0.2-0.4mg IV/SC q4-6h (does not cross BBB)</li>
+                                    <li>Scopolamine patch 1.5mg q72h</li>
+                                    <li>Hyoscine (scopolamine) 0.3-0.6mg SC q4h</li>
+                                    <li>Atropine 1% drops SL q4h</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        ⚠️ Anticholinergics work best <strong>prophylactically</strong> — they prevent NEW secretions but don't dry existing secretions.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Anorexia-Cachexia Syndrome</h3>
+                    <div class="info-box">
+                        <ul>
+                            <li>Metabolic syndrome with loss of muscle/fat despite nutrition</li>
+                            <li>Driven by inflammation and tumor factors</li>
+                            <li>Artificial nutrition does NOT reverse cancer cachexia</li>
+                        </ul>
+                    </div>
+
+                    <h4>Management</h4>
+                    <div class="key-point">
+                        <ul>
+                            <li>Education: eating won't reverse weight loss in advanced cancer</li>
+                            <li>Appetite stimulants (modest benefit):
+                                <ul>
+                                    <li>Dexamethasone 2-4mg daily (short-term)</li>
+                                    <li>Megestrol acetate 400-800mg daily (VTE risk)</li>
+                                    <li>Dronabinol 2.5mg BID</li>
+                                </ul>
+                            </li>
+                            <li>Focus on pleasure of eating, small portions, favorite foods</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- HOSPICE -->
+        <div class="section" id="hospice">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🏠 Hospice Care</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Hospice Eligibility Criteria</h3>
+                    <div class="criteria-box">
+                        <strong>Medicare Hospice Benefit Requirements:</strong>
+                        <ul>
+                            <li>Prognosis of ≤6 months if disease runs its expected course</li>
+                            <li>Two physicians certify (attending + hospice medical director)</li>
+                            <li>Patient elects comfort-focused care</li>
+                            <li>Patient agrees to forgo curative treatment for terminal diagnosis</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Key points:</strong>
+                        <ul>
+                            <li>Patients can continue treatments for OTHER diagnoses</li>
+                            <li>Can revoke hospice at any time and return to curative care</li>
+                            <li>Can re-enroll in hospice if still eligible</li>
+                            <li>Hospice covers: medications, equipment, nursing, aide, social work, chaplain, bereavement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Disease-Specific Prognostic Criteria</h3>
+
+                    <h4>Cancer</h4>
+                    <div class="info-box">
+                        <ul>
+                            <li>Metastatic or locally advanced disease</li>
+                            <li>Declining performance status (KPS ≤50 or PPS ≤50%)</li>
+                            <li>Declining despite or refusing further treatment</li>
+                        </ul>
+                    </div>
+
+                    <h4>Heart Failure</h4>
+                    <div class="info-box">
+                        <ul>
+                            <li>NYHA Class IV despite optimal therapy</li>
+                            <li>EF ≤20% or severe diastolic dysfunction</li>
+                            <li>≥1 hospitalization in past 6 months</li>
+                            <li>Not a transplant/VAD candidate</li>
+                            <li>Refractory symptoms, rising creatinine/BUN</li>
+                        </ul>
+                    </div>
+
+                    <h4>COPD</h4>
+                    <div class="info-box">
+                        <ul>
+                            <li>Disabling dyspnea at rest despite optimal treatment</li>
+                            <li>FEV1 &lt;30% predicted</li>
+                            <li>pO2 ≤55 or O2 sat ≤88% on room air</li>
+                            <li>pCO2 ≥50</li>
+                            <li>Progressive weight loss, cor pulmonale, ER visits/hospitalizations</li>
+                        </ul>
+                    </div>
+
+                    <h4>Dementia</h4>
+                    <div class="info-box">
+                        <ul>
+                            <li>FAST Stage 7C or beyond (non-ambulatory, minimal speech, incontinent)</li>
+                            <li>Unable to ambulate, dress, bathe independently</li>
+                            <li>Urinary and fecal incontinence</li>
+                            <li>≤6 intelligible words per day</li>
+                            <li>Complication in past 12 months: aspiration pneumonia, pyelonephritis, sepsis, decubitus ulcer, recurrent fever</li>
+                        </ul>
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Prognostication is difficult. If you would "not be surprised" if the patient died within 6 months, hospice referral is appropriate.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Palliative Care vs. Hospice</h3>
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Palliative Care</th>
+                            <th>Hospice</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Prognosis</strong></td>
+                            <td>Any stage of serious illness</td>
+                            <td>≤6 months</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Curative treatment</strong></td>
+                            <td>Can continue</td>
+                            <td>Forgone for terminal diagnosis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Setting</strong></td>
+                            <td>Hospital, clinic, home</td>
+                            <td>Primarily home (also facility, inpatient)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Insurance</strong></td>
+                            <td>Billed as medical services</td>
+                            <td>Medicare Hospice Benefit (comprehensive)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Focus</strong></td>
+                            <td>Quality of life + disease treatment</td>
+                            <td>Comfort, dignity, family support</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ETHICS AND LEGAL -->
+        <div class="section" id="ethics">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>⚖️ Ethics & Legal Issues</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Advance Directives</h3>
+                    <table>
+                        <tr>
+                            <th>Document</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Living Will</strong></td>
+                            <td>Specifies treatments patient does/doesn't want if incapacitated</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Healthcare Power of Attorney (HCPOA)</strong></td>
+                            <td>Designates surrogate decision-maker; broader than living will</td>
+                        </tr>
+                        <tr>
+                            <td><strong>POLST/MOLST</strong></td>
+                            <td>Physician orders for specific treatments (CPR, intubation, etc.); portable across settings</td>
+                        </tr>
+                    </table>
+
+                    <div class="info-box">
+                        <strong>POLST (Physician Orders for Life-Sustaining Treatment):</strong>
+                        <ul>
+                            <li>Signed by physician and patient/surrogate</li>
+                            <li>Actionable medical orders (unlike advance directive)</li>
+                            <li>Intended for seriously ill patients</li>
+                            <li>Addresses: CPR, intubation, hospitalization, artificial nutrition</li>
+                            <li>Bright color (usually pink) for easy identification</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Surrogate Decision-Making Hierarchy</h3>
+                    <div class="criteria-box">
+                        <strong>When patient lacks capacity (typical order):</strong>
+                        <ol>
+                            <li>Healthcare Power of Attorney / Healthcare Proxy</li>
+                            <li>Court-appointed guardian</li>
+                            <li>Spouse/domestic partner</li>
+                            <li>Adult children</li>
+                            <li>Parents</li>
+                            <li>Adult siblings</li>
+                            <li>Close friend (varies by state)</li>
+                        </ol>
+                        <em>Order varies by state law</em>
+                    </div>
+
+                    <h4>Standards for Surrogate Decision-Making</h4>
+                    <div class="key-point">
+                        <ol>
+                            <li><strong>Substituted judgment</strong> (preferred): What would THIS patient want?</li>
+                            <li><strong>Best interest</strong> (if wishes unknown): What would reasonable person want?</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Withdrawing vs. Withholding Treatment</h3>
+                    <div class="key-point">
+                        ✅ <strong>Ethically and legally equivalent:</strong>
+                        <ul>
+                            <li>Withdrawing treatment already started = withholding treatment never started</li>
+                            <li>Both are permissible when treatment no longer benefits patient or aligns with goals</li>
+                            <li>Psychological difference exists but not ethical distinction</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>Artificial nutrition/hydration:</strong>
+                        <ul>
+                            <li>Legally considered medical treatment (can be withdrawn)</li>
+                            <li>In dying patients, forced hydration may increase discomfort (edema, secretions)</li>
+                            <li>Dehydration in dying is NOT uncomfortable — may even be comfortable</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Principle of Double Effect</h3>
+                    <div class="criteria-box">
+                        <strong>Four conditions for ethical permissibility:</strong>
+                        <ol>
+                            <li>Action itself is morally good or neutral (giving medication for symptom relief)</li>
+                            <li>Good effect is intended (relief of suffering)</li>
+                            <li>Bad effect is foreseen but NOT intended (possible hastening of death)</li>
+                            <li>Good effect is not achieved BY means of the bad effect</li>
+                        </ol>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Example:</strong> Giving morphine to relieve dyspnea in a dying patient is ethical even if it might hasten death, as long as the intent is comfort and the dose is titrated to symptom relief.
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Appropriate opioid dosing for symptom control does NOT hasten death in most cases. Fear of hastening death should not prevent adequate pain/dyspnea treatment.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Palliative Sedation</h3>
+                    <div class="info-box">
+                        <strong>Definition:</strong> Intentionally reducing consciousness to relieve refractory symptoms at end of life
+                    </div>
+
+                    <div class="criteria-box">
+                        <strong>Criteria for palliative sedation:</strong>
+                        <ul>
+                            <li>Patient is imminently dying (hours to days)</li>
+                            <li>Symptom is refractory to standard treatments</li>
+                            <li>Symptom is intolerable to patient</li>
+                            <li>Consent obtained (patient or surrogate)</li>
+                            <li>Intent is symptom relief, not hastening death</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">
+                        ✅ <strong>Medications used:</strong> Midazolam, propofol, pentobarbital, phenobarbital
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Medical Aid in Dying (MAID)</h3>
+                    <div class="warning-box">
+                        <strong>Legal in some US states:</strong> Oregon, Washington, California, Colorado, Vermont, Hawaii, New Jersey, Maine, New Mexico, and DC (as of 2024)
+                        <ul>
+                            <li>Patient must have terminal illness with ≤6 month prognosis</li>
+                            <li>Must be mentally competent adult</li>
+                            <li>Must make multiple requests</li>
+                            <li>Patient self-administers lethal medication</li>
+                        </ul>
+                        <em>Different from euthanasia (physician administers)</em>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BOARD PEARLS -->
+        <div class="section" id="pearls">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>💎 High-Yield Board Pearls</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="pearl-box">
+                    <strong>Goals of Care:</strong>
+                    <ol>
+                        <li>Ask about understanding BEFORE giving information (SPIKES)</li>
+                        <li>Respond to emotion before continuing with information (NURSE)</li>
+                        <li>Frame recommendations positively: what you WILL do, not just what you won't</li>
+                        <li>Code status should be discussed in context of overall goals, not in isolation</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Pain Management:</strong>
+                    <ol>
+                        <li>Morphine PO:IV ratio = 3:1; Hydromorphone PO:IV = 4:1</li>
+                        <li>Breakthrough dose = 10-20% of total daily opioid dose</li>
+                        <li>AVOID morphine in renal failure (active metabolites accumulate)</li>
+                        <li>AVOID meperidine for chronic pain (neurotoxic metabolite)</li>
+                        <li>Constipation does NOT develop tolerance — ALWAYS prescribe bowel regimen</li>
+                        <li>When rotating opioids, reduce dose 25-50% for incomplete cross-tolerance</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Symptom Management:</strong>
+                    <ol>
+                        <li>Opioids are first-line for refractory dyspnea (safe at appropriate doses)</li>
+                        <li>Fan blowing on face helps dyspnea (trigeminal nerve stimulation)</li>
+                        <li>Death rattle: Anticholinergics work best prophylactically</li>
+                        <li>Terminal delirium: Haloperidol first-line; AVOID benzodiazepines</li>
+                        <li>Bowel obstruction: AVOID prokinetics (metoclopramide); use octreotide</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Hospice & Ethics:</strong>
+                    <ol>
+                        <li>Hospice eligibility: Prognosis ≤6 months + comfort-focused goals</li>
+                        <li>Withdrawing = withholding treatment (ethically equivalent)</li>
+                        <li>Artificial nutrition is medical treatment (can be withdrawn)</li>
+                        <li>Double effect: Intent matters — comfort care is ethical even if death hastened</li>
+                        <li>Surrogate decision: Substituted judgment > best interest</li>
+                        <li>POLST = actionable physician orders; Advance directive = patient wishes document</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            const content = header.nextElementSibling;
+            content.classList.toggle('collapsed');
+        }
+
+        function searchContent() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                const header = section.querySelector('.section-header');
+                const content = section.querySelector('.section-content');
+                
+                if (query === '' || text.includes(query)) {
+                    section.style.display = 'block';
+                    if (query !== '' && text.includes(query)) {
+                        header.classList.remove('collapsed');
+                        content.classList.remove('collapsed');
+                    }
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onscroll = function() {
+            const btn = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = 'block';
+            } else {
+                btn.style.display = 'none';
+            }
+        };
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const header = target.querySelector('.section-header');
+                    const content = target.querySelector('.section-content');
+                    if (header && content) {
+                        header.classList.remove('collapsed');
+                        content.classList.remove('collapsed');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

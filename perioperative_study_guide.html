@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Perioperative Medicine Study Guide | ABIM Board Review</title>
+    <style>
+        :root {
+            --primary: #00796b;
+            --primary-light: #e0f2f1;
+            --primary-dark: #004d40;
+            --accent: #ff5722;
+            --background: #fafafa;
+            --surface: #ffffff;
+            --text: #212121;
+            --text-secondary: #757575;
+            --divider: #e0e0e0;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --info: #2196f3;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+            margin: 0;
+            padding: 0;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 20px;
+            padding-top: calc(20px + env(safe-area-inset-top));
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; }
+        .header p { margin: 5px 0 0 0; opacity: 0.9; font-size: 0.95rem; }
+
+        .search-container {
+            padding: 15px 20px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--divider);
+            position: sticky;
+            top: 80px;
+            z-index: 99;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid var(--divider);
+            border-radius: 10px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #searchInput:focus { border-color: var(--primary); }
+
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            background: var(--surface);
+            border-bottom: 1px solid var(--divider);
+            padding: 0 10px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-tab {
+            flex-shrink: 0;
+            padding: 12px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-tab:hover, .nav-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        .section {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .section-header h2 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+        .section-header .toggle { font-size: 1.2rem; transition: transform 0.3s; }
+        .section-header.collapsed .toggle { transform: rotate(-90deg); }
+        .section-content { padding: 20px; }
+        .section-content.collapsed { display: none; }
+
+        .subsection { margin-bottom: 24px; }
+        .subsection:last-child { margin-bottom: 0; }
+
+        .subsection h3 {
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            margin: 0 0 12px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .subsection h4 { color: var(--accent); font-size: 1rem; margin: 16px 0 8px 0; }
+
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.95rem; }
+        th, td { padding: 10px 12px; text-align: left; border: 1px solid var(--divider); }
+        th { background: var(--primary-light); font-weight: 600; color: var(--primary-dark); }
+        tr:nth-child(even) { background: #fafafa; }
+
+        .box { padding: 14px 16px; border-radius: 8px; margin: 12px 0; }
+        .key-point { background: #e8f5e9; border-left: 4px solid var(--success); }
+        .warning-box { background: #fff3e0; border-left: 4px solid var(--warning); }
+        .danger-box { background: #ffebee; border-left: 4px solid var(--danger); }
+        .info-box { background: #e3f2fd; border-left: 4px solid var(--info); }
+        .pearl-box { background: #fff8e1; border-left: 4px solid #ffc107; }
+        .criteria-box { background: #f3e5f5; border-left: 4px solid #9c27b0; }
+
+        ul, ol { margin: 8px 0; padding-left: 24px; }
+        li { margin: 6px 0; }
+
+        .mnemonic { font-weight: 700; color: var(--accent); }
+        .drug { color: var(--primary-dark); font-weight: 600; }
+        .highlight { background: #fff59d; padding: 1px 4px; border-radius: 3px; }
+
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.4rem; }
+            .section-header h2 { font-size: 1.1rem; }
+            th, td { padding: 8px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏥 Perioperative Medicine Study Guide</h1>
+        <p>ABIM Board Review • 4% of Exam</p>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="🔍 Search topics..." oninput="searchContent()">
+    </div>
+
+    <div class="nav-tabs">
+        <a href="#cardiac" class="nav-tab">Cardiac Risk</a>
+        <a href="#pulmonary" class="nav-tab">Pulmonary</a>
+        <a href="#meds" class="nav-tab">Medications</a>
+        <a href="#anticoag" class="nav-tab">Anticoagulation</a>
+        <a href="#glycemic" class="nav-tab">Glycemic</a>
+        <a href="#vte" class="nav-tab">VTE</a>
+        <a href="#pearls" class="nav-tab">Pearls</a>
+    </div>
+
+    <div class="container">
+
+        <!-- CARDIAC RISK -->
+        <div class="section" id="cardiac">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>❤️ Cardiac Risk Assessment</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Revised Cardiac Risk Index (RCRI / Lee Index)</h3>
+                    <div class="criteria-box">
+                        <strong>1 point each (6 total possible):</strong>
+                        <ol>
+                            <li><strong>High-risk surgery</strong> (intraperitoneal, intrathoracic, suprainguinal vascular)</li>
+                            <li><strong>History of ischemic heart disease</strong> (MI, positive stress test, angina, nitrate use, Q waves)</li>
+                            <li><strong>History of heart failure</strong></li>
+                            <li><strong>History of cerebrovascular disease</strong> (stroke or TIA)</li>
+                            <li><strong>Diabetes requiring insulin</strong></li>
+                            <li><strong>Creatinine >2.0 mg/dL</strong></li>
+                        </ol>
+                    </div>
+
+                    <table>
+                        <tr>
+                            <th>RCRI Score</th>
+                            <th>Risk of MACE</th>
+                            <th>Risk Category</th>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>~0.4%</td>
+                            <td>Low</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>~1%</td>
+                            <td>Low</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>~2.4%</td>
+                            <td>Elevated</td>
+                        </tr>
+                        <tr>
+                            <td>≥3</td>
+                            <td>~5.4%</td>
+                            <td>Elevated</td>
+                        </tr>
+                    </table>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> RCRI is most useful for risk stratification in INTERMEDIATE-risk surgery. Low-risk surgery (e.g., cataract, endoscopy) doesn't need formal assessment. Very high-risk patients may need cardiac evaluation regardless.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Surgery Risk Categories</h3>
+                    <table>
+                        <tr>
+                            <th>Low Risk (&lt;1% MACE)</th>
+                            <th>Intermediate Risk (1-5%)</th>
+                            <th>High Risk (&gt;5%)</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>Cataract</li>
+                                    <li>Breast biopsy</li>
+                                    <li>Ambulatory surgery</li>
+                                    <li>Endoscopy</li>
+                                    <li>Superficial procedures</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Orthopedic (hip/knee)</li>
+                                    <li>Intra-abdominal</li>
+                                    <li>Intrathoracic</li>
+                                    <li>Prostate</li>
+                                    <li>Head & neck</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Aortic surgery</li>
+                                    <li>Peripheral vascular</li>
+                                    <li>Open heart</li>
+                                    <li>Transplant</li>
+                                    <li>Emergency major surgery</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>ACC/AHA Stepwise Approach</h3>
+                    <div class="info-box">
+                        <strong>Step 1:</strong> Is surgery <strong>emergent</strong>? → Proceed to surgery, optimize perioperatively<br><br>
+                        <strong>Step 2:</strong> Does patient have <strong>ACS</strong>? → Delay surgery, treat ACS<br><br>
+                        <strong>Step 3:</strong> Estimate risk using <strong>RCRI</strong> + surgery type<br><br>
+                        <strong>Step 4:</strong> Assess <strong>functional capacity</strong> (METs)
+                    </div>
+
+                    <h4>Functional Capacity (METs)</h4>
+                    <table>
+                        <tr>
+                            <th>METs</th>
+                            <th>Activity</th>
+                            <th>Implication</th>
+                        </tr>
+                        <tr>
+                            <td><strong>1-4</strong></td>
+                            <td>Self-care, walking indoors, light housework</td>
+                            <td>POOR — may need further testing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4-10</strong></td>
+                            <td>Climbing 1-2 flights of stairs, walking up hill, yard work</td>
+                            <td>MODERATE — proceed if asymptomatic</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&gt;10</strong></td>
+                            <td>Swimming, running, vigorous sports</td>
+                            <td>EXCELLENT — proceed</td>
+                        </tr>
+                    </table>
+
+                    <div class="key-point">✅ <strong>Key threshold:</strong> If functional capacity ≥4 METs AND asymptomatic → proceed to surgery without further cardiac testing.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Preoperative Testing</h3>
+                    
+                    <h4>When to Order ECG</h4>
+                    <div class="info-box">
+                        <ul>
+                            <li>Known CAD, arrhythmia, PAD, CVD, structural heart disease</li>
+                            <li>Intermediate/high-risk surgery with ≥1 RCRI risk factors</li>
+                            <li>NOT routinely needed for low-risk surgery</li>
+                        </ul>
+                    </div>
+
+                    <h4>When to Order Stress Testing</h4>
+                    <div class="warning-box">
+                        ⚠️ <strong>Consider stress testing ONLY if:</strong>
+                        <ul>
+                            <li>Elevated risk (RCRI ≥2)</li>
+                            <li>Poor functional capacity (&lt;4 METs)</li>
+                            <li>High-risk surgery</li>
+                            <li>Result will change management</li>
+                        </ul>
+                        <em>If stress testing within past 2 years was negative with no new symptoms → no need to repeat</em>
+                    </div>
+
+                    <div class="danger-box">
+                        ❌ <strong>Do NOT order cardiac catheterization just because of upcoming surgery.</strong> Revascularization is indicated only if independently warranted (ACS, left main disease, etc.)
+                    </div>
+
+                    <h4>Echocardiogram</h4>
+                    <div class="info-box">
+                        <strong>Consider if:</strong>
+                        <ul>
+                            <li>New/worsening dyspnea of unknown cause</li>
+                            <li>Known HF with worsening symptoms</li>
+                            <li>Known severe valvular disease (reassess if >1 year)</li>
+                        </ul>
+                        <em>NOT routinely indicated for noncardiac surgery</em>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Special Considerations: Recent PCI</h3>
+                    <table>
+                        <tr>
+                            <th>Stent Type</th>
+                            <th>Minimum Delay Before Elective Surgery</th>
+                            <th>DAPT Duration</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Bare-metal stent (BMS)</strong></td>
+                            <td>≥30 days</td>
+                            <td>4-6 weeks minimum</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Drug-eluting stent (DES)</strong></td>
+                            <td>≥6 months (ideal); ≥3 months if urgent</td>
+                            <td>6-12 months</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Balloon angioplasty alone</strong></td>
+                            <td>≥2 weeks</td>
+                            <td>2-4 weeks</td>
+                        </tr>
+                    </table>
+
+                    <div class="danger-box">
+                        ❌ <strong>High Risk of Stent Thrombosis:</strong> Stopping DAPT prematurely is a major risk. Stent thrombosis has ~30% mortality.
+                    </div>
+
+                    <div class="key-point">
+                        ✅ <strong>If surgery cannot wait:</strong>
+                        <ul>
+                            <li>Continue aspirin if at all possible</li>
+                            <li>Hold P2Y12 inhibitor (clopidogrel 5 days, ticagrelor 3-5 days, prasugrel 7 days)</li>
+                            <li>Resume DAPT as soon as bleeding risk allows</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Perioperative Beta-Blockers</h3>
+                    <div class="key-point">
+                        ✅ <strong>CONTINUE beta-blockers if:</strong>
+                        <ul>
+                            <li>Already taking chronically</li>
+                            <li>For any indication (HTN, CAD, HF, arrhythmia)</li>
+                        </ul>
+                    </div>
+
+                    <div class="danger-box">
+                        ❌ <strong>Do NOT START high-dose beta-blockers on day of surgery.</strong> POISE trial: ↓MI but ↑stroke and ↑mortality with day-of initiation.
+                    </div>
+
+                    <div class="info-box">
+                        <strong>If starting beta-blockers:</strong>
+                        <ul>
+                            <li>Begin >1 week before surgery</li>
+                            <li>Titrate to HR 60-80 without hypotension</li>
+                            <li>Consider in high-risk patients with ≥3 RCRI factors undergoing vascular surgery</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PULMONARY RISK -->
+        <div class="section" id="pulmonary">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🫁 Pulmonary Risk Assessment</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Risk Factors for Postoperative Pulmonary Complications</h3>
+                    <table>
+                        <tr>
+                            <th>Patient Factors</th>
+                            <th>Surgery Factors</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>Age >60</li>
+                                    <li>COPD (strongest patient factor)</li>
+                                    <li>Current smoking</li>
+                                    <li>CHF</li>
+                                    <li>Functional dependence</li>
+                                    <li>ASA class ≥2</li>
+                                    <li>Obstructive sleep apnea</li>
+                                    <li>Pulmonary hypertension</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li><strong>Surgical site</strong> (most predictive)</li>
+                                    <li>Thoracic surgery</li>
+                                    <li>Upper abdominal surgery</li>
+                                    <li>Aortic aneurysm repair</li>
+                                    <li>Duration >3 hours</li>
+                                    <li>Emergency surgery</li>
+                                    <li>General anesthesia</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Surgical site is the most important predictor of pulmonary complications. Thoracic and upper abdominal surgeries carry highest risk.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Preoperative Pulmonary Testing</h3>
+                    <div class="warning-box">
+                        ⚠️ <strong>Routine preoperative PFTs are NOT recommended</strong>
+                        <ul>
+                            <li>Do not predict postoperative complications better than clinical assessment</li>
+                            <li>No absolute PFT value precludes surgery</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>When PFTs may be helpful:</strong>
+                        <ul>
+                            <li>Undiagnosed dyspnea or cough</li>
+                            <li>Known COPD with unclear baseline</li>
+                            <li>Lung resection surgery (need to predict post-op lung function)</li>
+                        </ul>
+                    </div>
+
+                    <div class="danger-box">
+                        ❌ <strong>Chest X-ray:</strong> Not routinely indicated. Consider if new cardiopulmonary symptoms or known cardiopulmonary disease requiring reassessment.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Risk Reduction Strategies</h3>
+                    <div class="key-point">
+                        ✅ <strong>Evidence-based interventions:</strong>
+                        <ul>
+                            <li><strong>Smoking cessation</strong> — ideally ≥8 weeks preop; even shorter duration helpful</li>
+                            <li><strong>Lung expansion techniques</strong> — incentive spirometry, CPAP, deep breathing exercises</li>
+                            <li><strong>Optimize COPD/asthma</strong> — continue inhalers perioperatively</li>
+                            <li><strong>Nasogastric decompression</strong> — only with symptomatic distension (not prophylactic)</li>
+                            <li><strong>Neuraxial anesthesia</strong> — consider when appropriate (lower risk than GA)</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>Smoking cessation:</strong> Some concern about increased sputum production in first weeks after quitting. However, benefits outweigh risks at any time point.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Obstructive Sleep Apnea</h3>
+                    <div class="info-box">
+                        <strong>STOP-BANG Screening:</strong>
+                        <ul>
+                            <li><strong>S</strong>noring loudly</li>
+                            <li><strong>T</strong>ired during day</li>
+                            <li><strong>O</strong>bserved apneas</li>
+                            <li><strong>P</strong>ressure (HTN)</li>
+                            <li><strong>B</strong>MI >35</li>
+                            <li><strong>A</strong>ge >50</li>
+                            <li><strong>N</strong>eck circumference >40 cm</li>
+                            <li><strong>G</strong>ender male</li>
+                        </ul>
+                        <em>Score ≥3 = intermediate risk; ≥5 = high risk</em>
+                    </div>
+
+                    <div class="key-point">
+                        ✅ <strong>Perioperative management:</strong>
+                        <ul>
+                            <li>Continue CPAP perioperatively (bring from home)</li>
+                            <li>Minimize opioids, use multimodal analgesia</li>
+                            <li>Avoid supine position if possible</li>
+                            <li>Continuous pulse oximetry postoperatively</li>
+                            <li>May require ICU monitoring after major surgery</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MEDICATIONS -->
+        <div class="section" id="meds">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>💊 Perioperative Medication Management</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Medications to CONTINUE</h3>
+                    <table>
+                        <tr>
+                            <th>Drug Class</th>
+                            <th>Guidance</th>
+                            <th>Rationale</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Beta-blockers</strong></td>
+                            <td>✅ Continue</td>
+                            <td>Rebound tachycardia, HTN, ischemia if stopped</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Statins</strong></td>
+                            <td>✅ Continue</td>
+                            <td>Pleiotropic effects, may reduce perioperative MI</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aspirin (cardiac indication)</strong></td>
+                            <td>✅ Continue (usually)</td>
+                            <td>Exception: intracranial, spinal surgery</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Thyroid hormone</strong></td>
+                            <td>✅ Continue</td>
+                            <td>Long half-life, risk of myxedema</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inhaled beta-agonists, anticholinergics</strong></td>
+                            <td>✅ Continue</td>
+                            <td>Prevent bronchospasm</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anticonvulsants</strong></td>
+                            <td>✅ Continue</td>
+                            <td>Seizure risk</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Immunosuppressants (transplant)</strong></td>
+                            <td>✅ Continue</td>
+                            <td>Rejection risk</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Psychiatric medications</strong></td>
+                            <td>✅ Continue (most)</td>
+                            <td>See exceptions below</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>Medications to HOLD</h3>
+                    <table>
+                        <tr>
+                            <th>Drug Class</th>
+                            <th>When to Hold</th>
+                            <th>Rationale</th>
+                        </tr>
+                        <tr>
+                            <td><strong>ACE-I / ARBs</strong></td>
+                            <td>Hold morning of surgery (controversial)</td>
+                            <td>Refractory intraoperative hypotension. Can continue if stable HF.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diuretics</strong></td>
+                            <td>Hold morning of surgery</td>
+                            <td>Hypovolemia, electrolyte abnormalities</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Metformin</strong></td>
+                            <td>Hold day of surgery</td>
+                            <td>Risk of lactic acidosis with contrast/hypoperfusion</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SGLT2 inhibitors</strong></td>
+                            <td>Hold 3-4 days before</td>
+                            <td>Risk of euglycemic DKA</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sulfonylureas</strong></td>
+                            <td>Hold morning of surgery</td>
+                            <td>Hypoglycemia risk</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GLP-1 agonists</strong></td>
+                            <td>Hold day of (daily) or 1 week (weekly)</td>
+                            <td>Delayed gastric emptying → aspiration risk</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MAOIs</strong></td>
+                            <td>Continue (usually) — coordinate with anesthesia</td>
+                            <td>Avoid meperidine, indirect sympathomimetics</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NSAIDs</strong></td>
+                            <td>Hold 2-3 days before</td>
+                            <td>Bleeding risk, AKI</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Herbal supplements</strong></td>
+                            <td>Hold 1-2 weeks before</td>
+                            <td>Garlic, ginkgo, ginseng ↑ bleeding</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>Perioperative Steroid Coverage</h3>
+                    <div class="info-box">
+                        <strong>At risk for adrenal suppression:</strong>
+                        <ul>
+                            <li>Prednisone ≥20 mg/day (or equivalent) for ≥3 weeks</li>
+                            <li>Cushingoid appearance</li>
+                            <li>Current or recent steroid use (within 1 year)</li>
+                        </ul>
+                    </div>
+
+                    <table>
+                        <tr>
+                            <th>Surgery Type</th>
+                            <th>Stress Dose Recommendation</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Minor</strong> (local, <1 hour)</td>
+                            <td>Usual daily dose only</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Moderate</strong> (orthopedic, abdominal)</td>
+                            <td>Hydrocortisone 50 mg IV preop + 25 mg q8h × 24h</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Major</strong> (cardiac, Whipple)</td>
+                            <td>Hydrocortisone 100 mg IV preop + 50 mg q8h × 48-72h, then taper</td>
+                        </tr>
+                    </table>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Most patients on chronic steroids can tolerate surgery with their usual dose only. Reserve stress-dose steroids for truly high-risk patients undergoing major surgery.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ANTICOAGULATION -->
+        <div class="section" id="anticoag">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🩸 Anticoagulation Management</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Warfarin: Hold and Bridge Decision</h3>
+                    <table>
+                        <tr>
+                            <th>Thromboembolic Risk</th>
+                            <th>Indication Examples</th>
+                            <th>Bridging?</th>
+                        </tr>
+                        <tr>
+                            <td><strong>HIGH</strong> (>10%/year)</td>
+                            <td>
+                                <ul>
+                                    <li>Mechanical mitral valve</li>
+                                    <li>Older mechanical aortic valve</li>
+                                    <li>Recent stroke/TIA (<3 months)</li>
+                                    <li>CHADS₂-VASc ≥7</li>
+                                    <li>Recent VTE (<3 months)</li>
+                                </ul>
+                            </td>
+                            <td>✅ Bridge with LMWH</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MODERATE</strong></td>
+                            <td>
+                                <ul>
+                                    <li>Newer mechanical aortic valve</li>
+                                    <li>AFib with CHADS₂-VASc 5-6</li>
+                                    <li>VTE 3-12 months ago</li>
+                                </ul>
+                            </td>
+                            <td>⚠️ Consider bridging (individualize)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LOW</strong></td>
+                            <td>
+                                <ul>
+                                    <li>AFib with CHADS₂-VASc ≤4</li>
+                                    <li>Bioprosthetic valve</li>
+                                    <li>VTE >12 months ago</li>
+                                </ul>
+                            </td>
+                            <td>❌ No bridging (BRIDGE trial)</td>
+                        </tr>
+                    </table>
+
+                    <div class="pearl-box">💎 <strong>BRIDGE Trial (2015):</strong> In AFib patients with low-moderate risk, forgoing bridging was noninferior for thromboembolism and REDUCED major bleeding. Bridging now reserved for truly high-risk patients.</div>
+
+                    <h4>Warfarin Timing</h4>
+                    <div class="key-point">
+                        <ul>
+                            <li><strong>Hold:</strong> 5 days before surgery (goal INR <1.5)</li>
+                            <li><strong>If bridging:</strong> Start LMWH when INR subtherapeutic, hold 24h before surgery</li>
+                            <li><strong>Resume:</strong> 12-24h postop when hemostasis assured</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Direct Oral Anticoagulants (DOACs)</h3>
+                    <table>
+                        <tr>
+                            <th>DOAC</th>
+                            <th>Normal Renal (CrCl ≥50)</th>
+                            <th>CrCl 30-50</th>
+                            <th>CrCl <30</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Dabigatran</strong></td>
+                            <td>Hold 2-3 days</td>
+                            <td>Hold 3-4 days</td>
+                            <td>Hold 4-5 days</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rivaroxaban</strong></td>
+                            <td>Hold 2-3 days</td>
+                            <td>Hold 3-4 days</td>
+                            <td>Hold 4-5 days</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Apixaban</strong></td>
+                            <td>Hold 2-3 days</td>
+                            <td>Hold 3-4 days</td>
+                            <td>Hold 4-5 days</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Edoxaban</strong></td>
+                            <td>Hold 2-3 days</td>
+                            <td>Hold 3-4 days</td>
+                            <td>Hold 4-5 days</td>
+                        </tr>
+                    </table>
+
+                    <div class="key-point">
+                        ✅ <strong>DOACs do NOT require bridging</strong> — short half-life allows perioperative interruption without LMWH overlap.
+                    </div>
+
+                    <div class="info-box">
+                        <strong>For procedures with minimal bleeding risk</strong> (dental, cataract, minor dermatologic): Consider performing on DOAC with timing at trough (skip morning dose).
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Antiplatelet Management</h3>
+                    <table>
+                        <tr>
+                            <th>Agent</th>
+                            <th>Hold Duration</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Aspirin (primary prevention)</strong></td>
+                            <td>Hold 7 days</td>
+                            <td>Can often discontinue if no cardiac indication</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aspirin (CAD, stent)</strong></td>
+                            <td>Continue if possible</td>
+                            <td>Hold only for intracranial, spinal surgery</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clopidogrel</strong></td>
+                            <td>Hold 5 days</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prasugrel</strong></td>
+                            <td>Hold 7 days</td>
+                            <td>Most potent, longest to clear</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ticagrelor</strong></td>
+                            <td>Hold 3-5 days</td>
+                            <td>Reversible binding</td>
+                        </tr>
+                    </table>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>Recent coronary stent:</strong> See Cardiac Risk section. Balance stent thrombosis risk vs. bleeding risk. Aspirin should continue if at all possible.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- GLYCEMIC -->
+        <div class="section" id="glycemic">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>📊 Glycemic Management</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Diabetes Medication Management</h3>
+                    <table>
+                        <tr>
+                            <th>Drug Class</th>
+                            <th>Preoperative</th>
+                            <th>Day of Surgery</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Metformin</strong></td>
+                            <td>Continue until surgery</td>
+                            <td>Hold; resume when stable and eating</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SGLT2 inhibitors</strong></td>
+                            <td>Hold 3-4 days before</td>
+                            <td>Held — risk of euglycemic DKA</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sulfonylureas</strong></td>
+                            <td>Continue until day before</td>
+                            <td>Hold — hypoglycemia risk</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GLP-1 agonists</strong></td>
+                            <td>Daily: hold day of<br>Weekly: hold 1 week before</td>
+                            <td>Held — aspiration risk</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DPP-4 inhibitors</strong></td>
+                            <td>May continue</td>
+                            <td>May continue or hold</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Basal insulin</strong></td>
+                            <td>Reduce by 20-25% night before</td>
+                            <td>Give reduced dose (50-80% of usual)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bolus/prandial insulin</strong></td>
+                            <td>Continue with meals</td>
+                            <td>Hold (NPO)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Insulin pump</strong></td>
+                            <td>Continue basal</td>
+                            <td>Continue basal rate; coordinate with anesthesia</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>Perioperative Glucose Targets</h3>
+                    <div class="key-point">
+                        ✅ <strong>Target glucose:</strong> 140-180 mg/dL<br>
+                        <ul>
+                            <li>Tight control (<140) → ↑hypoglycemia without benefit (NICE-SUGAR)</li>
+                            <li>Avoid hyperglycemia >180 → infection, poor wound healing</li>
+                            <li>More liberal targets (180-250) acceptable in some patients</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Intraoperative management:</strong>
+                        <ul>
+                            <li>Check glucose on arrival, then q1-2h</li>
+                            <li>D5W + insulin drip for major surgery</li>
+                            <li>Sliding scale for minor procedures</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Euglycemic DKA with SGLT2 Inhibitors</h3>
+                    <div class="danger-box">
+                        ⚠️ <strong>Key features:</strong>
+                        <ul>
+                            <li>DKA with normal or only mildly elevated glucose (<250)</li>
+                            <li>Precipitated by surgery, fasting, dehydration, illness</li>
+                            <li>SGLT2 inhibitors promote ketogenesis</li>
+                            <li>May be missed because glucose not very high</li>
+                        </ul>
+                        <strong>Hold SGLT2i 3-4 days before surgery</strong>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- VTE PROPHYLAXIS -->
+        <div class="section" id="vte">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🦵 VTE Prophylaxis</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Risk Assessment (Caprini Score Simplified)</h3>
+                    <table>
+                        <tr>
+                            <th>Risk Level</th>
+                            <th>Caprini Score</th>
+                            <th>VTE Risk</th>
+                            <th>Prophylaxis</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Very Low</strong></td>
+                            <td>0</td>
+                            <td><0.5%</td>
+                            <td>Ambulation only</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Low</strong></td>
+                            <td>1-2</td>
+                            <td>0.5-1.5%</td>
+                            <td>Mechanical (SCDs) ± pharmacologic</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Moderate</strong></td>
+                            <td>3-4</td>
+                            <td>1.5-3%</td>
+                            <td>Pharmacologic + mechanical</td>
+                        </tr>
+                        <tr>
+                            <td><strong>High</strong></td>
+                            <td>≥5</td>
+                            <td>>3%</td>
+                            <td>Pharmacologic + mechanical; extended prophylaxis</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>Pharmacologic Prophylaxis Options</h3>
+                    <table>
+                        <tr>
+                            <th>Agent</th>
+                            <th>Dose</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Enoxaparin</strong></td>
+                            <td>40 mg SC daily<br>or 30 mg SC q12h (high-risk)</td>
+                            <td>Reduce to 30 mg daily if CrCl <30</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Heparin</strong></td>
+                            <td>5000 units SC q8h or q12h</td>
+                            <td>Use if CrCl <30 or high bleeding risk</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fondaparinux</strong></td>
+                            <td>2.5 mg SC daily</td>
+                            <td>Avoid if CrCl <30; no HIT risk</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>Special Populations</h3>
+
+                    <h4>Orthopedic Surgery (Hip/Knee)</h4>
+                    <div class="key-point">
+                        ✅ <strong>Extended prophylaxis:</strong> 10-35 days total
+                        <ul>
+                            <li>Options: LMWH, fondaparinux, rivaroxaban, apixaban, warfarin, aspirin (per CHEST 2012)</li>
+                            <li>Start 12-24h postop (if using LMWH/fondaparinux)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Abdominal/Pelvic Cancer Surgery</h4>
+                    <div class="key-point">
+                        ✅ <strong>Extended prophylaxis:</strong> 4 weeks total (high VTE risk)
+                    </div>
+
+                    <h4>High Bleeding Risk</h4>
+                    <div class="warning-box">
+                        ⚠️ If pharmacologic contraindicated:
+                        <ul>
+                            <li>Use mechanical prophylaxis (SCDs)</li>
+                            <li>Start pharmacologic as soon as bleeding risk acceptable</li>
+                            <li>Dual therapy (mechanical + pharmacologic) when able</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>IVC Filter Indications</h3>
+                    <div class="info-box">
+                        <ul>
+                            <li>Acute VTE with absolute contraindication to anticoagulation</li>
+                            <li>Recurrent VTE despite adequate anticoagulation</li>
+                            <li><strong>NOT indicated</strong> for primary prophylaxis (even high-risk surgery)</li>
+                            <li>Retrievable filters should be removed when anticoagulation can resume</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BOARD PEARLS -->
+        <div class="section" id="pearls">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>💎 High-Yield Board Pearls</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="pearl-box">
+                    <strong>Cardiac Risk:</strong>
+                    <ol>
+                        <li>RCRI: 6 factors (high-risk surgery, CAD, CHF, CVD, insulin DM, Cr >2.0)</li>
+                        <li>Functional capacity ≥4 METs → proceed without testing (if asymptomatic)</li>
+                        <li>Do NOT start high-dose beta-blockers on day of surgery (POISE: ↑stroke, ↑death)</li>
+                        <li>Continue beta-blockers if already on them</li>
+                        <li>Recent DES: delay elective surgery ≥6 months (≥3 months if urgent)</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Pulmonary Risk:</strong>
+                    <ol>
+                        <li>Surgical site is the strongest predictor of pulmonary complications</li>
+                        <li>Routine preoperative PFTs are NOT recommended</li>
+                        <li>Smoking cessation at any time before surgery is beneficial</li>
+                        <li>Continue inhalers perioperatively (COPD, asthma)</li>
+                        <li>OSA patients: continue CPAP, minimize opioids, monitor postoperatively</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Medications:</strong>
+                    <ol>
+                        <li>CONTINUE: beta-blockers, statins, thyroid hormones, anticonvulsants</li>
+                        <li>HOLD: ACE-I/ARBs (controversial), diuretics morning of surgery</li>
+                        <li>HOLD SGLT2 inhibitors 3-4 days before (euglycemic DKA)</li>
+                        <li>HOLD GLP-1 agonists (aspiration risk from delayed gastric emptying)</li>
+                        <li>Stress-dose steroids only for major surgery in high-risk patients</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Anticoagulation:</strong>
+                    <ol>
+                        <li>BRIDGE trial: Bridging NOT needed for most AFib patients on warfarin</li>
+                        <li>Bridge only for HIGH-risk: mechanical mitral valve, recent stroke, recent VTE</li>
+                        <li>DOACs: No bridging needed, hold 2-5 days based on renal function</li>
+                        <li>Continue aspirin for CAD/stents if possible (except intracranial surgery)</li>
+                        <li>Stop clopidogrel 5 days, ticagrelor 3-5 days, prasugrel 7 days before</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Glycemic Control & VTE:</strong>
+                    <ol>
+                        <li>Target glucose 140-180 (not tighter — NICE-SUGAR)</li>
+                        <li>Reduce basal insulin by 20-25% night before surgery</li>
+                        <li>Orthopedic surgery: Extended VTE prophylaxis 10-35 days</li>
+                        <li>Abdominal/pelvic cancer surgery: 4 weeks VTE prophylaxis</li>
+                        <li>IVC filters NOT for primary prophylaxis, only acute VTE with contraindication to anticoagulation</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            const content = header.nextElementSibling;
+            content.classList.toggle('collapsed');
+        }
+
+        function searchContent() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                const header = section.querySelector('.section-header');
+                const content = section.querySelector('.section-content');
+                
+                if (query === '' || text.includes(query)) {
+                    section.style.display = 'block';
+                    if (query !== '' && text.includes(query)) {
+                        header.classList.remove('collapsed');
+                        content.classList.remove('collapsed');
+                    }
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onscroll = function() {
+            const btn = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = 'block';
+            } else {
+                btn.style.display = 'none';
+            }
+        };
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const header = target.querySelector('.section-header');
+                    const content = target.querySelector('.section-content');
+                    if (header && content) {
+                        header.classList.remove('collapsed');
+                        content.classList.remove('collapsed');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

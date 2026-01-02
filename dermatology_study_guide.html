@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Dermatology Study Guide | ABIM Board Review</title>
+    <style>
+        :root {
+            --primary: #8d6e63;
+            --primary-light: #efebe9;
+            --primary-dark: #5d4037;
+            --accent: #ff7043;
+            --background: #fafafa;
+            --surface: #ffffff;
+            --text: #212121;
+            --text-secondary: #757575;
+            --divider: #e0e0e0;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --info: #2196f3;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+            margin: 0;
+            padding: 0;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 20px;
+            padding-top: calc(20px + env(safe-area-inset-top));
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; }
+        .header p { margin: 5px 0 0 0; opacity: 0.9; font-size: 0.95rem; }
+
+        .search-container {
+            padding: 15px 20px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--divider);
+            position: sticky;
+            top: 80px;
+            z-index: 99;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid var(--divider);
+            border-radius: 10px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #searchInput:focus { border-color: var(--primary); }
+
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            background: var(--surface);
+            border-bottom: 1px solid var(--divider);
+            padding: 0 10px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-tab {
+            flex-shrink: 0;
+            padding: 12px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-tab:hover, .nav-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        .section {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .section-header h2 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+        .section-header .toggle { font-size: 1.2rem; transition: transform 0.3s; }
+        .section-header.collapsed .toggle { transform: rotate(-90deg); }
+        .section-content { padding: 20px; }
+        .section-content.collapsed { display: none; }
+
+        .subsection { margin-bottom: 24px; }
+        .subsection:last-child { margin-bottom: 0; }
+
+        .subsection h3 {
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            margin: 0 0 12px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .subsection h4 { color: var(--accent); font-size: 1rem; margin: 16px 0 8px 0; }
+
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.95rem; }
+        th, td { padding: 10px 12px; text-align: left; border: 1px solid var(--divider); }
+        th { background: var(--primary-light); font-weight: 600; color: var(--primary-dark); }
+        tr:nth-child(even) { background: #fafafa; }
+
+        .box { padding: 14px 16px; border-radius: 8px; margin: 12px 0; }
+        .key-point { background: #e8f5e9; border-left: 4px solid var(--success); }
+        .warning-box { background: #fff3e0; border-left: 4px solid var(--warning); }
+        .danger-box { background: #ffebee; border-left: 4px solid var(--danger); }
+        .info-box { background: #e3f2fd; border-left: 4px solid var(--info); }
+        .pearl-box { background: #fff8e1; border-left: 4px solid #ffc107; }
+        .criteria-box { background: #f3e5f5; border-left: 4px solid #9c27b0; }
+
+        ul, ol { margin: 8px 0; padding-left: 24px; }
+        li { margin: 6px 0; }
+
+        .mnemonic { font-weight: 700; color: var(--accent); }
+        .drug { color: var(--primary-dark); font-weight: 600; }
+        .highlight { background: #fff59d; padding: 1px 4px; border-radius: 3px; }
+
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.4rem; }
+            .section-header h2 { font-size: 1.1rem; }
+            th, td { padding: 8px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🩹 Dermatology Study Guide</h1>
+        <p>ABIM Board Review • 3% of Exam</p>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="🔍 Search topics..." oninput="searchContent()">
+    </div>
+
+    <div class="nav-tabs">
+        <a href="#drug-reactions" class="nav-tab">Drug Reactions</a>
+        <a href="#skin-cancer" class="nav-tab">Skin Cancer</a>
+        <a href="#infections" class="nav-tab">Infections</a>
+        <a href="#inflammatory" class="nav-tab">Inflammatory</a>
+        <a href="#systemic" class="nav-tab">Systemic Signs</a>
+        <a href="#pearls" class="nav-tab">Pearls</a>
+    </div>
+
+    <div class="container">
+
+        <!-- DRUG REACTIONS -->
+        <div class="section" id="drug-reactions">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>💊 Drug Eruptions</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Types of Drug Eruptions</h3>
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Onset</th>
+                            <th>Appearance</th>
+                            <th>Common Causes</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Morbilliform (Exanthematous)</strong></td>
+                            <td>4-14 days</td>
+                            <td>Maculopapular, confluent, starts trunk</td>
+                            <td>Penicillins, sulfonamides, allopurinol, anticonvulsants</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Urticarial</strong></td>
+                            <td>Minutes-hours</td>
+                            <td>Wheals, pruritic, migratory</td>
+                            <td>PCN, NSAIDs, opioids, radiocontrast</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fixed Drug Eruption</strong></td>
+                            <td>30 min - 8 hours</td>
+                            <td>Round, violaceous plaques; recur same site</td>
+                            <td>TMP-SMX, NSAIDs, tetracyclines, phenytoin</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Photosensitivity</strong></td>
+                            <td>Hours-days</td>
+                            <td>Exaggerated sunburn in sun-exposed areas</td>
+                            <td>Tetracyclines, fluoroquinolones, thiazides, amiodarone</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lichenoid</strong></td>
+                            <td>Weeks-months</td>
+                            <td>Violaceous, flat-topped papules (like lichen planus)</td>
+                            <td>ACE-I, thiazides, gold, antimalarials</td>
+                        </tr>
+                    </table>
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Morbilliform eruptions are the MOST COMMON drug eruption. They are usually self-limited. Fixed drug eruptions recur at the SAME SITE with each exposure.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Stevens-Johnson Syndrome (SJS) / Toxic Epidermal Necrolysis (TEN)</h3>
+                    <div class="danger-box">
+                        <strong>Spectrum of Severity:</strong>
+                        <ul>
+                            <li><strong>SJS:</strong> &lt;10% body surface area (BSA) detachment</li>
+                            <li><strong>SJS/TEN overlap:</strong> 10-30% BSA</li>
+                            <li><strong>TEN:</strong> &gt;30% BSA (mortality 30-50%)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Clinical Features</h4>
+                    <div class="info-box">
+                        <ul>
+                            <li>Prodrome: fever, malaise, URI symptoms 1-3 days before rash</li>
+                            <li><strong>Mucosal involvement</strong> (≥2 sites): oral, ocular, genital (90%+)</li>
+                            <li>Skin: atypical targetoid lesions, bullae, <strong>positive Nikolsky sign</strong></li>
+                            <li>Full-thickness epidermal necrosis → "sheet-like" skin sloughing</li>
+                        </ul>
+                    </div>
+
+                    <h4>High-Risk Medications</h4>
+                    <div class="criteria-box">
+                        <ul>
+                            <li><strong>Sulfonamides</strong> (TMP-SMX) — most common</li>
+                            <li><strong>Allopurinol</strong></li>
+                            <li><strong>Anticonvulsants:</strong> carbamazepine, phenytoin, lamotrigine, phenobarbital</li>
+                            <li><strong>NSAIDs</strong> (oxicam type)</li>
+                            <li><strong>Antibiotics:</strong> penicillins, cephalosporins, fluoroquinolones</li>
+                            <li><strong>Nevirapine</strong></li>
+                        </ul>
+                    </div>
+
+                    <h4>Management</h4>
+                    <div class="key-point">
+                        ✅ <strong>Treatment:</strong>
+                        <ul>
+                            <li><strong>STOP the offending drug</strong> immediately</li>
+                            <li>Burn unit or ICU admission for wound care</li>
+                            <li>Fluid/electrolyte management (massive insensible losses)</li>
+                            <li>Wound care: non-adherent dressings, minimize debridement</li>
+                            <li>Ophthalmology consult (prevent corneal scarring)</li>
+                            <li>Systemic steroids: controversial (no proven benefit, may harm)</li>
+                            <li>IVIG: conflicting evidence</li>
+                            <li>Cyclosporine: some evidence of benefit</li>
+                        </ul>
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>HLA-B*58:01:</strong> Strongly associated with allopurinol-induced SJS/TEN. Screen in high-risk populations (Han Chinese, Thai, Korean) BEFORE starting allopurinol.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>DRESS Syndrome</h3>
+                    <div class="criteria-box">
+                        <strong>Drug Reaction with Eosinophilia and Systemic Symptoms</strong>
+                        <ul>
+                            <li>Onset: 2-8 weeks after drug initiation (LATER than other reactions)</li>
+                            <li>Fever, facial edema, lymphadenopathy</li>
+                            <li>Morbilliform rash → can become edematous, purpuric</li>
+                            <li><strong>Eosinophilia</strong> (≥700) and/or atypical lymphocytosis</li>
+                            <li><strong>Organ involvement:</strong> hepatitis (most common), nephritis, pneumonitis, myocarditis</li>
+                        </ul>
+                    </div>
+
+                    <h4>Causative Drugs (SPADE)</h4>
+                    <div class="info-box">
+                        <ul>
+                            <li><strong>S</strong>ulfonamides</li>
+                            <li><strong>P</strong>henytoin / Phenobarbital</li>
+                            <li><strong>A</strong>llopurinol</li>
+                            <li><strong>D</strong>apsone</li>
+                            <li><strong>E</strong>nticonvulsants (carbamazepine, lamotrigine)</li>
+                            <li>Also: vancomycin, minocycline, abacavir</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>HHV-6 reactivation</strong> occurs in ~60% of DRESS cases and may contribute to severity. Associated with prolonged course and may cause "flares" even after drug discontinuation.
+                    </div>
+
+                    <div class="key-point">
+                        ✅ <strong>Management:</strong> Stop drug, supportive care, systemic corticosteroids (unlike SJS/TEN, steroids DO help in DRESS)
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Acute Generalized Exanthematous Pustulosis (AGEP)</h3>
+                    <div class="info-box">
+                        <ul>
+                            <li>Onset: <strong>Rapid (within 48 hours)</strong></li>
+                            <li>Hundreds of small, non-follicular sterile pustules on erythematous base</li>
+                            <li>Starts in flexures (axillae, groin)</li>
+                            <li>Fever, neutrophilia</li>
+                            <li><strong>Resolves quickly</strong> (days) after drug cessation with superficial desquamation</li>
+                        </ul>
+                    </div>
+
+                    <h4>Common Causes</h4>
+                    <div class="warning-box">
+                        <ul>
+                            <li>Antibiotics: <strong>aminopenicillins</strong> (most common), macrolides, quinolones</li>
+                            <li>Calcium channel blockers</li>
+                            <li>Hydroxychloroquine</li>
+                        </ul>
+                    </div>
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> AGEP has the most RAPID onset of severe drug reactions (48 hours). Unlike pustular psoriasis, it resolves quickly once the drug is stopped.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Drug Eruption Summary Table</h3>
+                    <table>
+                        <tr>
+                            <th>Reaction</th>
+                            <th>Onset</th>
+                            <th>Key Feature</th>
+                            <th>Labs</th>
+                            <th>Prognosis</th>
+                        </tr>
+                        <tr>
+                            <td><strong>SJS/TEN</strong></td>
+                            <td>1-3 weeks</td>
+                            <td>Mucosal + skin detachment</td>
+                            <td>Usually normal</td>
+                            <td>Mortality up to 30-50%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DRESS</strong></td>
+                            <td>2-8 weeks</td>
+                            <td>Organ involvement + facial edema</td>
+                            <td>Eosinophilia, ↑LFTs</td>
+                            <td>Mortality ~10%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AGEP</strong></td>
+                            <td><48 hours</td>
+                            <td>Sterile pustules, flexures</td>
+                            <td>Neutrophilia</td>
+                            <td>Excellent (self-limited)</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SKIN CANCER -->
+        <div class="section" id="skin-cancer">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🔬 Skin Cancer</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Melanoma</h3>
+                    
+                    <h4>ABCDEs of Melanoma</h4>
+                    <div class="criteria-box">
+                        <ul>
+                            <li><strong>A</strong>symmetry — one half unlike the other</li>
+                            <li><strong>B</strong>order — irregular, ragged, blurred</li>
+                            <li><strong>C</strong>olor — varied shades of brown, black, red, white, blue</li>
+                            <li><strong>D</strong>iameter — >6 mm (pencil eraser), though can be smaller</li>
+                            <li><strong>E</strong>volving — changing in size, shape, color, or symptoms</li>
+                        </ul>
+                    </div>
+
+                    <h4>Types of Melanoma</h4>
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Frequency</th>
+                            <th>Features</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Superficial spreading</strong></td>
+                            <td>~70%</td>
+                            <td>Most common; horizontal growth, then vertical invasion</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nodular</strong></td>
+                            <td>~15%</td>
+                            <td>Most aggressive; vertical growth from onset; raised, dark nodule</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lentigo maligna</strong></td>
+                            <td>~10%</td>
+                            <td>Sun-damaged skin of elderly; slow growing; face/neck</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Acral lentiginous</strong></td>
+                            <td>~5%</td>
+                            <td>Palms, soles, nail beds; most common type in dark-skinned individuals</td>
+                        </tr>
+                    </table>
+
+                    <h4>Staging (Breslow Thickness)</h4>
+                    <div class="info-box">
+                        <ul>
+                            <li><strong>Breslow thickness</strong> (depth in mm) is the most important prognostic factor</li>
+                            <li>Ulceration worsens prognosis</li>
+                            <li>Sentinel lymph node biopsy if thickness ≥1 mm (or 0.8 mm with ulceration)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Surveillance After Treatment</h4>
+                    <div class="key-point">
+                        ✅ <strong>Follow-up:</strong>
+                        <ul>
+                            <li>Full skin exams every 3-12 months (based on stage)</li>
+                            <li>Patient self-exams monthly</li>
+                            <li>Imaging not routine for early-stage; consider for stage IIB+</li>
+                        </ul>
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Acral lentiginous melanoma is the most common melanoma in African Americans, Asians, and Hispanics. Look on palms, soles, and under nails. "Hutchinson sign" (periungual pigmentation) suggests subungual melanoma.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Non-Melanoma Skin Cancers</h3>
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Basal Cell Carcinoma (BCC)</th>
+                            <th>Squamous Cell Carcinoma (SCC)</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Frequency</strong></td>
+                            <td>Most common skin cancer (80%)</td>
+                            <td>Second most common (20%)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Appearance</strong></td>
+                            <td>Pearly, translucent papule with telangiectasias; "rolled" borders; rodent ulcer</td>
+                            <td>Scaly, erythematous plaque or nodule; may ulcerate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Location</strong></td>
+                            <td>Sun-exposed areas (face, especially nose)</td>
+                            <td>Sun-exposed areas; also lips, ears, hands</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Metastatic potential</strong></td>
+                            <td>Very rare (<0.1%)</td>
+                            <td>Low but present (2-6%); higher in immunocompromised</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Treatment</strong></td>
+                            <td>Excision, Mohs for high-risk; vismodegib for advanced</td>
+                            <td>Excision, Mohs; radiation for inoperable; immunotherapy for advanced</td>
+                        </tr>
+                    </table>
+
+                    <h4>Actinic Keratosis</h4>
+                    <div class="info-box">
+                        <ul>
+                            <li><strong>Precursor to SCC</strong> — "precancer"</li>
+                            <li>Rough, scaly, erythematous macules on sun-exposed skin</li>
+                            <li>"Sandpaper" texture</li>
+                            <li>1-10% progress to SCC</li>
+                            <li>Treatment: cryotherapy, topical 5-FU, imiquimod, photodynamic therapy</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>High-risk SCC features:</strong>
+                        <ul>
+                            <li>Size >2 cm</li>
+                            <li>Poor differentiation</li>
+                            <li>Perineural invasion</li>
+                            <li>Location: lip, ear, scar, chronic wound</li>
+                            <li>Immunocompromised patient</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SKIN INFECTIONS -->
+        <div class="section" id="infections">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🦠 Skin Infections</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Bacterial Skin Infections</h3>
+                    <table>
+                        <tr>
+                            <th>Condition</th>
+                            <th>Depth</th>
+                            <th>Features</th>
+                            <th>Treatment</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Impetigo</strong></td>
+                            <td>Superficial epidermis</td>
+                            <td>Honey-crusted lesions; S. aureus or GAS</td>
+                            <td>Topical mupirocin; oral abx if extensive</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Erysipelas</strong></td>
+                            <td>Upper dermis/superficial lymphatics</td>
+                            <td>Well-demarcated, raised, bright red; GAS</td>
+                            <td>Penicillin, cephalexin</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cellulitis</strong></td>
+                            <td>Deeper dermis/subcutaneous</td>
+                            <td>Poorly demarcated, warm, tender; GAS or S. aureus</td>
+                            <td>Cephalexin; add MRSA coverage if purulent</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Necrotizing fasciitis</strong></td>
+                            <td>Deep fascia</td>
+                            <td>Pain out of proportion, rapid spread, crepitus, bullae, necrosis</td>
+                            <td>Emergent surgical debridement + broad-spectrum abx</td>
+                        </tr>
+                    </table>
+
+                    <div class="danger-box">
+                        <strong>Necrotizing Fasciitis Red Flags:</strong>
+                        <ul>
+                            <li>Pain out of proportion to exam</li>
+                            <li>Rapid progression</li>
+                            <li>Systemic toxicity (fever, tachycardia, hypotension)</li>
+                            <li>Crepitus, bullae, skin necrosis</li>
+                            <li>Failure to respond to antibiotics</li>
+                        </ul>
+                        <em>Type I (polymicrobial) vs Type II (GAS/"flesh-eating")</em>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Herpes Zoster (Shingles)</h3>
+                    <div class="info-box">
+                        <ul>
+                            <li>Reactivation of VZV in dorsal root ganglion</li>
+                            <li><strong>Dermatomal distribution</strong> — does not cross midline</li>
+                            <li>Prodrome: pain, burning, tingling 1-5 days before rash</li>
+                            <li>Vesicles on erythematous base → pustules → crusts</li>
+                        </ul>
+                    </div>
+
+                    <h4>Treatment</h4>
+                    <div class="key-point">
+                        ✅ <strong>Antivirals</strong> (within 72 hours of rash onset):
+                        <ul>
+                            <li>Valacyclovir 1g TID × 7 days (preferred)</li>
+                            <li>Acyclovir 800mg 5×/day × 7 days</li>
+                            <li>Famciclovir 500mg TID × 7 days</li>
+                        </ul>
+                    </div>
+
+                    <h4>Complications</h4>
+                    <div class="warning-box">
+                        <ul>
+                            <li><strong>Postherpetic neuralgia (PHN)</strong> — pain persisting >90 days; risk ↑ with age</li>
+                            <li><strong>Herpes zoster ophthalmicus</strong> — V1 involvement; Hutchinson sign (nose tip) = ↑risk of ocular involvement</li>
+                            <li><strong>Ramsay Hunt syndrome</strong> — facial palsy + ear vesicles (CN VII + VIII involvement)</li>
+                            <li>Disseminated zoster (>2 dermatomes) — immunocompromised</li>
+                        </ul>
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>Shingrix vaccine:</strong> Recombinant (not live) — safe in immunocompromised. Give at age ≥50. Two doses, 2-6 months apart. >90% effective at preventing zoster and PHN.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Fungal Infections</h3>
+                    <table>
+                        <tr>
+                            <th>Condition</th>
+                            <th>Features</th>
+                            <th>Treatment</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Tinea corporis</strong></td>
+                            <td>Annular, scaly plaque with central clearing ("ringworm")</td>
+                            <td>Topical antifungals (clotrimazole, terbinafine)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tinea cruris</strong></td>
+                            <td>Pruritic, erythematous plaques in groin; spares scrotum</td>
+                            <td>Topical antifungals; keep area dry</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tinea pedis</strong></td>
+                            <td>Interdigital maceration, scaling; "moccasin" pattern</td>
+                            <td>Topical antifungals; oral if extensive</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Onychomycosis</strong></td>
+                            <td>Thickened, discolored, dystrophic nails</td>
+                            <td>Oral terbinafine (most effective); itraconazole; topical for mild</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tinea versicolor</strong></td>
+                            <td>Hypo/hyperpigmented macules with fine scale; upper trunk</td>
+                            <td>Topical selenium sulfide, ketoconazole; oral fluconazole if extensive</td>
+                        </tr>
+                    </table>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Tinea versicolor (caused by Malassezia) produces hypo- or hyperpigmented macules. "Spaghetti and meatballs" appearance on KOH prep. Recurrence common.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- INFLAMMATORY -->
+        <div class="section" id="inflammatory">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🔥 Inflammatory Conditions</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Psoriasis</h3>
+                    <div class="info-box">
+                        <strong>Classic features:</strong>
+                        <ul>
+                            <li>Well-demarcated, erythematous plaques with silvery scale</li>
+                            <li>Extensor surfaces: elbows, knees, scalp, sacrum</li>
+                            <li>Nail changes: pitting, onycholysis, oil spots</li>
+                            <li>Auspitz sign: pinpoint bleeding when scale removed</li>
+                            <li>Koebner phenomenon: lesions at sites of trauma</li>
+                        </ul>
+                    </div>
+
+                    <h4>Types</h4>
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Features</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Plaque (vulgaris)</strong></td>
+                            <td>Most common (90%); chronic plaques</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Guttate</strong></td>
+                            <td>Small "drop-like" lesions; often triggered by strep pharyngitis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inverse</strong></td>
+                            <td>Intertriginous areas; smooth, erythematous (less scale)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pustular</strong></td>
+                            <td>Sterile pustules; localized (palms/soles) or generalized (von Zumbusch — life-threatening)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Erythrodermic</strong></td>
+                            <td>>90% BSA involvement; medical emergency</td>
+                        </tr>
+                    </table>
+
+                    <h4>Treatment</h4>
+                    <div class="key-point">
+                        <ul>
+                            <li><strong>Mild:</strong> Topical steroids, vitamin D analogs (calcipotriene), tazarotene</li>
+                            <li><strong>Moderate-severe:</strong> Phototherapy (UVB), methotrexate, cyclosporine</li>
+                            <li><strong>Biologics:</strong> TNF-α inhibitors, IL-17 inhibitors (secukinumab), IL-23 inhibitors (guselkumab)</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>Associated conditions:</strong>
+                        <ul>
+                            <li>Psoriatic arthritis (30%)</li>
+                            <li>Metabolic syndrome, cardiovascular disease</li>
+                            <li>Depression</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Atopic Dermatitis (Eczema)</h3>
+                    <div class="info-box">
+                        <strong>Features:</strong>
+                        <ul>
+                            <li>Pruritic, erythematous, weeping/crusting patches</li>
+                            <li>Flexural involvement in older children/adults (antecubital, popliteal fossae)</li>
+                            <li>Associated with "atopic triad": asthma, allergic rhinitis, eczema</li>
+                            <li>Chronic: lichenification (thickened, leathery skin)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Treatment</h4>
+                    <div class="key-point">
+                        <ul>
+                            <li><strong>Emollients:</strong> Foundation of treatment — apply immediately after bathing</li>
+                            <li><strong>Topical steroids:</strong> For flares; low-potency for face/flexures</li>
+                            <li><strong>Topical calcineurin inhibitors:</strong> Tacrolimus, pimecrolimus (steroid-sparing)</li>
+                            <li><strong>Severe:</strong> Dupilumab (IL-4/IL-13 inhibitor), phototherapy, cyclosporine</li>
+                            <li>Avoid triggers: harsh soaps, fragrances, irritants</li>
+                        </ul>
+                    </div>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> Eczema herpeticum = disseminated HSV in atopic dermatitis. Presents with "punched-out" erosions, fever, lymphadenopathy. Treat with IV acyclovir.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Urticaria and Angioedema</h3>
+                    <div class="info-box">
+                        <strong>Urticaria (hives):</strong>
+                        <ul>
+                            <li>Transient, pruritic wheals</li>
+                            <li>Individual lesions last <24 hours</li>
+                            <li>Acute (<6 weeks) vs chronic (>6 weeks)</li>
+                        </ul>
+                        <strong>Angioedema:</strong>
+                        <ul>
+                            <li>Deep dermal/subcutaneous swelling</li>
+                            <li>Lips, eyelids, tongue, larynx</li>
+                            <li>Lasts 24-72 hours</li>
+                        </ul>
+                    </div>
+
+                    <h4>Types of Angioedema</h4>
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Mechanism</th>
+                            <th>Features</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Allergic/Mast cell</strong></td>
+                            <td>Histamine-mediated</td>
+                            <td>+ urticaria, + pruritus; responds to antihistamines/epinephrine</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ACE-I induced</strong></td>
+                            <td>Bradykinin-mediated</td>
+                            <td>NO urticaria; lips/tongue; can occur years after starting; does NOT respond to antihistamines</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hereditary (HAE)</strong></td>
+                            <td>C1-INH deficiency (bradykinin)</td>
+                            <td>NO urticaria; recurrent episodes; abdominal pain; family history; low C4</td>
+                        </tr>
+                    </table>
+
+                    <div class="danger-box">
+                        ❌ <strong>ACE-I angioedema:</strong>
+                        <ul>
+                            <li>Most common cause of drug-induced angioedema</li>
+                            <li>Can occur after years of use</li>
+                            <li>More common in African Americans</li>
+                            <li>Does NOT respond to epinephrine/antihistamines (bradykinin-mediated)</li>
+                            <li>Treat with FFP, icatibant (bradykinin antagonist), C1-INH concentrate</li>
+                            <li>Discontinue ACE-I permanently; ARBs generally safe but small cross-reactivity risk</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SYSTEMIC SIGNS -->
+        <div class="section" id="systemic">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>🩺 Skin Signs of Systemic Disease</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="subsection">
+                    <h3>Autoimmune/Rheumatologic</h3>
+                    <table>
+                        <tr>
+                            <th>Finding</th>
+                            <th>Associated Condition</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Malar (butterfly) rash</strong></td>
+                            <td>SLE (spares nasolabial folds)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Discoid lupus</strong></td>
+                            <td>SLE or isolated cutaneous lupus</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Heliotrope rash</strong></td>
+                            <td>Dermatomyositis (violaceous eyelid discoloration)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gottron papules</strong></td>
+                            <td>Dermatomyositis (over knuckles)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shawl sign, V-sign</strong></td>
+                            <td>Dermatomyositis (photodistributed)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mechanic's hands</strong></td>
+                            <td>Antisynthetase syndrome (cracked, rough fingers)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sclerodactyly</strong></td>
+                            <td>Systemic sclerosis (tight, shiny skin on fingers)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Digital pitting scars</strong></td>
+                            <td>Systemic sclerosis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Calcinosis cutis</strong></td>
+                            <td>Limited scleroderma (CREST), dermatomyositis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Livedo reticularis</strong></td>
+                            <td>Antiphospholipid syndrome, SLE, vasculitis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Palpable purpura</strong></td>
+                            <td>Vasculitis (leukocytoclastic, IgA)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>Internal Malignancy</h3>
+                    <table>
+                        <tr>
+                            <th>Sign</th>
+                            <th>Associated Cancer</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Acanthosis nigricans</strong></td>
+                            <td>GI adenocarcinoma (especially gastric) if sudden/severe; also insulin resistance</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dermatomyositis</strong></td>
+                            <td>Ovarian, lung, GI, breast, lymphoma (screen at diagnosis)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sign of Leser-Trélat</strong></td>
+                            <td>Sudden eruption of seborrheic keratoses → GI malignancy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sweet syndrome</strong></td>
+                            <td>AML and other hematologic malignancies</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pyoderma gangrenosum</strong></td>
+                            <td>IBD, hematologic malignancy, RA</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Erythema gyratum repens</strong></td>
+                            <td>Lung cancer (most paraneoplastic)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Necrolytic migratory erythema</strong></td>
+                            <td>Glucagonoma</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trousseau syndrome</strong></td>
+                            <td>Migratory thrombophlebitis → pancreatic cancer</td>
+                        </tr>
+                    </table>
+
+                    <div class="pearl-box">💎 <strong>Board Pearl:</strong> New-onset dermatomyositis in adults (especially >40) requires malignancy workup: CT chest/abdomen/pelvis, age-appropriate screening, consider PET. Risk is highest in the first 3 years.</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Endocrine</h3>
+                    <table>
+                        <tr>
+                            <th>Finding</th>
+                            <th>Condition</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Pretibial myxedema</strong></td>
+                            <td>Graves' disease (not hypothyroidism)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Necrobiosis lipoidica</strong></td>
+                            <td>Diabetes mellitus (shiny, yellow-brown plaques on shins)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diabetic dermopathy</strong></td>
+                            <td>DM (brown, atrophic macules on shins; "shin spots")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eruptive xanthomas</strong></td>
+                            <td>Hypertriglyceridemia (>1000 mg/dL)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Xanthelasma</strong></td>
+                            <td>Hypercholesterolemia (yellow plaques on eyelids)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bronze skin</strong></td>
+                            <td>Hemochromatosis, Addison's disease</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>Nail Findings</h3>
+                    <table>
+                        <tr>
+                            <th>Finding</th>
+                            <th>Association</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Clubbing</strong></td>
+                            <td>Lung cancer, ILD, IE, IBD, cirrhosis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Koilonychia</strong> (spooning)</td>
+                            <td>Iron deficiency anemia</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Terry nails</strong> (white with pink tip)</td>
+                            <td>Cirrhosis, CHF, DM</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Half-and-half nails</strong></td>
+                            <td>CKD/uremia</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mees' lines</strong> (transverse white bands)</td>
+                            <td>Arsenic poisoning, chemo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Muehrcke lines</strong> (paired white bands)</td>
+                            <td>Hypoalbuminemia</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Splinter hemorrhages</strong></td>
+                            <td>Endocarditis, trauma, vasculitis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pitting</strong></td>
+                            <td>Psoriasis, alopecia areata</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BOARD PEARLS -->
+        <div class="section" id="pearls">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>💎 High-Yield Board Pearls</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+
+                <div class="pearl-box">
+                    <strong>Drug Reactions:</strong>
+                    <ol>
+                        <li>SJS/TEN: Mucosal involvement + skin detachment; mortality 30-50% in TEN</li>
+                        <li>DRESS: Late onset (2-8 weeks), eosinophilia, organ involvement; HHV-6 reactivation</li>
+                        <li>AGEP: Most rapid (48h), pustules in flexures, self-limited</li>
+                        <li>High-risk drugs: Allopurinol, TMP-SMX, anticonvulsants</li>
+                        <li>HLA-B*58:01 screening before allopurinol in Asian populations</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Skin Cancer:</strong>
+                    <ol>
+                        <li>Melanoma ABCDEs: Asymmetry, Border, Color, Diameter, Evolving</li>
+                        <li>Breslow thickness = most important prognostic factor</li>
+                        <li>Acral lentiginous melanoma most common in dark-skinned individuals</li>
+                        <li>BCC: pearly papule with telangiectasias; rarely metastasizes</li>
+                        <li>SCC: can metastasize; higher risk if immunocompromised</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Infections:</strong>
+                    <ol>
+                        <li>Necrotizing fasciitis: Pain out of proportion, rapid spread, crepitus → emergent surgery</li>
+                        <li>Herpes zoster: Dermatomal, Hutchinson sign (nose tip) = eye involvement</li>
+                        <li>Shingrix vaccine: Safe in immunocompromised (recombinant, not live)</li>
+                        <li>Tinea versicolor: "Spaghetti and meatballs" on KOH; Malassezia</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Inflammatory Conditions:</strong>
+                    <ol>
+                        <li>Psoriasis: Silvery scale, extensor surfaces, Auspitz sign, nail pitting</li>
+                        <li>Guttate psoriasis: Triggered by strep pharyngitis</li>
+                        <li>Eczema herpeticum: Disseminated HSV in atopic dermatitis — IV acyclovir</li>
+                        <li>ACE-I angioedema: NO urticaria, bradykinin-mediated, doesn't respond to epinephrine</li>
+                        <li>HAE: Low C4, recurrent episodes, family history</li>
+                    </ol>
+                </div>
+
+                <div class="pearl-box">
+                    <strong>Skin Signs of Systemic Disease:</strong>
+                    <ol>
+                        <li>Dermatomyositis: Heliotrope rash + Gottron papules; screen for malignancy</li>
+                        <li>Acanthosis nigricans (sudden onset): Think GI malignancy</li>
+                        <li>Sweet syndrome: Think AML</li>
+                        <li>Necrolytic migratory erythema: Think glucagonoma</li>
+                        <li>Koilonychia: Iron deficiency; Terry nails: Cirrhosis</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            const content = header.nextElementSibling;
+            content.classList.toggle('collapsed');
+        }
+
+        function searchContent() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                const header = section.querySelector('.section-header');
+                const content = section.querySelector('.section-content');
+                
+                if (query === '' || text.includes(query)) {
+                    section.style.display = 'block';
+                    if (query !== '' && text.includes(query)) {
+                        header.classList.remove('collapsed');
+                        content.classList.remove('collapsed');
+                    }
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onscroll = function() {
+            const btn = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = 'block';
+            } else {
+                btn.style.display = 'none';
+            }
+        };
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const header = target.querySelector('.section-header');
+                    const content = target.querySelector('.section-content');
+                    if (header && content) {
+                        header.classList.remove('collapsed');
+                        content.classList.remove('collapsed');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
