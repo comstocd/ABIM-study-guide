@@ -1,8 +1,8 @@
-# 📚 ABIM Study Guides
+# 📖 ABIM Study Guides
 
-**Comprehensive Internal Medicine Board Review Resources**
+**v1.0 BUILD #8 | January 2025**
 
-A collection of high-yield, evidence-based study guides optimized for ABIM board preparation. Designed for iPad/tablet use with touch-friendly navigation, searchable content, and offline capability.
+Comprehensive, evidence-based study guides for ABIM Internal Medicine Board preparation. iPad-optimized with searchable content, clinical pearls, and board-style practice questions.
 
 ---
 
@@ -11,265 +11,166 @@ A collection of high-yield, evidence-based study guides optimized for ABIM board
 | Metric | Count |
 |--------|-------|
 | Specialty Guides | 17 |
-| Total Sections | 446+ |
-| Board Pearls | 177 |
-| High Value Care Items | 125 |
-| Total Size | ~1.6 MB |
-
-**Last Updated:** January 2026
+| Board Pearls | 205+ |
+| Total Topics | 400+ |
 
 ---
 
-## 🗂️ Contents
+## 🩺 Core Specialty Guides
 
-### Quick Review Tools
+| File | Specialty | ABIM Weight | Build |
+|------|-----------|-------------|-------|
+| `cardio_study_guide.html` | Cardiology | 14% | #1 |
+| `pulmonology_study_guide.html` | Pulmonology | 10% | #1 |
+| `gi_study_guide.html` | Gastroenterology | 9% | #1 |
+| `nephrology_study_guide.html` | Nephrology | 9% | #8 |
+| `endocrinology_study_guide.html` | Endocrinology | 8% | #1 |
+| `heme_onc_study_guide.html` | Hematology/Oncology | 8% | #1 |
+| `id_study_guide.html` | Infectious Disease | 8% | #1 |
+| `rheumatology_study_guide.html` | Rheumatology & MSK | 8% | #2 |
+| `neurology_study_guide.html` | Neurology | 6% | #1 |
 
-| Guide | Description | Size |
-|-------|-------------|------|
-| [💎 Board Pearls](board_pearls.html) | 177 high-yield clinical pearls from all specialties, organized by topic | 52 KB |
-| [💰 High Value Care](high_value_care.html) | 125 evidence-based recommendations on cost-effective care (Choosing Wisely, USPSTF) | 86 KB |
+---
 
-### Specialty Study Guides
+## 📚 Additional Specialty Guides
 
-| Guide | Sections | Key Topics | Size |
-|-------|----------|------------|------|
-| [🦠 Infectious Disease](id_study_guide.html) | 18 | HIV/AIDS, antimicrobials, pneumonia, endocarditis, TB, fungi, parasites | 189 KB |
-| [🫀 Cardiology](cardio_study_guide.html) | 17 | ACS, heart failure, arrhythmias, valvular disease, HTN, pericardial disease | 148 KB |
-| [🟠 GI / Hepatology](gi_study_guide.html) | 14 | GERD, PUD, IBD, cirrhosis, hepatitis, pancreatitis, GI bleeding | 155 KB |
-| [🦴 Rheumatology](rheumatology_study_guide.html) | 55 | RA, SLE, vasculitis, spondyloarthritis, crystal arthropathies, myopathies | 179 KB |
-| [🔬 Endocrinology](endocrinology_study_guide.html) | 50 | Diabetes, thyroid, adrenal, pituitary, calcium/bone, lipids, MEN | 149 KB |
-| [💧 Nephrology](nephrology_study_guide1.html) | 44 | AKI, CKD, glomerular disease, electrolytes, acid-base, dialysis | 55 KB |
-| [🫁 Pulmonology](pulmonology_study_guide.html) | 45 | Asthma, COPD, ILD, PE, pulmonary HTN, ARDS, sleep apnea, lung cancer | 91 KB |
-| [🩸 Hematology/Oncology](heme_onc_study_guide.html) | 45 | Anemia, bleeding disorders, thrombosis, leukemia, lymphoma, myeloma | 86 KB |
-| [🧠 Neurology](neurology_study_guide.html) | 45 | Stroke, seizures, headache, MS, movement disorders, neuropathy, dementia | 85 KB |
-| [🏥 General IM](general_im_study_guide.html) | 21 | Preventive care, screening, ethics, capacity, quality & safety | 72 KB |
-| [🧠 Psychiatry](psychiatry_study_guide.html) | 18 | Depression, anxiety, bipolar, psychosis, substance use, capacity | 68 KB |
-| [👴 Geriatrics](geriatrics_study_guide.html) | 16 | Falls, delirium, dementia, polypharmacy, Beers criteria, frailty | 58 KB |
-| [🌸 Allergy/Immunology](allergy_immunology_study_guide.html) | 18 | Anaphylaxis, drug allergy, urticaria, angioedema, immunodeficiency | 62 KB |
-| [👩‍⚕️ Women's Health](womens_health_study_guide.html) | 7 | Contraception, pregnancy complications, menopause/HRT, PCOS, screening | 63 KB |
-| [🏥 Perioperative Medicine](perioperative_study_guide.html) | 7 | Cardiac risk (RCRI), pulmonary risk, medications, anticoagulation, VTE | 55 KB |
-| [🩹 Dermatology](dermatology_study_guide.html) | 6 | Drug eruptions (SJS/TEN/DRESS), skin cancer, infections, skin signs | 54 KB |
-| [🕊️ Palliative Care](palliative_care_study_guide.html) | 6 | Goals of care, pain management, opioids, symptom control, hospice, ethics | 53 KB |
+| File | Specialty | ABIM Weight | Build |
+|------|-----------|-------------|-------|
+| `allergy_immunology_study_guide.html` | Allergy & Immunology | 3% | #8 |
+| `dermatology_study_guide.html` | Dermatology | 3% | #8 |
+| `psychiatry_study_guide.html` | Psychiatry | 4% | #8 |
+| `geriatrics_study_guide.html` | Geriatric Medicine | 4% | #8 |
+| `womens_health_study_guide.html` | Women's Health | 4% | #8 |
+| `palliative_care_study_guide.html` | Palliative Care | 2% | #8 |
+| `perioperative_study_guide.html` | Perioperative Medicine | 4% | #8 |
+| `general_im_study_guide.html` | General IM / Preventive Care | 6% | #8 |
+
+---
+
+## 🎯 Board Review Resources
+
+| File | Description | Build |
+|------|-------------|-------|
+| `board_pearls.html` | 205+ high-yield clinical pearls across 13 specialties — quick review format | #8 |
+| `high_value_care.html` | ACP/ABIM Choosing Wisely recommendations, cost-conscious medicine | #8 |
+| `study_guides_index.html` | **Main portal** — Search and navigate all study guides | #8 |
 
 ---
 
 ## ✨ Features
 
-### 📱 iPad Optimized
-- Touch-friendly navigation with large tap targets
-- Responsive design adapts to any screen size
-- Safe area support for notched devices
-- Smooth scrolling and collapsible sections
+Each study guide includes:
 
-### 🔍 Searchable
-- Real-time search across all content
-- Filter by specialty, topic, or keyword
-- Instant results without page reload
+- **📋 Table of Contents** — Clickable navigation
+- **🔍 Search** — Real-time topic filtering
+- **🏷️ Topic Badges** — Common, Boards Favorite, Emergency, High-Yield
+- **📊 Tables** — Diagnostic criteria, treatment algorithms, differentials
+- **💎 Clinical Pearls** — High-yield board facts
+- **📝 Practice Questions** — Board-style Q&A (select guides)
+- **🔗 Cross-Links** — Related topics in other guides
 
-### 🎨 Visual Learning
-- Color-coded sections by category
-- Clinical decision boxes (green), warnings (red), pearls (gold)
-- Tables for quick comparison
-- Diagnostic algorithms and criteria
+---
 
-### 📖 Evidence-Based
-- Current guidelines from major societies:
-  - AHA/ACC (Cardiology)
-  - IDSA (Infectious Disease)
-  - ATS/GOLD (Pulmonology)
-  - ACR (Rheumatology)
-  - KDIGO (Nephrology)
-  - ASH/ASCO (Hematology/Oncology)
-  - AAN (Neurology)
-  - Endocrine Society
-  - ACG/AGA (Gastroenterology)
-  - USPSTF/ACP (Screening/Prevention)
+## 📋 Content by Guide
 
-### 💾 Offline Capable
-- All content is self-contained HTML
-- No internet connection required after download
-- Works in airplane mode
+### Cardiology (14%)
+ACS, heart failure, arrhythmias, valvular disease, cardiomyopathies, pericardial disease, hypertension, peripheral vascular disease, ECG interpretation
+
+### Pulmonology (10%)
+COPD, asthma, ILD, pulmonary hypertension, pleural disease, lung cancer, sleep disorders, critical care/ARDS, mechanical ventilation
+
+### Gastroenterology (9%)
+GERD, PUD, IBD, liver disease, pancreatitis, GI bleeding, hepatitis, cirrhosis complications, biliary disease
+
+### Nephrology (9%)
+AKI, CKD, glomerulonephritis, electrolyte disorders, acid-base, hypertension, dialysis, transplant
+
+### Endocrinology (8%)
+Diabetes, thyroid disorders, adrenal disease, pituitary disorders, calcium/bone metabolism, lipid disorders
+
+### Hematology/Oncology (8%)
+Anemia, coagulation disorders, hematologic malignancies, solid tumors, transfusion medicine, oncologic emergencies
+
+### Infectious Disease (8%)
+Pneumonia, UTI, skin/soft tissue, endocarditis, meningitis, HIV/AIDS, TB, travel medicine, antimicrobial stewardship
+
+### Rheumatology (8%)
+RA, SLE, spondyloarthropathies, vasculitis, gout, osteoarthritis, myopathies, scleroderma, MSK disorders (55 total sections)
+
+### Neurology (6%)
+Stroke, seizures, headache, dementia, movement disorders, neuromuscular disease, MS, neuro-oncology
+
+---
+
+## 📚 Evidence Sources
+
+- **Guidelines**: ACC/AHA, IDSA, ATS, GOLD, ASH, ASCO, AAN, ACR, ADA, KDIGO, ACG, USPSTF, Endocrine Society
+- **References**: UpToDate, Harrison's Principles of Internal Medicine
+- **Journals**: NEJM, JAMA, Annals of Internal Medicine, Lancet
 
 ---
 
 ## 🚀 Quick Start
 
-### Option 1: Open Index
-Open `study_guides_index.html` in any web browser to access all guides from a central hub.
-
-### Option 2: Direct Access
-Open any individual guide directly:
-- `board_pearls.html` — Start here for rapid review
-- `high_value_care.html` — Essential for ACP/ABIM focus areas
-- `[specialty]_study_guide.html` — Deep dive into specific topics
-
-### Option 3: Add to Home Screen (iPad/iPhone)
-1. Open `study_guides_index.html` in Safari
-2. Tap the Share button
-3. Select "Add to Home Screen"
-4. Access guides like a native app
+1. Open `study_guides_index.html` as main portal
+2. Use search to find topics across all guides
+3. Click specialty cards to open individual guides
+4. Within each guide, use the Table of Contents or search
+5. Review `board_pearls.html` for rapid high-yield review
 
 ---
 
-## 📋 Guide Structure
-
-Each specialty guide follows a consistent format:
+## 📁 File Structure
 
 ```
-1. Overview / Epidemiology
-2. Pathophysiology
-3. Clinical Presentation
-4. Diagnosis / Workup
-5. Treatment / Management
-6. Complications
-7. Special Populations
-8. Board Pearls
+study-guides/
+├── study_guides_index.html      # Main portal
+│
+├── Core Specialties/
+│   ├── cardio_study_guide.html
+│   ├── pulmonology_study_guide.html
+│   ├── gi_study_guide.html
+│   ├── nephrology_study_guide.html
+│   ├── endocrinology_study_guide.html
+│   ├── heme_onc_study_guide.html
+│   ├── id_study_guide.html
+│   ├── rheumatology_study_guide.html
+│   └── neurology_study_guide.html
+│
+├── Additional Specialties/
+│   ├── allergy_immunology_study_guide.html
+│   ├── dermatology_study_guide.html
+│   ├── psychiatry_study_guide.html
+│   ├── geriatrics_study_guide.html
+│   ├── womens_health_study_guide.html
+│   ├── palliative_care_study_guide.html
+│   ├── perioperative_study_guide.html
+│   └── general_im_study_guide.html
+│
+├── Board Review/
+│   ├── board_pearls.html
+│   └── high_value_care.html
+│
+└── STUDY_GUIDES_README.md
 ```
-
-### Content Box Types
-
-| Box Color | Purpose |
-|-----------|---------|
-| 🟢 Green | Key clinical points, first-line treatments |
-| 🔴 Red | Warnings, contraindications, emergencies |
-| 🟡 Gold | High-yield board pearls |
-| 🔵 Blue | Diagnostic criteria, classifications |
-| ⚪ Gray | Background information, pathophysiology |
-
----
-
-## 💎 Board Pearls Guide
-
-The Board Pearls file extracts the highest-yield facts from all specialty guides:
-
-**Specialties Covered:**
-- Infectious Disease (18 pearls)
-- Cardiology (20 pearls)
-- GI/Hepatology (18 pearls)
-- Rheumatology (21 pearls)
-- Endocrinology (22 pearls)
-- Nephrology (18 pearls)
-- Pulmonology (18 pearls)
-- Hematology/Oncology (21 pearls)
-- Neurology (21 pearls)
-
-**Features:**
-- Collapsible sections by specialty
-- Search across all pearls
-- Quick-nav jump links
-- Print-friendly formatting
-
----
-
-## 💰 High Value Care Guide
-
-Organized by clinical domain, covering what to **avoid** and what to **prefer**:
-
-**Topics:**
-1. Cancer Screening & Prevention
-2. Diagnostic Imaging
-3. Laboratory Testing
-4. Cardiology
-5. Pulmonology
-6. Gastroenterology
-7. Infectious Disease
-8. Neurology
-9. Rheumatology
-10. Endocrinology
-11. Nephrology
-12. Hematology
-13. Geriatrics & Deprescribing
-14. Perioperative Medicine
-15. Hospital Medicine
-
-**Evidence Tags:**
-- 🟣 Choosing Wisely
-- 🔵 USPSTF
-- 🔴 ACC/AHA
-- 🟠 AGA
-- 🔵 ATS
-
----
-
-## 🔗 Related Resources
-
-These guides are part of a larger **Clinical Reference Suite**:
-
-| Resource | Description |
-|----------|-------------|
-| [🩺 IM Reference Guide](im_guide.html) | 118 conditions, comprehensive clinical reference |
-| [💊 Drug Reference Guide](drug_reference_guide.html) | 500+ medications with dosing, interactions |
-| [🔬 Lab Values](lab_values.html) | Reference ranges with clinical interpretation |
-| [🔍 Dx Framework](dx_framework.html) | Diagnostic algorithms by symptom/syndrome |
-| [🏥 Procedures Guide](procedures_guide.html) | Common procedures with technique and complications |
 
 ---
 
 ## 📝 Study Tips
 
-### For Initial Learning
-1. Read through each specialty guide systematically
-2. Focus on pathophysiology and clinical presentation
-3. Use the collapsible sections to test yourself
-
-### For Board Review
-1. Start with **Board Pearls** for rapid high-yield review
-2. Review **High Value Care** — heavily tested on ABIM
-3. Use search to find specific topics
-4. Focus on tables and diagnostic criteria
-
-### For Last-Minute Review
-1. Board Pearls only (177 facts)
-2. High Value Care "Avoid" items
-3. Diagnostic criteria boxes in each guide
+1. **Focus on high-yield topics** — Look for "Boards Favorite" and "High-Yield" badges
+2. **Know the guidelines** — ACC/AHA, IDSA, ADA guidelines are heavily tested
+3. **Master the tables** — Diagnostic criteria, staging systems, treatment algorithms
+4. **Review clinical pearls** — These capture classic board question patterns
+5. **Practice questions** — Use board-style questions at the end of each guide
+6. **High Value Care** — Expect 5-10% of questions on cost-conscious medicine
 
 ---
 
 ## ⚠️ Disclaimer
 
-These study guides are intended as educational resources for board preparation. They are not a substitute for clinical judgment, current guidelines, or consultation with specialists. Always verify information with primary sources and current literature.
-
-Content is based on guidelines and evidence available as of December 2025. Medicine evolves rapidly — confirm current recommendations before clinical application.
+These study guides are for **educational purposes only** and are intended to supplement, not replace, comprehensive board review resources. Content is based on current guidelines but medical knowledge evolves — always verify with the most current recommendations.
 
 ---
 
-## 📄 File List
-
-```
-study_guides_index.html      — Central hub / index page
-board_pearls.html            — 177 high-yield pearls
-high_value_care.html         — 125 HVC recommendations
-id_study_guide.html          — Infectious Disease
-cardio_study_guide.html      — Cardiology
-gi_study_guide.html          — GI / Hepatology
-rheumatology_study_guide.html — Rheumatology & Orthopedics
-endocrinology_study_guide.html — Endocrinology
-nephrology_study_guide1.html  — Nephrology
-pulmonology_study_guide.html  — Pulmonology
-heme_onc_study_guide.html    — Hematology / Oncology
-neurology_study_guide.html   — Neurology
-general_im_study_guide.html  — General Internal Medicine
-psychiatry_study_guide.html  — Psychiatry
-geriatrics_study_guide.html  — Geriatrics
-allergy_immunology_study_guide.html — Allergy & Immunology
-womens_health_study_guide.html — Women's Health
-perioperative_study_guide.html — Perioperative Medicine
-dermatology_study_guide.html — Dermatology
-palliative_care_study_guide.html — Palliative Care
-ABIM_README.md               — This file
-```
-
----
-
-## 🏥 About
-
-Created for Internal Medicine residents preparing for ABIM certification and maintenance of certification exams. Designed with a focus on:
-
-- **Evidence-based content** from major society guidelines
-- **High-yield focus** on board-relevant material
-- **Practical utility** for both exam prep and clinical reference
-- **Mobile optimization** for studying anywhere
-
----
-
-*Good luck on your boards!* 🎓
+**Last Updated**: January 2025
