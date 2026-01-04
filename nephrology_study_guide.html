@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nephrology Study Guide - ABIM Board Review</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #24292e; max-width: 1000px; margin: 0 auto; padding: 20px; background: #fff; }
+        h1 { color: #0969da; border-bottom: 3px solid #0969da; padding-bottom: 10px; }
+        h2 { color: #0969da; border-bottom: 2px solid #e1e4e8; padding-bottom: 8px; margin-top: 40px; font-size: 22px; }
+        h3 { color: #24292e; margin-top: 25px; border-left: 4px solid #0969da; padding-left: 12px; font-size: 18px; }
+        h4 { color: #586069; margin-top: 20px; font-size: 16px; }
+        .header-box { background: linear-gradient(135deg, #0969da 0%, #54aeff 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; text-align: center; }
+        .header-box h1 { color: white; border: none; margin: 0; font-size: 32px; }
+        .header-box .subtitle { font-size: 16px; opacity: 0.9; margin-top: 8px; }
+        .toc { background: #f6f8fa; padding: 20px 25px; border-radius: 8px; margin-bottom: 30px; }
+        .toc h2 { margin-top: 0; font-size: 18px; border: none; }
+        .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+        .toc-grid div { margin-bottom: 10px; }
+        .toc-grid strong { display: block; color: #0969da; margin-bottom: 5px; font-size: 14px; }
+        .toc a { color: #0969da; text-decoration: none; display: block; padding: 2px 0; font-size: 13px; }
+        .toc a:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
+        th, td { border: 1px solid #d0d7de; padding: 10px 12px; text-align: left; }
+        th { background: #f6f8fa; font-weight: 600; }
+        tr:nth-child(even) { background: #f6f8fa; }
+        ul, ol { margin: 10px 0; padding-left: 25px; }
+        li { margin: 6px 0; }
+        .section { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8; }
+        .box { border-radius: 6px; padding: 15px; margin: 15px 0; }
+        .emergency { background: #ffebe9; border: 2px solid #cf222e; }
+        .emergency strong { color: #cf222e; }
+        .pearl { background: #ddf4ff; border: 1px solid #54aeff; }
+        .mnemonic { background: #d1f7c4; border: 1px solid #2da44e; }
+        .highlight { background: #fff8c5; border: 1px solid #d4a72c; }
+        .formula { background: #f0f6fc; border: 1px solid #0969da; font-family: monospace; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; margin-left: 8px; }
+        .badge-common { background: #ddf4ff; color: #0969da; }
+        .badge-emergency { background: #ffebe9; color: #cf222e; }
+        .badge-boards { background: #fff8c5; color: #9a6700; }
+        .back-to-top { display: inline-block; margin-top: 15px; color: #0969da; text-decoration: none; font-size: 14px; }
+        @media (max-width: 768px) { .toc-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="header-box">
+    <h1>🔵 Nephrology Study Guide</h1>
+    <div class="subtitle">ABIM Board Review | Internal Medicine Residency | 44 Topics</div>
+    <div style="font-size:0.8rem; opacity:0.8; margin-top:8px;">v1.0 BUILD #8</div>
+</div>
+
+<div class="toc">
+    <h2>📚 Table of Contents</h2>
+    <div class="toc-grid">
+        <div>
+            <strong>Acute Kidney Injury (1-5)</strong>
+            <a href="#aki">1. AKI Classification</a>
+            <a href="#atn">2. ATN</a>
+            <a href="#ain">3. AIN</a>
+            <a href="#cin">4. Contrast Nephropathy</a>
+            <a href="#hrs">5. Hepatorenal Syndrome</a>
+        </div>
+        <div>
+            <strong>Glomerular Disease (6-16)</strong>
+            <a href="#gn">6. GN Overview</a>
+            <a href="#nephrotic">7. Nephrotic Syndrome</a>
+            <a href="#nephritic">8. Nephritic/RPGN</a>
+            <a href="#igan">9. IgA Nephropathy</a>
+            <a href="#membranous">10. Membranous</a>
+            <a href="#fsgs">11. FSGS</a>
+            <a href="#mcd">12. Minimal Change</a>
+            <a href="#lupus">13. Lupus Nephritis</a>
+            <a href="#anca">14. ANCA Vasculitis</a>
+            <a href="#antigbm">15. Anti-GBM</a>
+            <a href="#diabetic">16. Diabetic Nephropathy</a>
+        </div>
+        <div>
+            <strong>Tubulointerstitial (17-20)</strong>
+            <a href="#rta">17. RTA</a>
+            <a href="#tma">18. TMA/HUS/TTP</a>
+            <a href="#ras">19. Renal Artery Stenosis</a>
+            <a href="#athero">20. Atheroembolic</a>
+        </div>
+        <div>
+            <strong>CKD (21-23)</strong>
+            <a href="#ckd">21. CKD Staging</a>
+            <a href="#ckdmbd">22. CKD-MBD</a>
+            <a href="#anemia">23. Anemia of CKD</a>
+        </div>
+        <div>
+            <strong>Electrolytes (24-29)</strong>
+            <a href="#hyponatremia">24. Hyponatremia</a>
+            <a href="#hypernatremia">25. Hypernatremia</a>
+            <a href="#hypokalemia">26. Hypokalemia</a>
+            <a href="#hyperkalemia">27. Hyperkalemia</a>
+            <a href="#calcium">28. Calcium</a>
+            <a href="#phosphorus">29. Phosphorus/Magnesium</a>
+        </div>
+        <div>
+            <strong>Acid-Base (30-32)</strong>
+            <a href="#acidbase">30. ABG Approach</a>
+            <a href="#metac">31. Metabolic Acidosis</a>
+            <a href="#metalk">32. Metabolic Alkalosis</a>
+        </div>
+        <div>
+            <strong>Hypertension (33-35)</strong>
+            <a href="#htn">33. Essential HTN</a>
+            <a href="#secondary">34. Secondary HTN</a>
+            <a href="#htnemergency">35. HTN Emergency</a>
+        </div>
+        <div>
+            <strong>Other (36-39)</strong>
+            <a href="#stones">36. Nephrolithiasis</a>
+            <a href="#pkd">37. PKD</a>
+            <a href="#dialysis">38. Dialysis</a>
+            <a href="#transplant">39. Transplant</a>
+        </div>
+        <div>
+            <strong>Reference (40-44)</strong>
+            <a href="#ua">40. Urinalysis</a>
+            <a href="#formulas">41. Formulas</a>
+            <a href="#drugs">42. Drug Dosing</a>
+            <a href="#trials">43. Landmark Trials</a>
+            <a href="#questions">44. Board Questions</a>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 1: AKI -->
+<div class="section" id="aki">
+    <h2>1. AKI Overview & Classification <span class="badge badge-common">Very Common</span></h2>
+    <h3>KDIGO Definition</h3>
+    <ul>
+        <li>↑ SCr ≥0.3 mg/dL within 48h, OR</li>
+        <li>↑ SCr ≥1.5× baseline within 7 days, OR</li>
+        <li>UOP &lt;0.5 mL/kg/h for ≥6h</li>
+    </ul>
+    <h3>Staging</h3>
+    <table>
+        <tr><th>Stage</th><th>Creatinine</th><th>Urine Output</th></tr>
+        <tr><td>1</td><td>1.5-1.9× OR ≥0.3 increase</td><td>&lt;0.5 mL/kg/h × 6-12h</td></tr>
+        <tr><td>2</td><td>2.0-2.9× baseline</td><td>&lt;0.5 mL/kg/h × ≥12h</td></tr>
+        <tr><td>3</td><td>≥3× OR ≥4.0 OR RRT</td><td>&lt;0.3 mL/kg/h × ≥24h OR anuria</td></tr>
+    </table>
+    <h3>Prerenal vs Intrinsic vs Postrenal</h3>
+    <table>
+        <tr><th>Type</th><th>Causes</th><th>FENa</th><th>BUN:Cr</th><th>Sediment</th></tr>
+        <tr><td><b>Prerenal</b></td><td>Hypovolemia, HF, cirrhosis, NSAIDs/ACEi</td><td>&lt;1%</td><td>&gt;20:1</td><td>Bland, hyaline casts</td></tr>
+        <tr><td><b>Intrinsic</b></td><td>ATN, AIN, GN</td><td>&gt;2%</td><td>10-15:1</td><td>Casts (muddy brown, RBC, WBC)</td></tr>
+        <tr><td><b>Postrenal</b></td><td>BPH, stones, tumor</td><td>Variable</td><td>Variable</td><td>Bland</td></tr>
+    </table>
+    <div class="box formula">
+        <b>FENa = (UNa × PCr) / (PNa × UCr) × 100</b><br>
+        <b>FEUrea</b> = (UUrea × PCr) / (PUrea × UCr) × 100 → Use if on diuretics (&lt;35% = prerenal)
+    </div>
+    <div class="box pearl">FENa &lt;1% also seen in: contrast nephropathy, rhabdomyolysis, early obstruction, acute GN</div>
+</div>
+
+<!-- SECTION 2: ATN -->
+<div class="section" id="atn">
+    <h2>2. Acute Tubular Necrosis <span class="badge badge-common">Common</span></h2>
+    <h3>Causes</h3>
+    <table>
+        <tr><th>Type</th><th>Etiologies</th></tr>
+        <tr><td><b>Ischemic</b></td><td>Prolonged prerenal, sepsis, surgery, hemorrhage</td></tr>
+        <tr><td><b>Nephrotoxic</b></td><td>Aminoglycosides, amphotericin, cisplatin, contrast</td></tr>
+        <tr><td><b>Pigment</b></td><td>Rhabdomyolysis (myoglobin), hemolysis</td></tr>
+    </table>
+    <h3>Phases</h3>
+    <ol>
+        <li><b>Initiation:</b> Injury occurs</li>
+        <li><b>Maintenance:</b> Oliguria, Cr peaks (1-2 wks)</li>
+        <li><b>Recovery:</b> Polyuria, Cr falls</li>
+    </ol>
+    <h3>UA Findings</h3>
+    <ul>
+        <li><b>Muddy brown granular casts</b> — pathognomonic</li>
+        <li>Renal tubular epithelial cells</li>
+        <li>FENa &gt;2%</li>
+    </ul>
+    <h4>Rhabdomyolysis</h4>
+    <ul>
+        <li><b>Labs:</b> CK &gt;5× ULN, ↑K, ↓Ca, ↑PO4, ↑uric acid</li>
+        <li><b>UA:</b> + blood on dipstick, NO RBCs on micro</li>
+        <li><b>Tx:</b> Aggressive NS (goal UOP 200-300 mL/h)</li>
+    </ul>
+    <div class="box pearl">Dipstick + blood but no RBCs = myoglobinuria or hemoglobinuria</div>
+</div>
+
+<!-- SECTION 3: AIN -->
+<div class="section" id="ain">
+    <h2>3. Acute Interstitial Nephritis <span class="badge badge-boards">Boards Favorite</span></h2>
+    <h3>Causes</h3>
+    <table>
+        <tr><th>Category</th><th>Examples</th></tr>
+        <tr><td><b>Drugs (&gt;70%)</b></td><td>NSAIDs, PPIs, β-lactams, fluoroquinolones, sulfonamides, rifampin, allopurinol</td></tr>
+        <tr><td><b>Infection</b></td><td>Pyelonephritis, Legionella, CMV</td></tr>
+        <tr><td><b>Autoimmune</b></td><td>Sjögren's, SLE, sarcoid, IgG4-RD, TINU</td></tr>
+    </table>
+    <div class="box mnemonic"><b>Classic triad (only ~10%):</b> Fever + Rash + Eosinophilia</div>
+    <h3>Diagnosis</h3>
+    <ul>
+        <li><b>UA:</b> WBC casts, sterile pyuria, mild proteinuria (&lt;1 g)</li>
+        <li><b>Urine eosinophils:</b> Poor sensitivity (~30%) — don't rely on it!</li>
+        <li><b>Biopsy:</b> Gold standard — interstitial inflammation</li>
+    </ul>
+    <h3>Treatment</h3>
+    <ul>
+        <li><b>Stop offending agent</b> — most important step</li>
+        <li><b>Steroids:</b> If no improvement after 5-7 days</li>
+    </ul>
+</div>
+
+<!-- SECTION 4: CONTRAST -->
+<div class="section" id="cin">
+    <h2>4. Contrast-Induced Nephropathy</h2>
+    <h3>Risk Factors</h3>
+    <ul>
+        <li><b>CKD</b> (most important), diabetes + CKD</li>
+        <li>Volume depletion, high contrast volume</li>
+        <li>Concurrent nephrotoxins, heart failure</li>
+    </ul>
+    <h3>Prevention</h3>
+    <table>
+        <tr><th>Intervention</th><th>Evidence</th></tr>
+        <tr><td><b>IV isotonic saline</b></td><td>✓ Proven benefit</td></tr>
+        <tr><td>Low-osmolar contrast</td><td>✓ Preferred</td></tr>
+        <tr><td>Minimize volume (&lt;100 mL)</td><td>✓ Helpful</td></tr>
+        <tr><td>N-acetylcysteine</td><td>✗ No benefit (ACT trial)</td></tr>
+        <tr><td>Sodium bicarbonate</td><td>✗ No benefit (PRESERVE)</td></tr>
+    </table>
+    <div class="box highlight"><b>PRESERVE Trial:</b> Neither NAC nor bicarb superior to saline alone</div>
+</div>
+
+<!-- SECTION 5: HRS -->
+<div class="section" id="hrs">
+    <h2>5. Hepatorenal Syndrome <span class="badge badge-boards">High-Yield</span></h2>
+    <h3>Pathophysiology</h3>
+    <p>Splanchnic vasodilation → ↓ effective arterial volume → renal vasoconstriction</p>
+    <h3>Types</h3>
+    <table>
+        <tr><th>Type</th><th>Features</th><th>Survival</th></tr>
+        <tr><td><b>HRS-AKI</b></td><td>Rapid, often after SBP or GI bleed</td><td>~2 weeks</td></tr>
+        <tr><td><b>HRS-CKD</b></td><td>Gradual, refractory ascites</td><td>~6 months</td></tr>
+    </table>
+    <h3>Diagnosis (Exclusion)</h3>
+    <ul>
+        <li>Cirrhosis + ascites + AKI</li>
+        <li>No improvement with albumin 1 g/kg × 2 days</li>
+        <li>No shock, nephrotoxins, obstruction</li>
+        <li>Bland sediment, FENa &lt;1%</li>
+    </ul>
+    <h3>Treatment</h3>
+    <ul>
+        <li><b>Albumin + vasoconstrictors</b> (midodrine/octreotide OR norepinephrine)</li>
+        <li><b>Definitive:</b> Liver transplant (only cure)</li>
+    </ul>
+</div>
+
+<!-- SECTION 6: GN OVERVIEW -->
+<div class="section" id="gn">
+    <h2>6. Glomerulonephritis Overview</h2>
+    <h3>Nephrotic vs Nephritic</h3>
+    <table>
+        <tr><th>Feature</th><th>Nephrotic</th><th>Nephritic</th></tr>
+        <tr><td>Proteinuria</td><td>&gt;3.5 g/day</td><td>&lt;3.5 g/day</td></tr>
+        <tr><td>Hematuria</td><td>Minimal</td><td>Prominent (RBC casts)</td></tr>
+        <tr><td>Edema</td><td>Severe</td><td>Mild</td></tr>
+        <tr><td>Albumin</td><td>Low</td><td>Normal/mildly low</td></tr>
+        <tr><td>Lipids</td><td>Elevated</td><td>Normal</td></tr>
+        <tr><td>BP</td><td>Variable</td><td>Elevated</td></tr>
+    </table>
+    <h3>Complement Levels</h3>
+    <table>
+        <tr><th>LOW Complement</th><th>NORMAL Complement</th></tr>
+        <tr><td>Post-infectious GN</td><td>IgA nephropathy</td></tr>
+        <tr><td>Lupus nephritis</td><td>ANCA vasculitis</td></tr>
+        <tr><td>MPGN</td><td>Anti-GBM</td></tr>
+        <tr><td>Cryoglobulinemia</td><td>FSGS, MCD, Membranous</td></tr>
+        <tr><td>Endocarditis-associated</td><td></td></tr>
+    </table>
+    <div class="box pearl"><b>Low C3 + Low C4</b> = Classic pathway (lupus, cryo)<br><b>Low C3 + Normal C4</b> = Alternative pathway (post-infectious, MPGN)</div>
+</div>
+
+<!-- SECTION 7: NEPHROTIC -->
+<div class="section" id="nephrotic">
+    <h2>7. Nephrotic Syndrome <span class="badge badge-common">Common</span></h2>
+    <h3>Definition</h3>
+    <ul>
+        <li>Proteinuria &gt;3.5 g/24h</li>
+        <li>Hypoalbuminemia (&lt;3 g/dL)</li>
+        <li>Edema</li>
+        <li>Hyperlipidemia</li>
+    </ul>
+    <h3>Causes by Age</h3>
+    <table>
+        <tr><th>Population</th><th>Most Common</th></tr>
+        <tr><td>Children</td><td>Minimal Change Disease</td></tr>
+        <tr><td>Adults (Black)</td><td>FSGS</td></tr>
+        <tr><td>Adults (White)</td><td>Membranous</td></tr>
+        <tr><td>Diabetics</td><td>Diabetic nephropathy</td></tr>
+        <tr><td>Elderly</td><td>Membranous, Amyloidosis</td></tr>
+    </table>
+    <h3>Complications</h3>
+    <ul>
+        <li><b>Thromboembolism:</b> Loss of antithrombin III → DVT, PE, renal vein thrombosis</li>
+        <li><b>Infection:</b> Loss of immunoglobulins</li>
+        <li><b>Hyperlipidemia</b></li>
+    </ul>
+    <div class="box pearl"><b>Renal vein thrombosis:</b> Most common with membranous nephropathy. Sudden flank pain, hematuria, ↑ proteinuria</div>
+</div>
+
+<!-- SECTION 8: NEPHRITIC -->
+<div class="section" id="nephritic">
+    <h2>8. Nephritic Syndrome & RPGN</h2>
+    <h3>Features</h3>
+    <ul>
+        <li>Hematuria (dysmorphic RBCs, <b>RBC casts</b>)</li>
+        <li>Hypertension</li>
+        <li>Oliguria, azotemia</li>
+        <li>Mild proteinuria</li>
+    </ul>
+    <h3>RPGN Classification</h3>
+    <table>
+        <tr><th>Type</th><th>IF Pattern</th><th>Diseases</th></tr>
+        <tr><td><b>Type I</b></td><td>Linear IgG</td><td>Anti-GBM (Goodpasture)</td></tr>
+        <tr><td><b>Type II</b></td><td>Granular</td><td>Lupus, post-infectious, IgA, MPGN</td></tr>
+        <tr><td><b>Type III</b></td><td>Pauci-immune</td><td>ANCA (GPA, MPA, EGPA)</td></tr>
+    </table>
+    <h4>Post-Infectious GN</h4>
+    <ul>
+        <li><b>Cause:</b> Group A strep</li>
+        <li><b>Timing:</b> 1-3 wks post-pharyngitis, 3-6 wks post-skin</li>
+        <li><b>Labs:</b> ↓C3, ↑ASO</li>
+        <li><b>Biopsy:</b> Subepithelial humps ("starry sky")</li>
+    </ul>
+    <div class="box pearl"><b>RBC casts = GN.</b> Pathognomonic for glomerular bleeding.</div>
+</div>
+
+<!-- SECTION 9: IGA -->
+<div class="section" id="igan">
+    <h2>9. IgA Nephropathy <span class="badge badge-common">Most Common GN</span></h2>
+    <h3>Key Features</h3>
+    <ul>
+        <li>Most common primary GN worldwide</li>
+        <li>Young males</li>
+        <li><b>Synpharyngitic:</b> Gross hematuria during or within days of URI</li>
+        <li>Normal complement</li>
+    </ul>
+    <div class="box pearl"><b>IgA vs Post-strep:</b><br>IgA = hematuria DURING URI, normal C3<br>Post-strep = hematuria 1-3 wks AFTER, low C3</div>
+    <h3>Prognosis (Poor Factors)</h3>
+    <ul>
+        <li>Proteinuria &gt;1 g/day</li>
+        <li>Hypertension</li>
+        <li>↑ Cr at diagnosis</li>
+        <li>Crescents on biopsy</li>
+    </ul>
+    <h3>Treatment</h3>
+    <ul>
+        <li><b>ACEi/ARB</b> — first-line</li>
+        <li><b>SGLT2i</b> — renoprotective</li>
+        <li>Steroids if proteinuria &gt;1g despite supportive care</li>
+    </ul>
+</div>
+
+<!-- SECTION 10: MEMBRANOUS -->
+<div class="section" id="membranous">
+    <h2>10. Membranous Nephropathy <span class="badge badge-boards">Boards Favorite</span></h2>
+    <h3>Etiology</h3>
+    <table>
+        <tr><th>Primary (75%)</th><th>Secondary (25%)</th></tr>
+        <tr><td>Anti-PLA2R Ab (70-80%)</td><td>Malignancy (lung, colon, prostate)</td></tr>
+        <tr><td>Anti-THSD7A Ab</td><td>Hepatitis B, SLE, drugs (NSAIDs, gold)</td></tr>
+    </table>
+    <div class="box emergency"><b>Screen for malignancy</b> in all patients &gt;50 with membranous nephropathy!</div>
+    <h3>Key Points</h3>
+    <ul>
+        <li><b>Highest VTE risk</b> of all nephrotic causes</li>
+        <li>Rule of thirds: 1/3 remit, 1/3 stable, 1/3 progress</li>
+        <li><b>Biopsy:</b> "Spike and dome" on silver stain</li>
+    </ul>
+    <h3>Treatment</h3>
+    <ul>
+        <li>Supportive: ACEi/ARB, consider anticoagulation if albumin &lt;2.5</li>
+        <li>Immunosuppression: <b>Rituximab</b> (first-line), cyclophosphamide</li>
+    </ul>
+</div>
+
+<!-- SECTION 11: FSGS -->
+<div class="section" id="fsgs">
+    <h2>11. FSGS</h2>
+    <h3>Causes</h3>
+    <table>
+        <tr><th>Primary</th><th>Secondary</th></tr>
+        <tr><td>Idiopathic</td><td>HIV (collapsing variant)</td></tr>
+        <tr><td></td><td>Obesity, sickle cell, heroin</td></tr>
+        <tr><td></td><td>APOL1 variants (African Americans)</td></tr>
+    </table>
+    <ul>
+        <li><b>Most common nephrotic syndrome in African Americans</b></li>
+        <li>Heavy proteinuria, HTN, progressive CKD</li>
+        <li><b>Collapsing FSGS:</b> HIV-associated, worst prognosis</li>
+    </ul>
+    <h3>Treatment</h3>
+    <ul>
+        <li>Primary: Steroids (4-6 months), CNI if steroid-resistant</li>
+        <li>Secondary: Treat underlying cause</li>
+    </ul>
+</div>
+
+<!-- SECTION 12: MCD -->
+<div class="section" id="mcd">
+    <h2>12. Minimal Change Disease</h2>
+    <ul>
+        <li><b>Most common nephrotic syndrome in children</b></li>
+        <li>Associations: NSAIDs, Hodgkin lymphoma</li>
+        <li>Sudden onset nephrotic syndrome</li>
+        <li>Normal GFR, normal complement</li>
+    </ul>
+    <h3>Biopsy</h3>
+    <ul>
+        <li><b>LM:</b> Normal</li>
+        <li><b>IF:</b> Negative</li>
+        <li><b>EM:</b> Podocyte foot process effacement only</li>
+    </ul>
+    <h3>Treatment</h3>
+    <p><b>Highly steroid-responsive</b> — 90% children, 80% adults respond</p>
+    <div class="box pearl">If no steroid response, reconsider diagnosis — may be FSGS (sampling error)</div>
+</div>
+
+<!-- SECTION 13: LUPUS NEPHRITIS -->
+<div class="section" id="lupus">
+    <h2>13. Lupus Nephritis <span class="badge badge-boards">High-Yield</span></h2>
+    <h3>ISN/RPS Classification</h3>
+    <table>
+        <tr><th>Class</th><th>Description</th><th>Treatment</th></tr>
+        <tr><td>I</td><td>Minimal mesangial</td><td>Supportive</td></tr>
+        <tr><td>II</td><td>Mesangial proliferative</td><td>Supportive</td></tr>
+        <tr><td><b>III</b></td><td>Focal proliferative (&lt;50%)</td><td>Immunosuppression</td></tr>
+        <tr><td><b>IV</b></td><td>Diffuse proliferative (≥50%)</td><td>Immunosuppression (worst)</td></tr>
+        <tr><td>V</td><td>Membranous</td><td>If nephrotic → immunosuppression</td></tr>
+        <tr><td>VI</td><td>Sclerotic (&gt;90%)</td><td>Supportive (irreversible)</td></tr>
+    </table>
+    <h3>Labs</h3>
+    <ul>
+        <li>↓C3, ↓C4 (classic pathway)</li>
+        <li>Anti-dsDNA correlates with activity</li>
+    </ul>
+    <div class="box pearl"><b>"Full house" on IF:</b> IgG, IgM, IgA, C3, C1q all positive = pathognomonic for lupus</div>
+    <h3>Treatment (Class III/IV)</h3>
+    <ul>
+        <li><b>Induction:</b> MMF or cyclophosphamide + steroids</li>
+        <li><b>Maintenance:</b> MMF or azathioprine</li>
+        <li><b>All:</b> Hydroxychloroquine</li>
+    </ul>
+</div>
+
+<!-- SECTION 14: ANCA -->
+<div class="section" id="anca">
+    <h2>14. ANCA-Associated GN <span class="badge badge-emergency">Emergency</span></h2>
+    <h3>Diseases</h3>
+    <table>
+        <tr><th>Disease</th><th>ANCA</th><th>Features</th></tr>
+        <tr><td><b>GPA</b> (Wegener's)</td><td>PR3 (c-ANCA)</td><td>Upper airway, lungs, kidneys</td></tr>
+        <tr><td><b>MPA</b></td><td>MPO (p-ANCA)</td><td>Kidneys, lungs (no upper airway)</td></tr>
+        <tr><td><b>EGPA</b> (Churg-Strauss)</td><td>MPO (60%)</td><td>Asthma, eosinophilia</td></tr>
+    </table>
+    <h3>Renal</h3>
+    <ul>
+        <li>RPGN with crescents</li>
+        <li><b>Pauci-immune</b> (little IF staining)</li>
+        <li>RBC casts</li>
+    </ul>
+    <h3>Treatment</h3>
+    <ul>
+        <li><b>Induction:</b> Pulse steroids + rituximab (preferred) or cyclophosphamide</li>
+        <li><b>Maintenance:</b> Rituximab or azathioprine</li>
+        <li><b>PLEX:</b> For DAH or severe renal disease</li>
+    </ul>
+    <div class="box highlight"><b>RAVE Trial:</b> Rituximab non-inferior to cyclophosphamide, superior for relapse</div>
+</div>
+
+<!-- SECTION 15: ANTI-GBM -->
+<div class="section" id="antigbm">
+    <h2>15. Anti-GBM Disease <span class="badge badge-emergency">Emergency</span></h2>
+    <ul>
+        <li>Antibodies to type IV collagen</li>
+        <li><b>Goodpasture:</b> Anti-GBM + pulmonary hemorrhage</li>
+        <li>Risk: smoking, hydrocarbons</li>
+    </ul>
+    <h3>Diagnosis</h3>
+    <ul>
+        <li>Anti-GBM antibody positive</li>
+        <li><b>Linear IgG on IF</b> — pathognomonic</li>
+        <li>30% have concurrent ANCA</li>
+    </ul>
+    <div class="box emergency">
+        <b>Treat immediately!</b> Delay = irreversible damage<br>
+        • Plasmapheresis (daily until Ab negative)<br>
+        • Cyclophosphamide + steroids
+    </div>
+    <div class="box pearl"><b>IF patterns:</b> Linear = Anti-GBM | Granular = immune complex | Pauci-immune = ANCA</div>
+</div>
+
+<!-- SECTION 16: DIABETIC -->
+<div class="section" id="diabetic">
+    <h2>16. Diabetic Nephropathy <span class="badge badge-common">Most Common ESRD</span></h2>
+    <h3>Natural History</h3>
+    <ol>
+        <li>Hyperfiltration</li>
+        <li>Microalbuminuria (30-300 mg/g)</li>
+        <li>Macroalbuminuria (&gt;300 mg/g)</li>
+        <li>Declining GFR</li>
+        <li>ESRD</li>
+    </ol>
+    <h3>Pathology</h3>
+    <ul>
+        <li><b>Kimmelstiel-Wilson nodules</b> — pathognomonic</li>
+        <li>GBM thickening, mesangial expansion</li>
+    </ul>
+    <h3>Suspect Non-DM Cause If:</h3>
+    <ul>
+        <li>No retinopathy (usually present with nephropathy)</li>
+        <li>Active sediment (RBC casts)</li>
+        <li>Rapid GFR decline</li>
+        <li>DM duration &lt;5 years (T1DM)</li>
+    </ul>
+    <h3>Treatment</h3>
+    <table>
+        <tr><th>Agent</th><th>Benefit</th></tr>
+        <tr><td><b>ACEi/ARB</b></td><td>First-line, ↓ proteinuria</td></tr>
+        <tr><td><b>SGLT2i</b></td><td>Renoprotective (CREDENCE, DAPA-CKD)</td></tr>
+        <tr><td><b>Finerenone</b></td><td>↓ progression (FIDELIO-DKD)</td></tr>
+        <tr><td>BP &lt;130/80</td><td>Slows progression</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 17: RTA -->
+<div class="section" id="rta">
+    <h2>17. Renal Tubular Acidosis <span class="badge badge-boards">Boards Favorite</span></h2>
+    <h3>Comparison</h3>
+    <table>
+        <tr><th>Feature</th><th>Type 1 (Distal)</th><th>Type 2 (Proximal)</th><th>Type 4</th></tr>
+        <tr><td><b>Defect</b></td><td>Can't secrete H+</td><td>Can't reabsorb HCO3</td><td>↓ Aldosterone</td></tr>
+        <tr><td><b>Urine pH</b></td><td>&gt;5.5</td><td>&lt;5.5</td><td>&lt;5.5</td></tr>
+        <tr><td><b>Serum K+</b></td><td>LOW</td><td>LOW</td><td><b>HIGH</b></td></tr>
+        <tr><td><b>Stones</b></td><td>Yes (CaPO4)</td><td>Rare</td><td>No</td></tr>
+        <tr><td><b>Associations</b></td><td>Sjögren's, ampho B</td><td>Fanconi, MM</td><td>DM, ACEi, NSAIDs</td></tr>
+    </table>
+    <div class="box mnemonic"><b>Type 4 = HyperKalemia</b> (the only RTA with HIGH K)</div>
+    <h3>Diagnosis</h3>
+    <ul>
+        <li>NAGMA + positive urine anion gap = RTA</li>
+        <li>Urine AG = UNa + UK - UCl</li>
+        <li>Positive UAG = impaired NH4+ excretion</li>
+    </ul>
+</div>
+
+<!-- SECTION 18: TMA -->
+<div class="section" id="tma">
+    <h2>18. Thrombotic Microangiopathy <span class="badge badge-emergency">Emergency</span></h2>
+    <h3>Features (All TMA)</h3>
+    <ul>
+        <li>MAHA: schistocytes, ↑LDH, ↓haptoglobin, ↑indirect bili</li>
+        <li>Thrombocytopenia</li>
+        <li>Negative Coombs, normal PT/PTT</li>
+    </ul>
+    <h3>Types</h3>
+    <table>
+        <tr><th>Type</th><th>Mechanism</th><th>Features</th><th>Treatment</th></tr>
+        <tr><td><b>TTP</b></td><td>ADAMTS13 &lt;10%</td><td>Neuro sx prominent</td><td>PLEX, caplacizumab</td></tr>
+        <tr><td><b>HUS</b></td><td>Shiga toxin</td><td>Bloody diarrhea → AKI</td><td>Supportive (NO abx)</td></tr>
+        <tr><td><b>aHUS</b></td><td>Complement dysreg</td><td>No diarrhea, recurrent</td><td>Eculizumab</td></tr>
+    </table>
+    <div class="box emergency"><b>TTP = Emergency.</b> Start PLEX immediately — don't wait for ADAMTS13. Mortality &gt;90% without treatment.</div>
+</div>
+
+<!-- SECTION 19: RAS -->
+<div class="section" id="ras">
+    <h2>19. Renal Artery Stenosis</h2>
+    <h3>Types</h3>
+    <table>
+        <tr><th>Type</th><th>Demographics</th><th>Location</th></tr>
+        <tr><td><b>Atherosclerotic (90%)</b></td><td>Older, male, CVD risk factors</td><td>Proximal 1/3</td></tr>
+        <tr><td><b>FMD (10%)</b></td><td>Young women</td><td>Distal 2/3, "string of beads"</td></tr>
+    </table>
+    <h3>Clinical Clues</h3>
+    <ul>
+        <li>Resistant HTN</li>
+        <li><b>Cr rise &gt;30% after ACEi/ARB</b></li>
+        <li>Flash pulmonary edema</li>
+        <li>Asymmetric kidney sizes</li>
+        <li>Abdominal bruit</li>
+    </ul>
+    <h3>Treatment</h3>
+    <ul>
+        <li><b>Atherosclerotic:</b> Medical therapy (CORAL trial — no stent benefit)</li>
+        <li><b>FMD:</b> Angioplasty (high cure rate)</li>
+    </ul>
+</div>
+
+<!-- SECTION 20: ATHEROEMBOLIC -->
+<div class="section" id="athero">
+    <h2>20. Atheroembolic Disease <span class="badge badge-boards">Boards Favorite</span></h2>
+    <h3>Triggers</h3>
+    <ul>
+        <li>Vascular procedure (cath, surgery)</li>
+        <li>Anticoagulation (destabilizes plaque)</li>
+    </ul>
+    <h3>Classic Triad</h3>
+    <ul>
+        <li><b>Livedo reticularis</b>, blue toe syndrome</li>
+        <li><b>AKI</b> (subacute, stepwise)</li>
+        <li><b>Eosinophilia</b></li>
+    </ul>
+    <h3>Labs</h3>
+    <ul>
+        <li>↑ Eosinophils (80%)</li>
+        <li>↓ Complement (C3, C4)</li>
+        <li>↑ ESR</li>
+    </ul>
+    <div class="box pearl"><b>Classic boards scenario:</b> Elderly + AKI + livedo + eosinophilia after cardiac cath</div>
+    <h3>Diagnosis</h3>
+    <ul>
+        <li>Clinical + cholesterol clefts on biopsy</li>
+    </ul>
+</div>
+
+<!-- SECTION 21: CKD -->
+<div class="section" id="ckd">
+    <h2>21. CKD Staging & Management <span class="badge badge-common">Very Common</span></h2>
+    <h3>KDIGO Staging</h3>
+    <table>
+        <tr><th>Stage</th><th>GFR</th><th>Description</th></tr>
+        <tr><td>G1</td><td>≥90</td><td>Normal (with kidney damage)</td></tr>
+        <tr><td>G2</td><td>60-89</td><td>Mild ↓</td></tr>
+        <tr><td>G3a</td><td>45-59</td><td>Mild-moderate ↓</td></tr>
+        <tr><td>G3b</td><td>30-44</td><td>Moderate-severe ↓</td></tr>
+        <tr><td>G4</td><td>15-29</td><td>Severe ↓</td></tr>
+        <tr><td>G5</td><td>&lt;15</td><td>Kidney failure</td></tr>
+    </table>
+    <h3>Albuminuria</h3>
+    <table>
+        <tr><th>Category</th><th>UACR (mg/g)</th></tr>
+        <tr><td>A1</td><td>&lt;30</td></tr>
+        <tr><td>A2</td><td>30-300</td></tr>
+        <tr><td>A3</td><td>&gt;300</td></tr>
+    </table>
+    <h3>Renoprotective Therapy</h3>
+    <table>
+        <tr><th>Agent</th><th>Indication</th></tr>
+        <tr><td><b>ACEi/ARB</b></td><td>First-line if proteinuria</td></tr>
+        <tr><td><b>SGLT2i</b></td><td>eGFR ≥20, with or without DM</td></tr>
+        <tr><td><b>Finerenone</b></td><td>Diabetic nephropathy</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 22: CKD-MBD -->
+<div class="section" id="ckdmbd">
+    <h2>22. CKD-Mineral Bone Disease <span class="badge badge-boards">High-Yield</span></h2>
+    <h3>Pathophysiology</h3>
+    <ol>
+        <li>↓ GFR → ↓ PO4 excretion → ↑ PO4</li>
+        <li>↓ 1,25-vit D production → ↓ Ca absorption</li>
+        <li>↑ PTH (secondary hyperparathyroidism)</li>
+        <li>↑ FGF-23</li>
+    </ol>
+    <h3>Lab Pattern</h3>
+    <table>
+        <tr><th>Lab</th><th>Early CKD</th><th>Late CKD</th></tr>
+        <tr><td>Phosphorus</td><td>Normal</td><td>↑</td></tr>
+        <tr><td>Calcium</td><td>Normal</td><td>↓</td></tr>
+        <tr><td>PTH</td><td>↑</td><td>↑↑</td></tr>
+        <tr><td>1,25-vit D</td><td>↓</td><td>↓↓</td></tr>
+    </table>
+    <h3>Treatment</h3>
+    <ul>
+        <li><b>Phosphate binders:</b> Sevelamer, lanthanum, calcium-based</li>
+        <li><b>Vitamin D:</b> Calcitriol (active)</li>
+        <li><b>Calcimimetic:</b> Cinacalcet</li>
+    </ul>
+    <div class="box pearl"><b>Calciphylaxis:</b> Painful necrotic skin lesions from vascular calcification. Treat with sodium thiosulfate.</div>
+</div>
+
+<!-- SECTION 23: ANEMIA CKD -->
+<div class="section" id="anemia">
+    <h2>23. Anemia of CKD</h2>
+    <h3>Pathophysiology</h3>
+    <ul>
+        <li><b>Primary:</b> ↓ EPO production</li>
+        <li><b>Contributing:</b> Iron deficiency, ↑ hepcidin, uremia</li>
+    </ul>
+    <h3>Iron Targets</h3>
+    <table>
+        <tr><th>Parameter</th><th>Target</th></tr>
+        <tr><td>Ferritin</td><td>&gt;200 (HD), &gt;100 (non-HD)</td></tr>
+        <tr><td>TSAT</td><td>&gt;20%</td></tr>
+    </table>
+    <h3>Treatment</h3>
+    <ol>
+        <li><b>Iron first</b> (IV preferred in HD)</li>
+        <li><b>ESA</b> (epoetin, darbepoetin) — target Hgb 10-11</li>
+    </ol>
+    <div class="box highlight"><b>TREAT/CHOIR:</b> Hgb &gt;13 with ESAs → ↑ stroke, no CV benefit. Target 10-11.</div>
+</div>
+
+<!-- SECTION 24: HYPONATREMIA -->
+<div class="section" id="hyponatremia">
+    <h2>24. Hyponatremia <span class="badge badge-common">Very Common</span> <span class="badge badge-boards">High-Yield</span></h2>
+    <h3>Approach</h3>
+    <h4>Step 1: Serum Osmolality</h4>
+    <table>
+        <tr><th>Osm</th><th>Category</th><th>Causes</th></tr>
+        <tr><td>&lt;280</td><td>Hypotonic (true)</td><td>See below</td></tr>
+        <tr><td>280-295</td><td>Isotonic (pseudo)</td><td>Hyperlipidemia, hyperproteinemia</td></tr>
+        <tr><td>&gt;295</td><td>Hypertonic</td><td>Hyperglycemia, mannitol</td></tr>
+    </table>
+    <h4>Step 2: Volume Status (Hypotonic)</h4>
+    <table>
+        <tr><th>Volume</th><th>UNa</th><th>Causes</th></tr>
+        <tr><td rowspan="2"><b>Hypovolemic</b></td><td>&lt;20</td><td>GI losses, burns</td></tr>
+        <tr><td>&gt;20</td><td>Diuretics, salt-wasting</td></tr>
+        <tr><td><b>Euvolemic</b></td><td>&gt;20</td><td>SIADH, hypothyroid, adrenal insufficiency</td></tr>
+        <tr><td rowspan="2"><b>Hypervolemic</b></td><td>&lt;20</td><td>CHF, cirrhosis</td></tr>
+        <tr><td>&gt;20</td><td>CKD</td></tr>
+    </table>
+    <h3>SIADH Criteria</h3>
+    <ul>
+        <li>Serum osm &lt;275, Urine osm &gt;100</li>
+        <li>UNa &gt;30, euvolemic</li>
+        <li>Normal thyroid/adrenal</li>
+    </ul>
+    <div class="box emergency"><b>Correction rate:</b> ≤8-10 mEq/L per 24h (risk of osmotic demyelination if too fast)</div>
+    <h3>Treatment</h3>
+    <table>
+        <tr><th>Setting</th><th>Treatment</th></tr>
+        <tr><td>Acute symptomatic</td><td>3% saline (↑ 4-6 mEq in first hours)</td></tr>
+        <tr><td>Hypovolemic</td><td>NS</td></tr>
+        <tr><td>SIADH</td><td>Fluid restriction, salt tabs, vaptans</td></tr>
+        <tr><td>Hypervolemic</td><td>Fluid/Na restriction, diuretics</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 25: HYPERNATREMIA -->
+<div class="section" id="hypernatremia">
+    <h2>25. Hypernatremia</h2>
+    <h3>Definition</h3>
+    <p>Na &gt;145 = Free water deficit</p>
+    <h3>Causes</h3>
+    <ul>
+        <li><b>Water loss:</b> Insensible, GI, osmotic diuresis</li>
+        <li><b>Inadequate intake:</b> Altered mental status, intubated</li>
+        <li><b>Diabetes insipidus:</b> Central or nephrogenic</li>
+    </ul>
+    <h3>DI Types</h3>
+    <table>
+        <tr><th>Type</th><th>Cause</th><th>Treatment</th></tr>
+        <tr><td><b>Central</b></td><td>↓ ADH (pituitary)</td><td>DDAVP</td></tr>
+        <tr><td><b>Nephrogenic</b></td><td>ADH resistance (lithium, hypercalcemia)</td><td>Thiazides, amiloride</td></tr>
+    </table>
+    <div class="box formula"><b>Free water deficit = TBW × [(Na/140) - 1]</b><br>TBW = 0.6 × wt (men), 0.5 × wt (women)</div>
+    <p><b>Correction:</b> ≤10-12 mEq/24h (risk cerebral edema if too fast)</p>
+</div>
+
+<!-- SECTION 26: HYPOKALEMIA -->
+<div class="section" id="hypokalemia">
+    <h2>26. Hypokalemia</h2>
+    <h3>Causes</h3>
+    <table>
+        <tr><th>Mechanism</th><th>Examples</th></tr>
+        <tr><td>Shift</td><td>Insulin, β-agonists, alkalosis</td></tr>
+        <tr><td>GI loss</td><td>Vomiting, diarrhea</td></tr>
+        <tr><td>Renal loss</td><td>Diuretics, hyperaldosteronism, RTA 1/2</td></tr>
+    </table>
+    <h3>ECG Changes</h3>
+    <ul>
+        <li>Flattened T waves</li>
+        <li><b>U waves</b></li>
+        <li>ST depression</li>
+    </ul>
+    <div class="box pearl"><b>Always check Mg!</b> Hypomagnesemia causes refractory hypokalemia.</div>
+</div>
+
+<!-- SECTION 27: HYPERKALEMIA -->
+<div class="section" id="hyperkalemia">
+    <h2>27. Hyperkalemia <span class="badge badge-emergency">Emergency</span></h2>
+    <h3>Causes</h3>
+    <ul>
+        <li><b>Shift:</b> Acidosis, insulin deficiency, β-blockers, cell lysis</li>
+        <li><b>↓ Excretion:</b> AKI, CKD, hypoaldo, K-sparing diuretics</li>
+        <li><b>Drugs:</b> ACEi, ARB, spironolactone, TMP-SMX</li>
+    </ul>
+    <h3>ECG Changes (Progressive)</h3>
+    <ol>
+        <li>Peaked T waves</li>
+        <li>PR prolongation, flat P</li>
+        <li>QRS widening</li>
+        <li>Sine wave → VF/asystole</li>
+    </ol>
+    <h3>Treatment</h3>
+    <table>
+        <tr><th>Agent</th><th>Mechanism</th><th>Onset</th></tr>
+        <tr><td><b>Calcium gluconate</b></td><td>Stabilize membrane</td><td>Minutes</td></tr>
+        <tr><td><b>Insulin + glucose</b></td><td>Shift K into cells</td><td>15-30 min</td></tr>
+        <tr><td>Albuterol</td><td>Shift</td><td>30 min</td></tr>
+        <tr><td>Bicarb</td><td>Shift (if acidotic)</td><td>30-60 min</td></tr>
+        <tr><td>Loop diuretics</td><td>Excretion</td><td>Hours</td></tr>
+        <tr><td>Patiromer/SZC</td><td>GI binding</td><td>Hours</td></tr>
+        <tr><td><b>Dialysis</b></td><td>Removal</td><td>Immediate</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 28: CALCIUM -->
+<div class="section" id="calcium">
+    <h2>28. Calcium Disorders</h2>
+    <h3>Hypercalcemia</h3>
+    <div class="box mnemonic"><b>Most common:</b> Hyperparathyroidism (outpatient), Malignancy (inpatient)</div>
+    <h4>Symptoms</h4>
+    <p><b>"Stones, bones, groans, moans, psychiatric overtones"</b></p>
+    <h4>Workup</h4>
+    <ul>
+        <li><b>PTH high:</b> Primary hyperparathyroidism</li>
+        <li><b>PTH low:</b> Malignancy, granulomatous, vitamin D toxicity</li>
+    </ul>
+    <h4>Treatment</h4>
+    <ol>
+        <li>IV NS (volume first)</li>
+        <li>Loop diuretics (after euvolemic)</li>
+        <li>Bisphosphonates (zoledronic acid)</li>
+        <li>Calcitonin (rapid but tachyphylaxis)</li>
+        <li>Dialysis (severe)</li>
+    </ol>
+    <h3>Hypocalcemia</h3>
+    <ul>
+        <li><b>Causes:</b> Hypoparathyroid (post-surgical), vitamin D deficiency, CKD, hypomagnesemia</li>
+        <li><b>Signs:</b> Chvostek (facial twitch), Trousseau (carpal spasm)</li>
+        <li><b>Treatment:</b> IV calcium gluconate if symptomatic</li>
+    </ul>
+</div>
+
+<!-- SECTION 29: PHOSPHORUS/MG -->
+<div class="section" id="phosphorus">
+    <h2>29. Phosphorus & Magnesium Disorders</h2>
+    <h3>Hyperphosphatemia</h3>
+    <ul>
+        <li><b>Causes:</b> CKD, tumor lysis, rhabdo, hypoparathyroid</li>
+        <li><b>Treatment:</b> Dietary restriction, phosphate binders, dialysis</li>
+    </ul>
+    <h3>Hypophosphatemia</h3>
+    <ul>
+        <li><b>Causes:</b> Refeeding syndrome, insulin, respiratory alkalosis, alcoholism</li>
+        <li><b>Symptoms:</b> Weakness, rhabdo, respiratory failure, hemolysis</li>
+    </ul>
+    <div class="box pearl"><b>Refeeding syndrome:</b> Severe ↓PO4, ↓K, ↓Mg when malnourished patients fed. Can be fatal.</div>
+    <h3>Hypomagnesemia</h3>
+    <ul>
+        <li><b>Causes:</b> Diuretics, PPIs, alcoholism, aminoglycosides</li>
+        <li><b>Effect:</b> Causes refractory hypokalemia and hypocalcemia</li>
+        <li><b>Treatment:</b> IV Mg sulfate if severe</li>
+    </ul>
+</div>
+
+<!-- SECTION 30: ACID-BASE -->
+<div class="section" id="acidbase">
+    <h2>30. Acid-Base Approach <span class="badge badge-boards">Must-Know</span></h2>
+    <h3>5-Step Approach</h3>
+    <ol>
+        <li>pH: Acidemia (&lt;7.35) or alkalemia (&gt;7.45)?</li>
+        <li>Primary disorder (pCO2 vs HCO3)</li>
+        <li>Calculate expected compensation</li>
+        <li>Anion gap (if metabolic acidosis)</li>
+        <li>Delta-delta (if AGMA)</li>
+    </ol>
+    <div class="box formula">
+        <b>Anion Gap = Na - (Cl + HCO3)</b> | Normal: 8-12<br>
+        <b>Corrected AG:</b> Add 2.5 for each 1 g/dL ↓ albumin
+    </div>
+    <h3>Compensation Formulas</h3>
+    <table>
+        <tr><th>Disorder</th><th>Expected Compensation</th></tr>
+        <tr><td>Metabolic acidosis</td><td>pCO2 = 1.5(HCO3) + 8 ± 2</td></tr>
+        <tr><td>Metabolic alkalosis</td><td>pCO2 = 0.7(HCO3) + 21 ± 2</td></tr>
+        <tr><td>Acute resp acidosis</td><td>HCO3 ↑ 1 per 10 ↑pCO2</td></tr>
+        <tr><td>Chronic resp acidosis</td><td>HCO3 ↑ 3.5 per 10 ↑pCO2</td></tr>
+        <tr><td>Acute resp alkalosis</td><td>HCO3 ↓ 2 per 10 ↓pCO2</td></tr>
+        <tr><td>Chronic resp alkalosis</td><td>HCO3 ↓ 5 per 10 ↓pCO2</td></tr>
+    </table>
+    <div class="box formula"><b>Delta-Delta = (AG - 12) / (24 - HCO3)</b><br>&lt;1: concurrent NAGMA | 1-2: pure AGMA | &gt;2: concurrent met alk</div>
+</div>
+
+<!-- SECTION 31: METABOLIC ACIDOSIS -->
+<div class="section" id="metac">
+    <h2>31. Metabolic Acidosis <span class="badge badge-common">Common</span></h2>
+    <h3>Anion Gap Acidosis</h3>
+    <div class="box mnemonic"><b>GOLDMARK:</b> Glycols, Oxoproline, L-lactate, D-lactate, Methanol, Aspirin, Renal failure, Ketoacidosis</div>
+    <h4>Toxic Alcohols</h4>
+    <table>
+        <tr><th>Toxin</th><th>Metabolite</th><th>Clue</th></tr>
+        <tr><td>Methanol</td><td>Formic acid</td><td>Visual symptoms</td></tr>
+        <tr><td>Ethylene glycol</td><td>Oxalic acid</td><td>Ca oxalate crystals, AKI</td></tr>
+    </table>
+    <p><b>Treatment:</b> Fomepizole + hemodialysis</p>
+    <h3>Non-Anion Gap Acidosis</h3>
+    <div class="box mnemonic"><b>HARDASS:</b> Hyperalimentation, Acetazolamide, RTA, Diarrhea, Addison's, Spironolactone, Saline</div>
+    <h4>Urine Anion Gap</h4>
+    <p>UAG = UNa + UK - UCl</p>
+    <ul>
+        <li><b>Negative:</b> GI loss (appropriate NH4+ excretion)</li>
+        <li><b>Positive:</b> RTA (impaired NH4+)</li>
+    </ul>
+</div>
+
+<!-- SECTION 32: METABOLIC ALKALOSIS -->
+<div class="section" id="metalk">
+    <h2>32. Metabolic Alkalosis</h2>
+    <h3>Classification by Urine Cl</h3>
+    <table>
+        <tr><th>UCl</th><th>Category</th><th>Causes</th><th>Treatment</th></tr>
+        <tr><td><b>&lt;20</b></td><td>Saline-responsive</td><td>Vomiting, NG suction, diuretics (past)</td><td>IV NS</td></tr>
+        <tr><td><b>&gt;20</b></td><td>Saline-resistant</td><td>Hyperaldosteronism, Cushing's, Bartter/Gitelman</td><td>Treat cause</td></tr>
+    </table>
+    <h3>Bartter vs Gitelman</h3>
+    <table>
+        <tr><th>Feature</th><th>Bartter</th><th>Gitelman</th></tr>
+        <tr><td>Mimics</td><td>Loop diuretic</td><td>Thiazide</td></tr>
+        <tr><td>Urine Ca</td><td>↑</td><td>↓</td></tr>
+        <tr><td>Mg</td><td>Normal</td><td>↓</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 33: HTN -->
+<div class="section" id="htn">
+    <h2>33. Essential Hypertension <span class="badge badge-common">Very Common</span></h2>
+    <h3>Classification (ACC/AHA 2017)</h3>
+    <table>
+        <tr><th>Category</th><th>SBP</th><th>DBP</th></tr>
+        <tr><td>Normal</td><td>&lt;120</td><td>&lt;80</td></tr>
+        <tr><td>Elevated</td><td>120-129</td><td>&lt;80</td></tr>
+        <tr><td>Stage 1</td><td>130-139</td><td>80-89</td></tr>
+        <tr><td>Stage 2</td><td>≥140</td><td>≥90</td></tr>
+    </table>
+    <h3>First-Line Agents</h3>
+    <table>
+        <tr><th>Class</th><th>Compelling Indication</th></tr>
+        <tr><td>ACEi/ARB</td><td>DM, CKD with proteinuria, HFrEF</td></tr>
+        <tr><td>Thiazide</td><td>Osteoporosis, Black patients</td></tr>
+        <tr><td>CCB (DHP)</td><td>Elderly, Black patients</td></tr>
+    </table>
+    <div class="box highlight"><b>SPRINT:</b> SBP &lt;120 reduced CV events/mortality in high-risk non-diabetics</div>
+</div>
+
+<!-- SECTION 34: SECONDARY HTN -->
+<div class="section" id="secondary">
+    <h2>34. Secondary Hypertension <span class="badge badge-boards">High-Yield</span></h2>
+    <h3>When to Suspect</h3>
+    <ul>
+        <li>Onset &lt;30 or &gt;55</li>
+        <li>Resistant HTN (≥3 drugs)</li>
+        <li>Sudden worsening</li>
+        <li>Hypokalemia</li>
+    </ul>
+    <h3>Causes</h3>
+    <table>
+        <tr><th>Cause</th><th>Clues</th><th>Test</th></tr>
+        <tr><td><b>Primary aldosteronism</b></td><td>↓K, resistant HTN</td><td>Aldo:renin &gt;30</td></tr>
+        <tr><td>RAS</td><td>Bruit, Cr rise with ACEi, flash edema</td><td>Duplex/CTA</td></tr>
+        <tr><td>Pheochromocytoma</td><td>Episodic HTN, sweating, palpitations</td><td>Plasma metanephrines</td></tr>
+        <tr><td>Cushing's</td><td>Central obesity, striae</td><td>24h urine cortisol</td></tr>
+        <tr><td>OSA</td><td>Snoring, obesity</td><td>Sleep study</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 35: HTN EMERGENCY -->
+<div class="section" id="htnemergency">
+    <h2>35. Hypertensive Emergency <span class="badge badge-emergency">Emergency</span></h2>
+    <h3>Definition</h3>
+    <p><b>HTN emergency:</b> Severe BP + end-organ damage (encephalopathy, stroke, MI, AKI, dissection)</p>
+    <h3>Treatment Goals</h3>
+    <ul>
+        <li><b>General:</b> ↓ MAP 20-25% in first hour</li>
+        <li><b>Aortic dissection:</b> SBP &lt;120, HR &lt;60 in 20 min</li>
+        <li><b>Ischemic stroke:</b> Usually don't treat unless &gt;220/120</li>
+    </ul>
+    <h3>IV Agents</h3>
+    <table>
+        <tr><th>Drug</th><th>Best For</th></tr>
+        <tr><td><b>Labetalol</b></td><td>Most emergencies, pregnancy</td></tr>
+        <tr><td><b>Nicardipine</b></td><td>Most emergencies, stroke</td></tr>
+        <tr><td>Nitroprusside</td><td>Rapid titration (avoid in renal failure)</td></tr>
+        <tr><td>Nitroglycerin</td><td>ACS, pulmonary edema</td></tr>
+        <tr><td><b>Esmolol</b></td><td>Aortic dissection</td></tr>
+    </table>
+    <div class="box emergency"><b>Aortic dissection:</b> β-blocker FIRST (esmolol), THEN vasodilator</div>
+</div>
+
+<!-- SECTION 36: STONES -->
+<div class="section" id="stones">
+    <h2>36. Nephrolithiasis <span class="badge badge-common">Common</span></h2>
+    <h3>Stone Types</h3>
+    <table>
+        <tr><th>Type</th><th>%</th><th>X-ray</th><th>Risk Factors</th></tr>
+        <tr><td><b>Calcium oxalate</b></td><td>80%</td><td>Opaque</td><td>Hypercalciuria, hyperoxaluria</td></tr>
+        <tr><td><b>Uric acid</b></td><td>10%</td><td>Lucent</td><td>Gout, low pH, tumor lysis</td></tr>
+        <tr><td><b>Struvite</b></td><td>5%</td><td>Opaque</td><td>UTI (Proteus), staghorn</td></tr>
+        <tr><td><b>Cystine</b></td><td>1%</td><td>Faint</td><td>Cystinuria, hexagonal crystals</td></tr>
+    </table>
+    <h3>Diagnosis</h3>
+    <p><b>Non-contrast CT</b> = Gold standard</p>
+    <h3>Management</h3>
+    <ul>
+        <li>Analgesia (NSAIDs, opioids)</li>
+        <li>α-blockers (tamsulosin) for stones &lt;10mm</li>
+        <li>Intervention if: infection, obstruction, &gt;10mm</li>
+    </ul>
+    <div class="box emergency"><b>Infected obstructed kidney = emergency!</b> Urgent decompression + antibiotics</div>
+    <h3>Prevention</h3>
+    <table>
+        <tr><th>Stone</th><th>Prevention</th></tr>
+        <tr><td>Calcium</td><td>Fluids, thiazides, citrate</td></tr>
+        <tr><td>Uric acid</td><td>Alkalinize urine, allopurinol</td></tr>
+        <tr><td>Cystine</td><td>Alkalinize, D-penicillamine</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 37: PKD -->
+<div class="section" id="pkd">
+    <h2>37. Polycystic Kidney Disease</h2>
+    <h3>ADPKD</h3>
+    <table>
+        <tr><th>Gene</th><th>%</th><th>ESRD Age</th></tr>
+        <tr><td>PKD1 (chr 16)</td><td>85%</td><td>~55 yrs</td></tr>
+        <tr><td>PKD2 (chr 4)</td><td>15%</td><td>~70 yrs</td></tr>
+    </table>
+    <h3>Extrarenal Manifestations</h3>
+    <ul>
+        <li><b>Liver cysts</b> (most common)</li>
+        <li><b>Intracranial aneurysms</b> (10-15%)</li>
+        <li>MVP, colonic diverticula</li>
+    </ul>
+    <h3>Management</h3>
+    <ul>
+        <li>BP control (ACEi/ARB)</li>
+        <li><b>Tolvaptan:</b> Slows progression (TEMPO 3:4)</li>
+        <li>Screen for aneurysms if family Hx of rupture</li>
+    </ul>
+</div>
+
+<!-- SECTION 38: DIALYSIS -->
+<div class="section" id="dialysis">
+    <h2>38. Dialysis Indications & Modalities <span class="badge badge-boards">Must-Know</span></h2>
+    <h3>Urgent Indications</h3>
+    <div class="box mnemonic"><b>AEIOU:</b><br>
+        <b>A</b>cidosis (severe, refractory)<br>
+        <b>E</b>lectrolytes (refractory hyperK)<br>
+        <b>I</b>ngestions (toxic alcohols, lithium, aspirin)<br>
+        <b>O</b>verload (volume, refractory)<br>
+        <b>U</b>remia (encephalopathy, pericarditis, bleeding)
+    </div>
+    <h3>Modalities</h3>
+    <table>
+        <tr><th>Type</th><th>Access</th><th>Key Points</th></tr>
+        <tr><td><b>Hemodialysis</b></td><td>AV fistula (best), graft, catheter</td><td>3×/week, 4h sessions</td></tr>
+        <tr><td><b>Peritoneal</b></td><td>Tenckhoff catheter</td><td>Daily, at home, preserves residual function</td></tr>
+    </table>
+    <h3>Access Planning</h3>
+    <ul>
+        <li>Refer when GFR &lt;30</li>
+        <li>AV fistula: create 6 months early (maturation time)</li>
+    </ul>
+</div>
+
+<!-- SECTION 39: TRANSPLANT -->
+<div class="section" id="transplant">
+    <h2>39. Kidney Transplantation</h2>
+    <h3>Benefits</h3>
+    <ul>
+        <li>Superior survival vs dialysis</li>
+        <li>Better quality of life</li>
+        <li>Living donor &gt; deceased donor outcomes</li>
+    </ul>
+    <h3>Immunosuppression</h3>
+    <table>
+        <tr><th>Phase</th><th>Agents</th></tr>
+        <tr><td>Induction</td><td>Basiliximab, thymoglobulin</td></tr>
+        <tr><td>Maintenance</td><td>Tacrolimus + MMF + prednisone</td></tr>
+    </table>
+    <h3>Complications</h3>
+    <ul>
+        <li><b>Rejection:</b> Cellular (T-cell) or antibody-mediated</li>
+        <li><b>Infections:</b> CMV, BK virus (nephropathy)</li>
+        <li><b>Malignancy:</b> Skin cancer, PTLD</li>
+        <li><b>Drug toxicity:</b> CNI nephrotoxicity</li>
+    </ul>
+</div>
+
+<!-- SECTION 40: UA -->
+<div class="section" id="ua">
+    <h2>40. Urinalysis Interpretation</h2>
+    <h3>Urine Sediment</h3>
+    <table>
+        <tr><th>Finding</th><th>Suggests</th></tr>
+        <tr><td><b>Muddy brown casts</b></td><td>ATN</td></tr>
+        <tr><td><b>RBC casts</b></td><td>Glomerulonephritis</td></tr>
+        <tr><td><b>WBC casts</b></td><td>Pyelonephritis, AIN</td></tr>
+        <tr><td>Hyaline casts</td><td>Prerenal (concentrated urine)</td></tr>
+        <tr><td>Fatty casts, oval fat bodies</td><td>Nephrotic syndrome</td></tr>
+        <tr><td>Dysmorphic RBCs</td><td>Glomerular bleeding</td></tr>
+    </table>
+    <h3>Proteinuria Quantification</h3>
+    <table>
+        <tr><th>Method</th><th>Notes</th></tr>
+        <tr><td>Dipstick</td><td>Detects albumin only; misses light chains</td></tr>
+        <tr><td>UPCR (spot)</td><td>Correlates with 24h protein</td></tr>
+        <tr><td>UACR</td><td>Preferred for DM/HTN screening</td></tr>
+        <tr><td>24h collection</td><td>Gold standard but cumbersome</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 41: FORMULAS -->
+<div class="section" id="formulas">
+    <h2>41. Key Nephrology Formulas</h2>
+    <div class="box formula">
+        <b>CKD-EPI GFR:</b> Standard for GFR estimation<br><br>
+        <b>FENa = (UNa × PCr) / (PNa × UCr) × 100</b><br>
+        &lt;1% = prerenal | &gt;2% = intrinsic<br><br>
+        <b>FEUrea = (UUrea × PCr) / (PUrea × UCr) × 100</b><br>
+        &lt;35% = prerenal (use if on diuretics)<br><br>
+        <b>Anion Gap = Na - (Cl + HCO3)</b><br>
+        Normal 8-12; correct for albumin<br><br>
+        <b>Corrected Na = Measured Na + 1.6 × [(glucose-100)/100]</b><br><br>
+        <b>Free Water Deficit = TBW × [(Na/140) - 1]</b><br><br>
+        <b>Osmolar Gap = Measured Osm - Calculated Osm</b><br>
+        Calculated = 2(Na) + glucose/18 + BUN/2.8<br>
+        Gap &gt;10 = toxic alcohol
+    </div>
+</div>
+
+<!-- SECTION 42: DRUG DOSING -->
+<div class="section" id="drugs">
+    <h2>42. Drug Dosing in CKD</h2>
+    <h3>Drugs Requiring Adjustment</h3>
+    <table>
+        <tr><th>Drug</th><th>Concern</th></tr>
+        <tr><td>Metformin</td><td>Avoid if GFR &lt;30; hold before contrast</td></tr>
+        <tr><td>Gabapentin</td><td>Reduce dose, ↑ interval</td></tr>
+        <tr><td>Enoxaparin</td><td>Reduce dose if GFR &lt;30</td></tr>
+        <tr><td>DOACs</td><td>Varies by agent; check GFR cutoffs</td></tr>
+        <tr><td>Allopurinol</td><td>Start low, titrate slowly</td></tr>
+    </table>
+    <h3>Drugs to Avoid</h3>
+    <table>
+        <tr><th>Drug</th><th>Reason</th></tr>
+        <tr><td>NSAIDs</td><td>↓ GFR, hyperK, fluid retention</td></tr>
+        <tr><td>Gadolinium (GFR &lt;30)</td><td>NSF risk</td></tr>
+        <tr><td>Nitrofurantoin</td><td>Ineffective, neurotoxicity</td></tr>
+        <tr><td>Meperidine</td><td>Neurotoxic metabolite</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 43: TRIALS -->
+<div class="section" id="trials">
+    <h2>43. Landmark Nephrology Trials</h2>
+    <table>
+        <tr><th>Trial</th><th>Finding</th></tr>
+        <tr><td><b>SPRINT</b></td><td>SBP &lt;120 ↓ CV events in high-risk non-DM</td></tr>
+        <tr><td><b>CREDENCE</b></td><td>Canagliflozin ↓ renal outcomes in DKD</td></tr>
+        <tr><td><b>DAPA-CKD</b></td><td>Dapagliflozin benefits CKD ± diabetes</td></tr>
+        <tr><td><b>EMPA-KIDNEY</b></td><td>Empagliflozin ↓ progression in CKD</td></tr>
+        <tr><td><b>FIDELIO-DKD</b></td><td>Finerenone ↓ CKD progression in DKD</td></tr>
+        <tr><td><b>RAVE</b></td><td>Rituximab = cyclophosphamide for ANCA</td></tr>
+        <tr><td><b>PRESERVE</b></td><td>NAC/bicarb no better than saline for CIN</td></tr>
+        <tr><td><b>CORAL</b></td><td>No stent benefit over medical Rx for atherosclerotic RAS</td></tr>
+        <tr><td><b>TREAT/CHOIR</b></td><td>High Hgb targets with ESA → ↑ stroke</td></tr>
+        <tr><td><b>PATHWAY-2</b></td><td>Spironolactone best add-on for resistant HTN</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 44: BOARD QUESTIONS -->
+<div class="section" id="questions">
+    <h2>44. Board-Style Practice Questions</h2>
+    
+    <h4>Q1. AKI Classification</h4>
+    <p>65M with CHF presents with Cr 2.4 (baseline 1.0). BUN 56. UNa 8, FENa 0.4%. Bland sediment. Most likely?</p>
+    <p><b>Answer:</b> Prerenal AKI (low FENa, high BUN:Cr, bland sediment)</p>
+    
+    <h4>Q2. AIN</h4>
+    <p>45F started on omeprazole 3 weeks ago. Now Cr 2.8, fever, rash, eosinophilia. UA shows WBC casts. Next step?</p>
+    <p><b>Answer:</b> Stop PPI. If no improvement in 5-7 days, consider steroids.</p>
+    
+    <h4>Q3. Glomerulonephritis</h4>
+    <p>22M with gross hematuria during URI. Normal C3. UA shows RBC casts. Most likely diagnosis?</p>
+    <p><b>Answer:</b> IgA nephropathy (synpharyngitic hematuria, normal complement)</p>
+    
+    <h4>Q4. Nephrotic Syndrome</h4>
+    <p>60M with new nephrotic syndrome, anti-PLA2R positive. What screening is essential?</p>
+    <p><b>Answer:</b> Age-appropriate cancer screening (membranous + age &gt;50 = rule out malignancy)</p>
+    
+    <h4>Q5. RTA</h4>
+    <p>55F with diabetes on lisinopril. K 6.2, HCO3 18, pH 7.30. Urine pH 5.2. Which RTA?</p>
+    <p><b>Answer:</b> Type 4 RTA (hyperkalemia, acidosis, low urine pH, on ACEi)</p>
+    
+    <h4>Q6. Hyponatremia</h4>
+    <p>68F with SCLC. Na 118, Sosm 260, Uosm 450, UNa 45. Euvolemic. Treatment?</p>
+    <p><b>Answer:</b> SIADH from SCLC. Fluid restriction first-line. Correct ≤8-10 mEq/24h.</p>
+    
+    <h4>Q7. Hyperkalemia</h4>
+    <p>K 7.2 with peaked T waves on ECG. First treatment?</p>
+    <p><b>Answer:</b> IV calcium gluconate (stabilizes myocardium)</p>
+    
+    <h4>Q8. TMA</h4>
+    <p>35F with MAHA, plt 25K, Cr 3.2, confusion. ADAMTS13 pending. Management?</p>
+    <p><b>Answer:</b> Start plasma exchange immediately for presumed TTP. Don't wait for ADAMTS13.</p>
+    
+    <h4>Q9. Secondary HTN</h4>
+    <p>45M with resistant HTN, K 2.9, HCO3 32. Most likely cause?</p>
+    <p><b>Answer:</b> Primary aldosteronism (resistant HTN + hypokalemia + metabolic alkalosis)</p>
+    
+    <h4>Q10. Dialysis</h4>
+    <p>Patient with ESRD, pericardial friction rub, BUN 180. Indication for dialysis?</p>
+    <p><b>Answer:</b> Uremic pericarditis — emergent dialysis indication</p>
+    
+    <h4>Q11. Atheroembolic</h4>
+    <p>70M with AKI, livedo reticularis, eosinophilia 2 days after cardiac cath. Diagnosis?</p>
+    <p><b>Answer:</b> Atheroembolic disease (cholesterol emboli)</p>
+    
+    <h4>Q12. Anti-GBM</h4>
+    <p>28M smoker with hemoptysis and RPGN. IF shows linear IgG. Treatment?</p>
+    <p><b>Answer:</b> Plasmapheresis + cyclophosphamide + steroids for anti-GBM disease</p>
+    
+    <h4>Q13. SGLT2i</h4>
+    <p>Patient with T2DM and CKD (eGFR 35, UACR 450) on max ACEi. What to add for renoprotection?</p>
+    <p><b>Answer:</b> SGLT2 inhibitor (proven benefit in CREDENCE, DAPA-CKD)</p>
+    
+    <h4>Q14. Acid-Base</h4>
+    <p>pH 7.28, pCO2 24, HCO3 11, AG 22. What's the primary disorder and is compensation appropriate?</p>
+    <p><b>Answer:</b> AGMA. Expected pCO2 = 1.5(11)+8 = 24.5. Compensation appropriate.</p>
+    
+    <h4>Q15. Contrast</h4>
+    <p>Patient with CKD (GFR 40) needs CT with contrast. Prevention strategy?</p>
+    <p><b>Answer:</b> IV isotonic saline before and after. NAC and bicarb have no proven benefit (PRESERVE).</p>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align: center; padding: 30px; margin-top: 30px; border-top: 2px solid #0969da;">
+    <p style="color: #586069; margin: 0;">Nephrology Study Guide for ABIM Board Review</p>
+    <p style="margin: 10px 0 0; color: #0969da; font-size: 12px; font-weight: 600;">v1.0 BUILD #8 | January 2025 | 44 Topics</p>
+</div>
+
+</body>
+</html>
