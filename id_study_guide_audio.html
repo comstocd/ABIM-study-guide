@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>🎧 ID Study Guide — Audio Edition</title>
+    <style>
+        :root {
+            --primary: #0d4f4f;
+            --primary-light: #1a6b6b;
+            --accent: #e07b53;
+            --bg: #1a1a2e;
+            --card-bg: #16213e;
+            --text: #e8e8e8;
+            --text-muted: #a0a0a0;
+            --border: #2d3a4f;
+            --highlight: rgba(224, 123, 83, 0.3);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 20px;
+            padding-bottom: 200px;
+            font-size: 18px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 { font-size: 1.5rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        
+        /* Audio Control Bar */
+        .audio-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(26,26,46,0.95), rgba(22,33,62,0.98));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            padding-bottom: max(15px, env(safe-area-inset-bottom));
+            border-top: 1px solid var(--border);
+            z-index: 1000;
+        }
+        
+        .controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .control-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .control-btn:hover { background: var(--primary-light); transform: scale(1.05); }
+        .control-btn.play-btn { width: 65px; height: 65px; font-size: 1.6rem; background: var(--accent); }
+        .control-btn.play-btn:hover { background: #c96a47; }
+        
+        .control-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .speed-control, .pause-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .speed-control select, .pause-control select {
+            background: var(--card-bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .progress-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .current-topic {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-top: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .settings-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        /* Content Sections */
+        .section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: var(--primary);
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-header:hover { background: var(--primary-light); }
+        
+        .section-content {
+            padding: 20px;
+        }
+        
+        .topic {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .topic:last-child { border-bottom: none; margin-bottom: 0; }
+        
+        .topic-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .content-block {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .content-block.pearl {
+            border-left-color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+        }
+        
+        .content-block.high-yield {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .content-block.guideline {
+            border-left-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+        }
+        
+        .block-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        /* Highlight currently reading */
+        .reading {
+            background: var(--highlight) !important;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        /* Sentence spans for TTS */
+        .sentence {
+            transition: background 0.2s;
+        }
+        
+        .sentence.current {
+            background: var(--highlight);
+            border-radius: 3px;
+        }
+        
+        /* Voice selector */
+        .voice-selector {
+            margin: 15px 0;
+            padding: 15px;
+            background: var(--card-bg);
+            border-radius: 12px;
+        }
+        
+        .voice-selector label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .voice-selector select {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        /* Table of Contents */
+        .toc {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .toc h2 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .toc-item {
+            padding: 10px 15px;
+            margin: 5px 0;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .toc-item:hover { background: rgba(255,255,255,0.08); }
+        .toc-item.active { background: var(--primary); }
+        
+        .toc-duration {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding: 15px; }
+            .settings-row { gap: 10px; }
+            .control-btn { width: 44px; height: 44px; }
+            .control-btn.play-btn { width: 56px; height: 56px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🎧 Infectious Disease Study Guide</h1>
+    <p>Audio Edition • ABIM Board Review</p>
+    <p style="font-size:0.8rem; opacity:0.7; margin-top:8px;">v1.0 BUILD #8 — Audio Optimized</p>
+</div>
+
+<div class="voice-selector">
+    <label>🎙️ Select Voice:</label>
+    <select id="voiceSelect"></select>
+</div>
+
+<div class="toc">
+    <h2>📋 Chapters</h2>
+    <div class="toc-item" data-section="0">
+        <span>1. Antimicrobial Stewardship</span>
+        <span class="toc-duration">~4 min</span>
+    </div>
+    <div class="toc-item" data-section="1">
+        <span>2. PK/PD Principles</span>
+        <span class="toc-duration">~5 min</span>
+    </div>
+    <div class="toc-item" data-section="2">
+        <span>3. Antibiotic Classes</span>
+        <span class="toc-duration">~8 min</span>
+    </div>
+    <div class="toc-item" data-section="3">
+        <span>4. Community-Acquired Pneumonia</span>
+        <span class="toc-duration">~6 min</span>
+    </div>
+    <div class="toc-item" data-section="4">
+        <span>5. Hospital-Acquired Pneumonia</span>
+        <span class="toc-duration">~5 min</span>
+    </div>
+    <div class="toc-item" data-section="5">
+        <span>6. Meningitis</span>
+        <span class="toc-duration">~6 min</span>
+    </div>
+    <div class="toc-item" data-section="6">
+        <span>7. Infective Endocarditis</span>
+        <span class="toc-duration">~7 min</span>
+    </div>
+    <div class="toc-item" data-section="7">
+        <span>8. Sepsis & Septic Shock</span>
+        <span class="toc-duration">~6 min</span>
+    </div>
+    <div class="toc-item" data-section="8">
+        <span>9. Skin & Soft Tissue Infections</span>
+        <span class="toc-duration">~5 min</span>
+    </div>
+    <div class="toc-item" data-section="9">
+        <span>10. HIV/AIDS Essentials</span>
+        <span class="toc-duration">~7 min</span>
+    </div>
+</div>
+
+<!-- AUDIO CONTENT - Optimized for listening -->
+<div id="audioContent">
+
+<div class="section" data-section="0">
+    <div class="section-header" onclick="jumpToSection(0)">
+        <span>1. Antimicrobial Stewardship</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Introduction to Antimicrobial Stewardship</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">IDSA Guidelines</div>
+                <p class="speakable">Antimicrobial stewardship programs aim to optimize clinical outcomes while minimizing unintended consequences of antibiotic use.</p>
+                <p class="speakable">These consequences include antibiotic resistance, Clostridioides difficile infection, and adverse drug effects.</p>
+                <p class="speakable">The core elements of stewardship include: leadership commitment, accountability, pharmacy expertise, action through interventions, tracking outcomes, reporting, and education.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Key Interventions</div>
+                <p class="speakable">Prospective audit with feedback is the most effective stewardship intervention.</p>
+                <p class="speakable">This involves infectious disease specialists and pharmacists reviewing antibiotic orders and providing recommendations.</p>
+                <p class="speakable">Formulary restriction and preauthorization requires approval before using restricted agents.</p>
+                <p class="speakable">IV to oral conversion should occur when the patient is clinically stable, tolerating oral intake, and has a functioning GI tract.</p>
+                <p class="speakable">De-escalation means narrowing antibiotic spectrum based on culture and sensitivity data.</p>
+                <p class="speakable">Dose optimization uses pharmacokinetic and pharmacodynamic principles, such as extended infusions for beta-lactams.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl</div>
+                <p class="speakable">Procalcitonin-guided therapy can safely reduce antibiotic duration in respiratory infections and sepsis.</p>
+                <p class="speakable">A procalcitonin level less than 0.25 nanograms per milliliter suggests low likelihood of bacterial infection.</p>
+                <p class="speakable">A procalcitonin less than 0.5, or an 80 percent decrease from the peak value, supports discontinuing antibiotics.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="1">
+    <div class="section-header" onclick="jumpToSection(1)">
+        <span>2. PK/PD Principles</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Pharmacokinetics and Pharmacodynamics</div>
+            
+            <div class="content-block">
+                <div class="block-label">Time-Dependent Killing</div>
+                <p class="speakable">Time-dependent antibiotics require the drug concentration to remain above the minimum inhibitory concentration, or MIC, for as long as possible.</p>
+                <p class="speakable">This pattern applies to beta-lactams and carbapenems.</p>
+                <p class="speakable">The optimization strategy is extended or continuous infusion, and frequent dosing.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Concentration-Dependent Killing</div>
+                <p class="speakable">Concentration-dependent antibiotics work best when peak concentration is high relative to the MIC.</p>
+                <p class="speakable">This pattern applies to aminoglycosides, daptomycin, and metronidazole.</p>
+                <p class="speakable">The optimization strategy is high-dose, extended-interval dosing, such as once daily aminoglycosides.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">AUC-Dependent Killing</div>
+                <p class="speakable">AUC-dependent antibiotics require optimization of the total drug exposure over 24 hours relative to the MIC.</p>
+                <p class="speakable">This pattern applies to fluoroquinolones, vancomycin, and azithromycin.</p>
+                <p class="speakable">The optimization strategy is to optimize the total daily dose.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl</div>
+                <p class="speakable">Extended infusion piperacillin-tazobactam, given over 4 hours instead of 30 minutes, improves time above MIC.</p>
+                <p class="speakable">The BLING III trial published in Lancet 2022 showed this approach reduces mortality in critically ill patients with Pseudomonas infections.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Vancomycin Dosing — IDSA 2020</div>
+                <p class="speakable">The target for vancomycin is now AUC over MIC of 400 to 600. This replaces the older trough-based dosing approach.</p>
+                <p class="speakable">Loading dose is 25 to 30 milligrams per kilogram based on actual body weight for serious infections.</p>
+                <p class="speakable">Maintenance dosing is 15 to 20 milligrams per kilogram every 8 to 12 hours, adjusted based on AUC.</p>
+                <p class="speakable">AUC monitoring is preferred using a two-level Bayesian approach, which is most accurate.</p>
+                <p class="speakable">Nephrotoxicity risk increases with AUC greater than 600 or trough greater than 20.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="2">
+    <div class="section-header" onclick="jumpToSection(2)">
+        <span>3. Antibiotic Classes</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Beta-Lactam Antibiotics</div>
+            
+            <div class="content-block">
+                <div class="block-label">Penicillins</div>
+                <p class="speakable">Penicillin G and Penicillin V cover streptococci, including Strep pyogenes and Strep pneumoniae, as well as syphilis and most oral anaerobes.</p>
+                <p class="speakable">Ampicillin adds Enterococcus faecalis and Listeria monocytogenes coverage.</p>
+                <p class="speakable">Nafcillin and oxacillin are antistaphylococcal penicillins for MSSA.</p>
+                <p class="speakable">Piperacillin-tazobactam is an extended-spectrum penicillin covering gram positives, gram negatives including Pseudomonas, and anaerobes.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Cephalosporins by Generation</div>
+                <p class="speakable">First generation cephalosporins like cefazolin have excellent gram positive coverage and are first-line for MSSA infections and surgical prophylaxis.</p>
+                <p class="speakable">Second generation cephalosporins like cefuroxime add some gram negative coverage including Haemophilus and Moraxella.</p>
+                <p class="speakable">Third generation cephalosporins like ceftriaxone have broad gram negative coverage and good CNS penetration. They are first-line for community-acquired meningitis, gonorrhea, and many community-acquired infections.</p>
+                <p class="speakable">Fourth generation cephalosporins like cefepime cover Pseudomonas and are more stable against AmpC beta-lactamases.</p>
+                <p class="speakable">Fifth generation ceftaroline is unique in covering MRSA, making it the only beta-lactam effective against MRSA.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl</div>
+                <p class="speakable">Ceftriaxone is the workhorse of hospital medicine. Memorize its uses: community-acquired pneumonia, meningitis, gonorrhea, Lyme disease, and spontaneous bacterial peritonitis.</p>
+                <p class="speakable">Remember that ceftriaxone has poor Pseudomonas coverage. Use cefepime or piperacillin-tazobactam when Pseudomonas is a concern.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Carbapenems</div>
+                <p class="speakable">Carbapenems have the broadest spectrum of beta-lactams.</p>
+                <p class="speakable">Meropenem and imipenem cover gram positives, gram negatives, anaerobes, and ESBL-producing organisms.</p>
+                <p class="speakable">Ertapenem does not cover Pseudomonas or Acinetobacter but can be given once daily.</p>
+                <p class="speakable">Carbapenems are the treatment of choice for ESBL-producing Enterobacterales.</p>
+                <p class="speakable">Imipenem lowers the seizure threshold more than meropenem.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Other Important Antibiotics</div>
+            
+            <div class="content-block">
+                <div class="block-label">Fluoroquinolones</div>
+                <p class="speakable">Ciprofloxacin has excellent gram negative coverage including Pseudomonas. It is first-line for complicated UTI and anthrax.</p>
+                <p class="speakable">Levofloxacin is a respiratory fluoroquinolone covering strep pneumoniae. It's used for CAP and as a second-line agent for TB.</p>
+                <p class="speakable">Moxifloxacin has the best gram positive and anaerobic coverage among fluoroquinolones but does NOT cover Pseudomonas and has poor urinary penetration.</p>
+                <p class="speakable">Important toxicities include QT prolongation, tendinopathy, aortic aneurysm risk, and CNS effects. Avoid in myasthenia gravis.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">MRSA Agents</div>
+                <p class="speakable">Vancomycin is the standard for serious MRSA infections. Monitor AUC for dosing. Watch for nephrotoxicity and red man syndrome.</p>
+                <p class="speakable">Daptomycin is used for MRSA bacteremia and endocarditis. It is inactivated by pulmonary surfactant so never use for pneumonia. Monitor CPK weekly.</p>
+                <p class="speakable">Linezolid is the MRSA agent with best pulmonary penetration. Useful for MRSA pneumonia. Watch for serotonin syndrome, myelosuppression with prolonged use, and peripheral neuropathy.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="3">
+    <div class="section-header" onclick="jumpToSection(3)">
+        <span>4. Community-Acquired Pneumonia</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">CAP Overview and Risk Stratification</div>
+            
+            <div class="content-block">
+                <div class="block-label">Common Pathogens</div>
+                <p class="speakable">The most common cause of community-acquired pneumonia is Streptococcus pneumoniae.</p>
+                <p class="speakable">Atypical organisms include Mycoplasma pneumoniae, Chlamydia pneumoniae, and Legionella pneumophila.</p>
+                <p class="speakable">Haemophilus influenzae is common in patients with COPD.</p>
+                <p class="speakable">Respiratory viruses including influenza are increasingly recognized causes of CAP.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Severity Assessment — CURB-65</div>
+                <p class="speakable">CURB-65 is a validated scoring system for CAP severity.</p>
+                <p class="speakable">C is for Confusion or altered mental status.</p>
+                <p class="speakable">U is for Uremia, with BUN greater than 20.</p>
+                <p class="speakable">R is for Respiratory rate 30 or higher.</p>
+                <p class="speakable">B is for Blood pressure low, meaning systolic less than 90 or diastolic 60 or less.</p>
+                <p class="speakable">65 refers to age 65 or older.</p>
+                <p class="speakable">A score of 0 to 1 suggests outpatient treatment. A score of 2 warrants hospital admission. A score of 3 or higher indicates severe pneumonia, consider ICU.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl — MRSA and Pseudomonas Risk</div>
+                <p class="speakable">Only add MRSA or Pseudomonas coverage if the patient has specific risk factors.</p>
+                <p class="speakable">Risk factors include prior isolation of these organisms, recent hospitalization, and recent IV antibiotics.</p>
+                <p class="speakable">Do not routinely cover MRSA and Pseudomonas in CAP. This is a common board question.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">CAP Treatment</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Outpatient Treatment</div>
+                <p class="speakable">For healthy outpatients with no comorbidities or recent antibiotic use, give amoxicillin, OR doxycycline, OR a macrolide if local pneumococcal resistance is less than 25 percent.</p>
+                <p class="speakable">For outpatients with comorbidities such as chronic lung disease, diabetes, heart disease, or recent antibiotic use, give amoxicillin-clavulanate or a cephalosporin PLUS a macrolide or doxycycline. Alternatively, give a respiratory fluoroquinolone monotherapy.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Inpatient Non-ICU Treatment</div>
+                <p class="speakable">The preferred regimen is a beta-lactam such as ceftriaxone or ampicillin-sulbactam PLUS a macrolide like azithromycin.</p>
+                <p class="speakable">An alternative is a respiratory fluoroquinolone like levofloxacin or moxifloxacin as monotherapy.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">ICU Treatment</div>
+                <p class="speakable">For severe CAP requiring ICU admission, give a beta-lactam such as ceftriaxone or ampicillin-sulbactam PLUS either a macrolide OR a respiratory fluoroquinolone.</p>
+                <p class="speakable">Fluoroquinolone monotherapy is NOT adequate for ICU-level CAP.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl — Duration</div>
+                <p class="speakable">Standard CAP treatment duration is now 5 days, not 7 to 10 days.</p>
+                <p class="speakable">The patient should be afebrile for 48 hours and clinically stable before stopping antibiotics.</p>
+                <p class="speakable">This shorter duration is based on multiple randomized trials and is endorsed by IDSA and ATS guidelines.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="4">
+    <div class="section-header" onclick="jumpToSection(4)">
+        <span>5. Hospital-Acquired Pneumonia</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">HAP and VAP Overview</div>
+            
+            <div class="content-block">
+                <div class="block-label">Definitions</div>
+                <p class="speakable">Hospital-acquired pneumonia, or HAP, develops 48 hours or more after hospital admission in a non-intubated patient.</p>
+                <p class="speakable">Ventilator-associated pneumonia, or VAP, develops 48 hours or more after endotracheal intubation.</p>
+                <p class="speakable">Both require coverage of hospital-acquired pathogens including gram negatives and possibly MRSA.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Common Pathogens</div>
+                <p class="speakable">Gram negative organisms dominate: Pseudomonas aeruginosa, Klebsiella, Enterobacter, E. coli, Acinetobacter.</p>
+                <p class="speakable">MRSA is common, especially in patients with risk factors.</p>
+                <p class="speakable">Polymicrobial infection is frequent.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Empiric Treatment — IDSA 2016</div>
+                <p class="speakable">All patients need coverage for Staphylococcus aureus and gram negative bacilli including Pseudomonas.</p>
+                <p class="speakable">Choose an anti-pseudomonal beta-lactam: piperacillin-tazobactam, cefepime, ceftazidime, meropenem, or imipenem.</p>
+                <p class="speakable">Add MRSA coverage with vancomycin or linezolid if: MRSA risk factors are present, there is greater than 10 to 20 percent local MRSA prevalence, or prevalence is unknown.</p>
+                <p class="speakable">Add a second anti-pseudomonal agent from a different class if: there are risk factors for resistance, there is greater than 10 percent local pseudomonal resistance to the initial agent, or the patient is in septic shock.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl</div>
+                <p class="speakable">De-escalate antibiotics based on culture results. Duration is 7 days for HAP and VAP, not longer.</p>
+                <p class="speakable">The 2016 IDSA guidelines emphasize that shorter courses are equivalent to longer courses and reduce resistance.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="5">
+    <div class="section-header" onclick="jumpToSection(5)">
+        <span>6. Meningitis</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Bacterial Meningitis</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Critical Point</div>
+                <p class="speakable">Do not delay antibiotics for lumbar puncture in suspected bacterial meningitis.</p>
+                <p class="speakable">If LP will be delayed, draw blood cultures and start empiric antibiotics immediately.</p>
+                <p class="speakable">CSF findings will still be interpretable for several hours after starting antibiotics.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Common Pathogens by Age</div>
+                <p class="speakable">In adults, the most common organisms are Strep pneumoniae and Neisseria meningitidis.</p>
+                <p class="speakable">In adults over 50, the elderly, and immunocompromised patients, also consider Listeria monocytogenes.</p>
+                <p class="speakable">In neurosurgery patients, those with CSF shunts, or after head trauma, consider Staphylococcus aureus and gram negative bacilli.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Empiric Treatment</div>
+                <p class="speakable">Standard empiric therapy is vancomycin plus ceftriaxone plus dexamethasone.</p>
+                <p class="speakable">Add ampicillin for Listeria coverage if the patient is over 50, immunocompromised, or has other Listeria risk factors.</p>
+                <p class="speakable">Give dexamethasone 0.15 milligrams per kilogram IV before or with the first dose of antibiotics.</p>
+                <p class="speakable">Dexamethasone reduces mortality and neurological sequelae in pneumococcal meningitis.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl — CSF Findings</div>
+                <p class="speakable">Bacterial meningitis shows elevated opening pressure, elevated protein, low glucose, and neutrophilic pleocytosis usually over 1000 white cells.</p>
+                <p class="speakable">Viral meningitis shows normal or slightly elevated pressure, mildly elevated protein, normal glucose, and lymphocytic pleocytosis usually under 500 cells.</p>
+                <p class="speakable">TB and fungal meningitis show lymphocytic pleocytosis with very low glucose. This is a board favorite.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">HSV Encephalitis</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl</div>
+                <p class="speakable">HSV encephalitis classically involves the temporal lobes.</p>
+                <p class="speakable">Clinical clues include fever, altered mental status, seizures, and focal neurological findings.</p>
+                <p class="speakable">MRI shows temporal lobe hyperintensity on FLAIR and T2 sequences.</p>
+                <p class="speakable">Diagnose with CSF HSV PCR. Start empiric acyclovir immediately if suspected.</p>
+                <p class="speakable">Acyclovir dose is 10 milligrams per kilogram IV every 8 hours for 14 to 21 days.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="6">
+    <div class="section-header" onclick="jumpToSection(6)">
+        <span>7. Infective Endocarditis</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Diagnosis of Endocarditis</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Modified Duke Criteria</div>
+                <p class="speakable">Definite endocarditis requires 2 major criteria, OR 1 major plus 3 minor criteria, OR 5 minor criteria.</p>
+                <p class="speakable">Major criteria number one is positive blood cultures. This means typical organisms in 2 separate cultures, or persistently positive cultures.</p>
+                <p class="speakable">Major criteria number two is evidence of endocardial involvement: vegetation, abscess, or new dehiscence of a prosthetic valve on echocardiogram, OR new valvular regurgitation.</p>
+                <p class="speakable">Minor criteria include predisposing heart condition or IV drug use, fever, vascular phenomena such as septic emboli or Janeway lesions, immunologic phenomena such as glomerulonephritis or Osler nodes, and microbiologic evidence not meeting major criteria.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl — When to Get TEE</div>
+                <p class="speakable">Transthoracic echo, or TTE, is the initial test but has limited sensitivity, around 50 to 70 percent.</p>
+                <p class="speakable">Transesophageal echo, or TEE, has sensitivity over 90 percent.</p>
+                <p class="speakable">Get TEE when TTE is negative but suspicion remains high, for prosthetic valve endocarditis, and to evaluate for complications like abscess.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Endocarditis Treatment</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Empiric Therapy</div>
+                <p class="speakable">For native valve endocarditis, give vancomycin plus ceftriaxone empirically pending cultures.</p>
+                <p class="speakable">For prosthetic valve endocarditis, give vancomycin plus gentamicin plus rifampin.</p>
+                <p class="speakable">In IV drug users, cover MRSA with vancomycin. Right-sided S. aureus endocarditis may be treated for 2 weeks if no complications.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Surgical Indications — Board Favorite</div>
+                <p class="speakable">The surgical indications for endocarditis are commonly tested.</p>
+                <p class="speakable">Indications include: heart failure due to valve dysfunction, uncontrolled infection despite appropriate antibiotics, abscess or fistula formation, large vegetations greater than 10 millimeters with embolic events, and fungal endocarditis.</p>
+                <p class="speakable">Early surgery improves outcomes in these high-risk patients.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Organisms to Know</div>
+                <p class="speakable">Staph aureus is the most common cause of acute endocarditis and is associated with IV drug use. It has high mortality.</p>
+                <p class="speakable">Viridans streptococci cause subacute endocarditis, often after dental procedures.</p>
+                <p class="speakable">Enterococcus requires synergistic therapy with a cell wall agent plus an aminoglycoside.</p>
+                <p class="speakable">HACEK organisms are gram negative rods that cause culture-negative endocarditis. They are sensitive to ceftriaxone.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="7">
+    <div class="section-header" onclick="jumpToSection(7)">
+        <span>8. Sepsis & Septic Shock</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Definitions and Recognition</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Sepsis-3 Definitions</div>
+                <p class="speakable">Sepsis is defined as life-threatening organ dysfunction due to dysregulated host response to infection.</p>
+                <p class="speakable">Organ dysfunction is identified by an increase in SOFA score of 2 or more points.</p>
+                <p class="speakable">Septic shock is sepsis with persistent hypotension requiring vasopressors to maintain MAP 65 or higher, AND lactate greater than 2 millimoles per liter despite adequate fluid resuscitation.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">qSOFA Screening</div>
+                <p class="speakable">qSOFA is a bedside screening tool for sepsis outside the ICU.</p>
+                <p class="speakable">One point for respiratory rate 22 or higher.</p>
+                <p class="speakable">One point for altered mental status.</p>
+                <p class="speakable">One point for systolic blood pressure 100 or lower.</p>
+                <p class="speakable">A score of 2 or more suggests possible sepsis and warrants further evaluation.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Sepsis Management</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Hour-1 Bundle — Surviving Sepsis Campaign</div>
+                <p class="speakable">Within the first hour, you must measure lactate, obtain blood cultures before antibiotics, administer broad-spectrum antibiotics, begin rapid fluid resuscitation with 30 mL per kilogram crystalloid for hypotension or lactate 4 or higher, and start vasopressors if hypotensive during or after fluids.</p>
+                <p class="speakable">The key point is that antibiotics must be given within 1 hour of sepsis recognition. Each hour of delay increases mortality.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Antibiotic Selection</div>
+                <p class="speakable">Choose empiric antibiotics based on suspected source, local resistance patterns, and patient risk factors.</p>
+                <p class="speakable">Common regimens include piperacillin-tazobactam or meropenem for broad coverage, plus vancomycin if MRSA is suspected.</p>
+                <p class="speakable">De-escalate within 48 to 72 hours based on culture results.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Vasopressor Choice</div>
+                <p class="speakable">Norepinephrine is the first-line vasopressor for septic shock.</p>
+                <p class="speakable">Add vasopressin as a second agent if target MAP is not achieved.</p>
+                <p class="speakable">Dopamine is no longer preferred due to increased arrhythmia risk.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl — Steroids in Sepsis</div>
+                <p class="speakable">Give hydrocortisone 200 milligrams per day only if the patient remains hypotensive despite adequate fluid resuscitation AND vasopressors.</p>
+                <p class="speakable">Do not give steroids for sepsis without shock. Do not perform cosyntropin stimulation testing to decide on steroids.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="8">
+    <div class="section-header" onclick="jumpToSection(8)">
+        <span>9. Skin & Soft Tissue Infections</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Classification and Treatment</div>
+            
+            <div class="content-block">
+                <div class="block-label">Purulent vs Non-Purulent</div>
+                <p class="speakable">Purulent infections include abscesses, furuncles, and carbuncles. These are usually caused by Staph aureus including MRSA. Treatment is incision and drainage. Add antibiotics only for extensive disease or systemic symptoms.</p>
+                <p class="speakable">Non-purulent infections include cellulitis and erysipelas. These are usually caused by beta-hemolytic streptococci. Treat with beta-lactam antibiotics like cephalexin. Do not routinely cover MRSA for simple cellulitis.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Treatment by Type</div>
+                <p class="speakable">For simple cellulitis without purulence, give cephalexin or dicloxacillin for 5 days.</p>
+                <p class="speakable">For purulent cellulitis or abscess after I and D, give trimethoprim-sulfamethoxazole or doxycycline for MRSA coverage.</p>
+                <p class="speakable">For severe infection requiring IV therapy, give vancomycin or daptomycin plus piperacillin-tazobactam.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl — MRSA Nasal Swab</div>
+                <p class="speakable">MRSA nasal swab has a negative predictive value over 95 percent.</p>
+                <p class="speakable">A negative swab can help de-escalate empiric MRSA coverage in pneumonia and skin infections.</p>
+                <p class="speakable">This is increasingly used for antibiotic stewardship.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Necrotizing Fasciitis</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Red Flags — Emergency</div>
+                <p class="speakable">Necrotizing fasciitis is a surgical emergency. Recognize the warning signs.</p>
+                <p class="speakable">Pain out of proportion to exam findings is the classic clue.</p>
+                <p class="speakable">Other signs include rapidly spreading erythema, crepitus on palpation, bullae or skin necrosis, systemic toxicity with fever and hypotension, and failure to improve on antibiotics.</p>
+                <p class="speakable">Treatment requires immediate surgical debridement plus broad-spectrum antibiotics including vancomycin, piperacillin-tazobactam, and clindamycin.</p>
+                <p class="speakable">Clindamycin is added to inhibit toxin production.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="9">
+    <div class="section-header" onclick="jumpToSection(9)">
+        <span>10. HIV/AIDS Essentials</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Opportunistic Infection Prophylaxis</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">CD4 Thresholds</div>
+                <p class="speakable">When CD4 falls below 200, start PCP prophylaxis with trimethoprim-sulfamethoxazole one double-strength tablet daily. This also provides toxoplasma prophylaxis.</p>
+                <p class="speakable">When CD4 falls below 100, consider adding toxoplasma prophylaxis if not already on TMP-SMX, especially if toxoplasma IgG positive.</p>
+                <p class="speakable">When CD4 falls below 50, start MAC prophylaxis with azithromycin 1200 milligrams weekly.</p>
+                <p class="speakable">Prophylaxis can be stopped once CD4 rises above threshold for 3 months on antiretroviral therapy.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl — TMP-SMX</div>
+                <p class="speakable">TMP-SMX is the most important prophylactic agent in HIV. It prevents PCP, toxoplasmosis, and many bacterial infections.</p>
+                <p class="speakable">For patients with sulfa allergy, alternatives include dapsone, atovaquone, or aerosolized pentamidine.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Common Opportunistic Infections</div>
+            
+            <div class="content-block">
+                <div class="block-label">PCP Pneumonia</div>
+                <p class="speakable">Pneumocystis jirovecii pneumonia presents with subacute dyspnea, dry cough, and fever.</p>
+                <p class="speakable">Chest X-ray shows bilateral interstitial infiltrates. CT shows ground glass opacities.</p>
+                <p class="speakable">LDH is elevated. Beta-D-glucan is usually positive.</p>
+                <p class="speakable">Diagnose with induced sputum or BAL showing organisms on silver stain or DFA.</p>
+                <p class="speakable">Treat with TMP-SMX for 21 days. Add prednisone if PaO2 less than 70 or A-a gradient greater than 35.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Cryptococcal Meningitis</div>
+                <p class="speakable">Presents with headache, fever, and altered mental status, usually with CD4 under 100.</p>
+                <p class="speakable">CSF shows elevated opening pressure, lymphocytic pleocytosis, and positive cryptococcal antigen.</p>
+                <p class="speakable">India ink stain shows encapsulated yeast.</p>
+                <p class="speakable">Treat with amphotericin B plus flucytosine for 2 weeks induction, then fluconazole consolidation and maintenance.</p>
+                <p class="speakable">Serial lumbar punctures may be needed to manage elevated intracranial pressure.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl — IRIS</div>
+                <p class="speakable">Immune reconstitution inflammatory syndrome, or IRIS, occurs when the recovering immune system mounts an inflammatory response to a pre-existing infection.</p>
+                <p class="speakable">It typically occurs weeks to months after starting antiretroviral therapy.</p>
+                <p class="speakable">Continue ART. Treat the underlying infection. Use steroids for severe inflammation.</p>
+                <p class="speakable">Common triggers include MAC, TB, cryptococcus, CMV, and PML.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- Audio Control Bar -->
+<div class="audio-controls">
+    <div class="controls-row">
+        <button class="control-btn" onclick="skipBackward()" title="Back 30s">⏪</button>
+        <button class="control-btn play-btn" id="playPauseBtn" onclick="togglePlayPause()" title="Play/Pause">▶️</button>
+        <button class="control-btn" onclick="skipForward()" title="Forward 30s">⏩</button>
+        <button class="control-btn" onclick="stopReading()" title="Stop">⏹️</button>
+    </div>
+    
+    <div class="progress-section">
+        <span id="currentTime">0:00</span>
+        <div class="progress-bar" onclick="seekTo(event)">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span id="totalTime">0:00</span>
+    </div>
+    
+    <div class="current-topic" id="currentTopic">Ready to play</div>
+    
+    <div class="settings-row">
+        <div class="speed-control">
+            <label>Speed:</label>
+            <select id="speedSelect" onchange="updateSpeed()">
+                <option value="0.75">0.75×</option>
+                <option value="1" selected>1×</option>
+                <option value="1.25">1.25×</option>
+                <option value="1.5">1.5×</option>
+                <option value="1.75">1.75×</option>
+                <option value="2">2×</option>
+            </select>
+        </div>
+        <div class="pause-control">
+            <label>Pauses:</label>
+            <select id="pauseSelect" onchange="updatePauses()">
+                <option value="short">Short</option>
+                <option value="medium" selected>Medium</option>
+                <option value="long">Long</option>
+                <option value="extra">Extra Long</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<script>
+// Audio state
+let isPlaying = false;
+let currentSentenceIndex = 0;
+let sentences = [];
+let currentSection = 0;
+let speechRate = 1;
+let pauseSettings = {
+    sentence: 400,    // ms between sentences
+    paragraph: 800,   // ms between paragraphs (content blocks)
+    section: 1500     // ms between sections
+};
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    loadVoices();
+    buildSentenceList();
+    setupTOC();
+    
+    // Load saved position
+    const saved = localStorage.getItem('id_audio_position');
+    if (saved) {
+        currentSentenceIndex = parseInt(saved) || 0;
+    }
+});
+
+// Voice handling
+function loadVoices() {
+    const voiceSelect = document.getElementById('voiceSelect');
+    
+    function populateVoices() {
+        const voices = speechSynthesis.getVoices();
+        voiceSelect.innerHTML = '';
+        
+        // Prefer high-quality voices
+        const preferred = ['Samantha', 'Daniel', 'Karen', 'Moira', 'Tessa', 'Alex'];
+        const sortedVoices = voices.sort((a, b) => {
+            const aPreferred = preferred.some(p => a.name.includes(p));
+            const bPreferred = preferred.some(p => b.name.includes(p));
+            if (aPreferred && !bPreferred) return -1;
+            if (!aPreferred && bPreferred) return 1;
+            return a.name.localeCompare(b.name);
+        });
+        
+        sortedVoices.forEach((voice, i) => {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `${voice.name} (${voice.lang})`;
+            voiceSelect.appendChild(option);
+        });
+    }
+    
+    populateVoices();
+    speechSynthesis.onvoiceschanged = populateVoices;
+}
+
+// Build sentence list from content
+function buildSentenceList() {
+    sentences = [];
+    const speakables = document.querySelectorAll('.speakable');
+    
+    speakables.forEach((el, blockIndex) => {
+        const text = el.textContent.trim();
+        const section = el.closest('.section');
+        const sectionIndex = section ? parseInt(section.dataset.section) : 0;
+        const topic = el.closest('.topic');
+        const topicTitle = topic ? topic.querySelector('.topic-title')?.textContent : '';
+        const blockLabel = el.closest('.content-block')?.querySelector('.block-label')?.textContent || '';
+        
+        sentences.push({
+            text: text,
+            element: el,
+            section: sectionIndex,
+            topic: topicTitle,
+            label: blockLabel,
+            isNewBlock: blockIndex === 0 || el.closest('.content-block') !== speakables[blockIndex - 1]?.closest('.content-block'),
+            isNewSection: blockIndex === 0 || sectionIndex !== (speakables[blockIndex - 1]?.closest('.section')?.dataset.section || 0)
+        });
+    });
+    
+    updateProgress();
+}
+
+// Setup TOC click handlers
+function setupTOC() {
+    document.querySelectorAll('.toc-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const section = parseInt(item.dataset.section);
+            jumpToSection(section);
+        });
+    });
+}
+
+// Jump to section
+function jumpToSection(sectionIndex) {
+    const idx = sentences.findIndex(s => s.section === sectionIndex);
+    if (idx !== -1) {
+        currentSentenceIndex = idx;
+        if (isPlaying) {
+            speechSynthesis.cancel();
+            speakCurrentSentence();
+        }
+        updateProgress();
+        highlightCurrentSection();
+    }
+}
+
+// Play/Pause
+function togglePlayPause() {
+    if (isPlaying) {
+        pauseReading();
+    } else {
+        startReading();
+    }
+}
+
+function startReading() {
+    isPlaying = true;
+    document.getElementById('playPauseBtn').textContent = '⏸️';
+    speakCurrentSentence();
+}
+
+function pauseReading() {
+    isPlaying = false;
+    speechSynthesis.cancel();
+    document.getElementById('playPauseBtn').textContent = '▶️';
+    savePosition();
+}
+
+function stopReading() {
+    isPlaying = false;
+    speechSynthesis.cancel();
+    currentSentenceIndex = 0;
+    document.getElementById('playPauseBtn').textContent = '▶️';
+    updateProgress();
+    clearHighlights();
+    localStorage.removeItem('id_audio_position');
+}
+
+// Speak current sentence
+function speakCurrentSentence() {
+    if (!isPlaying || currentSentenceIndex >= sentences.length) {
+        if (currentSentenceIndex >= sentences.length) {
+            stopReading();
+        }
+        return;
+    }
+    
+    const sentence = sentences[currentSentenceIndex];
+    const utterance = new SpeechSynthesisUtterance(sentence.text);
+    
+    // Set voice
+    const voices = speechSynthesis.getVoices();
+    const voiceIndex = document.getElementById('voiceSelect').value;
+    if (voices[voiceIndex]) {
+        utterance.voice = voices[voiceIndex];
+    }
+    
+    utterance.rate = speechRate;
+    utterance.pitch = 1;
+    
+    // Highlight current
+    highlightSentence(sentence);
+    updateProgress();
+    
+    utterance.onend = () => {
+        currentSentenceIndex++;
+        savePosition();
+        
+        if (currentSentenceIndex < sentences.length) {
+            // Determine pause duration
+            let pauseDuration = pauseSettings.sentence;
+            
+            if (sentences[currentSentenceIndex].isNewSection) {
+                pauseDuration = pauseSettings.section;
+            } else if (sentences[currentSentenceIndex].isNewBlock) {
+                pauseDuration = pauseSettings.paragraph;
+            }
+            
+            setTimeout(() => {
+                if (isPlaying) {
+                    speakCurrentSentence();
+                }
+            }, pauseDuration);
+        } else {
+            stopReading();
+        }
+    };
+    
+    utterance.onerror = (e) => {
+        console.error('Speech error:', e);
+        if (isPlaying) {
+            currentSentenceIndex++;
+            speakCurrentSentence();
+        }
+    };
+    
+    speechSynthesis.speak(utterance);
+}
+
+// Highlighting
+function highlightSentence(sentence) {
+    clearHighlights();
+    sentence.element.classList.add('current');
+    sentence.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    document.getElementById('currentTopic').textContent = 
+        sentence.topic + (sentence.label ? ` — ${sentence.label}` : '');
+    
+    highlightCurrentSection();
+}
+
+function clearHighlights() {
+    document.querySelectorAll('.current').forEach(el => el.classList.remove('current'));
+}
+
+function highlightCurrentSection() {
+    document.querySelectorAll('.toc-item').forEach(item => {
+        item.classList.remove('active');
+        if (parseInt(item.dataset.section) === sentences[currentSentenceIndex]?.section) {
+            item.classList.add('active');
+        }
+    });
+}
+
+// Progress
+function updateProgress() {
+    const percent = sentences.length > 0 ? (currentSentenceIndex / sentences.length) * 100 : 0;
+    document.getElementById('progressFill').style.width = `${percent}%`;
+    
+    // Estimate time (roughly 3 seconds per sentence at 1x)
+    const avgTime = 3 / speechRate;
+    const currentTime = Math.floor(currentSentenceIndex * avgTime);
+    const totalTime = Math.floor(sentences.length * avgTime);
+    
+    document.getElementById('currentTime').textContent = formatTime(currentTime);
+    document.getElementById('totalTime').textContent = formatTime(totalTime);
+}
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+// Seek
+function seekTo(event) {
+    const bar = event.currentTarget;
+    const percent = event.offsetX / bar.offsetWidth;
+    const newIndex = Math.floor(percent * sentences.length);
+    currentSentenceIndex = Math.max(0, Math.min(newIndex, sentences.length - 1));
+    
+    if (isPlaying) {
+        speechSynthesis.cancel();
+        speakCurrentSentence();
+    }
+    updateProgress();
+}
+
+// Skip
+function skipForward() {
+    // Skip roughly 30 seconds (about 10 sentences)
+    const skip = Math.floor(10 * speechRate);
+    currentSentenceIndex = Math.min(currentSentenceIndex + skip, sentences.length - 1);
+    
+    if (isPlaying) {
+        speechSynthesis.cancel();
+        speakCurrentSentence();
+    }
+    updateProgress();
+}
+
+function skipBackward() {
+    const skip = Math.floor(10 * speechRate);
+    currentSentenceIndex = Math.max(currentSentenceIndex - skip, 0);
+    
+    if (isPlaying) {
+        speechSynthesis.cancel();
+        speakCurrentSentence();
+    }
+    updateProgress();
+}
+
+// Speed
+function updateSpeed() {
+    speechRate = parseFloat(document.getElementById('speedSelect').value);
+    updateProgress();
+}
+
+// Pause settings
+function updatePauses() {
+    const setting = document.getElementById('pauseSelect').value;
+    switch (setting) {
+        case 'short':
+            pauseSettings = { sentence: 200, paragraph: 400, section: 800 };
+            break;
+        case 'medium':
+            pauseSettings = { sentence: 400, paragraph: 800, section: 1500 };
+            break;
+        case 'long':
+            pauseSettings = { sentence: 600, paragraph: 1200, section: 2000 };
+            break;
+        case 'extra':
+            pauseSettings = { sentence: 800, paragraph: 1500, section: 2500 };
+            break;
+    }
+}
+
+// Save position
+function savePosition() {
+    localStorage.setItem('id_audio_position', currentSentenceIndex.toString());
+}
+
+// Handle page visibility (pause when switching apps)
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden && isPlaying) {
+        // Keep playing in background on iOS
+    }
+});
+
+// Prevent screen sleep while playing (iOS)
+let wakeLock = null;
+async function requestWakeLock() {
+    try {
+        if ('wakeLock' in navigator) {
+            wakeLock = await navigator.wakeLock.request('screen');
+        }
+    } catch (err) {
+        console.log('Wake lock not supported');
+    }
+}
+</script>
+
+</body>
+</html>
