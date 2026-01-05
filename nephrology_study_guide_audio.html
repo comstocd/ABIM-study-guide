@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>🎧 Nephrology Study Guide — Audio Edition</title>
+    <style>
+        :root {
+            --primary: #0969da;
+            --primary-light: #54aeff;
+            --accent: #e07b53;
+            --bg: #1a1a2e;
+            --card-bg: #16213e;
+            --text: #e8e8e8;
+            --text-muted: #a0a0a0;
+            --border: #2d3a4f;
+            --highlight: rgba(9, 105, 218, 0.3);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 20px;
+            padding-bottom: 200px;
+            font-size: 18px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 { font-size: 1.5rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        
+        /* Audio Control Bar */
+        .audio-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(26,26,46,0.95), rgba(22,33,62,0.98));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            padding-bottom: max(15px, env(safe-area-inset-bottom));
+            border-top: 1px solid var(--border);
+            z-index: 1000;
+        }
+        
+        .controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .control-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .control-btn:hover { background: var(--primary-light); transform: scale(1.05); }
+        .control-btn.play-btn { width: 65px; height: 65px; font-size: 1.6rem; background: var(--accent); }
+        .control-btn.play-btn:hover { background: #c96a47; }
+        
+        .control-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .speed-control, .pause-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .speed-control select, .pause-control select {
+            background: var(--card-bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .progress-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .current-topic {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-top: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .settings-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        /* Content Sections */
+        .section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: var(--primary);
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-header:hover { background: var(--primary-light); }
+        
+        .section-content {
+            padding: 20px;
+        }
+        
+        .topic {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .topic:last-child { border-bottom: none; margin-bottom: 0; }
+        
+        .topic-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .content-block {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .content-block.pearl {
+            border-left-color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+        }
+        
+        .content-block.high-yield {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .content-block.guideline {
+            border-left-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+        }
+        
+        .block-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        /* Highlight currently reading */
+        .reading {
+            background: var(--highlight) !important;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        /* Sentence spans for TTS */
+        .sentence {
+            transition: background 0.2s;
+        }
+        
+        .sentence.current {
+            background: var(--highlight);
+            border-radius: 3px;
+        }
+        
+        /* Voice selector */
+        .voice-selector {
+            margin: 15px 0;
+            padding: 15px;
+            background: var(--card-bg);
+            border-radius: 12px;
+        }
+        
+        .voice-selector label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .voice-selector select {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        /* Table of Contents */
+        .toc {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .toc h2 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .toc-item {
+            padding: 10px 15px;
+            margin: 5px 0;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .toc-item:hover { background: rgba(255,255,255,0.08); }
+        .toc-item.active { background: var(--primary); }
+        
+        .toc-duration {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding: 15px; }
+            .settings-row { gap: 10px; }
+            .control-btn { width: 44px; height: 44px; }
+            .control-btn.play-btn { width: 56px; height: 56px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🎧 Nephrology Study Guide</h1>
+    <p>Audio Edition • ABIM Board Review</p>
+    <p style="font-size:0.8rem; opacity:0.7; margin-top:8px;">v1.0 BUILD #8 — Audio Optimized</p>
+</div>
+
+<div class="voice-selector">
+    <label>🎙️ Select Voice:</label>
+    <select id="voiceSelect"></select>
+</div>
+
+<div class="toc">
+    <h2>📋 Chapters</h2>
+    <div class="toc-item" data-section="0">
+        <span>1. Acute Kidney Injury</span>
+        <span class="toc-duration">~6 min</span>
+    </div>
+    <div class="toc-item" data-section="1">
+        <span>2. ATN, AIN & Contrast Nephropathy</span>
+        <span class="toc-duration">~5 min</span>
+    </div>
+    <div class="toc-item" data-section="2">
+        <span>3. Glomerulonephritis Overview</span>
+        <span class="toc-duration">~5 min</span>
+    </div>
+    <div class="toc-item" data-section="3">
+        <span>4. Nephrotic Syndrome</span>
+        <span class="toc-duration">~6 min</span>
+    </div>
+    <div class="toc-item" data-section="4">
+        <span>5. Nephritic Syndrome & RPGN</span>
+        <span class="toc-duration">~5 min</span>
+    </div>
+    <div class="toc-item" data-section="5">
+        <span>6. CKD & Complications</span>
+        <span class="toc-duration">~6 min</span>
+    </div>
+    <div class="toc-item" data-section="6">
+        <span>7. Hyponatremia</span>
+        <span class="toc-duration">~7 min</span>
+    </div>
+    <div class="toc-item" data-section="7">
+        <span>8. Hyperkalemia & Hypokalemia</span>
+        <span class="toc-duration">~5 min</span>
+    </div>
+    <div class="toc-item" data-section="8">
+        <span>9. Acid-Base Disorders</span>
+        <span class="toc-duration">~7 min</span>
+    </div>
+    <div class="toc-item" data-section="9">
+        <span>10. Renal Tubular Acidosis</span>
+        <span class="toc-duration">~5 min</span>
+    </div>
+    <div class="toc-item" data-section="10">
+        <span>11. Dialysis & Transplant</span>
+        <span class="toc-duration">~5 min</span>
+    </div>
+</div>
+
+<!-- AUDIO CONTENT - Optimized for listening -->
+<div id="audioContent">
+
+<div class="section" data-section="0">
+    <div class="section-header" onclick="jumpToSection(0)">
+        <span>1. Acute Kidney Injury</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">AKI Definition and Staging</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">KDIGO Definition</div>
+                <p class="speakable">Acute kidney injury is defined by any of the following criteria.</p>
+                <p class="speakable">First, an increase in serum creatinine by 0.3 milligrams per deciliter or more within 48 hours.</p>
+                <p class="speakable">Second, an increase in serum creatinine to 1.5 times baseline or more within 7 days.</p>
+                <p class="speakable">Third, urine output less than 0.5 milliliters per kilogram per hour for 6 hours.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">KDIGO Staging</div>
+                <p class="speakable">Stage 1 AKI is creatinine 1.5 to 1.9 times baseline, or an increase of 0.3 or more, or urine output less than 0.5 mL per kg per hour for 6 to 12 hours.</p>
+                <p class="speakable">Stage 2 AKI is creatinine 2 to 2.9 times baseline, or urine output less than 0.5 mL per kg per hour for 12 hours or more.</p>
+                <p class="speakable">Stage 3 AKI is creatinine 3 times baseline or more, or creatinine 4 or higher, or initiation of dialysis, or urine output less than 0.3 mL per kg per hour for 24 hours, or anuria for 12 hours.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Prerenal vs Intrinsic vs Postrenal</div>
+            
+            <div class="content-block">
+                <div class="block-label">Prerenal AKI</div>
+                <p class="speakable">Prerenal AKI is caused by decreased renal perfusion with intact tubular function.</p>
+                <p class="speakable">Causes include volume depletion from bleeding, vomiting, or diarrhea, as well as decreased effective circulating volume in heart failure or cirrhosis.</p>
+                <p class="speakable">The hallmark lab findings are BUN to creatinine ratio greater than 20, and fractional excretion of sodium less than 1 percent.</p>
+                <p class="speakable">The urine sodium is typically less than 20, and urine osmolality is greater than 500.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Intrinsic AKI</div>
+                <p class="speakable">Intrinsic AKI involves direct damage to the kidney parenchyma.</p>
+                <p class="speakable">This includes acute tubular necrosis, acute interstitial nephritis, glomerulonephritis, and vascular causes.</p>
+                <p class="speakable">Lab findings show fractional excretion of sodium greater than 2 percent and urine sodium greater than 40.</p>
+                <p class="speakable">Urine osmolality is typically around 300, similar to serum.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Postrenal AKI</div>
+                <p class="speakable">Postrenal AKI is caused by obstruction of urine flow.</p>
+                <p class="speakable">Common causes include BPH, kidney stones, and pelvic malignancy.</p>
+                <p class="speakable">To cause AKI, obstruction must be bilateral or in a solitary kidney.</p>
+                <p class="speakable">Diagnosis is made by ultrasound showing hydronephrosis. Always check a post-void residual.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl</div>
+                <p class="speakable">Fractional excretion of sodium is unreliable in patients on diuretics. Use fractional excretion of urea instead. FE urea less than 35 percent suggests prerenal physiology.</p>
+                <p class="speakable">Also remember that FE sodium can be low in contrast nephropathy, myoglobinuria, and early obstruction.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="1">
+    <div class="section-header" onclick="jumpToSection(1)">
+        <span>2. ATN, AIN & Contrast Nephropathy</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Acute Tubular Necrosis</div>
+            
+            <div class="content-block">
+                <div class="block-label">Causes of ATN</div>
+                <p class="speakable">Ischemic ATN results from prolonged hypoperfusion, such as from shock or sepsis.</p>
+                <p class="speakable">Nephrotoxic ATN is caused by aminoglycosides, contrast, cisplatin, or amphotericin B.</p>
+                <p class="speakable">Pigment-induced ATN occurs with myoglobin from rhabdomyolysis or hemoglobin from hemolysis.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Phases of ATN</div>
+                <p class="speakable">The initiation phase lasts hours to days with ongoing injury.</p>
+                <p class="speakable">The maintenance phase shows persistent oliguria and elevated creatinine for 1 to 2 weeks.</p>
+                <p class="speakable">The recovery phase shows polyuria as tubular function returns, but concentrating ability is impaired.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl</div>
+                <p class="speakable">The urine sediment in ATN shows muddy brown granular casts and tubular epithelial cells.</p>
+                <p class="speakable">This finding is highly specific for ATN and helps distinguish it from prerenal azotemia.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Acute Interstitial Nephritis</div>
+            
+            <div class="content-block">
+                <div class="block-label">Common Causes</div>
+                <p class="speakable">Drug-induced AIN is most common. The classic offenders are penicillins, cephalosporins, sulfonamides, NSAIDs, and proton pump inhibitors.</p>
+                <p class="speakable">NSAIDs typically cause AIN with nephrotic-range proteinuria.</p>
+                <p class="speakable">PPI-induced AIN is increasingly recognized and can present months after starting therapy.</p>
+                <p class="speakable">Infectious and autoimmune causes include pyelonephritis, Sjogren syndrome, SLE, sarcoidosis, and IgG4-related disease.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl</div>
+                <p class="speakable">The classic triad of AIN is fever, rash, and eosinophilia. However, this triad is present in only about 10 percent of cases.</p>
+                <p class="speakable">Urine findings include white blood cell casts, sterile pyuria, and mild proteinuria usually less than 1 gram.</p>
+                <p class="speakable">Do not rely on urine eosinophils, as they have poor sensitivity of only about 30 percent.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Treatment</div>
+                <p class="speakable">The most important step is to stop the offending agent.</p>
+                <p class="speakable">If there is no improvement after 5 to 7 days, consider steroids.</p>
+                <p class="speakable">Biopsy is the gold standard for diagnosis and shows interstitial inflammation.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Contrast-Induced Nephropathy</div>
+            
+            <div class="content-block">
+                <div class="block-label">Risk Factors</div>
+                <p class="speakable">CKD is the most important risk factor for contrast nephropathy.</p>
+                <p class="speakable">Other risk factors include diabetes with CKD, volume depletion, high contrast volume, concurrent nephrotoxins, and heart failure.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Prevention — PRESERVE Trial</div>
+                <p class="speakable">IV isotonic saline has proven benefit for prevention.</p>
+                <p class="speakable">Use low-osmolar contrast and minimize contrast volume to less than 100 mL when possible.</p>
+                <p class="speakable">The PRESERVE trial showed that neither N-acetylcysteine nor sodium bicarbonate is superior to saline alone.</p>
+                <p class="speakable">So for prevention, give IV saline. NAC and bicarb do not help.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="2">
+    <div class="section-header" onclick="jumpToSection(2)">
+        <span>3. Glomerulonephritis Overview</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Nephrotic vs Nephritic Syndrome</div>
+            
+            <div class="content-block">
+                <div class="block-label">Nephrotic Syndrome Features</div>
+                <p class="speakable">Nephrotic syndrome is characterized by heavy proteinuria greater than 3.5 grams per day.</p>
+                <p class="speakable">Patients have severe edema, hypoalbuminemia with albumin less than 3, and hyperlipidemia.</p>
+                <p class="speakable">Hematuria is minimal. Blood pressure is variable.</p>
+                <p class="speakable">Think of nephrotic syndrome as a protein-losing state.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Nephritic Syndrome Features</div>
+                <p class="speakable">Nephritic syndrome presents with hematuria, often with dysmorphic red blood cells and RBC casts.</p>
+                <p class="speakable">Proteinuria is present but usually less than 3.5 grams per day.</p>
+                <p class="speakable">Patients have hypertension, edema that is usually mild, and oliguria with azotemia.</p>
+                <p class="speakable">Think of nephritic syndrome as inflammatory glomerular damage.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl</div>
+                <p class="speakable">RBC casts are pathognomonic for glomerulonephritis. If you see RBC casts, it means glomerular bleeding.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Complement Levels in GN</div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Low Complement GN</div>
+                <p class="speakable">Diseases with low complement include post-infectious GN, lupus nephritis, MPGN, cryoglobulinemia, and endocarditis-associated GN.</p>
+                <p class="speakable">A helpful tip: low C3 with low C4 suggests classic pathway activation, which occurs in lupus and cryoglobulinemia.</p>
+                <p class="speakable">Low C3 with normal C4 suggests alternative pathway activation, which occurs in post-infectious GN and MPGN.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Normal Complement GN</div>
+                <p class="speakable">Diseases with normal complement include IgA nephropathy, ANCA vasculitis, anti-GBM disease, FSGS, minimal change disease, and membranous nephropathy.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="3">
+    <div class="section-header" onclick="jumpToSection(3)">
+        <span>4. Nephrotic Syndrome</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Causes by Population</div>
+            
+            <div class="content-block">
+                <div class="block-label">Age and Demographics</div>
+                <p class="speakable">In children, the most common cause of nephrotic syndrome is minimal change disease.</p>
+                <p class="speakable">In Black adults, FSGS is most common, often associated with APOL1 gene variants.</p>
+                <p class="speakable">In White adults, membranous nephropathy is most common.</p>
+                <p class="speakable">In diabetics, diabetic nephropathy is the leading cause.</p>
+                <p class="speakable">In the elderly, consider membranous nephropathy and amyloidosis.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Membranous Nephropathy</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Favorite</div>
+                <p class="speakable">Membranous nephropathy is the most common cause of nephrotic syndrome in White adults.</p>
+                <p class="speakable">About 75 percent of cases are primary, associated with anti-PLA2R antibodies in 70 to 80 percent.</p>
+                <p class="speakable">Secondary causes include malignancy, hepatitis B, SLE, and drugs like NSAIDs.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Critical Point</div>
+                <p class="speakable">Screen for malignancy in all patients over 50 with membranous nephropathy. Think lung, colon, and prostate cancer.</p>
+                <p class="speakable">Membranous nephropathy has the highest risk of venous thromboembolism among all nephrotic causes.</p>
+                <p class="speakable">Consider prophylactic anticoagulation if albumin is less than 2.5.</p>
+            </div>
+            
+            <div class="content-block>
+                <div class="block-label">Treatment</div>
+                <p class="speakable">Supportive therapy includes ACE inhibitors or ARBs and consideration of anticoagulation.</p>
+                <p class="speakable">First-line immunosuppression is rituximab. Cyclophosphamide is an alternative.</p>
+                <p class="speakable">The rule of thirds applies: one-third remit spontaneously, one-third remain stable, one-third progress to ESRD.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">FSGS and Minimal Change Disease</div>
+            
+            <div class="content-block">
+                <div class="block-label">FSGS</div>
+                <p class="speakable">FSGS is the most common primary glomerulopathy in Black Americans.</p>
+                <p class="speakable">Primary FSGS is idiopathic. Secondary causes include HIV, particularly the collapsing variant, obesity, sickle cell disease, and heroin use.</p>
+                <p class="speakable">APOL1 genetic variants increase risk in African Americans.</p>
+                <p class="speakable">Treatment of primary FSGS is high-dose steroids for prolonged courses.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Minimal Change Disease</div>
+                <p class="speakable">Minimal change disease is the most common cause of nephrotic syndrome in children.</p>
+                <p class="speakable">In adults, it can be associated with NSAIDs, lithium, and Hodgkin lymphoma.</p>
+                <p class="speakable">The biopsy is normal on light microscopy. Electron microscopy shows podocyte foot process effacement.</p>
+                <p class="speakable">Treatment is steroids, with over 90 percent response rate. Relapses are common.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Nephrotic Syndrome Complications</div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl</div>
+                <p class="speakable">Thromboembolism risk is increased due to loss of antithrombin III in the urine. Watch for DVT, PE, and especially renal vein thrombosis.</p>
+                <p class="speakable">Renal vein thrombosis presents with sudden flank pain, hematuria, and worsening proteinuria. It is most common with membranous nephropathy.</p>
+                <p class="speakable">Infection risk is increased due to loss of immunoglobulins.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="4">
+    <div class="section-header" onclick="jumpToSection(4)">
+        <span>5. Nephritic Syndrome & RPGN</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">IgA Nephropathy</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Most Common Primary GN</div>
+                <p class="speakable">IgA nephropathy is the most common primary glomerulonephritis worldwide.</p>
+                <p class="speakable">It typically affects young males.</p>
+                <p class="speakable">The classic presentation is synpharyngitic hematuria, meaning gross hematuria during or within days of an upper respiratory infection.</p>
+                <p class="speakable">Complement levels are normal.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Board Pearl — IgA vs Post-Strep</div>
+                <p class="speakable">IgA nephropathy causes hematuria DURING the URI, and complement C3 is normal.</p>
+                <p class="speakable">Post-streptococcal GN causes hematuria 1 to 3 weeks AFTER the infection, and C3 is low.</p>
+                <p class="speakable">This timing distinction is a classic boards question.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Treatment</div>
+                <p class="speakable">First-line treatment is ACE inhibitors or ARBs.</p>
+                <p class="speakable">SGLT2 inhibitors are now recommended for renoprotection.</p>
+                <p class="speakable">Consider steroids if proteinuria exceeds 1 gram despite supportive care.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">RPGN Classification</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Three Types of RPGN</div>
+                <p class="speakable">Type 1 RPGN shows linear IgG staining on immunofluorescence. This is anti-GBM disease, also called Goodpasture syndrome when lungs are involved.</p>
+                <p class="speakable">Type 2 RPGN shows granular immune complex deposits. This includes lupus nephritis, post-infectious GN, IgA nephropathy, and MPGN.</p>
+                <p class="speakable">Type 3 RPGN is pauci-immune, meaning little or no immune deposits. This is ANCA-associated vasculitis, including GPA, MPA, and EGPA.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Anti-GBM Disease</div>
+                <p class="speakable">Anti-GBM disease presents with rapidly progressive GN and can involve the lungs causing pulmonary hemorrhage.</p>
+                <p class="speakable">When both kidneys and lungs are involved, it is called Goodpasture syndrome.</p>
+                <p class="speakable">Diagnose with anti-GBM antibodies and kidney biopsy showing crescents with linear IgG.</p>
+                <p class="speakable">Treatment is plasmapheresis plus cyclophosphamide plus steroids.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Lupus Nephritis</div>
+            
+            <div class="content-block">
+                <div class="block-label">Classification</div>
+                <p class="speakable">Lupus nephritis is classified using the ISN/RPS system with 6 classes.</p>
+                <p class="speakable">Class 1 is minimal mesangial. Class 2 is mesangial proliferative. These are mild and may not need immunosuppression.</p>
+                <p class="speakable">Class 3 is focal proliferative. Class 4 is diffuse proliferative. These are severe and require aggressive treatment.</p>
+                <p class="speakable">Class 5 is membranous. Class 6 is sclerosing with more than 90 percent scarring.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Treatment of Class 3 and 4</div>
+                <p class="speakable">Induction therapy is mycophenolate or cyclophosphamide plus steroids.</p>
+                <p class="speakable">Maintenance therapy is mycophenolate or azathioprine.</p>
+                <p class="speakable">All patients should receive hydroxychloroquine unless contraindicated.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="5">
+    <div class="section-header" onclick="jumpToSection(5)">
+        <span>6. CKD & Complications</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">CKD Staging</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">KDIGO GFR Staging</div>
+                <p class="speakable">Stage G1 is GFR 90 or above with evidence of kidney damage.</p>
+                <p class="speakable">Stage G2 is GFR 60 to 89, which is mildly decreased.</p>
+                <p class="speakable">Stage G3a is GFR 45 to 59. Stage G3b is GFR 30 to 44.</p>
+                <p class="speakable">Stage G4 is GFR 15 to 29, which is severely decreased.</p>
+                <p class="speakable">Stage G5 is GFR less than 15, which is kidney failure.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Albuminuria Staging</div>
+                <p class="speakable">A1 is urine albumin to creatinine ratio less than 30, which is normal.</p>
+                <p class="speakable">A2 is UACR 30 to 300, which is moderately increased, previously called microalbuminuria.</p>
+                <p class="speakable">A3 is UACR greater than 300, which is severely increased.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Renoprotective Therapy</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Key Medications</div>
+                <p class="speakable">ACE inhibitors or ARBs are first-line therapy if there is proteinuria.</p>
+                <p class="speakable">SGLT2 inhibitors are now recommended for CKD with GFR 20 or higher, with or without diabetes. This is based on DAPA-CKD and EMPA-KIDNEY trials.</p>
+                <p class="speakable">Finerenone, a nonsteroidal mineralocorticoid receptor antagonist, is indicated for diabetic kidney disease based on FIDELIO and FIGARO trials.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">CKD-Mineral Bone Disease</div>
+            
+            <div class="content-block">
+                <div class="block-label">Pathophysiology</div>
+                <p class="speakable">As GFR declines, phosphate excretion decreases and phosphorus levels rise.</p>
+                <p class="speakable">The kidney produces less 1,25-vitamin D, reducing calcium absorption from the gut.</p>
+                <p class="speakable">Low calcium and high phosphorus stimulate PTH release, causing secondary hyperparathyroidism.</p>
+                <p class="speakable">FGF-23 rises early in CKD as a compensatory mechanism.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Treatment</div>
+                <p class="speakable">Phosphate binders include sevelamer, lanthanum, and calcium-based binders. Give with meals.</p>
+                <p class="speakable">Calcitriol or other active vitamin D analogs replace deficient 1,25-vitamin D.</p>
+                <p class="speakable">Cinacalcet is a calcimimetic that lowers PTH in secondary hyperparathyroidism.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl</div>
+                <p class="speakable">Calciphylaxis is a feared complication with painful necrotic skin lesions from vascular calcification.</p>
+                <p class="speakable">It is more common in dialysis patients with high calcium-phosphorus product.</p>
+                <p class="speakable">Treatment includes wound care, lowering calcium and phosphorus, and sodium thiosulfate.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Anemia of CKD</div>
+            
+            <div class="content-block">
+                <div class="block-label">Pathophysiology and Treatment</div>
+                <p class="speakable">The primary cause is decreased erythropoietin production by the kidneys.</p>
+                <p class="speakable">Contributing factors include iron deficiency and elevated hepcidin.</p>
+                <p class="speakable">Treat iron deficiency first. Targets are ferritin above 200 and TSAT above 20 percent for hemodialysis patients.</p>
+                <p class="speakable">Erythropoiesis-stimulating agents like epoetin and darbepoetin are used to target hemoglobin 10 to 11.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl — TREAT and CHOIR</div>
+                <p class="speakable">The TREAT and CHOIR trials showed that targeting hemoglobin above 13 with ESAs increases stroke risk without cardiovascular benefit.</p>
+                <p class="speakable">Target hemoglobin 10 to 11, not higher.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="6">
+    <div class="section-header" onclick="jumpToSection(6)">
+        <span>7. Hyponatremia</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Diagnostic Approach</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Step 1 — Serum Osmolality</div>
+                <p class="speakable">First, check serum osmolality to classify the hyponatremia.</p>
+                <p class="speakable">Hypotonic hyponatremia has osmolality less than 280. This is true hyponatremia and requires further workup.</p>
+                <p class="speakable">Isotonic hyponatremia, or pseudohyponatremia, has osmolality 280 to 295. Causes include hyperlipidemia and hyperproteinemia.</p>
+                <p class="speakable">Hypertonic hyponatremia has osmolality above 295. This is seen with hyperglycemia and mannitol. Sodium is diluted by water drawn into the vascular space.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Step 2 — Volume Status</div>
+                <p class="speakable">For hypotonic hyponatremia, assess volume status.</p>
+                <p class="speakable">Hypovolemic hyponatremia with urine sodium less than 20 suggests extrarenal losses like GI losses or burns.</p>
+                <p class="speakable">Hypovolemic hyponatremia with urine sodium greater than 20 suggests renal losses from diuretics or salt-wasting nephropathy.</p>
+                <p class="speakable">Euvolemic hyponatremia with urine sodium greater than 20 suggests SIADH, hypothyroidism, or adrenal insufficiency.</p>
+                <p class="speakable">Hypervolemic hyponatremia with urine sodium less than 20 suggests heart failure or cirrhosis.</p>
+                <p class="speakable">Hypervolemic hyponatremia with urine sodium greater than 20 suggests CKD.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">SIADH</div>
+            
+            <div class="content-block">
+                <div class="block-label">Diagnostic Criteria</div>
+                <p class="speakable">SIADH requires serum osmolality less than 275 and urine osmolality greater than 100.</p>
+                <p class="speakable">Urine sodium is greater than 30 and the patient is euvolemic.</p>
+                <p class="speakable">Thyroid and adrenal function must be normal.</p>
+                <p class="speakable">Common causes include CNS disorders, pulmonary disease, malignancy, and drugs like SSRIs and carbamazepine.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Treatment of Hyponatremia</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Critical Point — Correction Rate</div>
+                <p class="speakable">Do not correct sodium faster than 8 to 10 milliequivalents per liter in 24 hours.</p>
+                <p class="speakable">Overcorrection risks osmotic demyelination syndrome, also called central pontine myelinolysis.</p>
+                <p class="speakable">Risk factors for ODS include chronic hyponatremia, alcoholism, malnutrition, and hypokalemia.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Treatment by Type</div>
+                <p class="speakable">For acute symptomatic hyponatremia with seizures or severe confusion, give 3 percent hypertonic saline. Aim to raise sodium 4 to 6 milliequivalents in the first few hours.</p>
+                <p class="speakable">For hypovolemic hyponatremia, give normal saline.</p>
+                <p class="speakable">For SIADH, use fluid restriction, salt tablets, or vaptans like tolvaptan.</p>
+                <p class="speakable">For hypervolemic hyponatremia, restrict fluid and sodium, and use diuretics.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="7">
+    <div class="section-header" onclick="jumpToSection(7)">
+        <span>8. Hyperkalemia & Hypokalemia</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Hyperkalemia</div>
+            
+            <div class="content-block">
+                <div class="block-label">Causes</div>
+                <p class="speakable">Transcellular shift causes include acidosis, insulin deficiency, beta-blockers, and cell lysis from rhabdomyolysis or tumor lysis.</p>
+                <p class="speakable">Decreased excretion causes include AKI, CKD, and hypoaldosteronism.</p>
+                <p class="speakable">Drug causes include ACE inhibitors, ARBs, spironolactone, and trimethoprim-sulfamethoxazole.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">ECG Changes — Know the Progression</div>
+                <p class="speakable">Early changes are peaked T waves, which are tall and narrow.</p>
+                <p class="speakable">As potassium rises, PR interval prolongs and P waves flatten.</p>
+                <p class="speakable">Then QRS widens.</p>
+                <p class="speakable">Finally, a sine wave pattern develops, leading to ventricular fibrillation or asystole.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Treatment</div>
+                <p class="speakable">First, stabilize the cardiac membrane with calcium gluconate. This does not lower potassium but protects the heart.</p>
+                <p class="speakable">Second, shift potassium into cells with insulin plus glucose, and with beta-agonists like albuterol.</p>
+                <p class="speakable">Third, remove potassium from the body with loop diuretics, potassium binders like patiromer or sodium polystyrene sulfonate, or dialysis for severe cases.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Hypokalemia</div>
+            
+            <div class="content-block">
+                <div class="block-label">Causes</div>
+                <p class="speakable">Transcellular shift causes include insulin, beta-agonists, and alkalosis.</p>
+                <p class="speakable">GI losses include vomiting and diarrhea.</p>
+                <p class="speakable">Renal losses include diuretics, hyperaldosteronism, and renal tubular acidosis types 1 and 2.</p>
+            </div>
+            
+            <div class="content-block>
+                <div class="block-label">ECG Changes</div>
+                <p class="speakable">Hypokalemia causes flattened T waves, prominent U waves, and ST depression.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl</div>
+                <p class="speakable">Always check magnesium in hypokalemia. Hypomagnesemia causes refractory hypokalemia that will not correct until magnesium is repleted.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="8">
+    <div class="section-header" onclick="jumpToSection(8)">
+        <span>9. Acid-Base Disorders</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Systematic Approach</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Step-by-Step Analysis</div>
+                <p class="speakable">Step 1: Look at the pH. If less than 7.35, it's acidemia. If greater than 7.45, it's alkalemia.</p>
+                <p class="speakable">Step 2: Determine the primary disorder. Look at PCO2 and bicarbonate. If the PCO2 explains the pH, it's respiratory. If bicarbonate explains the pH, it's metabolic.</p>
+                <p class="speakable">Step 3: Calculate compensation using Winter's formula for metabolic acidosis. Expected PCO2 equals 1.5 times bicarb plus 8, plus or minus 2.</p>
+                <p class="speakable">Step 4: Calculate the anion gap. Normal is 8 to 12. Anion gap equals sodium minus chloride minus bicarbonate.</p>
+                <p class="speakable">Step 5: If there's an anion gap, calculate the delta-delta ratio to look for additional disorders.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Anion Gap Metabolic Acidosis</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">MUDPILES Mnemonic</div>
+                <p class="speakable">The causes of anion gap metabolic acidosis can be remembered with MUDPILES.</p>
+                <p class="speakable">M is for methanol.</p>
+                <p class="speakable">U is for uremia.</p>
+                <p class="speakable">D is for diabetic ketoacidosis.</p>
+                <p class="speakable">P is for propylene glycol and paraldehyde.</p>
+                <p class="speakable">I is for isoniazid and iron.</p>
+                <p class="speakable">L is for lactic acidosis.</p>
+                <p class="speakable">E is for ethylene glycol.</p>
+                <p class="speakable">S is for salicylates.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Osmolar Gap</div>
+                <p class="speakable">If the anion gap is elevated, calculate the osmolar gap. An elevated osmolar gap greater than 10 suggests toxic alcohol ingestion.</p>
+                <p class="speakable">Methanol causes visual symptoms. Ethylene glycol causes calcium oxalate crystals in the urine and renal failure.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Non-Anion Gap Metabolic Acidosis</div>
+            
+            <div class="content-block">
+                <div class="block-label">Causes by Urine Anion Gap</div>
+                <p class="speakable">Calculate the urine anion gap, which equals urine sodium plus potassium minus chloride.</p>
+                <p class="speakable">A negative urine anion gap indicates appropriate renal response. This suggests GI bicarbonate loss from diarrhea.</p>
+                <p class="speakable">A positive urine anion gap indicates impaired renal acid excretion. This suggests renal tubular acidosis.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="9">
+    <div class="section-header" onclick="jumpToSection(9)">
+        <span>10. Renal Tubular Acidosis</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">RTA Types Comparison</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Type 1 — Distal RTA</div>
+                <p class="speakable">Type 1 RTA is distal RTA with impaired hydrogen ion secretion in the collecting duct.</p>
+                <p class="speakable">Urine pH is always greater than 5.5 despite systemic acidosis.</p>
+                <p class="speakable">Potassium is low due to increased distal sodium delivery.</p>
+                <p class="speakable">Complications include nephrocalcinosis and kidney stones.</p>
+                <p class="speakable">Causes include Sjogren syndrome, SLE, amphotericin B, and lithium.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Type 2 — Proximal RTA</div>
+                <p class="speakable">Type 2 RTA is proximal RTA with impaired bicarbonate reabsorption in the proximal tubule.</p>
+                <p class="speakable">Urine pH is variable. It is greater than 5.5 when serum bicarbonate is above the reabsorptive threshold, and less than 5.5 when below.</p>
+                <p class="speakable">Potassium is low.</p>
+                <p class="speakable">Often occurs with Fanconi syndrome, which includes glucosuria, phosphaturia, and aminoaciduria.</p>
+                <p class="speakable">Causes include multiple myeloma, carbonic anhydrase inhibitors like acetazolamide, and tenofovir.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Type 4 — Hyperkalemic RTA</div>
+                <p class="speakable">Type 4 RTA is due to aldosterone deficiency or resistance.</p>
+                <p class="speakable">The key distinguishing feature is hyperkalemia, not hypokalemia.</p>
+                <p class="speakable">Acidosis is usually mild.</p>
+                <p class="speakable">Causes include diabetic nephropathy, ACE inhibitors, ARBs, spironolactone, and NSAIDs.</p>
+                <p class="speakable">Treatment is fludrocortisone or potassium-lowering measures.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Board Pearl — Quick Summary</div>
+                <p class="speakable">Type 1 and Type 2 RTA both cause hypokalemia. Type 1 always has high urine pH. Type 2 has variable urine pH and Fanconi syndrome features.</p>
+                <p class="speakable">Type 4 RTA causes hyperkalemia. Think diabetic nephropathy or drugs blocking the RAAS system.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="10">
+    <div class="section-header" onclick="jumpToSection(10)">
+        <span>11. Dialysis & Transplant</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Indications for Dialysis</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">AEIOU Mnemonic</div>
+                <p class="speakable">Emergency indications for dialysis can be remembered with AEIOU.</p>
+                <p class="speakable">A is for acidosis that is refractory to medical management.</p>
+                <p class="speakable">E is for electrolyte abnormalities, specifically severe hyperkalemia refractory to treatment.</p>
+                <p class="speakable">I is for intoxication with dialyzable toxins like methanol, ethylene glycol, lithium, or salicylates.</p>
+                <p class="speakable">O is for volume overload refractory to diuretics.</p>
+                <p class="speakable">U is for uremic symptoms like encephalopathy, pericarditis, or bleeding.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Hemodialysis vs Peritoneal Dialysis</div>
+            
+            <div class="content-block">
+                <div class="block-label">Hemodialysis</div>
+                <p class="speakable">Hemodialysis uses an arteriovenous fistula, graft, or catheter for vascular access.</p>
+                <p class="speakable">AV fistula is preferred due to lowest infection and thrombosis rates. It needs 2 to 3 months to mature.</p>
+                <p class="speakable">Typical schedule is 3 times per week for 3 to 4 hours per session.</p>
+                <p class="speakable">Complications include hypotension, arrhythmias, and dialysis disequilibrium syndrome.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Peritoneal Dialysis</div>
+                <p class="speakable">Peritoneal dialysis uses the peritoneum as the dialysis membrane.</p>
+                <p class="speakable">It can be done at home and provides more continuous fluid and solute removal.</p>
+                <p class="speakable">The major complication is peritonitis, presenting with cloudy effluent and abdominal pain.</p>
+                <p class="speakable">Treat peritonitis empirically with intraperitoneal vancomycin plus a third-generation cephalosporin.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Kidney Transplant Basics</div>
+            
+            <div class="content-block">
+                <div class="block-label">Rejection Types</div>
+                <p class="speakable">Hyperacute rejection occurs within minutes to hours due to preformed antibodies. It is prevented by crossmatch testing.</p>
+                <p class="speakable">Acute cellular rejection occurs weeks to months post-transplant and is T-cell mediated. It responds to steroids.</p>
+                <p class="speakable">Acute antibody-mediated rejection is caused by donor-specific antibodies. Treatment is plasmapheresis and IVIG.</p>
+                <p class="speakable">Chronic rejection develops over months to years with gradual graft dysfunction. It is largely irreversible.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl</div>
+                <p class="speakable">BK virus nephropathy is an important cause of graft dysfunction in kidney transplant recipients.</p>
+                <p class="speakable">It presents with rising creatinine and BK viremia.</p>
+                <p class="speakable">Treatment is reducing immunosuppression. There is no specific antiviral therapy.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- Audio Control Bar -->
+<div class="audio-controls">
+    <div class="controls-row">
+        <button class="control-btn" onclick="skipBackward()" title="Back 30s">⏪</button>
+        <button class="control-btn play-btn" id="playPauseBtn" onclick="togglePlayPause()" title="Play/Pause">▶️</button>
+        <button class="control-btn" onclick="skipForward()" title="Forward 30s">⏩</button>
+        <button class="control-btn" onclick="stopReading()" title="Stop">⏹️</button>
+    </div>
+    
+    <div class="progress-section">
+        <span id="currentTime">0:00</span>
+        <div class="progress-bar" onclick="seekTo(event)">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span id="totalTime">0:00</span>
+    </div>
+    
+    <div class="current-topic" id="currentTopic">Ready to play</div>
+    
+    <div class="settings-row">
+        <div class="speed-control">
+            <label>Speed:</label>
+            <select id="speedSelect" onchange="updateSpeed()">
+                <option value="0.75">0.75×</option>
+                <option value="1" selected>1×</option>
+                <option value="1.25">1.25×</option>
+                <option value="1.5">1.5×</option>
+                <option value="1.75">1.75×</option>
+                <option value="2">2×</option>
+            </select>
+        </div>
+        <div class="pause-control">
+            <label>Pauses:</label>
+            <select id="pauseSelect" onchange="updatePauses()">
+                <option value="short">Short</option>
+                <option value="medium" selected>Medium</option>
+                <option value="long">Long</option>
+                <option value="extra">Extra Long</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<script>
+// Audio state
+let isPlaying = false;
+let currentSentenceIndex = 0;
+let sentences = [];
+let currentSection = 0;
+let speechRate = 1;
+let pauseSettings = {
+    sentence: 400,
+    paragraph: 800,
+    section: 1500
+};
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    loadVoices();
+    buildSentenceList();
+    setupTOC();
+    
+    const saved = localStorage.getItem('nephro_audio_position');
+    if (saved) {
+        currentSentenceIndex = parseInt(saved) || 0;
+    }
+});
+
+function loadVoices() {
+    const voiceSelect = document.getElementById('voiceSelect');
+    
+    function populateVoices() {
+        const voices = speechSynthesis.getVoices();
+        voiceSelect.innerHTML = '';
+        
+        const preferred = ['Samantha', 'Daniel', 'Karen', 'Moira', 'Tessa', 'Alex'];
+        const sortedVoices = voices.sort((a, b) => {
+            const aPreferred = preferred.some(p => a.name.includes(p));
+            const bPreferred = preferred.some(p => b.name.includes(p));
+            if (aPreferred && !bPreferred) return -1;
+            if (!aPreferred && bPreferred) return 1;
+            return a.name.localeCompare(b.name);
+        });
+        
+        sortedVoices.forEach((voice, i) => {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `${voice.name} (${voice.lang})`;
+            voiceSelect.appendChild(option);
+        });
+    }
+    
+    populateVoices();
+    speechSynthesis.onvoiceschanged = populateVoices;
+}
+
+function buildSentenceList() {
+    sentences = [];
+    const speakables = document.querySelectorAll('.speakable');
+    
+    speakables.forEach((el, blockIndex) => {
+        const text = el.textContent.trim();
+        const section = el.closest('.section');
+        const sectionIndex = section ? parseInt(section.dataset.section) : 0;
+        const topic = el.closest('.topic');
+        const topicTitle = topic ? topic.querySelector('.topic-title')?.textContent : '';
+        const blockLabel = el.closest('.content-block')?.querySelector('.block-label')?.textContent || '';
+        
+        sentences.push({
+            text: text,
+            element: el,
+            section: sectionIndex,
+            topic: topicTitle,
+            label: blockLabel,
+            isNewBlock: blockIndex === 0 || el.closest('.content-block') !== speakables[blockIndex - 1]?.closest('.content-block'),
+            isNewSection: blockIndex === 0 || sectionIndex !== (speakables[blockIndex - 1]?.closest('.section')?.dataset.section || 0)
+        });
+    });
+    
+    updateProgress();
+}
+
+function setupTOC() {
+    document.querySelectorAll('.toc-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const section = parseInt(item.dataset.section);
+            jumpToSection(section);
+        });
+    });
+}
+
+function jumpToSection(sectionIndex) {
+    const idx = sentences.findIndex(s => s.section === sectionIndex);
+    if (idx !== -1) {
+        currentSentenceIndex = idx;
+        if (isPlaying) {
+            speechSynthesis.cancel();
+            speakCurrentSentence();
+        }
+        updateProgress();
+        highlightCurrentSection();
+    }
+}
+
+function togglePlayPause() {
+    if (isPlaying) {
+        pauseReading();
+    } else {
+        startReading();
+    }
+}
+
+function startReading() {
+    isPlaying = true;
+    document.getElementById('playPauseBtn').textContent = '⏸️';
+    speakCurrentSentence();
+}
+
+function pauseReading() {
+    isPlaying = false;
+    speechSynthesis.cancel();
+    document.getElementById('playPauseBtn').textContent = '▶️';
+    savePosition();
+}
+
+function stopReading() {
+    isPlaying = false;
+    speechSynthesis.cancel();
+    currentSentenceIndex = 0;
+    document.getElementById('playPauseBtn').textContent = '▶️';
+    updateProgress();
+    clearHighlights();
+    localStorage.removeItem('nephro_audio_position');
+}
+
+function speakCurrentSentence() {
+    if (!isPlaying || currentSentenceIndex >= sentences.length) {
+        if (currentSentenceIndex >= sentences.length) {
+            stopReading();
+        }
+        return;
+    }
+    
+    const sentence = sentences[currentSentenceIndex];
+    const utterance = new SpeechSynthesisUtterance(sentence.text);
+    
+    const voices = speechSynthesis.getVoices();
+    const voiceIndex = document.getElementById('voiceSelect').value;
+    if (voices[voiceIndex]) {
+        utterance.voice = voices[voiceIndex];
+    }
+    
+    utterance.rate = speechRate;
+    utterance.pitch = 1;
+    
+    highlightSentence(sentence);
+    updateProgress();
+    
+    utterance.onend = () => {
+        currentSentenceIndex++;
+        savePosition();
+        
+        if (currentSentenceIndex < sentences.length) {
+            let pauseDuration = pauseSettings.sentence;
+            
+            if (sentences[currentSentenceIndex].isNewSection) {
+                pauseDuration = pauseSettings.section;
+            } else if (sentences[currentSentenceIndex].isNewBlock) {
+                pauseDuration = pauseSettings.paragraph;
+            }
+            
+            setTimeout(() => {
+                if (isPlaying) {
+                    speakCurrentSentence();
+                }
+            }, pauseDuration);
+        } else {
+            stopReading();
+        }
+    };
+    
+    utterance.onerror = (e) => {
+        console.error('Speech error:', e);
+        if (isPlaying) {
+            currentSentenceIndex++;
+            speakCurrentSentence();
+        }
+    };
+    
+    speechSynthesis.speak(utterance);
+}
+
+function highlightSentence(sentence) {
+    clearHighlights();
+    sentence.element.classList.add('current');
+    sentence.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    document.getElementById('currentTopic').textContent = 
+        sentence.topic + (sentence.label ? ` — ${sentence.label}` : '');
+    
+    highlightCurrentSection();
+}
+
+function clearHighlights() {
+    document.querySelectorAll('.current').forEach(el => el.classList.remove('current'));
+}
+
+function highlightCurrentSection() {
+    document.querySelectorAll('.toc-item').forEach(item => {
+        item.classList.remove('active');
+        if (parseInt(item.dataset.section) === sentences[currentSentenceIndex]?.section) {
+            item.classList.add('active');
+        }
+    });
+}
+
+function updateProgress() {
+    const percent = sentences.length > 0 ? (currentSentenceIndex / sentences.length) * 100 : 0;
+    document.getElementById('progressFill').style.width = `${percent}%`;
+    
+    const avgTime = 3 / speechRate;
+    const currentTime = Math.floor(currentSentenceIndex * avgTime);
+    const totalTime = Math.floor(sentences.length * avgTime);
+    
+    document.getElementById('currentTime').textContent = formatTime(currentTime);
+    document.getElementById('totalTime').textContent = formatTime(totalTime);
+}
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+function seekTo(event) {
+    const bar = event.currentTarget;
+    const percent = event.offsetX / bar.offsetWidth;
+    const newIndex = Math.floor(percent * sentences.length);
+    currentSentenceIndex = Math.max(0, Math.min(newIndex, sentences.length - 1));
+    
+    if (isPlaying) {
+        speechSynthesis.cancel();
+        speakCurrentSentence();
+    }
+    updateProgress();
+}
+
+function skipForward() {
+    const skip = Math.floor(10 * speechRate);
+    currentSentenceIndex = Math.min(currentSentenceIndex + skip, sentences.length - 1);
+    
+    if (isPlaying) {
+        speechSynthesis.cancel();
+        speakCurrentSentence();
+    }
+    updateProgress();
+}
+
+function skipBackward() {
+    const skip = Math.floor(10 * speechRate);
+    currentSentenceIndex = Math.max(currentSentenceIndex - skip, 0);
+    
+    if (isPlaying) {
+        speechSynthesis.cancel();
+        speakCurrentSentence();
+    }
+    updateProgress();
+}
+
+function updateSpeed() {
+    speechRate = parseFloat(document.getElementById('speedSelect').value);
+    updateProgress();
+}
+
+function updatePauses() {
+    const setting = document.getElementById('pauseSelect').value;
+    switch (setting) {
+        case 'short':
+            pauseSettings = { sentence: 200, paragraph: 400, section: 800 };
+            break;
+        case 'medium':
+            pauseSettings = { sentence: 400, paragraph: 800, section: 1500 };
+            break;
+        case 'long':
+            pauseSettings = { sentence: 600, paragraph: 1200, section: 2000 };
+            break;
+        case 'extra':
+            pauseSettings = { sentence: 800, paragraph: 1500, section: 2500 };
+            break;
+    }
+}
+
+function savePosition() {
+    localStorage.setItem('nephro_audio_position', currentSentenceIndex.toString());
+}
+</script>
+
+</body>
+</html>
