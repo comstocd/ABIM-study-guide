@@ -950,27 +950,45 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Voice handling
+// Store filtered English voices globally
+let englishVoices = [];
+
 function loadVoices() {
     const voiceSelect = document.getElementById('voiceSelect');
     
     function populateVoices() {
-        const voices = speechSynthesis.getVoices();
-        voiceSelect.innerHTML = '';
+        const allVoices = speechSynthesis.getVoices();
         
-        // Prefer high-quality voices
-        const preferred = ['Samantha', 'Daniel', 'Karen', 'Moira', 'Tessa', 'Alex'];
-        const sortedVoices = voices.sort((a, b) => {
+        // Filter for English voices only
+        englishVoices = allVoices.filter(v => 
+            v.lang.startsWith('en-') || v.lang === 'en'
+        );
+        
+        // If no English voices found, try again shortly (iOS timing issue)
+        if (englishVoices.length === 0) {
+            setTimeout(populateVoices, 100);
+            return;
+        }
+        
+        // Sort with preferred voices first
+        const preferred = ['Samantha', 'Daniel', 'Karen', 'Moira', 'Tessa', 'Alex', 'Nicky', 'Aaron'];
+        englishVoices.sort((a, b) => {
             const aPreferred = preferred.some(p => a.name.includes(p));
             const bPreferred = preferred.some(p => b.name.includes(p));
             if (aPreferred && !bPreferred) return -1;
             if (!aPreferred && bPreferred) return 1;
+            // Prefer local/enhanced voices
+            if (a.localService && !b.localService) return -1;
+            if (!a.localService && b.localService) return 1;
             return a.name.localeCompare(b.name);
         });
         
-        sortedVoices.forEach((voice, i) => {
+        voiceSelect.innerHTML = '';
+        englishVoices.forEach((voice, i) => {
             const option = document.createElement('option');
             option.value = i;
-            option.textContent = `${voice.name} (${voice.lang})`;
+            const quality = voice.localService ? '⭐' : '';
+            option.textContent = `${quality} ${voice.name} (${voice.lang})`;
             voiceSelect.appendChild(option);
         });
     }
@@ -1074,13 +1092,14 @@ function speakCurrentSentence() {
     const sentence = sentences[currentSentenceIndex];
     const utterance = new SpeechSynthesisUtterance(sentence.text);
     
-    // Set voice
-    const voices = speechSynthesis.getVoices();
-    const voiceIndex = document.getElementById('voiceSelect').value;
-    if (voices[voiceIndex]) {
-        utterance.voice = voices[voiceIndex];
+    // Use filtered English voices array
+    const voiceIndex = parseInt(document.getElementById('voiceSelect').value) || 0;
+    if (englishVoices.length > 0 && englishVoices[voiceIndex]) {
+        utterance.voice = englishVoices[voiceIndex];
     }
     
+    // Force English as fallback (critical for iOS)
+    utterance.lang = 'en-US';
     utterance.rate = speechRate;
     utterance.pitch = 1;
     
