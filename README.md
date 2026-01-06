@@ -1,275 +1,209 @@
-# 📚 ABIM Study Guides
+# 📚 Clinical Reference Suite (CRS)
 
-**Comprehensive Internal Medicine Board Review Resources**
-
-A collection of high-yield, evidence-based study guides optimized for ABIM board preparation. Designed for iPad/tablet use with touch-friendly navigation, searchable content, and offline capability.
-
----
-
-## 📊 Overview
-
-| Metric | Count |
-|--------|-------|
-| Specialty Guides | 17 |
-| Total Sections | 446+ |
-| Board Pearls | 177 |
-| High Value Care Items | 125 |
-| Total Size | ~1.6 MB |
-
-**Last Updated:** January 2026
+**Version:** 1.0 BUILD #8  
+**Last Updated:** January 2026  
+**Optimized for:** iPad (iOS Safari) • Hospital Use • Board Review
 
 ---
 
-## 🗂️ Contents
+## 🎯 Overview
 
-### Quick Review Tools
+A comprehensive, iPad-optimized collection of clinical reference tools and study materials for Internal Medicine residents and hospitalists. Designed for rapid bedside access with dark mode optimization, touch-friendly navigation, and offline capability.
 
-| Guide | Description | Size |
-|-------|-------------|------|
-| [💎 Board Pearls](board_pearls.html) | 177 high-yield clinical pearls from all specialties, organized by topic | 52 KB |
-| [💰 High Value Care](high_value_care.html) | 125 evidence-based recommendations on cost-effective care (Choosing Wisely, USPSTF) | 86 KB |
+**Total Files:** 39 HTML files  
+**Categories:** Clinical References • Study Guides • Audio Editions
 
-### Specialty Study Guides
+---
 
-| Guide | Sections | Key Topics | Size |
-|-------|----------|------------|------|
-| [🦠 Infectious Disease](id_study_guide.html) | 18 | HIV/AIDS, antimicrobials, pneumonia, endocarditis, TB, fungi, parasites | 189 KB |
-| [🫀 Cardiology](cardio_study_guide.html) | 17 | ACS, heart failure, arrhythmias, valvular disease, HTN, pericardial disease | 148 KB |
-| [🟠 GI / Hepatology](gi_study_guide.html) | 14 | GERD, PUD, IBD, cirrhosis, hepatitis, pancreatitis, GI bleeding | 155 KB |
-| [🦴 Rheumatology](rheumatology_study_guide.html) | 55 | RA, SLE, vasculitis, spondyloarthritis, crystal arthropathies, myopathies | 179 KB |
-| [🔬 Endocrinology](endocrinology_study_guide.html) | 50 | Diabetes, thyroid, adrenal, pituitary, calcium/bone, lipids, MEN | 149 KB |
-| [💧 Nephrology](nephrology_study_guide1.html) | 44 | AKI, CKD, glomerular disease, electrolytes, acid-base, dialysis | 55 KB |
-| [🫁 Pulmonology](pulmonology_study_guide.html) | 45 | Asthma, COPD, ILD, PE, pulmonary HTN, ARDS, sleep apnea, lung cancer | 91 KB |
-| [🩸 Hematology/Oncology](heme_onc_study_guide.html) | 45 | Anemia, bleeding disorders, thrombosis, leukemia, lymphoma, myeloma | 86 KB |
-| [🧠 Neurology](neurology_study_guide.html) | 45 | Stroke, seizures, headache, MS, movement disorders, neuropathy, dementia | 85 KB |
-| [🏥 General IM](general_im_study_guide.html) | 21 | Preventive care, screening, ethics, capacity, quality & safety | 72 KB |
-| [🧠 Psychiatry](psychiatry_study_guide.html) | 18 | Depression, anxiety, bipolar, psychosis, substance use, capacity | 68 KB |
-| [👴 Geriatrics](geriatrics_study_guide.html) | 16 | Falls, delirium, dementia, polypharmacy, Beers criteria, frailty | 58 KB |
-| [🌸 Allergy/Immunology](allergy_immunology_study_guide.html) | 18 | Anaphylaxis, drug allergy, urticaria, angioedema, immunodeficiency | 62 KB |
-| [👩‍⚕️ Women's Health](womens_health_study_guide.html) | 7 | Contraception, pregnancy complications, menopause/HRT, PCOS, screening | 63 KB |
-| [🏥 Perioperative Medicine](perioperative_study_guide.html) | 7 | Cardiac risk (RCRI), pulmonary risk, medications, anticoagulation, VTE | 55 KB |
-| [🩹 Dermatology](dermatology_study_guide.html) | 6 | Drug eruptions (SJS/TEN/DRESS), skin cancer, infections, skin signs | 54 KB |
-| [🕊️ Palliative Care](palliative_care_study_guide.html) | 6 | Goals of care, pain management, opioids, symptom control, hospice, ethics | 53 KB |
+## 📱 Quick Start
+
+1. **Main Entry Point:** `index.html` — Clinical Reference Suite dashboard
+2. **Study Guides Hub:** `study_guides_index.html` — All specialty study guides + audio editions
+3. **Deploy to GitHub Pages** for instant mobile access
+
+---
+
+## 📂 File Inventory
+
+### 🏥 Clinical Reference Tools (11 files)
+
+| File | Description |
+|------|-------------|
+| `index.html` | Main CRS dashboard with sidebar navigation |
+| `im_guide.html` | Internal Medicine Clinical Reference (118 conditions) |
+| `id_guide.html` | Infectious Disease Quick Reference |
+| `drug_reference_guide.html` | Drug Reference Guide (500+ medications) |
+| `lab_values.html` | Laboratory Values Clinical Reference |
+| `dx_framework.html` | Diagnostic Framework & Decision Support |
+| `renal_dosing_reference.html` | Renal Dosing Adjustments |
+| `antimicrobial_stewardship_guide.html` | Antimicrobial Stewardship Principles |
+| `drug_interactions.html` | Drug Interactions Reference |
+| `procedures_guide.html` | Common Procedures Guide |
+| `high_value_care.html` | High-Value Care Recommendations |
+
+### 📖 Study Guides (17 specialties)
+
+All study guides follow consistent formatting with:
+- Expandable sections
+- High-yield boxes
+- Clinical pearls
+- Board-style vignettes
+- Evidence-based guidelines
+
+| File | Specialty | ABIM Weight |
+|------|-----------|-------------|
+| `cardio_study_guide.html` | Cardiology | 14% |
+| `pulmonology_study_guide.html` | Pulmonology | 10% |
+| `gi_study_guide.html` | Gastroenterology | 9% |
+| `endocrinology_study_guide.html` | Endocrinology | 8% |
+| `heme_onc_study_guide.html` | Hematology/Oncology | 8% |
+| `rheumatology_study_guide.html` | Rheumatology | 8% |
+| `id_study_guide.html` | Infectious Disease | 8% |
+| `nephrology_study_guide.html` | Nephrology | 7% |
+| `neurology_study_guide.html` | Neurology | 6% |
+| `general_im_study_guide.html` | General Internal Medicine | 6% |
+| `geriatrics_study_guide.html` | Geriatrics | 4% |
+| `psychiatry_study_guide.html` | Psychiatry | 4% |
+| `allergy_immunology_study_guide.html` | Allergy & Immunology | 3% |
+| `dermatology_study_guide.html` | Dermatology | 3% |
+| `womens_health_study_guide.html` | Women's Health | 3% |
+| `palliative_care_study_guide.html` | Palliative Care | 2% |
+| `perioperative_study_guide.html` | Perioperative Medicine | — |
+| `board_pearls.html` | High-Yield Board Pearls | — |
+
+### 🎧 Audio Study Guides (9 specialties)
+
+Text-to-speech optimized for commute listening. Features:
+- Web Speech API integration
+- English-only voice selection (iOS Safari compatible)
+- Adjustable speed (0.75× to 2×)
+- Configurable pause lengths
+- Chapter navigation
+- Position memory (resume playback)
+- Real-time text highlighting
+
+| File | Specialty | Est. Duration |
+|------|-----------|---------------|
+| `cardio_study_guide_audio.html` | Cardiology | ~72 min |
+| `pulmonology_study_guide_audio.html` | Pulmonology | ~51 min |
+| `gi_study_guide_audio.html` | Gastroenterology | ~37 min |
+| `endocrinology_study_guide_audio.html` | Endocrinology | ~33 min |
+| `heme_onc_study_guide_audio.html` | Hematology/Oncology | ~37 min |
+| `rheumatology_study_guide_audio.html` | Rheumatology | ~35 min |
+| `neurology_study_guide_audio.html` | Neurology | ~35 min |
+| `nephrology_study_guide_audio.html` | Nephrology | ~62 min |
+| `id_study_guide_audio.html` | Infectious Disease | ~59 min |
+
+**Total Audio Content:** ~7 hours
 
 ---
 
 ## ✨ Features
 
+### 🌙 Dark Mode Optimized
+- OLED-friendly dark backgrounds
+- Reduced eye strain for night shifts
+- High contrast text and accents
+
 ### 📱 iPad Optimized
-- Touch-friendly navigation with large tap targets
-- Responsive design adapts to any screen size
-- Safe area support for notched devices
-- Smooth scrolling and collapsible sections
+- Touch-friendly tap targets (44px minimum)
+- CSS Grid layouts tested on iOS Safari
+- Safe area padding for notch/home bar
+- Offline-capable (no external dependencies)
 
-### 🔍 Searchable
-- Real-time search across all content
-- Filter by specialty, topic, or keyword
-- Instant results without page reload
+### 🔍 Search & Navigation
+- Real-time filtering across all entries
+- Collapsible sections for quick scanning
+- Back-to-top buttons
+- Cross-linked references between tools
 
-### 🎨 Visual Learning
-- Color-coded sections by category
-- Clinical decision boxes (green), warnings (red), pearls (gold)
-- Tables for quick comparison
-- Diagnostic algorithms and criteria
-
-### 📖 Evidence-Based
-- Current guidelines from major societies:
-  - AHA/ACC (Cardiology)
-  - IDSA (Infectious Disease)
-  - ATS/GOLD (Pulmonology)
-  - ACR (Rheumatology)
-  - KDIGO (Nephrology)
-  - ASH/ASCO (Hematology/Oncology)
-  - AAN (Neurology)
-  - Endocrine Society
-  - ACG/AGA (Gastroenterology)
-  - USPSTF/ACP (Screening/Prevention)
-
-### 💾 Offline Capable
-- All content is self-contained HTML
-- No internet connection required after download
-- Works in airplane mode
+### 🎯 Board Review Features
+- ABIM weight indicators per specialty
+- High-yield content boxes
+- Clinical vignette examples
+- Guideline references (ACC/AHA, IDSA, etc.)
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Deployment
 
-### Option 1: Open Index
-Open `study_guides_index.html` in any web browser to access all guides from a central hub.
+### GitHub Pages (Recommended)
 
-### Option 2: Direct Access
-Open any individual guide directly:
-- `board_pearls.html` — Start here for rapid review
-- `high_value_care.html` — Essential for ACP/ABIM focus areas
-- `[specialty]_study_guide.html` — Deep dive into specific topics
+```bash
+# Create repository
+git init
+git add .
+git commit -m "Clinical Reference Suite v1.0"
+git remote add origin https://github.com/YOUR_USERNAME/clinical-reference-suite.git
+git push -u origin main
 
-### Option 3: Add to Home Screen (iPad/iPhone)
-1. Open `study_guides_index.html` in Safari
-2. Tap the Share button
-3. Select "Add to Home Screen"
-4. Access guides like a native app
-
----
-
-## 📋 Guide Structure
-
-Each specialty guide follows a consistent format:
-
-```
-1. Overview / Epidemiology
-2. Pathophysiology
-3. Clinical Presentation
-4. Diagnosis / Workup
-5. Treatment / Management
-6. Complications
-7. Special Populations
-8. Board Pearls
+# Enable GitHub Pages in repository settings
+# Select: main branch, root folder
 ```
 
-### Content Box Types
+Access at: `https://YOUR_USERNAME.github.io/clinical-reference-suite/`
 
-| Box Color | Purpose |
-|-----------|---------|
-| 🟢 Green | Key clinical points, first-line treatments |
-| 🔴 Red | Warnings, contraindications, emergencies |
-| 🟡 Gold | High-yield board pearls |
-| 🔵 Blue | Diagnostic criteria, classifications |
-| ⚪ Gray | Background information, pathophysiology |
+### Local Use
+
+Simply open `index.html` in any modern browser. All files are self-contained HTML with inline CSS/JS.
 
 ---
 
-## 💎 Board Pearls Guide
+## 📋 Technical Specifications
 
-The Board Pearls file extracts the highest-yield facts from all specialty guides:
-
-**Specialties Covered:**
-- Infectious Disease (18 pearls)
-- Cardiology (20 pearls)
-- GI/Hepatology (18 pearls)
-- Rheumatology (21 pearls)
-- Endocrinology (22 pearls)
-- Nephrology (18 pearls)
-- Pulmonology (18 pearls)
-- Hematology/Oncology (21 pearls)
-- Neurology (21 pearls)
-
-**Features:**
-- Collapsible sections by specialty
-- Search across all pearls
-- Quick-nav jump links
-- Print-friendly formatting
+- **Format:** Single-file HTML with inline CSS and JavaScript
+- **Dependencies:** None (fully self-contained)
+- **Browser Support:** Safari (iOS/macOS), Chrome, Firefox, Edge
+- **Offline:** Full functionality without internet
+- **Storage:** LocalStorage for audio position memory
 
 ---
 
-## 💰 High Value Care Guide
+## 🔄 Version History
 
-Organized by clinical domain, covering what to **avoid** and what to **prefer**:
+### BUILD #8 (January 2026)
+- Added 9 audio study guide editions (~7 hours content)
+- iOS Safari voice selection fix for audio guides
+- Renal dosing reference expansion
+- Antimicrobial stewardship guide
+- Standardized versioning across all 39 files
 
-**Topics:**
-1. Cancer Screening & Prevention
-2. Diagnostic Imaging
-3. Laboratory Testing
-4. Cardiology
-5. Pulmonology
-6. Gastroenterology
-7. Infectious Disease
-8. Neurology
-9. Rheumatology
-10. Endocrinology
-11. Nephrology
-12. Hematology
-13. Geriatrics & Deprescribing
-14. Perioperative Medicine
-15. Hospital Medicine
+### BUILD #7
+- Drug Reference Guide (500+ medications)
+- Drug interactions reference
+- Enhanced search functionality
 
-**Evidence Tags:**
-- 🟣 Choosing Wisely
-- 🔵 USPSTF
-- 🔴 ACC/AHA
-- 🟠 AGA
-- 🔵 ATS
+### BUILD #6
+- Initial 17 specialty study guides
+- Clinical reference tools suite
+- Dark mode optimization
 
 ---
 
-## 🔗 Related Resources
+## 📝 Content Sources
 
-These guides are part of a larger **Clinical Reference Suite**:
-
-| Resource | Description |
-|----------|-------------|
-| [🩺 IM Reference Guide](im_guide.html) | 118 conditions, comprehensive clinical reference |
-| [💊 Drug Reference Guide](drug_reference_guide.html) | 500+ medications with dosing, interactions |
-| [🔬 Lab Values](lab_values.html) | Reference ranges with clinical interpretation |
-| [🔍 Dx Framework](dx_framework.html) | Diagnostic algorithms by symptom/syndrome |
-| [🏥 Procedures Guide](procedures_guide.html) | Common procedures with technique and complications |
-
----
-
-## 📝 Study Tips
-
-### For Initial Learning
-1. Read through each specialty guide systematically
-2. Focus on pathophysiology and clinical presentation
-3. Use the collapsible sections to test yourself
-
-### For Board Review
-1. Start with **Board Pearls** for rapid high-yield review
-2. Review **High Value Care** — heavily tested on ABIM
-3. Use search to find specific topics
-4. Focus on tables and diagnostic criteria
-
-### For Last-Minute Review
-1. Board Pearls only (177 facts)
-2. High Value Care "Avoid" items
-3. Diagnostic criteria boxes in each guide
+Study materials synthesized from evidence-based sources:
+- UpToDate
+- Harrison's Principles of Internal Medicine
+- NEJM / JAMA reviews
+- IDSA Guidelines
+- ACC/AHA Guidelines
+- ADA Standards of Care
+- KDIGO Guidelines
+- GOLD Guidelines
 
 ---
 
 ## ⚠️ Disclaimer
 
-These study guides are intended as educational resources for board preparation. They are not a substitute for clinical judgment, current guidelines, or consultation with specialists. Always verify information with primary sources and current literature.
-
-Content is based on guidelines and evidence available as of December 2025. Medicine evolves rapidly — confirm current recommendations before clinical application.
+This reference suite is designed for educational purposes and clinical decision support. It is not a substitute for clinical judgment, institutional protocols, or direct patient evaluation. Always verify drug dosing and contraindications with current pharmacy references.
 
 ---
 
-## 📄 File List
+## 👨‍⚕️ Author
 
-```
-study_guides_index.html      — Central hub / index page
-board_pearls.html            — 177 high-yield pearls
-high_value_care.html         — 125 HVC recommendations
-id_study_guide.html          — Infectious Disease
-cardio_study_guide.html      — Cardiology
-gi_study_guide.html          — GI / Hepatology
-rheumatology_study_guide.html — Rheumatology & Orthopedics
-endocrinology_study_guide.html — Endocrinology
-nephrology_study_guide1.html  — Nephrology
-pulmonology_study_guide.html  — Pulmonology
-heme_onc_study_guide.html    — Hematology / Oncology
-neurology_study_guide.html   — Neurology
-general_im_study_guide.html  — General Internal Medicine
-psychiatry_study_guide.html  — Psychiatry
-geriatrics_study_guide.html  — Geriatrics
-allergy_immunology_study_guide.html — Allergy & Immunology
-womens_health_study_guide.html — Women's Health
-perioperative_study_guide.html — Perioperative Medicine
-dermatology_study_guide.html — Dermatology
-palliative_care_study_guide.html — Palliative Care
-ABIM_README.md               — This file
-```
+Developed for Internal Medicine residency training and board preparation.
 
 ---
 
-## 🏥 About
-
-Created for Internal Medicine residents preparing for ABIM certification and maintenance of certification exams. Designed with a focus on:
-
-- **Evidence-based content** from major society guidelines
-- **High-yield focus** on board-relevant material
-- **Practical utility** for both exam prep and clinical reference
-- **Mobile optimization** for studying anywhere
-
----
-
-*Good luck on your boards!* 🎓
+*Last generated: January 2026*
