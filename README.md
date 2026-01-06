@@ -202,7 +202,9 @@ This reference suite is designed for educational purposes and clinical decision 
 
 ## 👨‍⚕️ Author
 
-Developed for Internal Medicine residency training and board preparation.
+**David Comstock, MD**  
+Internal Medicine Resident, PGY-3  
+Guthrie Lourdes Hospital
 
 ---
 
