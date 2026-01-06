@@ -10,7 +10,7 @@
 
 A comprehensive, iPad-optimized collection of clinical reference tools and study materials for Internal Medicine residents and hospitalists. Designed for rapid bedside access with dark mode optimization, touch-friendly navigation, and offline capability.
 
-**Total Files:** 39 HTML files  
+**Total Files:** 41 HTML files  
 **Categories:** Clinical References • Study Guides • Audio Editions
 
 ---
@@ -71,7 +71,7 @@ All study guides follow consistent formatting with:
 | `perioperative_study_guide.html` | Perioperative Medicine | — |
 | `board_pearls.html` | High-Yield Board Pearls | — |
 
-### 🎧 Audio Study Guides (9 specialties)
+### 🎧 Audio Study Guides (11 files)
 
 Text-to-speech optimized for commute listening. Features:
 - Web Speech API integration
@@ -82,8 +82,10 @@ Text-to-speech optimized for commute listening. Features:
 - Position memory (resume playback)
 - Real-time text highlighting
 
-| File | Specialty | Est. Duration |
-|------|-----------|---------------|
+| File | Topic | Est. Duration |
+|------|-------|---------------|
+| `board_pearls_audio.html` | High-Yield Board Pearls | ~41 min |
+| `high_value_care_audio.html` | Choosing Wisely / HVC | ~33 min |
 | `cardio_study_guide_audio.html` | Cardiology | ~72 min |
 | `pulmonology_study_guide_audio.html` | Pulmonology | ~51 min |
 | `gi_study_guide_audio.html` | Gastroenterology | ~37 min |
@@ -94,7 +96,7 @@ Text-to-speech optimized for commute listening. Features:
 | `nephrology_study_guide_audio.html` | Nephrology | ~62 min |
 | `id_study_guide_audio.html` | Infectious Disease | ~59 min |
 
-**Total Audio Content:** ~7 hours
+**Total Audio Content:** ~8+ hours
 
 ---
 
