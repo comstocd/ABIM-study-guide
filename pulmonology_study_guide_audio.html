@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>🎧 Pulmonology Study Guide — Audio Edition</title>
+    <style>
+        :root { --primary: #0891b2; --primary-light: #22d3ee; --accent: #e07b53; --bg: #1a1a2e; --card-bg: #16213e; --text: #e8e8e8; --text-muted: #a0a0a0; --border: #2d3a4f; --highlight: rgba(8, 145, 178, 0.3); }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; padding: 20px; padding-bottom: 200px; font-size: 18px; }
+        .header { text-align: center; padding: 30px 20px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 16px; margin-bottom: 20px; }
+        .header h1 { font-size: 1.5rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        .audio-controls { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(180deg, rgba(26,26,46,0.95), rgba(22,33,62,0.98)); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 15px 20px; padding-bottom: max(15px, env(safe-area-inset-bottom)); border-top: 1px solid var(--border); z-index: 1000; }
+        .controls-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px; }
+        .control-btn { background: var(--primary); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .control-btn.play-btn { width: 65px; height: 65px; font-size: 1.6rem; background: var(--accent); }
+        .progress-section { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--text-muted); }
+        .progress-bar { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; cursor: pointer; }
+        .progress-fill { height: 100%; background: var(--accent); width: 0%; }
+        .current-topic { text-align: center; font-size: 0.85rem; color: var(--accent); margin-top: 8px; }
+        .settings-row { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 10px; }
+        .speed-control, .pause-control { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); }
+        .speed-control select, .pause-control select { background: var(--card-bg); color: var(--text); border: 1px solid var(--border); padding: 6px 10px; border-radius: 8px; }
+        .section { background: var(--card-bg); border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
+        .section-header { background: var(--primary); padding: 15px 20px; font-size: 1.1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; }
+        .section-content { padding: 20px; }
+        .topic { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+        .topic:last-child { border-bottom: none; }
+        .topic-title { font-size: 1.1rem; font-weight: 600; color: var(--accent); margin-bottom: 15px; }
+        .content-block { margin-bottom: 15px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 3px solid var(--primary); }
+        .content-block.pearl { border-left-color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
+        .content-block.high-yield { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .content-block.guideline { border-left-color: #8b5cf6; background: rgba(139, 92, 246, 0.1); }
+        .block-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; }
+        .sentence.current { background: var(--highlight); border-radius: 3px; }
+        .voice-selector { margin: 15px 0; padding: 15px; background: var(--card-bg); border-radius: 12px; }
+        .voice-selector label { display: block; margin-bottom: 8px; color: var(--text-muted); }
+        .voice-selector select { width: 100%; padding: 10px; background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 8px; }
+        .toc { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .toc h2 { margin-bottom: 15px; font-size: 1.1rem; }
+        .toc-item { padding: 10px 15px; margin: 5px 0; background: rgba(255,255,255,0.03); border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between; }
+        .toc-item:hover { background: rgba(255,255,255,0.08); }
+        .toc-item.active { background: var(--primary); }
+        .toc-duration { font-size: 0.8rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🫁 Pulmonology Study Guide</h1>
+    <p>Audio Edition • ABIM Board Review • 10% of Exam</p>
+    <p style="font-size:0.8rem; opacity:0.7; margin-top:8px;">v1.0 BUILD #8 — Audio Optimized</p>
+</div>
+
+<div class="voice-selector">
+    <label>🎙️ Select Voice:</label>
+    <select id="voiceSelect"></select>
+</div>
+
+<div class="toc">
+    <h2>📋 Chapters</h2>
+    <div class="toc-item" data-section="0"><span>1. COPD</span><span class="toc-duration">~7 min</span></div>
+    <div class="toc-item" data-section="1"><span>2. Asthma</span><span class="toc-duration">~6 min</span></div>
+    <div class="toc-item" data-section="2"><span>3. Interstitial Lung Disease</span><span class="toc-duration">~6 min</span></div>
+    <div class="toc-item" data-section="3"><span>4. Pulmonary Hypertension</span><span class="toc-duration">~5 min</span></div>
+    <div class="toc-item" data-section="4"><span>5. Pleural Disease</span><span class="toc-duration">~5 min</span></div>
+    <div class="toc-item" data-section="5"><span>6. Pulmonary Embolism</span><span class="toc-duration">~6 min</span></div>
+    <div class="toc-item" data-section="6"><span>7. Sleep Disorders</span><span class="toc-duration">~4 min</span></div>
+    <div class="toc-item" data-section="7"><span>8. ARDS & Mechanical Ventilation</span><span class="toc-duration">~7 min</span></div>
+    <div class="toc-item" data-section="8"><span>9. Lung Cancer</span><span class="toc-duration">~5 min</span></div>
+</div>
+
+<div id="audioContent">
+
+<div class="section" data-section="0">
+    <div class="section-header" onclick="jumpToSection(0)"><span>1. COPD</span><span>▶️</span></div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Diagnosis and Classification</div>
+            <div class="content-block guideline">
+                <div class="block-label">GOLD Guidelines</div>
+                <p class="speakable">COPD is diagnosed by spirometry showing FEV1 to FVC ratio less than 0.70 after bronchodilator.</p>
+                <p class="speakable">Severity is classified by FEV1 percent predicted. GOLD 1 is mild with FEV1 80 percent or higher. GOLD 2 is moderate with FEV1 50 to 79 percent.</p>
+                <p class="speakable">GOLD 3 is severe with FEV1 30 to 49 percent. GOLD 4 is very severe with FEV1 less than 30 percent.</p>
+                <p class="speakable">ABCD assessment combines spirometry with symptoms using CAT or mMRC score and exacerbation history.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">Stable COPD Treatment</div>
+            <div class="content-block guideline">
+                <div class="block-label">Pharmacotherapy</div>
+                <p class="speakable">For Group A with few symptoms and low exacerbation risk, use a bronchodilator as needed.</p>
+                <p class="speakable">For Group B with more symptoms, start a long-acting bronchodilator. Either LAMA or LABA.</p>
+                <p class="speakable">For Group E with high exacerbation risk, start LAMA plus LABA. Add inhaled corticosteroid if eosinophils are 300 or higher.</p>
+                <p class="speakable">Triple therapy with LAMA plus LABA plus ICS reduces exacerbations in patients with elevated eosinophils.</p>
+            </div>
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl</div>
+                <p class="speakable">Blood eosinophil count predicts ICS response. Eosinophils 300 or higher favor adding ICS. Eosinophils under 100 suggest ICS is unlikely to help.</p>
+                <p class="speakable">Roflumilast is a PDE4 inhibitor added for severe COPD with chronic bronchitis phenotype and frequent exacerbations.</p>
+            </div>
+            <div class="content-block pearl">
+                <div class="block-label">Non-Pharmacologic</div>
+                <p class="speakable">Smoking cessation is the most important intervention. It is the only thing proven to slow FEV1 decline.</p>
+                <p class="speakable">Pulmonary rehabilitation improves exercise capacity and quality of life.</p>
+                <p class="speakable">Supplemental oxygen is indicated if PaO2 is 55 or less, or 55 to 59 with cor pulmonale or polycythemia.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">COPD Exacerbation</div>
+            <div class="content-block guideline">
+                <div class="block-label">Management</div>
+                <p class="speakable">Increase bronchodilators. Give systemic corticosteroids for 5 days. Prednisone 40 milligrams daily is standard.</p>
+                <p class="speakable">Antibiotics are indicated if there is increased sputum purulence or volume, or if the patient requires mechanical ventilation.</p>
+                <p class="speakable">Typical antibiotics include azithromycin, doxycycline, or a respiratory fluoroquinolone.</p>
+                <p class="speakable">Use noninvasive ventilation for respiratory acidosis. NIV reduces intubation rates and mortality.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="1">
+    <div class="section-header" onclick="jumpToSection(1)"><span>2. Asthma</span><span>▶️</span></div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Diagnosis and Control</div>
+            <div class="content-block">
+                <div class="block-label">Diagnosis</div>
+                <p class="speakable">Asthma is characterized by variable airflow obstruction that is reversible. Spirometry shows increased FEV1 by 12 percent and 200 mL after bronchodilator.</p>
+                <p class="speakable">Symptoms include episodic wheeze, cough, dyspnea, and chest tightness, often worse at night or with triggers.</p>
+                <p class="speakable">Methacholine challenge can confirm diagnosis when spirometry is normal. A positive test shows PC20 less than 4 milligrams per mL.</p>
+            </div>
+            <div class="content-block guideline">
+                <div class="block-label">Step Therapy</div>
+                <p class="speakable">Step 1 for intermittent asthma is as-needed SABA or as-needed low-dose ICS plus formoterol.</p>
+                <p class="speakable">Step 2 is daily low-dose ICS or as-needed ICS-formoterol.</p>
+                <p class="speakable">Step 3 is low-dose ICS-LABA.</p>
+                <p class="speakable">Step 4 is medium-dose ICS-LABA.</p>
+                <p class="speakable">Step 5 is high-dose ICS-LABA plus add-on therapies like LAMA, biologics, or low-dose oral steroids.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">Severe Asthma</div>
+            <div class="content-block high-yield">
+                <div class="block-label">Biologic Therapies</div>
+                <p class="speakable">Omalizumab is anti-IgE for allergic asthma with elevated IgE.</p>
+                <p class="speakable">Mepolizumab, benralizumab, and reslizumab target IL-5 or its receptor for eosinophilic asthma with eosinophils 150 or higher.</p>
+                <p class="speakable">Dupilumab targets IL-4 and IL-13 for eosinophilic asthma or asthma with elevated FeNO.</p>
+                <p class="speakable">Tezepelumab targets TSLP and works across multiple phenotypes.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">Acute Asthma Exacerbation</div>
+            <div class="content-block guideline">
+                <div class="block-label">ED Management</div>
+                <p class="speakable">Give continuous nebulized albuterol or albuterol MDI with spacer every 20 minutes times 3.</p>
+                <p class="speakable">Give systemic corticosteroids early. Prednisone 40 to 60 milligrams or IV methylprednisolone.</p>
+                <p class="speakable">Add ipratropium for severe exacerbations.</p>
+                <p class="speakable">Magnesium sulfate 2 grams IV for severe exacerbations not responding to initial therapy.</p>
+                <p class="speakable">Consider intubation for impending respiratory failure. A normal or rising PCO2 in acute asthma is a danger sign.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="2">
+    <div class="section-header" onclick="jumpToSection(2)"><span>3. Interstitial Lung Disease</span><span>▶️</span></div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Classification</div>
+            <div class="content-block">
+                <div class="block-label">Major Categories</div>
+                <p class="speakable">Idiopathic pulmonary fibrosis is the most common idiopathic interstitial pneumonia. It has a poor prognosis.</p>
+                <p class="speakable">Connective tissue disease-associated ILD occurs with rheumatoid arthritis, scleroderma, myositis, and Sjogren syndrome.</p>
+                <p class="speakable">Hypersensitivity pneumonitis is caused by inhaled organic antigens like mold, bird proteins, or bacteria.</p>
+                <p class="speakable">Sarcoidosis is a multisystem granulomatous disease most common in young African Americans and Scandinavians.</p>
+                <p class="speakable">Drug-induced ILD can be caused by amiodarone, methotrexate, nitrofurantoin, and bleomycin.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">Idiopathic Pulmonary Fibrosis</div>
+            <div class="content-block high-yield">
+                <div class="block-label">Diagnosis</div>
+                <p class="speakable">IPF presents with progressive dyspnea and dry cough in patients typically over 60 years old.</p>
+                <p class="speakable">Physical exam reveals bibasilar velcro-like crackles and digital clubbing.</p>
+                <p class="speakable">HRCT shows usual interstitial pneumonia pattern with basal-predominant honeycombing, traction bronchiectasis, and minimal ground glass.</p>
+                <p class="speakable">If HRCT is definitive for UIP, lung biopsy is not needed.</p>
+            </div>
+            <div class="content-block guideline">
+                <div class="block-label">Treatment</div>
+                <p class="speakable">Antifibrotic therapy with pirfenidone or nintedanib slows FVC decline but does not reverse fibrosis.</p>
+                <p class="speakable">Corticosteroids are NOT indicated for IPF and may be harmful.</p>
+                <p class="speakable">Lung transplant referral for appropriate candidates.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">Sarcoidosis</div>
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Features</div>
+                <p class="speakable">Sarcoidosis can affect any organ but lungs are involved in over 90 percent of cases.</p>
+                <p class="speakable">Classic findings include bilateral hilar lymphadenopathy, erythema nodosum, uveitis, and hypercalcemia.</p>
+                <p class="speakable">Lofgren syndrome is the combination of bilateral hilar adenopathy, erythema nodosum, and arthralgias. It has excellent prognosis.</p>
+                <p class="speakable">Diagnosis requires compatible clinical picture plus noncaseating granulomas on biopsy plus exclusion of other causes.</p>
+            </div>
+            <div class="content-block guideline">
+                <div class="block-label">Treatment</div>
+                <p class="speakable">Many patients do not require treatment. Observe if asymptomatic with stable disease.</p>
+                <p class="speakable">Treat for symptomatic pulmonary disease, cardiac involvement, neurologic involvement, or hypercalcemia.</p>
+                <p class="speakable">Corticosteroids are first-line. Methotrexate or azathioprine for steroid-sparing.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="3">
+    <div class="section-header" onclick="jumpToSection(3)"><span>4. Pulmonary Hypertension</span><span>▶️</span></div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Classification</div>
+            <div class="content-block guideline">
+                <div class="block-label">WHO Groups</div>
+                <p class="speakable">Pulmonary hypertension is defined as mean pulmonary artery pressure greater than 20 on right heart catheterization.</p>
+                <p class="speakable">Group 1 is pulmonary arterial hypertension, or PAH. This includes idiopathic PAH, connective tissue disease-associated PAH, and drug-induced PAH.</p>
+                <p class="speakable">Group 2 is PH due to left heart disease. This is the most common cause of PH overall.</p>
+                <p class="speakable">Group 3 is PH due to lung disease or hypoxia, such as COPD or ILD.</p>
+                <p class="speakable">Group 4 is chronic thromboembolic pulmonary hypertension, or CTEPH.</p>
+                <p class="speakable">Group 5 is PH due to unclear or multifactorial mechanisms.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">Diagnosis and Treatment</div>
+            <div class="content-block high-yield">
+                <div class="block-label">Workup</div>
+                <p class="speakable">Echo is the initial screening test. It estimates PA systolic pressure and assesses RV function.</p>
+                <p class="speakable">Right heart catheterization is required to confirm diagnosis and classify type.</p>
+                <p class="speakable">V/Q scan is essential to rule out CTEPH. It is more sensitive than CT for chronic PE.</p>
+            </div>
+            <div class="content-block guideline">
+                <div class="block-label">Group 1 PAH Treatment</div>
+                <p class="speakable">PAH-specific therapies target three pathways: endothelin, nitric oxide, and prostacyclin.</p>
+                <p class="speakable">Endothelin receptor antagonists include ambrisentan and bosentan.</p>
+                <p class="speakable">PDE-5 inhibitors include sildenafil and tadalafil. Riociguat is a soluble guanylate cyclase stimulator.</p>
+                <p class="speakable">Prostacyclin analogs include epoprostenol, treprostinil, and iloprost. Selexipag is a prostacyclin receptor agonist.</p>
+                <p class="speakable">Combination therapy is standard for most PAH patients.</p>
+            </div>
+            <div class="content-block pearl">
+                <div class="block-label">CTEPH</div>
+                <p class="speakable">CTEPH is curable with pulmonary thromboendarterectomy surgery in appropriate candidates.</p>
+                <p class="speakable">All patients with unexplained PH should have V/Q scan to rule out CTEPH.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="4">
+    <div class="section-header" onclick="jumpToSection(4)"><span>5. Pleural Disease</span><span>▶️</span></div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Pleural Effusion Analysis</div>
+            <div class="content-block high-yield">
+                <div class="block-label">Light's Criteria</div>
+                <p class="speakable">Light's criteria distinguish exudative from transudative effusions. An effusion is exudative if any one criterion is met.</p>
+                <p class="speakable">First, pleural protein divided by serum protein greater than 0.5.</p>
+                <p class="speakable">Second, pleural LDH divided by serum LDH greater than 0.6.</p>
+                <p class="speakable">Third, pleural LDH greater than two-thirds the upper limit of normal serum LDH.</p>
+                <p class="speakable">Transudates are caused by hydrostatic or oncotic pressure changes: heart failure, cirrhosis, nephrotic syndrome.</p>
+                <p class="speakable">Exudates are caused by pleural inflammation or impaired drainage: infection, malignancy, PE, connective tissue disease.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">Parapneumonic Effusion and Empyema</div>
+            <div class="content-block guideline">
+                <div class="block-label">When to Drain</div>
+                <p class="speakable">Uncomplicated parapneumonic effusions may resolve with antibiotics alone.</p>
+                <p class="speakable">Complicated parapneumonic effusions require drainage. Features include pH less than 7.2, glucose less than 60, positive Gram stain, loculations, or pus.</p>
+                <p class="speakable">Empyema is frank pus in the pleural space and always requires drainage.</p>
+                <p class="speakable">Options for drainage include thoracentesis, chest tube with or without fibrinolytics, or surgery for refractory cases.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="5">
+    <div class="section-header" onclick="jumpToSection(5)"><span>6. Pulmonary Embolism</span><span>▶️</span></div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Diagnosis</div>
+            <div class="content-block guideline">
+                <div class="block-label">Diagnostic Approach</div>
+                <p class="speakable">Use pretest probability with Wells score or Geneva score to guide testing.</p>
+                <p class="speakable">If low pretest probability, check D-dimer. If negative, PE is excluded.</p>
+                <p class="speakable">Age-adjusted D-dimer cutoff is age times 10 for patients over 50.</p>
+                <p class="speakable">CT pulmonary angiography is the test of choice if D-dimer is positive or pretest probability is intermediate to high.</p>
+                <p class="speakable">V/Q scan is an alternative for patients with contrast allergy or renal insufficiency.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">Treatment</div>
+            <div class="content-block guideline">
+                <div class="block-label">Anticoagulation</div>
+                <p class="speakable">DOACs are first-line for most patients with PE. Options are apixaban, rivaroxaban, edoxaban, or dabigatran.</p>
+                <p class="speakable">LMWH or fondaparinux is preferred for cancer-associated thrombosis, though DOACs are increasingly used.</p>
+                <p class="speakable">Warfarin requires heparin bridge until INR is therapeutic for 2 days.</p>
+                <p class="speakable">Duration is 3 months for provoked PE, indefinite for unprovoked PE or recurrent VTE.</p>
+            </div>
+            <div class="content-block high-yield">
+                <div class="block-label">Massive PE</div>
+                <p class="speakable">Massive PE presents with hypotension, defined as systolic BP less than 90 or drop of 40 or more for 15 minutes.</p>
+                <p class="speakable">Submassive PE has RV dysfunction or elevated troponin without hypotension.</p>
+                <p class="speakable">Systemic thrombolysis is indicated for massive PE without contraindications.</p>
+                <p class="speakable">Catheter-directed therapy or surgical embolectomy are alternatives.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="6">
+    <div class="section-header" onclick="jumpToSection(6)"><span>7. Sleep Disorders</span><span>▶️</span></div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Obstructive Sleep Apnea</div>
+            <div class="content-block">
+                <div class="block-label">Diagnosis</div>
+                <p class="speakable">OSA is diagnosed by polysomnography showing apnea-hypopnea index of 5 or more with symptoms, or AHI of 15 or more without symptoms.</p>
+                <p class="speakable">Home sleep testing is acceptable for uncomplicated patients with high pretest probability.</p>
+                <p class="speakable">Severity is classified as mild with AHI 5 to 15, moderate with AHI 15 to 30, and severe with AHI greater than 30.</p>
+            </div>
+            <div class="content-block guideline">
+                <div class="block-label">Treatment</div>
+                <p class="speakable">CPAP is first-line therapy for moderate to severe OSA and reduces cardiovascular events and improves quality of life.</p>
+                <p class="speakable">Weight loss, positional therapy, and avoiding alcohol and sedatives are adjunctive measures.</p>
+                <p class="speakable">Oral appliances are an option for mild to moderate OSA or CPAP-intolerant patients.</p>
+                <p class="speakable">Upper airway surgery may be considered for select patients with anatomic obstruction.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="7">
+    <div class="section-header" onclick="jumpToSection(7)"><span>8. ARDS & Mechanical Ventilation</span><span>▶️</span></div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">ARDS Definition</div>
+            <div class="content-block guideline">
+                <div class="block-label">Berlin Criteria</div>
+                <p class="speakable">ARDS is defined by acute onset within 1 week of known insult or new/worsening respiratory symptoms.</p>
+                <p class="speakable">Bilateral opacities on chest imaging not fully explained by effusion, collapse, or nodules.</p>
+                <p class="speakable">Respiratory failure not fully explained by cardiac failure or fluid overload.</p>
+                <p class="speakable">Severity is based on PaO2 to FiO2 ratio with PEEP 5 or higher. Mild is 200 to 300. Moderate is 100 to 200. Severe is less than 100.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">Ventilator Management</div>
+            <div class="content-block high-yield">
+                <div class="block-label">Lung-Protective Ventilation</div>
+                <p class="speakable">Low tidal volume ventilation with 6 mL per kilogram of predicted body weight reduces mortality. This is based on the ARMA trial.</p>
+                <p class="speakable">Target plateau pressure less than 30 centimeters of water.</p>
+                <p class="speakable">Allow permissive hypercapnia if needed to maintain low tidal volumes.</p>
+                <p class="speakable">Use adequate PEEP to maintain oxygenation while avoiding overdistension.</p>
+            </div>
+            <div class="content-block guideline">
+                <div class="block-label">Additional Interventions</div>
+                <p class="speakable">Prone positioning for 16 or more hours per day improves survival in moderate to severe ARDS. This is based on the PROSEVA trial.</p>
+                <p class="speakable">Neuromuscular blockade may be considered early in severe ARDS.</p>
+                <p class="speakable">Conservative fluid management after initial resuscitation improves oxygenation and shortens ventilator duration.</p>
+                <p class="speakable">ECMO is a salvage therapy for refractory hypoxemia.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">Ventilator Liberation</div>
+            <div class="content-block pearl">
+                <div class="block-label">Weaning</div>
+                <p class="speakable">Daily spontaneous awakening trials and spontaneous breathing trials reduce time on the ventilator.</p>
+                <p class="speakable">Rapid shallow breathing index less than 105 predicts successful extubation.</p>
+                <p class="speakable">Assess for cuff leak before extubation if prolonged intubation or difficult airway.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="8">
+    <div class="section-header" onclick="jumpToSection(8)"><span>9. Lung Cancer</span><span>▶️</span></div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Screening and Diagnosis</div>
+            <div class="content-block guideline">
+                <div class="block-label">Screening Guidelines</div>
+                <p class="speakable">Low-dose CT screening is recommended for adults 50 to 80 years old with 20 pack-year smoking history who currently smoke or quit within 15 years.</p>
+                <p class="speakable">Annual screening reduces lung cancer mortality by 20 percent.</p>
+            </div>
+            <div class="content-block">
+                <div class="block-label">Evaluation of Pulmonary Nodules</div>
+                <p class="speakable">Nodule management depends on size, appearance, and patient risk factors.</p>
+                <p class="speakable">Solid nodules less than 6 millimeters in low-risk patients need no follow-up.</p>
+                <p class="speakable">Ground glass nodules have lower malignancy risk but require longer follow-up.</p>
+                <p class="speakable">PET scan is useful for nodules 8 millimeters or larger. SUV greater than 2.5 suggests malignancy.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-title">Types and Treatment</div>
+            <div class="content-block high-yield">
+                <div class="block-label">Non-Small Cell Lung Cancer</div>
+                <p class="speakable">NSCLC accounts for 85 percent of lung cancers. Subtypes include adenocarcinoma, squamous cell, and large cell.</p>
+                <p class="speakable">Early stage is treated with surgical resection plus adjuvant chemotherapy for stage 2 or higher.</p>
+                <p class="speakable">Molecular testing is essential. EGFR mutations, ALK rearrangements, and other targets guide therapy.</p>
+                <p class="speakable">Immunotherapy with PD-1 or PD-L1 inhibitors has transformed treatment of advanced NSCLC.</p>
+            </div>
+            <div class="content-block high-yield">
+                <div class="block-label">Small Cell Lung Cancer</div>
+                <p class="speakable">SCLC is strongly associated with smoking and has aggressive behavior.</p>
+                <p class="speakable">Limited stage is confined to one hemithorax. Treat with concurrent chemoradiation.</p>
+                <p class="speakable">Extensive stage is treated with chemotherapy plus immunotherapy.</p>
+                <p class="speakable">Prophylactic cranial irradiation reduces brain metastases in responders.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class="audio-controls">
+    <div class="controls-row">
+        <button class="control-btn" onclick="skipBackward()">⏪</button>
+        <button class="control-btn play-btn" id="playPauseBtn" onclick="togglePlayPause()">▶️</button>
+        <button class="control-btn" onclick="skipForward()">⏩</button>
+        <button class="control-btn" onclick="stopReading()">⏹️</button>
+    </div>
+    <div class="progress-section">
+        <span id="currentTime">0:00</span>
+        <div class="progress-bar" onclick="seekTo(event)"><div class="progress-fill" id="progressFill"></div></div>
+        <span id="totalTime">0:00</span>
+    </div>
+    <div class="current-topic" id="currentTopic">Ready to play</div>
+    <div class="settings-row">
+        <div class="speed-control"><label>Speed:</label><select id="speedSelect" onchange="updateSpeed()"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="1.75">1.75×</option><option value="2">2×</option></select></div>
+        <div class="pause-control"><label>Pauses:</label><select id="pauseSelect" onchange="updatePauses()"><option value="short">Short</option><option value="medium" selected>Medium</option><option value="long">Long</option><option value="extra">Extra Long</option></select></div>
+    </div>
+</div>
+
+<script>
+let isPlaying=false,currentSentenceIndex=0,sentences=[],speechRate=1,englishVoices=[],pauseSettings={sentence:400,paragraph:800,section:1500};
+document.addEventListener('DOMContentLoaded',()=>{loadVoices();buildSentenceList();setupTOC();const s=localStorage.getItem('pulm_audio_position');if(s)currentSentenceIndex=parseInt(s)||0;});
+function loadVoices(){const sel=document.getElementById('voiceSelect');function pop(){const all=speechSynthesis.getVoices();englishVoices=all.filter(v=>v.lang.startsWith('en-')||v.lang==='en');if(!englishVoices.length){setTimeout(pop,100);return;}const pref=['Samantha','Daniel','Karen','Moira','Tessa','Alex'];englishVoices.sort((a,b)=>{const ap=pref.some(p=>a.name.includes(p)),bp=pref.some(p=>b.name.includes(p));if(ap&&!bp)return -1;if(!ap&&bp)return 1;if(a.localService&&!b.localService)return -1;if(!a.localService&&b.localService)return 1;return a.name.localeCompare(b.name);});sel.innerHTML='';englishVoices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${v.localService?'⭐ ':''}${v.name} (${v.lang})`;sel.appendChild(o);});}pop();speechSynthesis.onvoiceschanged=pop;}
+function buildSentenceList(){sentences=[];document.querySelectorAll('.speakable').forEach((el,i,arr)=>{const sec=el.closest('.section'),top=el.closest('.topic');sentences.push({text:el.textContent.trim(),element:el,section:sec?parseInt(sec.dataset.section):0,topic:top?.querySelector('.topic-title')?.textContent||'',label:el.closest('.content-block')?.querySelector('.block-label')?.textContent||'',isNewBlock:i===0||el.closest('.content-block')!==arr[i-1]?.closest('.content-block'),isNewSection:i===0||(sec?.dataset.section!==arr[i-1]?.closest('.section')?.dataset.section)});});updateProgress();}
+function setupTOC(){document.querySelectorAll('.toc-item').forEach(item=>{item.addEventListener('click',()=>jumpToSection(parseInt(item.dataset.section)));});}
+function jumpToSection(idx){const i=sentences.findIndex(s=>s.section===idx);if(i!==-1){currentSentenceIndex=i;if(isPlaying){speechSynthesis.cancel();speakCurrentSentence();}updateProgress();highlightCurrentSection();}}
+function togglePlayPause(){isPlaying?pauseReading():startReading();}
+function startReading(){isPlaying=true;document.getElementById('playPauseBtn').textContent='⏸️';speakCurrentSentence();}
+function pauseReading(){isPlaying=false;speechSynthesis.cancel();document.getElementById('playPauseBtn').textContent='▶️';savePosition();}
+function stopReading(){isPlaying=false;speechSynthesis.cancel();currentSentenceIndex=0;document.getElementById('playPauseBtn').textContent='▶️';updateProgress();clearHighlights();localStorage.removeItem('pulm_audio_position');}
+function speakCurrentSentence(){if(!isPlaying||currentSentenceIndex>=sentences.length){if(currentSentenceIndex>=sentences.length)stopReading();return;}const s=sentences[currentSentenceIndex],u=new SpeechSynthesisUtterance(s.text),vi=parseInt(document.getElementById('voiceSelect').value)||0;if(englishVoices.length&&englishVoices[vi])u.voice=englishVoices[vi];u.lang='en-US';u.rate=speechRate;u.pitch=1;highlightSentence(s);updateProgress();u.onend=()=>{currentSentenceIndex++;savePosition();if(currentSentenceIndex<sentences.length){let p=pauseSettings.sentence;if(sentences[currentSentenceIndex].isNewSection)p=pauseSettings.section;else if(sentences[currentSentenceIndex].isNewBlock)p=pauseSettings.paragraph;setTimeout(()=>{if(isPlaying)speakCurrentSentence();},p);}else stopReading();};u.onerror=()=>{if(isPlaying){currentSentenceIndex++;speakCurrentSentence();}};speechSynthesis.speak(u);}
+function highlightSentence(s){clearHighlights();s.element.classList.add('current');s.element.scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('currentTopic').textContent=s.topic+(s.label?` — ${s.label}`:'');highlightCurrentSection();}
+function clearHighlights(){document.querySelectorAll('.current').forEach(el=>el.classList.remove('current'));}
+function highlightCurrentSection(){document.querySelectorAll('.toc-item').forEach(item=>{item.classList.toggle('active',parseInt(item.dataset.section)===sentences[currentSentenceIndex]?.section);});}
+function updateProgress(){const pct=sentences.length?(currentSentenceIndex/sentences.length)*100:0;document.getElementById('progressFill').style.width=`${pct}%`;const avg=3/speechRate;document.getElementById('currentTime').textContent=formatTime(Math.floor(currentSentenceIndex*avg));document.getElementById('totalTime').textContent=formatTime(Math.floor(sentences.length*avg));}
+function formatTime(s){return `${Math.floor(s/60)}:${(s%60).toString().padStart(2,'0')}`;}
+function seekTo(e){const pct=e.offsetX/e.currentTarget.offsetWidth;currentSentenceIndex=Math.max(0,Math.min(Math.floor(pct*sentences.length),sentences.length-1));if(isPlaying){speechSynthesis.cancel();speakCurrentSentence();}updateProgress();}
+function skipForward(){currentSentenceIndex=Math.min(currentSentenceIndex+Math.floor(10*speechRate),sentences.length-1);if(isPlaying){speechSynthesis.cancel();speakCurrentSentence();}updateProgress();}
+function skipBackward(){currentSentenceIndex=Math.max(currentSentenceIndex-Math.floor(10*speechRate),0);if(isPlaying){speechSynthesis.cancel();speakCurrentSentence();}updateProgress();}
+function updateSpeed(){speechRate=parseFloat(document.getElementById('speedSelect').value);updateProgress();}
+function updatePauses(){const s=document.getElementById('pauseSelect').value;pauseSettings=s==='short'?{sentence:200,paragraph:400,section:800}:s==='long'?{sentence:600,paragraph:1200,section:2000}:s==='extra'?{sentence:800,paragraph:1500,section:2500}:{sentence:400,paragraph:800,section:1500};}
+function savePosition(){localStorage.setItem('pulm_audio_position',currentSentenceIndex.toString());}
+</script>
+</body>
+</html>

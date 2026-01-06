@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>🎧 Cardiology Study Guide — Audio Edition</title>
+    <style>
+        :root {
+            --primary: #991b1b;
+            --primary-light: #dc2626;
+            --accent: #e07b53;
+            --bg: #1a1a2e;
+            --card-bg: #16213e;
+            --text: #e8e8e8;
+            --text-muted: #a0a0a0;
+            --border: #2d3a4f;
+            --highlight: rgba(220, 38, 38, 0.3);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 20px;
+            padding-bottom: 200px;
+            font-size: 18px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 { font-size: 1.5rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        
+        .audio-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(26,26,46,0.95), rgba(22,33,62,0.98));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            padding-bottom: max(15px, env(safe-area-inset-bottom));
+            border-top: 1px solid var(--border);
+            z-index: 1000;
+        }
+        
+        .controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .control-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .control-btn:hover { background: var(--primary-light); transform: scale(1.05); }
+        .control-btn.play-btn { width: 65px; height: 65px; font-size: 1.6rem; background: var(--accent); }
+        .control-btn.play-btn:hover { background: #c96a47; }
+        
+        .speed-control, .pause-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .speed-control select, .pause-control select {
+            background: var(--card-bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .progress-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .current-topic {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-top: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .settings-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: var(--primary);
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-header:hover { background: var(--primary-light); }
+        
+        .section-content { padding: 20px; }
+        
+        .topic {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .topic:last-child { border-bottom: none; margin-bottom: 0; }
+        
+        .topic-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .content-block {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .content-block.pearl { border-left-color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
+        .content-block.high-yield { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .content-block.guideline { border-left-color: #8b5cf6; background: rgba(139, 92, 246, 0.1); }
+        
+        .block-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .sentence.current {
+            background: var(--highlight);
+            border-radius: 3px;
+        }
+        
+        .voice-selector {
+            margin: 15px 0;
+            padding: 15px;
+            background: var(--card-bg);
+            border-radius: 12px;
+        }
+        
+        .voice-selector label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .voice-selector select {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .toc {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .toc h2 { margin-bottom: 15px; font-size: 1.1rem; }
+        
+        .toc-item {
+            padding: 10px 15px;
+            margin: 5px 0;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .toc-item:hover { background: rgba(255,255,255,0.08); }
+        .toc-item.active { background: var(--primary); }
+        
+        .toc-duration { font-size: 0.8rem; color: var(--text-muted); }
+        
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding: 15px; }
+            .control-btn { width: 44px; height: 44px; }
+            .control-btn.play-btn { width: 56px; height: 56px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🫀 Cardiology Study Guide</h1>
+    <p>Audio Edition • ABIM Board Review • 14% of Exam</p>
+    <p style="font-size:0.8rem; opacity:0.7; margin-top:8px;">v1.0 BUILD #8 — Audio Optimized</p>
+</div>
+
+<div class="voice-selector">
+    <label>🎙️ Select Voice:</label>
+    <select id="voiceSelect"></select>
+</div>
+
+<div class="toc">
+    <h2>📋 Chapters</h2>
+    <div class="toc-item" data-section="0"><span>1. Acute Coronary Syndromes</span><span class="toc-duration">~8 min</span></div>
+    <div class="toc-item" data-section="1"><span>2. Chronic Coronary Disease</span><span class="toc-duration">~5 min</span></div>
+    <div class="toc-item" data-section="2"><span>3. Heart Failure</span><span class="toc-duration">~8 min</span></div>
+    <div class="toc-item" data-section="3"><span>4. Atrial Fibrillation</span><span class="toc-duration">~7 min</span></div>
+    <div class="toc-item" data-section="4"><span>5. Other Arrhythmias</span><span class="toc-duration">~6 min</span></div>
+    <div class="toc-item" data-section="5"><span>6. Valvular Heart Disease</span><span class="toc-duration">~7 min</span></div>
+    <div class="toc-item" data-section="6"><span>7. Cardiomyopathies</span><span class="toc-duration">~5 min</span></div>
+    <div class="toc-item" data-section="7"><span>8. Pericardial Disease</span><span class="toc-duration">~5 min</span></div>
+    <div class="toc-item" data-section="8"><span>9. Hypertension</span><span class="toc-duration">~6 min</span></div>
+    <div class="toc-item" data-section="9"><span>10. Lipids & Prevention</span><span class="toc-duration">~5 min</span></div>
+    <div class="toc-item" data-section="10"><span>11. Aortic & Peripheral Vascular</span><span class="toc-duration">~5 min</span></div>
+    <div class="toc-item" data-section="11"><span>12. Devices & Perioperative</span><span class="toc-duration">~5 min</span></div>
+</div>
+
+<div id="audioContent">
+
+<div class="section" data-section="0">
+    <div class="section-header" onclick="jumpToSection(0)">
+        <span>1. Acute Coronary Syndromes</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">STEMI Management</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Critical Time Windows</div>
+                <p class="speakable">STEMI requires immediate reperfusion. The goal is door-to-balloon time of 90 minutes or less for primary PCI.</p>
+                <p class="speakable">If PCI is not available within 120 minutes of first medical contact, give fibrinolytics within 30 minutes of arrival.</p>
+                <p class="speakable">Primary PCI is preferred over fibrinolytics when available in a timely manner.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Initial Management</div>
+                <p class="speakable">Give aspirin 325 milligrams immediately, chewed for rapid absorption.</p>
+                <p class="speakable">Give a P2Y12 inhibitor. Options include ticagrelor, prasugrel, or clopidogrel. Ticagrelor and prasugrel are more potent than clopidogrel.</p>
+                <p class="speakable">Give anticoagulation with unfractionated heparin, enoxaparin, or bivalirudin.</p>
+                <p class="speakable">Give high-intensity statin regardless of LDL level.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Contraindications to Fibrinolytics</div>
+                <p class="speakable">Absolute contraindications include prior intracranial hemorrhage, known cerebrovascular lesion, ischemic stroke within 3 months, active bleeding, suspected aortic dissection, and significant head trauma within 3 months.</p>
+                <p class="speakable">Relative contraindications include severe uncontrolled hypertension, prolonged CPR, major surgery within 3 weeks, and prior ischemic stroke beyond 3 months.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">NSTEMI and Unstable Angina</div>
+            
+            <div class="content-block">
+                <div class="block-label">Risk Stratification</div>
+                <p class="speakable">Use the TIMI or GRACE risk score to guide management intensity.</p>
+                <p class="speakable">High-risk features include ongoing chest pain, hemodynamic instability, elevated troponin, dynamic ST changes, heart failure, and reduced ejection fraction.</p>
+                <p class="speakable">High-risk patients should undergo early invasive strategy with angiography within 24 hours.</p>
+                <p class="speakable">Lower-risk patients may be managed with an ischemia-guided approach.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Medical Therapy</div>
+                <p class="speakable">Dual antiplatelet therapy with aspirin plus a P2Y12 inhibitor for at least 12 months after ACS.</p>
+                <p class="speakable">Anticoagulation during hospitalization with heparin, enoxaparin, fondaparinux, or bivalirudin.</p>
+                <p class="speakable">Beta-blockers should be started within 24 hours if no contraindications.</p>
+                <p class="speakable">ACE inhibitors for all patients, especially those with reduced EF, hypertension, or diabetes.</p>
+                <p class="speakable">High-intensity statin therapy for all ACS patients.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl — P2Y12 Inhibitors</div>
+                <p class="speakable">Prasugrel is contraindicated in patients with prior stroke or TIA due to increased bleeding risk.</p>
+                <p class="speakable">Ticagrelor can cause dyspnea and must be given twice daily. It also interacts with high-dose aspirin, so use aspirin 81 milligrams only.</p>
+                <p class="speakable">Clopidogrel requires CYP2C19 for activation. Poor metabolizers have reduced efficacy.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">ACS Complications</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Mechanical Complications</div>
+                <p class="speakable">Free wall rupture presents with sudden hemodynamic collapse and pulseless electrical activity. It usually occurs 3 to 5 days post-MI.</p>
+                <p class="speakable">Ventricular septal rupture presents with a new harsh holosystolic murmur and biventricular failure. Look for oxygen step-up in the right ventricle.</p>
+                <p class="speakable">Papillary muscle rupture causes acute severe mitral regurgitation with pulmonary edema. It usually involves the posteromedial papillary muscle with inferior MI.</p>
+                <p class="speakable">All mechanical complications require urgent surgical repair.</p>
+            </div>
+            
+            <div class="content-block">
+                <div class="block-label">Other Complications</div>
+                <p class="speakable">Cardiogenic shock complicates about 5 to 10 percent of STEMIs. Treatment is urgent revascularization. Inotropes and mechanical support may be needed.</p>
+                <p class="speakable">Right ventricular infarction occurs with inferior STEMI. Look for hypotension, clear lungs, and elevated JVP. Treatment is IV fluids, not diuretics.</p>
+                <p class="speakable">Pericarditis can occur early within days or late as Dressler syndrome at 2 to 10 weeks. Treat with aspirin or NSAIDs plus colchicine.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="1">
+    <div class="section-header" onclick="jumpToSection(1)">
+        <span>2. Chronic Coronary Disease</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Stress Testing</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Choosing the Right Test</div>
+                <p class="speakable">Exercise ECG is appropriate for patients who can exercise and have an interpretable baseline ECG.</p>
+                <p class="speakable">An uninterpretable ECG includes left bundle branch block, paced rhythm, pre-excitation, ST depression greater than 1 millimeter at rest, or digoxin use.</p>
+                <p class="speakable">If the ECG is uninterpretable, add imaging with nuclear perfusion or echocardiography.</p>
+                <p class="speakable">If the patient cannot exercise, use pharmacologic stress with vasodilators like adenosine, regadenoson, or dipyridamole for nuclear imaging, or dobutamine for echo.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl</div>
+                <p class="speakable">Adenosine and regadenoson are contraindicated in patients with bronchospasm, second or third degree AV block, or severe hypotension.</p>
+                <p class="speakable">Hold caffeine for 12 to 24 hours before adenosine stress testing as it blocks the adenosine receptor.</p>
+                <p class="speakable">Dobutamine is contraindicated in severe hypertension, unstable arrhythmias, and hypertrophic cardiomyopathy with obstruction.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Revascularization Decisions</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">PCI vs CABG</div>
+                <p class="speakable">PCI is preferred for single or two-vessel disease without left main involvement.</p>
+                <p class="speakable">CABG is preferred for three-vessel disease, especially with diabetes or reduced ejection fraction.</p>
+                <p class="speakable">CABG is also preferred for left main disease, although PCI is acceptable for selected patients with low SYNTAX scores.</p>
+                <p class="speakable">The SYNTAX score helps predict outcomes. Higher scores favor CABG over PCI.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Medical Therapy for Stable CAD</div>
+                <p class="speakable">Optimal medical therapy includes aspirin, high-intensity statin, beta-blocker, and ACE inhibitor or ARB.</p>
+                <p class="speakable">Ranolazine can be added for refractory angina. It works by inhibiting late sodium current.</p>
+                <p class="speakable">Long-acting nitrates provide symptom relief. Use a nitrate-free interval of 10 to 14 hours to prevent tolerance.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="2">
+    <div class="section-header" onclick="jumpToSection(2)">
+        <span>3. Heart Failure</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">HFrEF Management</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Guideline-Directed Medical Therapy</div>
+                <p class="speakable">The four pillars of HFrEF therapy are: ACE inhibitor or ARNI, beta-blocker, mineralocorticoid receptor antagonist, and SGLT2 inhibitor.</p>
+                <p class="speakable">ARNI, which is sacubitril-valsartan, is preferred over ACE inhibitor based on the PARADIGM-HF trial showing mortality benefit.</p>
+                <p class="speakable">Evidence-based beta-blockers are carvedilol, metoprolol succinate, and bisoprolol. Not all beta-blockers have mortality benefit.</p>
+                <p class="speakable">Spironolactone or eplerenone are added if EF is 35 percent or less with NYHA class 2 to 4 symptoms. Monitor potassium and creatinine.</p>
+                <p class="speakable">SGLT2 inhibitors dapagliflozin and empagliflozin reduce heart failure hospitalization and mortality regardless of diabetes status.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Key Trial — PARADIGM-HF</div>
+                <p class="speakable">PARADIGM-HF showed sacubitril-valsartan reduced cardiovascular death and heart failure hospitalization by 20 percent compared to enalapril.</p>
+                <p class="speakable">When switching from ACE inhibitor to ARNI, stop the ACE inhibitor and wait 36 hours before starting ARNI to reduce angioedema risk.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Drugs to Avoid in HFrEF</div>
+                <p class="speakable">Avoid non-dihydropyridine calcium channel blockers like verapamil and diltiazem due to negative inotropic effects.</p>
+                <p class="speakable">Avoid NSAIDs as they cause sodium retention and worsen heart failure.</p>
+                <p class="speakable">Avoid thiazolidinediones like pioglitazone as they increase fluid retention.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">HFpEF Management</div>
+            
+            <div class="content-block">
+                <div class="block-label">Treatment Approach</div>
+                <p class="speakable">HFpEF, or heart failure with preserved ejection fraction, has limited evidence-based therapies compared to HFrEF.</p>
+                <p class="speakable">SGLT2 inhibitors are now recommended based on the EMPEROR-Preserved and DELIVER trials showing reduced hospitalization.</p>
+                <p class="speakable">Diuretics are used for congestion. Control blood pressure and heart rate. Treat underlying conditions like atrial fibrillation.</p>
+                <p class="speakable">The evidence for ACE inhibitors, ARBs, and beta-blockers in HFpEF is not as strong as in HFrEF.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Acute Heart Failure</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Management</div>
+                <p class="speakable">IV loop diuretics are first-line for decongestion. Start with 1 to 2.5 times the home oral dose given intravenously.</p>
+                <p class="speakable">If inadequate response, double the dose or add a thiazide diuretic for sequential nephron blockade.</p>
+                <p class="speakable">Vasodilators like nitroglycerin or nitroprusside can be added for afterload reduction if blood pressure allows.</p>
+                <p class="speakable">Inotropes like dobutamine or milrinone are reserved for cardiogenic shock or low output states. They increase mortality with chronic use.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl</div>
+                <p class="speakable">Continue beta-blocker during acute heart failure unless the patient is hypotensive or in cardiogenic shock. Stopping beta-blockers increases mortality.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Device Therapy</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">ICD Indications</div>
+                <p class="speakable">Primary prevention ICD is indicated for EF 35 percent or less despite 3 months of optimal medical therapy, with NYHA class 2 or 3 symptoms and life expectancy greater than 1 year.</p>
+                <p class="speakable">Secondary prevention ICD is indicated after cardiac arrest or sustained ventricular tachycardia.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">CRT Indications</div>
+                <p class="speakable">CRT is indicated for EF 35 percent or less, NYHA class 2 to 4, left bundle branch block with QRS 150 milliseconds or greater, and sinus rhythm.</p>
+                <p class="speakable">The benefit is less clear for non-LBBB morphology or QRS between 120 and 150 milliseconds.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="3">
+    <div class="section-header" onclick="jumpToSection(3)">
+        <span>4. Atrial Fibrillation</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Stroke Risk and Anticoagulation</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">CHA2DS2-VASc Score</div>
+                <p class="speakable">CHA2DS2-VASc is used to assess stroke risk in atrial fibrillation.</p>
+                <p class="speakable">C is for congestive heart failure, 1 point. H is for hypertension, 1 point. A is for age 75 or older, 2 points. D is for diabetes, 1 point.</p>
+                <p class="speakable">S is for prior stroke or TIA, 2 points. V is for vascular disease, 1 point. A is for age 65 to 74, 1 point. Sc is for sex category female, 1 point.</p>
+                <p class="speakable">Anticoagulation is recommended for score 2 or higher in men, or 3 or higher in women.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Anticoagulant Choice</div>
+                <p class="speakable">DOACs are preferred over warfarin for non-valvular atrial fibrillation.</p>
+                <p class="speakable">DOACs include apixaban, rivaroxaban, dabigatran, and edoxaban.</p>
+                <p class="speakable">Warfarin is required for mechanical heart valves and moderate-to-severe mitral stenosis.</p>
+                <p class="speakable">DOACs are contraindicated with mechanical valves. The RE-ALIGN trial showed increased thrombosis with dabigatran in mechanical valves.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">DOAC Reversal</div>
+                <p class="speakable">Idarucizumab, brand name Praxbind, reverses dabigatran.</p>
+                <p class="speakable">Andexanet alfa reverses factor Xa inhibitors including apixaban and rivaroxaban.</p>
+                <p class="speakable">4-factor PCC can be used if specific reversal agents are not available.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Rate vs Rhythm Control</div>
+            
+            <div class="content-block">
+                <div class="block-label">Rate Control</div>
+                <p class="speakable">Rate control is reasonable for most patients with atrial fibrillation.</p>
+                <p class="speakable">First-line agents are beta-blockers and non-dihydropyridine calcium channel blockers.</p>
+                <p class="speakable">Digoxin can be added but should not be used as monotherapy. It has no mortality benefit.</p>
+                <p class="speakable">Target heart rate is generally less than 110 at rest for lenient control, or less than 80 for strict control if symptoms persist.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Rhythm Control</div>
+                <p class="speakable">Rhythm control may be preferred for younger patients, highly symptomatic patients, or those with heart failure.</p>
+                <p class="speakable">The EAST-AFNET 4 trial showed early rhythm control reduced cardiovascular events.</p>
+                <p class="speakable">Options include antiarrhythmic drugs or catheter ablation.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Antiarrhythmic Drug Selection</div>
+                <p class="speakable">For patients without structural heart disease, flecainide, propafenone, sotalol, dronedarone, or dofetilide can be used.</p>
+                <p class="speakable">For patients with coronary artery disease, use sotalol, dofetilide, dronedarone, or amiodarone.</p>
+                <p class="speakable">For patients with heart failure, only amiodarone or dofetilide are safe.</p>
+                <p class="speakable">Dronedarone is contraindicated in heart failure. It increased mortality in the ANDROMEDA trial.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Cardioversion</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Anticoagulation Around Cardioversion</div>
+                <p class="speakable">If atrial fibrillation duration is less than 48 hours and low stroke risk, cardioversion can proceed without anticoagulation.</p>
+                <p class="speakable">If duration is 48 hours or more or unknown, anticoagulate for 3 weeks before and 4 weeks after cardioversion.</p>
+                <p class="speakable">Alternatively, perform TEE to rule out left atrial thrombus, then cardiovert with anticoagulation for 4 weeks after.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="4">
+    <div class="section-header" onclick="jumpToSection(4)">
+        <span>5. Other Arrhythmias</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Supraventricular Tachycardia</div>
+            
+            <div class="content-block">
+                <div class="block-label">AVNRT</div>
+                <p class="speakable">AV nodal reentrant tachycardia is the most common SVT in adults.</p>
+                <p class="speakable">It involves dual AV nodal pathways with a slow pathway and a fast pathway.</p>
+                <p class="speakable">Typical AVNRT conducts down the slow pathway and up the fast pathway.</p>
+                <p class="speakable">ECG shows a regular narrow complex tachycardia with pseudo R prime in V1 or pseudo S in inferior leads.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Acute SVT Management</div>
+                <p class="speakable">First try vagal maneuvers like Valsalva or carotid massage.</p>
+                <p class="speakable">If unsuccessful, give adenosine 6 milligrams IV push followed by 12 milligrams if needed.</p>
+                <p class="speakable">If adenosine fails, use IV beta-blocker, diltiazem, or verapamil.</p>
+                <p class="speakable">Synchronized cardioversion for hemodynamically unstable patients.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Ventricular Tachycardia</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Distinguishing VT from SVT with Aberrancy</div>
+                <p class="speakable">Wide complex tachycardia is VT until proven otherwise, especially in patients with structural heart disease.</p>
+                <p class="speakable">Features favoring VT include AV dissociation, fusion beats, capture beats, very wide QRS greater than 160 milliseconds, and concordance in precordial leads.</p>
+                <p class="speakable">If uncertain, treat as VT. Giving adenosine to VT is generally safe, though unhelpful.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">VT Management</div>
+                <p class="speakable">Unstable VT requires immediate synchronized cardioversion.</p>
+                <p class="speakable">Stable monomorphic VT can be treated with IV amiodarone, procainamide, or lidocaine.</p>
+                <p class="speakable">Polymorphic VT with normal QT, such as from ischemia, treat like VT and address ischemia.</p>
+                <p class="speakable">Polymorphic VT with prolonged QT is Torsades de Pointes. Give IV magnesium 2 grams, stop QT-prolonging drugs, and consider overdrive pacing.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Bradyarrhythmias</div>
+            
+            <div class="content-block">
+                <div class="block-label">AV Block</div>
+                <p class="speakable">First degree AV block is PR interval greater than 200 milliseconds. It is usually benign and does not require pacing.</p>
+                <p class="speakable">Second degree Mobitz I, or Wenckebach, shows progressive PR prolongation until a dropped beat. It is usually due to AV nodal disease and is often benign.</p>
+                <p class="speakable">Second degree Mobitz II shows sudden dropped beats without PR prolongation. It is infranodal and has high risk of progression to complete heart block. Pacing is indicated.</p>
+                <p class="speakable">Third degree, or complete heart block, shows complete AV dissociation. Pacing is required.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="5">
+    <div class="section-header" onclick="jumpToSection(5)">
+        <span>6. Valvular Heart Disease</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Aortic Stenosis</div>
+            
+            <div class="content-block">
+                <div class="block-label">Diagnosis</div>
+                <p class="speakable">Severe aortic stenosis is defined by valve area less than 1.0 centimeter squared, mean gradient greater than 40 millimeters of mercury, or peak velocity greater than 4 meters per second.</p>
+                <p class="speakable">Classic symptoms are angina, syncope, and heart failure. Once symptoms develop, prognosis is poor without intervention.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Intervention Indications</div>
+                <p class="speakable">Aortic valve replacement is indicated for symptomatic severe aortic stenosis.</p>
+                <p class="speakable">Also indicated for asymptomatic severe AS with reduced EF less than 50 percent.</p>
+                <p class="speakable">TAVR, or transcatheter aortic valve replacement, is an option for patients at high or prohibitive surgical risk, and is increasingly used in intermediate-risk patients.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl</div>
+                <p class="speakable">Low-flow, low-gradient aortic stenosis with reduced EF requires dobutamine stress echo to differentiate true severe AS from pseudo-severe AS with primary cardiomyopathy.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Mitral Regurgitation</div>
+            
+            <div class="content-block">
+                <div class="block-label">Classification</div>
+                <p class="speakable">Primary, or degenerative, mitral regurgitation is due to structural valve abnormality like myxomatous disease, endocarditis, or rheumatic disease.</p>
+                <p class="speakable">Secondary, or functional, mitral regurgitation is due to left ventricular dilation with normal valve leaflets. The ventricle is the problem, not the valve.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Surgery Indications</div>
+                <p class="speakable">For primary MR, surgery is indicated when symptomatic with severe MR, or asymptomatic with EF 60 percent or less or LV end-systolic dimension 40 millimeters or greater.</p>
+                <p class="speakable">Repair is preferred over replacement when feasible.</p>
+                <p class="speakable">For secondary MR, treat the underlying heart failure first. MitraClip may be considered for selected patients with persistent severe MR despite optimal medical therapy.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="6">
+    <div class="section-header" onclick="jumpToSection(6)">
+        <span>7. Cardiomyopathies</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Hypertrophic Cardiomyopathy</div>
+            
+            <div class="content-block">
+                <div class="block-label">Key Features</div>
+                <p class="speakable">HCM is characterized by unexplained left ventricular hypertrophy, often asymmetric septal hypertrophy.</p>
+                <p class="speakable">It is autosomal dominant, caused by sarcomere protein mutations.</p>
+                <p class="speakable">LVOT obstruction is dynamic and worsens with decreased preload, decreased afterload, or increased contractility.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Board Pearl — What Worsens Obstruction</div>
+                <p class="speakable">Valsalva maneuver, standing, dehydration, and vasodilators all decrease preload and worsen obstruction.</p>
+                <p class="speakable">Squatting increases preload and afterload, reducing obstruction. This is the opposite of what you see with most murmurs.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Management</div>
+                <p class="speakable">Avoid dehydration and vasodilators. Avoid digoxin and high-dose diuretics.</p>
+                <p class="speakable">Beta-blockers are first-line for symptom control.</p>
+                <p class="speakable">Disopyramide can be added for refractory symptoms.</p>
+                <p class="speakable">Mavacamten is a new cardiac myosin inhibitor that reduces LVOT gradient.</p>
+                <p class="speakable">Septal reduction therapy, either surgical myectomy or alcohol septal ablation, for refractory symptoms with significant gradient.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Restrictive Cardiomyopathy</div>
+            
+            <div class="content-block">
+                <div class="block-label">Key Features</div>
+                <p class="speakable">Restrictive cardiomyopathy shows impaired ventricular filling with preserved systolic function.</p>
+                <p class="speakable">Causes include amyloidosis, sarcoidosis, hemochromatosis, radiation, and idiopathic.</p>
+                <p class="speakable">Cardiac amyloidosis can be AL type from plasma cell dyscrasia or ATTR type from transthyretin mutations or wild-type.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Clinical Pearl</div>
+                <p class="speakable">Low voltage on ECG with increased wall thickness on echo is a classic clue for cardiac amyloidosis.</p>
+                <p class="speakable">Technetium pyrophosphate scan can diagnose ATTR amyloidosis non-invasively.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="7">
+    <div class="section-header" onclick="jumpToSection(7)">
+        <span>8. Pericardial Disease</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Acute Pericarditis</div>
+            
+            <div class="content-block">
+                <div class="block-label">Diagnosis</div>
+                <p class="speakable">Diagnose acute pericarditis with at least 2 of 4 criteria: pleuritic chest pain, pericardial friction rub, diffuse ST elevation, and new or worsening pericardial effusion.</p>
+                <p class="speakable">The ECG classically shows diffuse ST elevation with PR depression. Spodick sign is downsloping TP segment.</p>
+                <p class="speakable">Most cases are viral or idiopathic.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Treatment</div>
+                <p class="speakable">NSAIDs are first-line, such as ibuprofen 600 milligrams three times daily for 1 to 2 weeks.</p>
+                <p class="speakable">Colchicine is added to reduce recurrence. Give 0.5 milligrams twice daily for 3 months.</p>
+                <p class="speakable">Avoid steroids initially as they increase recurrence risk. Use only if NSAIDs are contraindicated.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Cardiac Tamponade</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Key Features</div>
+                <p class="speakable">Tamponade is a clinical diagnosis. The classic Beck's triad is hypotension, muffled heart sounds, and elevated JVP.</p>
+                <p class="speakable">Pulsus paradoxus is systolic BP drop greater than 10 millimeters of mercury with inspiration.</p>
+                <p class="speakable">Echo shows diastolic collapse of the right atrium and right ventricle.</p>
+                <p class="speakable">Treatment is urgent pericardiocentesis. IV fluids can temporize but do not delay drainage.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Constrictive Pericarditis</div>
+            
+            <div class="content-block">
+                <div class="block-label">Key Features</div>
+                <p class="speakable">Constrictive pericarditis presents with right heart failure symptoms due to impaired diastolic filling from a thickened, non-compliant pericardium.</p>
+                <p class="speakable">Kussmaul sign is elevated JVP with inspiration, the opposite of normal.</p>
+                <p class="speakable">Pericardial knock is an early diastolic sound from abrupt cessation of ventricular filling.</p>
+                <p class="speakable">CT or MRI shows pericardial thickening. Treatment is pericardiectomy for symptomatic patients.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="8">
+    <div class="section-header" onclick="jumpToSection(8)">
+        <span>9. Hypertension</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Diagnosis and Staging</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">2017 ACC/AHA Guidelines</div>
+                <p class="speakable">Normal blood pressure is less than 120 over 80.</p>
+                <p class="speakable">Elevated blood pressure is 120 to 129 over less than 80.</p>
+                <p class="speakable">Stage 1 hypertension is 130 to 139 over 80 to 89.</p>
+                <p class="speakable">Stage 2 hypertension is 140 or higher over 90 or higher.</p>
+                <p class="speakable">Confirm with out-of-office measurements using ambulatory BP monitoring or home BP monitoring.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Treatment</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">First-Line Agents</div>
+                <p class="speakable">First-line agents are thiazide diuretics, ACE inhibitors, ARBs, and calcium channel blockers.</p>
+                <p class="speakable">ACE inhibitors or ARBs are preferred if the patient has diabetes, CKD with proteinuria, or heart failure.</p>
+                <p class="speakable">Black patients without proteinuria respond better to thiazides and calcium channel blockers than to ACE inhibitors or ARBs as monotherapy.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Resistant Hypertension</div>
+                <p class="speakable">Resistant hypertension is BP above goal despite 3 medications including a diuretic at optimal doses.</p>
+                <p class="speakable">Check for secondary causes: primary aldosteronism, renal artery stenosis, pheochromocytoma, sleep apnea.</p>
+                <p class="speakable">Add spironolactone as fourth-line agent. The PATHWAY-2 trial showed superiority over other add-on agents.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Hypertensive Emergency</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Definition and Management</div>
+                <p class="speakable">Hypertensive emergency is severe hypertension with acute end-organ damage affecting the brain, heart, kidneys, or eyes.</p>
+                <p class="speakable">Treat with IV antihypertensives. Options include nicardipine, labetalol, sodium nitroprusside, or clevidipine.</p>
+                <p class="speakable">Target BP reduction is 25 percent in the first hour, then to 160 over 100 in the next 2 to 6 hours. Do not lower too quickly.</p>
+                <p class="speakable">Exception: aortic dissection requires rapid BP and heart rate control. Target systolic less than 120 and heart rate less than 60.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="9">
+    <div class="section-header" onclick="jumpToSection(9)">
+        <span>10. Lipids & Prevention</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Statin Therapy</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Indications for High-Intensity Statin</div>
+                <p class="speakable">High-intensity statin therapy reduces LDL by 50 percent or more. Examples are atorvastatin 40 to 80 milligrams or rosuvastatin 20 to 40 milligrams.</p>
+                <p class="speakable">Indicated for clinical ASCVD, including ACS, prior MI, stable angina, coronary revascularization, stroke, TIA, and peripheral arterial disease.</p>
+                <p class="speakable">Also indicated for LDL 190 or higher, diabetes in patients 40 to 75 with additional risk factors, or 10-year ASCVD risk 20 percent or higher.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">LDL Goals</div>
+                <p class="speakable">For very high-risk ASCVD patients, target LDL less than 70 or at least 50 percent reduction.</p>
+                <p class="speakable">Consider adding ezetimibe if LDL remains above goal on maximally tolerated statin.</p>
+                <p class="speakable">PCSK9 inhibitors like evolocumab or alirocumab can be added if still not at goal, particularly in high-risk patients.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Non-Statin Therapies</div>
+            
+            <div class="content-block">
+                <div class="block-label">Options</div>
+                <p class="speakable">Ezetimibe blocks intestinal cholesterol absorption. Reduces LDL by about 15 to 20 percent when added to statin.</p>
+                <p class="speakable">PCSK9 inhibitors are injectable monoclonal antibodies that dramatically lower LDL. The FOURIER and ODYSSEY trials showed cardiovascular benefit.</p>
+                <p class="speakable">Bempedoic acid is an oral ATP citrate lyase inhibitor for statin-intolerant patients.</p>
+                <p class="speakable">Icosapent ethyl, a purified EPA fish oil, reduces cardiovascular events in patients with elevated triglycerides already on statin. This is based on the REDUCE-IT trial.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="10">
+    <div class="section-header" onclick="jumpToSection(10)">
+        <span>11. Aortic & Peripheral Vascular</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Aortic Dissection</div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Classification and Presentation</div>
+                <p class="speakable">Stanford Type A involves the ascending aorta. This is a surgical emergency.</p>
+                <p class="speakable">Stanford Type B involves only the descending aorta. Usually managed medically unless complicated.</p>
+                <p class="speakable">Classic presentation is severe, tearing chest pain radiating to the back, often with unequal blood pressures in the arms.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Management</div>
+                <p class="speakable">Immediate goals are to reduce heart rate to less than 60 and systolic BP to less than 120.</p>
+                <p class="speakable">Start IV beta-blocker first to reduce dP/dt and shear stress. Then add vasodilator if needed.</p>
+                <p class="speakable">Do not give vasodilator before beta-blocker as reflex tachycardia worsens dissection propagation.</p>
+                <p class="speakable">CT angiography is the diagnostic study of choice. TEE is an alternative if patient is too unstable for CT.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Peripheral Arterial Disease</div>
+            
+            <div class="content-block">
+                <div class="block-label">Diagnosis</div>
+                <p class="speakable">Ankle-brachial index less than 0.9 confirms PAD. ABI 0.4 to 0.9 is mild to moderate. ABI less than 0.4 is severe.</p>
+                <p class="speakable">Classic symptom is intermittent claudication, leg pain with walking that resolves with rest.</p>
+                <p class="speakable">Critical limb ischemia presents with rest pain, typically in the forefoot, and non-healing wounds.</p>
+            </div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">Management</div>
+                <p class="speakable">Supervised exercise therapy is first-line for claudication.</p>
+                <p class="speakable">Cilostazol improves walking distance. Avoid in heart failure.</p>
+                <p class="speakable">Aggressive cardiovascular risk modification with statin, antiplatelet therapy, and blood pressure control.</p>
+                <p class="speakable">Revascularization for critical limb ischemia or lifestyle-limiting claudication despite medical therapy.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" data-section="11">
+    <div class="section-header" onclick="jumpToSection(11)">
+        <span>12. Devices & Perioperative</span>
+        <span>▶️</span>
+    </div>
+    <div class="section-content">
+        <div class="topic">
+            <div class="topic-title">Pacemaker Modes</div>
+            
+            <div class="content-block">
+                <div class="block-label">Understanding Pacemaker Codes</div>
+                <p class="speakable">The first letter indicates the chamber paced: A for atrium, V for ventricle, D for dual.</p>
+                <p class="speakable">The second letter indicates the chamber sensed.</p>
+                <p class="speakable">The third letter indicates the response to sensing: I for inhibited, T for triggered, D for dual.</p>
+                <p class="speakable">VVI paces and senses the ventricle, inhibits when it senses a native beat. Used in chronic atrial fibrillation with slow ventricular response.</p>
+                <p class="speakable">DDD paces and senses both chambers with dual response. Used for sinus node dysfunction or AV block with intact atrial activity.</p>
+            </div>
+        </div>
+        
+        <div class="topic">
+            <div class="topic-title">Perioperative Cardiac Risk</div>
+            
+            <div class="content-block guideline">
+                <div class="block-label">RCRI Score</div>
+                <p class="speakable">The Revised Cardiac Risk Index predicts major cardiac events with noncardiac surgery.</p>
+                <p class="speakable">Risk factors are: high-risk surgery, history of ischemic heart disease, history of heart failure, history of cerebrovascular disease, diabetes requiring insulin, and creatinine greater than 2.</p>
+                <p class="speakable">Each factor is 1 point. Score 0 is low risk, 1 to 2 is intermediate risk, 3 or more is high risk.</p>
+            </div>
+            
+            <div class="content-block high-yield">
+                <div class="block-label">Perioperative Beta-Blockers</div>
+                <p class="speakable">Continue beta-blockers in patients already taking them. Do not stop before surgery.</p>
+                <p class="speakable">Do not start high-dose beta-blockers the day of surgery. The POISE trial showed this increased stroke and mortality.</p>
+                <p class="speakable">If starting beta-blocker, begin weeks before surgery and titrate to heart rate of 60 to 70.</p>
+            </div>
+            
+            <div class="content-block pearl">
+                <div class="block-label">Anticoagulation Bridging</div>
+                <p class="speakable">Bridging anticoagulation is generally NOT recommended for atrial fibrillation without mechanical valve.</p>
+                <p class="speakable">The BRIDGE trial showed bridging increased bleeding without reducing thromboembolism.</p>
+                <p class="speakable">For mechanical valves, bridge with heparin based on valve position and patient risk factors.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- Audio Control Bar -->
+<div class="audio-controls">
+    <div class="controls-row">
+        <button class="control-btn" onclick="skipBackward()" title="Back 30s">⏪</button>
+        <button class="control-btn play-btn" id="playPauseBtn" onclick="togglePlayPause()" title="Play/Pause">▶️</button>
+        <button class="control-btn" onclick="skipForward()" title="Forward 30s">⏩</button>
+        <button class="control-btn" onclick="stopReading()" title="Stop">⏹️</button>
+    </div>
+    
+    <div class="progress-section">
+        <span id="currentTime">0:00</span>
+        <div class="progress-bar" onclick="seekTo(event)">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span id="totalTime">0:00</span>
+    </div>
+    
+    <div class="current-topic" id="currentTopic">Ready to play</div>
+    
+    <div class="settings-row">
+        <div class="speed-control">
+            <label>Speed:</label>
+            <select id="speedSelect" onchange="updateSpeed()">
+                <option value="0.75">0.75×</option>
+                <option value="1" selected>1×</option>
+                <option value="1.25">1.25×</option>
+                <option value="1.5">1.5×</option>
+                <option value="1.75">1.75×</option>
+                <option value="2">2×</option>
+            </select>
+        </div>
+        <div class="pause-control">
+            <label>Pauses:</label>
+            <select id="pauseSelect" onchange="updatePauses()">
+                <option value="short">Short</option>
+                <option value="medium" selected>Medium</option>
+                <option value="long">Long</option>
+                <option value="extra">Extra Long</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<script>
+let isPlaying = false;
+let currentSentenceIndex = 0;
+let sentences = [];
+let speechRate = 1;
+let englishVoices = [];
+let pauseSettings = { sentence: 400, paragraph: 800, section: 1500 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadVoices();
+    buildSentenceList();
+    setupTOC();
+    const saved = localStorage.getItem('cardio_audio_position');
+    if (saved) currentSentenceIndex = parseInt(saved) || 0;
+});
+
+function loadVoices() {
+    const voiceSelect = document.getElementById('voiceSelect');
+    function populateVoices() {
+        const allVoices = speechSynthesis.getVoices();
+        englishVoices = allVoices.filter(v => v.lang.startsWith('en-') || v.lang === 'en');
+        if (englishVoices.length === 0) { setTimeout(populateVoices, 100); return; }
+        const preferred = ['Samantha', 'Daniel', 'Karen', 'Moira', 'Tessa', 'Alex', 'Nicky', 'Aaron'];
+        englishVoices.sort((a, b) => {
+            const aP = preferred.some(p => a.name.includes(p));
+            const bP = preferred.some(p => b.name.includes(p));
+            if (aP && !bP) return -1;
+            if (!aP && bP) return 1;
+            if (a.localService && !b.localService) return -1;
+            if (!a.localService && b.localService) return 1;
+            return a.name.localeCompare(b.name);
+        });
+        voiceSelect.innerHTML = '';
+        englishVoices.forEach((voice, i) => {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `${voice.localService ? '⭐ ' : ''}${voice.name} (${voice.lang})`;
+            voiceSelect.appendChild(option);
+        });
+    }
+    populateVoices();
+    speechSynthesis.onvoiceschanged = populateVoices;
+}
+
+function buildSentenceList() {
+    sentences = [];
+    document.querySelectorAll('.speakable').forEach((el, i, arr) => {
+        const section = el.closest('.section');
+        const topic = el.closest('.topic');
+        sentences.push({
+            text: el.textContent.trim(),
+            element: el,
+            section: section ? parseInt(section.dataset.section) : 0,
+            topic: topic?.querySelector('.topic-title')?.textContent || '',
+            label: el.closest('.content-block')?.querySelector('.block-label')?.textContent || '',
+            isNewBlock: i === 0 || el.closest('.content-block') !== arr[i-1]?.closest('.content-block'),
+            isNewSection: i === 0 || (section?.dataset.section !== arr[i-1]?.closest('.section')?.dataset.section)
+        });
+    });
+    updateProgress();
+}
+
+function setupTOC() {
+    document.querySelectorAll('.toc-item').forEach(item => {
+        item.addEventListener('click', () => jumpToSection(parseInt(item.dataset.section)));
+    });
+}
+
+function jumpToSection(idx) {
+    const i = sentences.findIndex(s => s.section === idx);
+    if (i !== -1) {
+        currentSentenceIndex = i;
+        if (isPlaying) { speechSynthesis.cancel(); speakCurrentSentence(); }
+        updateProgress();
+        highlightCurrentSection();
+    }
+}
+
+function togglePlayPause() { isPlaying ? pauseReading() : startReading(); }
+function startReading() { isPlaying = true; document.getElementById('playPauseBtn').textContent = '⏸️'; speakCurrentSentence(); }
+function pauseReading() { isPlaying = false; speechSynthesis.cancel(); document.getElementById('playPauseBtn').textContent = '▶️'; savePosition(); }
+function stopReading() { isPlaying = false; speechSynthesis.cancel(); currentSentenceIndex = 0; document.getElementById('playPauseBtn').textContent = '▶️'; updateProgress(); clearHighlights(); localStorage.removeItem('cardio_audio_position'); }
+
+function speakCurrentSentence() {
+    if (!isPlaying || currentSentenceIndex >= sentences.length) { if (currentSentenceIndex >= sentences.length) stopReading(); return; }
+    const sentence = sentences[currentSentenceIndex];
+    const utterance = new SpeechSynthesisUtterance(sentence.text);
+    const voiceIndex = parseInt(document.getElementById('voiceSelect').value) || 0;
+    if (englishVoices.length > 0 && englishVoices[voiceIndex]) utterance.voice = englishVoices[voiceIndex];
+    utterance.lang = 'en-US';
+    utterance.rate = speechRate;
+    utterance.pitch = 1;
+    highlightSentence(sentence);
+    updateProgress();
+    utterance.onend = () => {
+        currentSentenceIndex++;
+        savePosition();
+        if (currentSentenceIndex < sentences.length) {
+            let pause = pauseSettings.sentence;
+            if (sentences[currentSentenceIndex].isNewSection) pause = pauseSettings.section;
+            else if (sentences[currentSentenceIndex].isNewBlock) pause = pauseSettings.paragraph;
+            setTimeout(() => { if (isPlaying) speakCurrentSentence(); }, pause);
+        } else stopReading();
+    };
+    utterance.onerror = () => { if (isPlaying) { currentSentenceIndex++; speakCurrentSentence(); } };
+    speechSynthesis.speak(utterance);
+}
+
+function highlightSentence(s) { clearHighlights(); s.element.classList.add('current'); s.element.scrollIntoView({ behavior: 'smooth', block: 'center' }); document.getElementById('currentTopic').textContent = s.topic + (s.label ? ` — ${s.label}` : ''); highlightCurrentSection(); }
+function clearHighlights() { document.querySelectorAll('.current').forEach(el => el.classList.remove('current')); }
+function highlightCurrentSection() { document.querySelectorAll('.toc-item').forEach(item => { item.classList.toggle('active', parseInt(item.dataset.section) === sentences[currentSentenceIndex]?.section); }); }
+function updateProgress() { const pct = sentences.length > 0 ? (currentSentenceIndex / sentences.length) * 100 : 0; document.getElementById('progressFill').style.width = `${pct}%`; const avg = 3 / speechRate; document.getElementById('currentTime').textContent = formatTime(Math.floor(currentSentenceIndex * avg)); document.getElementById('totalTime').textContent = formatTime(Math.floor(sentences.length * avg)); }
+function formatTime(s) { return `${Math.floor(s/60)}:${(s%60).toString().padStart(2,'0')}`; }
+function seekTo(e) { const pct = e.offsetX / e.currentTarget.offsetWidth; currentSentenceIndex = Math.max(0, Math.min(Math.floor(pct * sentences.length), sentences.length - 1)); if (isPlaying) { speechSynthesis.cancel(); speakCurrentSentence(); } updateProgress(); }
+function skipForward() { currentSentenceIndex = Math.min(currentSentenceIndex + Math.floor(10 * speechRate), sentences.length - 1); if (isPlaying) { speechSynthesis.cancel(); speakCurrentSentence(); } updateProgress(); }
+function skipBackward() { currentSentenceIndex = Math.max(currentSentenceIndex - Math.floor(10 * speechRate), 0); if (isPlaying) { speechSynthesis.cancel(); speakCurrentSentence(); } updateProgress(); }
+function updateSpeed() { speechRate = parseFloat(document.getElementById('speedSelect').value); updateProgress(); }
+function updatePauses() { const s = document.getElementById('pauseSelect').value; pauseSettings = s === 'short' ? {sentence:200,paragraph:400,section:800} : s === 'long' ? {sentence:600,paragraph:1200,section:2000} : s === 'extra' ? {sentence:800,paragraph:1500,section:2500} : {sentence:400,paragraph:800,section:1500}; }
+function savePosition() { localStorage.setItem('cardio_audio_position', currentSentenceIndex.toString()); }
+</script>
+
+</body>
+</html>
